@@ -1,9 +1,9 @@
 import pytest
 import respx
 
+from bookieskit.bookmakers.bet9ja import Bet9ja
 from bookieskit.bookmakers.betpawa import BetPawa
 from bookieskit.bookmakers.sportybet import SportyBet
-from bookieskit.bookmakers.bet9ja import Bet9ja
 
 
 @pytest.mark.asyncio

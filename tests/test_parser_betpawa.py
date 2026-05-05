@@ -1,7 +1,6 @@
 from bookieskit.markets.parser import parse_markets
 from bookieskit.markets.registry import MarketRegistry
 
-
 BETPAWA_EVENT_RESPONSE = {
     "id": "32299257",
     "homeTeam": "Manchester City",

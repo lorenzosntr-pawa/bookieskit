@@ -1,7 +1,6 @@
-import pytest
 
 from bookieskit.markets.registry import MarketRegistry
-from bookieskit.markets.types import MarketMapping, OutcomeMapping
+from bookieskit.markets.types import OutcomeMapping
 
 
 def test_registry_loads_builtins_by_default():

@@ -1,6 +1,4 @@
 from bookieskit.markets.parser import parse_markets
-from bookieskit.markets.registry import MarketRegistry
-
 
 BET9JA_EVENT_RESPONSE = {
     "R": "D",

@@ -1,6 +1,4 @@
 from bookieskit.markets.parser import parse_markets
-from bookieskit.markets.registry import MarketRegistry
-
 
 SPORTYBET_EVENT_RESPONSE = {
     "bizCode": 10000,
