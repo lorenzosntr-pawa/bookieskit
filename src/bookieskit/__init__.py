@@ -5,4 +5,4 @@ from bookieskit.bookmakers.betpawa import BetPawa
 from bookieskit.bookmakers.sportybet import SportyBet
 
 __all__ = ["BetPawa", "SportyBet", "Bet9ja"]
-__version__ = "0.1.0"
+__version__ = "0.2.0"
