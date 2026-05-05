@@ -73,3 +73,20 @@ def test_extract_from_bet9ja_no_extid():
 def test_extract_unknown_platform():
     sr_id = extract_sportradar_id({}, platform="unknown")
     assert sr_id is None
+
+
+def test_extract_from_betway():
+    response = {
+        "sportEvent": {
+            "eventId": 69339436,
+            "name": "Arsenal FC vs. Atletico Madrid",
+        }
+    }
+    sr_id = extract_sportradar_id(response, platform="betway")
+    assert sr_id == "69339436"
+
+
+def test_extract_from_betway_no_event():
+    response = {"sportEvent": {}}
+    sr_id = extract_sportradar_id(response, platform="betway")
+    assert sr_id is None

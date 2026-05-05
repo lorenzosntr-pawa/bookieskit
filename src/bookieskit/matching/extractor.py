@@ -17,6 +17,7 @@ def extract_sportradar_id(
         "betpawa": _extract_betpawa,
         "sportybet": _extract_sportybet,
         "bet9ja": _extract_bet9ja,
+        "betway": _extract_betway,
     }
     extractor = extractors.get(platform)
     if extractor is None:
@@ -61,4 +62,13 @@ def _extract_bet9ja(response: dict) -> str | None:
     ext_id = data.get("EXTID")
     if ext_id:
         return _strip_sr_prefix(str(ext_id))
+    return None
+
+
+def _extract_betway(response: dict) -> str | None:
+    """Extract from Betway sportEvent.eventId (IS the SR ID)."""
+    sport_event = response.get("sportEvent", {})
+    event_id = sport_event.get("eventId")
+    if event_id:
+        return _strip_sr_prefix(str(event_id))
     return None
