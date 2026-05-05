@@ -36,11 +36,11 @@ Returns full sport/category/tournament hierarchy in one call.
 
 Same as `get_sports()` — Bet9ja returns the full hierarchy in one call.
 
-### `get_events(tournament_id, market_id="1")`
+### `get_events(tournament_id)`
 
 Returns events for a tournament group.
 
-**Endpoint:** `GET /desktop/feapi/PalimpsestAjax/GetEventsInGroupV2`
+**Endpoint:** `GET /desktop/feapi/PalimpsestAjax/GetEventsInGroup`
 
 **Response:**
 ```json

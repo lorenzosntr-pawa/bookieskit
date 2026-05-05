@@ -79,14 +79,11 @@ class BetPawa(BaseBookmaker):
             params={"includeRegions": "true"},
         )
 
-    async def get_tournaments(
-        self, sport_id: str, country_id: str | None = None
-    ) -> dict[str, Any]:
+    async def get_tournaments(self, sport_id: str) -> dict[str, Any]:
         """Get tournaments/competitions for a sport.
 
         Args:
             sport_id: Sport category ID (e.g., "2" for Football)
-            country_id: Optional region ID to filter by
 
         Returns:
             Raw JSON with withRegions[].regions[].competitions structure.

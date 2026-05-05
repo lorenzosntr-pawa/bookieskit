@@ -73,7 +73,7 @@ async def test_get_tournaments():
         }
     )
     async with BetPawa(country="ng") as client:
-        result = await client.get_tournaments(sport_id="2", country_id="1")
+        result = await client.get_tournaments(sport_id="2")
     assert result["regions"][0]["competitions"][0]["name"] == "Premier League"
 
 
@@ -82,30 +82,33 @@ async def test_get_tournaments():
 async def test_get_events():
     respx.get("https://www.betpawa.ng/api/sportsbook/v3/events/lists/by-queries").respond(
         json={
-            "results": [
+            "responses": [
                 {
-                    "id": "32299257",
-                    "homeTeam": "Manchester City",
-                    "awayTeam": "Liverpool",
+                    "responses": [
+                        {
+                            "id": "32299257",
+                            "homeTeam": "Manchester City",
+                            "awayTeam": "Liverpool",
+                        }
+                    ]
                 }
-            ],
-            "totalCount": 1,
+            ]
         }
     )
     async with BetPawa(country="ng") as client:
         result = await client.get_events(tournament_id="11965")
-    assert result["results"][0]["homeTeam"] == "Manchester City"
+    assert result["responses"][0]["responses"][0]["homeTeam"] == "Manchester City"
 
 
 @pytest.mark.asyncio
 @respx.mock
 async def test_get_events_with_sport_id():
     respx.get("https://www.betpawa.ng/api/sportsbook/v3/events/lists/by-queries").respond(
-        json={"results": [], "totalCount": 0}
+        json={"responses": [{"responses": []}]}
     )
     async with BetPawa(country="ng") as client:
         result = await client.get_events(tournament_id="11965", sport_id="3")
-    assert result["totalCount"] == 0
+    assert result["responses"][0]["responses"] == []
 
 
 @pytest.mark.asyncio
@@ -118,16 +121,15 @@ async def test_get_event_detail():
             "awayTeam": "Liverpool",
             "markets": [
                 {
-                    "id": "3743",
-                    "name": "1X2 - Full Time",
-                    "row": [{"prices": [{"name": "1", "odds": 1.95}]}],
+                    "marketType": {"id": "3743", "name": "1X2"},
+                    "row": [{"prices": [{"name": "1", "price": 1.95}]}],
                 }
             ],
         }
     )
     async with BetPawa(country="ng") as client:
         result = await client.get_event_detail(event_id="32299257")
-    assert result["markets"][0]["name"] == "1X2 - Full Time"
+    assert result["markets"][0]["marketType"]["id"] == "3743"
 
 
 @pytest.mark.asyncio

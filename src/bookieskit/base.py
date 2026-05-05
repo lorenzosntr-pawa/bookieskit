@@ -16,6 +16,7 @@ from bookieskit.config import (
 from bookieskit.exceptions import (
     RateLimitError,
     RequestError,
+    ResponseError,
     TimeoutError,
     UnsupportedCountryError,
 )
@@ -157,7 +158,14 @@ class BaseBookmaker:
                     )
                     continue
 
-                response.raise_for_status()
+                try:
+                    response.raise_for_status()
+                except httpx.HTTPStatusError as e:
+                    raise ResponseError(
+                        url=url,
+                        status_code=e.response.status_code,
+                        body=e.response.text[:500],
+                    ) from e
                 return response.json()
 
             except httpx.TimeoutException:

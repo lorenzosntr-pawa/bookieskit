@@ -22,9 +22,12 @@ Returns all sport categories.
 **Response:**
 ```json
 {
-  "categories": [
-    {"id": "2", "name": "Football"},
-    {"id": "3", "name": "Basketball"}
+  "withRegions": [],
+  "onlyMeta": [
+    {
+      "category": {"id": "2", "name": "Football"},
+      "eventCounts": {"live": 5, "upcoming": 1000}
+    }
   ]
 }
 ```
@@ -38,19 +41,23 @@ Returns regions/countries for a sport.
 **Response:**
 ```json
 {
-  "id": "2",
-  "name": "Football",
-  "regions": [
+  "withRegions": [
     {
-      "id": "1",
-      "name": "England",
-      "competitions": [{"id": "11965", "name": "Premier League"}]
+      "category": {"id": "2", "name": "Football"},
+      "regions": [
+        {
+          "region": {"id": "1", "name": "England"},
+          "competitions": [
+            {"competition": {"id": "11965", "name": "Premier League"}}
+          ]
+        }
+      ]
     }
   ]
 }
 ```
 
-### `get_tournaments(sport_id, country_id=None)`
+### `get_tournaments(sport_id)`
 
 Same endpoint as `get_countries` — tournaments are nested under regions.
 
@@ -63,16 +70,21 @@ Returns events for a competition.
 **Response:**
 ```json
 {
-  "results": [
+  "responses": [
     {
-      "id": "32299257",
-      "homeTeam": "Manchester City",
-      "awayTeam": "Liverpool",
-      "kickoffTime": 1704067200000,
-      "markets": [...]
+      "responses": [
+        {
+          "id": "32299257",
+          "participants": [
+            {"name": "Manchester City", "role": "HOME"},
+            {"name": "Liverpool", "role": "AWAY"}
+          ],
+          "competition": {"id": "11965", "name": "Premier League"},
+          "widgets": [{"type": "SPORTRADAR", "id": "sr:match:61300947"}]
+        }
+      ]
     }
-  ],
-  "totalCount": 50
+  ]
 }
 ```
 
@@ -86,25 +98,26 @@ Returns full event with all markets and odds.
 ```json
 {
   "id": "32299257",
-  "homeTeam": "Manchester City",
-  "awayTeam": "Liverpool",
+  "participants": [
+    {"name": "Manchester City", "role": "HOME"},
+    {"name": "Liverpool", "role": "AWAY"}
+  ],
   "markets": [
     {
-      "id": "3743",
-      "name": "1X2 - Full Time",
+      "marketType": {"id": "3743", "name": "1X2"},
       "row": [
         {
           "prices": [
-            {"name": "1", "odds": 1.95},
-            {"name": "X", "odds": 3.50},
-            {"name": "2", "odds": 2.10}
+            {"name": "1", "price": 1.95},
+            {"name": "X", "price": 3.50},
+            {"name": "2", "price": 2.10}
           ]
         }
       ]
     }
   ],
   "widgets": [
-    {"type": "SPORTRADAR", "value": "sr:match:61300947"}
+    {"type": "SPORTRADAR", "id": "sr:match:61300947"}
   ]
 }
 ```
