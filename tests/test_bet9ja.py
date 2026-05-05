@@ -41,7 +41,7 @@ async def test_get_sports():
 @pytest.mark.asyncio
 @respx.mock
 async def test_get_events():
-    respx.get("https://sports.bet9ja.com/desktop/feapi/PalimpsestAjax/GetEventsInGroupV2").respond(
+    respx.get("https://sports.bet9ja.com/desktop/feapi/PalimpsestAjax/GetEventsInGroup").respond(
         json={
             "R": "OK",
             "D": {

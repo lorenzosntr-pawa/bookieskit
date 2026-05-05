@@ -77,24 +77,21 @@ class Bet9ja(BaseBookmaker):
     async def get_events(
         self,
         tournament_id: str,
-        market_id: str = "1",
     ) -> dict[str, Any]:
         """Get events for a tournament/group.
 
         Args:
             tournament_id: Bet9ja group ID (e.g., "170880")
-            market_id: Market group ID to include (default: "1" for 1X2)
 
         Returns:
             Raw JSON with R (status) and D.E (events array).
         """
         return await self._request(
             "GET",
-            "/desktop/feapi/PalimpsestAjax/GetEventsInGroupV2",
+            "/desktop/feapi/PalimpsestAjax/GetEventsInGroup",
             params={
                 "GROUPID": tournament_id,
                 "DISP": "0",
-                "GROUPMARKETID": market_id,
                 "v_cache_version": _CACHE_VERSION,
             },
         )
