@@ -266,9 +266,10 @@ def _parse_sportybet_parameterized(
 
 
 def _extract_line_from_specifier(specifier: str) -> float | None:
-    """Extract line value from SportyBet specifier string.
+    """Extract line value from a specifier string.
 
-    Examples: "total=2.5" -> 2.5, "hcp=-0.5" -> -0.5
+    Shared by SportyBet and MSport — both use the same pipe-delimited
+    key=value format (e.g., "total=2.5", "hcp=-0.5").
     """
     for part in specifier.split("|"):
         if "=" in part:
