@@ -2,122 +2,124 @@
 
 ## Supported Countries
 
-| Code | Domain |
-|------|--------|
-| ng | betpawa.ng |
-| gh | betpawa.com.gh |
-| ke | betpawa.co.ke |
-| ug | betpawa.co.ug |
-| tz | betpawa.co.tz |
-| zm | betpawa.co.zm |
+| Code | Domain | Notes |
+|------|--------|-------|
+| `ng` | https://www.betpawa.ng | Nigeria |
+| `gh` | https://www.betpawa.com.gh | Ghana |
+| `ke` | https://www.betpawa.co.ke | Kenya |
+| `ug` | https://www.betpawa.co.ug | Uganda |
+| `tz` | https://www.betpawa.co.tz | Tanzania |
+| `zm` | https://www.betpawa.co.zm | Zambia |
+
+Country also drives the `x-pawa-brand` request header (e.g. `betpawa-nigeria` for `ng`).
+
+## SportRadar id
+
+BetPawa hides the SR id inside `widgets[]` on the event-detail response — look for the entry with `type == "SPORTRADAR"`, then read `id` (preferred) or `value` (legacy). The library's `extract_sportradar_id(response, platform="betpawa")` does this and strips the `sr:match:` prefix. There is **no** SR-id-to-BetPawa-id reverse search yet — start workflows from a BetPawa internal id.
 
 ## Methods
 
-### `get_sports()`
+| Method | HTTP | Path | When to use |
+|--------|------|------|-------------|
+| `get_sports()` | GET | `/api/sportsbook/v3/categories/list/all` | Top-level sport list with prematch/live counts. |
+| `get_countries(sport_id)` | GET | `/api/sportsbook/v3/categories/list/{sport_id}?includeRegions=true` | Regions + competitions under a sport. |
+| `get_tournaments(sport_id)` | GET | (same as get_countries) | Alias — same data as `get_countries`, kept for naming symmetry. |
+| `get_events(...)` | POST | (varies by params) | Events for a tournament or sport, prematch or live. |
+| `get_event_detail(event_id)` | GET | event detail with markets and widgets | Full event data; SR id lives in `widgets[]`. |
+| `get_markets(event_id)` | (calls `get_event_detail`) | — | Inherited convenience: returns `list[NormalizedMarket]`. |
+| `get_sportradar_id(event_id)` | (calls `get_event_detail`) | — | Inherited convenience: returns the SR id as a numeric string. |
 
-Returns all sport categories.
+### `get_sports() -> dict`
 
-**Endpoint:** `GET /api/sportsbook/v3/categories/list/all`
+Top-level sport categories. Response carries `onlyMeta[]` with one entry per sport, including `eventCounts.upcoming` and `eventCounts.live`. No params.
 
-**Response:**
-```json
-{
-  "withRegions": [],
-  "onlyMeta": [
-    {
-      "category": {"id": "2", "name": "Football"},
-      "eventCounts": {"live": 5, "upcoming": 1000}
-    }
-  ]
-}
+### `get_countries(sport_id: str) -> dict`
+
+Regions and competitions under one sport. Response shape: `withRegions[].regions[].competitions[]`. Each region is a country, each competition is a tournament.
+
+### `get_tournaments(sport_id: str) -> dict`
+
+Same data as `get_countries`. Both methods hit the same endpoint with the same params; tournaments are nested under `competitions[]` in the response.
+
+### `get_events(tournament_id=None, event_type=None, sport_id=None) -> dict`
+
+Events for a tournament or for a whole sport.
+- Pass `tournament_id` to filter to one competition.
+- Pass `sport_id` + `event_type="LIVE"` for live events of a whole sport.
+
+Response: `responses[0].responses[]` — list of events. Each event has `id` (BetPawa internal), `participants` (`[{name: home}, {name: away}]`), `competition`, `region`.
+
+### `get_event_detail(event_id: str) -> dict`
+
+Full event payload, including `markets[]` and `widgets[]`. The SR id lives in the SPORTRADAR widget.
+
+### Inherited: `get_markets(event_id, registry=None) -> list[NormalizedMarket]`
+
+Calls `get_event_detail`, then `parse_markets(response, platform="betpawa", registry=registry)`. Returns the normalized markets — only those whose `betpawa_id` is registered (4 of the 6 builtins by default; the 1Up/2Up variants are not yet wired for BetPawa).
+
+### Inherited: `get_sportradar_id(event_id) -> str | None`
+
+Calls `get_event_detail`, then extracts the SR id from the SPORTRADAR widget. Returns the numeric id (no `sr:match:` prefix), or `None` if no widget is present.
+
+## Quirks
+
+- `x-pawa-brand` header varies per country (`betpawa-nigeria`, `betpawa-ghana`, etc.) and is set automatically by the client.
+- BetPawa's parameterized markets store the line as `formattedHandicap` (display) and `handicap` (internal value × 4). The parser handles both.
+- Outcome odds live under `prices[].price` (not `odds`).
+- No SR-id reverse search yet — BetPawa is the seed, not a target, in cross-bookmaker workflows.
+
+## Recipes
+
+### List all events in a competition
+
+```python
+import asyncio
+from bookieskit import BetPawa
+
+async def main():
+    async with BetPawa(country="ng") as bp:
+        raw = await bp.get_events(tournament_id="12546")
+        events = (raw.get("responses") or [{}])[0].get("responses", [])
+        for ev in events:
+            parts = ev.get("participants", [])
+            home = parts[0]["name"] if parts else "?"
+            away = parts[1]["name"] if len(parts) > 1 else "?"
+            print(f"{ev['id']}  {home} vs {away}")
+
+asyncio.run(main())
 ```
 
-### `get_countries(sport_id)`
+### Normalized markets and SR id from one event
 
-Returns regions/countries for a sport.
+```python
+import asyncio
+from bookieskit import BetPawa
+from bookieskit.matching import extract_sportradar_id
 
-**Endpoint:** `GET /api/sportsbook/v3/categories/list/{sport_id}`
+async def main():
+    async with BetPawa(country="ng") as bp:
+        detail = await bp.get_event_detail(event_id="34716684")
+        sr_id = extract_sportradar_id(detail, platform="betpawa")
+        markets = await bp.get_markets(event_id="34716684")
+        print(f"SR id: {sr_id}")
+        for m in markets:
+            outcomes = m.outcomes if m.outcomes else (m.lines.get(2.5) if m.lines else [])
+            print(f"  {m.name}: {len(outcomes)} outcomes")
 
-**Response:**
-```json
-{
-  "withRegions": [
-    {
-      "category": {"id": "2", "name": "Football"},
-      "regions": [
-        {
-          "region": {"id": "1", "name": "England"},
-          "competitions": [
-            {"competition": {"id": "11965", "name": "Premier League"}}
-          ]
-        }
-      ]
-    }
-  ]
-}
+asyncio.run(main())
 ```
 
-### `get_tournaments(sport_id)`
+### Use a BetPawa id as the seed for cross-bookmaker comparison
 
-Same endpoint as `get_countries` — tournaments are nested under regions.
+See `examples/odds_from_betpawa_id.py` for the complete script. Flow:
+1. Fetch BetPawa event detail.
+2. Extract SR id from the SPORTRADAR widget.
+3. Use that SR id to query SportyBet, MSport, Betway directly (their event ids ARE the SR id).
+4. Look up Bet9ja's internal id via `Bet9ja.find_event_id_by_sr_id` (live) or `build_prematch_event_map` (prematch).
 
-### `get_events(tournament_id, sport_id="2", event_type="UPCOMING", skip=0, take=100)`
+## See also
 
-Returns events for a competition.
-
-**Endpoint:** `GET /api/sportsbook/v3/events/lists/by-queries?q={encoded_json}`
-
-**Response:**
-```json
-{
-  "responses": [
-    {
-      "responses": [
-        {
-          "id": "32299257",
-          "participants": [
-            {"name": "Manchester City", "role": "HOME"},
-            {"name": "Liverpool", "role": "AWAY"}
-          ],
-          "competition": {"id": "11965", "name": "Premier League"},
-          "widgets": [{"type": "SPORTRADAR", "id": "sr:match:61300947"}]
-        }
-      ]
-    }
-  ]
-}
-```
-
-### `get_event_detail(event_id)`
-
-Returns full event with all markets and odds.
-
-**Endpoint:** `GET /api/sportsbook/v3/events/{event_id}`
-
-**Response:**
-```json
-{
-  "id": "32299257",
-  "participants": [
-    {"name": "Manchester City", "role": "HOME"},
-    {"name": "Liverpool", "role": "AWAY"}
-  ],
-  "markets": [
-    {
-      "marketType": {"id": "3743", "name": "1X2"},
-      "row": [
-        {
-          "prices": [
-            {"name": "1", "price": 1.95},
-            {"name": "X", "price": 3.50},
-            {"name": "2", "price": 2.10}
-          ]
-        }
-      ]
-    }
-  ],
-  "widgets": [
-    {"type": "SPORTRADAR", "id": "sr:match:61300947"}
-  ]
-}
-```
+- `examples/odds_from_betpawa_id.py`
+- `examples/odds_for_betpawa_competition.py`
+- [docs/markets.md](markets.md) — registry, builtins, custom mappings.
+- [docs/matching.md](matching.md) — `extract_sportradar_id`, `match_events`.
