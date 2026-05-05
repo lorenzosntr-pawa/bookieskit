@@ -2,9 +2,7 @@
 
 import asyncio
 
-from bookieskit import BetPawa, SportyBet, Bet9ja, Betway
-from bookieskit.markets import parse_markets
-from bookieskit.matching import extract_sportradar_id
+from bookieskit import Bet9ja, BetPawa, Betway, SportyBet
 
 
 async def audit_bookmaker(name, get_data_fn):
@@ -16,7 +14,7 @@ async def audit_bookmaker(name, get_data_fn):
     data = await get_data_fn()
 
     # PREMATCH
-    print(f"\n  --- PREMATCH ---")
+    print("\n  --- PREMATCH ---")
     print(f"  Sports: {data['prematch']['sports_count']}")
     for s in data["prematch"]["sports"]:
         print(f"    {s['name']} - {s['events']} events")
@@ -33,7 +31,7 @@ async def audit_bookmaker(name, get_data_fn):
         print(f"    {ev}")
 
     # LIVE
-    print(f"\n  --- LIVE ---")
+    print("\n  --- LIVE ---")
     print(f"  Live Sports: {data['live']['sports_count']}")
     for s in data["live"]["sports"]:
         print(f"    {s['name']} - {s['events']} live")
@@ -54,7 +52,7 @@ async def get_betpawa_data():
         sport_list = sports.get("onlyMeta", [])
         data["prematch"]["sports_count"] = len(sport_list)
         data["prematch"]["sports"] = [
-            {"name": s["category"]["name"], "events": s.get("eventCounts", {}).get("upcoming", 0)}
+            {"name": s["category"]["name"], "events": s.get("eventCounts", {}).get("upcoming", 0)}  # noqa: E501
             for s in sport_list
         ]
 
@@ -129,7 +127,7 @@ async def get_sportybet_data():
 
         # PREMATCH - Regions/Tournaments
         countries_raw = await sb.get_countries(sport_id="sr:sport:1", live=False)
-        cats = countries_raw.get("data", {}).get("sportList", [{}])[0].get("categories", [])
+        cats = countries_raw.get("data", {}).get("sportList", [{}])[0].get("categories", [])  # noqa: E501
         total_t = sum(len(c.get("tournaments", [])) for c in cats)
         data["prematch"]["regions_count"] = len(cats)
         data["prematch"]["tournaments_count"] = total_t
@@ -162,7 +160,7 @@ async def get_sportybet_data():
 
         # LIVE - Football events
         countries_raw = await sb.get_countries(sport_id="sr:sport:1", live=True)
-        cats = countries_raw.get("data", {}).get("sportList", [{}])[0].get("categories", [])
+        cats = countries_raw.get("data", {}).get("sportList", [{}])[0].get("categories", [])  # noqa: E501
         live_football = []
         for c in cats[:10]:
             for t in c.get("tournaments", [])[:2]:
@@ -171,7 +169,7 @@ async def get_sportybet_data():
                 ev_list = ev_data[0].get("events", []) if ev_data else []
                 for ev in ev_list[:2]:
                     live_football.append(
-                        f"{ev.get('homeTeamName')} vs {ev.get('awayTeamName')} ({t['name']})"
+                        f"{ev.get('homeTeamName')} vs {ev.get('awayTeamName')} ({t['name']})"  # noqa: E501
                     )
                 if len(live_football) >= 5:
                     break
@@ -273,7 +271,7 @@ async def get_betway_data():
     async with Betway(country="ng") as bw:
         # PREMATCH - Sports
         sports = await bw.get_sports()
-        sport_list = [s for s in sports.get("sports", []) if s.get("sportType") == "Sport"]
+        sport_list = [s for s in sports.get("sports", []) if s.get("sportType") == "Sport"]  # noqa: E501
         data["prematch"]["sports_count"] = len(sport_list)
         data["prematch"]["sports"] = [
             {"name": s["name"], "events": "yes" if s.get("hasUpcomingEvents") else "no"}
@@ -288,9 +286,9 @@ async def get_betway_data():
         data["prematch"]["tournaments_count"] = total_leagues
         data["prematch"]["sample_tournaments"] = []
         for r in regions[:8]:
-            for l in r.get("leagues", [])[:2]:
+            for lg in r.get("leagues", [])[:2]:
                 data["prematch"]["sample_tournaments"].append(
-                    f"{r['name']}/{l['name']}"
+                    f"{r['name']}/{lg['name']}"
                 )
 
         # PREMATCH - PL Events

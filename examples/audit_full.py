@@ -2,7 +2,7 @@
 
 import asyncio
 
-from bookieskit import BetPawa, SportyBet, Bet9ja
+from bookieskit import Bet9ja, BetPawa, SportyBet
 from bookieskit.markets import parse_markets
 from bookieskit.matching import extract_sportradar_id
 
@@ -54,9 +54,9 @@ async def audit_betpawa():
             for m in markets:
                 if m.lines:
                     lines_sorted = sorted(m.lines.keys())
-                    mid_line = lines_sorted[len(lines_sorted) // 2] if lines_sorted else None
+                    mid_line = lines_sorted[len(lines_sorted) // 2] if lines_sorted else None  # noqa: E501
                     if mid_line:
-                        odds = ", ".join(f"{o.canonical_name}={o.odds}" for o in m.lines[mid_line])
+                        odds = ", ".join(f"{o.canonical_name}={o.odds}" for o in m.lines[mid_line])  # noqa: E501
                         print(f"      {m.name} [{mid_line}]: {odds}")
                 else:
                     odds = ", ".join(f"{o.canonical_name}={o.odds}" for o in m.outcomes)
@@ -99,9 +99,9 @@ async def audit_betpawa():
             for m in markets:
                 if m.lines:
                     lines_sorted = sorted(m.lines.keys())
-                    mid_line = lines_sorted[len(lines_sorted) // 2] if lines_sorted else None
+                    mid_line = lines_sorted[len(lines_sorted) // 2] if lines_sorted else None  # noqa: E501
                     if mid_line:
-                        odds = ", ".join(f"{o.canonical_name}={o.odds}" for o in m.lines[mid_line])
+                        odds = ", ".join(f"{o.canonical_name}={o.odds}" for o in m.lines[mid_line])  # noqa: E501
                         print(f"      {m.name} [{mid_line}]: {odds}")
                 else:
                     odds = ", ".join(f"{o.canonical_name}={o.odds}" for o in m.outcomes)
@@ -128,7 +128,7 @@ async def audit_sportybet():
 
             # Get countries for this sport to find a tournament
             countries_raw = await sb.get_countries(sport_id=sport_id, live=False)
-            cats = countries_raw.get("data", {}).get("sportList", [{}])[0].get("categories", [])
+            cats = countries_raw.get("data", {}).get("sportList", [{}])[0].get("categories", [])  # noqa: E501
 
             # Find first tournament with events
             found = False
@@ -158,12 +158,12 @@ async def audit_sportybet():
                         for m in markets:
                             if m.lines:
                                 lines_sorted = sorted(m.lines.keys())
-                                mid_line = lines_sorted[len(lines_sorted) // 2] if lines_sorted else None
+                                mid_line = lines_sorted[len(lines_sorted) // 2] if lines_sorted else None  # noqa: E501
                                 if mid_line:
-                                    odds = ", ".join(f"{o.canonical_name}={o.odds}" for o in m.lines[mid_line])
+                                    odds = ", ".join(f"{o.canonical_name}={o.odds}" for o in m.lines[mid_line])  # noqa: E501
                                     print(f"      {m.name} [{mid_line}]: {odds}")
                             else:
-                                odds = ", ".join(f"{o.canonical_name}={o.odds}" for o in m.outcomes)
+                                odds = ", ".join(f"{o.canonical_name}={o.odds}" for o in m.outcomes)  # noqa: E501
                                 print(f"      {m.name}: {odds}")
                         found = True
                         break
@@ -186,7 +186,7 @@ async def audit_sportybet():
                 continue
 
             countries_raw = await sb.get_countries(sport_id=sport_id, live=True)
-            cats = countries_raw.get("data", {}).get("sportList", [{}])[0].get("categories", [])
+            cats = countries_raw.get("data", {}).get("sportList", [{}])[0].get("categories", [])  # noqa: E501
 
             found = False
             for c in cats[:5]:
@@ -203,7 +203,7 @@ async def audit_sportybet():
                         away = ev.get("awayTeamName", "?")
 
                         print(f"\n  [{sport_name}] {home} vs {away}")
-                        print(f"    Tournament: {c.get('name', '?')}/{t.get('name', '?')}")
+                        print(f"    Tournament: {c.get('name', '?')}/{t.get('name', '?')}")  # noqa: E501
 
                         detail = await sb.get_event_detail(event_id=ev_id)
                         sr_id = extract_sportradar_id(detail, platform="sportybet")
@@ -214,12 +214,12 @@ async def audit_sportybet():
                         for m in markets:
                             if m.lines:
                                 lines_sorted = sorted(m.lines.keys())
-                                mid_line = lines_sorted[len(lines_sorted) // 2] if lines_sorted else None
+                                mid_line = lines_sorted[len(lines_sorted) // 2] if lines_sorted else None  # noqa: E501
                                 if mid_line:
-                                    odds = ", ".join(f"{o.canonical_name}={o.odds}" for o in m.lines[mid_line])
+                                    odds = ", ".join(f"{o.canonical_name}={o.odds}" for o in m.lines[mid_line])  # noqa: E501
                                     print(f"      {m.name} [{mid_line}]: {odds}")
                             else:
-                                odds = ", ".join(f"{o.canonical_name}={o.odds}" for o in m.outcomes)
+                                odds = ", ".join(f"{o.canonical_name}={o.odds}" for o in m.outcomes)  # noqa: E501
                                 print(f"      {m.name}: {odds}")
                         found = True
                         break
@@ -244,7 +244,7 @@ async def audit_bet9ja():
         for key, item in pal.items():
             sport_name = item.get("S_DESC", "?")
             num = item.get("NUM", 0)
-            if num == 0 or "Antepost" in sport_name or "Players" in sport_name or "Zoom" in sport_name:
+            if num == 0 or "Antepost" in sport_name or "Players" in sport_name or "Zoom" in sport_name:  # noqa: E501
                 continue
 
             sg = item.get("SG", {})
@@ -275,12 +275,12 @@ async def audit_bet9ja():
                             for m in markets:
                                 if m.lines:
                                     lines_sorted = sorted(m.lines.keys())
-                                    mid_line = lines_sorted[len(lines_sorted) // 2] if lines_sorted else None
+                                    mid_line = lines_sorted[len(lines_sorted) // 2] if lines_sorted else None  # noqa: E501
                                     if mid_line:
-                                        odds = ", ".join(f"{o.canonical_name}={o.odds}" for o in m.lines[mid_line])
+                                        odds = ", ".join(f"{o.canonical_name}={o.odds}" for o in m.lines[mid_line])  # noqa: E501
                                         print(f"      {m.name} [{mid_line}]: {odds}")
                                 else:
-                                    odds = ", ".join(f"{o.canonical_name}={o.odds}" for o in m.outcomes)
+                                    odds = ", ".join(f"{o.canonical_name}={o.odds}" for o in m.outcomes)  # noqa: E501
                                     print(f"      {m.name}: {odds}")
                             found = True
                             break
@@ -298,7 +298,7 @@ async def audit_bet9ja():
         for key, item in pal.items():
             sport_name = item.get("S_DESC", "?")
             num = item.get("NUM", 0)
-            if num == 0 or "Players" in sport_name or "Zoom" in sport_name or "Specials" in sport_name:
+            if num == 0 or "Players" in sport_name or "Zoom" in sport_name or "Specials" in sport_name:  # noqa: E501
                 continue
 
             sg = item.get("SG", {})
@@ -326,12 +326,12 @@ async def audit_bet9ja():
                             for m in markets:
                                 if m.lines:
                                     lines_sorted = sorted(m.lines.keys())
-                                    mid_line = lines_sorted[len(lines_sorted) // 2] if lines_sorted else None
+                                    mid_line = lines_sorted[len(lines_sorted) // 2] if lines_sorted else None  # noqa: E501
                                     if mid_line:
-                                        odds = ", ".join(f"{o.canonical_name}={o.odds}" for o in m.lines[mid_line])
+                                        odds = ", ".join(f"{o.canonical_name}={o.odds}" for o in m.lines[mid_line])  # noqa: E501
                                         print(f"      {m.name} [{mid_line}]: {odds}")
                                 else:
-                                    odds = ", ".join(f"{o.canonical_name}={o.odds}" for o in m.outcomes)
+                                    odds = ", ".join(f"{o.canonical_name}={o.odds}" for o in m.outcomes)  # noqa: E501
                                     print(f"      {m.name}: {odds}")
                             found = True
                             break

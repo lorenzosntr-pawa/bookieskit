@@ -1,8 +1,8 @@
-"""Full live flow test: Sports -> Countries -> Events -> Markets for all 3 bookmakers."""
+"""Full live flow test: Sports -> Countries -> Events -> Markets for all 3 bookmakers."""  # noqa: E501
 
 import asyncio
 
-from bookieskit import BetPawa, SportyBet, Bet9ja
+from bookieskit import Bet9ja, BetPawa, SportyBet
 from bookieskit.markets import parse_markets
 from bookieskit.matching import extract_sportradar_id
 
@@ -64,7 +64,7 @@ async def main():
                 if m.lines:
                     lines_list = sorted(m.lines.keys())[:3]
                     for line in lines_list:
-                        odds = ", ".join(f"{o.canonical_name}={o.odds}" for o in m.lines[line])
+                        odds = ", ".join(f"{o.canonical_name}={o.odds}" for o in m.lines[line])  # noqa: E501
                         print(f"      {m.name} [{line}]: {odds}")
                 else:
                     odds = ", ".join(f"{o.canonical_name}={o.odds}" for o in m.outcomes)
@@ -82,7 +82,7 @@ async def main():
 
         # 2-3. Live football countries/tournaments
         countries_raw = await sb.get_countries(sport_id="sr:sport:1", live=True)
-        cats = countries_raw.get("data", {}).get("sportList", [{}])[0].get("categories", [])
+        cats = countries_raw.get("data", {}).get("sportList", [{}])[0].get("categories", [])  # noqa: E501
         print(f"\n[2] Live Football Countries: {len(cats)}")
         print("\n[3] Countries/Tournaments:")
         for c in cats[:8]:
@@ -104,7 +104,7 @@ async def main():
 
         if picked_event:
             ev_id = picked_event.get("eventId")
-            print(f"\n[4] Event: {picked_event.get('homeTeamName')} vs {picked_event.get('awayTeamName')} (id: {ev_id})")
+            print(f"\n[4] Event: {picked_event.get('homeTeamName')} vs {picked_event.get('awayTeamName')} (id: {ev_id})")  # noqa: E501
 
             detail = await sb.get_event_detail(event_id=ev_id)
             sr_id = extract_sportradar_id(detail, platform="sportybet")
@@ -116,7 +116,7 @@ async def main():
                 if m.lines:
                     lines_list = sorted(m.lines.keys())[:3]
                     for line in lines_list:
-                        odds = ", ".join(f"{o.canonical_name}={o.odds}" for o in m.lines[line])
+                        odds = ", ".join(f"{o.canonical_name}={o.odds}" for o in m.lines[line])  # noqa: E501
                         print(f"      {m.name} [{line}]: {odds}")
                 else:
                     odds = ", ".join(f"{o.canonical_name}={o.odds}" for o in m.outcomes)
@@ -146,7 +146,7 @@ async def main():
             sub = group.get("G", {})
             for tid, t in sub.items():
                 if t.get("NUM", 0) > 0:
-                    print(f"    {name}/{t.get('G_DESC', '?')} (id: {tid}) - {t.get('NUM', 0)} events")
+                    print(f"    {name}/{t.get('G_DESC', '?')} (id: {tid}) - {t.get('NUM', 0)} events")  # noqa: E501
 
         # 4. First live event -> detail -> markets
         found = False
@@ -171,10 +171,10 @@ async def main():
                             if m.lines:
                                 lines_list = sorted(m.lines.keys())[:3]
                                 for line in lines_list:
-                                    odds = ", ".join(f"{o.canonical_name}={o.odds}" for o in m.lines[line])
+                                    odds = ", ".join(f"{o.canonical_name}={o.odds}" for o in m.lines[line])  # noqa: E501
                                     print(f"      {m.name} [{line}]: {odds}")
                             else:
-                                odds = ", ".join(f"{o.canonical_name}={o.odds}" for o in m.outcomes)
+                                odds = ", ".join(f"{o.canonical_name}={o.odds}" for o in m.outcomes)  # noqa: E501
                                 print(f"      {m.name}: {odds}")
                         found = True
                         break

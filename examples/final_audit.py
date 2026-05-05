@@ -2,7 +2,7 @@
 
 import asyncio
 
-from bookieskit import BetPawa, SportyBet, Bet9ja, Betway
+from bookieskit import Bet9ja, BetPawa, Betway, SportyBet
 
 
 async def main():
@@ -44,7 +44,7 @@ async def main():
             if len(p) >= 2:
                 print(f"    {p[0]['name']} vs {p[1]['name']}")
 
-        print(f"\n  LIVE")
+        print("\n  LIVE")
         total_live = 0
         for s in sport_list:
             cat = s["category"]
@@ -77,7 +77,7 @@ async def main():
             print(f"    {s['name']} - {n} events")
 
         countries_raw = await sb.get_countries(sport_id="sr:sport:1", live=False)
-        cats = countries_raw.get("data", {}).get("sportList", [{}])[0].get("categories", [])
+        cats = countries_raw.get("data", {}).get("sportList", [{}])[0].get("categories", [])  # noqa: E501
         total_t = sum(len(c.get("tournaments", [])) for c in cats)
         print(f"  Football: {len(cats)} regions, {total_t} tournaments")
 
@@ -88,7 +88,7 @@ async def main():
         for ev in ev_list[:3]:
             print(f"    {ev.get('homeTeamName')} vs {ev.get('awayTeamName')}")
 
-        print(f"\n  LIVE")
+        print("\n  LIVE")
         sports_raw = await sb.get_sports(live=True)
         sport_list_live = sports_raw.get("data", {}).get("sportList", [])
         total_live = 0
@@ -134,7 +134,7 @@ async def main():
         for ev in ev_list[:3]:
             print(f"    {ev.get('DS')}")
 
-        print(f"\n  LIVE")
+        print("\n  LIVE")
         live_raw = await b9.get_live_events()
         live_d = live_raw.get("D", {})
         live_sports = live_d.get("S", {})
@@ -185,7 +185,7 @@ async def main():
         for ev in ev_list[:3]:
             print(f"    {ev.get('homeTeam')} vs {ev.get('awayTeam')}")
 
-        print(f"\n  LIVE")
+        print("\n  LIVE")
         total_live = 0
         for s in sport_list:
             n = s.get("liveInPlayCount", 0)

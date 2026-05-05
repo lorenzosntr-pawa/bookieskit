@@ -2,7 +2,7 @@
 
 import asyncio
 
-from bookieskit import BetPawa, SportyBet, Bet9ja, Betway
+from bookieskit import Bet9ja, BetPawa, Betway, SportyBet
 
 
 async def audit_betpawa():
@@ -20,7 +20,7 @@ async def audit_betpawa():
             cat = s["category"]
             upcoming = s.get("eventCounts", {}).get("upcoming", 0)
             live = s.get("eventCounts", {}).get("live", 0)
-            print(f"    {cat['name']} (id: {cat['id']}) - {upcoming} prematch, {live} live")
+            print(f"    {cat['name']} (id: {cat['id']}) - {upcoming} prematch, {live} live")  # noqa: E501
 
         # Football tournaments
         countries = await bp.get_countries(sport_id="2")
@@ -31,7 +31,7 @@ async def audit_betpawa():
         for r in regions[:5]:
             region_info = r.get("region", {})
             comps = r.get("competitions", [])
-            comp_names = ", ".join(c.get("competition", {}).get("name", "?") for c in comps[:3])
+            comp_names = ", ".join(c.get("competition", {}).get("name", "?") for c in comps[:3])  # noqa: E501
             print(f"    {region_info.get('name')} ({len(comps)}): {comp_names}")
         if len(regions) > 5:
             print(f"    ... +{len(regions)-5} more regions")
@@ -77,7 +77,7 @@ async def audit_sportybet():
 
         # Football tournaments
         countries_raw = await sb.get_countries(sport_id="sr:sport:1", live=False)
-        cats = countries_raw.get("data", {}).get("sportList", [{}])[0].get("categories", [])
+        cats = countries_raw.get("data", {}).get("sportList", [{}])[0].get("categories", [])  # noqa: E501
         total_tournaments = sum(len(c.get("tournaments", [])) for c in cats)
         print(f"\n  Football Countries: {len(cats)}")
         print(f"  Total Tournaments: {total_tournaments}")
@@ -108,7 +108,7 @@ async def audit_sportybet():
 
         # Live football countries
         countries_raw = await sb.get_countries(sport_id="sr:sport:1", live=True)
-        cats = countries_raw.get("data", {}).get("sportList", [{}])[0].get("categories", [])
+        cats = countries_raw.get("data", {}).get("sportList", [{}])[0].get("categories", [])  # noqa: E501
         print(f"  Live Football Countries: {len(cats)}")
         for c in cats[:5]:
             for t in c.get("tournaments", []):
@@ -182,12 +182,12 @@ async def audit_betway():
         # PREMATCH
         print("\n  --- PREMATCH ---")
         sports = await bw.get_sports()
-        sport_list = [s for s in sports.get("sports", []) if s.get("sportType") == "Sport"]
+        sport_list = [s for s in sports.get("sports", []) if s.get("sportType") == "Sport"]  # noqa: E501
         print(f"  Sports: {len(sport_list)}")
         for s in sport_list[:10]:
             live = s.get("liveInPlayCount", 0)
             has_upcoming = s.get("hasUpcomingEvents", False)
-            print(f"    {s['name']} (id: {s['sportId']}) - live: {live}, upcoming: {has_upcoming}")
+            print(f"    {s['name']} (id: {s['sportId']}) - live: {live}, upcoming: {has_upcoming}")  # noqa: E501
         if len(sport_list) > 10:
             print(f"    ... +{len(sport_list)-10} more")
 
@@ -199,13 +199,13 @@ async def audit_betway():
         print(f"  Total Leagues: {total_leagues}")
         for r in regions[:5]:
             leagues = r.get("leagues", [])
-            l_names = ", ".join(l.get("name", "?") for l in leagues[:3])
+            l_names = ", ".join(lg.get("name", "?") for lg in leagues[:3])
             print(f"    {r['name']} ({len(leagues)}): {l_names}")
         if len(regions) > 5:
             print(f"    ... +{len(regions)-5} more regions")
 
         # Sample events (UCL)
-        events = await bw.get_events(league_id="international-clubs_uefa-champions-league")
+        events = await bw.get_events(league_id="international-clubs_uefa-champions-league")  # noqa: E501
         ev_list = events.get("events", [])
         print(f"\n  UCL Events: {len(ev_list)}")
         for ev in ev_list[:3]:
@@ -218,10 +218,10 @@ async def audit_betway():
         live_events = [e for e in all_events if e.get("isLive")]
         print(f"  Live Soccer Events (from highlights): {len(live_events)}")
         for ev in live_events[:5]:
-            print(f"    {ev.get('homeTeam')} vs {ev.get('awayTeam')} ({ev.get('league', '?')})")
+            print(f"    {ev.get('homeTeam')} vs {ev.get('awayTeam')} ({ev.get('league', '?')})")  # noqa: E501
 
         # Live sports counts from config
-        print(f"\n  Live Sports (from config):")
+        print("\n  Live Sports (from config):")
         for s in sport_list[:10]:
             live = s.get("liveInPlayCount", 0)
             if live > 0:

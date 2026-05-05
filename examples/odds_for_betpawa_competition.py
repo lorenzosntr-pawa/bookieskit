@@ -13,7 +13,8 @@ WHY START FROM A BETPAWA COMPETITION ID?
         3. Use that SR id to query the other four bookmakers.
 
 USAGE
-    python examples/odds_for_betpawa_competition.py <competition_id> [--live] [--csv path.csv]
+    python examples/odds_for_betpawa_competition.py <competition_id> \
+        [--live] [--csv path.csv]
 
     Defaults to PREMATCH (productId=3 / prematch endpoints) since
     competition listings are mostly upcoming events. Pass --live to
@@ -25,7 +26,6 @@ import argparse
 import asyncio
 import csv
 from collections import defaultdict
-from typing import Any
 
 # Public surface of the library: the 5 client classes plus the parser
 # (raw response -> NormalizedMarket list) and extractor (raw response
@@ -275,7 +275,7 @@ async def main(competition_id: str, live: bool, csv_path: str) -> None:
         if not live:
             print("Building Bet9ja prematch event map (walking soccer tournaments)...")
         bet9ja_lookup = await build_bet9ja_lookup(b9_lookup, live=live)
-        print(f"Bet9ja {'live' if live else 'prematch'} lookup: {len(bet9ja_lookup)} entries")
+        print(f"Bet9ja {'live' if live else 'prematch'} lookup: {len(bet9ja_lookup)} entries")  # noqa: E501
 
         for i, ev in enumerate(events, start=1):
             label = f"{ev['home']} vs {ev['away']}"
@@ -298,7 +298,7 @@ async def main(competition_id: str, live: bool, csv_path: str) -> None:
                         fetch_sportybet(sr_prefixed, live=live),
                         fetch_msport(sr_prefixed, live=live),
                         fetch_betway(sr_numeric),
-                        fetch_bet9ja(sr_numeric, live=live, bet9ja_lookup=bet9ja_lookup),
+                        fetch_bet9ja(sr_numeric, live=live, bet9ja_lookup=bet9ja_lookup),  # noqa: E501
                     )
                     per_bookmaker = {
                         "BetPawa": bp_data["markets"],
@@ -332,7 +332,7 @@ async def main(competition_id: str, live: bool, csv_path: str) -> None:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-        description="Compare odds across 5 bookmakers for every event in a BetPawa competition.",
+        description="Compare odds across 5 bookmakers for every event in a BetPawa competition.",  # noqa: E501
     )
     parser.add_argument(
         "competition_id",

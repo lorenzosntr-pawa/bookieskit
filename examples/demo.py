@@ -2,9 +2,7 @@
 
 import asyncio
 
-from bookieskit import BetPawa, SportyBet, Bet9ja
-from bookieskit.markets import MarketRegistry
-from bookieskit.matching import extract_sportradar_id
+from bookieskit import Bet9ja, BetPawa, SportyBet
 
 
 async def main():
@@ -40,7 +38,7 @@ async def main():
                 print(f"  Events found: {len(results)}")
                 if results:
                     event_id = str(results[0]["id"])
-                    print(f"  First event: {results[0].get('homeTeam', '?')} vs {results[0].get('awayTeam', '?')}")
+                    print(f"  First event: {results[0].get('homeTeam', '?')} vs {results[0].get('awayTeam', '?')}")  # noqa: E501
                     break
 
         # Get markets for an event
@@ -50,7 +48,7 @@ async def main():
             print(f"  Normalized markets found: {len(markets)}")
             for m in markets:
                 if m.lines:
-                    lines_str = ", ".join(f"{l}" for l in list(m.lines.keys())[:3])
+                    lines_str = ", ".join(str(k) for k in list(m.lines.keys())[:3])
                     print(f"  - {m.name} (lines: {lines_str})")
                 else:
                     odds_str = ", ".join(
@@ -77,12 +75,12 @@ async def main():
             print(f"Premier League events: {len(event_list)}")
             if event_list:
                 ev = event_list[0]
-                print(f"  First: {ev.get('homeTeamName', '?')} vs {ev.get('awayTeamName', '?')}")
+                print(f"  First: {ev.get('homeTeamName', '?')} vs {ev.get('awayTeamName', '?')}")  # noqa: E501
                 ev_id = ev.get("eventId", "")
                 print(f"  EventId (SR ID): {ev_id}")
 
                 # Get full detail + markets
-                detail = await sb.get_event_detail(event_id=ev_id)
+                await sb.get_event_detail(event_id=ev_id)
                 markets = await sb.get_markets(event_id=ev_id)
                 print(f"  Normalized markets: {len(markets)}")
                 for m in markets:

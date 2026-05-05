@@ -9,7 +9,8 @@ Defaults to live (productId=1 / live endpoints). Pass --prematch for upcoming
 events.
 
 Resolution per bookmaker:
-- SportyBet, MSport: eventId IS sr:match:XXX → direct lookup, productId switch by --live/--prematch
+- SportyBet, MSport: eventId IS sr:match:XXX → direct lookup,
+  productId switch by --live/--prematch
 - Betway: eventId IS the bare numeric SR id; uses get_markets() (separate
   markets endpoint, returns same shape for live + prematch)
 - Bet9ja: SR id → internal id via find_event_id_by_sr_id (live scan); then
@@ -37,7 +38,7 @@ async def odds_sportybet(sr_numeric: str, sr_prefixed: str, *, live: bool) -> di
             detail = await sb.get_event_detail(event_id=sr_prefixed, live=live)
             data = detail.get("data") or {}
             if not data or not data.get("markets"):
-                return {**out, "status": "no markets returned", "raw_event_id": sr_prefixed}
+                return {**out, "status": "no markets returned", "raw_event_id": sr_prefixed}  # noqa: E501
             out["home"] = data.get("homeTeamName") or data.get("homeTeam")
             out["away"] = data.get("awayTeamName") or data.get("awayTeam")
             out["markets"] = parse_markets(detail, platform="sportybet")
@@ -54,7 +55,7 @@ async def odds_msport(sr_numeric: str, sr_prefixed: str, *, live: bool) -> dict:
             detail = await ms.get_event_detail(event_id=sr_prefixed, live=live)
             data = detail.get("data") or {}
             if not data or not data.get("markets"):
-                return {**out, "status": "no markets returned", "raw_event_id": sr_prefixed}
+                return {**out, "status": "no markets returned", "raw_event_id": sr_prefixed}  # noqa: E501
             out["home"] = data.get("homeTeam")
             out["away"] = data.get("awayTeam")
             out["markets"] = parse_markets(detail, platform="msport")

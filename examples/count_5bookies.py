@@ -44,18 +44,18 @@ async def count_betpawa() -> dict:
             except Exception:
                 pass
         out["tournaments_prematch"] = prematch_tournaments
-        out["tournaments_live"] = live_tournaments  # BetPawa doesn't expose live tournaments distinctly
+        out["tournaments_live"] = live_tournaments  # BetPawa doesn't expose live tournaments distinctly  # noqa: E501
     return out
 
 
 async def count_sportybet() -> dict:
     out = {"name": "SportyBet", "country": "ng"}
     async with SportyBet(country="ng") as sb:
-        prematch_sports = (await sb.get_sports(live=False)).get("data", {}).get("sportList", [])
-        live_sports = (await sb.get_sports(live=True)).get("data", {}).get("sportList", [])
+        prematch_sports = (await sb.get_sports(live=False)).get("data", {}).get("sportList", [])  # noqa: E501
+        live_sports = (await sb.get_sports(live=True)).get("data", {}).get("sportList", [])  # noqa: E501
         out["sports_total"] = len(prematch_sports)
-        out["sports_with_prematch"] = sum(1 for s in prematch_sports if s.get("eventSize", 0) > 0)
-        out["sports_with_live"] = sum(1 for s in live_sports if s.get("eventSize", 0) > 0)
+        out["sports_with_prematch"] = sum(1 for s in prematch_sports if s.get("eventSize", 0) > 0)  # noqa: E501
+        out["sports_with_live"] = sum(1 for s in live_sports if s.get("eventSize", 0) > 0)  # noqa: E501
         out["events_prematch"] = sum(s.get("eventSize", 0) for s in prematch_sports)
         out["events_live"] = sum(s.get("eventSize", 0) for s in live_sports)
         # Tournaments: iterate all sports
@@ -98,7 +98,7 @@ async def count_bet9ja() -> dict:
             and "Zoom" not in v.get("S_DESC", "")
         }
         out["sports_total"] = len(regular)
-        out["sports_with_prematch"] = sum(1 for v in regular.values() if v.get("NUM", 0) > 0)
+        out["sports_with_prematch"] = sum(1 for v in regular.values() if v.get("NUM", 0) > 0)  # noqa: E501
         out["events_prematch"] = sum(v.get("NUM", 0) for v in regular.values())
 
         # Tournaments: count by walking SG (countries) -> G (tournaments) per sport
@@ -115,22 +115,22 @@ async def count_bet9ja() -> dict:
         live_events = 0
         for sid in live.keys():
             try:
-                ev = (await b9.get_live_events(sport_id=str(sid))).get("D", {}).get("E", {}) or {}
+                ev = (await b9.get_live_events(sport_id=str(sid))).get("D", {}).get("E", {}) or {}  # noqa: E501
                 live_events += len(ev)
             except Exception:
                 pass
         out["events_live"] = live_events
-        out["tournaments_live"] = 0  # Bet9ja live shape doesn't expose tournament counts here
+        out["tournaments_live"] = 0  # Bet9ja live shape doesn't expose tournament counts here  # noqa: E501
     return out
 
 
 async def count_betway() -> dict:
     out = {"name": "Betway", "country": "ng"}
     async with Betway(country="ng") as bw:
-        sports = [s for s in (await bw.get_sports()).get("sports", []) if s.get("sportType") == "Sport"]
+        sports = [s for s in (await bw.get_sports()).get("sports", []) if s.get("sportType") == "Sport"]  # noqa: E501
         out["sports_total"] = len(sports)
-        out["sports_with_prematch"] = sum(1 for s in sports if s.get("hasUpcomingEvents", False))
-        out["sports_with_live"] = sum(1 for s in sports if s.get("liveInPlayCount", 0) > 0)
+        out["sports_with_prematch"] = sum(1 for s in sports if s.get("hasUpcomingEvents", False))  # noqa: E501
+        out["sports_with_live"] = sum(1 for s in sports if s.get("liveInPlayCount", 0) > 0)  # noqa: E501
         out["events_live"] = sum(s.get("liveInPlayCount", 0) for s in sports)
         # Betway doesn't surface a per-sport upcoming count — leave None
         out["events_prematch"] = None
@@ -172,7 +172,7 @@ async def count_msport() -> dict:
             if not sid:
                 continue
             try:
-                tours = (await ms.get_events(sport_id=sid)).get("data", {}).get("tournaments", [])
+                tours = (await ms.get_events(sport_id=sid)).get("data", {}).get("tournaments", [])  # noqa: E501
                 prematch_tournaments += len(tours)
                 prematch_events += sum(len(t.get("events", []) or []) for t in tours)
             except Exception:
@@ -183,7 +183,7 @@ async def count_msport() -> dict:
             if not sid:
                 continue
             try:
-                tours = (await ms.get_live_events(sport_id=sid)).get("data", {}).get("tournaments", [])
+                tours = (await ms.get_live_events(sport_id=sid)).get("data", {}).get("tournaments", [])  # noqa: E501
                 live_tournaments += len(tours)
             except Exception:
                 pass
@@ -195,7 +195,7 @@ async def count_msport() -> dict:
 
 async def main():
     results = []
-    for fn in (count_betpawa, count_sportybet, count_bet9ja, count_betway, count_msport):
+    for fn in (count_betpawa, count_sportybet, count_bet9ja, count_betway, count_msport):  # noqa: E501
         try:
             r = await fn()
             results.append(r)
@@ -205,7 +205,7 @@ async def main():
             results.append({"name": fn.__name__.replace("count_", ""), "error": str(e)})
 
     print("\n" + "=" * 90)
-    print(f"{'Bookmaker':<12} {'Sports':>7} {'Tour(P)':>8} {'Tour(L)':>8} {'Events(P)':>10} {'Events(L)':>10}")
+    print(f"{'Bookmaker':<12} {'Sports':>7} {'Tour(P)':>8} {'Tour(L)':>8} {'Events(P)':>10} {'Events(L)':>10}")  # noqa: E501
     print("-" * 90)
     for r in results:
         if "error" in r:
@@ -219,7 +219,7 @@ async def main():
         ep_str = "n/a" if ep is None else str(ep)
         print(f"{r['name']:<12} {sp:>7} {tp:>8} {tl:>8} {ep_str:>10} {el:>10}")
     print("=" * 90)
-    print("\nLegend: Tour(P)=prematch tournaments, Tour(L)=live tournaments, Events(P/L)=events totals")
+    print("\nLegend: Tour(P)=prematch tournaments, Tour(L)=live tournaments, Events(P/L)=events totals")  # noqa: E501
 
 
 if __name__ == "__main__":
