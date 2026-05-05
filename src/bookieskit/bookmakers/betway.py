@@ -120,6 +120,7 @@ class Betway(BaseBookmaker):
 
     async def get_events(
         self,
+        region_id: str | None = None,
         league_id: str | None = None,
         sport_id: str = "soccer",
         skip: int = 0,
@@ -129,9 +130,10 @@ class Betway(BaseBookmaker):
         """Get events for a league.
 
         Args:
-            league_id: League ID slug (e.g.,
-                       "international-clubs_uefa-champions-league").
-                       Format: "{regionId}_{leagueId}". None for all.
+            region_id: Region slug (e.g., "international-clubs", "england").
+                       Required together with league_id for filtered results.
+            league_id: League slug (e.g., "uefa-champions-league",
+                       "premier-league"). Required together with region_id.
             sport_id: Sport slug (default: "soccer")
             skip: Pagination offset (default: 0)
             take: Page size (default: 50)
@@ -150,13 +152,14 @@ class Betway(BaseBookmaker):
             "boostedOnly": "false",
             "marketTypes": market_types,
         }
-        if league_id:
-            params["leagueIds"] = league_id
-        return await self._request(
-            "GET",
-            "/br/_apis/sport/v1/BetBook/Highlights/",
-            params=params,
-        )
+        if region_id and league_id:
+            params["SortOrder"] = "League"
+            params["RegionAndLeagueIds[0].regionId"] = region_id
+            params["RegionAndLeagueIds[0].leagueId"] = league_id
+            endpoint = "/br/_apis/sport/v1/BetBook/Filtered/"
+        else:
+            endpoint = "/br/_apis/sport/v1/BetBook/Highlights/"
+        return await self._request("GET", endpoint, params=params)
 
     async def get_event_detail(
         self, event_id: str
