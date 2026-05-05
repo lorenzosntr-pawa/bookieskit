@@ -1,0 +1,23 @@
+"""Default configuration constants for bookieskit."""
+
+# HTTP client defaults
+DEFAULT_TIMEOUT = 30.0  # seconds
+DEFAULT_MAX_RETRIES = 3
+DEFAULT_BACKOFF_FACTOR = 1.0  # exponential: 1s, 2s, 4s
+
+# Connection pooling
+DEFAULT_MAX_CONNECTIONS = 200
+DEFAULT_MAX_KEEPALIVE = 100
+
+# Platform-specific rate limits
+BETPAWA_MAX_CONCURRENT = 50
+BETPAWA_REQUEST_DELAY = 0.0
+
+SPORTYBET_MAX_CONCURRENT = 50
+SPORTYBET_REQUEST_DELAY = 0.0
+
+BET9JA_MAX_CONCURRENT = 15
+BET9JA_REQUEST_DELAY = 0.025  # 25ms
+
+# Retry-eligible HTTP status codes
+RETRYABLE_STATUS_CODES = {429, 500, 502, 503, 504}
