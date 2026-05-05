@@ -56,12 +56,15 @@ class Betway(BaseBookmaker):
             "Chrome/144.0.0.0 Safari/537.36"
         ),
     }
+    # AUDIT: MAX_CONCURRENT and REQUEST_DELAY are hardcoded here while all
+    # other bookmakers pull from config.py constants. Add BETWAY_MAX_CONCURRENT
+    # and BETWAY_REQUEST_DELAY to config.py and import them here for consistency.
     MAX_CONCURRENT = 50
     REQUEST_DELAY = 0.0
     NAME = "Betway"
     PLATFORM_KEY = "betway"
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         super().__init__(**kwargs)
         self._country_code = _COUNTRY_CODES.get(
             self._country, self._country.upper()
@@ -213,7 +216,7 @@ class Betway(BaseBookmaker):
             },
         )
 
-    async def get_markets(self, event_id: str, registry=None):
+    async def get_markets(self, event_id: str, registry: Any = None) -> list:
         """Fetch event markets and return normalized markets.
 
         Overrides base because Betway uses a separate markets endpoint.

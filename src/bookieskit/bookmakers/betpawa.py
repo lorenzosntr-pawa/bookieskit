@@ -79,8 +79,15 @@ class BetPawa(BaseBookmaker):
             params={"includeRegions": "true"},
         )
 
+    # AUDIT: get_tournaments is identical to get_countries (same endpoint,
+    # same params). Consider removing get_tournaments and aliasing it, or
+    # merging into one method with a docstring note.
     async def get_tournaments(self, sport_id: str) -> dict[str, Any]:
         """Get tournaments/competitions for a sport.
+
+        Returns the same payload as get_countries — BetPawa's
+        categories/list endpoint returns both regions and competitions
+        in a single response.
 
         Args:
             sport_id: Sport category ID (e.g., "2" for Football)

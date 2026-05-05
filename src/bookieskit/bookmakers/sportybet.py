@@ -91,10 +91,17 @@ class SportyBet(BaseBookmaker):
             },
         )
 
+    # AUDIT: get_tournaments is identical to get_countries (same endpoint,
+    # same params). Consider removing get_tournaments and aliasing it, or
+    # merging into one method with a docstring note.
     async def get_tournaments(
         self, sport_id: str = "sr:sport:1", live: bool = False
     ) -> dict[str, Any]:
         """Get tournaments for a sport (nested under categories).
+
+        Returns the same payload as get_countries — SportyBet's
+        popularAndSportList endpoint returns categories and tournaments
+        in a single response.
 
         Args:
             sport_id: SportRadar sport ID (default: "sr:sport:1" for Football)

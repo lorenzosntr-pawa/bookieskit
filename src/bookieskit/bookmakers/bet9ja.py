@@ -38,6 +38,10 @@ class Bet9ja(BaseBookmaker):
     NAME = "Bet9ja"
     PLATFORM_KEY = "bet9ja"
 
+    # AUDIT: Several example files call get_sports(live=False) and
+    # get_sports(live=True), but this method has no `live` parameter.
+    # The live=True callers should use get_live_sports() instead.
+    # Fix the example files or add a deprecation shim here.
     async def get_sports(self) -> dict[str, Any]:
         """Get all available sports with their category hierarchy (prematch).
 
