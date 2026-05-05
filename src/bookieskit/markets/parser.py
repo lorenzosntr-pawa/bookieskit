@@ -46,7 +46,9 @@ def _parse_betpawa(
     markets = response.get("markets", [])
 
     for market_data in markets:
-        market_id = str(market_data.get("id", ""))
+        # BetPawa nests market ID under marketType.id
+        market_type = market_data.get("marketType", {})
+        market_id = str(market_type.get("id", market_data.get("id", "")))
         mapping = registry.get_by_platform_id("betpawa", market_id)
         if mapping is None:
             continue
@@ -67,11 +69,14 @@ def _parse_betpawa_simple(
     """Parse a simple BetPawa market (1X2, BTTS, DC)."""
     outcomes: list[Outcome] = []
     rows = market_data.get("row", [])
+    if not isinstance(rows, list):
+        rows = [rows] if rows else []
 
     for row in rows:
         for price in row.get("prices", []):
-            price_name = str(price.get("name", ""))
-            odds = float(price.get("odds", 0))
+            price_name = str(price.get("name", price.get("displayName", "")))
+            # BetPawa uses "price" field (not "odds")
+            odds = float(price.get("price", price.get("odds", 0)))
             canonical = _resolve_outcome_betpawa(
                 price_name, mapping
             )
@@ -98,17 +103,28 @@ def _parse_betpawa_parameterized(
     """Parse a parameterized BetPawa market (O/U, handicaps)."""
     lines: dict[float, list[Outcome]] = {}
     rows = market_data.get("row", [])
+    if not isinstance(rows, list):
+        rows = [rows] if rows else []
 
     for row in rows:
-        line = row.get("line")
+        # BetPawa uses "handicap" or "formattedHandicap" for the line value
+        line = row.get("line", row.get("handicap"))
         if line is None:
-            continue
+            # Try to extract from formattedHandicap
+            formatted = row.get("formattedHandicap")
+            if formatted:
+                try:
+                    line = float(formatted)
+                except (ValueError, TypeError):
+                    continue
+            else:
+                continue
         line = float(line)
         line_outcomes: list[Outcome] = []
 
         for price in row.get("prices", []):
-            price_name = str(price.get("name", ""))
-            odds = float(price.get("odds", 0))
+            price_name = str(price.get("name", price.get("displayName", "")))
+            odds = float(price.get("price", price.get("odds", 0)))
             canonical = _resolve_outcome_betpawa(
                 price_name, mapping
             )

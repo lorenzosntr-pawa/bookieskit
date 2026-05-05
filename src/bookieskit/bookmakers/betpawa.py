@@ -65,32 +65,36 @@ class BetPawa(BaseBookmaker):
         return await self._request("GET", "/api/sportsbook/v3/categories/list/all")
 
     async def get_countries(self, sport_id: str) -> dict[str, Any]:
-        """Get countries/regions for a sport.
+        """Get countries/regions for a sport (with competitions).
 
         Args:
             sport_id: Sport category ID (e.g., "2" for Football)
 
         Returns:
-            Raw JSON with regions and their competitions.
+            Raw JSON with withRegions[].regions[].competitions structure.
         """
         return await self._request(
-            "GET", f"/api/sportsbook/v3/categories/list/{sport_id}"
+            "GET",
+            f"/api/sportsbook/v3/categories/list/{sport_id}",
+            params={"includeRegions": "true"},
         )
 
     async def get_tournaments(
         self, sport_id: str, country_id: str | None = None
     ) -> dict[str, Any]:
-        """Get tournaments/competitions for a sport (optionally filtered by country).
+        """Get tournaments/competitions for a sport.
 
         Args:
             sport_id: Sport category ID (e.g., "2" for Football)
             country_id: Optional region ID to filter by
 
         Returns:
-            Raw JSON with regions containing competitions.
+            Raw JSON with withRegions[].regions[].competitions structure.
         """
         return await self._request(
-            "GET", f"/api/sportsbook/v3/categories/list/{sport_id}"
+            "GET",
+            f"/api/sportsbook/v3/categories/list/{sport_id}",
+            params={"includeRegions": "true"},
         )
 
     async def get_events(

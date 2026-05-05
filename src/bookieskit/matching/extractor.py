@@ -32,13 +32,17 @@ def _strip_sr_prefix(value: str) -> str:
 
 
 def _extract_betpawa(response: dict) -> str | None:
-    """Extract from BetPawa widgets array."""
+    """Extract from BetPawa widgets array.
+
+    BetPawa uses widgets[].id (not .value) for the SportRadar ID.
+    """
     widgets = response.get("widgets", [])
     for widget in widgets:
         if widget.get("type") == "SPORTRADAR":
-            value = widget.get("value", "")
+            # BetPawa uses "id" field, fallback to "value" for compatibility
+            value = widget.get("id", widget.get("value", ""))
             if value:
-                return _strip_sr_prefix(value)
+                return _strip_sr_prefix(str(value))
     return None
 
 
