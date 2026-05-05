@@ -1,78 +1,122 @@
-# Market Mapping
+# Markets — registry, builtins, parser
 
-## Overview
+The `bookieskit.markets` package normalizes per-bookmaker market formats into a small set of canonical markets. Three pieces:
 
-bookieskit normalizes market data from different platforms into a canonical format. Each platform uses different IDs, outcome names, and response structures — the market mapping layer abstracts this away.
+- **Types** (`markets/types.py`) — `MarketMapping`, `OutcomeMapping`, `NormalizedMarket`, `Outcome`.
+- **Registry** (`markets/registry.py`) — `MarketRegistry` holds `MarketMapping` entries, indexed by canonical id and by each platform's id.
+- **Parser** (`markets/parser.py`) — `parse_markets(response, platform, registry=None)` dispatches to a per-platform parser and returns `list[NormalizedMarket]`.
 
-## Quick Start
+## Built-in mappings
 
-```python
-from bookieskit import BetPawa
-from bookieskit.markets import MarketRegistry
+Six markets ship in the default `MarketRegistry`:
 
-# Convenience method (fetches + parses)
-async with BetPawa(country="ng") as client:
-    markets = await client.get_markets(event_id="32299257")
+| Canonical id | Name | Parameterized? | BetPawa | SportyBet | Bet9ja | Betway | MSport |
+|---|---|---|---|---|---|---|---|
+| `1x2_ft` | 1X2 — Full Time | no | ✅ | ✅ | ✅ | ✅ | ✅ |
+| `over_under_ft` | Over/Under — Full Time | yes (line=goals) | ✅ | ✅ | ✅ | ✅ | ✅ |
+| `btts_ft` | Both Teams To Score — Full Time | no | ✅ | ✅ | ✅ | ✅ | ✅ |
+| `double_chance_ft` | Double Chance — Full Time | no | ✅ | ✅ | ✅ | ✅ | ✅ |
+| `1x2_1up_ft` | 1X2 1Up — Full Time | no | — | ✅ | ✅ | ✅ | — |
+| `1x2_2up_ft` | 1X2 2Up — Full Time | no | — | ✅ | ✅ | ✅ | — |
 
-for market in markets:
-    print(f"{market.name}:")
-    if market.lines:
-        for line, outcomes in market.lines.items():
-            for o in outcomes:
-                print(f"  {line} {o.canonical_name}: {o.odds}")
-    else:
-        for o in market.outcomes:
-            print(f"  {o.canonical_name}: {o.odds}")
-```
+The 1Up / 2Up markets pay as a 1X2 if your team gets to a 1- or 2-goal lead at any point. BetPawa and MSport are intentionally unmapped (BetPawa to be added at production cutover; MSport doesn't expose this market).
 
-## Built-in Markets
+## Types
 
-| Canonical ID | Name | BetPawa | SportyBet | Bet9ja | Parameterized |
-|---|---|---|---|---|---|
-| `1x2_ft` | 1X2 - Full Time | 3743 | 1 | S_1X2 | No |
-| `over_under_ft` | Over/Under - Full Time | 5000 | 18 | S_OU | Yes |
-| `btts_ft` | Both Teams To Score | 3795 | 29 | S_GGNG | No |
-| `double_chance_ft` | Double Chance | 4693 | 10 | S_DC | No |
+### `MarketMapping`
 
-## Custom Registry
+Frozen dataclass. Fields:
+- `canonical_id: str` — unique short id (e.g. `"over_under_ft"`).
+- `name: str` — human-readable name.
+- `betpawa_id: str | None`
+- `sportybet_id: str | None`
+- `bet9ja_key: str | None` — the key prefix in Bet9ja's flat odds dict (e.g. `"S_OU"`).
+- `betway_id: str | None` — the literal market name as Betway returns it (e.g. `"[Total Goals]"`, `"1X2 (1Up)"`).
+- `msport_id: str | None`
+- `outcomes: dict[str, OutcomeMapping]` — keyed by canonical outcome name (`"home"`, `"over"`, etc.).
+- `parameterized: bool` — `True` for markets with line variants (Over/Under, handicaps).
+
+### `OutcomeMapping`
+
+Frozen dataclass. One per canonical outcome:
+- `canonical_name: str` — e.g. `"home"`, `"draw"`, `"over"`.
+- `betpawa: str` — the platform's outcome string (e.g. `"1"`, `"1X"`).
+- `sportybet: str` — e.g. `"Home"`, `"Home or Draw"`.
+- `bet9ja: str` — the suffix in the flat odds dict (e.g. `"O"` for over, `"X1"` for the 1X2 1Up draw).
+- `betway: str` — either the literal name (`"Over"`) or a position sentinel (see below).
+- `msport: str` — e.g. `"Home"`, `"1 X"` for DC.
+
+### `NormalizedMarket`
+
+The output of `parse_markets`. Has `canonical_id`, `name`, `outcomes` (a flat list for non-parameterized markets), and `lines` (a `dict[float, list[Outcome]]` for parameterized markets like Over/Under). Exactly one of `outcomes` / `lines` is populated per market.
+
+### `Outcome`
+
+A normalized outcome inside a `NormalizedMarket`. Has `canonical_name`, `odds: float`, `platform_name` (the original string from the bookmaker, useful for debugging).
+
+### Position sentinels (Betway)
+
+Betway returns the 1X2-shaped markets (1X2, DC, 1X2 1Up, 1X2 2Up) with team names as outcomes (`"Aston Villa"`, `"Draw"`, `"Nottingham Forest"`) — not standardized labels. The parser resolves them by index using these sentinels in the `betway` field of `OutcomeMapping`:
+
+| Sentinel | Index | Meaning |
+|---|---|---|
+| `__HOME__` | 0 | Home team (used by 1X2-shaped markets). |
+| `__AWAY__` | 2 | Away team (used by 1X2-shaped markets). |
+| `__POS_1__` | 0 | First outcome positionally. |
+| `__POS_2__` | 1 | Second outcome positionally. |
+| `__POS_3__` | 2 | Third outcome positionally. |
+
+Use `__HOME__` / `__AWAY__` on 1X2 (clearest intent) and `__POS_N__` for Double Chance where the meaning is purely positional (Betway returns DC as 1X / 12 / X2 in that order).
+
+## Parser dispatcher
+
+`parse_markets(response, platform, registry=None)` looks up `platform` in the dispatcher dict and calls the right `_parse_<platform>` function. Currently registered: `"betpawa"`, `"sportybet"`, `"bet9ja"`, `"betway"`, `"msport"`. Returns `[]` if `platform` is unknown.
+
+The Bet9ja parser handles BOTH the prematch `S_*` keys AND the live `LIVES_*` keys. It also unwraps the `{"v": <float>}` odds shape used in live responses (vs bare strings prematch).
+
+## Custom mappings
+
+Add a market to the default registry at runtime:
 
 ```python
 from bookieskit.markets import MarketRegistry, OutcomeMapping
 
-registry = MarketRegistry()  # includes 4 built-in
-
-# Add your own
+registry = MarketRegistry()  # ships with the 6 builtins
 registry.add(
     canonical_id="draw_no_bet_ft",
-    name="Draw No Bet - Full Time",
+    name="Draw No Bet — Full Time",
     betpawa_id="4703",
     sportybet_id="11",
     bet9ja_key="S_DNB",
+    betway_id="Draw No Bet",
+    msport_id="11",
     outcomes={
-        "home": OutcomeMapping(canonical_name="home", betpawa="1", sportybet="Home", bet9ja="1"),
-        "away": OutcomeMapping(canonical_name="away", betpawa="2", sportybet="Away", bet9ja="2"),
+        "home": OutcomeMapping(
+            canonical_name="home",
+            betpawa="1", sportybet="Home", bet9ja="1",
+            betway="__HOME__", msport="Home",
+        ),
+        "away": OutcomeMapping(
+            canonical_name="away",
+            betpawa="2", sportybet="Away", bet9ja="2",
+            betway="__AWAY__", msport="Away",
+        ),
     },
 )
-
-# Use with client
-markets = await client.get_markets(event_id="123", registry=registry)
 ```
 
-## Using the Parser Directly
+Pass the registry into `parse_markets(raw, platform=..., registry=registry)` or `client.get_markets(event_id, registry=registry)`.
 
-```python
-from bookieskit.markets import parse_markets, MarketRegistry
+## Adding a new platform
 
-# Parse any raw response
-raw = await client.get_event_detail(event_id="123")
-markets = parse_markets(raw, platform="betpawa")
-```
+To wire a new bookmaker into the parser:
+1. Add a `<platform>_id` field to `MarketMapping` and a `<platform>` field to `OutcomeMapping` in `markets/types.py`.
+2. Add a `_by_<platform>` index to `MarketRegistry` in `markets/registry.py` and update `_register` and `get_by_platform_id`.
+3. Write `_parse_<platform>(response, registry)` in `markets/parser.py`.
+4. Add a `"<platform>": _parse_<platform>` entry to the dispatcher in `parse_markets`.
+5. Update the 6 builtins in `markets/builtin_mappings.py` (or leave entries unmapped via `None` if the platform doesn't expose those markets).
 
-## Contributing New Built-in Markets (PR Guide)
+## See also
 
-1. Edit `src/bookieskit/markets/builtin_mappings.py`
-2. Add a new `MarketMapping` entry to `BUILTIN_MAPPINGS`
-3. Include all outcome mappings for each platform (use `None` for platform IDs if the market doesn't exist on that platform)
-4. Set `parameterized=True` if the market has lines (Over/Under, handicaps)
-5. Add tests in `tests/test_parser_*.py` with fixture data
-6. Update the "Built-in Markets" table above
+- [docs/matching.md](matching.md) — pairing events across platforms by SR id.
+- [docs/examples.md](examples.md) — example scripts that use the registry end-to-end.
