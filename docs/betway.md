@@ -4,119 +4,146 @@
 
 | Code | Country |
 |------|---------|
-| ng | Nigeria |
-| gh | Ghana |
-| ke | Kenya |
-| tz | Tanzania |
-| ug | Uganda |
-| zm | Zambia |
+| `ng` | Nigeria |
+| `gh` | Ghana |
+| `ke` | Kenya |
+| `tz` | Tanzania |
+| `ug` | Uganda |
+| `zm` | Zambia |
 
-All countries use the same API domain — differentiated by `countryCode` parameter.
+All countries share the same data domain (`https://feeds-roa2.betwayafrica.com`); the country is passed via the `countryCode` query parameter on every request. The sports list comes from a separate config domain (`https://config.betwayafrica.com`).
 
-## SportRadar ID
+## SportRadar id
 
-Betway event IDs ARE SportRadar IDs natively. No extraction needed — `get_sportradar_id()` returns the event ID directly without an API call.
+Betway's `eventId` IS the bare numeric SportRadar id (no `sr:match:` prefix). This means:
+
+- `extract_sportradar_id(response, platform="betway")` reads `sportEvent.eventId` and returns it as-is.
+- `Betway.get_sportradar_id(event_id)` is a synchronous identity (no API call) — it just returns the input.
+- Direct lookups by SR id work: `await betway.get_markets(event_id="69339436")`.
 
 ## Methods
 
-### `get_sports()`
+| Method | HTTP | Domain | Path | When to use |
+|--------|------|--------|------|-------------|
+| `get_sports()` | GET | config | `/cron/sports/{countryCode}/en-US` | Top-level sport list with live counts. |
+| `get_countries(sport_id)` | GET | feeds | `/br/_apis/sport/v1/Feeds/RegionsAndLeagues/{sport_id}` | Regions + leagues for one sport. |
+| `get_tournaments(sport_id)` | GET | feeds | (same) | Alias for `get_countries`. |
+| `get_events(...)` | GET | feeds | `BetBook/Highlights/` or `BetBook/Filtered/` | Events for a sport / region / league. |
+| `get_event_detail(event_id)` | GET | feeds | `Feeds/Events/EventAndGameState` | Scoreboard / state info — **no markets**. |
+| `get_event_markets(event_id, skip, take)` | GET | feeds | `MarketGroupings/MarketGroupNamesAndMarketsForEvent` | Full markets feed for an event. |
+| `get_markets(event_id, registry=None)` | (calls `get_event_markets`) | — | Inherited convenience overridden — calls the markets endpoint, not event_detail. |
+| `get_sportradar_id(event_id)` | (no API call) | — | Returns the input — `event_id` IS the SR numeric id. |
 
-Returns all available sports with live/upcoming counts.
+### `get_sports() -> dict`
 
-**Endpoint:** `GET https://config.betwayafrica.com/cron/sports/{countryCode}/en-US`
+Top-level sport list. Uses the config domain (separate httpx client). Filter `sportType == "Sport"` to skip aggregate categories. Each sport has `sportId`, `name`, `liveInPlayCount`, `hasUpcomingEvents`.
 
-**Response:**
-```json
-{
-  "sports": [
-    {
-      "sportId": "soccer",
-      "name": "Soccer",
-      "liveInPlayCount": 29,
-      "hasUpcomingEvents": true
-    }
-  ]
-}
+### `get_countries(sport_id: str) -> dict`
+
+Regions and leagues under one sport. Response: `regions[].leagues[]`.
+
+### `get_tournaments(sport_id: str) -> dict`
+
+Alias for `get_countries` — returns the same regions+leagues structure.
+
+### `get_events(sport_id=None, region_id=None, league_id=None, market_types=None, ...) -> dict`
+
+Events for a sport / region / league. Filter combinations supported. When both `region_id` and `league_id` are supplied the `BetBook/Filtered/` endpoint is used; otherwise `BetBook/Highlights/`. Response: `events[]` with `eventId`, `homeTeam`, `awayTeam`, `league`, `isLive`, etc.
+
+### `get_event_detail(event_id: str) -> dict`
+
+**Returns scoreboard / metadata only — NOT markets.** Response: `sportEvent` (with `eventId`, `name` like `"Arsenal FC vs. Atletico Madrid"`) and `gameStateTimeScore`. To get odds, use `get_event_markets` (or the convenience `get_markets`).
+
+### `get_event_markets(event_id: str, skip: int = 0, take: int = 100) -> dict`
+
+The actual markets/odds endpoint. Returns denormalized data joined by id:
+
+- `marketsInGroup[]` — each entry has `marketId`, `name` (e.g. `"[Win/Draw/Win]"`, `"1X2 (1Up)"`), `handicap`.
+- `outcomes[]` — each entry has `outcomeId`, `marketId`, `name` (e.g. `"Aston Villa"`, `"Over"`).
+- `prices[]` — each entry has `outcomeId`, `priceDecimal`.
+
+The library's parser walks all three arrays to produce normalized markets. Pagination via `skip` / `take` for events with very large market books.
+
+### `get_markets(event_id, registry=None) -> list[NormalizedMarket]`
+
+Overrides the base `get_markets`. Calls `get_event_markets` (NOT `get_event_detail`) and runs `parse_markets(..., platform="betway")`. This is the right entry point for normalized odds — `get_event_detail` won't work because it has no markets.
+
+### `get_sportradar_id(event_id) -> str | None`
+
+Overrides the base method. Returns `event_id` directly without an API call — Betway's event ids ARE the SR numeric.
+
+## Quirks
+
+- **Two domains**: sports list from `config.betwayafrica.com`, everything else from `feeds-roa2.betwayafrica.com`. The client manages both transparently.
+- **Markets and event detail are SEPARATE endpoints**: `get_event_detail` returns no markets. Use `get_event_markets` (or `get_markets`) for odds.
+- **Markets feed is denormalized**: `marketsInGroup[]`, `outcomes[]`, `prices[]` linked by `marketId` and `outcomeId`. The parser handles the join.
+- **Position-based outcome resolution** (1X2, DC, 1X2 1Up, 1X2 2Up): outcomes are returned in order without explicit names like "Home"/"Draw"/"Away" — the parser uses `__HOME__` / `__AWAY__` / `__POS_N__` sentinels (see [docs/markets.md](markets.md)).
+- **`countryCode` query parameter** is added to every feeds-domain request automatically.
+
+## Recipes
+
+### List soccer leagues for a country
+
+```python
+import asyncio
+from bookieskit import Betway
+
+async def main():
+    async with Betway(country="ng") as bw:
+        raw = await bw.get_countries(sport_id="soccer")
+        regions = raw.get("regions", [])
+        for r in regions[:5]:
+            for lg in r.get("leagues", [])[:3]:
+                print(f"{r.get('name')}/{lg.get('name')} (id: {lg.get('leagueId')})")
+
+asyncio.run(main())
 ```
 
-### `get_countries(sport_id="soccer")`
+### Normalized markets for one event
 
-Returns regions and leagues for a sport.
+```python
+import asyncio
+from bookieskit import Betway
 
-**Endpoint:** `GET /br/_apis/sport/v1/Feeds/RegionsAndLeagues/{sportId}?countryCode={cc}`
+async def main():
+    async with Betway(country="ng") as bw:
+        # Betway's event id IS the bare numeric SR id.
+        markets = await bw.get_markets(event_id="69339436")
+        for m in markets:
+            if m.lines:
+                lines = sorted(m.lines.keys())[:3]
+                for line in lines:
+                    odds = ", ".join(f"{o.canonical_name}={o.odds}" for o in m.lines[line])
+                    print(f"  {m.name} [{line}]: {odds}")
+            else:
+                odds = ", ".join(f"{o.canonical_name}={o.odds}" for o in m.outcomes)
+                print(f"  {m.name}: {odds}")
 
-**Response:**
-```json
-{
-  "regions": [
-    {
-      "regionId": "england",
-      "name": "England",
-      "leagues": [
-        {"leagueId": "premier-league", "name": "Premier League"}
-      ]
-    }
-  ]
-}
+asyncio.run(main())
 ```
 
-### `get_events(league_id, sport_id="soccer")`
+### Inspect raw markets / outcomes / prices
 
-Returns events with inline markets, outcomes, and prices.
+```python
+import asyncio
+from bookieskit import Betway
 
-**Endpoint:** `GET /br/_apis/sport/v1/BetBook/Highlights/?countryCode={cc}&sportId={sport}&leagueIds={league}`
+async def main():
+    async with Betway(country="ng") as bw:
+        raw = await bw.get_event_markets(event_id="69339436")
+        print(f"markets: {len(raw.get('marketsInGroup', []))}")
+        print(f"outcomes: {len(raw.get('outcomes', []))}")
+        print(f"prices: {len(raw.get('prices', []))}")
+        # Example: find any 1X2 (1Up) variant
+        for m in raw.get("marketsInGroup", []):
+            if "1Up" in (m.get("name") or ""):
+                print(m)
 
-League ID format: `"{regionId}_{leagueId}"` (e.g., `"international-clubs_uefa-champions-league"`)
-
-**Response:**
-```json
-{
-  "events": [
-    {
-      "eventId": 69339436,
-      "homeTeam": "Arsenal FC",
-      "awayTeam": "Atletico Madrid",
-      "isLive": false,
-      "expectedStartEpoch": 1778007600
-    }
-  ],
-  "markets": [...],
-  "outcomes": [...],
-  "prices": [{"outcomeId": "...", "priceDecimal": 1.63}]
-}
+asyncio.run(main())
 ```
 
-### `get_event_detail(event_id)`
+## See also
 
-Returns event info and game state.
-
-**Endpoint:** `GET /br/_apis/sport/v3/Feeds/Events/EventAndGameState?eventId={id}&countryCode={cc}`
-
-### `get_event_markets(event_id)`
-
-Returns all markets for an event (denormalized).
-
-**Endpoint:** `GET /br/_apis/sport/v1/MarketGroupings/MarketGroupNamesAndMarketsForEvent?eventId={id}&countryCode={cc}`
-
-**Response:**
-```json
-{
-  "marketGroupNames": ["Main", "Totals", "Goals"],
-  "marketsInGroup": [
-    {"marketId": "693394361", "name": "[Win/Draw/Win]", "displayName": "1X2", "handicap": 0}
-  ],
-  "outcomes": [
-    {"outcomeId": "6933943611", "marketId": "693394361", "name": "Arsenal FC"}
-  ],
-  "prices": [
-    {"outcomeId": "6933943611", "priceDecimal": 1.63}
-  ]
-}
-```
-
-## Notes
-
-- Uses **string-based sport IDs** (slugs: "soccer", "tennis", "basketball")
-- **Denormalized responses** — events, markets, outcomes, prices in separate arrays linked by IDs
-- **Position-based outcome matching** for 1X2 and Double Chance (outcomes use team names, not "1"/"X"/"2")
-- `get_sportradar_id()` does NOT make an API call — returns the event ID directly
+- `examples/odds_from_betpawa_id.py` (uses `Betway.get_markets`).
+- [docs/markets.md](markets.md) — position sentinels section.
+- [docs/matching.md](matching.md).
