@@ -35,6 +35,7 @@ class OutcomeMapping:
     sportybet: str
     bet9ja: str
     betway: str = ""
+    msport: str = ""
 
 
 @dataclass(frozen=True)
@@ -47,5 +48,6 @@ class MarketMapping:
     sportybet_id: str | None
     bet9ja_key: str | None
     betway_id: str | None = None
+    msport_id: str | None = None
     outcomes: dict[str, OutcomeMapping] = field(default_factory=dict)
     parameterized: bool = False

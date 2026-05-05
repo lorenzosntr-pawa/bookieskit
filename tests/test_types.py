@@ -97,3 +97,52 @@ def test_market_mapping_with_none_platform():
     )
     assert mm.sportybet_id is None
     assert mm.bet9ja_key is None
+
+
+def test_outcome_mapping_with_msport():
+    om = OutcomeMapping(
+        canonical_name="home",
+        betpawa="1",
+        sportybet="Home",
+        bet9ja="1",
+        betway="__HOME__",
+        msport="Home",
+    )
+    assert om.msport == "Home"
+
+
+def test_outcome_mapping_msport_defaults_empty():
+    om = OutcomeMapping(
+        canonical_name="home",
+        betpawa="1",
+        sportybet="Home",
+        bet9ja="1",
+    )
+    assert om.msport == ""
+
+
+def test_market_mapping_with_msport_id():
+    mm = MarketMapping(
+        canonical_id="1x2_ft",
+        name="1X2 - Full Time",
+        betpawa_id="3743",
+        sportybet_id="1",
+        bet9ja_key="S_1X2",
+        betway_id="[Win/Draw/Win]",
+        msport_id="1",
+        outcomes={},
+        parameterized=False,
+    )
+    assert mm.msport_id == "1"
+
+
+def test_market_mapping_msport_id_defaults_none():
+    mm = MarketMapping(
+        canonical_id="x",
+        name="X",
+        betpawa_id=None,
+        sportybet_id=None,
+        bet9ja_key=None,
+        outcomes={},
+    )
+    assert mm.msport_id is None
