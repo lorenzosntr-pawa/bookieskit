@@ -38,6 +38,7 @@ class SportyBet(BaseBookmaker):
     MAX_CONCURRENT = SPORTYBET_MAX_CONCURRENT
     REQUEST_DELAY = SPORTYBET_REQUEST_DELAY
     NAME = "SportyBet"
+    PLATFORM_KEY = "sportybet"
 
     @property
     def _api_prefix(self) -> str:

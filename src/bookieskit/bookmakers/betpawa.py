@@ -47,6 +47,7 @@ class BetPawa(BaseBookmaker):
     MAX_CONCURRENT = BETPAWA_MAX_CONCURRENT
     REQUEST_DELAY = BETPAWA_REQUEST_DELAY
     NAME = "BetPawa"
+    PLATFORM_KEY = "betpawa"
 
     def _build_headers(self) -> dict[str, str]:
         headers = dict(self.DEFAULT_HEADERS)

@@ -37,6 +37,7 @@ class BaseBookmaker:
     MAX_CONCURRENT: int = 50
     REQUEST_DELAY: float = 0.0
     NAME: str = "BaseBookmaker"
+    PLATFORM_KEY: str = ""
 
     def __init__(
         self,
@@ -169,6 +170,43 @@ class BaseBookmaker:
                 )
 
         raise last_error
+
+    async def get_markets(
+        self,
+        event_id: str,
+        registry=None,
+    ):
+        """Fetch event detail and return normalized markets.
+
+        Args:
+            event_id: Platform-specific event ID
+            registry: MarketRegistry (default: built-in 4 markets)
+
+        Returns:
+            List of NormalizedMarket for recognized markets.
+        """
+        from bookieskit.markets.parser import parse_markets
+
+        raw = await self.get_event_detail(event_id=event_id)
+        return parse_markets(
+            raw, platform=self.PLATFORM_KEY, registry=registry
+        )
+
+    async def get_sportradar_id(self, event_id: str) -> str | None:
+        """Fetch event detail and extract SportRadar ID.
+
+        Args:
+            event_id: Platform-specific event ID
+
+        Returns:
+            SportRadar ID string, or None if not available.
+        """
+        from bookieskit.matching.extractor import extract_sportradar_id
+
+        raw = await self.get_event_detail(event_id=event_id)
+        return extract_sportradar_id(
+            raw, platform=self.PLATFORM_KEY
+        )
 
 
 class _SyncProxy:

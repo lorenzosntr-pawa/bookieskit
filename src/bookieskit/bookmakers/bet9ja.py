@@ -35,6 +35,7 @@ class Bet9ja(BaseBookmaker):
     MAX_CONCURRENT = BET9JA_MAX_CONCURRENT
     REQUEST_DELAY = BET9JA_REQUEST_DELAY
     NAME = "Bet9ja"
+    PLATFORM_KEY = "bet9ja"
 
     async def get_sports(self) -> dict[str, Any]:
         """Get all available sports with their category hierarchy.
