@@ -151,3 +151,41 @@ async def test_get_event_markets():
     async with Betway(country="ng") as client:
         result = await client.get_event_markets(event_id="69339436")
     assert len(result["marketsInGroup"]) == 1
+
+
+@pytest.mark.asyncio
+@respx.mock
+async def test_get_markets_convenience():
+    respx.get(
+        "https://feeds-roa2.betwayafrica.com/br/_apis/sport/v1/MarketGroupings/MarketGroupNamesAndMarketsForEvent"
+    ).respond(
+        json={
+            "marketsInGroup": [
+                {
+                    "marketId": "1",
+                    "name": "[Both Teams To Score]",
+                    "handicap": 0,
+                }
+            ],
+            "outcomes": [
+                {"outcomeId": "a", "marketId": "1", "name": "Yes"},
+                {"outcomeId": "b", "marketId": "1", "name": "No"},
+            ],
+            "prices": [
+                {"outcomeId": "a", "priceDecimal": 1.7},
+                {"outcomeId": "b", "priceDecimal": 2.1},
+            ],
+        }
+    )
+    async with Betway(country="ng") as client:
+        markets = await client.get_markets(event_id="123")
+    assert len(markets) == 1
+    assert markets[0].canonical_id == "btts_ft"
+
+
+@pytest.mark.asyncio
+async def test_get_sportradar_id_no_api_call():
+    """Betway event IDs ARE SR IDs — no API call needed."""
+    client = Betway(country="ng")
+    sr_id = await client.get_sportradar_id(event_id="69339436")
+    assert sr_id == "69339436"

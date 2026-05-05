@@ -208,3 +208,37 @@ class Betway(BaseBookmaker):
                 "searchQuery": "",
             },
         )
+
+    async def get_markets(self, event_id: str, registry=None):
+        """Fetch event markets and return normalized markets.
+
+        Overrides base because Betway uses a separate markets endpoint.
+
+        Args:
+            event_id: Betway event ID (= SportRadar ID)
+            registry: MarketRegistry (default: built-in)
+
+        Returns:
+            List of NormalizedMarket for recognized markets.
+        """
+        from bookieskit.markets.parser import parse_markets
+
+        raw = await self.get_event_markets(event_id=event_id)
+        return parse_markets(
+            raw, platform=self.PLATFORM_KEY, registry=registry
+        )
+
+    async def get_sportradar_id(
+        self, event_id: str
+    ) -> str | None:
+        """Return the event ID directly (it IS the SportRadar ID).
+
+        Overrides base to avoid an unnecessary API call.
+
+        Args:
+            event_id: Betway event ID
+
+        Returns:
+            The event ID as string (same value).
+        """
+        return str(event_id)
