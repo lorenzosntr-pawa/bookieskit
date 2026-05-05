@@ -99,33 +99,37 @@ class BetPawa(BaseBookmaker):
 
     async def get_events(
         self,
-        tournament_id: str,
+        tournament_id: str | None = None,
         sport_id: str = "2",
         event_type: str = "UPCOMING",
         skip: int = 0,
         take: int = 100,
     ) -> dict[str, Any]:
-        """Get events for a tournament/competition.
+        """Get events for a tournament/competition, or all events for a sport.
 
         Args:
-            tournament_id: Competition ID (e.g., "11965")
+            tournament_id: Competition ID (e.g., "11965"). If None, returns
+                           all events for the sport (useful for LIVE).
             sport_id: Sport category ID (default: "2" for Football)
             event_type: "UPCOMING" or "LIVE" (default: "UPCOMING")
             skip: Pagination offset (default: 0)
             take: Page size (default: 100)
 
         Returns:
-            Raw JSON with results array and totalCount.
+            Raw JSON with responses[].responses[] structure.
         """
+        query = {
+            "eventType": event_type,
+            "categories": [sport_id],
+            "hasOdds": True,
+        }
+        if tournament_id:
+            query["zones"] = {"competitions": [tournament_id]}
+
         query_payload = {
             "queries": [
                 {
-                    "query": {
-                        "eventType": event_type,
-                        "categories": [sport_id],
-                        "zones": {"competitions": [tournament_id]},
-                        "hasOdds": True,
-                    },
+                    "query": query,
                     "view": {},
                     "skip": skip,
                     "take": take,

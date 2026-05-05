@@ -49,8 +49,11 @@ class SportyBet(BaseBookmaker):
         """Current timestamp in milliseconds for cache busting."""
         return str(int(time.time() * 1000))
 
-    async def get_sports(self) -> dict[str, Any]:
+    async def get_sports(self, live: bool = False) -> dict[str, Any]:
         """Get all available sports.
+
+        Args:
+            live: If True, return live sports only (default: False for prematch)
 
         Returns:
             Raw JSON with data.sportList containing all sports.
@@ -60,16 +63,19 @@ class SportyBet(BaseBookmaker):
             f"{self._api_prefix}/factsCenter/popularAndSportList",
             params={
                 "timeline": "",
-                "productId": "3",
+                "productId": "1" if live else "3",
                 "_t": self._timestamp(),
             },
         )
 
-    async def get_countries(self, sport_id: str = "sr:sport:1") -> dict[str, Any]:
+    async def get_countries(
+        self, sport_id: str = "sr:sport:1", live: bool = False
+    ) -> dict[str, Any]:
         """Get countries/categories for a sport.
 
         Args:
             sport_id: SportRadar sport ID (default: "sr:sport:1" for Football)
+            live: If True, return live data only (default: False)
 
         Returns:
             Raw JSON — categories are nested under sportList[].categories.
@@ -80,16 +86,19 @@ class SportyBet(BaseBookmaker):
             params={
                 "sportId": sport_id,
                 "timeline": "",
-                "productId": "3",
+                "productId": "1" if live else "3",
                 "_t": self._timestamp(),
             },
         )
 
-    async def get_tournaments(self, sport_id: str = "sr:sport:1") -> dict[str, Any]:
+    async def get_tournaments(
+        self, sport_id: str = "sr:sport:1", live: bool = False
+    ) -> dict[str, Any]:
         """Get tournaments for a sport (nested under categories).
 
         Args:
             sport_id: SportRadar sport ID (default: "sr:sport:1" for Football)
+            live: If True, return live data only (default: False)
 
         Returns:
             Raw JSON — tournaments nested under sportList[].categories[].tournaments.
@@ -100,7 +109,7 @@ class SportyBet(BaseBookmaker):
             params={
                 "sportId": sport_id,
                 "timeline": "",
-                "productId": "3",
+                "productId": "1" if live else "3",
                 "_t": self._timestamp(),
             },
         )
