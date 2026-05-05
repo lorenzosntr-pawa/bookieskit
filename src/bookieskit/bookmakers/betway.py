@@ -129,7 +129,8 @@ class Betway(BaseBookmaker):
         """Get events for a league.
 
         Args:
-            league_id: League ID slug (e.g., "international-clubs_uefa-champions-league").
+            league_id: League ID slug (e.g.,
+                       "international-clubs_uefa-champions-league").
                        Format: "{regionId}_{leagueId}". None for all.
             sport_id: Sport slug (default: "soccer")
             skip: Pagination offset (default: 0)

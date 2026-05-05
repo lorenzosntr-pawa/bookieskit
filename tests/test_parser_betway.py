@@ -1,6 +1,5 @@
 from bookieskit.markets.parser import parse_markets
 
-
 BETWAY_MARKETS_RESPONSE = {
     "marketGroupNames": ["Main", "Totals"],
     "marketsInGroup": [
@@ -46,8 +45,16 @@ BETWAY_MARKETS_RESPONSE = {
         {"outcomeId": "o2", "marketId": "693394361", "name": "Draw"},
         {"outcomeId": "o3", "marketId": "693394361", "name": "Atletico Madrid"},
         {"outcomeId": "o4", "marketId": "6933943610", "name": "Arsenal FC or Draw"},
-        {"outcomeId": "o5", "marketId": "6933943610", "name": "Draw or Atletico Madrid"},
-        {"outcomeId": "o6", "marketId": "6933943610", "name": "Arsenal FC or Atletico Madrid"},
+        {
+            "outcomeId": "o5",
+            "marketId": "6933943610",
+            "name": "Draw or Atletico Madrid",
+        },
+        {
+            "outcomeId": "o6",
+            "marketId": "6933943610",
+            "name": "Arsenal FC or Atletico Madrid",
+        },
         {"outcomeId": "o7", "marketId": "69339436btts", "name": "Yes"},
         {"outcomeId": "o8", "marketId": "69339436btts", "name": "No"},
         {"outcomeId": "o9", "marketId": "6933943618total=2.5~", "name": "Over"},
