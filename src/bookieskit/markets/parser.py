@@ -107,18 +107,22 @@ def _parse_betpawa_parameterized(
         rows = [rows] if rows else []
 
     for row in rows:
-        # BetPawa uses "handicap" or "formattedHandicap" for the line value
-        line = row.get("line", row.get("handicap"))
-        if line is None:
-            # Try to extract from formattedHandicap
-            formatted = row.get("formattedHandicap")
-            if formatted:
-                try:
-                    line = float(formatted)
-                except (ValueError, TypeError):
-                    continue
+        # BetPawa uses "handicap" field (internal value, divide by 4 for actual line)
+        # or "formattedHandicap" (display value, already correct)
+        formatted = row.get("formattedHandicap")
+        if formatted is not None:
+            try:
+                line = float(formatted)
+            except (ValueError, TypeError):
+                line = None
+        else:
+            raw_handicap = row.get("handicap")
+            if raw_handicap is not None:
+                line = float(raw_handicap) / 4
             else:
-                continue
+                line = row.get("line")
+        if line is None:
+            continue
         line = float(line)
         line_outcomes: list[Outcome] = []
 
@@ -278,9 +282,18 @@ def _extract_line_from_specifier(specifier: str) -> float | None:
 def _resolve_outcome_sportybet(
     platform_name: str, mapping: MarketMapping
 ) -> str | None:
-    """Find canonical outcome name from SportyBet outcome desc."""
+    """Find canonical outcome name from SportyBet outcome desc.
+
+    Handles both exact match ("Over") and prefix match ("Over 2.5")
+    for parameterized markets where desc includes the line value.
+    """
     for om in mapping.outcomes.values():
         if om.sportybet == platform_name:
+            return om.canonical_name
+    # Fallback: prefix match for parameterized markets
+    # e.g., "Over 2" should match mapping "Over"
+    for om in mapping.outcomes.values():
+        if platform_name.startswith(om.sportybet):
             return om.canonical_name
     return None
 
