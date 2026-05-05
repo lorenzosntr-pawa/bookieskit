@@ -272,5 +272,150 @@ def _resolve_outcome_sportybet(
 def _parse_bet9ja(
     response: dict, registry: MarketRegistry
 ) -> list[NormalizedMarket]:
-    """Parse Bet9ja event detail response. (Implemented in Task 6)"""
-    return []
+    """Parse Bet9ja event detail response."""
+    results: list[NormalizedMarket] = []
+    data = response.get("D", {})
+    odds_dict = data.get("O", {})
+
+    if not odds_dict:
+        return []
+
+    # Group odds keys by market key
+    # Format: S_{MARKET}_{OUTCOME} or S_{MARKET}@{LINE}_{OUTCOME}
+    simple_groups: dict[str, list[tuple[str, float]]] = {}
+    parameterized_groups: dict[str, dict[float, list[tuple[str, float]]]] = {}
+
+    for key, value in odds_dict.items():
+        if not key.startswith("S_"):
+            continue
+
+        odds = float(value)
+        parsed = _parse_bet9ja_key(key)
+        if parsed is None:
+            continue
+
+        market_key, line, outcome_suffix = parsed
+        mapping = registry.get_by_platform_id("bet9ja", market_key)
+        if mapping is None:
+            continue
+
+        if mapping.parameterized and line is not None:
+            if market_key not in parameterized_groups:
+                parameterized_groups[market_key] = {}
+            if line not in parameterized_groups[market_key]:
+                parameterized_groups[market_key][line] = []
+            parameterized_groups[market_key][line].append(
+                (outcome_suffix, odds)
+            )
+        else:
+            if market_key not in simple_groups:
+                simple_groups[market_key] = []
+            simple_groups[market_key].append((outcome_suffix, odds))
+
+    # Build simple markets
+    for market_key, outcomes_data in simple_groups.items():
+        mapping = registry.get_by_platform_id("bet9ja", market_key)
+        if mapping:
+            outcomes = _build_bet9ja_outcomes(outcomes_data, mapping)
+            if outcomes:
+                results.append(
+                    NormalizedMarket(
+                        canonical_id=mapping.canonical_id,
+                        name=mapping.name,
+                        outcomes=outcomes,
+                        lines=None,
+                    )
+                )
+
+    # Build parameterized markets
+    for market_key, lines_data in parameterized_groups.items():
+        mapping = registry.get_by_platform_id("bet9ja", market_key)
+        if mapping:
+            lines: dict[float, list[Outcome]] = {}
+            for line, outcomes_data in lines_data.items():
+                line_outcomes = _build_bet9ja_outcomes(
+                    outcomes_data, mapping
+                )
+                if line_outcomes:
+                    lines[line] = line_outcomes
+            if lines:
+                results.append(
+                    NormalizedMarket(
+                        canonical_id=mapping.canonical_id,
+                        name=mapping.name,
+                        outcomes=[],
+                        lines=lines,
+                    )
+                )
+
+    return results
+
+
+def _parse_bet9ja_key(
+    key: str,
+) -> tuple[str, float | None, str] | None:
+    """Parse a Bet9ja odds key into (market_key, line, outcome_suffix).
+
+    Examples:
+        "S_1X2_1" -> ("S_1X2", None, "1")
+        "S_OU@2.5_O" -> ("S_OU", 2.5, "O")
+        "S_DC_1X" -> ("S_DC", None, "1X")
+    """
+    # Remove "S_" prefix for parsing
+    without_prefix = key[2:]
+
+    # Check for line (@ separator)
+    if "@" in without_prefix:
+        # Format: MARKET@LINE_OUTCOME
+        at_idx = without_prefix.index("@")
+        market_part = without_prefix[:at_idx]
+        rest = without_prefix[at_idx + 1:]
+        # Find last underscore for outcome
+        last_us = rest.rfind("_")
+        if last_us == -1:
+            return None
+        try:
+            line = float(rest[:last_us])
+        except ValueError:
+            return None
+        outcome = rest[last_us + 1:]
+        return (f"S_{market_part}", line, outcome)
+    else:
+        # Format: MARKET_OUTCOME (find the split point)
+        # Market keys: 1X2, OU, GGNG, DC, etc.
+        # Try splitting at last underscore
+        last_us = without_prefix.rfind("_")
+        if last_us == -1:
+            return None
+        market_part = without_prefix[:last_us]
+        outcome = without_prefix[last_us + 1:]
+        return (f"S_{market_part}", None, outcome)
+
+
+def _build_bet9ja_outcomes(
+    outcomes_data: list[tuple[str, float]],
+    mapping: MarketMapping,
+) -> list[Outcome]:
+    """Build Outcome list from Bet9ja suffix/odds pairs."""
+    outcomes: list[Outcome] = []
+    for suffix, odds in outcomes_data:
+        canonical = _resolve_outcome_bet9ja(suffix, mapping)
+        if canonical:
+            outcomes.append(
+                Outcome(
+                    canonical_name=canonical,
+                    odds=odds,
+                    platform_name=suffix,
+                )
+            )
+    return outcomes
+
+
+def _resolve_outcome_bet9ja(
+    suffix: str, mapping: MarketMapping
+) -> str | None:
+    """Find canonical outcome name from Bet9ja key suffix."""
+    for om in mapping.outcomes.values():
+        if om.bet9ja == suffix:
+            return om.canonical_name
+    return None
