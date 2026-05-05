@@ -37,11 +37,12 @@ class Bet9ja(BaseBookmaker):
     NAME = "Bet9ja"
     PLATFORM_KEY = "bet9ja"
 
-    async def get_sports(self, live: bool = False) -> dict[str, Any]:
+    async def get_sports(self) -> dict[str, Any]:
         """Get all available sports with their category hierarchy.
 
-        Args:
-            live: If True, return live sports only (default: False for prematch)
+        Note: Bet9ja's REST API only serves prematch data.
+        Live events use a separate WebSocket-based system
+        not accessible via HTTP.
 
         Returns:
             Raw JSON with R (status) and D (data) containing PAL hierarchy.
@@ -49,30 +50,24 @@ class Bet9ja(BaseBookmaker):
         return await self._request(
             "GET",
             "/desktop/feapi/PalimpsestAjax/GetSports",
-            params={"DISP": "1" if live else "0", "v_cache_version": _CACHE_VERSION},
+            params={"DISP": "0", "v_cache_version": _CACHE_VERSION},
         )
 
-    async def get_countries(self, live: bool = False) -> dict[str, Any]:
+    async def get_countries(self) -> dict[str, Any]:
         """Get countries/categories (included in sports hierarchy).
 
-        Args:
-            live: If True, return live data only (default: False)
-
         Returns:
             Same as get_sports — Bet9ja returns full hierarchy in one call.
         """
-        return await self.get_sports(live=live)
+        return await self.get_sports()
 
-    async def get_tournaments(self, live: bool = False) -> dict[str, Any]:
+    async def get_tournaments(self) -> dict[str, Any]:
         """Get tournaments (included in sports hierarchy).
 
-        Args:
-            live: If True, return live data only (default: False)
-
         Returns:
             Same as get_sports — Bet9ja returns full hierarchy in one call.
         """
-        return await self.get_sports(live=live)
+        return await self.get_sports()
 
     async def get_events(
         self,
