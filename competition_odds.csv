@@ -1,0 +1,63 @@
+event_id,home,away,market,line,outcome,BetPawa,SportyBet,MSport,Betway,Bet9ja
+34746355,Aston Villa,Nottingham Forest,1X2 - Full Time,,away,4.6,4.74,4.68,4.4,4.5
+34746355,Aston Villa,Nottingham Forest,1X2 - Full Time,,draw,3.94,3.95,3.9,3.7,3.9
+34746355,Aston Villa,Nottingham Forest,1X2 - Full Time,,home,1.81,1.8,1.79,1.72,1.78
+34746355,Aston Villa,Nottingham Forest,Both Teams To Score - Full Time,,no,1.93,1.92,1.9,1.97,1.97
+34746355,Aston Villa,Nottingham Forest,Both Teams To Score - Full Time,,yes,1.91,1.89,1.88,1.81,1.84
+34746355,Aston Villa,Nottingham Forest,Double Chance - Full Time,,draw_away,2.01,2.0,1.98,1.27,2.05
+34746355,Aston Villa,Nottingham Forest,Double Chance - Full Time,,home_away,1.28,1.27,1.27,2.08,1.26
+34746355,Aston Villa,Nottingham Forest,Double Chance - Full Time,,home_draw,1.22,1.21,1.21,1.22,1.21
+34746355,Aston Villa,Nottingham Forest,Over/Under - Full Time,0.5,over,1.06,1.06,1.06,1.05,1.04
+34746355,Aston Villa,Nottingham Forest,Over/Under - Full Time,0.5,under,10.26,10.5,9.64,13.0,10.0
+34746355,Aston Villa,Nottingham Forest,Over/Under - Full Time,1.0,over,,1.08,,,
+34746355,Aston Villa,Nottingham Forest,Over/Under - Full Time,1.0,under,,8.8,,,
+34746355,Aston Villa,Nottingham Forest,Over/Under - Full Time,1.5,over,1.31,1.31,1.31,1.27,1.32
+34746355,Aston Villa,Nottingham Forest,Over/Under - Full Time,1.5,under,3.59,3.6,3.52,3.9,3.35
+34746355,Aston Villa,Nottingham Forest,Over/Under - Full Time,2.0,over,,1.48,,,
+34746355,Aston Villa,Nottingham Forest,Over/Under - Full Time,2.0,under,,2.75,,,
+34746355,Aston Villa,Nottingham Forest,Over/Under - Full Time,2.5,over,1.95,1.95,1.93,1.82,1.94
+34746355,Aston Villa,Nottingham Forest,Over/Under - Full Time,2.5,under,1.9,1.9,1.88,1.95,1.88
+34746355,Aston Villa,Nottingham Forest,Over/Under - Full Time,3.0,over,,2.7,,,
+34746355,Aston Villa,Nottingham Forest,Over/Under - Full Time,3.0,under,,1.5,,,
+34746355,Aston Villa,Nottingham Forest,Over/Under - Full Time,3.5,over,3.36,3.4,3.31,3.0,3.25
+34746355,Aston Villa,Nottingham Forest,Over/Under - Full Time,3.5,under,1.35,1.35,1.34,1.37,1.33
+34746355,Aston Villa,Nottingham Forest,Over/Under - Full Time,4.0,over,,5.75,,,
+34746355,Aston Villa,Nottingham Forest,Over/Under - Full Time,4.0,under,,1.15,,,
+34746355,Aston Villa,Nottingham Forest,Over/Under - Full Time,4.5,over,6.58,6.6,6.36,5.6,5.8
+34746355,Aston Villa,Nottingham Forest,Over/Under - Full Time,4.5,under,1.13,1.13,1.12,1.13,1.11
+34746355,Aston Villa,Nottingham Forest,Over/Under - Full Time,5.0,over,,12.5,,,
+34746355,Aston Villa,Nottingham Forest,Over/Under - Full Time,5.0,under,,1.04,,,
+34746355,Aston Villa,Nottingham Forest,Over/Under - Full Time,5.5,over,12.98,13.0,11.94,15.0,11.0
+34746355,Aston Villa,Nottingham Forest,Over/Under - Full Time,5.5,under,1.04,1.04,1.03,1.04,1.01
+34746355,Aston Villa,Nottingham Forest,Over/Under - Full Time,6.5,over,,,,,18.0
+34721111,SC Freiburg,SC Braga,1X2 - Full Time,,away,4.64,4.78,4.71,4.3,4.7
+34721111,SC Freiburg,SC Braga,1X2 - Full Time,,draw,3.75,3.77,3.72,3.55,3.7
+34721111,SC Freiburg,SC Braga,1X2 - Full Time,,home,1.85,1.83,1.82,1.79,1.8
+34721111,SC Freiburg,SC Braga,Both Teams To Score - Full Time,,no,1.87,1.85,1.84,1.92,1.9
+34721111,SC Freiburg,SC Braga,Both Teams To Score - Full Time,,yes,1.98,1.96,1.94,1.86,1.91
+34721111,SC Freiburg,SC Braga,Double Chance - Full Time,,draw_away,1.97,1.96,1.94,1.29,2.02
+34721111,SC Freiburg,SC Braga,Double Chance - Full Time,,home_away,1.3,1.29,1.29,2.0,1.28
+34721111,SC Freiburg,SC Braga,Double Chance - Full Time,,home_draw,1.22,1.21,1.21,1.23,1.19
+34721111,SC Freiburg,SC Braga,Over/Under - Full Time,0.5,over,1.07,1.07,1.07,1.06,1.05
+34721111,SC Freiburg,SC Braga,Over/Under - Full Time,0.5,under,9.39,9.4,8.88,12.0,9.0
+34721111,SC Freiburg,SC Braga,Over/Under - Full Time,1.0,over,,1.09,,,
+34721111,SC Freiburg,SC Braga,Over/Under - Full Time,1.0,under,,7.9,,,
+34721111,SC Freiburg,SC Braga,Over/Under - Full Time,1.5,over,1.35,1.35,1.34,1.3,1.35
+34721111,SC Freiburg,SC Braga,Over/Under - Full Time,1.5,under,3.35,3.33,3.3,3.6,3.15
+34721111,SC Freiburg,SC Braga,Over/Under - Full Time,2.0,over,,1.55,,,
+34721111,SC Freiburg,SC Braga,Over/Under - Full Time,2.0,under,,2.55,,,
+34721111,SC Freiburg,SC Braga,Over/Under - Full Time,2.5,over,2.06,2.05,2.04,1.93,2.05
+34721111,SC Freiburg,SC Braga,Over/Under - Full Time,2.5,under,1.8,1.8,1.79,1.85,1.8
+34721111,SC Freiburg,SC Braga,Over/Under - Full Time,3.0,over,,2.9,,,
+34721111,SC Freiburg,SC Braga,Over/Under - Full Time,3.0,under,,1.43,,,
+34721111,SC Freiburg,SC Braga,Over/Under - Full Time,3.5,over,3.63,3.6,3.57,3.3,3.5
+34721111,SC Freiburg,SC Braga,Over/Under - Full Time,3.5,under,1.31,1.31,1.3,1.32,1.29
+34721111,SC Freiburg,SC Braga,Over/Under - Full Time,4.0,over,,6.4,,,
+34721111,SC Freiburg,SC Braga,Over/Under - Full Time,4.0,under,,1.13,,,
+34721111,SC Freiburg,SC Braga,Over/Under - Full Time,4.5,over,7.29,7.3,7.01,6.2,6.3
+34721111,SC Freiburg,SC Braga,Over/Under - Full Time,4.5,under,1.11,1.11,1.1,1.11,1.09
+34721111,SC Freiburg,SC Braga,Over/Under - Full Time,5.0,over,,14.0,,,
+34721111,SC Freiburg,SC Braga,Over/Under - Full Time,5.0,under,,1.03,,,
+34721111,SC Freiburg,SC Braga,Over/Under - Full Time,5.5,over,14.27,14.5,12.96,17.0,12.0
+34721111,SC Freiburg,SC Braga,Over/Under - Full Time,5.5,under,1.03,1.03,1.03,1.03,
+34721111,SC Freiburg,SC Braga,Over/Under - Full Time,6.5,over,,,,,20.0

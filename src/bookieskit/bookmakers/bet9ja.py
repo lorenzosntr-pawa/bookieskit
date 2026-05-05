@@ -1,5 +1,6 @@
 """Bet9ja client — supports ng only."""
 
+import asyncio
 from typing import Any
 
 from bookieskit.base import BaseBookmaker
@@ -97,6 +98,64 @@ class Bet9ja(BaseBookmaker):
             "/desktop/feapi/PalimpsestLiveAjax/GetLiveEvent",
             params={"EVENTID": event_id, "v_cache_version": _CACHE_VERSION},
         )
+
+    async def build_prematch_event_map(
+        self, sport_id: str = "1"
+    ) -> dict[str, str]:
+        """Build a SR-id -> Bet9ja internal-id map for ALL prematch events
+        under a sport.
+
+        Bet9ja prematch events are scoped per-tournament (no flat global
+        endpoint), so this walks every tournament under the sport and
+        scans its event list for `EXTID` (the SportRadar match id).
+        Reasonably fast in practice — calls are dispatched under the
+        client's existing rate-limit semaphore (15 concurrent, 25ms
+        delay). For Soccer (~367 tournaments) the walk takes a handful
+        of seconds.
+
+        Intended for callers that need to look up many SR ids in one
+        session (e.g. a full-tournament odds compare): build the map
+        once, then dict-lookup per SR id is O(1).
+
+        Args:
+            sport_id: Bet9ja prematch sport id (default "1" = Soccer).
+
+        Returns:
+            dict mapping SR numeric id (e.g. "69339436") -> Bet9ja
+            internal event id (e.g. "9138769").
+        """
+        sports = await self.get_sports()
+        sport = (sports.get("D") or {}).get("PAL", {}).get(sport_id, {})
+        country_groups = sport.get("SG", {}) or {}
+
+        # Collect every tournament id under this sport.
+        tournament_ids: list[str] = []
+        for country in country_groups.values():
+            for tid in (country.get("G") or {}).keys():
+                tournament_ids.append(str(tid))
+
+        # Fetch every tournament's events concurrently. The base client's
+        # semaphore + request_delay keep us under Bet9ja's rate limits.
+        async def _fetch(tid: str) -> dict:
+            try:
+                return await self.get_events(tournament_id=tid)
+            except Exception:
+                return {}
+
+        responses = await asyncio.gather(
+            *(_fetch(tid) for tid in tournament_ids)
+        )
+
+        # Walk responses, build the SR -> internal id map.
+        sr_map: dict[str, str] = {}
+        for resp in responses:
+            events = (resp.get("D") or {}).get("E") or []
+            for ev in events:
+                ext = str(ev.get("EXTID", "") or "")
+                internal = str(ev.get("ID", "") or "")
+                if ext and internal:
+                    sr_map[ext] = internal
+        return sr_map
 
     async def find_event_id_by_sr_id(
         self,

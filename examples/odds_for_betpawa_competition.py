@@ -141,22 +141,31 @@ async def fetch_bet9ja(
 # ----------------------------------------------------------------------
 # One-shot Bet9ja optimisation: build a SR-id -> internal-id map.
 #
-# `Bet9ja.find_event_id_by_sr_id(sr_id)` calls `get_live_events` on
-# every invocation. For a tournament with N events that's N wasted
-# requests. Instead, fetch the live events list ONCE and map every
-# EXTID to its internal id. If the user is browsing prematch (the
-# default), this only finds the events that are currently in-play —
-# which is fine (Bet9ja's prematch SR-id search is a separate gap).
+# Bet9ja stores events in TWO disjoint buckets:
+#   - Live: a single flat dict (D.E) on get_live_events. Cheap — one call.
+#   - Prematch: scoped per-tournament. There is no flat global endpoint,
+#     so a full prematch map requires walking every tournament under the
+#     sport and concatenating their event lists. The lib's
+#     `build_prematch_event_map` does this concurrently under the
+#     client's rate limit (15 concurrent / 25ms delay).
+#
+# We pick the right one based on `live`. The map shape is the same
+# either way: SR numeric id -> Bet9ja internal id.
 # ----------------------------------------------------------------------
-async def build_bet9ja_lookup(b9: Bet9ja) -> dict[str, str]:
-    live = await b9.get_live_events(sport_id="3000001")  # 3000001 = Soccer
-    events = (live.get("D") or {}).get("E") or {}
-    lookup: dict[str, str] = {}
-    for internal_id, ev in events.items():
-        ext = str(ev.get("EXTID", "") or "")
-        if ext:
-            lookup[ext] = str(internal_id)
-    return lookup
+async def build_bet9ja_lookup(b9: Bet9ja, *, live: bool) -> dict[str, str]:
+    if live:
+        # Live: cheap. One call, all live soccer events at list level.
+        resp = await b9.get_live_events(sport_id="3000001")  # 3000001 = Live Soccer
+        events = (resp.get("D") or {}).get("E") or {}
+        return {
+            str(ev.get("EXTID", "") or ""): str(internal_id)
+            for internal_id, ev in events.items()
+            if ev.get("EXTID")
+        }
+    # Prematch: walks every soccer tournament. Slower (a few seconds for
+    # the full Bet9ja prematch soccer list), but covers all upcoming
+    # events. sport_id="1" is prematch Soccer.
+    return await b9.build_prematch_event_map(sport_id="1")
 
 
 # ----------------------------------------------------------------------
@@ -260,8 +269,13 @@ async def main(competition_id: str, live: bool, csv_path: str) -> None:
             return
 
         # One-shot Bet9ja lookup table — built once, reused per event.
-        bet9ja_lookup = await build_bet9ja_lookup(b9_lookup)
-        print(f"Bet9ja live-events lookup table: {len(bet9ja_lookup)} entries")
+        # Live mode: cheap (one call). Prematch mode: walks every soccer
+        # tournament — takes a few seconds; printed before so the user
+        # knows what the pause is.
+        if not live:
+            print("Building Bet9ja prematch event map (walking soccer tournaments)...")
+        bet9ja_lookup = await build_bet9ja_lookup(b9_lookup, live=live)
+        print(f"Bet9ja {'live' if live else 'prematch'} lookup: {len(bet9ja_lookup)} entries")
 
         for i, ev in enumerate(events, start=1):
             label = f"{ev['home']} vs {ev['away']}"

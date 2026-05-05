@@ -144,3 +144,58 @@ async def test_get_live_event_detail_uses_eventid_param():
         await client.get_live_event_detail(event_id="9138769")
     # The live endpoint expects parameter name EVENTID (uppercase).
     assert route.calls[0].request.url.params["EVENTID"] == "9138769"
+
+
+@pytest.mark.asyncio
+@respx.mock
+async def test_build_prematch_event_map_walks_tournaments():
+    # GetSports response: one sport ("1" = Soccer), one country, two
+    # tournaments. The map should cover events from BOTH.
+    respx.get(
+        "https://sports.bet9ja.com/desktop/feapi/PalimpsestAjax/GetSports"
+    ).respond(
+        json={
+            "D": {
+                "PAL": {
+                    "1": {
+                        "S_DESC": "Soccer",
+                        "SG": {
+                            "ENG": {
+                                "G": {
+                                    "170880": {"G_DESC": "Premier League"},
+                                    "170881": {"G_DESC": "Championship"},
+                                }
+                            }
+                        },
+                    }
+                }
+            }
+        }
+    )
+    # GetEventsInGroup — respond differently per tournament via side_effect.
+    def by_tournament(request):
+        import httpx
+        tid = request.url.params.get("GROUPID", "")
+        if tid == "170880":
+            return httpx.Response(
+                200,
+                json={"D": {"E": [
+                    {"ID": 9000001, "EXTID": "11111"},
+                    {"ID": 9000002, "EXTID": "22222"},
+                ]}},
+            )
+        if tid == "170881":
+            return httpx.Response(
+                200,
+                json={"D": {"E": [{"ID": 9000003, "EXTID": "33333"}]}},
+            )
+        return httpx.Response(200, json={"D": {"E": []}})
+
+    respx.get(
+        "https://sports.bet9ja.com/desktop/feapi/PalimpsestAjax/GetEventsInGroup"
+    ).mock(side_effect=by_tournament)
+
+    async with Bet9ja(country="ng") as client:
+        sr_map = await client.build_prematch_event_map(sport_id="1")
+
+    assert sr_map == {"11111": "9000001", "22222": "9000002", "33333": "9000003"}
