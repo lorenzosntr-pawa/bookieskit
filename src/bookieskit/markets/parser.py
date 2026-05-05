@@ -31,6 +31,7 @@ def parse_markets(
         "betpawa": _parse_betpawa,
         "sportybet": _parse_sportybet,
         "bet9ja": _parse_bet9ja,
+        "betway": _parse_betway,
     }
     parser = parsers.get(platform)
     if parser is None:
@@ -447,4 +448,226 @@ def _resolve_outcome_bet9ja(
     for om in mapping.outcomes.values():
         if om.bet9ja == suffix:
             return om.canonical_name
+    return None
+
+
+def _parse_betway(
+    response: dict, registry: MarketRegistry
+) -> list[NormalizedMarket]:
+    """Parse Betway event markets response.
+
+    Betway returns denormalized data: marketsInGroup[], outcomes[], prices[]
+    as separate arrays linked by marketId and outcomeId.
+    """
+    results: list[NormalizedMarket] = []
+    markets_in_group = response.get("marketsInGroup", [])
+    all_outcomes = response.get("outcomes", [])
+    all_prices = response.get("prices", [])
+
+    # Build price lookup: outcomeId -> priceDecimal
+    price_map: dict[str, float] = {}
+    for p in all_prices:
+        price_map[str(p.get("outcomeId", ""))] = float(
+            p.get("priceDecimal", 0)
+        )
+
+    # Build outcome lookup: marketId -> list of outcomes
+    outcomes_by_market: dict[str, list[dict]] = {}
+    for o in all_outcomes:
+        mid = str(o.get("marketId", ""))
+        if mid not in outcomes_by_market:
+            outcomes_by_market[mid] = []
+        outcomes_by_market[mid].append(o)
+
+    # Group markets: find parent market name -> collect all variants
+    # For parameterized markets (Total Goals), multiple entries share
+    # the parent betway_id but have different handicap values
+    simple_markets: dict[str, tuple[dict, list[dict]]] = {}
+    parameterized_markets: dict[str, list[tuple[dict, list[dict]]]] = {}
+
+    for market in markets_in_group:
+        market_name = str(market.get("name", ""))
+        market_id = str(market.get("marketId", ""))
+        market_outcomes = outcomes_by_market.get(market_id, [])
+
+        # Check if this is a known parent market
+        mapping = registry.get_by_platform_id("betway", market_name)
+        if mapping is not None:
+            if mapping.parameterized:
+                if mapping.betway_id not in parameterized_markets:
+                    parameterized_markets[mapping.betway_id] = []
+                parameterized_markets[mapping.betway_id].append(
+                    (market, market_outcomes)
+                )
+            else:
+                simple_markets[market_name] = (
+                    market,
+                    market_outcomes,
+                )
+            continue
+
+        # Check if this is a parameterized variant (name="Total")
+        # by checking if any registered parameterized market
+        # has a matching parent
+        for mm in registry.list_markets():
+            if not mm.parameterized or not mm.betway_id:
+                continue
+            # "Total" matches "[Total Goals]" parent
+            parent_name = mm.betway_id
+            if _is_betway_parameterized_variant(
+                market_name, parent_name
+            ):
+                if parent_name not in parameterized_markets:
+                    parameterized_markets[parent_name] = []
+                parameterized_markets[parent_name].append(
+                    (market, market_outcomes)
+                )
+                break
+
+    # Build simple markets
+    for market_name, (market, outcomes_list) in simple_markets.items():
+        mapping = registry.get_by_platform_id("betway", market_name)
+        if mapping:
+            parsed = _build_betway_simple(
+                outcomes_list, mapping, price_map
+            )
+            if parsed:
+                results.append(parsed)
+
+    # Build parameterized markets
+    for parent_name, entries in parameterized_markets.items():
+        mapping = registry.get_by_platform_id("betway", parent_name)
+        if mapping:
+            parsed = _build_betway_parameterized(
+                entries, mapping, price_map
+            )
+            if parsed:
+                results.append(parsed)
+
+    return results
+
+
+def _is_betway_parameterized_variant(
+    market_name: str, parent_name: str
+) -> bool:
+    """Check if a market name is a variant of a parameterized parent.
+
+    e.g., "Total" is a variant of "[Total Goals]"
+    """
+    # Strip brackets from parent: "[Total Goals]" -> "Total Goals"
+    clean_parent = parent_name.strip("[]")
+    # "Total" matches if it's a prefix of "Total Goals"
+    return clean_parent.startswith(market_name)
+
+
+def _build_betway_simple(
+    outcomes_list: list[dict],
+    mapping: MarketMapping,
+    price_map: dict[str, float],
+) -> NormalizedMarket | None:
+    """Build a simple NormalizedMarket from Betway outcomes."""
+    parsed_outcomes: list[Outcome] = []
+
+    for i, outcome_data in enumerate(outcomes_list):
+        oid = str(outcome_data.get("outcomeId", ""))
+        name = str(outcome_data.get("name", ""))
+        odds = price_map.get(oid, 0)
+
+        canonical = _resolve_outcome_betway(
+            name, i, mapping
+        )
+        if canonical:
+            parsed_outcomes.append(
+                Outcome(
+                    canonical_name=canonical,
+                    odds=odds,
+                    platform_name=name,
+                )
+            )
+
+    if not parsed_outcomes:
+        return None
+
+    return NormalizedMarket(
+        canonical_id=mapping.canonical_id,
+        name=mapping.name,
+        outcomes=parsed_outcomes,
+        lines=None,
+    )
+
+
+def _build_betway_parameterized(
+    entries: list[tuple[dict, list[dict]]],
+    mapping: MarketMapping,
+    price_map: dict[str, float],
+) -> NormalizedMarket | None:
+    """Build a parameterized NormalizedMarket from Betway entries."""
+    lines: dict[float, list[Outcome]] = {}
+
+    for market, outcomes_list in entries:
+        handicap = market.get("handicap")
+        if handicap is None:
+            continue
+        line = float(handicap)
+        line_outcomes: list[Outcome] = []
+
+        for i, outcome_data in enumerate(outcomes_list):
+            oid = str(outcome_data.get("outcomeId", ""))
+            name = str(outcome_data.get("name", ""))
+            odds = price_map.get(oid, 0)
+
+            canonical = _resolve_outcome_betway(
+                name, i, mapping
+            )
+            if canonical:
+                line_outcomes.append(
+                    Outcome(
+                        canonical_name=canonical,
+                        odds=odds,
+                        platform_name=name,
+                    )
+                )
+
+        if line_outcomes:
+            lines[line] = line_outcomes
+
+    if not lines:
+        return None
+
+    return NormalizedMarket(
+        canonical_id=mapping.canonical_id,
+        name=mapping.name,
+        outcomes=[],
+        lines=lines,
+    )
+
+
+def _resolve_outcome_betway(
+    platform_name: str,
+    index: int,
+    mapping: MarketMapping,
+) -> str | None:
+    """Find canonical outcome name from Betway outcome.
+
+    Uses exact match first, then position-based matching for
+    markets that use team names (1X2, DC).
+    Sentinel values: __HOME__=pos0, __AWAY__=pos2,
+    __POS_1__=pos0, __POS_2__=pos1, __POS_3__=pos2.
+    """
+    # Exact match first
+    for om in mapping.outcomes.values():
+        if om.betway == platform_name:
+            return om.canonical_name
+
+    # Position-based match for sentinels
+    position_sentinels = {
+        0: ["__HOME__", "__POS_1__"],
+        1: ["__POS_2__"],
+        2: ["__AWAY__", "__POS_3__"],
+    }
+    sentinels_for_index = position_sentinels.get(index, [])
+    for om in mapping.outcomes.values():
+        if om.betway in sentinels_for_index:
+            return om.canonical_name
+
     return None
