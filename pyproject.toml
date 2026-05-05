@@ -4,8 +4,8 @@ build-backend = "hatchling.build"
 
 [project]
 name = "bookieskit"
-version = "0.3.0"
-description = "HTTP clients for scraping betting data from BetPawa, SportyBet, and Bet9ja"
+version = "0.4.0"
+description = "Async HTTP clients for scraping odds from 5 African sportsbooks (BetPawa, SportyBet, Bet9ja, Betway, MSport) with cross-bookmaker normalization via SportRadar IDs."
 requires-python = ">=3.11"
 dependencies = [
     "httpx>=0.27",
