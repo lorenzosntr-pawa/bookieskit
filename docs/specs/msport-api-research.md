@@ -1,65 +1,145 @@
-# MSport API Research (In Progress)
+# MSport API Research (COMPLETE)
 
-## Status: API discovery incomplete — need Playwright to capture network traffic
+## Summary
 
-## What we found so far
+MSport uses **nearly identical API to SportyBet** — same headers, same SportRadar IDs, very similar response structure.
 
-### Base URL
-`https://www.msport.com/api/ng/facts-center/query/frontend/`
+## Required Headers
 
-### Working endpoints
-
-**Sports list (prematch):**
 ```
-GET /api/ng/facts-center/query/frontend/sports
-Response: { bizCode: 10000, data: { sports: [...], esportIds: [...], productStatus: {...} } }
-31 sports with SportRadar IDs (sr:sport:1, sr:sport:2, etc.)
+operid: 2
+clientid: web
+platform: web
 ```
 
-**Live sports:**
-```
-GET /api/ng/facts-center/query/frontend/live-matches/sports
-Response: { bizCode: 10000, data: { productStatus: {...}, sports: [...] } }
-24 live sports with counts (Soccer: 30 live, Tennis: 16 live, etc.)
-```
+Same as SportyBet!
 
-### Discovered paths (from JS bundle analysis)
+## Base URL
+
+`https://www.msport.com/api/{region}/facts-center/query/frontend/`
+
+Where `{region}` = `ng`, `gh`, etc.
+
+## Endpoints
+
+### Sports (prematch)
 ```
-/facts-center/query/frontend/sports                    -- Sports list (works!)
-/facts-center/query/frontend/sports-matches-list       -- Needs params (bizCode 19000)
-/facts-center/query/frontend/live-matches              -- Needs params (bizCode 19000)
-/facts-center/query/frontend/live-matches/list         -- 
-/facts-center/query/frontend/live-matches/sports       -- Live sports (works!)
-/facts-center/query/frontend/live-matches/count        -- 
-/facts-center/query/frontend/focus-matches/v3          -- Focus/featured matches
-/facts-center/query/frontend/all-matches/today         -- Today's matches
-/facts-center/query/frontend/all-matches/next-7-days   -- Next 7 days
-/facts-center/query/frontend/match/{id}/bet-builder/*  -- Bet builder (works)
-/facts-center/query/frontend/event/tracker/*           -- Event tracker
-/facts-center/query/frontend/market-info               -- Market info
-/facts-center/query/frontend/market-group-info         -- Market groups
-/facts-center/query/frontend/default-market-info/v2    -- Default markets
+GET /sports
+Response: { bizCode: 10000, data: { sports: [{sportId: "sr:sport:1", sportName: "Soccer", count: 0}] } }
+31 sports with SportRadar IDs
 ```
 
-### Key characteristics
-- Uses SportRadar IDs natively (same as SportyBet)
-- SR IDs visible in URLs: sr:match:61301231, sr:tournament:17
-- bizCode: 10000 = success, 19000 = needs parameters, 19003 = invalid params
-- Multi-country via /api/{region}/... path (ng, gh, etc.)
-- Vue.js SPA with lazy-loaded chunks
-- Socket.io for real-time updates
-- Chunk files: main.14c6cf01.js, matches.5f76d290.js
+### Events by Sport (prematch)
+```
+GET /sports-matches-list?sportId=sr:sport:1
+Response: { bizCode: 10000, data: { tournaments: [{
+  category: "England",
+  tournament: "Premier League",
+  tournamentId: "sr:tournament:17",
+  events: [{
+    homeTeam: "Liverpool", awayTeam: "Chelsea",
+    eventId: "sr:match:61301233"
+  }]
+}] } }
+```
 
-### Next steps
-Use Playwright to:
-1. Navigate to https://www.msport.com/ng/web/sports/list/Soccer?t=sr:tournament:17
-2. Capture network requests for events listing
-3. Navigate to an event detail page
-4. Capture network requests for full markets/odds
-5. Check the exact request format (headers, body, params)
+### Event Detail (full markets)
+```
+GET /match/detail?eventId=sr:match:61301231&productId=3
+Response: { bizCode: 10000, data: {
+  eventId: "sr:match:61301231",
+  homeTeam: "Fulham", awayTeam: "Bournemouth",
+  markets: [407 markets!] {
+    id: 1, description: "1x2", name: "1x2",
+    specifiers: null,
+    outcomes: [
+      {description: "Home", id: "1", odds: "2.76"},
+      {description: "Draw", id: "2", odds: "3.77"},
+      {description: "Away", id: "3", odds: "2.39"}
+    ]
+  }
+} }
+```
 
-### JS bundle references
-- `getAvailableSports` -> `(a.l3)()` -> `/facts-center/query/frontend/sports`
-- `getPrematchSports` -> `(a.l3)(3)` -> same endpoint with productId?
-- `getSportsMatches` -> probably `/facts-center/query/frontend/sports-matches-list`
-- `getLiveEvents` -> probably `/facts-center/query/frontend/live-matches`
+### Live Sports
+```
+GET /live-matches/sports
+Response: { bizCode: 10000, data: { sports: [
+  {sportId: "sr:sport:1", sportName: "Soccer", count: 30},
+  {sportId: "sr:sport:2", sportName: "Basketball", count: 18},
+  ...24 sports
+] } }
+```
+
+### Live Events
+```
+GET /live-matches?sportId=sr:sport:1
+Response: { bizCode: 10000, data: {
+  events: [...live events...],
+  count: 30
+} }
+```
+
+### Live Events List (with tournaments)
+```
+GET /live-matches/list?sportId=sr:sport:1
+Response: { bizCode: 10000, data: {
+  tournaments: [...],
+  events: [...],
+  comingSoons: [...]
+} }
+```
+
+## Comparison with SportyBet
+
+| Feature | SportyBet | MSport |
+|---------|-----------|--------|
+| Base path | /api/{region}/factsCenter/ | /api/{region}/facts-center/query/frontend/ |
+| Headers | operid=2, clientid=web, platform=web | SAME |
+| Sport IDs | sr:sport:1 | SAME |
+| Event IDs | sr:match:XXXXX | SAME |
+| Tournament IDs | sr:tournament:XX | SAME |
+| Market ID field | `id` | `id` (same) |
+| Market name field | `desc` | `description` (different!) |
+| Outcome name field | `desc` | `description` (different!) |
+| Specifier field | `specifier` | `specifiers` (plural!) |
+| Odds field | `odds` | `odds` (same) |
+| bizCode success | 10000 | 10000 (same) |
+| Sports endpoint | /popularAndSportList | /sports |
+| Events endpoint | POST /pcEvents | GET /sports-matches-list?sportId= |
+| Event detail | GET /event?eventId= | GET /match/detail?eventId=&productId=3 |
+| Live events | /popularAndSportList (productId=1) | /live-matches?sportId= |
+
+## Key Differences from SportyBet
+
+1. `description` instead of `desc` for market and outcome names
+2. `specifiers` (plural) instead of `specifier`
+3. Events listing uses GET with query params (SportyBet uses POST)
+4. Different endpoint paths but same data structure
+5. Event detail returns 407 markets (very comprehensive)
+6. Multi-country via same domain (`/api/ng/`, `/api/gh/`)
+
+## Market Structure (id=1 = 1X2, same as SportyBet)
+
+```json
+{
+  "id": 1,
+  "description": "1x2",
+  "name": "1x2",
+  "specifiers": null,
+  "outcomes": [
+    {"description": "Home", "id": "1", "odds": "2.76", "isActive": 1},
+    {"description": "Draw", "id": "2", "odds": "3.77", "isActive": 1},
+    {"description": "Away", "id": "3", "odds": "2.39", "isActive": 1}
+  ]
+}
+```
+
+## Implementation Notes
+
+Adding MSport to bookieskit will be very straightforward:
+- Same headers as SportyBet
+- Same SR IDs (matching works automatically)
+- Parser needs minor adaptation: `description` instead of `desc`
+- Events fetching uses GET (simpler than SportyBet's POST)
+- Market IDs are identical: 1=1X2, 18=O/U, 29=BTTS, 10=DC
