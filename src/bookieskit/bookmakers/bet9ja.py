@@ -38,19 +38,28 @@ class Bet9ja(BaseBookmaker):
     PLATFORM_KEY = "bet9ja"
 
     async def get_sports(self) -> dict[str, Any]:
-        """Get all available sports with their category hierarchy.
-
-        Note: Bet9ja's REST API only serves prematch data.
-        Live events use a separate WebSocket-based system
-        not accessible via HTTP.
+        """Get all available sports with their category hierarchy (prematch).
 
         Returns:
-            Raw JSON with R (status) and D (data) containing PAL hierarchy.
+            Raw JSON with R (status) and D.PAL hierarchy.
         """
         return await self._request(
             "GET",
             "/desktop/feapi/PalimpsestAjax/GetSports",
             params={"DISP": "0", "v_cache_version": _CACHE_VERSION},
+        )
+
+    async def get_live_events(self) -> dict[str, Any]:
+        """Get all live events across all sports.
+
+        Returns:
+            Raw JSON with D.S (sports), D.G (groups), D.E (events dict),
+            D.MK (markets). Events keyed by ID with DS, EXTID, SID fields.
+        """
+        return await self._request(
+            "GET",
+            "/desktop/feapi/PalimpsestLiveAjax/GetLiveEventsV3",
+            params={"v_cache_version": _CACHE_VERSION},
         )
 
     async def get_countries(self) -> dict[str, Any]:
