@@ -145,8 +145,128 @@ def _resolve_outcome_betpawa(
 def _parse_sportybet(
     response: dict, registry: MarketRegistry
 ) -> list[NormalizedMarket]:
-    """Parse SportyBet event detail response. (Implemented in Task 5)"""
-    return []
+    """Parse SportyBet event detail response."""
+    results: list[NormalizedMarket] = []
+    data = response.get("data", response)
+    markets = data.get("markets", [])
+
+    # Group parameterized markets by ID (multiple entries per line)
+    parameterized_groups: dict[str, list[dict]] = {}
+
+    for market_data in markets:
+        market_id = str(market_data.get("id", ""))
+        mapping = registry.get_by_platform_id("sportybet", market_id)
+        if mapping is None:
+            continue
+
+        if mapping.parameterized:
+            if market_id not in parameterized_groups:
+                parameterized_groups[market_id] = []
+            parameterized_groups[market_id].append(market_data)
+        else:
+            results.append(
+                _parse_sportybet_simple(market_data, mapping)
+            )
+
+    # Process grouped parameterized markets
+    for market_id, entries in parameterized_groups.items():
+        mapping = registry.get_by_platform_id("sportybet", market_id)
+        if mapping:
+            results.append(
+                _parse_sportybet_parameterized(entries, mapping)
+            )
+
+    return results
+
+
+def _parse_sportybet_simple(
+    market_data: dict, mapping: MarketMapping
+) -> NormalizedMarket:
+    """Parse a simple SportyBet market."""
+    outcomes: list[Outcome] = []
+
+    for outcome_data in market_data.get("outcomes", []):
+        desc = str(outcome_data.get("desc", ""))
+        odds = float(outcome_data.get("odds", 0))
+        canonical = _resolve_outcome_sportybet(desc, mapping)
+        if canonical:
+            outcomes.append(
+                Outcome(
+                    canonical_name=canonical,
+                    odds=odds,
+                    platform_name=desc,
+                )
+            )
+
+    return NormalizedMarket(
+        canonical_id=mapping.canonical_id,
+        name=mapping.name,
+        outcomes=outcomes,
+        lines=None,
+    )
+
+
+def _parse_sportybet_parameterized(
+    entries: list[dict], mapping: MarketMapping
+) -> NormalizedMarket:
+    """Parse a parameterized SportyBet market (multiple entries, one per line)."""
+    lines: dict[float, list[Outcome]] = {}
+
+    for entry in entries:
+        specifier = entry.get("specifier", "") or ""
+        line = _extract_line_from_specifier(specifier)
+        if line is None:
+            continue
+
+        line_outcomes: list[Outcome] = []
+        for outcome_data in entry.get("outcomes", []):
+            desc = str(outcome_data.get("desc", ""))
+            odds = float(outcome_data.get("odds", 0))
+            canonical = _resolve_outcome_sportybet(desc, mapping)
+            if canonical:
+                line_outcomes.append(
+                    Outcome(
+                        canonical_name=canonical,
+                        odds=odds,
+                        platform_name=desc,
+                    )
+                )
+
+        if line_outcomes:
+            lines[line] = line_outcomes
+
+    return NormalizedMarket(
+        canonical_id=mapping.canonical_id,
+        name=mapping.name,
+        outcomes=[],
+        lines=lines,
+    )
+
+
+def _extract_line_from_specifier(specifier: str) -> float | None:
+    """Extract line value from SportyBet specifier string.
+
+    Examples: "total=2.5" -> 2.5, "hcp=-0.5" -> -0.5
+    """
+    for part in specifier.split("|"):
+        if "=" in part:
+            key, value = part.split("=", 1)
+            if key in ("total", "hcp"):
+                try:
+                    return float(value)
+                except ValueError:
+                    continue
+    return None
+
+
+def _resolve_outcome_sportybet(
+    platform_name: str, mapping: MarketMapping
+) -> str | None:
+    """Find canonical outcome name from SportyBet outcome desc."""
+    for om in mapping.outcomes.values():
+        if om.sportybet == platform_name:
+            return om.canonical_name
+    return None
 
 
 def _parse_bet9ja(
