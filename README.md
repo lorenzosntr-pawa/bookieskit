@@ -1,6 +1,6 @@
 # bookieskit
 
-HTTP clients for scraping betting data from BetPawa, SportyBet, and Bet9ja.
+HTTP clients for scraping betting data from BetPawa, SportyBet, Bet9ja, Betway, and MSport.
 
 ## Installation
 
@@ -31,6 +31,8 @@ with BetPawa(country="ng") as client:
 | BetPawa   | ng, gh, ke, ug, tz, zm |
 | SportyBet | ng, gh, ke |
 | Bet9ja    | ng |
+| Betway    | ng, gh, ke, tz, ug, zm |
+| MSport    | ng, gh, ke |
 
 ## Configuration
 
