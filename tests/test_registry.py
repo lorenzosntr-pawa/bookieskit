@@ -6,7 +6,8 @@ from bookieskit.markets.types import OutcomeMapping
 def test_registry_loads_builtins_by_default():
     registry = MarketRegistry()
     markets = registry.list_markets()
-    assert len(markets) == 4
+    # 1X2, O/U, BTTS, DC + 1X2 1Up, 1X2 2Up
+    assert len(markets) == 6
 
 
 def test_registry_no_builtins():
@@ -76,7 +77,8 @@ def test_registry_add_custom_mapping():
             ),
         },
     )
-    assert len(registry.list_markets()) == 5
+    # 6 builtins + the new draw_no_bet custom mapping
+    assert len(registry.list_markets()) == 7
     mapping = registry.get_by_canonical("draw_no_bet_ft")
     assert mapping is not None
     assert mapping.betpawa_id == "4703"

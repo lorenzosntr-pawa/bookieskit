@@ -131,4 +131,82 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
         },
         parameterized=False,
     ),
+    # 1X2 1Up — pays as 1X2 if your team gets to a 1-goal lead at any point.
+    # Available on SportyBet / Bet9ja / Betway. BetPawa intentionally left
+    # for later (will be wired when promoted to production). MSport doesn't
+    # expose this market.
+    MarketMapping(
+        canonical_id="1x2_1up_ft",
+        name="1X2 1Up - Full Time",
+        betpawa_id=None,
+        sportybet_id="60200",
+        bet9ja_key="S_1X21",
+        betway_id="1X2 (1Up)",
+        msport_id=None,
+        outcomes={
+            "home": OutcomeMapping(
+                canonical_name="home",
+                betpawa="",
+                sportybet="Home",
+                bet9ja="11",
+                betway="__HOME__",
+                msport="",
+            ),
+            "draw": OutcomeMapping(
+                canonical_name="draw",
+                betpawa="",
+                sportybet="Draw",
+                bet9ja="X1",
+                betway="Draw",
+                msport="",
+            ),
+            "away": OutcomeMapping(
+                canonical_name="away",
+                betpawa="",
+                sportybet="Away",
+                bet9ja="21",
+                betway="__AWAY__",
+                msport="",
+            ),
+        },
+        parameterized=False,
+    ),
+    # 1X2 2Up — pays as 1X2 if your team gets to a 2-goal lead at any point.
+    # Same coverage as 1Up.
+    MarketMapping(
+        canonical_id="1x2_2up_ft",
+        name="1X2 2Up - Full Time",
+        betpawa_id=None,
+        sportybet_id="60100",
+        bet9ja_key="S_1X22",
+        betway_id="1X2 (2Up)",
+        msport_id=None,
+        outcomes={
+            "home": OutcomeMapping(
+                canonical_name="home",
+                betpawa="",
+                sportybet="Home",
+                bet9ja="12",
+                betway="__HOME__",
+                msport="",
+            ),
+            "draw": OutcomeMapping(
+                canonical_name="draw",
+                betpawa="",
+                sportybet="Draw",
+                bet9ja="X2",
+                betway="Draw",
+                msport="",
+            ),
+            "away": OutcomeMapping(
+                canonical_name="away",
+                betpawa="",
+                sportybet="Away",
+                bet9ja="22",
+                betway="__AWAY__",
+                msport="",
+            ),
+        },
+        parameterized=False,
+    ),
 ]
