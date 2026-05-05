@@ -10,6 +10,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
         sportybet_id="1",
         bet9ja_key="S_1X2",
         betway_id="[Win/Draw/Win]",
+        msport_id="1",
         outcomes={
             "home": OutcomeMapping(
                 canonical_name="home",
@@ -17,6 +18,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 sportybet="Home",
                 bet9ja="1",
                 betway="__HOME__",
+                msport="Home",
             ),
             "draw": OutcomeMapping(
                 canonical_name="draw",
@@ -24,6 +26,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 sportybet="Draw",
                 bet9ja="X",
                 betway="Draw",
+                msport="Draw",
             ),
             "away": OutcomeMapping(
                 canonical_name="away",
@@ -31,6 +34,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 sportybet="Away",
                 bet9ja="2",
                 betway="__AWAY__",
+                msport="Away",
             ),
         },
         parameterized=False,
@@ -42,6 +46,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
         sportybet_id="18",
         bet9ja_key="S_OU",
         betway_id="[Total Goals]",
+        msport_id="18",
         outcomes={
             "over": OutcomeMapping(
                 canonical_name="over",
@@ -49,6 +54,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 sportybet="Over",
                 bet9ja="O",
                 betway="Over",
+                msport="Over",
             ),
             "under": OutcomeMapping(
                 canonical_name="under",
@@ -56,6 +62,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 sportybet="Under",
                 bet9ja="U",
                 betway="Under",
+                msport="Under",
             ),
         },
         parameterized=True,
@@ -67,6 +74,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
         sportybet_id="29",
         bet9ja_key="S_GGNG",
         betway_id="[Both Teams To Score]",
+        msport_id="29",
         outcomes={
             "yes": OutcomeMapping(
                 canonical_name="yes",
@@ -74,6 +82,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 sportybet="Yes",
                 bet9ja="Y",
                 betway="Yes",
+                msport="Yes",
             ),
             "no": OutcomeMapping(
                 canonical_name="no",
@@ -81,6 +90,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 sportybet="No",
                 bet9ja="N",
                 betway="No",
+                msport="No",
             ),
         },
         parameterized=False,
@@ -92,6 +102,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
         sportybet_id="10",
         bet9ja_key="S_DC",
         betway_id="[Double Chance]",
+        msport_id="10",
         outcomes={
             "home_draw": OutcomeMapping(
                 canonical_name="home_draw",
@@ -99,6 +110,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 sportybet="Home or Draw",
                 bet9ja="1X",
                 betway="__POS_1__",
+                msport="Home or Draw",
             ),
             "draw_away": OutcomeMapping(
                 canonical_name="draw_away",
@@ -106,6 +118,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 sportybet="Draw or Away",
                 bet9ja="X2",
                 betway="__POS_2__",
+                msport="Draw or Away",
             ),
             "home_away": OutcomeMapping(
                 canonical_name="home_away",
@@ -113,6 +126,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 sportybet="Home or Away",
                 bet9ja="12",
                 betway="__POS_3__",
+                msport="Home or Away",
             ),
         },
         parameterized=False,
