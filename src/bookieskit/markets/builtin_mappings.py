@@ -1,4 +1,4 @@
-"""Built-in market mappings for the 4 main markets."""
+"""Built-in market mappings (6 markets: 1X2, O/U, BTTS, DC, 1X2 1Up, 1X2 2Up)."""
 
 from bookieskit.markets.types import MarketMapping, OutcomeMapping
 

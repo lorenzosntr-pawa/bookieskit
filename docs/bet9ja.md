@@ -79,7 +79,7 @@ Both call `get_event_detail` (prematch). For LIVE markets, fetch via `get_live_e
 
 ## Quirks
 
-- **Prematch and live use different endpoints**: `GetEvent` (prematch, param `ID`) vs `GetLiveEvent` (live, param `EVENTID` uppercase).
+- **Prematch and live use different endpoints, same param name**: `GetEvent` (prematch) and `GetLiveEvent` (live) both expect the parameter `EVENTID` (uppercase). The endpoints and response shapes differ, but the param name is identical.
 - **Odds key prefixes**: prematch uses `S_<MARKET>_<OUTCOME>` (e.g. `S_1X2_1`); live uses `LIVES_<MARKET>_<OUTCOME>` (e.g. `LIVES_1X2_1`).
 - **Live odds shape**: live odds values are wrapped as `{"v": <float>}` instead of bare strings. The parser handles both.
 - **Live sport ids differ**: Soccer is `"3000001"` for live, `"1"` for prematch.

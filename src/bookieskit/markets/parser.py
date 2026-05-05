@@ -18,7 +18,7 @@ def parse_markets(
     Args:
         response: Raw JSON from get_event_detail()
         platform: "betpawa", "sportybet", "bet9ja", "betway", or "msport"
-        registry: Market registry to use (default: built-in 4 markets)
+        registry: Market registry to use (default: built-in 6 markets)
 
     Returns:
         List of NormalizedMarket for all recognized markets.

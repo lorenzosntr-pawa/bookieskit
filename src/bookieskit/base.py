@@ -205,7 +205,7 @@ class BaseBookmaker:
 
         Args:
             event_id: Platform-specific event ID
-            registry: MarketRegistry (default: built-in 4 markets)
+            registry: MarketRegistry (default: built-in 6 markets)
 
         Returns:
             List of NormalizedMarket for recognized markets.

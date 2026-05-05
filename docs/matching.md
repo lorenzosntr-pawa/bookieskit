@@ -10,7 +10,7 @@ Pulls the SR id out of a raw event-detail response. Returns the bare numeric id 
 |---|---|---|
 | `betpawa` | `widgets[].id` where `type == "SPORTRADAR"` | Falls back to `value` for legacy responses; strips `sr:match:`. |
 | `sportybet` | `data.eventId` | Strips `sr:match:`. |
-| `bet9ja` | `D.EXTID` | Prematch detail. Live detail uses `D.A.EXTID` (the live extractor walks both). |
+| `bet9ja` | `D.EXTID` | Prematch detail only. Live detail (`get_live_event_detail`) stores EXTID at `D.A.EXTID` — the extractor does **not** handle that path and returns `None` for live responses. |
 | `betway` | `sportEvent.eventId` | The id IS the SR numeric — already prefix-free. |
 | `msport` | `data.eventId` | Strips `sr:match:`. |
 

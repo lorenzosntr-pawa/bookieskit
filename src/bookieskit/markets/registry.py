@@ -7,7 +7,7 @@ from bookieskit.markets.types import MarketMapping, OutcomeMapping
 class MarketRegistry:
     """Registry of market mappings.
 
-    Ships with 4 built-in markets (1X2, O/U, BTTS, DC).
+    Ships with 6 built-in markets (1X2, O/U, BTTS, DC, 1X2 1Up, 1X2 2Up).
     Users can add custom mappings at runtime.
     """
 
