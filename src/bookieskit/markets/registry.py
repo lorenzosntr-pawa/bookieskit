@@ -81,17 +81,27 @@ class MarketRegistry:
         self._register(mapping)
 
     def get_by_canonical(self, canonical_id: str) -> MarketMapping | None:
-        """Look up by canonical ID."""
+        """Return the MarketMapping for a canonical ID, or None if not registered.
+
+        Args:
+            canonical_id: Canonical market identifier (e.g., "1x2_ft").
+
+        Returns:
+            Matching MarketMapping, or None.
+        """
         return self._by_canonical.get(canonical_id)
 
     def get_by_platform_id(
         self, platform: str, platform_id: str
     ) -> MarketMapping | None:
-        """Look up by platform-specific ID.
+        """Return the MarketMapping for a platform-specific ID.
 
         Args:
-            platform: "betpawa", "sportybet", "bet9ja", "betway", or "msport"
-            platform_id: Platform-specific market ID or key
+            platform: "betpawa", "sportybet", "bet9ja", "betway", or "msport".
+            platform_id: Platform-specific market ID or key.
+
+        Returns:
+            Matching MarketMapping, or None if the platform or ID is unrecognised.
         """
         index = {
             "betpawa": self._by_betpawa,
@@ -103,5 +113,9 @@ class MarketRegistry:
         return index.get(platform_id)
 
     def list_markets(self) -> list[MarketMapping]:
-        """Return all registered mappings."""
+        """Return all registered market mappings in insertion order.
+
+        Returns:
+            List of all MarketMapping objects currently registered.
+        """
         return list(self._by_canonical.values())

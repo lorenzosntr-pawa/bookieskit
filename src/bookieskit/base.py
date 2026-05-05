@@ -1,9 +1,13 @@
 """Base bookmaker client with shared HTTP, retry, and rate-limiting logic."""
 
 import asyncio
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 import httpx
+
+if TYPE_CHECKING:
+    from bookieskit.markets.registry import MarketRegistry
+    from bookieskit.markets.types import NormalizedMarket
 
 from bookieskit.config import (
     DEFAULT_BACKOFF_FACTOR,
@@ -48,7 +52,20 @@ class BaseBookmaker:
         backoff_factor: float = DEFAULT_BACKOFF_FACTOR,
         max_concurrent: int | None = None,
         request_delay: float | None = None,
-    ):
+    ) -> None:
+        """Initialise the client for the given country.
+
+        Args:
+            country: ISO country code (must be in DOMAINS).
+            timeout: Request timeout in seconds.
+            max_retries: Number of retry attempts for transient errors.
+            backoff_factor: Exponential backoff multiplier.
+            max_concurrent: Maximum concurrent requests (overrides class default).
+            request_delay: Per-request delay in seconds (overrides class default).
+
+        Raises:
+            UnsupportedCountryError: If ``country`` is not in DOMAINS.
+        """
         if country not in self.DOMAINS:
             raise UnsupportedCountryError(
                 bookmaker=self.NAME,
@@ -182,8 +199,8 @@ class BaseBookmaker:
     async def get_markets(
         self,
         event_id: str,
-        registry=None,
-    ):
+        registry: "MarketRegistry | None" = None,
+    ) -> "list[NormalizedMarket]":
         """Fetch event detail and return normalized markets.
 
         Args:
