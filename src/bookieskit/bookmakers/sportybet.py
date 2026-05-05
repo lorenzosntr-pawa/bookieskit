@@ -50,16 +50,15 @@ class SportyBet(BaseBookmaker):
         return str(int(time.time() * 1000))
 
     async def get_sports(self) -> dict[str, Any]:
-        """Get all available sports with their category/tournament hierarchy.
+        """Get all available sports.
 
         Returns:
-            Raw JSON with sportList containing categories and tournaments.
+            Raw JSON with data.sportList containing all sports.
         """
         return await self._request(
             "GET",
             f"{self._api_prefix}/factsCenter/popularAndSportList",
             params={
-                "sportId": "sr:sport:1",
                 "timeline": "",
                 "productId": "3",
                 "_t": self._timestamp(),
