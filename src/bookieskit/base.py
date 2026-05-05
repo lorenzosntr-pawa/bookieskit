@@ -1,0 +1,187 @@
+"""Base bookmaker client with shared HTTP, retry, and rate-limiting logic."""
+
+import asyncio
+from typing import Any
+
+import httpx
+
+from bookieskit.config import (
+    DEFAULT_BACKOFF_FACTOR,
+    DEFAULT_MAX_CONNECTIONS,
+    DEFAULT_MAX_KEEPALIVE,
+    DEFAULT_MAX_RETRIES,
+    DEFAULT_TIMEOUT,
+    RETRYABLE_STATUS_CODES,
+)
+from bookieskit.exceptions import (
+    RateLimitError,
+    RequestError,
+    TimeoutError,
+    UnsupportedCountryError,
+)
+
+
+class BaseBookmaker:
+    """Base class for all bookmaker HTTP clients.
+
+    Subclasses must define:
+        DOMAINS: dict[str, str] — country code to base URL mapping
+        DEFAULT_HEADERS: dict[str, str] — platform-specific headers
+        MAX_CONCURRENT: int — default max concurrent requests
+        REQUEST_DELAY: float — default delay between requests (seconds)
+        NAME: str — bookmaker display name
+    """
+
+    DOMAINS: dict[str, str] = {}
+    DEFAULT_HEADERS: dict[str, str] = {}
+    MAX_CONCURRENT: int = 50
+    REQUEST_DELAY: float = 0.0
+    NAME: str = "BaseBookmaker"
+
+    def __init__(
+        self,
+        country: str,
+        timeout: float = DEFAULT_TIMEOUT,
+        max_retries: int = DEFAULT_MAX_RETRIES,
+        backoff_factor: float = DEFAULT_BACKOFF_FACTOR,
+        max_concurrent: int | None = None,
+        request_delay: float | None = None,
+    ):
+        if country not in self.DOMAINS:
+            raise UnsupportedCountryError(
+                bookmaker=self.NAME,
+                country=country,
+                available=list(self.DOMAINS.keys()),
+            )
+
+        self._country = country
+        self.base_url = self.DOMAINS[country]
+        self._timeout = timeout
+        self._max_retries = max_retries
+        self._backoff_factor = backoff_factor
+        self._max_concurrent = max_concurrent or self.MAX_CONCURRENT
+        self._request_delay = request_delay if request_delay is not None else self.REQUEST_DELAY
+        self._http_client: httpx.AsyncClient | None = None
+        self._semaphore: asyncio.Semaphore | None = None
+
+    def _build_headers(self) -> dict[str, str]:
+        """Build request headers. Override in subclass for country-specific headers."""
+        return dict(self.DEFAULT_HEADERS)
+
+    async def __aenter__(self):
+        self._http_client = httpx.AsyncClient(
+            base_url=self.base_url,
+            headers=self._build_headers(),
+            timeout=httpx.Timeout(self._timeout),
+            limits=httpx.Limits(
+                max_connections=DEFAULT_MAX_CONNECTIONS,
+                max_keepalive_connections=DEFAULT_MAX_KEEPALIVE,
+            ),
+        )
+        self._semaphore = asyncio.Semaphore(self._max_concurrent)
+        return self
+
+    async def __aexit__(self, *args):
+        if self._http_client:
+            await self._http_client.aclose()
+
+    def __enter__(self):
+        """Sync context manager — creates event loop and async client."""
+        self._loop = asyncio.new_event_loop()
+        self._loop.run_until_complete(self.__aenter__())
+        return _SyncProxy(self, self._loop)
+
+    def __exit__(self, *args):
+        """Sync context manager cleanup."""
+        self._loop.run_until_complete(self.__aexit__(*args))
+        self._loop.close()
+        self._loop = None
+
+    async def _request(
+        self,
+        method: str,
+        path: str,
+        params: dict[str, Any] | None = None,
+        json: Any = None,
+    ) -> dict[str, Any]:
+        """Make an HTTP request with retry and rate-limiting.
+
+        Args:
+            method: HTTP method (GET, POST)
+            path: URL path (appended to base_url)
+            params: Query parameters
+            json: JSON body (for POST)
+
+        Returns:
+            Parsed JSON response as dict
+
+        Raises:
+            TimeoutError: Request timed out after all retries
+            RateLimitError: Platform returned 429
+            RequestError: Request failed after all retries
+        """
+        url = f"{self.base_url}{path}"
+        last_error: Exception | None = None
+
+        for attempt in range(self._max_retries):
+            if attempt > 0:
+                delay = self._backoff_factor * (2 ** (attempt - 1))
+                await asyncio.sleep(delay)
+
+            try:
+                async with self._semaphore:
+                    if self._request_delay > 0:
+                        await asyncio.sleep(self._request_delay)
+
+                    response = await self._http_client.request(
+                        method, path, params=params, json=json
+                    )
+
+                if response.status_code == 429:
+                    retry_after = response.headers.get("Retry-After")
+                    last_error = RateLimitError(
+                        bookmaker=self.NAME,
+                        url=url,
+                        retry_after=float(retry_after) if retry_after else None,
+                    )
+                    continue
+
+                if response.status_code in RETRYABLE_STATUS_CODES:
+                    last_error = RequestError(
+                        url=url,
+                        retries=attempt + 1,
+                        message=f"HTTP {response.status_code}",
+                    )
+                    continue
+
+                response.raise_for_status()
+                return response.json()
+
+            except httpx.TimeoutException:
+                last_error = TimeoutError(
+                    url=url, retries=attempt + 1, timeout=self._timeout
+                )
+            except httpx.ConnectError as e:
+                last_error = RequestError(
+                    url=url, retries=attempt + 1, message=str(e)
+                )
+
+        raise last_error
+
+
+class _SyncProxy:
+    """Proxy that wraps async methods as sync calls."""
+
+    def __init__(self, instance: BaseBookmaker, loop: asyncio.AbstractEventLoop):
+        self._instance = instance
+        self._loop = loop
+
+    def __getattr__(self, name: str):
+        attr = getattr(self._instance, name)
+        if callable(attr) and asyncio.iscoroutinefunction(attr):
+            def sync_wrapper(*args, **kwargs):
+                return self._loop.run_until_complete(attr(*args, **kwargs))
+            sync_wrapper.__name__ = name
+            sync_wrapper.__doc__ = attr.__doc__
+            return sync_wrapper
+        return attr
