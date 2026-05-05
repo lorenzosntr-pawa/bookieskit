@@ -90,3 +90,32 @@ def test_extract_from_betway_no_event():
     response = {"sportEvent": {}}
     sr_id = extract_sportradar_id(response, platform="betway")
     assert sr_id is None
+
+
+def test_extract_from_msport():
+    response = {
+        "bizCode": 10000,
+        "data": {"eventId": "sr:match:61301231", "markets": []},
+    }
+    sr_id = extract_sportradar_id(response, platform="msport")
+    assert sr_id == "61301231"
+
+
+def test_extract_from_msport_no_prefix():
+    response = {
+        "bizCode": 10000,
+        "data": {"eventId": "61301231", "markets": []},
+    }
+    sr_id = extract_sportradar_id(response, platform="msport")
+    assert sr_id == "61301231"
+
+
+def test_extract_from_msport_no_event_id():
+    response = {"bizCode": 10000, "data": {"markets": []}}
+    sr_id = extract_sportradar_id(response, platform="msport")
+    assert sr_id is None
+
+
+def test_extract_from_msport_no_data():
+    sr_id = extract_sportradar_id({"bizCode": 10000}, platform="msport")
+    assert sr_id is None
