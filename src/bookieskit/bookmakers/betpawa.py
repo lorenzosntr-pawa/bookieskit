@@ -7,7 +7,6 @@ from urllib.parse import quote
 from bookieskit.base import BaseBookmaker
 from bookieskit.config import BETPAWA_MAX_CONCURRENT, BETPAWA_REQUEST_DELAY
 
-
 # Country code to x-pawa-brand header value
 _BRAND_MAP = {
     "ng": "betpawa-nigeria",
@@ -43,7 +42,7 @@ class BetPawa(BaseBookmaker):
         "accept": "*/*",
         "accept-language": "en-GB,en-US;q=0.9,en;q=0.8",
         "devicetype": "web",
-        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",  # noqa: E501
     }
     MAX_CONCURRENT = BETPAWA_MAX_CONCURRENT
     REQUEST_DELAY = BETPAWA_REQUEST_DELAY
@@ -51,7 +50,9 @@ class BetPawa(BaseBookmaker):
 
     def _build_headers(self) -> dict[str, str]:
         headers = dict(self.DEFAULT_HEADERS)
-        headers["x-pawa-brand"] = _BRAND_MAP.get(self._country, f"betpawa-{self._country}")
+        headers["x-pawa-brand"] = _BRAND_MAP.get(
+            self._country, f"betpawa-{self._country}"
+        )
         return headers
 
     async def get_sports(self) -> dict[str, Any]:
@@ -71,9 +72,13 @@ class BetPawa(BaseBookmaker):
         Returns:
             Raw JSON with regions and their competitions.
         """
-        return await self._request("GET", f"/api/sportsbook/v3/categories/list/{sport_id}")
+        return await self._request(
+            "GET", f"/api/sportsbook/v3/categories/list/{sport_id}"
+        )
 
-    async def get_tournaments(self, sport_id: str, country_id: str | None = None) -> dict[str, Any]:
+    async def get_tournaments(
+        self, sport_id: str, country_id: str | None = None
+    ) -> dict[str, Any]:
         """Get tournaments/competitions for a sport (optionally filtered by country).
 
         Args:
@@ -83,7 +88,9 @@ class BetPawa(BaseBookmaker):
         Returns:
             Raw JSON with regions containing competitions.
         """
-        return await self._request("GET", f"/api/sportsbook/v3/categories/list/{sport_id}")
+        return await self._request(
+            "GET", f"/api/sportsbook/v3/categories/list/{sport_id}"
+        )
 
     async def get_events(
         self,

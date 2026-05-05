@@ -1,9 +1,9 @@
 from bookieskit.exceptions import (
     BookiesKitError,
-    RequestError,
-    TimeoutError,
     RateLimitError,
+    RequestError,
     ResponseError,
+    TimeoutError,
     UnsupportedCountryError,
 )
 
@@ -18,7 +18,9 @@ def test_exception_hierarchy():
 
 
 def test_request_error_contains_context():
-    err = RequestError(url="https://example.com/api", retries=3, message="Connection failed")
+    err = RequestError(
+        url="https://example.com/api", retries=3, message="Connection failed"
+    )
     assert err.url == "https://example.com/api"
     assert err.retries == 3
     assert "Connection failed" in str(err)
@@ -32,13 +34,17 @@ def test_timeout_error_contains_context():
 
 
 def test_rate_limit_error_contains_context():
-    err = RateLimitError(bookmaker="bet9ja", url="https://sports.bet9ja.com/api", retry_after=5.0)
+    err = RateLimitError(
+        bookmaker="bet9ja", url="https://sports.bet9ja.com/api", retry_after=5.0
+    )
     assert err.bookmaker == "bet9ja"
     assert err.retry_after == 5.0
 
 
 def test_response_error_contains_status():
-    err = ResponseError(url="https://example.com/api", status_code=500, body="Internal error")
+    err = ResponseError(
+        url="https://example.com/api", status_code=500, body="Internal error"
+    )
     assert err.status_code == 500
     assert err.body == "Internal error"
 

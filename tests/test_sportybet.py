@@ -1,6 +1,5 @@
 import pytest
 import respx
-from httpx import Response
 
 from bookieskit.bookmakers.sportybet import SportyBet
 
@@ -75,7 +74,10 @@ async def test_get_tournaments():
                                 "id": "sr:category:1",
                                 "name": "England",
                                 "tournaments": [
-                                    {"id": "sr:tournament:17", "name": "Premier League"},
+                                    {
+                                        "id": "sr:tournament:17",
+                                        "name": "Premier League",
+                                    },
                                 ],
                             }
                         ],

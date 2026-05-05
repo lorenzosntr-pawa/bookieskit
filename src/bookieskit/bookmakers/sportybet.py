@@ -33,7 +33,7 @@ class SportyBet(BaseBookmaker):
         "clientid": "web",
         "operid": "2",
         "platform": "web",
-        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",  # noqa: E501
     }
     MAX_CONCURRENT = SPORTYBET_MAX_CONCURRENT
     REQUEST_DELAY = SPORTYBET_REQUEST_DELAY
@@ -57,7 +57,12 @@ class SportyBet(BaseBookmaker):
         return await self._request(
             "GET",
             f"{self._api_prefix}/factsCenter/popularAndSportList",
-            params={"sportId": "sr:sport:1", "timeline": "", "productId": "3", "_t": self._timestamp()},
+            params={
+                "sportId": "sr:sport:1",
+                "timeline": "",
+                "productId": "3",
+                "_t": self._timestamp(),
+            },
         )
 
     async def get_countries(self, sport_id: str = "sr:sport:1") -> dict[str, Any]:
@@ -72,7 +77,12 @@ class SportyBet(BaseBookmaker):
         return await self._request(
             "GET",
             f"{self._api_prefix}/factsCenter/popularAndSportList",
-            params={"sportId": sport_id, "timeline": "", "productId": "3", "_t": self._timestamp()},
+            params={
+                "sportId": sport_id,
+                "timeline": "",
+                "productId": "3",
+                "_t": self._timestamp(),
+            },
         )
 
     async def get_tournaments(self, sport_id: str = "sr:sport:1") -> dict[str, Any]:
@@ -87,7 +97,12 @@ class SportyBet(BaseBookmaker):
         return await self._request(
             "GET",
             f"{self._api_prefix}/factsCenter/popularAndSportList",
-            params={"sportId": sport_id, "timeline": "", "productId": "3", "_t": self._timestamp()},
+            params={
+                "sportId": sport_id,
+                "timeline": "",
+                "productId": "3",
+                "_t": self._timestamp(),
+            },
         )
 
     async def get_events(

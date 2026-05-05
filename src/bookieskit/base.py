@@ -60,7 +60,9 @@ class BaseBookmaker:
         self._max_retries = max_retries
         self._backoff_factor = backoff_factor
         self._max_concurrent = max_concurrent or self.MAX_CONCURRENT
-        self._request_delay = request_delay if request_delay is not None else self.REQUEST_DELAY
+        self._request_delay = (
+            request_delay if request_delay is not None else self.REQUEST_DELAY
+        )
         self._http_client: httpx.AsyncClient | None = None
         self._semaphore: asyncio.Semaphore | None = None
 

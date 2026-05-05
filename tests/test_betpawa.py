@@ -1,6 +1,5 @@
 import pytest
 import respx
-from httpx import Response
 
 from bookieskit.bookmakers.betpawa import BetPawa
 

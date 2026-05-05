@@ -1,16 +1,14 @@
 import httpx
 import pytest
 import respx
+from conftest import MockBookmaker
 
-from bookieskit.base import BaseBookmaker
 from bookieskit.exceptions import (
     RateLimitError,
     RequestError,
     TimeoutError,
     UnsupportedCountryError,
 )
-
-from conftest import MockBookmaker
 
 
 def test_unsupported_country_raises():
@@ -66,7 +64,9 @@ async def test_retry_on_server_error():
 @respx.mock
 async def test_raises_request_error_after_max_retries():
     respx.get("https://mock.example.com/api/test").respond(500)
-    async with MockBookmaker(country="ng", max_retries=2, backoff_factor=0.01) as client:
+    async with MockBookmaker(
+        country="ng", max_retries=2, backoff_factor=0.01
+    ) as client:
         with pytest.raises(RequestError) as exc_info:
             await client._request("GET", "/api/test")
     assert exc_info.value.retries == 2
@@ -78,7 +78,9 @@ async def test_raises_rate_limit_error_on_429():
     respx.get("https://mock.example.com/api/test").respond(
         429, headers={"Retry-After": "5"}
     )
-    async with MockBookmaker(country="ng", max_retries=1, backoff_factor=0.01) as client:
+    async with MockBookmaker(
+        country="ng", max_retries=1, backoff_factor=0.01
+    ) as client:
         with pytest.raises(RateLimitError) as exc_info:
             await client._request("GET", "/api/test")
     assert exc_info.value.bookmaker == "MockBookmaker"
@@ -90,7 +92,9 @@ async def test_timeout_raises_timeout_error():
     respx.get("https://mock.example.com/api/test").mock(
         side_effect=httpx.ReadTimeout("timed out")
     )
-    async with MockBookmaker(country="ng", max_retries=1, backoff_factor=0.01) as client:
+    async with MockBookmaker(
+        country="ng", max_retries=1, backoff_factor=0.01
+    ) as client:
         with pytest.raises(TimeoutError) as exc_info:
             await client._request("GET", "/api/test")
     assert exc_info.value.timeout == 30.0

@@ -30,7 +30,7 @@ class Bet9ja(BaseBookmaker):
     DEFAULT_HEADERS = {
         "accept": "*/*",
         "accept-language": "en-GB,en-US;q=0.9,en;q=0.8",
-        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",  # noqa: E501
     }
     MAX_CONCURRENT = BET9JA_MAX_CONCURRENT
     REQUEST_DELAY = BET9JA_REQUEST_DELAY

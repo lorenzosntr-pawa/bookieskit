@@ -21,7 +21,9 @@ class TimeoutError(BookiesKitError):
         self.url = url
         self.retries = retries
         self.timeout = timeout
-        super().__init__(f"Request to {url} timed out after {timeout}s ({retries} retries)")
+        super().__init__(
+            f"Request to {url} timed out after {timeout}s ({retries} retries)"
+        )
 
 
 class RateLimitError(BookiesKitError):
