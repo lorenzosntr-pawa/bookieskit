@@ -17,7 +17,7 @@ def parse_markets(
 
     Args:
         response: Raw JSON from get_event_detail()
-        platform: "betpawa", "sportybet", or "bet9ja"
+        platform: "betpawa", "sportybet", "bet9ja", "betway", or "msport"
         registry: Market registry to use (default: built-in 4 markets)
 
     Returns:
@@ -32,6 +32,7 @@ def parse_markets(
         "sportybet": _parse_sportybet,
         "bet9ja": _parse_bet9ja,
         "betway": _parse_betway,
+        "msport": _parse_msport,
     }
     parser = parsers.get(platform)
     if parser is None:
@@ -713,4 +714,121 @@ def _resolve_outcome_betway(
         if om.betway in sentinels_for_index:
             return om.canonical_name
 
+    return None
+
+
+def _parse_msport(
+    response: dict, registry: MarketRegistry
+) -> list[NormalizedMarket]:
+    """Parse MSport event detail response.
+
+    MSport's payload mirrors SportyBet's structurally but uses
+    `description` instead of `desc` and `specifiers` (plural) instead
+    of `specifier`. Market ids are integer-strings; parameterized
+    markets repeat the same id once per line, with `specifiers` like
+    "total=2.5" or "hcp=-0.5".
+    """
+    results: list[NormalizedMarket] = []
+    data = response.get("data", response)
+    markets = data.get("markets", [])
+
+    parameterized_groups: dict[str, list[dict]] = {}
+
+    for market_data in markets:
+        market_id = str(market_data.get("id", ""))
+        mapping = registry.get_by_platform_id("msport", market_id)
+        if mapping is None:
+            continue
+
+        if mapping.parameterized:
+            parameterized_groups.setdefault(market_id, []).append(market_data)
+        else:
+            results.append(_parse_msport_simple(market_data, mapping))
+
+    for market_id, entries in parameterized_groups.items():
+        mapping = registry.get_by_platform_id("msport", market_id)
+        if mapping:
+            results.append(_parse_msport_parameterized(entries, mapping))
+
+    return results
+
+
+def _parse_msport_simple(
+    market_data: dict, mapping: MarketMapping
+) -> NormalizedMarket:
+    """Parse a simple MSport market."""
+    outcomes: list[Outcome] = []
+
+    for outcome_data in market_data.get("outcomes", []):
+        desc = str(outcome_data.get("description", ""))
+        odds = float(outcome_data.get("odds", 0))
+        canonical = _resolve_outcome_msport(desc, mapping)
+        if canonical:
+            outcomes.append(
+                Outcome(
+                    canonical_name=canonical,
+                    odds=odds,
+                    platform_name=desc,
+                )
+            )
+
+    return NormalizedMarket(
+        canonical_id=mapping.canonical_id,
+        name=mapping.name,
+        outcomes=outcomes,
+        lines=None,
+    )
+
+
+def _parse_msport_parameterized(
+    entries: list[dict], mapping: MarketMapping
+) -> NormalizedMarket:
+    """Parse a parameterized MSport market (multiple entries, one per line)."""
+    lines: dict[float, list[Outcome]] = {}
+
+    for entry in entries:
+        specifiers = entry.get("specifiers", "") or ""
+        line = _extract_line_from_specifier(specifiers)
+        if line is None:
+            continue
+
+        line_outcomes: list[Outcome] = []
+        for outcome_data in entry.get("outcomes", []):
+            desc = str(outcome_data.get("description", ""))
+            odds = float(outcome_data.get("odds", 0))
+            canonical = _resolve_outcome_msport(desc, mapping)
+            if canonical:
+                line_outcomes.append(
+                    Outcome(
+                        canonical_name=canonical,
+                        odds=odds,
+                        platform_name=desc,
+                    )
+                )
+
+        if line_outcomes:
+            lines[line] = line_outcomes
+
+    return NormalizedMarket(
+        canonical_id=mapping.canonical_id,
+        name=mapping.name,
+        outcomes=[],
+        lines=lines,
+    )
+
+
+def _resolve_outcome_msport(
+    platform_name: str, mapping: MarketMapping
+) -> str | None:
+    """Find canonical outcome name from MSport outcome description.
+
+    Exact match first, then prefix match for parameterized payloads
+    where the description embeds the line value (e.g. "Over 2.5").
+    """
+    for om in mapping.outcomes.values():
+        if om.msport == platform_name:
+            return om.canonical_name
+    for om in mapping.outcomes.values():
+        if om.msport and platform_name.startswith(om.msport):
+            return om.canonical_name
     return None
