@@ -188,7 +188,7 @@ async def get_bet9ja_data():
 
     async with Bet9ja(country="ng") as b9:
         # PREMATCH - Sports
-        sports_raw = await b9.get_sports(live=False)
+        sports_raw = await b9.get_sports()
         pal = sports_raw.get("D", {}).get("PAL", {})
         regular = {k: v for k, v in pal.items()
                    if "Antepost" not in v.get("S_DESC", "")
@@ -227,7 +227,9 @@ async def get_bet9ja_data():
         ]
 
         # LIVE - Sports
-        sports_raw = await b9.get_sports(live=True)
+        # TODO(post-cleanup): live sports shape differs — get_live_sports() returns D.S
+        # (live sport IDs) not D.PAL; this block needs a deeper refactor to use D.S.
+        sports_raw = await b9.get_live_sports()
         pal = sports_raw.get("D", {}).get("PAL", {})
         live_sports = [
             {"name": v["S_DESC"], "events": v.get("NUM", 0)}

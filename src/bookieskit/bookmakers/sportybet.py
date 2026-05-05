@@ -91,9 +91,6 @@ class SportyBet(BaseBookmaker):
             },
         )
 
-    # AUDIT: get_tournaments is identical to get_countries (same endpoint,
-    # same params). Consider removing get_tournaments and aliasing it, or
-    # merging into one method with a docstring note.
     async def get_tournaments(
         self, sport_id: str = "sr:sport:1", live: bool = False
     ) -> dict[str, Any]:

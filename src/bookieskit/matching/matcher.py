@@ -13,8 +13,8 @@ class MatchedEvent:
     betpawa: dict | None = None
     sportybet: dict | None = None
     bet9ja: dict | None = None
-    # AUDIT: betway and msport fields are missing here (and from match_events
-    # grouping logic). Task 5 should add them for full 5-platform coverage.
+    betway: dict | None = None
+    msport: dict | None = None
 
 
 def match_events(
@@ -50,6 +50,8 @@ def match_events(
                 betpawa=platforms.get("betpawa"),
                 sportybet=platforms.get("sportybet"),
                 bet9ja=platforms.get("bet9ja"),
+                betway=platforms.get("betway"),
+                msport=platforms.get("msport"),
             )
         )
 

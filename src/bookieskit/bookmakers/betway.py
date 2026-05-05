@@ -5,7 +5,11 @@ from typing import Any
 import httpx
 
 from bookieskit.base import BaseBookmaker
-from bookieskit.config import DEFAULT_TIMEOUT
+from bookieskit.config import (  # noqa: E501
+    BETWAY_MAX_CONCURRENT,
+    BETWAY_REQUEST_DELAY,
+    DEFAULT_TIMEOUT,
+)
 
 # Country code mapping (lowercase -> API format)
 _COUNTRY_CODES = {
@@ -56,11 +60,8 @@ class Betway(BaseBookmaker):
             "Chrome/144.0.0.0 Safari/537.36"
         ),
     }
-    # AUDIT: MAX_CONCURRENT and REQUEST_DELAY are hardcoded here while all
-    # other bookmakers pull from config.py constants. Add BETWAY_MAX_CONCURRENT
-    # and BETWAY_REQUEST_DELAY to config.py and import them here for consistency.
-    MAX_CONCURRENT = 50
-    REQUEST_DELAY = 0.0
+    MAX_CONCURRENT = BETWAY_MAX_CONCURRENT
+    REQUEST_DELAY = BETWAY_REQUEST_DELAY
     NAME = "Betway"
     PLATFORM_KEY = "betway"
 

@@ -238,7 +238,7 @@ async def audit_bet9ja():
     async with Bet9ja(country="ng") as b9:
         # --- PREMATCH ---
         print("\n--- PREMATCH ---")
-        sports_raw = await b9.get_sports(live=False)
+        sports_raw = await b9.get_sports()
         pal = sports_raw.get("D", {}).get("PAL", {})
 
         for key, item in pal.items():
@@ -292,7 +292,9 @@ async def audit_bet9ja():
 
         # --- LIVE ---
         print("\n\n--- LIVE ---")
-        sports_raw = await b9.get_sports(live=True)
+        # TODO(post-cleanup): live sports shape differs — get_live_sports() returns D.S
+        # (live sport IDs) not D.PAL; this block needs a deeper refactor to use D.S.
+        sports_raw = await b9.get_live_sports()
         pal = sports_raw.get("D", {}).get("PAL", {})
 
         for key, item in pal.items():

@@ -126,7 +126,9 @@ async def main():
     print("\n\n=== BET9JA LIVE ===")
     async with Bet9ja(country="ng") as b9:
         # 1. Live sports
-        sports_raw = await b9.get_sports(live=True)
+        # TODO(post-cleanup): live sports shape differs — get_live_sports() returns D.S
+        # (live sport IDs) not D.PAL; this block needs a deeper refactor to use D.S.
+        sports_raw = await b9.get_live_sports()
         pal = sports_raw.get("D", {}).get("PAL", {})
         print("\n[1] Live Sports:")
         for key, item in pal.items():

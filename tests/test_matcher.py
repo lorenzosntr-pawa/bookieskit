@@ -93,3 +93,14 @@ def test_matched_event_dataclass():
     assert me.betpawa is None
     assert me.sportybet is None
     assert me.bet9ja is None
+
+
+def test_match_events_handles_betway_and_msport():
+    from bookieskit.matching import match_events
+    bw_event = {"sportEvent": {"eventId": 12345}}
+    ms_event = {"data": {"eventId": "sr:match:12345"}}
+    matched = match_events(("betway", [bw_event]), ("msport", [ms_event]))
+    assert len(matched) == 1
+    assert matched[0].sportradar_id == "12345"
+    assert matched[0].betway is bw_event
+    assert matched[0].msport is ms_event
