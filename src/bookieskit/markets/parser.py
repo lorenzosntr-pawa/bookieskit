@@ -601,35 +601,77 @@ def _build_betway_parameterized(
     mapping: MarketMapping,
     price_map: dict[str, float],
 ) -> NormalizedMarket | None:
-    """Build a parameterized NormalizedMarket from Betway entries."""
+    """Build a parameterized NormalizedMarket from Betway entries.
+
+    Betway links all outcomes to the parent market ID, not to individual
+    line entries. Outcome IDs contain the line info (e.g., "...total=2.5~12").
+    We collect outcomes from the parent (handicap=0) and distribute them
+    to lines by matching line entries' marketId against outcome IDs.
+    """
     lines: dict[float, list[Outcome]] = {}
+
+    # Collect all outcomes from the parent entry (handicap=0)
+    parent_outcomes: list[dict] = []
+    line_market_ids: list[tuple[float, str]] = []
 
     for market, outcomes_list in entries:
         handicap = market.get("handicap")
+        market_id = str(market.get("marketId", ""))
         if handicap is None:
             continue
-        line = float(handicap)
-        line_outcomes: list[Outcome] = []
+        if handicap == 0:
+            parent_outcomes = outcomes_list
+        else:
+            line_market_ids.append((float(handicap), market_id))
 
-        for i, outcome_data in enumerate(outcomes_list):
-            oid = str(outcome_data.get("outcomeId", ""))
-            name = str(outcome_data.get("name", ""))
-            odds = price_map.get(oid, 0)
-
-            canonical = _resolve_outcome_betway(
-                name, i, mapping
-            )
-            if canonical:
-                line_outcomes.append(
-                    Outcome(
-                        canonical_name=canonical,
-                        odds=odds,
-                        platform_name=name,
+    # If we have parent outcomes, distribute them by line
+    if parent_outcomes and line_market_ids:
+        for line, line_mid in line_market_ids:
+            line_outcomes: list[Outcome] = []
+            # Find outcomes whose outcomeId starts with this line's marketId
+            for i, outcome_data in enumerate(parent_outcomes):
+                oid = str(outcome_data.get("outcomeId", ""))
+                if oid.startswith(line_mid):
+                    name = str(outcome_data.get("name", ""))
+                    odds = price_map.get(oid, 0)
+                    canonical = _resolve_outcome_betway(
+                        name, i, mapping
                     )
+                    if canonical:
+                        line_outcomes.append(
+                            Outcome(
+                                canonical_name=canonical,
+                                odds=odds,
+                                platform_name=name,
+                            )
+                        )
+            if line_outcomes:
+                lines[line] = line_outcomes
+    else:
+        # Fallback: outcomes directly on line entries
+        for market, outcomes_list in entries:
+            handicap = market.get("handicap")
+            if handicap is None or handicap == 0:
+                continue
+            line = float(handicap)
+            line_outcomes_list: list[Outcome] = []
+            for i, outcome_data in enumerate(outcomes_list):
+                oid = str(outcome_data.get("outcomeId", ""))
+                name = str(outcome_data.get("name", ""))
+                odds = price_map.get(oid, 0)
+                canonical = _resolve_outcome_betway(
+                    name, i, mapping
                 )
-
-        if line_outcomes:
-            lines[line] = line_outcomes
+                if canonical:
+                    line_outcomes_list.append(
+                        Outcome(
+                            canonical_name=canonical,
+                            odds=odds,
+                            platform_name=name,
+                        )
+                    )
+            if line_outcomes_list:
+                lines[line] = line_outcomes_list
 
     if not lines:
         return None
@@ -654,9 +696,10 @@ def _resolve_outcome_betway(
     Sentinel values: __HOME__=pos0, __AWAY__=pos2,
     __POS_1__=pos0, __POS_2__=pos1, __POS_3__=pos2.
     """
-    # Exact match first
+    # Exact match first (strip whitespace from platform names)
+    clean_name = platform_name.strip()
     for om in mapping.outcomes.values():
-        if om.betway == platform_name:
+        if om.betway == clean_name:
             return om.canonical_name
 
     # Position-based match for sentinels
