@@ -22,6 +22,7 @@ class MarketRegistry:
         self._by_sportybet: dict[str, MarketMapping] = {}
         self._by_bet9ja: dict[str, MarketMapping] = {}
         self._by_betway: dict[str, MarketMapping] = {}
+        self._by_msport: dict[str, MarketMapping] = {}
 
         if load_builtins:
             for mapping in BUILTIN_MAPPINGS:
@@ -38,6 +39,8 @@ class MarketRegistry:
             self._by_bet9ja[mapping.bet9ja_key] = mapping
         if mapping.betway_id:
             self._by_betway[mapping.betway_id] = mapping
+        if mapping.msport_id:
+            self._by_msport[mapping.msport_id] = mapping
 
     def add(
         self,
@@ -47,6 +50,7 @@ class MarketRegistry:
         sportybet_id: str | None = None,
         bet9ja_key: str | None = None,
         betway_id: str | None = None,
+        msport_id: str | None = None,
         outcomes: dict[str, OutcomeMapping] | None = None,
         parameterized: bool = False,
     ) -> None:
@@ -59,6 +63,7 @@ class MarketRegistry:
             sportybet_id: SportyBet market ID (or None)
             bet9ja_key: Bet9ja key prefix (or None)
             betway_id: Betway market name (or None)
+            msport_id: MSport market ID (or None)
             outcomes: Dict of canonical_name -> OutcomeMapping
             parameterized: True if market has lines (O/U, handicaps)
         """
@@ -69,6 +74,7 @@ class MarketRegistry:
             sportybet_id=sportybet_id,
             bet9ja_key=bet9ja_key,
             betway_id=betway_id,
+            msport_id=msport_id,
             outcomes=outcomes or {},
             parameterized=parameterized,
         )
@@ -84,7 +90,7 @@ class MarketRegistry:
         """Look up by platform-specific ID.
 
         Args:
-            platform: "betpawa", "sportybet", or "bet9ja"
+            platform: "betpawa", "sportybet", "bet9ja", "betway", or "msport"
             platform_id: Platform-specific market ID or key
         """
         index = {
@@ -92,6 +98,7 @@ class MarketRegistry:
             "sportybet": self._by_sportybet,
             "bet9ja": self._by_bet9ja,
             "betway": self._by_betway,
+            "msport": self._by_msport,
         }.get(platform, {})
         return index.get(platform_id)
 

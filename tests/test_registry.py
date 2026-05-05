@@ -108,3 +108,23 @@ def test_registry_add_parameterized():
     )
     mapping = registry.get_by_canonical("asian_handicap_ft")
     assert mapping.parameterized is True
+
+
+def test_registry_get_by_platform_id_msport():
+    registry = MarketRegistry()
+    mapping = registry.get_by_platform_id("msport", "1")
+    assert mapping is not None
+    assert mapping.canonical_id == "1x2_ft"
+
+
+def test_registry_add_with_msport_id():
+    registry = MarketRegistry(load_builtins=False)
+    registry.add(
+        canonical_id="custom",
+        name="Custom",
+        msport_id="42",
+        outcomes={},
+    )
+    mapping = registry.get_by_platform_id("msport", "42")
+    assert mapping is not None
+    assert mapping.canonical_id == "custom"
