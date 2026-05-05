@@ -49,12 +49,36 @@ class Bet9ja(BaseBookmaker):
             params={"DISP": "0", "v_cache_version": _CACHE_VERSION},
         )
 
-    async def get_live_events(self) -> dict[str, Any]:
-        """Get all live events across all sports.
+    async def get_live_events(
+        self, sport_id: str | None = None
+    ) -> dict[str, Any]:
+        """Get live events.
+
+        Args:
+            sport_id: Live sport ID (e.g., "3000001" for Soccer,
+                      "3000002" for Basketball). If None, returns
+                      soccer by default. Use get_live_sports() first
+                      to discover available live sport IDs.
 
         Returns:
-            Raw JSON with D.S (sports), D.G (groups), D.E (events dict),
-            D.MK (markets). Events keyed by ID with DS, EXTID, SID fields.
+            Raw JSON with D.S (sports), D.G (groups), D.E (events dict).
+            Events keyed by ID with DS, EXTID, SID fields.
+        """
+        params: dict[str, str] = {"v_cache_version": _CACHE_VERSION}
+        if sport_id:
+            params["SID"] = sport_id
+        return await self._request(
+            "GET",
+            "/desktop/feapi/PalimpsestLiveAjax/GetLiveEventsV3",
+            params=params,
+        )
+
+    async def get_live_sports(self) -> dict[str, Any]:
+        """Get list of sports that currently have live events.
+
+        Returns:
+            Raw JSON with D.S dict keyed by live sport ID
+            (e.g., "3000001"=Soccer, "3000002"=Basketball).
         """
         return await self._request(
             "GET",
