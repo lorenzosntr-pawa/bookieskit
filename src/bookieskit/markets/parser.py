@@ -318,9 +318,18 @@ def _parse_bet9ja(
     parameterized_groups: dict[str, dict[float, list[tuple[str, float]]]] = {}
 
     for key, value in odds_dict.items():
-        if not key.startswith("S_"):
+        # Bet9ja prematch keys start with "S_"; live keys start with "LIVES_".
+        # Normalize both to "S_..." so the rest of the parser is unchanged.
+        if key.startswith("LIVES_"):
+            key = "S_" + key[len("LIVES_"):]
+        elif not key.startswith("S_"):
             continue
 
+        # Live odds are wrapped as {"v": <float>}; prematch are bare strings.
+        if isinstance(value, dict):
+            value = value.get("v")
+        if value is None:
+            continue
         odds = float(value)
         parsed = _parse_bet9ja_key(key)
         if parsed is None:

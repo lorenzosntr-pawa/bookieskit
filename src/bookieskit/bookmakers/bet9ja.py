@@ -73,6 +73,68 @@ class Bet9ja(BaseBookmaker):
             params=params,
         )
 
+    async def get_live_event_detail(
+        self, event_id: str
+    ) -> dict[str, Any]:
+        """Get full live event detail (markets + odds) by Bet9ja internal id.
+
+        Uses the live-specific endpoint (`GetLiveEvent`) which expects
+        the parameter name `EVENTID`. The response shape mirrors the
+        prematch event-detail (D.O odds dict) but odds keys use the
+        `LIVES_` prefix instead of `S_` and odds values are wrapped as
+        ``{"v": <float>}`` rather than bare strings.
+
+        Args:
+            event_id: Bet9ja internal numeric event id (use
+                `find_event_id_by_sr_id` to resolve from a SportRadar id).
+
+        Returns:
+            Raw JSON with D.A (anchor: EXTID, score, time) and D.O
+            (odds keyed by market_outcome).
+        """
+        return await self._request(
+            "GET",
+            "/desktop/feapi/PalimpsestLiveAjax/GetLiveEvent",
+            params={"EVENTID": event_id, "v_cache_version": _CACHE_VERSION},
+        )
+
+    async def find_event_id_by_sr_id(
+        self,
+        sportradar_id: str,
+        sport_id: str = "3000001",
+    ) -> str | None:
+        """Look up Bet9ja's internal event ID for a given SportRadar ID.
+
+        Bet9ja's live events response (`D.E`) exposes `EXTID` (the SR
+        numeric id) at the list level for every event, so we can scan
+        once and match without per-event detail fetches.
+
+        Currently scans live events only. Prematch events are scoped
+        per-tournament and would require iterating all tournaments
+        for the sport — call get_events(tournament_id) and inspect EXTID
+        on each event if you know the tournament.
+
+        Args:
+            sportradar_id: SR id in either bare numeric ("69339436") or
+                prefixed ("sr:match:69339436") form.
+            sport_id: Live sport id to scope the search (default
+                "3000001" = Soccer).
+
+        Returns:
+            Bet9ja internal event id as string, or None if not found.
+        """
+        target = sportradar_id
+        if target.startswith("sr:match:"):
+            target = target[len("sr:match:"):]
+
+        live = await self.get_live_events(sport_id=sport_id)
+        events = (live.get("D") or {}).get("E") or {}
+        for internal_id, ev in events.items():
+            ext = str(ev.get("EXTID", "") or "")
+            if ext == target:
+                return str(internal_id)
+        return None
+
     async def get_live_sports(self) -> dict[str, Any]:
         """Get list of sports that currently have live events.
 

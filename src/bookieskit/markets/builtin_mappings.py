@@ -110,7 +110,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 sportybet="Home or Draw",
                 bet9ja="1X",
                 betway="__POS_1__",
-                msport="Home or Draw",
+                msport="1 X",
             ),
             "draw_away": OutcomeMapping(
                 canonical_name="draw_away",
@@ -118,7 +118,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 sportybet="Draw or Away",
                 bet9ja="X2",
                 betway="__POS_2__",
-                msport="Draw or Away",
+                msport="X 2",
             ),
             "home_away": OutcomeMapping(
                 canonical_name="home_away",
@@ -126,7 +126,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 sportybet="Home or Away",
                 bet9ja="12",
                 betway="__POS_3__",
-                msport="Home or Away",
+                msport="1 2",
             ),
         },
         parameterized=False,

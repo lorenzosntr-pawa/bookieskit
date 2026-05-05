@@ -74,3 +74,37 @@ def test_parse_bet9ja_empty_odds():
     response = {"R": "D", "D": {"O": {}}}
     markets = parse_markets(response, platform="bet9ja")
     assert len(markets) == 0
+
+
+def test_parse_bet9ja_live_keys_with_lives_prefix():
+    """Bet9ja live event detail uses LIVES_ prefix and {"v": float} odds."""
+    response = {
+        "R": "OK",
+        "D": {
+            "A": {"EXTID": "69339436"},
+            "O": {
+                "LIVES_1X2_1": {"v": 1.27},
+                "LIVES_1X2_X": {"v": 4.9},
+                "LIVES_1X2_2": {"v": 20.0},
+                "LIVES_OU@2.5_O": {"v": 2.7},
+                "LIVES_OU@2.5_U": {"v": 1.49},
+                "LIVES_GGNG_Y": {"v": 2.38},
+                "LIVES_GGNG_N": {"v": 1.61},
+                "LIVES_DC_1X": {"v": 1.0},
+                "LIVES_DC_X2": {"v": 3.95},
+                "LIVES_DC_12": {"v": 1.19},
+            },
+        },
+    }
+    markets = parse_markets(response, platform="bet9ja")
+    by_canon = {m.canonical_id: m for m in markets}
+    assert "1x2_ft" in by_canon
+    assert "over_under_ft" in by_canon
+    assert "btts_ft" in by_canon
+    assert "double_chance_ft" in by_canon
+    home = next(o for o in by_canon["1x2_ft"].outcomes if o.canonical_name == "home")
+    assert home.odds == 1.27
+    over_25 = next(
+        o for o in by_canon["over_under_ft"].lines[2.5] if o.canonical_name == "over"
+    )
+    assert over_25.odds == 2.7

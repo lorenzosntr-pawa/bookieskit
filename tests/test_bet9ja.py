@@ -88,3 +88,59 @@ async def test_bet9ja_headers():
         await client.get_sports()
     headers = route.calls[0].request.headers
     assert "Mozilla" in headers["user-agent"]
+
+
+@pytest.mark.asyncio
+@respx.mock
+async def test_find_event_id_by_sr_id_found():
+    respx.get(
+        "https://sports.bet9ja.com/desktop/feapi/PalimpsestLiveAjax/GetLiveEventsV3"
+    ).respond(
+        json={
+            "D": {
+                "E": {
+                    "9138769": {"EXTID": "69339436", "DS": "Arsenal vs Atletico"},
+                    "9138770": {"EXTID": "13858490", "DS": "Other"},
+                }
+            }
+        }
+    )
+    async with Bet9ja(country="ng") as client:
+        internal = await client.find_event_id_by_sr_id("sr:match:69339436")
+    assert internal == "9138769"
+
+
+@pytest.mark.asyncio
+@respx.mock
+async def test_find_event_id_by_sr_id_numeric_input():
+    respx.get(
+        "https://sports.bet9ja.com/desktop/feapi/PalimpsestLiveAjax/GetLiveEventsV3"
+    ).respond(
+        json={"D": {"E": {"9138769": {"EXTID": "69339436"}}}}
+    )
+    async with Bet9ja(country="ng") as client:
+        internal = await client.find_event_id_by_sr_id("69339436")
+    assert internal == "9138769"
+
+
+@pytest.mark.asyncio
+@respx.mock
+async def test_find_event_id_by_sr_id_not_found():
+    respx.get(
+        "https://sports.bet9ja.com/desktop/feapi/PalimpsestLiveAjax/GetLiveEventsV3"
+    ).respond(json={"D": {"E": {"9138770": {"EXTID": "99999"}}}})
+    async with Bet9ja(country="ng") as client:
+        internal = await client.find_event_id_by_sr_id("69339436")
+    assert internal is None
+
+
+@pytest.mark.asyncio
+@respx.mock
+async def test_get_live_event_detail_uses_eventid_param():
+    route = respx.get(
+        "https://sports.bet9ja.com/desktop/feapi/PalimpsestLiveAjax/GetLiveEvent"
+    ).respond(json={"R": "OK", "D": {"O": {}}})
+    async with Bet9ja(country="ng") as client:
+        await client.get_live_event_detail(event_id="9138769")
+    # The live endpoint expects parameter name EVENTID (uppercase).
+    assert route.calls[0].request.url.params["EVENTID"] == "9138769"

@@ -184,3 +184,25 @@ async def test_msport_ke_uses_ke_path():
     async with MSport(country="ke") as client:
         result = await client.get_sports()
     assert result["bizCode"] == 10000
+
+
+@pytest.mark.asyncio
+@respx.mock
+async def test_get_event_detail_live_uses_product_1():
+    route = respx.get(
+        "https://www.msport.com/api/ng/facts-center/query/frontend/match/detail"
+    ).respond(json={"bizCode": 10000, "data": {"markets": []}})
+    async with MSport(country="ng") as client:
+        await client.get_event_detail(event_id="sr:match:69339436", live=True)
+    assert route.calls[0].request.url.params["productId"] == "1"
+
+
+@pytest.mark.asyncio
+@respx.mock
+async def test_get_event_detail_default_uses_product_3():
+    route = respx.get(
+        "https://www.msport.com/api/ng/facts-center/query/frontend/match/detail"
+    ).respond(json={"bizCode": 10000, "data": {"markets": []}})
+    async with MSport(country="ng") as client:
+        await client.get_event_detail(event_id="sr:match:61301231")
+    assert route.calls[0].request.url.params["productId"] == "3"

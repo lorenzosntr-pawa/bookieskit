@@ -143,11 +143,18 @@ class SportyBet(BaseBookmaker):
             json=body,
         )
 
-    async def get_event_detail(self, event_id: str) -> dict[str, Any]:
+    async def get_event_detail(
+        self, event_id: str, live: bool = False
+    ) -> dict[str, Any]:
         """Get full event details including all markets.
 
         Args:
             event_id: SportRadar match ID (e.g., "sr:match:61300947")
+            live: If True, request the live market set (productId=1).
+                  Default False uses productId=3 (prematch). For live
+                  events, productId=3 returns only player-prop markets;
+                  the main 1X2/OU/BTTS/DC live markets live under
+                  productId=1.
 
         Returns:
             Raw JSON with full event info and all available markets.
@@ -155,5 +162,9 @@ class SportyBet(BaseBookmaker):
         return await self._request(
             "GET",
             f"{self._api_prefix}/factsCenter/event",
-            params={"eventId": event_id, "productId": "3", "_t": self._timestamp()},
+            params={
+                "eventId": event_id,
+                "productId": "1" if live else "3",
+                "_t": self._timestamp(),
+            },
         )

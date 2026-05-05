@@ -79,11 +79,17 @@ class MSport(BaseBookmaker):
             params={"sportId": sport_id},
         )
 
-    async def get_event_detail(self, event_id: str) -> dict[str, Any]:
+    async def get_event_detail(
+        self, event_id: str, live: bool = False
+    ) -> dict[str, Any]:
         """Get full event details including all markets.
 
         Args:
             event_id: SportRadar match ID (e.g., "sr:match:61301231")
+            live: If True, request the live market set (productId=1).
+                  Default False uses productId=3 (prematch). For live
+                  events, productId=3 returns only a partial subset;
+                  productId=1 returns the full live market book.
 
         Returns:
             Raw JSON with data containing eventId, homeTeam, awayTeam,
@@ -92,7 +98,10 @@ class MSport(BaseBookmaker):
         return await self._request(
             "GET",
             f"{self._api_prefix}/match/detail",
-            params={"eventId": event_id, "productId": "3"},
+            params={
+                "eventId": event_id,
+                "productId": "1" if live else "3",
+            },
         )
 
     async def get_live_sports(self) -> dict[str, Any]:

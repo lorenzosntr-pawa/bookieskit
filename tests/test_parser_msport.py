@@ -52,9 +52,9 @@ MSPORT_EVENT_RESPONSE = {
                 "name": "Double Chance",
                 "specifiers": None,
                 "outcomes": [
-                    {"id": "9", "description": "Home or Draw", "odds": "1.25"},
-                    {"id": "11", "description": "Draw or Away", "odds": "1.50"},
-                    {"id": "10", "description": "Home or Away", "odds": "1.10"},
+                    {"id": "9", "description": "1 X", "odds": "1.25"},
+                    {"id": "11", "description": "X 2", "odds": "1.50"},
+                    {"id": "10", "description": "1 2", "odds": "1.10"},
                 ],
             },
             {
@@ -108,7 +108,7 @@ def test_parse_msport_double_chance():
     home_draw = next(
         o for o in dc.outcomes if o.canonical_name == "home_draw"
     )
-    assert home_draw.platform_name == "Home or Draw"
+    assert home_draw.platform_name == "1 X"
 
 
 def test_parse_msport_skips_unknown_market():
