@@ -68,7 +68,7 @@ def is_live_now(kickoff: datetime | None) -> bool:
 
 # ---- BetPawa --------------------------------------------------------------
 
-def _kickoff_betpawa(response: dict, mode: Mode | None) -> datetime | None:
+def _kickoff_betpawa(response: dict, _mode: Mode | None) -> datetime | None:
     s = response.get("startTime")
     if not isinstance(s, str):
         return None
@@ -78,7 +78,7 @@ def _kickoff_betpawa(response: dict, mode: Mode | None) -> datetime | None:
         return None
 
 
-def _participants_betpawa(response: dict, mode: Mode | None) -> Participants:
+def _participants_betpawa(response: dict, _mode: Mode | None) -> Participants:
     parts = response.get("participants") or []
     home = (
         parts[0].get("name") if len(parts) > 0 and isinstance(parts[0], dict) else None

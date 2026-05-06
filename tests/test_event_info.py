@@ -107,3 +107,10 @@ def test_betpawa_live_info_live():
     assert li.period == "Second Half"
     assert li.score_home == 0
     assert li.score_away == 3
+
+
+def test_betpawa_live_info_mode_prematch_overrides_live_data():
+    """Explicit mode='prematch' suppresses live data even on a live fixture."""
+    d = _load("betpawa", "live")
+    li = extract_live_info(d, "betpawa", mode="prematch")
+    assert li == LiveInfo()
