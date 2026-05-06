@@ -1,5 +1,6 @@
 """Tests for true/void probability extraction across all 5 platforms."""
 
+import copy
 import json
 from pathlib import Path
 
@@ -300,3 +301,65 @@ def test_1x2_true_probabilities_sum_to_about_one(platform):
     assert 0.95 <= total <= 1.05, (
         f"{platform} 1X2 prob sum {total} not in [0.95, 1.05]"
     )
+
+
+def test_betpawa_missing_probability_field_yields_none():
+    """If a BetPawa price has no 'probability' key, fields stay None."""
+    d = copy.deepcopy(_load("betpawa"))
+    for m in d.get("markets", []):
+        rows = m.get("row") or []
+        if not isinstance(rows, list):
+            rows = [rows]
+        for row in rows:
+            for price in row.get("prices", []):
+                price.pop("probability", None)
+    markets = parse_markets(d, platform="betpawa", probability="with_void")
+    for m in markets:
+        for o in m.outcomes:
+            assert o.true_probability is None
+            assert o.void_probability is None
+
+
+def test_betpawa_garbage_probability_blob_yields_none():
+    """A non-base64 'probability' string must not raise."""
+    d = copy.deepcopy(_load("betpawa"))
+    for m in d.get("markets", []):
+        rows = m.get("row") or []
+        if not isinstance(rows, list):
+            rows = [rows]
+        for row in rows:
+            for price in row.get("prices", []):
+                if "probability" in price:
+                    price["probability"] = "not-base64!!!"
+    markets = parse_markets(d, platform="betpawa", probability="with_void")
+    for m in markets:
+        for o in m.outcomes:
+            assert o.true_probability is None
+            assert o.void_probability is None
+
+
+def test_sportybet_non_numeric_probability_yields_none():
+    d = copy.deepcopy(_load("sportybet"))
+    for m in (d.get("data") or {}).get("markets", []):
+        for o in m.get("outcomes", []):
+            if "probability" in o:
+                o["probability"] = "abc"
+            if "voidProbability" in o:
+                o["voidProbability"] = "xyz"
+    markets = parse_markets(d, platform="sportybet", probability="with_void")
+    for m in markets:
+        for o in m.outcomes:
+            assert o.true_probability is None
+            assert o.void_probability is None
+
+
+def test_invalid_mode_silently_treated_as_off():
+    """A mode value outside the Literal silently becomes 'off' — no raise."""
+    d = _load("sportybet")
+    markets_default = parse_markets(d, platform="sportybet")
+    markets_garbage = parse_markets(d, platform="sportybet", probability="garbage")  # type: ignore[arg-type]
+    assert len(markets_default) == len(markets_garbage)
+    for m in markets_garbage:
+        for o in m.outcomes:
+            assert o.true_probability is None
+            assert o.void_probability is None
