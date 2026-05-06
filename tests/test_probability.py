@@ -140,3 +140,50 @@ def test_decode_non_integer_values():
         b'{"win":"abc","refund":"def","key":"ghi"}'
     ).decode()
     assert decode_betpawa_probability(payload) == (None, None)
+
+
+def test_betpawa_probability_off_keeps_outcomes_clean():
+    d = _load("betpawa")
+    markets = parse_markets(d, platform="betpawa", probability="off")
+    m = next(m for m in markets if m.canonical_id == "1x2_ft")
+    for o in m.outcomes:
+        assert o.true_probability is None
+        assert o.void_probability is None
+
+
+def test_betpawa_probability_true_populates_true_only():
+    d = _load("betpawa")
+    markets = parse_markets(d, platform="betpawa", probability="true")
+    m = next(m for m in markets if m.canonical_id == "1x2_ft")
+    by_name = {o.canonical_name: o for o in m.outcomes}
+    for name in ("home", "draw", "away"):
+        assert name in by_name, f"missing {name}"
+        o = by_name[name]
+        assert o.true_probability is not None and 0 < o.true_probability < 1
+        assert o.void_probability is None  # mode='true' must NOT populate void
+
+
+def test_betpawa_probability_with_void_populates_both():
+    d = _load("betpawa")
+    markets = parse_markets(d, platform="betpawa", probability="with_void")
+    m = next(m for m in markets if m.canonical_id == "1x2_ft")
+    by_name = {o.canonical_name: o for o in m.outcomes}
+    assert by_name["home"].true_probability == pytest.approx(0.395274)
+    assert by_name["home"].void_probability == 0.0
+    assert by_name["draw"].true_probability == pytest.approx(0.289197)
+    assert by_name["draw"].void_probability == 0.0
+    assert by_name["away"].true_probability == pytest.approx(0.315522)
+    assert by_name["away"].void_probability == 0.0
+
+
+def test_betpawa_probability_parameterized_market():
+    """O/U 2.5 — verify probability flows into the parameterized branch too."""
+    d = _load("betpawa")
+    markets = parse_markets(d, platform="betpawa", probability="with_void")
+    ou = next(m for m in markets if m.canonical_id == "over_under_ft")
+    assert 2.5 in ou.lines
+    for o in ou.lines[2.5]:
+        assert o.true_probability is not None
+        assert 0 < o.true_probability < 1
+        # BetPawa refund is 0 across the fixture's 1X2; verify holds for OU too
+        assert o.void_probability == 0.0

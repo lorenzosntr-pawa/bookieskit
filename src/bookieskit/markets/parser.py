@@ -2,6 +2,7 @@
 
 from typing import Literal
 
+from bookieskit.bookmakers._betpawa_obfuscation import decode_betpawa_probability
 from bookieskit.markets.registry import MarketRegistry
 from bookieskit.markets.types import (
     MarketMapping,
@@ -106,11 +107,19 @@ def _parse_betpawa_simple(
                 price_name, mapping
             )
             if canonical:
+                true_p = void_p = None
+                if mode != "off":
+                    win, refund = decode_betpawa_probability(price.get("probability"))
+                    true_p = win
+                    if mode == "with_void":
+                        void_p = refund
                 outcomes.append(
                     Outcome(
                         canonical_name=canonical,
                         odds=odds,
                         platform_name=price_name,
+                        true_probability=true_p,
+                        void_probability=void_p,
                     )
                 )
 
@@ -158,11 +167,19 @@ def _parse_betpawa_parameterized(
                 price_name, mapping
             )
             if canonical:
+                true_p = void_p = None
+                if mode != "off":
+                    win, refund = decode_betpawa_probability(price.get("probability"))
+                    true_p = win
+                    if mode == "with_void":
+                        void_p = refund
                 line_outcomes.append(
                     Outcome(
                         canonical_name=canonical,
                         odds=odds,
                         platform_name=price_name,
+                        true_probability=true_p,
+                        void_probability=void_p,
                     )
                 )
 
