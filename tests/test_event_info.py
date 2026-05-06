@@ -10,9 +10,9 @@ from bookieskit.event_info import (
     LiveInfo,
     Mode,
     Participants,
-    extract_kickoff,  # noqa: F401
-    extract_live_info,  # noqa: F401
-    extract_participants,  # noqa: F401
+    extract_kickoff,
+    extract_live_info,
+    extract_participants,
     is_live_now,
 )
 
@@ -66,3 +66,44 @@ def test_is_live_now_exactly_now_returns_true():
     # `>=` boundary — at the exact kickoff instant, treat as live.
     now = datetime.now(timezone.utc)
     assert is_live_now(now) is True
+
+
+def test_betpawa_kickoff_prematch():
+    d = _load("betpawa", "prematch")
+    k = extract_kickoff(d, "betpawa")
+    assert k == datetime(2026, 5, 6, 11, 0, 0, tzinfo=timezone.utc)
+
+
+def test_betpawa_kickoff_live():
+    d = _load("betpawa", "live")
+    k = extract_kickoff(d, "betpawa")
+    assert k == datetime(2026, 5, 6, 6, 0, 0, tzinfo=timezone.utc)
+
+
+def test_betpawa_participants_prematch():
+    d = _load("betpawa", "prematch")
+    p = extract_participants(d, "betpawa")
+    assert p.home == "Wuhan Three Towns FC"
+    assert p.away == "Qingdao Hainiu FC"
+
+
+def test_betpawa_participants_live():
+    d = _load("betpawa", "live")
+    p = extract_participants(d, "betpawa")
+    assert p.home == "FC Tokyo"
+    assert p.away == "JEF United Chiba"
+
+
+def test_betpawa_live_info_prematch_all_none():
+    d = _load("betpawa", "prematch")
+    li = extract_live_info(d, "betpawa")
+    assert li == LiveInfo()
+
+
+def test_betpawa_live_info_live():
+    d = _load("betpawa", "live")
+    li = extract_live_info(d, "betpawa")
+    assert li.minute == 96
+    assert li.period == "Second Half"
+    assert li.score_home == 0
+    assert li.score_away == 3
