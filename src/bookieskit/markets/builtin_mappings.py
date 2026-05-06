@@ -132,13 +132,12 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
         parameterized=False,
     ),
     # 1X2 1Up — pays as 1X2 if your team gets to a 1-goal lead at any point.
-    # Available on SportyBet / Bet9ja / Betway. BetPawa intentionally left
-    # for later (will be wired when promoted to production). MSport doesn't
+    # Available on BetPawa / SportyBet / Bet9ja / Betway. MSport doesn't
     # expose this market.
     MarketMapping(
         canonical_id="1x2_1up_ft",
         name="1X2 1Up - Full Time",
-        betpawa_id=None,
+        betpawa_id="28000810",
         sportybet_id="60200",
         bet9ja_key="S_1X21",
         betway_id="1X2 (1Up)",
@@ -146,7 +145,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
         outcomes={
             "home": OutcomeMapping(
                 canonical_name="home",
-                betpawa="",
+                betpawa="1",
                 sportybet="Home",
                 bet9ja="11",
                 betway="__HOME__",
@@ -154,7 +153,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
             ),
             "draw": OutcomeMapping(
                 canonical_name="draw",
-                betpawa="",
+                betpawa="X",
                 sportybet="Draw",
                 bet9ja="X1",
                 betway="Draw",
@@ -162,7 +161,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
             ),
             "away": OutcomeMapping(
                 canonical_name="away",
-                betpawa="",
+                betpawa="2",
                 sportybet="Away",
                 bet9ja="21",
                 betway="__AWAY__",
