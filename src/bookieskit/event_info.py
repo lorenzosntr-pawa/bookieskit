@@ -10,8 +10,7 @@ yield None / empty dataclasses — they never raise.
 
 from dataclasses import dataclass
 from datetime import datetime, timezone
-from typing import Callable, Literal
-
+from typing import Literal
 
 Mode = Literal["prematch", "live"]
 

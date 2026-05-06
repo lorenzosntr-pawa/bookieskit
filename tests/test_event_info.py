@@ -1,7 +1,7 @@
 """Unit tests for bookieskit.event_info — pure-data, bound to captured fixtures."""
 
 import json
-from datetime import datetime, timezone
+from datetime import datetime, timezone  # noqa: F401
 from pathlib import Path
 
 import pytest
@@ -10,10 +10,10 @@ from bookieskit.event_info import (
     LiveInfo,
     Mode,
     Participants,
-    extract_kickoff,
-    extract_live_info,
-    extract_participants,
-    is_live_now,
+    extract_kickoff,  # noqa: F401
+    extract_live_info,  # noqa: F401
+    extract_participants,  # noqa: F401
+    is_live_now,  # noqa: F401
 )
 
 FIXTURES = Path(__file__).parent / "fixtures" / "event_info"
@@ -37,11 +37,12 @@ def test_dataclasses_construct_with_all_none():
 
 def test_dataclasses_are_frozen():
     li = LiveInfo()
-    with pytest.raises(Exception):  # FrozenInstanceError or AttributeError
+    with pytest.raises(AttributeError):
         li.minute = 5  # type: ignore[misc]
 
 
 def test_mode_alias_is_literal():
-    # Mode is Literal["prematch","live"] — runtime check is type-only,
-    # but the symbol must exist and be importable.
-    assert Mode is not None
+    # Literal has no meaningful runtime identity, but get_args() exposes
+    # its parameters — that's the strongest check available at runtime.
+    from typing import get_args
+    assert set(get_args(Mode)) == {"prematch", "live"}
