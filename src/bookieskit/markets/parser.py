@@ -417,7 +417,6 @@ def _parse_bet9ja(
 
 def _parse_bet9ja_key(
     key: str,
-    _mode: ProbabilityMode = "off",
 ) -> tuple[str, float | None, str] | None:
     """Parse a Bet9ja odds key into (market_key, line, outcome_suffix).
 

@@ -57,16 +57,13 @@ def test_parse_markets_default_off_leaves_probabilities_none():
     assert o.void_probability is None
 
 
-def test_parse_markets_accepts_probability_kwarg_without_error():
-    """The new keyword must be accepted by all 5 platforms (even ones that
-    don't support probability extraction yet — their parsers must silently
-    accept the kwarg)."""
-    d = _load("sportybet")
-    parse_markets(d, platform="sportybet", probability="off")
-    parse_markets(d, platform="sportybet", probability="true")
-    parse_markets(d, platform="sportybet", probability="with_void")
-    # Same for the other 4 platforms — they accept the kwarg.
-    parse_markets(_load("msport"), platform="msport", probability="with_void")
-    parse_markets(_load("betpawa"), platform="betpawa", probability="with_void")
-    parse_markets(_load("betway"), platform="betway", probability="with_void")
-    parse_markets(_load("bet9ja"), platform="bet9ja", probability="with_void")
+@pytest.mark.parametrize(
+    "platform", ["betpawa", "sportybet", "bet9ja", "betway", "msport"]
+)
+@pytest.mark.parametrize("mode", ["off", "true", "with_void"])
+def test_parse_markets_accepts_probability_kwarg_without_error(platform, mode):
+    """The probability kwarg must be accepted by all 5 platforms in all 3
+    modes — even platforms that don't support probability (Bet9ja, Betway)
+    silently accept it."""
+    d = _load(platform)
+    parse_markets(d, platform=platform, probability=mode)
