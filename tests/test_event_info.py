@@ -269,3 +269,40 @@ def test_betway_live_info_explicit_prematch_mode_overrides_anything():
     d = _load("betway", "live")
     li = extract_live_info(d, "betway", mode="prematch")
     assert li == LiveInfo()
+
+
+def test_msport_kickoff_prematch():
+    d = _load("msport", "prematch")
+    assert extract_kickoff(d, "msport") == \
+           datetime(2026, 5, 6, 11, 0, 0, tzinfo=timezone.utc)
+
+
+def test_msport_kickoff_live():
+    d = _load("msport", "live")
+    assert extract_kickoff(d, "msport") == \
+           datetime(2026, 5, 6, 6, 0, 0, tzinfo=timezone.utc)
+
+
+def test_msport_participants_prematch():
+    p = extract_participants(_load("msport", "prematch"), "msport")
+    assert p.home == "Wuhan Three Towns"
+    assert p.away == "Qingdao Hainiu FC"
+
+
+def test_msport_participants_live():
+    p = extract_participants(_load("msport", "live"), "msport")
+    assert p.home == "Tokyo"
+    assert p.away == "Ichihara Chiba"
+
+
+def test_msport_live_info_prematch_all_none():
+    li = extract_live_info(_load("msport", "prematch"), "msport")
+    assert li == LiveInfo()
+
+
+def test_msport_live_info_live():
+    li = extract_live_info(_load("msport", "live"), "msport")
+    assert li.minute == 90
+    assert li.period is None  # statusDescription is None in this fixture
+    assert li.score_home == 0
+    assert li.score_away == 3

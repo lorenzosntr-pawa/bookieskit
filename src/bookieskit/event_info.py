@@ -258,6 +258,44 @@ def _live_info_betway(response: dict, mode: Mode | None) -> LiveInfo:
     )
 
 
+# ---- MSport ---------------------------------------------------------------
+
+def _kickoff_msport(response: dict, _mode: Mode | None) -> datetime | None:
+    data = response.get("data") or {}
+    ms = data.get("startTime")
+    if not isinstance(ms, (int, float)):
+        return None
+    try:
+        return datetime.fromtimestamp(ms / 1000, tz=timezone.utc)
+    except (ValueError, OSError):
+        return None
+
+
+def _participants_msport(response: dict, _mode: Mode | None) -> Participants:
+    data = response.get("data") or {}
+    return Participants(
+        home=data.get("homeTeam") or None,
+        away=data.get("awayTeam") or None,
+    )
+
+
+def _live_info_msport(response: dict, mode: Mode | None) -> LiveInfo:
+    if mode == "prematch":
+        return _EMPTY_LIVE_INFO
+    data = response.get("data") or {}
+    played = data.get("playedTime")
+    minute = None
+    if isinstance(played, str) and "'" in played:
+        # "90'00\"" → "90"
+        minute = _try_int(played.split("'", 1)[0])
+    period = data.get("statusDescription") or None
+    score_home, score_away = _split_score(data.get("scoreOfWholeMatch"))
+    return LiveInfo(
+        minute=minute, period=period,
+        score_home=score_home, score_away=score_away,
+    )
+
+
 # ---- Dispatch tables -------------------------------------------------------
 
 _KICKOFF_DISPATCH: dict[str, Callable[[dict, Mode | None], datetime | None]] = {
@@ -265,6 +303,7 @@ _KICKOFF_DISPATCH: dict[str, Callable[[dict, Mode | None], datetime | None]] = {
     "sportybet": _kickoff_sportybet,
     "bet9ja": _kickoff_bet9ja,
     "betway": _kickoff_betway,
+    "msport": _kickoff_msport,
 }
 
 _PARTICIPANTS_DISPATCH: dict[str, Callable[[dict, Mode | None], Participants]] = {
@@ -272,6 +311,7 @@ _PARTICIPANTS_DISPATCH: dict[str, Callable[[dict, Mode | None], Participants]] =
     "sportybet": _participants_sportybet,
     "bet9ja": _participants_bet9ja,
     "betway": _participants_betway,
+    "msport": _participants_msport,
 }
 
 _LIVE_INFO_DISPATCH: dict[str, Callable[[dict, Mode | None], LiveInfo]] = {
@@ -279,6 +319,7 @@ _LIVE_INFO_DISPATCH: dict[str, Callable[[dict, Mode | None], LiveInfo]] = {
     "sportybet": _live_info_sportybet,
     "bet9ja": _live_info_bet9ja,
     "betway": _live_info_betway,
+    "msport": _live_info_msport,
 }
 
 
