@@ -116,6 +116,70 @@ To wire a new bookmaker into the parser:
 4. Add a `"<platform>": _parse_<platform>` entry to the dispatcher in `parse_markets`.
 5. Update the 6 builtins in `markets/builtin_mappings.py` (or leave entries unmapped via `None` if the platform doesn't expose those markets).
 
+## Probabilities
+
+Each `Outcome` carries `odds` (decimal odds) and optionally
+`true_probability` / `void_probability` — the bookmaker's pre-margin fair
+estimate and the chance the bet is voided. Off by default; opt in via the
+`probability` keyword on `parse_markets`:
+
+```python
+from bookieskit.markets import parse_markets
+
+# Default: probabilities not extracted
+markets = parse_markets(detail, platform="sportybet")
+
+# Opt in to fair-probability extraction
+markets = parse_markets(detail, platform="sportybet", probability="true")
+
+# Opt in to fair + void
+markets = parse_markets(detail, platform="sportybet", probability="with_void")
+
+for m in markets:
+    for o in m.outcomes:
+        print(o.canonical_name, o.odds, o.true_probability, o.void_probability)
+```
+
+`true_probability` is the bookmaker's fair (pre-margin) estimate, **not**
+`1 / odds`. Across mutually exclusive outcomes of one market, fair
+probabilities sum to ≈1; implied probabilities (`1/odds`) sum to >1
+because of the bookmaker's margin.
+
+### Per-platform support
+
+| Platform | `true_probability` | `void_probability` | Notes |
+|---|---|---|---|
+| SportyBet | yes | yes | Plain decimal-string fields |
+| MSport | yes | n/a | Only `probability`; `voidProbability` is not in the API |
+| BetPawa | yes | yes | Obfuscated client-side; bookieskit decodes transparently |
+| Betway | n/a | n/a | Verified absent from `get_event_markets` (no `probability` / `prob` / `impliedOdds` / `margin` / `voidProbability` keys anywhere in their 400 KB markets payload) |
+| Bet9ja | n/a | n/a | Not in `D.O` (live) nor in their prematch event-detail response |
+
+For Betway and Bet9ja, both fields are always `None` regardless of the
+`probability` mode — `parse_markets` accepts the keyword silently.
+
+### Modes
+
+| `probability` value | Behaviour |
+|---|---|
+| `"off"` (default) | Both fields `None` for every outcome. Zero parsing cost. |
+| `"true"` | `true_probability` populated where supported; `void_probability` always `None`. |
+| `"with_void"` | Both fields populated where supported. |
+
+Invalid values (anything outside the literal) are silently treated as
+`"off"`.
+
+### BetPawa deobfuscation
+
+BetPawa hides per-outcome probability behind a base64-encoded JSON
+payload `{"win": <int>, "refund": <int>, "key": <int>}`; each value is
+recovered by 3-way 64-bit XOR with a global constant and the per-bet key,
+then reinterpreted as IEEE 754 float64 (big-endian). The library handles
+this transparently — callers only see `true_probability` and
+`void_probability` as floats. Direct access to the decoder is available
+via `bookieskit.bookmakers._betpawa_obfuscation.decode_betpawa_probability`
+for ad-hoc analysis (private import, not re-exported from the top-level package).
+
 ## See also
 
 - [docs/matching.md](matching.md) — pairing events across platforms by SR id.
