@@ -1,0 +1,67 @@
+{
+  "bizCode": 10000,
+  "message": "0#0",
+  "data": {
+    "eventId": "sr:match:67645534",
+    "gameId": "46696",
+    "productStatus": "0#0",
+    "estimateStartTime": 1778047200000,
+    "status": 1,
+    "setScore": "0:3",
+    "gameScore": [
+      "0:1",
+      "0:2"
+    ],
+    "period": "2",
+    "matchStatus": "H2",
+    "playedSeconds": "90:00",
+    "homeTeamId": "sr:competitor:3147",
+    "homeTeamName": "FC Tokyo",
+    "awayTeamName": "JEF United Chiba",
+    "awayTeamId": "sr:competitor:3144",
+    "sport": {
+      "id": "sr:sport:1",
+      "name": "Football",
+      "category": {
+        "id": "sr:category:52",
+        "name": "Japan",
+        "tournament": {
+          "id": "sr:tournament:196",
+          "name": "J1 League"
+        }
+      }
+    },
+    "markets": [],
+    "liveChannel": false,
+    "webViewLiveChannel": true,
+    "socialMediaLiveChannel": false,
+    "bookingStatus": "Booked",
+    "topTeam": true,
+    "homeTeamIcon": "https://s.sporty.net/common/main/res/fbbdcae01c81ef39bf861ae8576baf4f.png",
+    "awayTeamIcon": "https://s.sporty.net/ng/main/res/77fcbc4f4ca4d9327f6c3189a00650f.png",
+    "commentsNum": 1100,
+    "topicId": 19649623,
+    "fixtureVenue": {
+      "name": "Ajinomoto Stadium"
+    },
+    "giftGrabActivityResultVO": {
+      "activityEnabled": false,
+      "enabled": false
+    },
+    "ai": false,
+    "bgEvent": false,
+    "matchTrackerNotAllowed": false,
+    "eventSource": {
+      "preMatchSource": {
+        "sourceType": "BET_RADAR",
+        "sourceId": "67645534"
+      },
+      "liveSource": {
+        "sourceType": "BET_RADAR",
+        "sourceId": "67645534"
+      }
+    },
+    "containsPcbb": false,
+    "banned": false
+  }
+}

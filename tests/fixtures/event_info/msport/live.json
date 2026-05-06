@@ -1,0 +1,59 @@
+{
+  "bizCode": 10000,
+  "data": {
+    "allScores": [
+      [
+        "HT",
+        "0:1"
+      ],
+      [
+        "FT",
+        "0:3"
+      ]
+    ],
+    "awayTeam": "Ichihara Chiba",
+    "awayTeamIcon": "",
+    "awayTeamId": "sr:competitor:3144",
+    "bookingStatus": "Booked",
+    "category": "Japan",
+    "categoryIcon": "https://static.msport.com/public/up/640ce457-9d20-4a8a-8aae-b3d32ba32092.png",
+    "categoryId": "sr:category:52",
+    "eventId": "sr:match:67645534",
+    "hasLive": 0,
+    "hasLiveCoverage": 1,
+    "hasLiveWidget": 1,
+    "hasVoucher": 0,
+    "homeTeam": "Tokyo",
+    "homeTeamIcon": "",
+    "homeTeamId": "sr:competitor:3147",
+    "howToPlay": null,
+    "liveAudioStreamUrl": null,
+    "markets": [],
+    "marketsCount": 0,
+    "playedTime": "90'00\"",
+    "roundNumber": 15,
+    "roundType": "group",
+    "scoreInCurrentSection": null,
+    "scoreOfSection": null,
+    "scoreOfWholeMatch": "0:3",
+    "seasonId": "sr:season:138182",
+    "seasonName": "J1 League 2026",
+    "sectionRemainTime": null,
+    "server": null,
+    "soccerBookingsScore": "1:1",
+    "soccerCornerScore": "7:2",
+    "sport": "Soccer",
+    "sportId": "sr:sport:1",
+    "startTime": 1778047200000,
+    "status": 1,
+    "statusDescription": null,
+    "stoppagePlayedTime": "5'51\"",
+    "stoppageTime": "5",
+    "totalPlayedTime": "95'51\"",
+    "tournament": "J1 League",
+    "tournamentId": "sr:tournament:196",
+    "videoInfo": null
+  },
+  "innerMsg": null,
+  "message": "success"
+}

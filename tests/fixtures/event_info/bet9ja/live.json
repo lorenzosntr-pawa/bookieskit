@@ -1,0 +1,275 @@
+{
+  "R": "OK",
+  "D": {
+    "A": {
+      "A": true,
+      "E": true,
+      "MKNUM": 0,
+      "EXTID": "67645534",
+      "ISSTREAMINGVIDEO": true,
+      "ES": "2nd Half",
+      "BS": "2nd Half",
+      "R": {
+        "SS": [
+          "0:1",
+          "0:2"
+        ],
+        "S": "0:3",
+        "EXTRA": "",
+        "SRV": -1,
+        "GS": ""
+      },
+      "WID": null,
+      "T": 91,
+      "PRV": 60,
+      "ID": 9261155,
+      "T2": "91'",
+      "BRMATCHID": 67645534
+    },
+    "O": {
+      "LIVES_1X2GG_awayandno": {
+        "v": 1
+      },
+      "LIVES_1X2HNDHN1@2.0_XH": {
+        "v": 1
+      },
+      "LIVES_GOALSHOME_2": {
+        "v": 1
+      },
+      "LIVES_GOALSHOME_1": {
+        "v": 1
+      },
+      "LIVES_GOALSHOME_0": {
+        "v": 1
+      },
+      "LIVES_DCGG_12andno": {
+        "v": 1
+      },
+      "LIVES_1X2RHND@0:3_2H": {
+        "v": 1
+      },
+      "LIVES_CLEANAWAY_Yes": {
+        "v": 1
+      },
+      "LIVES_GOALSHOME_3+": {
+        "v": 1
+      },
+      "LIVES_1X2RHND@0:3_1H": {
+        "v": 1
+      },
+      "LIVES_DC_1X": {
+        "v": 1
+      },
+      "LIVES_DC_12": {
+        "v": 1
+      },
+      "LIVES_HOMENOBET_XHNB": {
+        "v": 1
+      },
+      "LIVES_OU@3.5_U": {
+        "v": 1
+      },
+      "LIVES_OU@3.5_O": {
+        "v": 1
+      },
+      "LIVES_CLEANAWAY_No": {
+        "v": 1
+      },
+      "LIVES_DCGG_X2andyes": {
+        "v": 1
+      },
+      "LIVES_AWAYNOBET_XANB": {
+        "v": 1
+      },
+      "LIVES_1X2_1": {
+        "v": 1
+      },
+      "LIVES_1X2_2": {
+        "v": 1
+      },
+      "LIVES_DC_X2": {
+        "v": 1
+      },
+      "LIVES_DNB_2": {
+        "v": 1
+      },
+      "LIVES_DNB_1": {
+        "v": 1
+      },
+      "LIVES_AWTTW_N": {
+        "v": 1
+      },
+      "LIVES_1X2HNDHN1@2.0_2H": {
+        "v": 1
+      },
+      "LIVES_DCGG_X2andno": {
+        "v": 1
+      },
+      "LIVES_1X2_X": {
+        "v": 1
+      },
+      "LIVES_1X2HNDHN1@2.0_1H": {
+        "v": 1
+      },
+      "LIVES_AWTTW_Y": {
+        "v": 1
+      },
+      "LIVES_1X2GG_homeandyes": {
+        "v": 1
+      },
+      "LIVES_1X2GG_drawandyes": {
+        "v": 1
+      },
+      "LIVES_DCGG_1Xandyes": {
+        "v": 1
+      },
+      "LIVES_OUHOME@0.5_U": {
+        "v": 1
+      },
+      "LIVES_DCGG_1Xandno": {
+        "v": 1
+      },
+      "LIVES_OUHOME@0.5_O": {
+        "v": 1
+      },
+      "LIVES_HOMENOBET_2HNB": {
+        "v": 1
+      },
+      "LIVES_1X2GG_drawandno": {
+        "v": 1
+      },
+      "LIVES_ATTW_Y": {
+        "v": 1
+      },
+      "LIVES_OE_EV": {
+        "v": 1
+      },
+      "LIVES_ATTW_N": {
+        "v": 1
+      },
+      "LIVES_12HNDN@3.0_2H": {
+        "v": 1
+      },
+      "LIVES_HTTW_N": {
+        "v": 1
+      },
+      "LIVES_1X2GG_awayandyes": {
+        "v": 1
+      },
+      "LIVES_NEXTGOAL@0:3_2": {
+        "v": 1
+      },
+      "LIVES_12HNDN@3.0_1H": {
+        "v": 1
+      },
+      "LIVES_NEXTGOAL@0:3_1": {
+        "v": 1
+      },
+      "LIVES_GOALTYPE@4_FK": {
+        "v": 1
+      },
+      "LIVES_DCGG_12andyes": {
+        "v": 1
+      },
+      "LIVES_OUAWAY@3.5_O": {
+        "v": 1
+      },
+      "LIVES_OUAWAY@3.5_U": {
+        "v": 1
+      },
+      "LIVES_1X2RHND@0:3_XH": {
+        "v": 1
+      },
+      "LIVES_HTTW_Y": {
+        "v": 1
+      },
+      "LIVES_GGNG_Y": {
+        "v": 1
+      },
+      "LIVES_GGNG_N": {
+        "v": 1
+      },
+      "LIVES_NEXTGOAL@0:3_X": {
+        "v": 1
+      },
+      "LIVES_OE_OD": {
+        "v": 1
+      },
+      "LIVES_EXACTGOALN_3": {
+        "v": 1
+      },
+      "LIVES_EXACTGOALN_4": {
+        "v": 1
+      },
+      "LIVES_EXACTGOALN_5": {
+        "v": 1
+      },
+      "LIVES_EXACTGOALN_0": {
+        "v": 1
+      },
+      "LIVES_EXACTGOALN_1": {
+        "v": 1
+      },
+      "LIVES_EXACTGOALN_2": {
+        "v": 1
+      },
+      "LIVES_AWAYNOBET_1ANB": {
+        "v": 1
+      },
+      "LIVES_GOALTYPE@4_NG": {
+        "v": 1
+      },
+      "LIVES_1X2GG_homeandno": {
+        "v": 1
+      },
+      "LIVES_GOALTYPE@4_OG": {
+        "v": 1
+      },
+      "LIVES_GOALTYPE@4_K": {
+        "v": 1
+      },
+      "LIVES_GOALTYPE@4_H": {
+        "v": 1
+      },
+      "LIVES_GOALTYPE@4_P": {
+        "v": 1
+      }
+    },
+    "AA": {
+      "INCTYPE": 0,
+      "ST": 1,
+      "GID": 33536,
+      "C": 11155,
+      "STARTDATE": "2026-05-06 06:00:00",
+      "EXTID": "67645534",
+      "SGID": "3000001_33536",
+      "ISSTREAMINGVIDEO": true,
+      "DS": "FC Tokyo - JEF United Chiba",
+      "SID": 3000001,
+      "WID": null,
+      "PRV": 60,
+      "ID": 9261155,
+      "PL": 1,
+      "TYPE": 0,
+      "BRMATCHID": 67645534,
+      "ENDVISIBILITYDATE": "2026-05-06 06:00:00",
+      "COMP": {
+        "SPORT": "Soccer",
+        "SGID": "3000001_33536",
+        "G_PRIORITY": 69,
+        "DS": "Japan - J1 League",
+        "SID": 3000001,
+        "AP": 0,
+        "BTID": "3000001_33536",
+        "S_PRIORITY": 11,
+        "INT_SID": 3000001,
+        "CATEGORY": "Soccer Japan - J1 League",
+        "PARENT": null,
+        "ID": 33536,
+        "PL": null
+      },
+      "GN": "Japan - J1 League",
+      "GP": 69
+    }
+  }
+}

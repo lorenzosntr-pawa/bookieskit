@@ -1,0 +1,68 @@
+{
+  "sportEvent": {
+    "eventId": 67645534,
+    "isActive": false,
+    "isFinished": false,
+    "isLive": true,
+    "shouldDisplay": true,
+    "name": "FC Tokyo vs. JEF United Chiba",
+    "displayName": "FC Tokyo vs. JEF United Chiba",
+    "signalRGroupId": "event::67645534",
+    "expectedStartEpoch": 1778047200,
+    "sportId": "soccer",
+    "regionId": "japan",
+    "region": "Japan",
+    "leagueId": "j1-league",
+    "league": "J1 League",
+    "joinedLeagueId": "soccer::japan::j1-league",
+    "homeTeam": "FC Tokyo",
+    "awayTeam": "JEF United Chiba",
+    "isBoosted": false,
+    "isBookedForLive": true,
+    "isOutright": false,
+    "version": 1778054183556,
+    "isTwoUpEnabled": false,
+    "isSportBonusAllowed": true,
+    "gameStateTimeScore": {
+      "eventId": 67645534,
+      "score": [
+        "0",
+        "3"
+      ],
+      "state": "2nd half",
+      "time": 90,
+      "timePeriod": "seconds",
+      "sportType": "standard-game",
+      "comments": "RegularPeriod",
+      "gameEventType": "standard-game",
+      "gameEventPeriod": "2",
+      "gameEventPeriodIndex": 1,
+      "publicHubPublishedTime": "2026-05-06T07:58:02.3385203Z"
+    },
+    "emopSource": 3,
+    "publicHubPublishedTime": "2026-05-06T07:58:38.5833765Z",
+    "sportSpecificProperties": {
+      "Producer": "1",
+      "Type": "match",
+      "HomeTeamId": "fc-tokyo",
+      "AwayTeamId": "jef-united-chiba"
+    },
+    "isCashOutAllowed": false
+  },
+  "gameStateTimeScore": {
+    "eventId": 67645534,
+    "score": [
+      "0",
+      "3"
+    ],
+    "state": "2nd half",
+    "time": 90,
+    "timePeriod": "seconds",
+    "sportType": "standard-game",
+    "comments": "RegularPeriod",
+    "gameEventType": "standard-game",
+    "gameEventPeriod": "2",
+    "gameEventPeriodIndex": 1,
+    "publicHubPublishedTime": "2026-05-06T07:58:02.3385203Z"
+  }
+}

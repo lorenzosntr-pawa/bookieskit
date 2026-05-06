@@ -1,0 +1,67 @@
+{
+  "sportEvent": {
+    "eventId": 68995116,
+    "isActive": true,
+    "isFinished": false,
+    "isLive": false,
+    "shouldDisplay": true,
+    "name": "Wuhan Three Towns FC vs. Qingdao Hainiu FC",
+    "displayName": "Wuhan Three Towns FC vs. Qingdao Hainiu FC",
+    "signalRGroupId": "event::68995116",
+    "expectedStartEpoch": 1778065200,
+    "sportId": "soccer",
+    "regionId": "china",
+    "region": "China",
+    "leagueId": "chinese-super-league",
+    "league": "Chinese Super League",
+    "joinedLeagueId": "soccer::china::chinese-super-league",
+    "homeTeam": "Wuhan Three Towns FC",
+    "awayTeam": "Qingdao Hainiu FC",
+    "isBoosted": true,
+    "isBookedForLive": true,
+    "isOutright": false,
+    "version": 1778038822092,
+    "isTwoUpEnabled": false,
+    "isSportBonusAllowed": true,
+    "gameStateTimeScore": {
+      "eventId": 68995116,
+      "score": [
+        "0",
+        "0"
+      ],
+      "timePeriod": "seconds",
+      "sportType": "standard-game",
+      "comments": "NotStarted",
+      "gameEventType": "standard-game",
+      "gameEventPeriod": "default",
+      "gameEventPeriodIndex": 1,
+      "publicHubPublishedTime": "2026-05-06T07:46:20.9977534Z"
+    },
+    "emopSource": 3,
+    "publicHubPublishedTime": "2026-05-06T07:58:36.291101Z",
+    "sportSpecificProperties": {
+      "Producer": "3",
+      "Type": "match",
+      "OneUpStatus": "Active",
+      "TwoUpStatus": "Active",
+      "ThreeUpStatus": "Active",
+      "HomeTeamId": "wuhan-three-towns-fc",
+      "AwayTeamId": "qingdao-hainiu-fc"
+    },
+    "isCashOutAllowed": false
+  },
+  "gameStateTimeScore": {
+    "eventId": 68995116,
+    "score": [
+      "0",
+      "0"
+    ],
+    "timePeriod": "seconds",
+    "sportType": "standard-game",
+    "comments": "NotStarted",
+    "gameEventType": "standard-game",
+    "gameEventPeriod": "default",
+    "gameEventPeriodIndex": 1,
+    "publicHubPublishedTime": "2026-05-06T07:46:20.9977534Z"
+  }
+}
