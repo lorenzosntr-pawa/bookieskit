@@ -187,3 +187,34 @@ def test_betpawa_probability_parameterized_market():
         assert 0 < o.true_probability < 1
         # BetPawa refund is 0 across the fixture's 1X2; verify holds for OU too
         assert o.void_probability == 0.0
+
+
+def test_sportybet_probability_off_keeps_outcomes_clean():
+    d = _load("sportybet")
+    markets = parse_markets(d, platform="sportybet", probability="off")
+    m = next(m for m in markets if m.canonical_id == "1x2_ft")
+    for o in m.outcomes:
+        assert o.true_probability is None
+        assert o.void_probability is None
+
+
+def test_sportybet_probability_true_populates_true_only():
+    d = _load("sportybet")
+    markets = parse_markets(d, platform="sportybet", probability="true")
+    m = next(m for m in markets if m.canonical_id == "1x2_ft")
+    by_name = {o.canonical_name: o for o in m.outcomes}
+    assert by_name["home"].true_probability == pytest.approx(0.395274)
+    assert by_name["draw"].true_probability == pytest.approx(0.289197)
+    assert by_name["away"].true_probability == pytest.approx(0.315522)
+    for o in m.outcomes:
+        assert o.void_probability is None
+
+
+def test_sportybet_probability_with_void_populates_both():
+    d = _load("sportybet")
+    markets = parse_markets(d, platform="sportybet", probability="with_void")
+    m = next(m for m in markets if m.canonical_id == "1x2_ft")
+    for o in m.outcomes:
+        assert o.true_probability is not None
+        # voidProbability '0E-10' parses to 0.0
+        assert o.void_probability == 0.0

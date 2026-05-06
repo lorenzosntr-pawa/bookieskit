@@ -204,6 +204,16 @@ def _resolve_outcome_betpawa(
     return None
 
 
+def _try_float(v: object) -> float | None:
+    """Best-effort float cast; None on failure or empty/invalid string."""
+    if v is None:
+        return None
+    try:
+        return float(v)  # type: ignore[arg-type]
+    except (TypeError, ValueError):
+        return None
+
+
 def _parse_sportybet(
     response: dict, registry: MarketRegistry, mode: ProbabilityMode = "off"
 ) -> list[NormalizedMarket]:
@@ -252,11 +262,18 @@ def _parse_sportybet_simple(
         odds = float(outcome_data.get("odds", 0))
         canonical = _resolve_outcome_sportybet(desc, mapping)
         if canonical:
+            true_p = void_p = None
+            if mode != "off":
+                true_p = _try_float(outcome_data.get("probability"))
+                if mode == "with_void":
+                    void_p = _try_float(outcome_data.get("voidProbability"))
             outcomes.append(
                 Outcome(
                     canonical_name=canonical,
                     odds=odds,
                     platform_name=desc,
+                    true_probability=true_p,
+                    void_probability=void_p,
                 )
             )
 
@@ -286,11 +303,18 @@ def _parse_sportybet_parameterized(
             odds = float(outcome_data.get("odds", 0))
             canonical = _resolve_outcome_sportybet(desc, mapping)
             if canonical:
+                true_p = void_p = None
+                if mode != "off":
+                    true_p = _try_float(outcome_data.get("probability"))
+                    if mode == "with_void":
+                        void_p = _try_float(outcome_data.get("voidProbability"))
                 line_outcomes.append(
                     Outcome(
                         canonical_name=canonical,
                         odds=odds,
                         platform_name=desc,
+                        true_probability=true_p,
+                        void_probability=void_p,
                     )
                 )
 
