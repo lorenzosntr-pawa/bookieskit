@@ -214,24 +214,71 @@ def _live_info_bet9ja(response: dict, mode: Mode | None) -> LiveInfo:
     )
 
 
+# ---- Betway ---------------------------------------------------------------
+
+def _kickoff_betway(response: dict, _mode: Mode | None) -> datetime | None:
+    sport_event = response.get("sportEvent") or {}
+    s = sport_event.get("expectedStartEpoch")
+    if not isinstance(s, (int, float)):
+        return None
+    try:
+        return datetime.fromtimestamp(s, tz=timezone.utc)
+    except (ValueError, OSError):
+        return None
+
+
+def _participants_betway(response: dict, _mode: Mode | None) -> Participants:
+    sport_event = response.get("sportEvent") or {}
+    return Participants(
+        home=sport_event.get("homeTeam") or None,
+        away=sport_event.get("awayTeam") or None,
+    )
+
+
+def _live_info_betway(response: dict, mode: Mode | None) -> LiveInfo:
+    if mode == "prematch":
+        return _EMPTY_LIVE_INFO
+    sport_event = response.get("sportEvent") or {}
+    g = sport_event.get("gameStateTimeScore") or {}
+    # Auto-detect: prematch responses lack the `time` key (and have
+    # comments=='NotStarted'). Their score=['0','0'] is an artefact.
+    if mode is None and ("time" not in g or g.get("comments") == "NotStarted"):
+        return _EMPTY_LIVE_INFO
+    minute = _try_int(g.get("time"))
+    period = g.get("state") or None
+    score = g.get("score") or []
+    if isinstance(score, list) and len(score) >= 2:
+        score_home = _try_int(score[0])
+        score_away = _try_int(score[1])
+    else:
+        score_home = score_away = None
+    return LiveInfo(
+        minute=minute, period=period,
+        score_home=score_home, score_away=score_away,
+    )
+
+
 # ---- Dispatch tables -------------------------------------------------------
 
 _KICKOFF_DISPATCH: dict[str, Callable[[dict, Mode | None], datetime | None]] = {
     "betpawa": _kickoff_betpawa,
     "sportybet": _kickoff_sportybet,
     "bet9ja": _kickoff_bet9ja,
+    "betway": _kickoff_betway,
 }
 
 _PARTICIPANTS_DISPATCH: dict[str, Callable[[dict, Mode | None], Participants]] = {
     "betpawa": _participants_betpawa,
     "sportybet": _participants_sportybet,
     "bet9ja": _participants_bet9ja,
+    "betway": _participants_betway,
 }
 
 _LIVE_INFO_DISPATCH: dict[str, Callable[[dict, Mode | None], LiveInfo]] = {
     "betpawa": _live_info_betpawa,
     "sportybet": _live_info_sportybet,
     "bet9ja": _live_info_bet9ja,
+    "betway": _live_info_betway,
 }
 
 
