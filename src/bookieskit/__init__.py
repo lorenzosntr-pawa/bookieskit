@@ -14,6 +14,7 @@ from bookieskit.event_info import (
     extract_participants,
     is_live_now,
 )
+from bookieskit.markets.parser import ProbabilityMode
 
 __version__ = "0.4.0"
 __all__ = [
@@ -25,6 +26,7 @@ __all__ = [
     "LiveInfo",
     "Mode",
     "Participants",
+    "ProbabilityMode",
     "extract_kickoff",
     "extract_live_info",
     "extract_participants",

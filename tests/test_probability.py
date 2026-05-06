@@ -363,3 +363,10 @@ def test_invalid_mode_silently_treated_as_off():
         for o in m.outcomes:
             assert o.true_probability is None
             assert o.void_probability is None
+
+
+def test_probability_mode_is_top_level_reexport():
+    import bookieskit
+    assert hasattr(bookieskit, "ProbabilityMode")
+    from bookieskit.markets.parser import ProbabilityMode as _PM
+    assert bookieskit.ProbabilityMode is _PM
