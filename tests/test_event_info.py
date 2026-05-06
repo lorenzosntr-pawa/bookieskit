@@ -380,3 +380,19 @@ def test_participants_present_for_all_except_bet9ja_live():
                 assert p == Participants(), platform
             else:
                 assert p.home and p.away, f"{platform}/{phase}"
+
+
+def test_top_level_reexports():
+    """Public surface must be importable from `bookieskit` directly."""
+    import bookieskit
+
+    for name in (
+        "extract_kickoff",
+        "extract_live_info",
+        "extract_participants",
+        "is_live_now",
+        "LiveInfo",
+        "Participants",
+        "Mode",
+    ):
+        assert hasattr(bookieskit, name), name
