@@ -67,7 +67,8 @@ from bookieskit.matching import extract_sportradar_id
 # BetPawa event ids to monitor. Each id corresponds to a single match;
 # the script will fetch live or prematch odds per event automatically
 # based on each event's current state.
-BETPAWA_EVENT_IDS = ["33289995", "33248210"]
+# BETPAWA_EVENT_IDS = ["33289995", "33248210"]
+BETPAWA_EVENT_IDS = ["33204225"]
 
 # Interval between ticks. We monitor more aggressively during live
 # (live odds move quickly) and back off during prematch (odds drift
@@ -179,10 +180,11 @@ def _extract_live_info(detail: dict) -> dict:
     """Pull live match info from a BetPawa event-detail response.
 
     BetPawa structure during live:
-      results.display.minute            -> e.g. "49"
+      results.display.minute             -> e.g. "59"
       results.display.currentPeriod.name -> e.g. "Second Half"
-      results.periods[].participant.type ("HOME" | "AWAY")
-      results.periods[].periodResults[].period.slug
+      results.participantPeriodResults[].participant.type
+                                         -> "HOME" | "AWAY"
+      results.participantPeriodResults[].periodResults[].period.slug
             ("FULL_TIME_EXCLUDING_OVERTIME" gives the running total)
 
     For prematch events `results` is None — we return blanks.
@@ -197,7 +199,7 @@ def _extract_live_info(detail: dict) -> dict:
     current_period = display.get("currentPeriod") or {}
     out["period"] = str(current_period.get("name") or "")
 
-    for participant_block in results.get("periods") or []:
+    for participant_block in results.get("participantPeriodResults") or []:
         participant = participant_block.get("participant") or {}
         ptype = participant.get("type")  # "HOME" or "AWAY"
         if ptype not in ("HOME", "AWAY"):
