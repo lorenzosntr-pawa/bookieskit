@@ -306,3 +306,36 @@ def test_msport_live_info_live():
     assert li.period is None  # statusDescription is None in this fixture
     assert li.score_home == 0
     assert li.score_away == 3
+
+
+@pytest.mark.parametrize(
+    "platform", ["betpawa", "sportybet", "bet9ja", "betway", "msport"]
+)
+def test_empty_dict_does_not_raise(platform):
+    assert extract_kickoff({}, platform) is None
+    assert extract_participants({}, platform) == Participants()
+    assert extract_live_info({}, platform) == LiveInfo()
+
+
+def test_unknown_platform_returns_empty():
+    fixture = _load("betpawa", "live")
+    assert extract_kickoff(fixture, "no-such-platform") is None
+    assert extract_participants(fixture, "no-such-platform") == Participants()
+    assert extract_live_info(fixture, "no-such-platform") == LiveInfo()
+
+
+def test_invalid_mode_silently_treated_as_none():
+    """Unknown mode strings must not raise; behavior matches mode=None."""
+    d = _load("betpawa", "live")
+    li_invalid = extract_live_info(d, "betpawa", mode="garbage")  # type: ignore[arg-type]
+    li_default = extract_live_info(d, "betpawa")
+    assert li_invalid == li_default
+
+
+def test_invalid_mode_on_betway_does_not_force_prematch():
+    """Specifically: a bogus mode should NOT silently become 'prematch'
+    (which would zero out live data on Betway)."""
+    d = _load("betway", "live")
+    li = extract_live_info(d, "betway", mode="LIVE")  # type: ignore[arg-type]
+    # 'LIVE' is not in the Mode literal → fall back to auto-detect → live data.
+    assert li.minute == 90
