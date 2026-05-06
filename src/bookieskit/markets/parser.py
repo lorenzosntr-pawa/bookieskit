@@ -1,5 +1,7 @@
 """Market parser — transforms raw event responses into NormalizedMarkets."""
 
+from typing import Literal
+
 from bookieskit.markets.registry import MarketRegistry
 from bookieskit.markets.types import (
     MarketMapping,
@@ -7,11 +9,25 @@ from bookieskit.markets.types import (
     Outcome,
 )
 
+ProbabilityMode = Literal["off", "true", "with_void"]
+
+
+def _normalised_probability_mode(mode: object) -> ProbabilityMode:
+    """Coerce arbitrary user input to a known ProbabilityMode value.
+
+    Invalid mode strings silently become 'off' — matches the total-function
+    contract used elsewhere in the lib (e.g. event_info._normalised_mode)."""
+    if mode == "true" or mode == "with_void":
+        return mode  # type: ignore[return-value]
+    return "off"
+
 
 def parse_markets(
     response: dict,
     platform: str,
     registry: MarketRegistry | None = None,
+    *,
+    probability: ProbabilityMode = "off",
 ) -> list[NormalizedMarket]:
     """Parse raw event detail response into normalized markets.
 
@@ -19,6 +35,12 @@ def parse_markets(
         response: Raw JSON from get_event_detail()
         platform: "betpawa", "sportybet", "bet9ja", "betway", or "msport"
         registry: Market registry to use (default: built-in 6 markets)
+        probability: How much probability data to extract per outcome.
+            "off" (default) — no probability parsing; both fields None.
+            "true" — populate true_probability where the platform supports it.
+            "with_void" — populate true_probability AND void_probability.
+            Bet9ja and Betway don't expose probability — both fields stay
+            None for them regardless of mode.
 
     Returns:
         List of NormalizedMarket for all recognized markets.
@@ -26,6 +48,7 @@ def parse_markets(
     """
     if registry is None:
         registry = MarketRegistry()
+    mode = _normalised_probability_mode(probability)
 
     parsers = {
         "betpawa": _parse_betpawa,
@@ -37,11 +60,11 @@ def parse_markets(
     parser = parsers.get(platform)
     if parser is None:
         return []
-    return parser(response, registry)
+    return parser(response, registry, mode)
 
 
 def _parse_betpawa(
-    response: dict, registry: MarketRegistry
+    response: dict, registry: MarketRegistry, mode: ProbabilityMode = "off"
 ) -> list[NormalizedMarket]:
     """Parse BetPawa event detail response."""
     results: list[NormalizedMarket] = []
@@ -57,16 +80,16 @@ def _parse_betpawa(
 
         if mapping.parameterized:
             results.append(
-                _parse_betpawa_parameterized(market_data, mapping)
+                _parse_betpawa_parameterized(market_data, mapping, mode)
             )
         else:
-            results.append(_parse_betpawa_simple(market_data, mapping))
+            results.append(_parse_betpawa_simple(market_data, mapping, mode))
 
     return results
 
 
 def _parse_betpawa_simple(
-    market_data: dict, mapping: MarketMapping
+    market_data: dict, mapping: MarketMapping, mode: ProbabilityMode = "off"
 ) -> NormalizedMarket:
     """Parse a simple BetPawa market (1X2, BTTS, DC)."""
     outcomes: list[Outcome] = []
@@ -100,7 +123,7 @@ def _parse_betpawa_simple(
 
 
 def _parse_betpawa_parameterized(
-    market_data: dict, mapping: MarketMapping
+    market_data: dict, mapping: MarketMapping, mode: ProbabilityMode = "off"
 ) -> NormalizedMarket:
     """Parse a parameterized BetPawa market (O/U, handicaps)."""
     lines: dict[float, list[Outcome]] = {}
@@ -165,7 +188,7 @@ def _resolve_outcome_betpawa(
 
 
 def _parse_sportybet(
-    response: dict, registry: MarketRegistry
+    response: dict, registry: MarketRegistry, mode: ProbabilityMode = "off"
 ) -> list[NormalizedMarket]:
     """Parse SportyBet event detail response."""
     results: list[NormalizedMarket] = []
@@ -187,7 +210,7 @@ def _parse_sportybet(
             parameterized_groups[market_id].append(market_data)
         else:
             results.append(
-                _parse_sportybet_simple(market_data, mapping)
+                _parse_sportybet_simple(market_data, mapping, mode)
             )
 
     # Process grouped parameterized markets
@@ -195,14 +218,14 @@ def _parse_sportybet(
         mapping = registry.get_by_platform_id("sportybet", market_id)
         if mapping:
             results.append(
-                _parse_sportybet_parameterized(entries, mapping)
+                _parse_sportybet_parameterized(entries, mapping, mode)
             )
 
     return results
 
 
 def _parse_sportybet_simple(
-    market_data: dict, mapping: MarketMapping
+    market_data: dict, mapping: MarketMapping, mode: ProbabilityMode = "off"
 ) -> NormalizedMarket:
     """Parse a simple SportyBet market."""
     outcomes: list[Outcome] = []
@@ -229,7 +252,7 @@ def _parse_sportybet_simple(
 
 
 def _parse_sportybet_parameterized(
-    entries: list[dict], mapping: MarketMapping
+    entries: list[dict], mapping: MarketMapping, mode: ProbabilityMode = "off"
 ) -> NormalizedMarket:
     """Parse a parameterized SportyBet market (multiple entries, one per line)."""
     lines: dict[float, list[Outcome]] = {}
@@ -302,7 +325,7 @@ def _resolve_outcome_sportybet(
 
 
 def _parse_bet9ja(
-    response: dict, registry: MarketRegistry
+    response: dict, registry: MarketRegistry, _mode: ProbabilityMode = "off"
 ) -> list[NormalizedMarket]:
     """Parse Bet9ja event detail response."""
     results: list[NormalizedMarket] = []
@@ -394,6 +417,7 @@ def _parse_bet9ja(
 
 def _parse_bet9ja_key(
     key: str,
+    _mode: ProbabilityMode = "off",
 ) -> tuple[str, float | None, str] | None:
     """Parse a Bet9ja odds key into (market_key, line, outcome_suffix).
 
@@ -463,7 +487,7 @@ def _resolve_outcome_bet9ja(
 
 
 def _parse_betway(
-    response: dict, registry: MarketRegistry
+    response: dict, registry: MarketRegistry, _mode: ProbabilityMode = "off"
 ) -> list[NormalizedMarket]:
     """Parse Betway event markets response.
 
@@ -540,7 +564,7 @@ def _parse_betway(
         mapping = registry.get_by_platform_id("betway", market_name)
         if mapping:
             parsed = _build_betway_simple(
-                outcomes_list, mapping, price_map
+                outcomes_list, mapping, price_map, _mode
             )
             if parsed:
                 results.append(parsed)
@@ -550,7 +574,7 @@ def _parse_betway(
         mapping = registry.get_by_platform_id("betway", parent_name)
         if mapping:
             parsed = _build_betway_parameterized(
-                entries, mapping, price_map
+                entries, mapping, price_map, _mode
             )
             if parsed:
                 results.append(parsed)
@@ -575,6 +599,7 @@ def _build_betway_simple(
     outcomes_list: list[dict],
     mapping: MarketMapping,
     price_map: dict[str, float],
+    _mode: ProbabilityMode = "off",
 ) -> NormalizedMarket | None:
     """Build a simple NormalizedMarket from Betway outcomes."""
     parsed_outcomes: list[Outcome] = []
@@ -611,6 +636,7 @@ def _build_betway_parameterized(
     entries: list[tuple[dict, list[dict]]],
     mapping: MarketMapping,
     price_map: dict[str, float],
+    _mode: ProbabilityMode = "off",
 ) -> NormalizedMarket | None:
     """Build a parameterized NormalizedMarket from Betway entries.
 
@@ -728,7 +754,7 @@ def _resolve_outcome_betway(
 
 
 def _parse_msport(
-    response: dict, registry: MarketRegistry
+    response: dict, registry: MarketRegistry, mode: ProbabilityMode = "off"
 ) -> list[NormalizedMarket]:
     """Parse MSport event detail response.
 
@@ -753,18 +779,18 @@ def _parse_msport(
         if mapping.parameterized:
             parameterized_groups.setdefault(market_id, []).append(market_data)
         else:
-            results.append(_parse_msport_simple(market_data, mapping))
+            results.append(_parse_msport_simple(market_data, mapping, mode))
 
     for market_id, entries in parameterized_groups.items():
         mapping = registry.get_by_platform_id("msport", market_id)
         if mapping:
-            results.append(_parse_msport_parameterized(entries, mapping))
+            results.append(_parse_msport_parameterized(entries, mapping, mode))
 
     return results
 
 
 def _parse_msport_simple(
-    market_data: dict, mapping: MarketMapping
+    market_data: dict, mapping: MarketMapping, mode: ProbabilityMode = "off"
 ) -> NormalizedMarket:
     """Parse a simple MSport market."""
     outcomes: list[Outcome] = []
@@ -791,7 +817,7 @@ def _parse_msport_simple(
 
 
 def _parse_msport_parameterized(
-    entries: list[dict], mapping: MarketMapping
+    entries: list[dict], mapping: MarketMapping, mode: ProbabilityMode = "off"
 ) -> NormalizedMarket:
     """Parse a parameterized MSport market (multiple entries, one per line)."""
     lines: dict[float, list[Outcome]] = {}

@@ -5,11 +5,26 @@ from dataclasses import dataclass, field
 
 @dataclass(frozen=True)
 class Outcome:
-    """A single outcome within a market."""
+    """A single outcome within a market.
+
+    `true_probability` is the bookmaker's fair (pre-margin) probability
+    estimate — across mutually exclusive outcomes of one market, these
+    sum to ≈1, NOT to 1 + margin like 1/odds would. Populated only when
+    the platform exposes it (SportyBet, MSport, BetPawa) AND the caller
+    passes `probability="true"` or `probability="with_void"` to
+    parse_markets.
+
+    `void_probability` is the bookmaker's estimate of the bet being
+    voided/refunded (e.g. event abandoned). Populated only when the
+    platform exposes it (SportyBet, BetPawa) AND the caller passes
+    `probability="with_void"`. Always None on MSport/Betway/Bet9ja.
+    """
 
     canonical_name: str
     odds: float
     platform_name: str
+    true_probability: float | None = None
+    void_probability: float | None = None
 
 
 @dataclass(frozen=True)
