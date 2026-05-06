@@ -158,21 +158,80 @@ def _live_info_sportybet(response: dict, mode: Mode | None) -> LiveInfo:
     )
 
 
+# ---- Bet9ja ---------------------------------------------------------------
+
+def _bet9ja_is_live(response: dict, mode: Mode | None) -> bool:
+    """True if explicit mode says live, or if auto-detect sees D.A.
+
+    Caller passed mode='live' / mode='prematch' wins. Otherwise the response
+    shape decides: presence of `D.A` means it's a GetLiveEvent payload.
+    """
+    if mode == "live":
+        return True
+    if mode == "prematch":
+        return False
+    # auto-detect
+    D = response.get("D") or {}
+    return "A" in D
+
+
+def _kickoff_bet9ja(response: dict, mode: Mode | None) -> datetime | None:
+    if _bet9ja_is_live(response, mode):
+        return None  # live response carries no kickoff
+    D = response.get("D") or {}
+    s = D.get("STARTDATE")
+    if not isinstance(s, str):
+        return None
+    try:
+        # "YYYY-MM-DD HH:MM:SS" — empirically UTC.
+        return datetime.strptime(s, "%Y-%m-%d %H:%M:%S").replace(tzinfo=timezone.utc)
+    except ValueError:
+        return None
+
+
+def _participants_bet9ja(response: dict, mode: Mode | None) -> Participants:
+    if _bet9ja_is_live(response, mode):
+        return _EMPTY_PARTICIPANTS  # live response carries no team names
+    D = response.get("D") or {}
+    ds = D.get("DS")
+    if not isinstance(ds, str) or " - " not in ds:
+        return _EMPTY_PARTICIPANTS
+    home, away = ds.split(" - ", 1)
+    return Participants(home=home or None, away=away or None)
+
+
+def _live_info_bet9ja(response: dict, mode: Mode | None) -> LiveInfo:
+    if not _bet9ja_is_live(response, mode):
+        return _EMPTY_LIVE_INFO
+    A = (response.get("D") or {}).get("A") or {}
+    minute = _try_int(A.get("T"))
+    period = A.get("ES") or None
+    R = A.get("R") or {}
+    score_home, score_away = _split_score(R.get("S"))
+    return LiveInfo(
+        minute=minute, period=period,
+        score_home=score_home, score_away=score_away,
+    )
+
+
 # ---- Dispatch tables -------------------------------------------------------
 
 _KICKOFF_DISPATCH: dict[str, Callable[[dict, Mode | None], datetime | None]] = {
     "betpawa": _kickoff_betpawa,
     "sportybet": _kickoff_sportybet,
+    "bet9ja": _kickoff_bet9ja,
 }
 
 _PARTICIPANTS_DISPATCH: dict[str, Callable[[dict, Mode | None], Participants]] = {
     "betpawa": _participants_betpawa,
     "sportybet": _participants_sportybet,
+    "bet9ja": _participants_bet9ja,
 }
 
 _LIVE_INFO_DISPATCH: dict[str, Callable[[dict, Mode | None], LiveInfo]] = {
     "betpawa": _live_info_betpawa,
     "sportybet": _live_info_sportybet,
+    "bet9ja": _live_info_bet9ja,
 }
 
 

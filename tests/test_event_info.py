@@ -155,3 +155,69 @@ def test_sportybet_live_info_live():
     assert li.period == "H2"
     assert li.score_home == 0
     assert li.score_away == 3
+
+
+def test_bet9ja_kickoff_prematch_auto():
+    d = _load("bet9ja", "prematch")
+    k = extract_kickoff(d, "bet9ja")
+    assert k == datetime(2026, 5, 6, 11, 0, 0, tzinfo=timezone.utc)
+
+
+def test_bet9ja_kickoff_live_auto_returns_none():
+    d = _load("bet9ja", "live")
+    assert extract_kickoff(d, "bet9ja") is None
+
+
+def test_bet9ja_participants_prematch_auto():
+    d = _load("bet9ja", "prematch")
+    p = extract_participants(d, "bet9ja")
+    assert p.home == "Wuhan Three Towns"
+    assert p.away == "Qingdao Hainiu FC"
+
+
+def test_bet9ja_participants_live_auto_returns_none():
+    d = _load("bet9ja", "live")
+    p = extract_participants(d, "bet9ja")
+    assert p == Participants()
+
+
+def test_bet9ja_live_info_prematch_auto_all_none():
+    d = _load("bet9ja", "prematch")
+    li = extract_live_info(d, "bet9ja")
+    assert li == LiveInfo()
+
+
+def test_bet9ja_live_info_live_auto():
+    d = _load("bet9ja", "live")
+    li = extract_live_info(d, "bet9ja")
+    assert li.minute == 91
+    assert li.period == "2nd Half"
+    assert li.score_home == 0
+    assert li.score_away == 3
+
+
+def test_bet9ja_explicit_mode_live_on_prematch_fixture_yields_nones():
+    """User asserts live, but fixture is prematch shape — follow the mode,
+    yield Nones where the live fields are absent. Must not raise."""
+    d = _load("bet9ja", "prematch")
+    assert extract_kickoff(d, "bet9ja", mode="live") is None
+    assert extract_participants(d, "bet9ja", mode="live") == Participants()
+    assert extract_live_info(d, "bet9ja", mode="live") == LiveInfo()
+
+
+def test_bet9ja_explicit_mode_prematch_on_live_fixture_yields_nones():
+    """User asserts prematch, but fixture is live shape — follow the mode,
+    yield Nones where the prematch fields are absent. Must not raise."""
+    d = _load("bet9ja", "live")
+    assert extract_kickoff(d, "bet9ja", mode="prematch") is None
+    assert extract_participants(d, "bet9ja", mode="prematch") == Participants()
+    assert extract_live_info(d, "bet9ja", mode="prematch") == LiveInfo()
+
+
+def test_bet9ja_explicit_mode_matches_auto_on_correct_fixture():
+    d_pm = _load("bet9ja", "prematch")
+    d_lv = _load("bet9ja", "live")
+    assert extract_kickoff(d_pm, "bet9ja", mode="prematch") == \
+           extract_kickoff(d_pm, "bet9ja")
+    assert extract_live_info(d_lv, "bet9ja", mode="live") == \
+           extract_live_info(d_lv, "bet9ja")
