@@ -251,3 +251,35 @@ def test_msport_probability_with_void_only_populates_true():
     for o in m.outcomes:
         assert o.true_probability is not None
         assert o.void_probability is None  # NOT exposed by MSport
+
+
+@pytest.mark.parametrize("mode", ["off", "true", "with_void"])
+def test_betway_never_populates_probabilities(mode):
+    """Betway has no probability data in its API; both fields always None."""
+    d = _load("betway")
+    markets = parse_markets(d, platform="betway", probability=mode)
+    for m in markets:
+        for o in m.outcomes:
+            assert o.true_probability is None
+            assert o.void_probability is None
+        if m.lines:
+            for outcomes in m.lines.values():
+                for o in outcomes:
+                    assert o.true_probability is None
+                    assert o.void_probability is None
+
+
+@pytest.mark.parametrize("mode", ["off", "true", "with_void"])
+def test_bet9ja_never_populates_probabilities(mode):
+    """Bet9ja has no probability in its API; both fields always None."""
+    d = _load("bet9ja")
+    markets = parse_markets(d, platform="bet9ja", probability=mode)
+    for m in markets:
+        for o in m.outcomes:
+            assert o.true_probability is None
+            assert o.void_probability is None
+        if m.lines:
+            for outcomes in m.lines.values():
+                for o in outcomes:
+                    assert o.true_probability is None
+                    assert o.void_probability is None
