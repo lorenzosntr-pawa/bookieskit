@@ -240,8 +240,12 @@ def _live_info_betway(response: dict, mode: Mode | None) -> LiveInfo:
         return _EMPTY_LIVE_INFO
     sport_event = response.get("sportEvent") or {}
     g = sport_event.get("gameStateTimeScore") or {}
-    # Auto-detect: prematch responses lack the `time` key (and have
-    # comments=='NotStarted'). Their score=['0','0'] is an artefact.
+    # Auto-detect prematch via two independent signals OR'd together:
+    #  (a) the `time` key is absent (most common — Betway omits it pre-kick)
+    #  (b) `comments == "NotStarted"` (covers the edge case where Betway sends
+    #      `time: 0` literally instead of omitting the key).
+    # Both must be checked: removing either leaves a hole. The score=['0','0']
+    # value reported during prematch is a known artefact and must be suppressed.
     if mode is None and ("time" not in g or g.get("comments") == "NotStarted"):
         return _EMPTY_LIVE_INFO
     minute = _try_int(g.get("time"))

@@ -396,3 +396,20 @@ def test_top_level_reexports():
         "Mode",
     ):
         assert hasattr(bookieskit, name), name
+
+
+@pytest.mark.parametrize("platform", ["betpawa", "sportybet", "msport"])
+def test_explicit_mode_matches_auto_on_live_fixture(platform):
+    """Spec §5: for platforms whose mode is informational only,
+    explicit mode='live' agrees with auto-detect on a healthy live fixture."""
+    d = _load(platform, "live")
+    assert extract_live_info(d, platform, mode="live") == \
+           extract_live_info(d, platform)
+
+
+@pytest.mark.parametrize("platform", ["betpawa", "sportybet", "msport"])
+def test_explicit_mode_matches_auto_on_prematch_fixture(platform):
+    """Same as above for prematch fixtures."""
+    d = _load(platform, "prematch")
+    assert extract_live_info(d, platform, mode="prematch") == \
+           extract_live_info(d, platform)
