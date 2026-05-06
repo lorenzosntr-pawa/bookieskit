@@ -257,8 +257,11 @@ def test_msport_probability_with_void_only_populates_true():
 @pytest.mark.parametrize("mode", ["off", "true", "with_void"])
 def test_betway_never_populates_probabilities(mode):
     """Betway has no probability data in its API; both fields always None."""
-    d = _load("betway")
-    markets = parse_markets(d, platform="betway", probability=mode)
+    from tests.test_parser_betway import BETWAY_MARKETS_RESPONSE
+    markets = parse_markets(
+        BETWAY_MARKETS_RESPONSE, platform="betway", probability=mode
+    )
+    assert markets, "expected Betway markets fixture to yield parsed markets"
     for m in markets:
         for o in m.outcomes:
             assert o.true_probability is None
