@@ -120,18 +120,59 @@ def _live_info_betpawa(response: dict, mode: Mode | None) -> LiveInfo:
     )
 
 
+# ---- SportyBet ------------------------------------------------------------
+
+def _kickoff_sportybet(response: dict, _mode: Mode | None) -> datetime | None:
+    data = response.get("data") or {}
+    ms = data.get("estimateStartTime")
+    if not isinstance(ms, (int, float)):
+        return None
+    try:
+        return datetime.fromtimestamp(ms / 1000, tz=timezone.utc)
+    except (ValueError, OSError):
+        return None
+
+
+def _participants_sportybet(response: dict, _mode: Mode | None) -> Participants:
+    data = response.get("data") or {}
+    return Participants(
+        home=data.get("homeTeamName") or None,
+        away=data.get("awayTeamName") or None,
+    )
+
+
+def _live_info_sportybet(response: dict, mode: Mode | None) -> LiveInfo:
+    if mode == "prematch":
+        return _EMPTY_LIVE_INFO
+    data = response.get("data") or {}
+    played_seconds = data.get("playedSeconds")
+    minute = None
+    if isinstance(played_seconds, str) and ":" in played_seconds:
+        minute = _try_int(played_seconds.split(":", 1)[0])
+    match_status = data.get("matchStatus")
+    period = match_status if match_status not in ("Not start", None, "") else None
+    score_home, score_away = _split_score(data.get("setScore"))
+    return LiveInfo(
+        minute=minute, period=period,
+        score_home=score_home, score_away=score_away,
+    )
+
+
 # ---- Dispatch tables -------------------------------------------------------
 
 _KICKOFF_DISPATCH: dict[str, Callable[[dict, Mode | None], datetime | None]] = {
     "betpawa": _kickoff_betpawa,
+    "sportybet": _kickoff_sportybet,
 }
 
 _PARTICIPANTS_DISPATCH: dict[str, Callable[[dict, Mode | None], Participants]] = {
     "betpawa": _participants_betpawa,
+    "sportybet": _participants_sportybet,
 }
 
 _LIVE_INFO_DISPATCH: dict[str, Callable[[dict, Mode | None], LiveInfo]] = {
     "betpawa": _live_info_betpawa,
+    "sportybet": _live_info_sportybet,
 }
 
 

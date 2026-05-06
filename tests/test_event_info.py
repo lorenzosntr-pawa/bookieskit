@@ -114,3 +114,44 @@ def test_betpawa_live_info_mode_prematch_overrides_live_data():
     d = _load("betpawa", "live")
     li = extract_live_info(d, "betpawa", mode="prematch")
     assert li == LiveInfo()
+
+
+def test_sportybet_kickoff_prematch():
+    d = _load("sportybet", "prematch")
+    k = extract_kickoff(d, "sportybet")
+    assert k == datetime(2026, 5, 6, 11, 0, 0, tzinfo=timezone.utc)
+
+
+def test_sportybet_kickoff_live():
+    d = _load("sportybet", "live")
+    k = extract_kickoff(d, "sportybet")
+    assert k == datetime(2026, 5, 6, 6, 0, 0, tzinfo=timezone.utc)
+
+
+def test_sportybet_participants_prematch():
+    d = _load("sportybet", "prematch")
+    p = extract_participants(d, "sportybet")
+    assert p.home == "Wuhan Three Towns FC"
+    assert p.away == "Qingdao Hainiu FC"
+
+
+def test_sportybet_participants_live():
+    d = _load("sportybet", "live")
+    p = extract_participants(d, "sportybet")
+    assert p.home == "FC Tokyo"
+    assert p.away == "JEF United Chiba"
+
+
+def test_sportybet_live_info_prematch_all_none():
+    d = _load("sportybet", "prematch")
+    li = extract_live_info(d, "sportybet")
+    assert li == LiveInfo()
+
+
+def test_sportybet_live_info_live():
+    d = _load("sportybet", "live")
+    li = extract_live_info(d, "sportybet")
+    assert li.minute == 90
+    assert li.period == "H2"
+    assert li.score_home == 0
+    assert li.score_away == 3
