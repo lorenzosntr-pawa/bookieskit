@@ -54,10 +54,19 @@ from collections import defaultdict
 from datetime import datetime, timezone
 
 # Public surface of the library — only what we need.
-from bookieskit import Bet9ja, BetPawa, Betway, SportyBet
+from bookieskit import (
+    Bet9ja,
+    BetPawa,
+    Betway,
+    LiveInfo,
+    SportyBet,
+    extract_kickoff,
+    extract_live_info,
+    extract_participants,
+    is_live_now,
+)
 from bookieskit.markets import parse_markets
 from bookieskit.matching import extract_sportradar_id
-
 
 # ----------------------------------------------------------------------
 # Configuration. All hard-coded values are here at the top so changes
@@ -67,8 +76,8 @@ from bookieskit.matching import extract_sportradar_id
 # BetPawa event ids to monitor. Each id corresponds to a single match;
 # the script will fetch live or prematch odds per event automatically
 # based on each event's current state.
-# BETPAWA_EVENT_IDS = ["33289995", "33248210"]
-BETPAWA_EVENT_IDS = ["33204225"]
+BETPAWA_EVENT_IDS = ["33289995", "33248210"]
+# BETPAWA_EVENT_IDS = ["33204225"]
 
 # Interval between ticks. We monitor more aggressively during live
 # (live odds move quickly) and back off during prematch (odds drift
@@ -122,95 +131,31 @@ async def resolve_event(bp: BetPawa, betpawa_id: str) -> dict | None:
     except Exception as e:
         print(f"  resolve {betpawa_id}: ERROR {e}")
         return None
-    parts = detail.get("participants", [])
-    home = parts[0]["name"] if len(parts) > 0 else "?"
-    away = parts[1]["name"] if len(parts) > 1 else "?"
+    parts = extract_participants(detail, platform="betpawa")
     sr_numeric = extract_sportradar_id(detail, platform="betpawa")
-    kickoff = _parse_kickoff(detail.get("startTime"))
+    kickoff = extract_kickoff(detail, platform="betpawa")
     EVENT_CACHE[betpawa_id] = {
         "sr_numeric": sr_numeric,
-        "home": home,
-        "away": away,
+        "home": parts.home or "?",
+        "away": parts.away or "?",
         "kickoff_utc": kickoff,
     }
     return EVENT_CACHE[betpawa_id]
 
 
-def _parse_kickoff(s: str | None) -> datetime | None:
-    """Parse BetPawa's startTime (ISO 8601 with Z) to tz-aware UTC datetime."""
-    if not s:
-        return None
-    try:
-        # Python's fromisoformat accepts +00:00 but not Z — normalise.
-        normalised = s.replace("Z", "+00:00")
-        return datetime.fromisoformat(normalised)
-    except ValueError:
-        return None
-
-
-def is_live_now(kickoff_utc: datetime | None) -> bool:
-    """True if the event has kicked off (i.e. now >= kickoff). If kickoff
-    is unknown, default to prematch."""
-    if kickoff_utc is None:
-        return False
-    return datetime.now(timezone.utc) >= kickoff_utc
-
-
 # ----------------------------------------------------------------------
 # Step 2: Per-tick BetPawa fetch — markets + live info (minute, period,
-# scores). Returns the markets list AND the live-info dict.
+# scores). Returns the markets list AND the live-info dataclass.
 # ----------------------------------------------------------------------
 async def fetch_betpawa_tick(bp: BetPawa, betpawa_id: str) -> dict:
-    """Fetch fresh BetPawa data for one tick. Returns {markets, live_info}.
-    Empty markets / empty live_info are OK."""
+    """Fetch fresh BetPawa data for one tick. Returns {markets, live_info}."""
     try:
         detail = await bp.get_event_detail(event_id=betpawa_id)
     except Exception:
-        return {"markets": [], "live_info": _empty_live_info()}
+        return {"markets": [], "live_info": LiveInfo()}
     markets = parse_markets(detail, platform="betpawa")
-    live_info = _extract_live_info(detail)
+    live_info = extract_live_info(detail, platform="betpawa")
     return {"markets": markets, "live_info": live_info}
-
-
-def _empty_live_info() -> dict:
-    return {"minute": "", "period": "", "score_home": "", "score_away": ""}
-
-
-def _extract_live_info(detail: dict) -> dict:
-    """Pull live match info from a BetPawa event-detail response.
-
-    BetPawa structure during live:
-      results.display.minute             -> e.g. "59"
-      results.display.currentPeriod.name -> e.g. "Second Half"
-      results.participantPeriodResults[].participant.type
-                                         -> "HOME" | "AWAY"
-      results.participantPeriodResults[].periodResults[].period.slug
-            ("FULL_TIME_EXCLUDING_OVERTIME" gives the running total)
-
-    For prematch events `results` is None — we return blanks.
-    """
-    out = _empty_live_info()
-    results = detail.get("results")
-    if not isinstance(results, dict):
-        return out
-
-    display = results.get("display") or {}
-    out["minute"] = str(display.get("minute") or "")
-    current_period = display.get("currentPeriod") or {}
-    out["period"] = str(current_period.get("name") or "")
-
-    for participant_block in results.get("participantPeriodResults") or []:
-        participant = participant_block.get("participant") or {}
-        ptype = participant.get("type")  # "HOME" or "AWAY"
-        if ptype not in ("HOME", "AWAY"):
-            continue
-        for period_result in participant_block.get("periodResults") or []:
-            period = period_result.get("period") or {}
-            if period.get("slug") == "FULL_TIME_EXCLUDING_OVERTIME":
-                key = "score_home" if ptype == "HOME" else "score_away"
-                out[key] = str(period_result.get("result") or "")
-                break
-    return out
 
 
 # ----------------------------------------------------------------------
@@ -266,7 +211,9 @@ async def fetch_bet9ja(
 # Prematch: walks every soccer tournament — takes a few seconds. We
 # build it lazily and only if at least one prematch event needs it.
 # ----------------------------------------------------------------------
-async def build_bet9ja_maps(b9: Bet9ja, *, need_prematch: bool) -> dict[str, dict[str, str]]:
+async def build_bet9ja_maps(
+    b9: Bet9ja, *, need_prematch: bool
+) -> dict[str, dict[str, str]]:
     """Returns {'live': dict, 'prematch': dict}. Prematch is empty if
     need_prematch is False — saves a slow walk when all events are live."""
     out: dict[str, dict[str, str]] = {"live": {}, "prematch": {}}
@@ -328,11 +275,10 @@ def event_rows(
     event_meta: dict,
     sr_numeric: str,
     mode: str,
-    live_info: dict,
+    live_info: LiveInfo,
     per_bookmaker: dict[str, list],
 ) -> list[dict]:
     """Build CSV rows for one event."""
-    # Nested grid: (canonical_id, market_name, line, outcome) -> {bookie: odds}
     grid: dict[tuple, dict[str, float]] = defaultdict(dict)
 
     for bookie, markets in per_bookmaker.items():
@@ -341,11 +287,13 @@ def event_rows(
                 key = (m.canonical_id, m.name, line, outcome)
                 grid[key][bookie] = odds
 
-    # Sort: market name, then numeric line (empty first), then outcome.
     def sort_key(item):
         _cid, name, line, outcome = item[0]
         line_key = (1, float(line)) if line != "" else (0, 0.0)
         return (name, line_key, outcome)
+
+    def _s(v: object) -> str:
+        return "" if v is None else str(v)
 
     rows: list[dict] = []
     for (_cid, name, line, outcome), per_bookie in sorted(grid.items(), key=sort_key):
@@ -356,10 +304,10 @@ def event_rows(
             "sr_id": sr_numeric,
             "home": event_meta["home"],
             "away": event_meta["away"],
-            "minute": live_info.get("minute", ""),
-            "period": live_info.get("period", ""),
-            "score_home": live_info.get("score_home", ""),
-            "score_away": live_info.get("score_away", ""),
+            "minute": _s(live_info.minute),
+            "period": _s(live_info.period),
+            "score_home": _s(live_info.score_home),
+            "score_away": _s(live_info.score_away),
             "market": name,
             "line": line,
             "outcome": outcome,
@@ -447,9 +395,11 @@ async def run_tick(csv_path: str) -> None:
 
             tasks = [
                 fetch_betpawa_tick(bp, bp_id),
-                fetch_sportybet(sr_prefixed, live=live) if sr_prefixed else _empty_markets(),
+                fetch_sportybet(sr_prefixed, live=live)
+                if sr_prefixed else _empty_markets(),
                 fetch_betway(sr_numeric) if sr_numeric else _empty_markets(),
-                fetch_bet9ja(sr_numeric, live=live, lookup=lookup) if sr_numeric else _empty_markets(),
+                fetch_bet9ja(sr_numeric, live=live, lookup=lookup)
+                if sr_numeric else _empty_markets(),
             ]
             bp_result, sb_markets, bw_markets, b9_markets = await asyncio.gather(*tasks)
 
@@ -459,15 +409,15 @@ async def run_tick(csv_path: str) -> None:
                 "Bet9ja": b9_markets,
                 "Betway": bw_markets,
             }
-            live_info = bp_result["live_info"] if live else _empty_live_info()
+            live_info = bp_result["live_info"] if live else LiveInfo()
 
             counts = " ".join(
                 f"{short[name]}={len(per_bookmaker[name])}" for name in BOOKMAKERS
             )
             extra = ""
-            if live and live_info["minute"]:
-                extra = (f"  [{live_info['period']} {live_info['minute']}'  "
-                         f"{live_info['score_home']}-{live_info['score_away']}]")
+            if live and live_info.minute is not None:
+                extra = (f"  [{live_info.period or ''} {live_info.minute}'  "
+                         f"{live_info.score_home}-{live_info.score_away}]")
             print(f"    [{mode}] {entry['home']} vs {entry['away']}: {counts}{extra}")
 
             all_rows.extend(event_rows(
@@ -500,7 +450,8 @@ async def run_forever(csv_path: str) -> None:
             for bp_id in BETPAWA_EVENT_IDS
         )
         sleep_s = INTERVAL_SECONDS_LIVE if any_live else INTERVAL_SECONDS_PREMATCH
-        print(f"  next tick in {sleep_s}s ({'live' if any_live else 'prematch'} cadence)")
+        cadence = "live" if any_live else "prematch"
+        print(f"  next tick in {sleep_s}s ({cadence} cadence)")
         await asyncio.sleep(sleep_s)
 
 
