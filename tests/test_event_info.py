@@ -339,3 +339,44 @@ def test_invalid_mode_on_betway_does_not_force_prematch():
     li = extract_live_info(d, "betway", mode="LIVE")  # type: ignore[arg-type]
     # 'LIVE' is not in the Mode literal → fall back to auto-detect → live data.
     assert li.minute == 90
+
+
+ALL_PLATFORMS = ["betpawa", "sportybet", "bet9ja", "betway", "msport"]
+
+
+def _kickoffs_for(phase: str) -> dict[str, datetime | None]:
+    return {p: extract_kickoff(_load(p, phase), p) for p in ALL_PLATFORMS}
+
+
+def test_kickoffs_agree_across_platforms_prematch():
+    kicks = _kickoffs_for("prematch")
+    assert all(k is not None for k in kicks.values()), kicks
+    base = kicks["betpawa"]
+    for platform, k in kicks.items():
+        assert k is not None
+        delta = abs((k - base).total_seconds())
+        assert delta <= 300, f"{platform} kickoff drifts {delta}s vs betpawa"
+
+
+def test_kickoffs_agree_across_platforms_live_except_bet9ja():
+    kicks = _kickoffs_for("live")
+    # Bet9ja's live response has no kickoff.
+    assert kicks["bet9ja"] is None
+    base = kicks["betpawa"]
+    for platform, k in kicks.items():
+        if platform == "bet9ja":
+            continue
+        assert k is not None, platform
+        delta = abs((k - base).total_seconds())
+        assert delta <= 300, f"{platform} kickoff drifts {delta}s vs betpawa"
+
+
+def test_participants_present_for_all_except_bet9ja_live():
+    """Sanity: every fixture except bet9ja-live yields non-None home/away."""
+    for phase in ("prematch", "live"):
+        for platform in ALL_PLATFORMS:
+            p = extract_participants(_load(platform, phase), platform)
+            if platform == "bet9ja" and phase == "live":
+                assert p == Participants(), platform
+            else:
+                assert p.home and p.away, f"{platform}/{phase}"
