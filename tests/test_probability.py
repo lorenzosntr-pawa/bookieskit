@@ -283,3 +283,20 @@ def test_bet9ja_never_populates_probabilities(mode):
                 for o in outcomes:
                     assert o.true_probability is None
                     assert o.void_probability is None
+
+
+@pytest.mark.parametrize("platform", ["betpawa", "sportybet", "msport"])
+def test_1x2_true_probabilities_sum_to_about_one(platform):
+    """Fair probabilities across mutually exclusive 1X2 outcomes sum to ≈1.
+    A bookmaker's implied probabilities (1/odds) would sum to >1 due to
+    margin; if this test fails it likely means we're reading the wrong
+    field."""
+    d = _load(platform)
+    markets = parse_markets(d, platform=platform, probability="true")
+    m = next(m for m in markets if m.canonical_id == "1x2_ft")
+    probs = [o.true_probability for o in m.outcomes if o.true_probability is not None]
+    assert len(probs) == 3, f"expected 3 outcomes, got {probs}"
+    total = sum(probs)
+    assert 0.95 <= total <= 1.05, (
+        f"{platform} 1X2 prob sum {total} not in [0.95, 1.05]"
+    )
