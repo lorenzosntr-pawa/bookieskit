@@ -1,10 +1,11 @@
 """
-Monitor odds across 4 bookmakers (BetPawa, SportyBet, Bet9ja, Betway) for two
-specific BetPawa competitions, ticking every 10 minutes.
+Monitor odds across 4 bookmakers (BetPawa, SportyBet, Bet9ja, Betway) for a
+fixed list of BetPawa event ids, ticking every 10 minutes.
 
 WHAT THIS SCRIPT DOES
-    On each tick, for every event in BetPawa competitions 13344 and 12385:
-      1. Reads the event's BetPawa detail (gets BetPawa id, SR id, BetPawa odds).
+    On each tick, for every BetPawa event id in BETPAWA_EVENT_IDS below:
+      1. Reads the event's BetPawa detail (gets BetPawa id, SR id, home/away,
+         BetPawa odds).
       2. Detects whether the event is currently in-play. If it is, fetches LIVE
          odds from SportyBet / Bet9ja / Betway. If not, fetches PREMATCH odds.
       3. Filters down to the markets we care about: 1X2, BTTS, Over/Under (only
@@ -14,6 +15,8 @@ WHAT THIS SCRIPT DOES
 
     The script then sleeps 10 minutes and repeats. Output CSV grows over time —
     each tick is a snapshot, suitable for time-series analysis.
+
+    To switch to a different event set, edit BETPAWA_EVENT_IDS below.
 
 WHY MSPORT IS SKIPPED
     Per request — MSport excluded from this monitoring run.
@@ -54,8 +57,10 @@ from bookieskit.matching import extract_sportradar_id
 # are easy to find.
 # ----------------------------------------------------------------------
 
-# BetPawa competition ids to monitor.
-COMPETITIONS = ["13344", "12385"]
+# BetPawa event ids to monitor. Each id corresponds to a single match;
+# the script will fetch live or prematch odds per event automatically
+# based on each event's current state.
+BETPAWA_EVENT_IDS = ["33289995", "33248210"]
 
 # Interval between ticks in seconds. 10 minutes.
 INTERVAL_SECONDS = 600
@@ -80,41 +85,34 @@ BOOKMAKERS = ["BetPawa", "SportyBet", "Bet9ja", "Betway"]
 
 
 # ----------------------------------------------------------------------
-# Step 1: List events in a BetPawa competition.
-# ----------------------------------------------------------------------
-async def list_competition_events(bp: BetPawa, competition_id: str) -> list[dict]:
-    """Return [{betpawa_id, home, away}, ...] for one BetPawa competition."""
-    raw = await bp.get_events(tournament_id=competition_id)
-    responses = raw.get("responses", [])
-    events = responses[0].get("responses", []) if responses else []
-    out: list[dict] = []
-    for ev in events:
-        parts = ev.get("participants", [])
-        out.append({
-            "betpawa_id": str(ev.get("id", "")),
-            "home": parts[0]["name"] if len(parts) > 0 else "?",
-            "away": parts[1]["name"] if len(parts) > 1 else "?",
-        })
-    return out
-
-
-# ----------------------------------------------------------------------
-# Step 2: Per-event BetPawa fetch — gets BetPawa odds, SR id, and a
-# heuristic for live vs prematch state.
+# Step 1: Per-event BetPawa fetch — gets home/away, BetPawa odds, SR id,
+# and a heuristic for live vs prematch state.
 #
-# We can't tell live state from the event-list response alone, but the
-# event-detail response has it. Strategy: fetch detail, parse markets,
-# extract SR id. If the detail's `status` (or any of several flag
-# fields) indicates LIVE, mark this event as live. Otherwise treat as
-# prematch.
+# The event-detail response includes participants (home/away), markets,
+# the SPORTRADAR widget (for SR id extraction), and a status field. If
+# the status indicates LIVE, we'll fetch live odds from the other
+# bookmakers; otherwise prematch.
 # ----------------------------------------------------------------------
 async def fetch_betpawa_event(bp: BetPawa, betpawa_id: str) -> dict:
-    """Return {markets, sr_id, is_live}.  Empty markets / None sr_id are OK."""
+    """Return {betpawa_id, home, away, markets, sr_id, is_live}.
+
+    Empty markets / None sr_id are OK — they get logged and the row
+    falls back to BetPawa-only data."""
     detail = await bp.get_event_detail(event_id=betpawa_id)
+    parts = detail.get("participants", [])
+    home = parts[0]["name"] if len(parts) > 0 else "?"
+    away = parts[1]["name"] if len(parts) > 1 else "?"
     markets = parse_markets(detail, platform="betpawa")
     sr_id = extract_sportradar_id(detail, platform="betpawa")
     is_live = _is_live_betpawa(detail)
-    return {"markets": markets, "sr_id": sr_id, "is_live": is_live}
+    return {
+        "betpawa_id": betpawa_id,
+        "home": home,
+        "away": away,
+        "markets": markets,
+        "sr_id": sr_id,
+        "is_live": is_live,
+    }
 
 
 def _is_live_betpawa(detail: dict) -> bool:
@@ -307,42 +305,43 @@ def append_csv(rows: list[dict], path: str) -> None:
 # ----------------------------------------------------------------------
 async def run_tick(csv_path: str) -> None:
     timestamp = datetime.now(timezone.utc).isoformat(timespec="seconds")
-    print(f"\n[{timestamp}] tick start")
+    print(f"\n[{timestamp}] tick start ({len(BETPAWA_EVENT_IDS)} events)")
 
     all_rows: list[dict] = []
-    total_events = 0
 
     async with BetPawa(country="ng") as bp, Bet9ja(country="ng") as b9:
-        # --- Phase A: list every event, fetch BetPawa detail to learn
-        # SR id and live state. We do this BEFORE building the Bet9ja
-        # prematch map so we know whether we actually need it. ---
-        per_event_payload: list[tuple[dict, dict]] = []
-        for comp_id in COMPETITIONS:
+        # --- Phase A: fetch BetPawa detail for each configured event id.
+        # We need SR id + live state before we can decide whether to
+        # build the (slow) Bet9ja prematch map. ---
+        per_event_payload: list[dict] = []
+        for bp_id in BETPAWA_EVENT_IDS:
             try:
-                events = await list_competition_events(bp, comp_id)
+                bp_data = await fetch_betpawa_event(bp, bp_id)
             except Exception as e:
-                print(f"  competition {comp_id}: ERROR {e}")
+                print(f"  betpawa_id {bp_id}: ERROR {e}")
                 continue
-            print(f"  competition {comp_id}: {len(events)} events")
-            for ev in events:
-                try:
-                    bp_data = await fetch_betpawa_event(bp, ev["betpawa_id"])
-                except Exception as e:
-                    print(f"    {ev['home']} vs {ev['away']}: BetPawa ERROR {e}")
-                    continue
-                per_event_payload.append((ev, bp_data))
-        total_events = len(per_event_payload)
+            per_event_payload.append(bp_data)
+            print(f"  {bp_id}  {bp_data['home']} vs {bp_data['away']}  "
+                  f"sr={bp_data['sr_id']}  "
+                  f"mode={'live' if bp_data['is_live'] else 'prematch'}")
 
         # Decide whether we need the (slow) prematch Bet9ja walk.
-        need_prematch = any(not bp_data["is_live"] for _ev, bp_data in per_event_payload)
+        need_prematch = any(not d["is_live"] for d in per_event_payload)
         bet9ja_maps = await build_bet9ja_maps(b9, need_prematch=need_prematch)
         print(f"  Bet9ja lookups: live={len(bet9ja_maps['live'])}, "
               f"prematch={len(bet9ja_maps['prematch'])}")
 
         # --- Phase B: per-event, fetch other 3 bookmakers in parallel. ---
-        for ev, bp_data in per_event_payload:
+        # The short labels avoid the BetPawa/Betway/Bet9ja leading-letter clash.
+        short = {"BetPawa": "BP", "SportyBet": "SB", "Bet9ja": "B9", "Betway": "BW"}
+        for bp_data in per_event_payload:
             sr_numeric = bp_data["sr_id"]
             mode = "live" if bp_data["is_live"] else "prematch"
+            ev_meta = {
+                "betpawa_id": bp_data["betpawa_id"],
+                "home": bp_data["home"],
+                "away": bp_data["away"],
+            }
 
             if sr_numeric is None:
                 # No SR id — record BetPawa-only rows.
@@ -351,7 +350,7 @@ async def run_tick(csv_path: str) -> None:
                     "SportyBet": [], "Bet9ja": [], "Betway": [],
                 }
                 all_rows.extend(event_rows(
-                    timestamp, ev, sr_numeric or "", mode, per_bookmaker,
+                    timestamp, ev_meta, "", mode, per_bookmaker,
                 ))
                 continue
 
@@ -372,18 +371,16 @@ async def run_tick(csv_path: str) -> None:
                 "Betway": bw_markets,
             }
             counts = " ".join(
-                f"{name[:2]}={len(per_bookmaker[name])}" for name in BOOKMAKERS
+                f"{short[name]}={len(per_bookmaker[name])}" for name in BOOKMAKERS
             )
-            # Deduplicate the BetPawa/Betway leading-letter clash for clarity.
-            counts = counts.replace("Be=", "BP=", 1).replace("Be=", "BW=", 1)
-            print(f"    [{mode}] {ev['home']} vs {ev['away']}: {counts}")
+            print(f"    [{mode}] {bp_data['home']} vs {bp_data['away']}: {counts}")
 
             all_rows.extend(event_rows(
-                timestamp, ev, sr_numeric, mode, per_bookmaker,
+                timestamp, ev_meta, sr_numeric, mode, per_bookmaker,
             ))
 
     append_csv(all_rows, csv_path)
-    print(f"[{timestamp}] tick end — {total_events} events, "
+    print(f"[{timestamp}] tick end — {len(per_event_payload)} events, "
           f"{len(all_rows)} rows appended to {csv_path}")
 
 
