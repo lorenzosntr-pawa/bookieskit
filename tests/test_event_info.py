@@ -1,7 +1,7 @@
 """Unit tests for bookieskit.event_info — pure-data, bound to captured fixtures."""
 
 import json
-from datetime import datetime, timezone  # noqa: F401
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 import pytest
@@ -13,7 +13,7 @@ from bookieskit.event_info import (
     extract_kickoff,  # noqa: F401
     extract_live_info,  # noqa: F401
     extract_participants,  # noqa: F401
-    is_live_now,  # noqa: F401
+    is_live_now,
 )
 
 FIXTURES = Path(__file__).parent / "fixtures" / "event_info"
@@ -46,3 +46,23 @@ def test_mode_alias_is_literal():
     # its parameters — that's the strongest check available at runtime.
     from typing import get_args
     assert set(get_args(Mode)) == {"prematch", "live"}
+
+
+def test_is_live_now_none_returns_false():
+    assert is_live_now(None) is False
+
+
+def test_is_live_now_past_kickoff_returns_true():
+    past = datetime.now(timezone.utc) - timedelta(minutes=5)
+    assert is_live_now(past) is True
+
+
+def test_is_live_now_future_kickoff_returns_false():
+    future = datetime.now(timezone.utc) + timedelta(minutes=5)
+    assert is_live_now(future) is False
+
+
+def test_is_live_now_exactly_now_returns_true():
+    # `>=` boundary — at the exact kickoff instant, treat as live.
+    now = datetime.now(timezone.utc)
+    assert is_live_now(now) is True
