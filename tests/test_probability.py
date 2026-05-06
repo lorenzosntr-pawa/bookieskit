@@ -218,3 +218,36 @@ def test_sportybet_probability_with_void_populates_both():
         assert o.true_probability is not None
         # voidProbability '0E-10' parses to 0.0
         assert o.void_probability == 0.0
+
+
+def test_msport_probability_off_keeps_outcomes_clean():
+    d = _load("msport")
+    markets = parse_markets(d, platform="msport", probability="off")
+    m = next((m for m in markets if m.canonical_id == "1x2_ft"), None)
+    assert m is not None
+    for o in m.outcomes:
+        assert o.true_probability is None
+        assert o.void_probability is None
+
+
+def test_msport_probability_true_populates_true_only():
+    d = _load("msport")
+    markets = parse_markets(d, platform="msport", probability="true")
+    m = next(m for m in markets if m.canonical_id == "1x2_ft")
+    probs = sorted(
+        [o.true_probability for o in m.outcomes if o.true_probability is not None]
+    )
+    assert probs == pytest.approx([0.2892, 0.3155, 0.3953], abs=1e-4)
+    for o in m.outcomes:
+        assert o.void_probability is None
+
+
+def test_msport_probability_with_void_only_populates_true():
+    """MSport doesn't expose voidProbability — with_void mode still
+    populates true_probability but leaves void_probability None."""
+    d = _load("msport")
+    markets = parse_markets(d, platform="msport", probability="with_void")
+    m = next(m for m in markets if m.canonical_id == "1x2_ft")
+    for o in m.outcomes:
+        assert o.true_probability is not None
+        assert o.void_probability is None  # NOT exposed by MSport

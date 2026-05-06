@@ -840,11 +840,17 @@ def _parse_msport_simple(
         odds = float(outcome_data.get("odds", 0))
         canonical = _resolve_outcome_msport(desc, mapping)
         if canonical:
+            true_p = None
+            if mode != "off":
+                true_p = _try_float(outcome_data.get("probability"))
+            # MSport doesn't expose voidProbability — leave void_probability as None
+            # even when mode == "with_void".
             outcomes.append(
                 Outcome(
                     canonical_name=canonical,
                     odds=odds,
                     platform_name=desc,
+                    true_probability=true_p,
                 )
             )
 
@@ -874,11 +880,17 @@ def _parse_msport_parameterized(
             odds = float(outcome_data.get("odds", 0))
             canonical = _resolve_outcome_msport(desc, mapping)
             if canonical:
+                true_p = None
+                if mode != "off":
+                    true_p = _try_float(outcome_data.get("probability"))
+                # MSport doesn't expose voidProbability — leave void_probability as None
+                # even when mode == "with_void".
                 line_outcomes.append(
                     Outcome(
                         canonical_name=canonical,
                         odds=odds,
                         platform_name=desc,
+                        true_probability=true_p,
                     )
                 )
 
