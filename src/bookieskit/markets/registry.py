@@ -23,6 +23,7 @@ class MarketRegistry:
         self._by_bet9ja: dict[str, MarketMapping] = {}
         self._by_betway: dict[str, MarketMapping] = {}
         self._by_msport: dict[str, MarketMapping] = {}
+        self._by_sportpesa: dict[str, MarketMapping] = {}
 
         if load_builtins:
             for mapping in BUILTIN_MAPPINGS:
@@ -41,6 +42,8 @@ class MarketRegistry:
             self._by_betway[mapping.betway_id] = mapping
         if mapping.msport_id:
             self._by_msport[mapping.msport_id] = mapping
+        if mapping.sportpesa_id:
+            self._by_sportpesa[mapping.sportpesa_id] = mapping
 
     def add(
         self,
@@ -51,6 +54,7 @@ class MarketRegistry:
         bet9ja_key: str | None = None,
         betway_id: str | None = None,
         msport_id: str | None = None,
+        sportpesa_id: str | None = None,
         outcomes: dict[str, OutcomeMapping] | None = None,
         parameterized: bool = False,
     ) -> None:
@@ -64,6 +68,7 @@ class MarketRegistry:
             bet9ja_key: Bet9ja key prefix (or None)
             betway_id: Betway market name (or None)
             msport_id: MSport market ID (or None)
+            sportpesa_id: SportPesa market ID (or None)
             outcomes: Dict of canonical_name -> OutcomeMapping
             parameterized: True if market has lines (O/U, handicaps)
         """
@@ -75,6 +80,7 @@ class MarketRegistry:
             bet9ja_key=bet9ja_key,
             betway_id=betway_id,
             msport_id=msport_id,
+            sportpesa_id=sportpesa_id,
             outcomes=outcomes or {},
             parameterized=parameterized,
         )
@@ -109,6 +115,7 @@ class MarketRegistry:
             "bet9ja": self._by_bet9ja,
             "betway": self._by_betway,
             "msport": self._by_msport,
+            "sportpesa": self._by_sportpesa,
         }.get(platform, {})
         return index.get(platform_id)
 

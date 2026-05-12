@@ -130,3 +130,22 @@ def test_registry_add_with_msport_id():
     mapping = registry.get_by_platform_id("msport", "42")
     assert mapping is not None
     assert mapping.canonical_id == "custom"
+
+
+def test_registry_resolves_by_sportpesa_id():
+    from bookieskit.markets.registry import MarketRegistry
+    registry = MarketRegistry(load_builtins=False)
+    registry.add(
+        canonical_id="test_market",
+        name="Test",
+        sportpesa_id="42",
+    )
+    m = registry.get_by_platform_id("sportpesa", "42")
+    assert m is not None
+    assert m.canonical_id == "test_market"
+
+
+def test_registry_sportpesa_lookup_returns_none_for_unknown_id():
+    from bookieskit.markets.registry import MarketRegistry
+    registry = MarketRegistry(load_builtins=False)
+    assert registry.get_by_platform_id("sportpesa", "999") is None
