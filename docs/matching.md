@@ -13,6 +13,7 @@ Pulls the SR id out of a raw event-detail response. Returns the bare numeric id 
 | `bet9ja` | `D.EXTID` | Prematch detail only. Live detail (`get_live_event_detail`) stores EXTID at `D.A.EXTID` — the extractor does **not** handle that path and returns `None` for live responses. |
 | `betway` | `sportEvent.eventId` | The id IS the SR numeric — already prefix-free. |
 | `msport` | `data.eventId` | Strips `sr:match:`. |
+| `sportpesa` | `data[0].additional_info.sportradar_id` | Best-evidence path; fixture-resolved. The extractor probes three sibling fallbacks (`betradar_id`, `sr_id`, and `data[0].external_id`) until the captured payload confirms one. Strips `sr:match:`. |
 
 Unknown platforms return `None`.
 
@@ -29,9 +30,10 @@ class MatchedEvent:
     bet9ja: dict | None = None
     betway: dict | None = None
     msport: dict | None = None
+    sportpesa: dict | None = None
 ```
 
-All 5 per-platform fields default to `None`, so callers can pass any subset of platforms.
+All 6 per-platform fields default to `None`, so callers can pass any subset of platforms.
 
 ## End-to-end example
 
@@ -76,6 +78,7 @@ When you have a SR id, the easiest path differs by platform:
 - **Betway**: pass the bare numeric SR id directly to `get_markets(event_id)`.
 - **Bet9ja**: SR id → internal id via `find_event_id_by_sr_id` (live, fast) or `build_prematch_event_map(sport_id="1")` (prematch — walks all soccer tournaments).
 - **BetPawa**: no SR-id reverse search yet. Start workflows from a BetPawa internal id; extract the SR id from the SPORTRADAR widget on the event-detail response.
+- **SportPesa**: no SR-id reverse search yet — same gap as BetPawa. Start workflows from a SportPesa internal id; extract the SR id from event-detail.
 
 ## When `extract_sportradar_id` is not enough
 
@@ -84,5 +87,5 @@ For events fed from non-SportRadar providers (notably **GeniusSport**), no SR id
 ## See also
 
 - [docs/markets.md](markets.md) — what to do once you have the per-bookmaker event ids.
-- `examples/odds_for_sr_id.py` — single-event compare across all 5.
+- `examples/odds_for_sr_id.py` — single-event compare across all 6.
 - `examples/odds_for_betpawa_competition.py` — full-tournament compare via BetPawa as the seed.

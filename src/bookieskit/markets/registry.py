@@ -103,7 +103,7 @@ class MarketRegistry:
         """Return the MarketMapping for a platform-specific ID.
 
         Args:
-            platform: "betpawa", "sportybet", "bet9ja", "betway", or "msport".
+            platform: "betpawa", "sportybet", "bet9ja", "betway", "msport", or "sportpesa".
             platform_id: Platform-specific market ID or key.
 
         Returns:

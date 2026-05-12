@@ -8,7 +8,7 @@
 
 ## Rate limits
 
-Bet9ja is the most rate-sensitive of the 5 bookmakers. The client uses tighter defaults:
+Bet9ja is one of the more rate-sensitive of the 6 bookmakers (alongside SportPesa). The client uses tighter defaults:
 
 - `MAX_CONCURRENT = 15`
 - `REQUEST_DELAY = 0.025` (25 ms)

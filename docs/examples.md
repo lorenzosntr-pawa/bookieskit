@@ -12,7 +12,7 @@ python examples/count_5bookies.py
 
 ## `odds_for_sr_id.py`
 
-Given a SportRadar event id, fetch normalized odds for the mapped markets across all 5 bookmakers. Defaults to live; pass `--prematch` for upcoming events.
+Given a SportRadar event id, fetch normalized odds for the mapped markets across all 6 bookmakers. Defaults to live; pass `--prematch` for upcoming events.
 
 ```bash
 python examples/odds_for_sr_id.py 69339436
@@ -29,8 +29,8 @@ Resolution per bookmaker:
 Same as above, but seeded with a BetPawa internal id. The script:
 1. Hits BetPawa's event detail.
 2. Extracts the SR id from the SPORTRADAR widget.
-3. Dispatches the other 4 bookmakers in parallel.
-4. Writes one CSV row per (market, line, outcome) with five bookmaker columns.
+3. Dispatches the other 5 bookmakers in parallel.
+4. Writes one CSV row per (market, line, outcome) with six bookmaker columns.
 
 ```bash
 python examples/odds_from_betpawa_id.py 34716684
@@ -42,7 +42,7 @@ The resulting CSV is a tidy, rectangular grid suitable for opening in Excel / Nu
 
 ## `odds_for_betpawa_competition.py`
 
-Walks every event in a BetPawa competition and produces a CSV with one row per (event, market, line, outcome) and five bookmaker columns.
+Walks every event in a BetPawa competition and produces a CSV with one row per (event, market, line, outcome) and six bookmaker columns.
 
 ```bash
 python examples/odds_for_betpawa_competition.py 12546
