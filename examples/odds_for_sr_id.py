@@ -22,13 +22,17 @@ Resolution per bookmaker:
 import asyncio
 import sys
 
-from bookieskit import Bet9ja, Betway, MSport, SportyBet
-from bookieskit.markets import parse_markets
-
 # SportPesa is imported but currently unused in the fan-out because there is
 # no SR-id → SportPesa-internal-id lookup yet. Kept here to make extension
 # obvious once a reverse-search path lands.
-from bookieskit import SportPesa  # noqa: F401
+from bookieskit import (
+    Bet9ja,
+    Betway,
+    MSport,
+    SportPesa,  # noqa: F401
+    SportyBet,
+)
+from bookieskit.markets import parse_markets
 
 
 def _normalize_sr_id(s: str) -> tuple[str, str]:

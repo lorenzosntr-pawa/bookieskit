@@ -1,0 +1,49 @@
+{
+  "sports": [
+    {
+      "id": 1,
+      "name": "Football",
+      "eventNumber": 5
+    },
+    {
+      "id": 2,
+      "name": "Basketball",
+      "eventNumber": 2
+    },
+    {
+      "id": 4,
+      "name": "Tennis",
+      "eventNumber": 21
+    },
+    {
+      "id": 8,
+      "name": "Rugby",
+      "eventNumber": 0
+    },
+    {
+      "id": 5,
+      "name": "Handball",
+      "eventNumber": 0
+    },
+    {
+      "id": 10,
+      "name": "Volleyball",
+      "eventNumber": 1
+    },
+    {
+      "id": 9,
+      "name": "Cricket",
+      "eventNumber": 0
+    },
+    {
+      "id": 13,
+      "name": "Table Tennis",
+      "eventNumber": 13
+    },
+    {
+      "id": 16,
+      "name": "Beach Volley",
+      "eventNumber": 1
+    }
+  ]
+}

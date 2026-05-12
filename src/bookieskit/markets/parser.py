@@ -57,6 +57,7 @@ def parse_markets(
         "bet9ja": _parse_bet9ja,
         "betway": _parse_betway,
         "msport": _parse_msport,
+        "sportpesa": _parse_sportpesa,
     }
     parser = parsers.get(platform)
     if parser is None:
@@ -918,5 +919,137 @@ def _resolve_outcome_msport(
             return om.canonical_name
     for om in mapping.outcomes.values():
         if om.msport and platform_name.startswith(om.msport):
+            return om.canonical_name
+    return None
+
+
+def _parse_sportpesa(
+    response, registry: MarketRegistry, _mode: ProbabilityMode = "off"
+) -> list[NormalizedMarket]:
+    """Parse a SportPesa ``/api/games/markets`` payload.
+
+    Response shape: ``{<game_id>: [<market>, ...]}``. Each market has
+    ``id``, ``name``, ``specValue``, ``selections``. Parameterized
+    markets (e.g. Total Goals Over/Under) repeat the same ``id`` once
+    per line, each entry's ``specValue`` carrying the line value.
+
+    SportPesa does not expose ``probability`` / ``void_probability``
+    on selections — ``_mode`` is accepted for symmetry but both
+    Outcome probability fields stay ``None``.
+    """
+    if not isinstance(response, dict) or not response:
+        return []
+    # The payload is keyed by game id; take the first (callers pass a
+    # single-game response from get_event_markets).
+    first_value = next(iter(response.values()), None)
+    if not isinstance(first_value, list):
+        return []
+    markets = first_value
+
+    results: list[NormalizedMarket] = []
+    parameterized_groups: dict[str, list[dict]] = {}
+
+    for md in markets:
+        if not isinstance(md, dict):
+            continue
+        market_id = str(md.get("id", ""))
+        mapping = registry.get_by_platform_id("sportpesa", market_id)
+        if mapping is None:
+            continue
+        if mapping.parameterized:
+            parameterized_groups.setdefault(market_id, []).append(md)
+        else:
+            results.append(_parse_sportpesa_simple(md, mapping))
+
+    for market_id, entries in parameterized_groups.items():
+        mapping = registry.get_by_platform_id("sportpesa", market_id)
+        if mapping:
+            results.append(_parse_sportpesa_parameterized(entries, mapping))
+
+    return results
+
+
+def _parse_sportpesa_simple(
+    market_data: dict, mapping: MarketMapping
+) -> NormalizedMarket:
+    """Parse a simple SportPesa market (1X2, BTTS, DC)."""
+    outcomes: list[Outcome] = []
+    for sel in market_data.get("selections", []):
+        if not isinstance(sel, dict):
+            continue
+        short = str(sel.get("shortName", ""))
+        try:
+            odds = float(sel.get("odds", 0))
+        except (TypeError, ValueError):
+            continue
+        canonical = _resolve_outcome_sportpesa(short, mapping)
+        if canonical:
+            outcomes.append(
+                Outcome(
+                    canonical_name=canonical,
+                    odds=odds,
+                    platform_name=short,
+                )
+            )
+    return NormalizedMarket(
+        canonical_id=mapping.canonical_id,
+        name=mapping.name,
+        outcomes=outcomes,
+        lines=None,
+    )
+
+
+def _parse_sportpesa_parameterized(
+    entries: list[dict], mapping: MarketMapping
+) -> NormalizedMarket:
+    """Parse a parameterized SportPesa market (Over/Under, handicaps).
+
+    Each entry is one (market_id, specValue) pair with its selections.
+    """
+    lines: dict[float, list[Outcome]] = {}
+    for entry in entries:
+        try:
+            line = float(entry.get("specValue"))
+        except (TypeError, ValueError):
+            continue
+        line_outcomes: list[Outcome] = []
+        for sel in entry.get("selections", []):
+            if not isinstance(sel, dict):
+                continue
+            short = str(sel.get("shortName", ""))
+            try:
+                odds = float(sel.get("odds", 0))
+            except (TypeError, ValueError):
+                continue
+            canonical = _resolve_outcome_sportpesa(short, mapping)
+            if canonical:
+                line_outcomes.append(
+                    Outcome(
+                        canonical_name=canonical,
+                        odds=odds,
+                        platform_name=short,
+                    )
+                )
+        if line_outcomes:
+            lines[line] = line_outcomes
+    return NormalizedMarket(
+        canonical_id=mapping.canonical_id,
+        name=mapping.name,
+        outcomes=[],
+        lines=lines,
+    )
+
+
+def _resolve_outcome_sportpesa(
+    short_name: str, mapping: MarketMapping
+) -> str | None:
+    """Find canonical outcome name from a SportPesa selection ``shortName``.
+
+    Exact match — SportPesa's ``shortName`` is a discrete token (``1``,
+    ``X``, ``OV``, ``UN``, ``Yes``, ``1X``, ...) with no embedded line
+    value, so no prefix-match fallback is required.
+    """
+    for om in mapping.outcomes.values():
+        if om.sportpesa and om.sportpesa == short_name:
             return om.canonical_name
     return None

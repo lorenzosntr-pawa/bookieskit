@@ -35,13 +35,18 @@ from collections import defaultdict
 # Public surface of the library: the 6 client classes plus the parser
 # (raw response -> NormalizedMarket list) and extractor (raw response
 # -> SportRadar id).
-from bookieskit import Bet9ja, BetPawa, Betway, MSport, SportyBet
-from bookieskit.markets import parse_markets
-from bookieskit.matching import extract_sportradar_id
-
 # SportPesa kept as an explicit import for discoverability; not wired
 # into the fan-out below.
-from bookieskit import SportPesa  # noqa: F401
+from bookieskit import (
+    Bet9ja,
+    BetPawa,
+    Betway,
+    MSport,
+    SportPesa,  # noqa: F401
+    SportyBet,
+)
+from bookieskit.markets import parse_markets
+from bookieskit.matching import extract_sportradar_id
 
 
 # ----------------------------------------------------------------------

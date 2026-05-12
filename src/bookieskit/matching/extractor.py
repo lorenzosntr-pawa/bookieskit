@@ -89,23 +89,26 @@ def _extract_msport(response: dict) -> str | None:
     return None
 
 
-def _extract_sportpesa(response: dict) -> str | None:
-    """Extract from SportPesa data[0].additional_info.sportradar_id.
+def _extract_sportpesa(response) -> str | None:
+    """Extract from SportPesa ``[0].betradarId``.
 
-    Path is fixture-resolved — checks four candidate locations. After
-    fixture capture lands, prune the unused fallback branches.
+    SportPesa returns event-detail as a list of length 1 (not a dict
+    wrapper). The SportRadar id is the bare integer at
+    ``[0].betradarId`` — already prefix-free. A value of ``0`` means
+    not-supplied (the field is always present in the response shape).
     """
-    games = response.get("data") or response.get("games") or []
+    if isinstance(response, list):
+        games = response
+    elif isinstance(response, dict):
+        games = response.get("data") or response.get("games") or []
+    else:
+        return None
     if not isinstance(games, list) or not games:
         return None
     game = games[0]
-    info = game.get("additional_info") or {}
-    sr = (
-        info.get("sportradar_id")
-        or info.get("betradar_id")
-        or info.get("sr_id")
-        or game.get("external_id")
-    )
-    if not sr:
+    if not isinstance(game, dict):
+        return None
+    sr = game.get("betradarId")
+    if sr in (None, 0, "0", ""):
         return None
     return _strip_sr_prefix(str(sr))

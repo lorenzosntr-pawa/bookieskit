@@ -63,19 +63,27 @@ class SportPesa(BaseBookmaker):
     async def get_event_detail(
         self, event_id: str, live: bool = False
     ) -> dict[str, Any]:
-        """Get event detail (metadata + SR id, NOT full markets).
+        """Get event detail (metadata + SR id + a subset of markets).
+
+        SportPesa serves the same `/api/upcoming/games?gameId=...` endpoint
+        for both prematch and in-play events — `state` is empty in both
+        cases and there is no separate `/api/live/games?gameId=...` route.
+        The ``live`` argument is accepted for API symmetry but ignored.
 
         Args:
-            event_id: SportPesa internal game id (e.g., "8868005")
-            live: If True, query the live endpoint family.
+            event_id: SportPesa internal game id (e.g. ``"8868005"``).
+            live: Accepted for symmetry; ignored.
 
         Returns:
-            Raw JSON. SR id lives at <RESOLVED.md path>.
+            Raw JSON: a list of length 1 whose `[0]` element has
+            ``betradarId``, ``dateTimestamp``, ``competitors``, ``sport``,
+            ``competition``, ``markets`` (subset). The full markets feed
+            is at ``get_event_markets``.
         """
-        path = "/api/live/games" if live else "/api/upcoming/games"
+        del live  # accepted for symmetry with other clients
         return await self._request(
             "GET",
-            path,
+            "/api/upcoming/games",
             params={
                 "gameId": event_id,
                 "sportId": "1",
@@ -91,7 +99,8 @@ class SportPesa(BaseBookmaker):
             event_id: SportPesa internal game id
 
         Returns:
-            Raw JSON with data[0].markets[].
+            Raw JSON shaped as ``{<game_id>: [<market>, ...]}``. Each
+            market has ``id``, ``name``, ``specValue``, ``selections``.
         """
         return await self._request(
             "GET",
@@ -120,85 +129,64 @@ class SportPesa(BaseBookmaker):
         raw = await self.get_event_markets(event_id=event_id)
         return parse_markets(raw, platform=self.PLATFORM_KEY, registry=registry)
 
-    async def get_sports(self, live: bool = False) -> dict[str, Any]:
-        """Get all available sports.
+    async def get_sports(self, live: bool = True) -> dict[str, Any]:
+        """Get the available sports list.
+
+        SportPesa only exposes a dedicated sports endpoint for the live
+        catalogue (``/api/live/sports``). The prematch catalogue has no
+        sports endpoint — derive it by walking ``get_events`` per sport,
+        or accept the live list as a reasonable approximation (SportPesa
+        carries the same sports prematch and live).
 
         Args:
-            live: If True, fetch the live-sports endpoint.
+            live: Default ``True``. Calling with ``live=False`` is a
+                no-op — the endpoint is the same; kept for API symmetry.
 
         Returns:
-            Raw JSON.
+            Raw JSON shaped as ``{"sports": [{"id": int, "name": str,
+            "eventNumber": int}, ...]}``. ``eventNumber`` is the count
+            of currently-live events on that sport.
         """
-        # fixture-resolve: confirm exact path per RESOLVED.md
-        path = "/api/live/sports" if live else "/api/sports"
-        return await self._request("GET", path)
-
-    async def get_countries(
-        self, sport_id: str = "1", live: bool = False
-    ) -> dict[str, Any]:
-        """Get countries/categories for a sport.
-
-        Args:
-            sport_id: SportPesa sport id (default "1" for Football)
-            live: If True, query the live endpoint family.
-
-        Returns:
-            Raw JSON.
-        """
-        # fixture-resolve: confirm exact path per RESOLVED.md
-        path = "/api/live/categories" if live else "/api/upcoming/categories"
-        return await self._request("GET", path, params={"sportId": sport_id})
-
-    async def get_tournaments(
-        self,
-        sport_id: str = "1",
-        category_id: str | None = None,
-        live: bool = False,
-    ) -> dict[str, Any]:
-        """Get tournaments/competitions for a sport.
-
-        Args:
-            sport_id: SportPesa sport id (default "1" for Football)
-            category_id: Optional country/category id filter
-            live: If True, query the live endpoint family.
-
-        Returns:
-            Raw JSON.
-        """
-        # fixture-resolve: confirm exact path per RESOLVED.md
-        path = "/api/live/competitions" if live else "/api/upcoming/competitions"
-        params: dict[str, Any] = {"sportId": sport_id}
-        if category_id:
-            params["categoryId"] = category_id
-        return await self._request("GET", path, params=params)
+        del live  # symmetry only — SportPesa has just the one sports endpoint
+        return await self._request("GET", "/api/live/sports")
 
     async def get_events(
         self,
         sport_id: str = "1",
         competition_id: str | None = None,
         live: bool = False,
-        page: int = 0,
-        per_page: int = 50,
-    ) -> dict[str, Any]:
-        """Get events for a sport / competition.
+        pag_count: int | None = None,
+    ) -> list[dict[str, Any]]:
+        """Get events for a sport (prematch via ``/api/upcoming/games``;
+        live via ``/api/highlights/{sport_id}?live=true``).
 
         Args:
-            sport_id: SportPesa sport id (default "1" for Football)
-            competition_id: Optional competition id filter
-            live: If True, query the live endpoint family.
-            page: Pagination page (default 0)
-            per_page: Page size (default 50)
+            sport_id: SportPesa sport id (default ``"1"`` for Football).
+            competition_id: Optional competition id filter — passed as
+                ``competitionId`` to ``/api/upcoming/games`` when set.
+            live: If ``True``, query ``/api/highlights/{sport_id}?live=true``.
+            pag_count: Optional page size; absent param means full list.
 
         Returns:
-            Raw JSON.
+            Raw JSON list of game objects (each carrying ``id``,
+            ``betradarId``, ``competition``, ``country``, ``sport``,
+            ``competitors``, ``dateTimestamp``).
         """
-        # fixture-resolve: confirm exact path + param names per RESOLVED.md
-        path = "/api/live/games" if live else "/api/upcoming/games"
-        params: dict[str, Any] = {
-            "sportId": sport_id,
-            "page": str(page),
-            "per_page": str(per_page),
-        }
+        if live:
+            params: dict[str, Any] = {"live": "true"}
+            if pag_count is not None:
+                params["pag_count"] = str(pag_count)
+            return await self._request(
+                "GET", f"/api/highlights/{sport_id}", params=params
+            )
+        params = {"sportId": sport_id}
         if competition_id:
             params["competitionId"] = competition_id
-        return await self._request("GET", path, params=params)
+        if pag_count is not None:
+            params["pag_count"] = str(pag_count)
+        return await self._request("GET", "/api/upcoming/games", params=params)
+
+    # NOTE: SportPesa has no dedicated tournament / competition list endpoint.
+    # The closest you can do is group `get_events(sport_id=...)` by
+    # `competition.id`. `get_countries` / `get_tournaments` are intentionally
+    # absent from this client — adding placeholders would be misleading.

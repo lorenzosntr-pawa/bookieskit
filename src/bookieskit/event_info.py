@@ -300,6 +300,63 @@ def _live_info_msport(response: dict, mode: Mode | None) -> LiveInfo:
     )
 
 
+# ---- SportPesa ------------------------------------------------------------
+
+def _sportpesa_first_game(response) -> dict | None:
+    """SportPesa event-detail is a list of length 1; tolerate dict wrappers."""
+    if isinstance(response, list):
+        games = response
+    elif isinstance(response, dict):
+        games = response.get("data") or response.get("games") or []
+    else:
+        return None
+    if not isinstance(games, list) or not games:
+        return None
+    g = games[0]
+    return g if isinstance(g, dict) else None
+
+
+def _kickoff_sportpesa(response, _mode: Mode | None) -> datetime | None:
+    g = _sportpesa_first_game(response)
+    if g is None:
+        return None
+    ms = g.get("dateTimestamp")
+    if isinstance(ms, (int, float)):
+        try:
+            return datetime.fromtimestamp(ms / 1000, tz=timezone.utc)
+        except (ValueError, OSError):
+            return None
+    iso = g.get("date")
+    if isinstance(iso, str):
+        try:
+            return datetime.fromisoformat(iso.replace("Z", "+00:00"))
+        except ValueError:
+            return None
+    return None
+
+
+def _participants_sportpesa(response, _mode: Mode | None) -> Participants:
+    g = _sportpesa_first_game(response)
+    if g is None:
+        return _EMPTY_PARTICIPANTS
+    comps = g.get("competitors") or []
+    if not isinstance(comps, list) or len(comps) < 2:
+        return _EMPTY_PARTICIPANTS
+    home = comps[0].get("name") if isinstance(comps[0], dict) else None
+    away = comps[1].get("name") if isinstance(comps[1], dict) else None
+    return Participants(home=home or None, away=away or None)
+
+
+def _live_info_sportpesa(response, _mode: Mode | None) -> LiveInfo:
+    # SportPesa's event-detail `state` is empty `{}` on both prematch and
+    # in-play captures — minute / period / score are not exposed by this
+    # endpoint. A dedicated live-info endpoint exists but is not yet
+    # discovered; this function intentionally returns the empty dataclass
+    # so callers don't see fabricated values.
+    del response, _mode
+    return _EMPTY_LIVE_INFO
+
+
 # ---- Dispatch tables -------------------------------------------------------
 
 _KICKOFF_DISPATCH: dict[str, Callable[[dict, Mode | None], datetime | None]] = {
@@ -308,6 +365,7 @@ _KICKOFF_DISPATCH: dict[str, Callable[[dict, Mode | None], datetime | None]] = {
     "bet9ja": _kickoff_bet9ja,
     "betway": _kickoff_betway,
     "msport": _kickoff_msport,
+    "sportpesa": _kickoff_sportpesa,
 }
 
 _PARTICIPANTS_DISPATCH: dict[str, Callable[[dict, Mode | None], Participants]] = {
@@ -316,6 +374,7 @@ _PARTICIPANTS_DISPATCH: dict[str, Callable[[dict, Mode | None], Participants]] =
     "bet9ja": _participants_bet9ja,
     "betway": _participants_betway,
     "msport": _participants_msport,
+    "sportpesa": _participants_sportpesa,
 }
 
 _LIVE_INFO_DISPATCH: dict[str, Callable[[dict, Mode | None], LiveInfo]] = {
@@ -324,6 +383,7 @@ _LIVE_INFO_DISPATCH: dict[str, Callable[[dict, Mode | None], LiveInfo]] = {
     "bet9ja": _live_info_bet9ja,
     "betway": _live_info_betway,
     "msport": _live_info_msport,
+    "sportpesa": _live_info_sportpesa,
 }
 
 

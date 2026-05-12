@@ -1,0 +1,652 @@
+[
+  {
+    "id": 8887261,
+    "betgeniusId": 0,
+    "betradarId": 71348330,
+    "smsId": 5511,
+    "hasCustomBet": 0,
+    "competition": {
+      "id": 97675,
+      "name": "Queensland Npl, Women"
+    },
+    "country": {
+      "id": 11,
+      "name": "Australia",
+      "iso": "aus"
+    },
+    "sport": {
+      "id": 1,
+      "name": "Football"
+    },
+    "competitors": [
+      {
+        "id": 702177,
+        "name": "Gold Coast Knights W"
+      },
+      {
+        "id": 613463,
+        "name": "Gold Coast United W"
+      }
+    ],
+    "dateTimestamp": 1778581800000,
+    "date": "2026-05-12T10:30:00.000Z",
+    "state": {},
+    "marketsCount": 21,
+    "markets": [
+      {
+        "id": 10,
+        "name": "3 Way",
+        "columns": 3,
+        "columnsApp": 3,
+        "selections": [
+          {
+            "id": 2666935441,
+            "name": "Gold Coast Knights W",
+            "odds": "1.04",
+            "shortName": "1",
+            "specValue": 0
+          },
+          {
+            "id": 2666935579,
+            "name": "Draw",
+            "odds": "9.00",
+            "shortName": "X",
+            "specValue": 0
+          },
+          {
+            "id": 2666935721,
+            "name": "Gold Coast United W",
+            "odds": "20.00",
+            "shortName": "2",
+            "specValue": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 8887197,
+    "betgeniusId": 0,
+    "betradarId": 71240286,
+    "smsId": 5993,
+    "hasCustomBet": 0,
+    "competition": {
+      "id": 123597,
+      "name": "Northern Territory Premier League"
+    },
+    "country": {
+      "id": 11,
+      "name": "Australia",
+      "iso": "aus"
+    },
+    "sport": {
+      "id": 1,
+      "name": "Football"
+    },
+    "competitors": [
+      {
+        "id": 558896,
+        "name": "Hellenic Athletic Club"
+      },
+      {
+        "id": 687087,
+        "name": "Darwin Hearts FC"
+      }
+    ],
+    "dateTimestamp": 1778581800000,
+    "date": "2026-05-12T10:30:00.000Z",
+    "state": {},
+    "marketsCount": 21,
+    "markets": [
+      {
+        "id": 10,
+        "name": "3 Way",
+        "columns": 3,
+        "columnsApp": 3,
+        "selections": [
+          {
+            "id": 2666932149,
+            "name": "Hellenic Athletic Club",
+            "odds": "4.20",
+            "shortName": "1",
+            "specValue": 0
+          },
+          {
+            "id": 2666932155,
+            "name": "Draw",
+            "odds": "4.50",
+            "shortName": "X",
+            "specValue": 0
+          },
+          {
+            "id": 2666932161,
+            "name": "Darwin Hearts FC",
+            "odds": "1.57",
+            "shortName": "2",
+            "specValue": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 8881529,
+    "betgeniusId": 0,
+    "betradarId": 67817692,
+    "smsId": 4384,
+    "hasCustomBet": 0,
+    "competition": {
+      "id": 67736,
+      "name": "K-League Classic"
+    },
+    "country": {
+      "id": 165,
+      "name": "South Korea",
+      "iso": "kor"
+    },
+    "sport": {
+      "id": 1,
+      "name": "Football"
+    },
+    "competitors": [
+      {
+        "id": 84982,
+        "name": "Gwangju"
+      },
+      {
+        "id": 1073,
+        "name": "FC Seoul"
+      }
+    ],
+    "dateTimestamp": 1778581800000,
+    "date": "2026-05-12T10:30:00.000Z",
+    "state": {},
+    "marketsCount": 22,
+    "markets": [
+      {
+        "id": 10,
+        "name": "3 Way",
+        "columns": 3,
+        "columnsApp": 3,
+        "selections": [
+          {
+            "id": 2666477671,
+            "name": "Gwangju",
+            "odds": "6.80",
+            "shortName": "1",
+            "specValue": 0
+          },
+          {
+            "id": 2666477809,
+            "name": "Draw",
+            "odds": "4.10",
+            "shortName": "X",
+            "specValue": 0
+          },
+          {
+            "id": 2666477877,
+            "name": "FC Seoul",
+            "odds": "1.37",
+            "shortName": "2",
+            "specValue": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 8881789,
+    "betgeniusId": 0,
+    "betradarId": 67817690,
+    "smsId": 3696,
+    "hasCustomBet": 0,
+    "competition": {
+      "id": 67736,
+      "name": "K-League Classic"
+    },
+    "country": {
+      "id": 165,
+      "name": "South Korea",
+      "iso": "kor"
+    },
+    "sport": {
+      "id": 1,
+      "name": "Football"
+    },
+    "competitors": [
+      {
+        "id": 84979,
+        "name": "Gangwon"
+      },
+      {
+        "id": 84984,
+        "name": "Daejeon Citizen"
+      }
+    ],
+    "dateTimestamp": 1778581800000,
+    "date": "2026-05-12T10:30:00.000Z",
+    "state": {},
+    "marketsCount": 22,
+    "markets": [
+      {
+        "id": 10,
+        "name": "3 Way",
+        "columns": 3,
+        "columnsApp": 3,
+        "selections": [
+          {
+            "id": 2666501697,
+            "name": "Gangwon",
+            "odds": "2.22",
+            "shortName": "1",
+            "specValue": 0
+          },
+          {
+            "id": 2666501821,
+            "name": "Draw",
+            "odds": "2.95",
+            "shortName": "X",
+            "specValue": 0
+          },
+          {
+            "id": 2666501925,
+            "name": "Daejeon Citizen",
+            "odds": "3.05",
+            "shortName": "2",
+            "specValue": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 8881805,
+    "betgeniusId": 0,
+    "betradarId": 67817694,
+    "smsId": 4882,
+    "hasCustomBet": 0,
+    "competition": {
+      "id": 67736,
+      "name": "K-League Classic"
+    },
+    "country": {
+      "id": 165,
+      "name": "South Korea",
+      "iso": "kor"
+    },
+    "sport": {
+      "id": 1,
+      "name": "Football"
+    },
+    "competitors": [
+      {
+        "id": 84974,
+        "name": "Incheon Utd"
+      },
+      {
+        "id": 1076,
+        "name": "Pohang Steelers"
+      }
+    ],
+    "dateTimestamp": 1778581800000,
+    "date": "2026-05-12T10:30:00.000Z",
+    "state": {},
+    "marketsCount": 22,
+    "markets": [
+      {
+        "id": 10,
+        "name": "3 Way",
+        "columns": 3,
+        "columnsApp": 3,
+        "selections": [
+          {
+            "id": 2666503635,
+            "name": "Incheon Utd",
+            "odds": "2.95",
+            "shortName": "1",
+            "specValue": 0
+          },
+          {
+            "id": 2666503737,
+            "name": "Draw",
+            "odds": "2.80",
+            "shortName": "X",
+            "specValue": 0
+          },
+          {
+            "id": 2666503797,
+            "name": "Pohang Steelers",
+            "odds": "2.36",
+            "shortName": "2",
+            "specValue": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 8887309,
+    "betgeniusId": 0,
+    "betradarId": 71240276,
+    "smsId": 4209,
+    "hasCustomBet": 0,
+    "competition": {
+      "id": 123607,
+      "name": "West State League 1, Reserves"
+    },
+    "country": {
+      "id": 11,
+      "name": "Australia",
+      "iso": "aus"
+    },
+    "sport": {
+      "id": 1,
+      "name": "Football"
+    },
+    "competitors": [
+      {
+        "id": 730273,
+        "name": "Gwelup Croatia SC Reserves"
+      },
+      {
+        "id": 729865,
+        "name": "Cockburn City SC Reserves"
+      }
+    ],
+    "dateTimestamp": 1778583600000,
+    "date": "2026-05-12T11:00:00.000Z",
+    "state": {},
+    "marketsCount": 21,
+    "markets": [
+      {
+        "id": 10,
+        "name": "3 Way",
+        "columns": 3,
+        "columnsApp": 3,
+        "selections": [
+          {
+            "id": 2666937491,
+            "name": "Gwelup Croatia SC Reserves",
+            "odds": "1.47",
+            "shortName": "1",
+            "specValue": 0
+          },
+          {
+            "id": 2666937497,
+            "name": "Draw",
+            "odds": "4.60",
+            "shortName": "X",
+            "specValue": 0
+          },
+          {
+            "id": 2666937503,
+            "name": "Cockburn City SC Reserves",
+            "odds": "4.60",
+            "shortName": "2",
+            "specValue": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 8887087,
+    "betgeniusId": 0,
+    "betradarId": 70478154,
+    "smsId": 1444,
+    "hasCustomBet": 0,
+    "competition": {
+      "id": 79606,
+      "name": "Premier League"
+    },
+    "country": {
+      "id": 20480,
+      "name": "Tanzania",
+      "iso": "tza"
+    },
+    "sport": {
+      "id": 1,
+      "name": "Football"
+    },
+    "competitors": [
+      {
+        "id": 609929,
+        "name": "Singida BS"
+      },
+      {
+        "id": 586197,
+        "name": "Namungo FC"
+      }
+    ],
+    "dateTimestamp": 1778583600000,
+    "date": "2026-05-12T11:00:00.000Z",
+    "state": {},
+    "marketsCount": 21,
+    "markets": [
+      {
+        "id": 10,
+        "name": "3 Way",
+        "columns": 3,
+        "columnsApp": 3,
+        "selections": [
+          {
+            "id": 2666925497,
+            "name": "Singida BS",
+            "odds": "1.42",
+            "shortName": "1",
+            "specValue": 0
+          },
+          {
+            "id": 2666925503,
+            "name": "Draw",
+            "odds": "3.80",
+            "shortName": "X",
+            "specValue": 0
+          },
+          {
+            "id": 2666925509,
+            "name": "Namungo FC",
+            "odds": "7.00",
+            "shortName": "2",
+            "specValue": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 8887823,
+    "betgeniusId": 0,
+    "betradarId": 71161224,
+    "smsId": 3019,
+    "hasCustomBet": 0,
+    "competition": {
+      "id": 123607,
+      "name": "West State League 1, Reserves"
+    },
+    "country": {
+      "id": 11,
+      "name": "Australia",
+      "iso": "aus"
+    },
+    "sport": {
+      "id": 1,
+      "name": "Football"
+    },
+    "competitors": [
+      {
+        "id": 729867,
+        "name": "Murdoch University Melville FC Reserves"
+      },
+      {
+        "id": 732651,
+        "name": "Joondalup City FC Reserve"
+      }
+    ],
+    "dateTimestamp": 1778584500000,
+    "date": "2026-05-12T11:15:00.000Z",
+    "state": {},
+    "marketsCount": 21,
+    "markets": [
+      {
+        "id": 10,
+        "name": "3 Way",
+        "columns": 3,
+        "columnsApp": 3,
+        "selections": [
+          {
+            "id": 2666967507,
+            "name": "Murdoch University Melville FC Reserves",
+            "odds": "2.43",
+            "shortName": "1",
+            "specValue": 0
+          },
+          {
+            "id": 2666967513,
+            "name": "Draw",
+            "odds": "4.10",
+            "shortName": "X",
+            "specValue": 0
+          },
+          {
+            "id": 2666967517,
+            "name": "Joondalup City FC Reserve",
+            "odds": "2.16",
+            "shortName": "2",
+            "specValue": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 8871505,
+    "betgeniusId": 0,
+    "betradarId": 61651656,
+    "smsId": 5071,
+    "hasCustomBet": 0,
+    "competition": {
+      "id": 67604,
+      "name": "Premier League"
+    },
+    "country": {
+      "id": 187,
+      "name": "Ukraine",
+      "iso": "ukr"
+    },
+    "sport": {
+      "id": 1,
+      "name": "Football"
+    },
+    "competitors": [
+      {
+        "id": 594345,
+        "name": "Epicentr Dunaivtsi"
+      },
+      {
+        "id": 547760,
+        "name": "Polissya Zhytomyr"
+      }
+    ],
+    "dateTimestamp": 1778589000000,
+    "date": "2026-05-12T12:30:00.000Z",
+    "state": {},
+    "marketsCount": 22,
+    "markets": [
+      {
+        "id": 10,
+        "name": "3 Way",
+        "columns": 3,
+        "columnsApp": 3,
+        "selections": [
+          {
+            "id": 2665693399,
+            "name": "Epicentr Dunaivtsi",
+            "odds": "5.80",
+            "shortName": "1",
+            "specValue": 0
+          },
+          {
+            "id": 2665693405,
+            "name": "Draw",
+            "odds": "3.70",
+            "shortName": "X",
+            "specValue": 0
+          },
+          {
+            "id": 2665693409,
+            "name": "Polissya Zhytomyr",
+            "odds": "1.48",
+            "shortName": "2",
+            "specValue": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 8886861,
+    "betgeniusId": 0,
+    "betradarId": 71378880,
+    "smsId": 2634,
+    "hasCustomBet": 0,
+    "competition": {
+      "id": 113697,
+      "name": "Primera Division Reserve League"
+    },
+    "country": {
+      "id": 188,
+      "name": "Uruguay",
+      "iso": "ury"
+    },
+    "sport": {
+      "id": 1,
+      "name": "Football"
+    },
+    "competitors": [
+      {
+        "id": 729209,
+        "name": "Deportivo Maldonado Reserve"
+      },
+      {
+        "id": 703287,
+        "name": "Racing Club Montevideo Reserve"
+      }
+    ],
+    "dateTimestamp": 1778590800000,
+    "date": "2026-05-12T13:00:00.000Z",
+    "state": {},
+    "marketsCount": 14,
+    "markets": [
+      {
+        "id": 10,
+        "name": "3 Way",
+        "columns": 3,
+        "columnsApp": 3,
+        "selections": [
+          {
+            "id": 2666912597,
+            "name": "Deportivo Maldonado Reserve",
+            "odds": "2.45",
+            "shortName": "1",
+            "specValue": 0
+          },
+          {
+            "id": 2666912681,
+            "name": "Draw",
+            "odds": "3.30",
+            "shortName": "X",
+            "specValue": 0
+          },
+          {
+            "id": 2666912735,
+            "name": "Racing Club Montevideo Reserve",
+            "odds": "2.45",
+            "shortName": "2",
+            "specValue": 0
+          }
+        ]
+      }
+    ]
+  }
+]

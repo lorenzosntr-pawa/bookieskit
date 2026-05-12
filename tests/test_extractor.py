@@ -122,13 +122,34 @@ def test_extract_from_msport_no_data():
 
 
 def test_extract_sportradar_id_sportpesa_missing_returns_none():
+    # SportPesa returns a list of length 1 from /api/upcoming/games. Missing
+    # or empty inputs in either list-shape or dict-wrapped shape resolve to None.
     from bookieskit.matching.extractor import extract_sportradar_id
     assert extract_sportradar_id({}, platform="sportpesa") is None
-    assert extract_sportradar_id({"data": []}, platform="sportpesa") is None
-    assert extract_sportradar_id({"data": [{}]}, platform="sportpesa") is None
+    assert extract_sportradar_id([], platform="sportpesa") is None
+    assert extract_sportradar_id([{}], platform="sportpesa") is None
+    # betradarId == 0 is the documented "not supplied" sentinel.
+    assert extract_sportradar_id([{"betradarId": 0}], platform="sportpesa") is None
 
 
-def test_extract_sportradar_id_sportpesa_strips_prefix():
+def test_extract_sportradar_id_sportpesa_from_list_shape():
+    # Real response shape: list of length 1 with betradarId as an int.
     from bookieskit.matching.extractor import extract_sportradar_id
-    response = {"data": [{"additional_info": {"sportradar_id": "sr:match:12345"}}]}
-    assert extract_sportradar_id(response, platform="sportpesa") == "12345"
+    response = [{"id": 8868005, "betradarId": 71348330}]
+    assert extract_sportradar_id(response, platform="sportpesa") == "71348330"
+
+
+def test_extract_sportradar_id_sportpesa_from_fixture():
+    # Bind against the captured prematch fixture.
+    import json
+    from pathlib import Path
+
+    from bookieskit.matching.extractor import extract_sportradar_id
+
+    fixture = (
+        Path(__file__).parent
+        / "fixtures" / "event_info" / "sportpesa" / "prematch.json"
+    )
+    response = json.loads(fixture.read_text(encoding="utf-8"))
+    sr = extract_sportradar_id(response, platform="sportpesa")
+    assert sr is not None and sr.isdigit()

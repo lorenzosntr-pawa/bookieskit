@@ -1,0 +1,67 @@
+[
+  {
+    "id": 8887261,
+    "betgeniusId": 0,
+    "betradarId": 71348330,
+    "smsId": 5511,
+    "hasCustomBet": 0,
+    "competition": {
+      "id": 97675,
+      "name": "Queensland Npl, Women"
+    },
+    "country": {
+      "id": 11,
+      "name": "Australia",
+      "iso": "aus"
+    },
+    "sport": {
+      "id": 1,
+      "name": "Football"
+    },
+    "competitors": [
+      {
+        "id": 702177,
+        "name": "Gold Coast Knights W"
+      },
+      {
+        "id": 613463,
+        "name": "Gold Coast United W"
+      }
+    ],
+    "dateTimestamp": 1778581800000,
+    "date": "2026-05-12T10:30:00.000Z",
+    "state": {},
+    "marketsCount": 21,
+    "markets": [
+      {
+        "id": 10,
+        "name": "3 Way",
+        "columns": 3,
+        "columnsApp": 3,
+        "selections": [
+          {
+            "id": 2666935441,
+            "name": "Gold Coast Knights W",
+            "odds": "1.04",
+            "shortName": "1",
+            "specValue": 0
+          },
+          {
+            "id": 2666935579,
+            "name": "Draw",
+            "odds": "9.00",
+            "shortName": "X",
+            "specValue": 0
+          },
+          {
+            "id": 2666935721,
+            "name": "Gold Coast United W",
+            "odds": "20.00",
+            "shortName": "2",
+            "specValue": 0
+          }
+        ]
+      }
+    ]
+  }
+]

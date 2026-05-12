@@ -107,10 +107,13 @@ def test_match_events_handles_betway_and_msport():
 
 
 def test_match_events_populates_sportpesa_field():
+    # SportPesa's natural event-detail shape is a list of length 1 with
+    # `betradarId` carrying the SR id. The matcher treats each `event` in
+    # the list-of-events as-is and passes it to extract_sportradar_id.
     from bookieskit.matching.matcher import match_events
 
     bw_event = {"sportEvent": {"eventId": "12345"}}
-    sp_event = {"data": [{"additional_info": {"sportradar_id": "12345"}}]}
+    sp_event = [{"id": 8868005, "betradarId": 12345}]
 
     results = match_events(
         ("betway", [bw_event]),

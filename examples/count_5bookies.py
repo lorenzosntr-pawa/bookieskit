@@ -202,27 +202,70 @@ async def count_msport() -> dict:
 
 
 async def count_sportpesa() -> dict:
+    """SportPesa totals — derived because SportPesa has no per-sport
+    summary endpoint.
+
+    Strategy:
+    - `/api/live/sports` returns the live sport catalogue with per-sport
+      `eventNumber` (live event count). Sum for `events_live`.
+    - For each sport, hit `/api/upcoming/games?sportId={id}` once to
+      enumerate prematch games. From that list, count unique competition
+      ids for `tournaments_prematch` and `len(games)` for `events_prematch`.
+    - There is no dedicated live-competitions endpoint; live tournaments
+      are derived from `/api/highlights/{sportId}?live=true` by grouping
+      on competition.id.
+
+    Per-bookmaker assumption: SportPesa carries the same sport catalogue
+    prematch and live, so `sports_total` is the size of the live list.
+    """
     out = {"name": "SportPesa", "country": "ke"}
     cookie = os.environ.get("SPORTPESA_COOKIE")
     if not cookie:
         return {"name": "SportPesa", "error": "SPORTPESA_COOKIE env var not set"}
     async with SportPesa(country="ke") as sp:
         sp._http_client.headers["cookie"] = cookie
-        # Best-evidence paths — adjust here when fixture capture confirms the
-        # actual SportPesa list-endpoint shapes (see docs/sportpesa.md).
         try:
-            sports_raw = (await sp.get_sports()).get("data", []) or []
+            sports_resp = await sp.get_sports()
         except Exception as e:
             return {"name": "SportPesa", "error": f"get_sports failed: {e!r}"}
-        out["sports_total"] = len(sports_raw)
-        # SportPesa's per-sport counts aren't a confirmed field — leave as "?"
-        # until the fixture pins the shape.
-        out["sports_with_prematch"] = "?"
-        out["sports_with_live"] = "?"
-        out["events_prematch"] = None  # rendered as "n/a" by the main printer
-        out["events_live"] = "?"
-        out["tournaments_prematch"] = "?"
-        out["tournaments_live"] = "?"
+        sports = sports_resp.get("sports", []) or []
+        out["sports_total"] = len(sports)
+        out["sports_with_live"] = sum(
+            1 for s in sports if s.get("eventNumber", 0) > 0
+        )
+        out["events_live"] = sum(s.get("eventNumber", 0) for s in sports)
+
+        prematch_events = 0
+        prematch_tournaments_seen: set = set()
+        live_tournaments_seen: set = set()
+        sports_with_prematch = 0
+        for s in sports:
+            sid = str(s.get("id"))
+            try:
+                games = await sp.get_events(sport_id=sid)
+            except Exception:
+                games = []
+            if games:
+                sports_with_prematch += 1
+            prematch_events += len(games)
+            for g in games:
+                comp_id = (g.get("competition") or {}).get("id")
+                if comp_id is not None:
+                    prematch_tournaments_seen.add((sid, comp_id))
+            if s.get("eventNumber", 0) > 0:
+                try:
+                    live_games = await sp.get_events(sport_id=sid, live=True)
+                except Exception:
+                    live_games = []
+                for g in live_games:
+                    comp_id = (g.get("competition") or {}).get("id")
+                    if comp_id is not None:
+                        live_tournaments_seen.add((sid, comp_id))
+
+        out["sports_with_prematch"] = sports_with_prematch
+        out["events_prematch"] = prematch_events
+        out["tournaments_prematch"] = len(prematch_tournaments_seen)
+        out["tournaments_live"] = len(live_tournaments_seen)
     return out
 
 

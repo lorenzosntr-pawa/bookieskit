@@ -13,3 +13,6 @@ dist/
 venv/
 
 .claude/
+sportpesa_cookie.txt
+probe_sportpesa.py
+capture_now.py

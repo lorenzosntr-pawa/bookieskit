@@ -1,0 +1,67 @@
+[
+  {
+    "id": 8868005,
+    "betgeniusId": 0,
+    "betradarId": 61624650,
+    "smsId": 5402,
+    "hasCustomBet": 0,
+    "competition": {
+      "id": 76837,
+      "name": "Primera Division"
+    },
+    "country": {
+      "id": 166,
+      "name": "Spain",
+      "iso": "esp"
+    },
+    "sport": {
+      "id": 1,
+      "name": "Football"
+    },
+    "competitors": [
+      {
+        "id": 177,
+        "name": "Osasuna"
+      },
+      {
+        "id": 166,
+        "name": "Atletico Madrid"
+      }
+    ],
+    "dateTimestamp": 1778614200000,
+    "date": "2026-05-12T19:30:00.000Z",
+    "state": {},
+    "marketsCount": 22,
+    "markets": [
+      {
+        "id": 10,
+        "name": "3 Way",
+        "columns": 3,
+        "columnsApp": 3,
+        "selections": [
+          {
+            "id": 2665438181,
+            "name": "Osasuna",
+            "odds": "2.60",
+            "shortName": "1",
+            "specValue": 0
+          },
+          {
+            "id": 2665438279,
+            "name": "Draw",
+            "odds": "3.55",
+            "shortName": "X",
+            "specValue": 0
+          },
+          {
+            "id": 2665438307,
+            "name": "Atletico Madrid",
+            "odds": "2.70",
+            "shortName": "2",
+            "specValue": 0
+          }
+        ]
+      }
+    ]
+  }
+]

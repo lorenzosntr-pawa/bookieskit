@@ -1,0 +1,1966 @@
+{
+  "8887261": [
+    {
+      "id": 10,
+      "specValue": 0,
+      "name": "3 Way",
+      "order": 101,
+      "columns": 3,
+      "columnsApp": 3,
+      "selections": [
+        {
+          "id": 2666935441,
+          "name": "Gold Coast Knights W",
+          "odds": "1.04",
+          "shortName": "1",
+          "specValue": 0
+        },
+        {
+          "id": 2666935579,
+          "name": "Draw",
+          "odds": "9.00",
+          "shortName": "X",
+          "specValue": 0
+        },
+        {
+          "id": 2666935721,
+          "name": "Gold Coast United W",
+          "odds": "20.00",
+          "shortName": "2",
+          "specValue": 0
+        }
+      ]
+    },
+    {
+      "id": 43,
+      "specValue": 0,
+      "name": "Both Teams To Score",
+      "order": 103,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2666935673,
+          "name": "YES (GG)",
+          "odds": "2.60",
+          "shortName": "Yes",
+          "specValue": 0
+        },
+        {
+          "id": 2666935757,
+          "name": "NO (NG)",
+          "odds": "1.40",
+          "shortName": "No",
+          "specValue": 0
+        }
+      ]
+    },
+    {
+      "id": 46,
+      "specValue": 0,
+      "name": "Double Chance",
+      "order": 105,
+      "columns": 3,
+      "columnsApp": 3,
+      "selections": [
+        {
+          "id": 2666935709,
+          "name": "1 OR X",
+          "odds": "1.01",
+          "shortName": "1X",
+          "specValue": 0
+        },
+        {
+          "id": 2666935611,
+          "name": "X OR 2",
+          "odds": "3.70",
+          "shortName": "X2",
+          "specValue": 0
+        },
+        {
+          "id": 2666935423,
+          "name": "1 OR 2",
+          "odds": "1.02",
+          "shortName": "12",
+          "specValue": 0
+        }
+      ]
+    },
+    {
+      "id": 52,
+      "specValue": 0.5,
+      "name": "Total Goals Over/Under - Full Time",
+      "order": 109,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2666935463,
+          "name": "OVER 0.50",
+          "odds": "1.01",
+          "shortName": "OV",
+          "specValue": 0.5
+        },
+        {
+          "id": 2666935613,
+          "name": "UNDER 0.50",
+          "odds": "12.00",
+          "shortName": "UN",
+          "specValue": 0.5
+        }
+      ]
+    },
+    {
+      "id": 52,
+      "specValue": 1.5,
+      "name": "Total Goals Over/Under - Full Time",
+      "order": 109,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2666935525,
+          "name": "OVER 1.50",
+          "odds": "1.06",
+          "shortName": "OV",
+          "specValue": 1.5
+        },
+        {
+          "id": 2666935653,
+          "name": "UNDER 1.50",
+          "odds": "7.20",
+          "shortName": "UN",
+          "specValue": 1.5
+        }
+      ]
+    },
+    {
+      "id": 52,
+      "specValue": 1.75,
+      "name": "Total Goals Over/Under - Full Time",
+      "order": 109,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2666935381,
+          "name": "OVER 1.75",
+          "odds": "1.07",
+          "shortName": "OV",
+          "specValue": 1.75
+        },
+        {
+          "id": 2666935551,
+          "name": "UNDER 1.75",
+          "odds": "6.80",
+          "shortName": "UN",
+          "specValue": 1.75
+        }
+      ]
+    },
+    {
+      "id": 52,
+      "specValue": 2,
+      "name": "Total Goals Over/Under - Full Time",
+      "order": 109,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2666935505,
+          "name": "OVER 2.00",
+          "odds": "1.09",
+          "shortName": "OV",
+          "specValue": 2
+        },
+        {
+          "id": 2666935637,
+          "name": "UNDER 2.00",
+          "odds": "6.20",
+          "shortName": "UN",
+          "specValue": 2
+        }
+      ]
+    },
+    {
+      "id": 52,
+      "specValue": 2.25,
+      "name": "Total Goals Over/Under - Full Time",
+      "order": 109,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2666935439,
+          "name": "OVER 2.25",
+          "odds": "1.18",
+          "shortName": "OV",
+          "specValue": 2.25
+        },
+        {
+          "id": 2666935571,
+          "name": "UNDER 2.25",
+          "odds": "4.30",
+          "shortName": "UN",
+          "specValue": 2.25
+        }
+      ]
+    },
+    {
+      "id": 52,
+      "specValue": 2.5,
+      "name": "Total Goals Over/Under - Full Time",
+      "order": 109,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2666935375,
+          "name": "OVER 2.50",
+          "odds": "1.28",
+          "shortName": "OV",
+          "specValue": 2.5
+        },
+        {
+          "id": 2666935495,
+          "name": "UNDER 2.50",
+          "odds": "3.35",
+          "shortName": "UN",
+          "specValue": 2.5
+        }
+      ]
+    },
+    {
+      "id": 52,
+      "specValue": 2.75,
+      "name": "Total Goals Over/Under - Full Time",
+      "order": 109,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2666935403,
+          "name": "OVER 2.75",
+          "odds": "1.33",
+          "shortName": "OV",
+          "specValue": 2.75
+        },
+        {
+          "id": 2666935565,
+          "name": "UNDER 2.75",
+          "odds": "3.05",
+          "shortName": "UN",
+          "specValue": 2.75
+        }
+      ]
+    },
+    {
+      "id": 52,
+      "specValue": 3,
+      "name": "Total Goals Over/Under - Full Time",
+      "order": 109,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2666935691,
+          "name": "OVER 3.00",
+          "odds": "1.41",
+          "shortName": "OV",
+          "specValue": 3
+        },
+        {
+          "id": 2666935769,
+          "name": "UNDER 3.00",
+          "odds": "2.70",
+          "shortName": "UN",
+          "specValue": 3
+        }
+      ]
+    },
+    {
+      "id": 52,
+      "specValue": 3.25,
+      "name": "Total Goals Over/Under - Full Time",
+      "order": 109,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2666935371,
+          "name": "OVER 3.25",
+          "odds": "1.58",
+          "shortName": "OV",
+          "specValue": 3.25
+        },
+        {
+          "id": 2666935533,
+          "name": "UNDER 3.25",
+          "odds": "2.24",
+          "shortName": "UN",
+          "specValue": 3.25
+        }
+      ]
+    },
+    {
+      "id": 52,
+      "specValue": 3.5,
+      "name": "Total Goals Over/Under - Full Time",
+      "order": 109,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2666935383,
+          "name": "OVER 3.50",
+          "odds": "1.74",
+          "shortName": "OV",
+          "specValue": 3.5
+        },
+        {
+          "id": 2666935583,
+          "name": "UNDER 3.50",
+          "odds": "1.98",
+          "shortName": "UN",
+          "specValue": 3.5
+        }
+      ]
+    },
+    {
+      "id": 52,
+      "specValue": 3.75,
+      "name": "Total Goals Over/Under - Full Time",
+      "order": 109,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2666935397,
+          "name": "OVER 3.75",
+          "odds": "1.91",
+          "shortName": "OV",
+          "specValue": 3.75
+        },
+        {
+          "id": 2666935527,
+          "name": "UNDER 3.75",
+          "odds": "1.79",
+          "shortName": "UN",
+          "specValue": 3.75
+        }
+      ]
+    },
+    {
+      "id": 52,
+      "specValue": 4,
+      "name": "Total Goals Over/Under - Full Time",
+      "order": 109,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2666935679,
+          "name": "OVER 4.00",
+          "odds": "2.18",
+          "shortName": "OV",
+          "specValue": 4
+        },
+        {
+          "id": 2666935749,
+          "name": "UNDER 4.00",
+          "odds": "1.61",
+          "shortName": "UN",
+          "specValue": 4
+        }
+      ]
+    },
+    {
+      "id": 52,
+      "specValue": 4.25,
+      "name": "Total Goals Over/Under - Full Time",
+      "order": 109,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2666935473,
+          "name": "OVER 4.25",
+          "odds": "2.41",
+          "shortName": "OV",
+          "specValue": 4.25
+        },
+        {
+          "id": 2666935603,
+          "name": "UNDER 4.25",
+          "odds": "1.50",
+          "shortName": "UN",
+          "specValue": 4.25
+        }
+      ]
+    },
+    {
+      "id": 52,
+      "specValue": 4.5,
+      "name": "Total Goals Over/Under - Full Time",
+      "order": 109,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2666935401,
+          "name": "OVER 4.50",
+          "odds": "2.65",
+          "shortName": "OV",
+          "specValue": 4.5
+        },
+        {
+          "id": 2666935531,
+          "name": "UNDER 4.50",
+          "odds": "1.43",
+          "shortName": "UN",
+          "specValue": 4.5
+        }
+      ]
+    },
+    {
+      "id": 52,
+      "specValue": 4.75,
+      "name": "Total Goals Over/Under - Full Time",
+      "order": 109,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2666935517,
+          "name": "OVER 4.75",
+          "odds": "3.05",
+          "shortName": "OV",
+          "specValue": 4.75
+        },
+        {
+          "id": 2666935647,
+          "name": "UNDER 4.75",
+          "odds": "1.33",
+          "shortName": "UN",
+          "specValue": 4.75
+        }
+      ]
+    },
+    {
+      "id": 52,
+      "specValue": 5,
+      "name": "Total Goals Over/Under - Full Time",
+      "order": 109,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2666935415,
+          "name": "OVER 5.00",
+          "odds": "3.75",
+          "shortName": "OV",
+          "specValue": 5
+        },
+        {
+          "id": 2666935557,
+          "name": "UNDER 5.00",
+          "odds": "1.23",
+          "shortName": "UN",
+          "specValue": 5
+        }
+      ]
+    },
+    {
+      "id": 52,
+      "specValue": 5.25,
+      "name": "Total Goals Over/Under - Full Time",
+      "order": 109,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2666935669,
+          "name": "OVER 5.25",
+          "odds": "4.00",
+          "shortName": "OV",
+          "specValue": 5.25
+        },
+        {
+          "id": 2666935753,
+          "name": "UNDER 5.25",
+          "odds": "1.20",
+          "shortName": "UN",
+          "specValue": 5.25
+        }
+      ]
+    },
+    {
+      "id": 52,
+      "specValue": 5.5,
+      "name": "Total Goals Over/Under - Full Time",
+      "order": 109,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2666935677,
+          "name": "OVER 5.50",
+          "odds": "4.30",
+          "shortName": "OV",
+          "specValue": 5.5
+        },
+        {
+          "id": 2666935773,
+          "name": "UNDER 5.50",
+          "odds": "1.18",
+          "shortName": "UN",
+          "specValue": 5.5
+        }
+      ]
+    },
+    {
+      "id": 52,
+      "specValue": 5.75,
+      "name": "Total Goals Over/Under - Full Time",
+      "order": 109,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2666935519,
+          "name": "OVER 5.75",
+          "odds": "5.00",
+          "shortName": "OV",
+          "specValue": 5.75
+        },
+        {
+          "id": 2666935649,
+          "name": "UNDER 5.75",
+          "odds": "1.13",
+          "shortName": "UN",
+          "specValue": 5.75
+        }
+      ]
+    },
+    {
+      "id": 52,
+      "specValue": 6,
+      "name": "Total Goals Over/Under - Full Time",
+      "order": 109,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2666935313,
+          "name": "OVER 6.00",
+          "odds": "6.40",
+          "shortName": "OV",
+          "specValue": 6
+        },
+        {
+          "id": 2666935433,
+          "name": "UNDER 6.00",
+          "odds": "1.08",
+          "shortName": "UN",
+          "specValue": 6
+        }
+      ]
+    },
+    {
+      "id": 52,
+      "specValue": 6.25,
+      "name": "Total Goals Over/Under - Full Time",
+      "order": 109,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2666935685,
+          "name": "OVER 6.25",
+          "odds": "6.60",
+          "shortName": "OV",
+          "specValue": 6.25
+        },
+        {
+          "id": 2666935785,
+          "name": "UNDER 6.25",
+          "odds": "1.08",
+          "shortName": "UN",
+          "specValue": 6.25
+        }
+      ]
+    },
+    {
+      "id": 208,
+      "specValue": 1.5,
+      "name": "Full time result + Total Goals Over/Under",
+      "order": 111,
+      "columns": 3,
+      "columnsApp": 3,
+      "selections": [
+        {
+          "id": 2666935639,
+          "name": "1 and OVER [1.5]",
+          "odds": "1.10",
+          "shortName": "OV_1",
+          "specValue": 1.5
+        },
+        {
+          "id": 2666935803,
+          "name": "X and OVER [1.5]",
+          "odds": "15.00",
+          "shortName": "OV_X",
+          "specValue": 1.5
+        },
+        {
+          "id": 2666935857,
+          "name": "2 and OVER [1.5]",
+          "odds": "40.00",
+          "shortName": "OV_2",
+          "specValue": 1.5
+        },
+        {
+          "id": 2666935539,
+          "name": "1 and UNDER [1.5]",
+          "odds": "7.20",
+          "shortName": "UN_1",
+          "specValue": 1.5
+        },
+        {
+          "id": 2666935731,
+          "name": "X and UNDER [1.5]",
+          "odds": "25.00",
+          "shortName": "UN_X",
+          "specValue": 1.5
+        },
+        {
+          "id": 2666935821,
+          "name": "2 and UNDER [1.5]",
+          "odds": "50.00",
+          "shortName": "UN_2",
+          "specValue": 1.5
+        }
+      ]
+    },
+    {
+      "id": 208,
+      "specValue": 2.5,
+      "name": "Full time result + Total Goals Over/Under",
+      "order": 111,
+      "columns": 3,
+      "columnsApp": 3,
+      "selections": [
+        {
+          "id": 2666935805,
+          "name": "1 and OVER [2.5]",
+          "odds": "1.27",
+          "shortName": "OV_1",
+          "specValue": 2.5
+        },
+        {
+          "id": 2666935865,
+          "name": "X and OVER [2.5]",
+          "odds": "60.00",
+          "shortName": "OV_X",
+          "specValue": 2.5
+        },
+        {
+          "id": 2666935903,
+          "name": "2 and OVER [2.5]",
+          "odds": "60.00",
+          "shortName": "OV_2",
+          "specValue": 2.5
+        },
+        {
+          "id": 2666935693,
+          "name": "1 and UNDER [2.5]",
+          "odds": "3.45",
+          "shortName": "UN_1",
+          "specValue": 2.5
+        },
+        {
+          "id": 2666935835,
+          "name": "X and UNDER [2.5]",
+          "odds": "14.00",
+          "shortName": "UN_X",
+          "specValue": 2.5
+        },
+        {
+          "id": 2666935885,
+          "name": "2 and UNDER [2.5]",
+          "odds": "50.00",
+          "shortName": "UN_2",
+          "specValue": 2.5
+        }
+      ]
+    },
+    {
+      "id": 208,
+      "specValue": 3.5,
+      "name": "Full time result + Total Goals Over/Under",
+      "order": 111,
+      "columns": 3,
+      "columnsApp": 3,
+      "selections": [
+        {
+          "id": 2666935799,
+          "name": "1 and OVER [3.5]",
+          "odds": "1.71",
+          "shortName": "OV_1",
+          "specValue": 3.5
+        },
+        {
+          "id": 2666935863,
+          "name": "X and OVER [3.5]",
+          "odds": "60.00",
+          "shortName": "OV_X",
+          "specValue": 3.5
+        },
+        {
+          "id": 2666935901,
+          "name": "2 and OVER [3.5]",
+          "odds": "101.00",
+          "shortName": "OV_2",
+          "specValue": 3.5
+        },
+        {
+          "id": 2666935701,
+          "name": "1 and UNDER [3.5]",
+          "odds": "2.01",
+          "shortName": "UN_1",
+          "specValue": 3.5
+        },
+        {
+          "id": 2666935831,
+          "name": "X and UNDER [3.5]",
+          "odds": "15.00",
+          "shortName": "UN_X",
+          "specValue": 3.5
+        },
+        {
+          "id": 2666935883,
+          "name": "2 and UNDER [3.5]",
+          "odds": "35.00",
+          "shortName": "UN_2",
+          "specValue": 3.5
+        }
+      ]
+    },
+    {
+      "id": 208,
+      "specValue": 4.5,
+      "name": "Full time result + Total Goals Over/Under",
+      "order": 111,
+      "columns": 3,
+      "columnsApp": 3,
+      "selections": [
+        {
+          "id": 2666935593,
+          "name": "1 and OVER [4.5]",
+          "odds": "2.48",
+          "shortName": "OV_1",
+          "specValue": 4.5
+        },
+        {
+          "id": 2666935801,
+          "name": "X and OVER [4.5]",
+          "odds": "101.00",
+          "shortName": "OV_X",
+          "specValue": 4.5
+        },
+        {
+          "id": 2666935867,
+          "name": "2 and OVER [4.5]",
+          "odds": "101.00",
+          "shortName": "OV_2",
+          "specValue": 4.5
+        },
+        {
+          "id": 2666935431,
+          "name": "1 and UNDER [4.5]",
+          "odds": "1.47",
+          "shortName": "UN_1",
+          "specValue": 4.5
+        },
+        {
+          "id": 2666935723,
+          "name": "X and UNDER [4.5]",
+          "odds": "12.00",
+          "shortName": "UN_X",
+          "specValue": 4.5
+        },
+        {
+          "id": 2666935843,
+          "name": "2 and UNDER [4.5]",
+          "odds": "30.00",
+          "shortName": "UN_2",
+          "specValue": 4.5
+        }
+      ]
+    },
+    {
+      "id": 386,
+      "specValue": 0,
+      "name": "Full time result + Both Teams To Score",
+      "order": 113,
+      "columns": 3,
+      "columnsApp": 3,
+      "selections": [
+        {
+          "id": 2666935705,
+          "name": "1 and YES (GG)",
+          "odds": "2.75",
+          "shortName": "1GG",
+          "specValue": 0
+        },
+        {
+          "id": 2666935841,
+          "name": "X and YES (GG)",
+          "odds": "19.00",
+          "shortName": "XGG",
+          "specValue": 0
+        },
+        {
+          "id": 2666935889,
+          "name": "2 and YES (GG)",
+          "odds": "60.00",
+          "shortName": "2GG",
+          "specValue": 0
+        },
+        {
+          "id": 2666935775,
+          "name": "1 and NO (NG)",
+          "odds": "1.40",
+          "shortName": "1NG",
+          "specValue": 0
+        },
+        {
+          "id": 2666935869,
+          "name": "X and NO (NG)",
+          "odds": "30.00",
+          "shortName": "XNG",
+          "specValue": 0
+        },
+        {
+          "id": 2666935907,
+          "name": "2 and NO (NG)",
+          "odds": "50.00",
+          "shortName": "2NG",
+          "specValue": 0
+        }
+      ]
+    },
+    {
+      "id": 47,
+      "specValue": 0,
+      "name": "Draw no bet - Full Time",
+      "order": 115,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2666935681,
+          "name": "Gold Coast Knights W",
+          "odds": "1.01",
+          "shortName": "1",
+          "specValue": 0
+        },
+        {
+          "id": 2666935777,
+          "name": "Gold Coast United W",
+          "odds": "11.00",
+          "shortName": "2",
+          "specValue": 0
+        }
+      ]
+    },
+    {
+      "id": 353,
+      "specValue": 2.5,
+      "name": "Total Goals Over/Under Home Team - Full Time",
+      "order": 117,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2666935521,
+          "name": "OVER 2.50",
+          "odds": "1.43",
+          "shortName": "OV",
+          "specValue": 2.5
+        },
+        {
+          "id": 2666935623,
+          "name": "UNDER 2.50",
+          "odds": "2.49",
+          "shortName": "UN",
+          "specValue": 2.5
+        }
+      ]
+    },
+    {
+      "id": 353,
+      "specValue": 3.5,
+      "name": "Total Goals Over/Under Home Team - Full Time",
+      "order": 117,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2666935671,
+          "name": "OVER 3.50",
+          "odds": "2.10",
+          "shortName": "OV",
+          "specValue": 3.5
+        },
+        {
+          "id": 2666935737,
+          "name": "UNDER 3.50",
+          "odds": "1.60",
+          "shortName": "UN",
+          "specValue": 3.5
+        }
+      ]
+    },
+    {
+      "id": 353,
+      "specValue": 4.5,
+      "name": "Total Goals Over/Under Home Team - Full Time",
+      "order": 117,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2666935443,
+          "name": "OVER 4.50",
+          "odds": "3.40",
+          "shortName": "OV",
+          "specValue": 4.5
+        },
+        {
+          "id": 2666935581,
+          "name": "UNDER 4.50",
+          "odds": "1.24",
+          "shortName": "UN",
+          "specValue": 4.5
+        }
+      ]
+    },
+    {
+      "id": 352,
+      "specValue": 0.5,
+      "name": "Total Goals Over/Under Away Team - Full Time",
+      "order": 119,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2666935523,
+          "name": "OVER 0.50",
+          "odds": "2.50",
+          "shortName": "OV",
+          "specValue": 0.5
+        },
+        {
+          "id": 2666935643,
+          "name": "UNDER 0.50",
+          "odds": "1.42",
+          "shortName": "UN",
+          "specValue": 0.5
+        }
+      ]
+    },
+    {
+      "id": 352,
+      "specValue": 1.5,
+      "name": "Total Goals Over/Under Away Team - Full Time",
+      "order": 119,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2666935385,
+          "name": "OVER 1.50",
+          "odds": "7.40",
+          "shortName": "OV",
+          "specValue": 1.5
+        },
+        {
+          "id": 2666935543,
+          "name": "UNDER 1.50",
+          "odds": "1.03",
+          "shortName": "UN",
+          "specValue": 1.5
+        }
+      ]
+    },
+    {
+      "id": 352,
+      "specValue": 2.5,
+      "name": "Total Goals Over/Under Away Team - Full Time",
+      "order": 119,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2666935373,
+          "name": "OVER 2.50",
+          "odds": "10.00",
+          "shortName": "OV",
+          "specValue": 2.5
+        },
+        {
+          "id": 2666935483,
+          "name": "UNDER 2.50",
+          "odds": "1.01",
+          "shortName": "UN",
+          "specValue": 2.5
+        }
+      ]
+    },
+    {
+      "id": 42,
+      "specValue": 0,
+      "name": "3 Way - First Half",
+      "order": 123,
+      "columns": 3,
+      "columnsApp": 3,
+      "selections": [
+        {
+          "id": 2666935365,
+          "name": "Gold Coast Knights W",
+          "odds": "1.29",
+          "shortName": "1",
+          "specValue": 0
+        },
+        {
+          "id": 2666935499,
+          "name": "Draw",
+          "odds": "3.50",
+          "shortName": "X",
+          "specValue": 0
+        },
+        {
+          "id": 2666935625,
+          "name": "Gold Coast United W",
+          "odds": "17.00",
+          "shortName": "2",
+          "specValue": 0
+        }
+      ]
+    },
+    {
+      "id": 328,
+      "specValue": 0,
+      "name": "Both Teams To Score - First Half",
+      "order": 125,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2666935369,
+          "name": "YES (GG)",
+          "odds": "5.20",
+          "shortName": "Yes",
+          "specValue": 0
+        },
+        {
+          "id": 2666935481,
+          "name": "NO (NG)",
+          "odds": "1.10",
+          "shortName": "No",
+          "specValue": 0
+        }
+      ]
+    },
+    {
+      "id": 54,
+      "specValue": 1,
+      "name": "Total Goals Over/Under - Half Time",
+      "order": 129,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2666935355,
+          "name": "OVER 1.00",
+          "odds": "1.26",
+          "shortName": "OV",
+          "specValue": 1
+        },
+        {
+          "id": 2666935475,
+          "name": "UNDER 1.00",
+          "odds": "3.20",
+          "shortName": "UN",
+          "specValue": 1
+        }
+      ]
+    },
+    {
+      "id": 54,
+      "specValue": 1.5,
+      "name": "Total Goals Over/Under - Half Time",
+      "order": 129,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2666935387,
+          "name": "OVER 1.50",
+          "odds": "1.77",
+          "shortName": "OV",
+          "specValue": 1.5
+        },
+        {
+          "id": 2666935541,
+          "name": "UNDER 1.50",
+          "odds": "1.84",
+          "shortName": "UN",
+          "specValue": 1.5
+        }
+      ]
+    },
+    {
+      "id": 54,
+      "specValue": 1.75,
+      "name": "Total Goals Over/Under - Half Time",
+      "order": 129,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2666935559,
+          "name": "OVER 1.75",
+          "odds": "2.03",
+          "shortName": "OV",
+          "specValue": 1.75
+        },
+        {
+          "id": 2666935661,
+          "name": "UNDER 1.75",
+          "odds": "1.62",
+          "shortName": "UN",
+          "specValue": 1.75
+        }
+      ]
+    },
+    {
+      "id": 203,
+      "specValue": 0,
+      "name": "Correct Score - First Half",
+      "order": 133,
+      "columns": 3,
+      "columnsApp": 3,
+      "selections": [
+        {
+          "id": 2666935435,
+          "name": "0:0",
+          "odds": "3.75",
+          "shortName": "0:0",
+          "specValue": 0
+        },
+        {
+          "id": 2666935895,
+          "name": "0:1",
+          "odds": "17.00",
+          "shortName": "0:1",
+          "specValue": 0
+        },
+        {
+          "id": 2666935915,
+          "name": "0:2",
+          "odds": "101.00",
+          "shortName": "0:2",
+          "specValue": 0
+        },
+        {
+          "id": 2666935811,
+          "name": "1:0",
+          "odds": "2.50",
+          "shortName": "1:0",
+          "specValue": 0
+        },
+        {
+          "id": 2666935617,
+          "name": "1:1",
+          "odds": "12.00",
+          "shortName": "1:1",
+          "specValue": 0
+        },
+        {
+          "id": 2666935931,
+          "name": "1:2",
+          "odds": "101.00",
+          "shortName": "1:2",
+          "specValue": 0
+        },
+        {
+          "id": 2666935851,
+          "name": "2:0",
+          "odds": "3.20",
+          "shortName": "2:0",
+          "specValue": 0
+        },
+        {
+          "id": 2666935875,
+          "name": "2:1",
+          "odds": "15.00",
+          "shortName": "2:1",
+          "specValue": 0
+        },
+        {
+          "id": 2666935743,
+          "name": "2:2",
+          "odds": "101.00",
+          "shortName": "2:2",
+          "specValue": 0
+        },
+        {
+          "id": 2666935939,
+          "name": "ANY OTHER",
+          "odds": "3.40",
+          "shortName": "OTHR",
+          "specValue": 0
+        }
+      ]
+    },
+    {
+      "id": 207,
+      "specValue": 0,
+      "name": "Half with most goals",
+      "order": 135,
+      "columns": 3,
+      "columnsApp": 3,
+      "selections": [
+        {
+          "id": 2666935471,
+          "name": "First Half",
+          "odds": "2.70",
+          "shortName": "1st",
+          "specValue": 0
+        },
+        {
+          "id": 2666935609,
+          "name": "Second Half",
+          "odds": "1.97",
+          "shortName": "2nd",
+          "specValue": 0
+        },
+        {
+          "id": 2666935733,
+          "name": "Draw",
+          "odds": "4.10",
+          "shortName": "Eql",
+          "specValue": 0
+        }
+      ]
+    },
+    {
+      "id": 44,
+      "specValue": 0,
+      "name": "Half Time/Full Time",
+      "order": 137,
+      "columns": 3,
+      "columnsApp": 3,
+      "selections": [
+        {
+          "id": 2666935425,
+          "name": "1/1",
+          "odds": "1.17",
+          "shortName": "11",
+          "specValue": 0
+        },
+        {
+          "id": 2666935555,
+          "name": "1/X",
+          "odds": "40.00",
+          "shortName": "1X",
+          "specValue": 0
+        },
+        {
+          "id": 2666935657,
+          "name": "1/2",
+          "odds": "101.00",
+          "shortName": "12",
+          "specValue": 0
+        },
+        {
+          "id": 2666935791,
+          "name": "X/1",
+          "odds": "2.85",
+          "shortName": "X1",
+          "specValue": 0
+        },
+        {
+          "id": 2666935853,
+          "name": "X/X",
+          "odds": "12.00",
+          "shortName": "XX",
+          "specValue": 0
+        },
+        {
+          "id": 2666935881,
+          "name": "X/2",
+          "odds": "40.00",
+          "shortName": "X2",
+          "specValue": 0
+        },
+        {
+          "id": 2666935905,
+          "name": "2/1",
+          "odds": "19.00",
+          "shortName": "21",
+          "specValue": 0
+        },
+        {
+          "id": 2666935921,
+          "name": "2/X",
+          "odds": "45.00",
+          "shortName": "2X",
+          "specValue": 0
+        },
+        {
+          "id": 2666935933,
+          "name": "2/2",
+          "odds": "35.00",
+          "shortName": "22",
+          "specValue": 0
+        }
+      ]
+    },
+    {
+      "id": 332,
+      "specValue": 0,
+      "name": "Correct Score",
+      "order": 139,
+      "columns": 3,
+      "columnsApp": 3,
+      "selections": [
+        {
+          "id": 2666935619,
+          "name": "0:0",
+          "odds": "30.00",
+          "shortName": "0:0",
+          "specValue": 0
+        },
+        {
+          "id": 2666935729,
+          "name": "0:1",
+          "odds": "60.00",
+          "shortName": "0:1",
+          "specValue": 0
+        },
+        {
+          "id": 2666935807,
+          "name": "0:2",
+          "odds": "101.00",
+          "shortName": "0:2",
+          "specValue": 0
+        },
+        {
+          "id": 2666935845,
+          "name": "0:3",
+          "odds": "101.00",
+          "shortName": "0:3",
+          "specValue": 0
+        },
+        {
+          "id": 2666935873,
+          "name": "0:4",
+          "odds": "101.00",
+          "shortName": "0:4",
+          "specValue": 0
+        },
+        {
+          "id": 2666935893,
+          "name": "0:5",
+          "odds": "101.00",
+          "shortName": "0:5",
+          "specValue": 0
+        },
+        {
+          "id": 2666935917,
+          "name": "0:6",
+          "odds": "101.00",
+          "shortName": "0:6",
+          "specValue": 0
+        },
+        {
+          "id": 2666935929,
+          "name": "1:0",
+          "odds": "8.40",
+          "shortName": "1:0",
+          "specValue": 0
+        },
+        {
+          "id": 2666935937,
+          "name": "1:1",
+          "odds": "24.00",
+          "shortName": "1:1",
+          "specValue": 0
+        },
+        {
+          "id": 2666935941,
+          "name": "1:2",
+          "odds": "80.00",
+          "shortName": "1:2",
+          "specValue": 0
+        },
+        {
+          "id": 2666935945,
+          "name": "1:3",
+          "odds": "101.00",
+          "shortName": "1:3",
+          "specValue": 0
+        },
+        {
+          "id": 2666935949,
+          "name": "1:4",
+          "odds": "101.00",
+          "shortName": "1:4",
+          "specValue": 0
+        },
+        {
+          "id": 2666935953,
+          "name": "1:5",
+          "odds": "101.00",
+          "shortName": "1:5",
+          "specValue": 0
+        },
+        {
+          "id": 2666935957,
+          "name": "2:0",
+          "odds": "5.20",
+          "shortName": "2:0",
+          "specValue": 0
+        },
+        {
+          "id": 2666935961,
+          "name": "2:1",
+          "odds": "11.00",
+          "shortName": "2:1",
+          "specValue": 0
+        },
+        {
+          "id": 2666935965,
+          "name": "2:2",
+          "odds": "70.00",
+          "shortName": "2:2",
+          "specValue": 0
+        },
+        {
+          "id": 2666935969,
+          "name": "2:3",
+          "odds": "101.00",
+          "shortName": "2:3",
+          "specValue": 0
+        },
+        {
+          "id": 2666935973,
+          "name": "2:4",
+          "odds": "101.00",
+          "shortName": "2:4",
+          "specValue": 0
+        },
+        {
+          "id": 2666935977,
+          "name": "3:0",
+          "odds": "4.70",
+          "shortName": "3:0",
+          "specValue": 0
+        },
+        {
+          "id": 2666935981,
+          "name": "3:1",
+          "odds": "10.00",
+          "shortName": "3:1",
+          "specValue": 0
+        },
+        {
+          "id": 2666935985,
+          "name": "3:2",
+          "odds": "45.00",
+          "shortName": "3:2",
+          "specValue": 0
+        },
+        {
+          "id": 2666935989,
+          "name": "3:3",
+          "odds": "101.00",
+          "shortName": "3:3",
+          "specValue": 0
+        },
+        {
+          "id": 2666935993,
+          "name": "4:0",
+          "odds": "5.60",
+          "shortName": "4:0",
+          "specValue": 0
+        },
+        {
+          "id": 2666935997,
+          "name": "4:1",
+          "odds": "13.00",
+          "shortName": "4:1",
+          "specValue": 0
+        },
+        {
+          "id": 2666936001,
+          "name": "4:2",
+          "odds": "60.00",
+          "shortName": "4:2",
+          "specValue": 0
+        },
+        {
+          "id": 2666936005,
+          "name": "5:0",
+          "odds": "8.40",
+          "shortName": "5:0",
+          "specValue": 0
+        },
+        {
+          "id": 2666936009,
+          "name": "5:1",
+          "odds": "19.00",
+          "shortName": "5:1",
+          "specValue": 0
+        },
+        {
+          "id": 2666936011,
+          "name": "6:0",
+          "odds": "15.00",
+          "shortName": "6:0",
+          "specValue": 0
+        },
+        {
+          "id": 2666936015,
+          "name": "ANY OTHER",
+          "odds": "7.80",
+          "shortName": "OTHR",
+          "specValue": 0
+        }
+      ]
+    },
+    {
+      "id": 55,
+      "specValue": -5,
+      "name": "Euro Handicap",
+      "order": 141,
+      "columns": 3,
+      "columnsApp": 3,
+      "selections": [
+        {
+          "id": 2666935419,
+          "name": "1 (0:5)",
+          "odds": "7.40",
+          "shortName": "1",
+          "specValue": -5
+        },
+        {
+          "id": 2666935605,
+          "name": "X (0:5)",
+          "odds": "7.00",
+          "shortName": "X",
+          "specValue": -5
+        },
+        {
+          "id": 2666935739,
+          "name": "2 (0:5)",
+          "odds": "1.16",
+          "shortName": "2",
+          "specValue": -5
+        }
+      ]
+    },
+    {
+      "id": 55,
+      "specValue": -4,
+      "name": "Euro Handicap",
+      "order": 141,
+      "columns": 3,
+      "columnsApp": 3,
+      "selections": [
+        {
+          "id": 2666935361,
+          "name": "1 (0:4)",
+          "odds": "4.20",
+          "shortName": "1",
+          "specValue": -4
+        },
+        {
+          "id": 2666935577,
+          "name": "X (0:4)",
+          "odds": "5.00",
+          "shortName": "X",
+          "specValue": -4
+        },
+        {
+          "id": 2666935711,
+          "name": "2 (0:4)",
+          "odds": "1.42",
+          "shortName": "2",
+          "specValue": -4
+        }
+      ]
+    },
+    {
+      "id": 55,
+      "specValue": -3,
+      "name": "Euro Handicap",
+      "order": 141,
+      "columns": 3,
+      "columnsApp": 3,
+      "selections": [
+        {
+          "id": 2666935675,
+          "name": "1 (0:3)",
+          "odds": "2.49",
+          "shortName": "1",
+          "specValue": -3
+        },
+        {
+          "id": 2666935789,
+          "name": "X (0:3)",
+          "odds": "4.10",
+          "shortName": "X",
+          "specValue": -3
+        },
+        {
+          "id": 2666935833,
+          "name": "2 (0:3)",
+          "odds": "2.01",
+          "shortName": "2",
+          "specValue": -3
+        }
+      ]
+    },
+    {
+      "id": 55,
+      "specValue": -2,
+      "name": "Euro Handicap",
+      "order": 141,
+      "columns": 3,
+      "columnsApp": 3,
+      "selections": [
+        {
+          "id": 2666935689,
+          "name": "1 (0:2)",
+          "odds": "1.63",
+          "shortName": "1",
+          "specValue": -2
+        },
+        {
+          "id": 2666935787,
+          "name": "X (0:2)",
+          "odds": "4.00",
+          "shortName": "X",
+          "specValue": -2
+        },
+        {
+          "id": 2666935837,
+          "name": "2 (0:2)",
+          "odds": "3.55",
+          "shortName": "2",
+          "specValue": -2
+        }
+      ]
+    },
+    {
+      "id": 55,
+      "specValue": -1,
+      "name": "Euro Handicap",
+      "order": 141,
+      "columns": 3,
+      "columnsApp": 3,
+      "selections": [
+        {
+          "id": 2666935683,
+          "name": "1 (0:1)",
+          "odds": "1.22",
+          "shortName": "1",
+          "specValue": -1
+        },
+        {
+          "id": 2666935793,
+          "name": "X (0:1)",
+          "odds": "4.90",
+          "shortName": "X",
+          "specValue": -1
+        },
+        {
+          "id": 2666935839,
+          "name": "2 (0:1)",
+          "odds": "8.80",
+          "shortName": "2",
+          "specValue": -1
+        }
+      ]
+    },
+    {
+      "id": 258,
+      "specValue": 0,
+      "name": "Total Goals Exactly",
+      "order": 143,
+      "columns": 3,
+      "columnsApp": 3,
+      "selections": [
+        {
+          "id": 2666935633,
+          "name": "0",
+          "odds": "35.00",
+          "shortName": "0",
+          "specValue": 0
+        },
+        {
+          "id": 2666935755,
+          "name": "1",
+          "odds": "8.20",
+          "shortName": "1",
+          "specValue": 0
+        },
+        {
+          "id": 2666935817,
+          "name": "2",
+          "odds": "4.80",
+          "shortName": "2",
+          "specValue": 0
+        },
+        {
+          "id": 2666935855,
+          "name": "3",
+          "odds": "3.70",
+          "shortName": "3",
+          "specValue": 0
+        },
+        {
+          "id": 2666935879,
+          "name": "4",
+          "odds": "4.00",
+          "shortName": "4",
+          "specValue": 0
+        },
+        {
+          "id": 2666935899,
+          "name": "5",
+          "odds": "5.20",
+          "shortName": "5",
+          "specValue": 0
+        },
+        {
+          "id": 2666935913,
+          "name": "6 OR MORE",
+          "odds": "4.40",
+          "shortName": "6+",
+          "specValue": 0
+        }
+      ]
+    },
+    {
+      "id": 45,
+      "specValue": 0,
+      "name": "Odd/Even",
+      "order": 145,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2666935379,
+          "name": "ODD",
+          "odds": "1.81",
+          "shortName": "OD",
+          "specValue": 0
+        },
+        {
+          "id": 2666935563,
+          "name": "EVEN",
+          "odds": "1.86",
+          "shortName": "EV",
+          "specValue": 0
+        }
+      ]
+    },
+    {
+      "id": 51,
+      "specValue": -3,
+      "name": "Asian Handicap - Full Time",
+      "order": 147,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2667006615,
+          "name": "Gold Coast Knights W [-3.00]",
+          "odds": "2.03",
+          "shortName": "1",
+          "specValue": -3
+        },
+        {
+          "id": 2667006619,
+          "name": "Gold Coast United W [+3.00]",
+          "odds": "1.65",
+          "shortName": "2",
+          "specValue": -3
+        }
+      ]
+    },
+    {
+      "id": 51,
+      "specValue": -2.75,
+      "name": "Asian Handicap - Full Time",
+      "order": 147,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2666935395,
+          "name": "Gold Coast Knights W [-2.75]",
+          "odds": "1.80",
+          "shortName": "1",
+          "specValue": -2.75
+        },
+        {
+          "id": 2666935585,
+          "name": "Gold Coast United W [+2.75]",
+          "odds": "1.84",
+          "shortName": "2",
+          "specValue": -2.75
+        }
+      ]
+    },
+    {
+      "id": 51,
+      "specValue": -2.5,
+      "name": "Asian Handicap - Full Time",
+      "order": 147,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2666935695,
+          "name": "Gold Coast Knights W [-2.50]",
+          "odds": "1.65",
+          "shortName": "1",
+          "specValue": -2.5
+        },
+        {
+          "id": 2666935751,
+          "name": "Gold Coast United W [+2.50]",
+          "odds": "2.02",
+          "shortName": "2",
+          "specValue": -2.5
+        }
+      ]
+    },
+    {
+      "id": 53,
+      "specValue": -1.5,
+      "name": "Asian Handicap - Half Time",
+      "order": 149,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2667006613,
+          "name": "Gold Coast Knights W [-1.50]",
+          "odds": "2.15",
+          "shortName": "1",
+          "specValue": -1.5
+        },
+        {
+          "id": 2667006617,
+          "name": "Gold Coast United W [+1.50]",
+          "odds": "1.53",
+          "shortName": "2",
+          "specValue": -1.5
+        }
+      ]
+    },
+    {
+      "id": 53,
+      "specValue": -1.25,
+      "name": "Asian Handicap - Half Time",
+      "order": 149,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2666935377,
+          "name": "Gold Coast Knights W [-1.25]",
+          "odds": "1.85",
+          "shortName": "1",
+          "specValue": -1.25
+        },
+        {
+          "id": 2666935503,
+          "name": "Gold Coast United W [+1.25]",
+          "odds": "1.73",
+          "shortName": "2",
+          "specValue": -1.25
+        }
+      ]
+    },
+    {
+      "id": 53,
+      "specValue": -1,
+      "name": "Asian Handicap - Half Time",
+      "order": 149,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2666935665,
+          "name": "Gold Coast Knights W [-1.00]",
+          "odds": "1.53",
+          "shortName": "1",
+          "specValue": -1
+        },
+        {
+          "id": 2666935765,
+          "name": "Gold Coast United W [+1.00]",
+          "odds": "2.14",
+          "shortName": "2",
+          "specValue": -1
+        }
+      ]
+    },
+    {
+      "id": 202,
+      "specValue": 0,
+      "name": "Number of Goals in Groups - Full Time",
+      "order": 151,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2666935461,
+          "name": "0 or 1 goal",
+          "odds": "7.00",
+          "shortName": "0-1",
+          "specValue": 0
+        },
+        {
+          "id": 2666935615,
+          "name": "2 or 3 goals",
+          "odds": "2.26",
+          "shortName": "2-3",
+          "specValue": 0
+        },
+        {
+          "id": 2666935707,
+          "name": "4 or 5 goals",
+          "odds": "2.44",
+          "shortName": "4-5",
+          "specValue": 0
+        },
+        {
+          "id": 2666935771,
+          "name": "6 or more",
+          "odds": "4.50",
+          "shortName": "6+",
+          "specValue": 0
+        }
+      ]
+    }
+  ]
+}

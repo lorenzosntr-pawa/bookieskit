@@ -152,35 +152,39 @@ def test_registry_sportpesa_lookup_returns_none_for_unknown_id():
 
 
 def test_builtin_1x2_ft_has_sportpesa_mapping():
+    # SportPesa market id 10 = "3 Way" = canonical 1X2 (per RESOLVED.md).
     from bookieskit.markets.registry import MarketRegistry
     registry = MarketRegistry()
-    m = registry.get_by_platform_id("sportpesa", "1")
+    m = registry.get_by_platform_id("sportpesa", "10")
     assert m is not None
     assert m.canonical_id == "1x2_ft"
     assert m.outcomes["home"].sportpesa  # any non-empty string
 
 
 def test_builtin_over_under_ft_has_sportpesa_mapping():
+    # SportPesa market id 52 = "Total Goals Over/Under - Full Time".
     from bookieskit.markets.registry import MarketRegistry
     registry = MarketRegistry()
-    m = registry.get_by_platform_id("sportpesa", "18")
+    m = registry.get_by_platform_id("sportpesa", "52")
     assert m is not None
     assert m.canonical_id == "over_under_ft"
     assert m.parameterized is True
 
 
 def test_builtin_btts_ft_has_sportpesa_mapping():
+    # SportPesa market id 43 = "Both Teams To Score".
     from bookieskit.markets.registry import MarketRegistry
     registry = MarketRegistry()
-    m = registry.get_by_platform_id("sportpesa", "29")
+    m = registry.get_by_platform_id("sportpesa", "43")
     assert m is not None
     assert m.canonical_id == "btts_ft"
 
 
 def test_builtin_dc_ft_has_sportpesa_mapping():
+    # SportPesa market id 46 = "Double Chance".
     from bookieskit.markets.registry import MarketRegistry
     registry = MarketRegistry()
-    m = registry.get_by_platform_id("sportpesa", "10")
+    m = registry.get_by_platform_id("sportpesa", "46")
     assert m is not None
     assert m.canonical_id == "double_chance_ft"
 
