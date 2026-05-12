@@ -362,8 +362,11 @@ async def count_sportpesa() -> dict:
       empirically — ``competitionId`` does NOT, it is silently ignored).
     - Run all per-league calls concurrently. SportPesa's
       ``MAX_CONCURRENT=15`` semaphore caps in-flight requests.
-    - ``/api/live/sports`` is used for live counts (it carries per-sport
-      ``eventNumber`` plus the live-tournaments grouping derivation).
+    - ``/api/live/sports`` enumerates the live sport ids only; for each,
+      ``/api/live/sports/{sid}/events/started`` is the authoritative
+      currently-in-play list (the ``eventNumber`` counter on
+      ``/api/live/sports`` is separately cached and unreliable — observed
+      returning all zeros even when many events are in-play).
 
     This is the only known path to the complete SportPesa prematch
     catalogue. The rolling-window cap discussion in earlier versions of

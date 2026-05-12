@@ -110,6 +110,85 @@ async def test_get_events_live_uses_highlights():
     assert result[0]["marketsCount"] == 22
 
 
+@pytest.mark.asyncio
+@respx.mock
+async def test_get_navigation():
+    respx.get("https://www.ke.sportpesa.com/api/navigation").respond(
+        json=[
+            {
+                "id": 1,
+                "name": "Football",
+                "order": 0,
+                "has_matches": True,
+                "countries": [
+                    {
+                        "id": 61,
+                        "name": "England",
+                        "iso_name": "eng",
+                        "leagues": [
+                            {"id": 67600, "name": "Premier League",
+                             "top_league_pos": 2},
+                        ],
+                    },
+                ],
+            },
+        ]
+    )
+    async with SportPesa(country="ke") as client:
+        result = await client.get_navigation()
+    assert result[0]["name"] == "Football"
+    assert result[0]["countries"][0]["leagues"][0]["id"] == 67600
+
+
+@pytest.mark.asyncio
+@respx.mock
+async def test_get_live_events_started():
+    respx.get(
+        "https://www.ke.sportpesa.com/api/live/sports/1/events/started"
+    ).respond(
+        json={
+            "events": [
+                {
+                    "id": 8868005,
+                    "tournament": {"id": 67600, "name": "Premier League"},
+                    "sport": {"id": 1, "name": "Football"},
+                    "country": {"id": 61, "name": "England"},
+                },
+            ]
+        }
+    )
+    async with SportPesa(country="ke") as client:
+        result = await client.get_live_events_started(sport_id="1")
+    assert result["events"][0]["tournament"]["id"] == 67600
+
+
+@pytest.mark.asyncio
+@respx.mock
+async def test_get_live_sport_events():
+    respx.get(
+        "https://www.ke.sportpesa.com/api/live/sports/1/events"
+    ).respond(json={"events": [{"id": 8868005}, {"id": 8868006}]})
+    async with SportPesa(country="ke") as client:
+        result = await client.get_live_sport_events(sport_id="1")
+    assert len(result["events"]) == 2
+
+
+@pytest.mark.asyncio
+@respx.mock
+async def test_get_events_uses_league_id_not_competition_id():
+    # `leagueId` is the only filter that actually walks past the rolling
+    # window; `competitionId` is silently ignored by the API.
+    route = respx.get(
+        "https://www.ke.sportpesa.com/api/upcoming/games"
+    ).respond(json=[{"id": 8868005, "competition": {"id": 67600}}])
+    async with SportPesa(country="ke") as client:
+        await client.get_events(sport_id="1", league_id="67600", pag_count=100)
+    # Verify the captured request used leagueId (NOT competitionId)
+    last_call = route.calls.last
+    assert "leagueId=67600" in str(last_call.request.url)
+    assert "competitionId" not in str(last_call.request.url)
+
+
 def test_sportpesa_exported_from_top_level():
     from bookieskit import SportPesa as SP
     from bookieskit.bookmakers.sportpesa import SportPesa as SP2
