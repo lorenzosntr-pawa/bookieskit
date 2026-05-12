@@ -72,3 +72,47 @@ async def test_get_markets_calls_markets_endpoint():
 
     assert markets_called.called
     assert not detail_called.called
+
+
+@pytest.mark.asyncio
+@respx.mock
+async def test_get_sports():
+    respx.get("https://www.ke.sportpesa.com/api/sports").respond(
+        json={"data": [{"id": 1, "name": "Football"}]}
+    )
+    async with SportPesa(country="ke") as client:
+        result = await client.get_sports()
+    assert result["data"][0]["name"] == "Football"
+
+
+@pytest.mark.asyncio
+@respx.mock
+async def test_get_countries():
+    respx.get("https://www.ke.sportpesa.com/api/upcoming/categories").respond(
+        json={"data": [{"id": 100, "name": "England"}]}
+    )
+    async with SportPesa(country="ke") as client:
+        result = await client.get_countries(sport_id="1")
+    assert result["data"][0]["name"] == "England"
+
+
+@pytest.mark.asyncio
+@respx.mock
+async def test_get_tournaments():
+    respx.get("https://www.ke.sportpesa.com/api/upcoming/competitions").respond(
+        json={"data": [{"id": 200, "name": "Premier League"}]}
+    )
+    async with SportPesa(country="ke") as client:
+        result = await client.get_tournaments(sport_id="1", category_id="100")
+    assert result["data"][0]["name"] == "Premier League"
+
+
+@pytest.mark.asyncio
+@respx.mock
+async def test_get_events():
+    respx.get("https://www.ke.sportpesa.com/api/upcoming/games").respond(
+        json={"data": [{"id": 8868005, "home_team": "Arsenal"}]}
+    )
+    async with SportPesa(country="ke") as client:
+        result = await client.get_events(sport_id="1", competition_id="200")
+    assert result["data"][0]["home_team"] == "Arsenal"

@@ -119,3 +119,86 @@ class SportPesa(BaseBookmaker):
 
         raw = await self.get_event_markets(event_id=event_id)
         return parse_markets(raw, platform=self.PLATFORM_KEY, registry=registry)
+
+    async def get_sports(self, live: bool = False) -> dict[str, Any]:
+        """Get all available sports.
+
+        Args:
+            live: If True, fetch the live-sports endpoint.
+
+        Returns:
+            Raw JSON.
+        """
+        # fixture-resolve: confirm exact path per RESOLVED.md
+        path = "/api/live/sports" if live else "/api/sports"
+        return await self._request("GET", path)
+
+    async def get_countries(
+        self, sport_id: str = "1", live: bool = False
+    ) -> dict[str, Any]:
+        """Get countries/categories for a sport.
+
+        Args:
+            sport_id: SportPesa sport id (default "1" for Football)
+            live: If True, query the live endpoint family.
+
+        Returns:
+            Raw JSON.
+        """
+        # fixture-resolve: confirm exact path per RESOLVED.md
+        path = "/api/live/categories" if live else "/api/upcoming/categories"
+        return await self._request("GET", path, params={"sportId": sport_id})
+
+    async def get_tournaments(
+        self,
+        sport_id: str = "1",
+        category_id: str | None = None,
+        live: bool = False,
+    ) -> dict[str, Any]:
+        """Get tournaments/competitions for a sport.
+
+        Args:
+            sport_id: SportPesa sport id (default "1" for Football)
+            category_id: Optional country/category id filter
+            live: If True, query the live endpoint family.
+
+        Returns:
+            Raw JSON.
+        """
+        # fixture-resolve: confirm exact path per RESOLVED.md
+        path = "/api/live/competitions" if live else "/api/upcoming/competitions"
+        params: dict[str, Any] = {"sportId": sport_id}
+        if category_id:
+            params["categoryId"] = category_id
+        return await self._request("GET", path, params=params)
+
+    async def get_events(
+        self,
+        sport_id: str = "1",
+        competition_id: str | None = None,
+        live: bool = False,
+        page: int = 0,
+        per_page: int = 50,
+    ) -> dict[str, Any]:
+        """Get events for a sport / competition.
+
+        Args:
+            sport_id: SportPesa sport id (default "1" for Football)
+            competition_id: Optional competition id filter
+            live: If True, query the live endpoint family.
+            page: Pagination page (default 0)
+            per_page: Page size (default 50)
+
+        Returns:
+            Raw JSON.
+        """
+        # fixture-resolve: confirm exact path + param names per RESOLVED.md
+        path = "/api/live/games" if live else "/api/upcoming/games"
+        params: dict[str, Any] = {
+            "sportId": sport_id,
+            "page": str(page),
+            "per_page": str(per_page),
+        }
+        if competition_id:
+            params["competitionId"] = competition_id
+        return await self._request("GET", path, params=params)
