@@ -149,3 +149,48 @@ def test_registry_sportpesa_lookup_returns_none_for_unknown_id():
     from bookieskit.markets.registry import MarketRegistry
     registry = MarketRegistry(load_builtins=False)
     assert registry.get_by_platform_id("sportpesa", "999") is None
+
+
+def test_builtin_1x2_ft_has_sportpesa_mapping():
+    from bookieskit.markets.registry import MarketRegistry
+    registry = MarketRegistry()
+    m = registry.get_by_platform_id("sportpesa", "1")
+    assert m is not None
+    assert m.canonical_id == "1x2_ft"
+    assert m.outcomes["home"].sportpesa  # any non-empty string
+
+
+def test_builtin_over_under_ft_has_sportpesa_mapping():
+    from bookieskit.markets.registry import MarketRegistry
+    registry = MarketRegistry()
+    m = registry.get_by_platform_id("sportpesa", "18")
+    assert m is not None
+    assert m.canonical_id == "over_under_ft"
+    assert m.parameterized is True
+
+
+def test_builtin_btts_ft_has_sportpesa_mapping():
+    from bookieskit.markets.registry import MarketRegistry
+    registry = MarketRegistry()
+    m = registry.get_by_platform_id("sportpesa", "29")
+    assert m is not None
+    assert m.canonical_id == "btts_ft"
+
+
+def test_builtin_dc_ft_has_sportpesa_mapping():
+    from bookieskit.markets.registry import MarketRegistry
+    registry = MarketRegistry()
+    m = registry.get_by_platform_id("sportpesa", "10")
+    assert m is not None
+    assert m.canonical_id == "double_chance_ft"
+
+
+def test_builtin_1up_2up_have_no_sportpesa_mapping():
+    from bookieskit.markets.registry import MarketRegistry
+    registry = MarketRegistry()
+    one_up = registry.get_by_canonical("1x2_1up_ft")
+    two_up = registry.get_by_canonical("1x2_2up_ft")
+    assert one_up.sportpesa_id is None
+    assert two_up.sportpesa_id is None
+    for om in one_up.outcomes.values():
+        assert om.sportpesa == ""
