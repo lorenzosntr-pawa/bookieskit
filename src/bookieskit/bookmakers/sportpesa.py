@@ -59,3 +59,63 @@ class SportPesa(BaseBookmaker):
             self._country, "Africa/Nairobi"
         )
         return headers
+
+    async def get_event_detail(
+        self, event_id: str, live: bool = False
+    ) -> dict[str, Any]:
+        """Get event detail (metadata + SR id, NOT full markets).
+
+        Args:
+            event_id: SportPesa internal game id (e.g., "8868005")
+            live: If True, query the live endpoint family.
+
+        Returns:
+            Raw JSON. SR id lives at <RESOLVED.md path>.
+        """
+        path = "/api/live/games" if live else "/api/upcoming/games"
+        return await self._request(
+            "GET",
+            path,
+            params={
+                "gameId": event_id,
+                "sportId": "1",
+                "section": "markets",
+                "pag_count": "1",
+            },
+        )
+
+    async def get_event_markets(self, event_id: str) -> dict[str, Any]:
+        """Get the full markets payload for one event.
+
+        Args:
+            event_id: SportPesa internal game id
+
+        Returns:
+            Raw JSON with data[0].markets[].
+        """
+        return await self._request(
+            "GET",
+            "/api/games/markets",
+            params={
+                "games": event_id,
+                "markets": "all",
+            },
+        )
+
+    async def get_markets(self, event_id: str, registry: Any = None) -> list:
+        """Fetch markets and return normalized markets.
+
+        Overrides the base because SportPesa uses a separate markets
+        endpoint, same pattern as Betway.
+
+        Args:
+            event_id: SportPesa internal game id
+            registry: MarketRegistry (default: built-in)
+
+        Returns:
+            List of NormalizedMarket for recognized markets.
+        """
+        from bookieskit.markets.parser import parse_markets
+
+        raw = await self.get_event_markets(event_id=event_id)
+        return parse_markets(raw, platform=self.PLATFORM_KEY, registry=registry)
