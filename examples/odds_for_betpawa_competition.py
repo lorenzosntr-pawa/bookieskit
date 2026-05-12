@@ -1,6 +1,6 @@
 """
 For every event in a BetPawa competition (tournament), fetch the mapped
-odds from all 5 bookmakers and write a single CSV comparing them.
+odds from all 6 bookmakers and write a single CSV comparing them.
 
 WHY START FROM A BETPAWA COMPETITION ID?
     Same reason as the single-event script: BetPawa's API doesn't (yet,
@@ -10,7 +10,12 @@ WHY START FROM A BETPAWA COMPETITION ID?
         1. List that competition's events (BetPawa internal ids).
         2. For each event, hit BetPawa to get its markets AND extract
            the SR id from the widget.
-        3. Use that SR id to query the other four bookmakers.
+        3. Use that SR id to query the other four SR-keyed bookmakers
+           (SportyBet, MSport, Betway, Bet9ja).
+
+    SportPesa is included in the CSV as a placeholder column with empty
+    values — it has no SR-id reverse search yet and its endpoints need
+    warmed Akamai cookies. See docs/sportpesa.md.
 
 USAGE
     python examples/odds_for_betpawa_competition.py <competition_id> \
@@ -27,12 +32,16 @@ import asyncio
 import csv
 from collections import defaultdict
 
-# Public surface of the library: the 5 client classes plus the parser
+# Public surface of the library: the 6 client classes plus the parser
 # (raw response -> NormalizedMarket list) and extractor (raw response
 # -> SportRadar id).
 from bookieskit import Bet9ja, BetPawa, Betway, MSport, SportyBet
 from bookieskit.markets import parse_markets
 from bookieskit.matching import extract_sportradar_id
+
+# SportPesa kept as an explicit import for discoverability; not wired
+# into the fan-out below.
+from bookieskit import SportPesa  # noqa: F401
 
 
 # ----------------------------------------------------------------------
@@ -258,7 +267,9 @@ async def main(competition_id: str, live: bool, csv_path: str) -> None:
     mode = "LIVE" if live else "PREMATCH"
     print(f"BetPawa competition: {competition_id}  mode: {mode}")
 
-    bookies_order = ["BetPawa", "SportyBet", "MSport", "Betway", "Bet9ja"]
+    # SportPesa is included as a placeholder column (always empty markets).
+    # No SR-id reverse search yet; the API also needs warmed Akamai cookies.
+    bookies_order = ["BetPawa", "SportyBet", "MSport", "Betway", "Bet9ja", "SportPesa"]
     all_rows: list[dict] = []
 
     async with BetPawa(country="ng") as bp, Bet9ja(country="ng") as b9_lookup:
@@ -289,6 +300,7 @@ async def main(competition_id: str, live: bool, csv_path: str) -> None:
                     per_bookmaker = {
                         "BetPawa": bp_data["markets"],
                         "SportyBet": [], "MSport": [], "Betway": [], "Bet9ja": [],
+                        "SportPesa": [],
                     }
                 else:
                     sr_prefixed = f"sr:match:{sr_numeric}"
@@ -303,6 +315,7 @@ async def main(competition_id: str, live: bool, csv_path: str) -> None:
                     per_bookmaker = {
                         "BetPawa": bp_data["markets"],
                         "SportyBet": sb, "MSport": ms, "Betway": bw, "Bet9ja": b9,
+                        "SportPesa": [],
                     }
 
                     # Per-event progress line: lets you see at a glance
@@ -311,7 +324,7 @@ async def main(competition_id: str, live: bool, csv_path: str) -> None:
                     # (BetPawa vs Betway, Bet9ja).
                     short = {
                         "BetPawa": "BP", "SportyBet": "SB", "MSport": "MS",
-                        "Betway": "BW", "Bet9ja": "B9",
+                        "Betway": "BW", "Bet9ja": "B9", "SportPesa": "SP",
                     }
                     counts = " ".join(
                         f"{short[name]}={len(per_bookmaker[name])}"

@@ -1,5 +1,5 @@
 """Given a SportRadar event ID (live or prematch), fetch odds for the
-mapped (built-in) markets from each of the 5 bookmakers.
+mapped (built-in) markets from each of the 6 bookmakers.
 
 Usage:
     python examples/odds_for_sr_id.py <sr_id> [--prematch]
@@ -15,7 +15,8 @@ Resolution per bookmaker:
   markets endpoint, returns same shape for live + prematch)
 - Bet9ja: SR id → internal id via find_event_id_by_sr_id (live scan); then
   get_event_detail
-- BetPawa: not yet supported by SR id directly. Skipped here.
+- BetPawa, SportPesa: no SR-id reverse search yet. Skipped here.
+  (SportPesa also requires warmed Akamai cookies — see docs/sportpesa.md.)
 """
 
 import asyncio
@@ -23,6 +24,11 @@ import sys
 
 from bookieskit import Bet9ja, Betway, MSport, SportyBet
 from bookieskit.markets import parse_markets
+
+# SportPesa is imported but currently unused in the fan-out because there is
+# no SR-id → SportPesa-internal-id lookup yet. Kept here to make extension
+# obvious once a reverse-search path lands.
+from bookieskit import SportPesa  # noqa: F401
 
 
 def _normalize_sr_id(s: str) -> tuple[str, str]:
@@ -119,6 +125,13 @@ async def odds_betpawa(sr_numeric: str, sr_prefixed: str, *, live: bool) -> dict
     }
 
 
+async def odds_sportpesa(sr_numeric: str, sr_prefixed: str, *, live: bool) -> dict:
+    return {
+        "name": "SportPesa",
+        "status": "skipped (no SR-ID reverse search yet; also requires warmed Akamai cookies — see docs/sportpesa.md)",  # noqa: E501
+    }
+
+
 def _print(r: dict) -> None:
     name = r["name"]
     status = r.get("status", "?")
@@ -154,6 +167,7 @@ async def main(sr_input: str, live: bool):
         odds_betway(sr_numeric, sr_prefixed, live=live),
         odds_bet9ja(sr_numeric, sr_prefixed, live=live),
         odds_betpawa(sr_numeric, sr_prefixed, live=live),
+        odds_sportpesa(sr_numeric, sr_prefixed, live=live),
     )
     for r in results:
         _print(r)

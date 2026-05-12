@@ -1,17 +1,22 @@
 """
-Compare odds across all 5 bookmakers, starting from a BetPawa event id.
+Compare odds across all 6 bookmakers, starting from a BetPawa event id.
 
 WHY START FROM BETPAWA?
-    The other 4 bookmakers (SportyBet, MSport, Betway, Bet9ja) either use
+    Four of the others (SportyBet, MSport, Betway, Bet9ja) either use
     the SportRadar id directly as their event id (SportyBet/MSport/Betway)
     or expose the SR id alongside their internal id (Bet9ja's `EXTID`),
     so given a SR id we can look them up cheaply.
 
-    BetPawa is the odd one out: their event id is internal, and their API
+    BetPawa is one odd one out: its event id is internal, and the API
     doesn't (yet, in this lib) expose a SR-id -> BetPawa-id search. But
     BetPawa DOES embed the SR id inside the event-detail response (under
     `widgets[].id` for the SPORTRADAR widget), so once we have the BetPawa
-    id, we can read out the SR id and use it to query the other four.
+    id, we can read out the SR id and use it to query the SR-keyed four.
+
+    SportPesa is the *other* odd one out: same lack of SR-id reverse
+    search, AND its endpoints are gated by Akamai Bot Manager. This
+    script shows it as a placeholder column populated with empty values;
+    populate it manually once a reverse-search path exists.
 
 USAGE
     python examples/odds_from_betpawa_id.py <betpawa_id> [--prematch] [--csv path.csv]
@@ -27,12 +32,16 @@ import asyncio
 import csv
 from collections import defaultdict
 
-# Public surface of the library — these are the 5 client classes plus
+# Public surface of the library — these are the 6 client classes plus
 # the two helpers we need: a parser (raw response -> NormalizedMarket
 # list) and an extractor (raw response -> SportRadar id).
 from bookieskit import Bet9ja, BetPawa, Betway, MSport, SportyBet
 from bookieskit.markets import parse_markets
 from bookieskit.matching import extract_sportradar_id
+
+# SportPesa kept as an explicit import even though it's not wired into
+# the fan-out below — see the module docstring for why.
+from bookieskit import SportPesa  # noqa: F401
 
 
 # --- Step 1: Fetch BetPawa event + extract SR id ---
@@ -231,13 +240,16 @@ async def main(betpawa_id: str, live: bool, csv_path: str) -> None:
     )
 
     # Bundle results keyed by display name. Order here is the column
-    # order in the CSV.
+    # order in the CSV. SportPesa is included as an empty placeholder
+    # column — no SR-id reverse search yet, and the API needs warmed
+    # Akamai cookies anyway.
     per_bookmaker = {
         "BetPawa": {"markets": bp["markets"]},
         "SportyBet": sb_res,
         "MSport": ms_res,
         "Betway": bw_res,
         "Bet9ja": b9_res,
+        "SportPesa": {"markets": []},
     }
 
     # Quick console summary so the user can see at a glance whether each
@@ -254,7 +266,7 @@ async def main(betpawa_id: str, live: bool, csv_path: str) -> None:
 if __name__ == "__main__":
     # `argparse` keeps the CLI surface tiny but discoverable.
     parser = argparse.ArgumentParser(
-        description="Compare odds across 5 bookmakers, starting from a BetPawa event id."  # noqa: E501
+        description="Compare odds across 6 bookmakers, starting from a BetPawa event id."  # noqa: E501
     )
     parser.add_argument("betpawa_id", help="BetPawa internal event id (e.g. 32299257)")
     parser.add_argument(

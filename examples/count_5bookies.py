@@ -1,14 +1,22 @@
-"""Quick totals audit: sports / tournaments / events for all 5 bookmakers.
+"""Quick totals audit: sports / tournaments / events for all 6 bookmakers.
 
 Strategy: single API call per (bookmaker, prematch/live) where possible.
 Event totals come from per-sport counts in the sports response; tournament
 totals iterate over sports (for soccer only — full enumeration would be many
 calls per bookmaker).
+
+SportPesa requires warmed Akamai cookies — set the SPORTPESA_COOKIE env var
+to a full Cookie: header from a browser session. When unset, the SportPesa
+block reports a clean failure rather than crashing.
+
+The file name (count_5bookies.py) is kept for backwards-compatibility with
+external references; the script now iterates 6 bookmakers.
 """
 
 import asyncio
+import os
 
-from bookieskit import Bet9ja, BetPawa, Betway, MSport, SportyBet
+from bookieskit import Bet9ja, BetPawa, Betway, MSport, SportPesa, SportyBet
 
 
 async def count_betpawa() -> dict:
@@ -193,9 +201,37 @@ async def count_msport() -> dict:
     return out
 
 
+async def count_sportpesa() -> dict:
+    out = {"name": "SportPesa", "country": "ke"}
+    cookie = os.environ.get("SPORTPESA_COOKIE")
+    if not cookie:
+        return {"name": "SportPesa", "error": "SPORTPESA_COOKIE env var not set"}
+    async with SportPesa(country="ke") as sp:
+        sp._http_client.headers["cookie"] = cookie
+        # Best-evidence paths — adjust here when fixture capture confirms the
+        # actual SportPesa list-endpoint shapes (see docs/sportpesa.md).
+        try:
+            sports_raw = (await sp.get_sports()).get("data", []) or []
+        except Exception as e:
+            return {"name": "SportPesa", "error": f"get_sports failed: {e!r}"}
+        out["sports_total"] = len(sports_raw)
+        # SportPesa's per-sport counts aren't a confirmed field — leave as "?"
+        # until the fixture pins the shape.
+        out["sports_with_prematch"] = "?"
+        out["sports_with_live"] = "?"
+        out["events_prematch"] = None  # rendered as "n/a" by the main printer
+        out["events_live"] = "?"
+        out["tournaments_prematch"] = "?"
+        out["tournaments_live"] = "?"
+    return out
+
+
 async def main():
     results = []
-    for fn in (count_betpawa, count_sportybet, count_bet9ja, count_betway, count_msport):  # noqa: E501
+    for fn in (
+        count_betpawa, count_sportybet, count_bet9ja,
+        count_betway, count_msport, count_sportpesa,
+    ):
         try:
             r = await fn()
             results.append(r)
