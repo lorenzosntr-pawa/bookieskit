@@ -41,6 +41,7 @@ Endpoint paths for `get_sports`, `get_countries`, `get_tournaments`, and `get_ev
   ```
 - **Markets and event detail are SEPARATE endpoints.** `get_event_detail` returns metadata + SR id only — NO markets. Use `get_event_markets` (or the `get_markets` convenience) for odds.
 - **Country via subdomain**, not via a query parameter. The `x-app-timezone` header switches per country.
+- **Rolling-window event cap (≈100 per sport).** `/api/upcoming/games?sportId=N` hard-caps responses at 100 events spanning a rolling ~24h window. Verified empirically that *no* pagination convention walks past it: `page` / `pageNumber` / `offset` / `start` / `from` / `skip` / `pag_offset` / `pag_start` / `cursor` / `lastId` / `after` / `dateFrom` / `startDate` / `dayOffset` / `period` all return the same first-100. The `/api/highlights/{sportId}` endpoint surfaces a few featured events but is largely a subset of upcoming. `countryId` and `competitionId` filters return subsets of the rolling window (post-hoc filtering, not catalogue expansion). To enumerate the multi-day catalogue you would need either repeated polling over time + dedup, or a private/partner API not exposed to web clients. This is a SportPesa product/API design choice, not a scraping limitation.
 
 ## Recipes
 

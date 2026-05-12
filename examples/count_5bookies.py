@@ -309,17 +309,28 @@ async def count_sportpesa() -> dict:
     Strategy:
     - `/api/live/sports` returns the live sport catalogue with per-sport
       `eventNumber` (live event count). Sum for `events_live`.
-    - For each sport, hit `/api/upcoming/games?sportId={id}` once to
-      enumerate prematch games. From that list, count unique competition
-      ids for `tournaments_prematch` and `len(games)` for `events_prematch`.
-    - There is no dedicated live-competitions endpoint; live tournaments
-      are derived from `/api/highlights/{sportId}?live=true` by grouping
-      on competition.id.
+    - For each sport, union the prematch lists from `/api/upcoming/games?
+      sportId={id}` (rolling ~24h) and `/api/highlights/{id}` (featured /
+      slightly longer window). From that union, count unique competition
+      ids for `tournaments_prematch` and `len(union)` for `events_prematch`.
+    - Live tournaments derived from `/api/highlights/{sportId}?live=true`
+      by grouping on competition.id.
+
+    IMPORTANT — public-API ceiling: SportPesa's `/api/upcoming/games`
+    hard-caps at 100 events per sport in a rolling window (~24h). No
+    `page`/`offset`/`pageNumber`/`countryId`/`competitionId`/date filter
+    walks past it (verified empirically). The `/api/highlights/{id}`
+    endpoint surfaces at most a few extra featured events. So
+    `events_prematch` here represents the rolling visible catalogue, not
+    a multi-day total. Other bookmakers (BetPawa, SportyBet, Bet9ja,
+    Betway, MSport) expose multi-day catalogues, so their numbers are
+    structurally larger; this is a SportPesa API design choice, not
+    a bug. The script marks the SportPesa row with `*` for clarity.
 
     Per-bookmaker assumption: SportPesa carries the same sport catalogue
     prematch and live, so `sports_total` is the size of the live list.
     """
-    out = {"name": "SportPesa", "country": "ke"}
+    out = {"name": "SportPesa*", "country": "ke"}
     cookie = os.environ.get("SPORTPESA_COOKIE")
     if not cookie:
         return {"name": "SportPesa", "error": "SPORTPESA_COOKIE env var not set"}
@@ -336,32 +347,41 @@ async def count_sportpesa() -> dict:
         )
         out["events_live"] = sum(s.get("eventNumber", 0) for s in sports)
 
-        prematch_events = 0
+        prematch_event_ids_seen: set = set()
         prematch_tournaments_seen: set = set()
         live_tournaments_seen: set = set()
         sports_with_prematch = 0
-        # SportPesa's /api/upcoming/games is hard-capped at 100 entries per
-        # sport in a rolling ~24-hour window. No `page`/`offset`/`date_from`
-        # parameter walks past it (verified empirically — every offset value
-        # returns the same first-100). Per-competition fan-out also adds
-        # nothing because every visible event already appears in the per-sport
-        # seed list. The reported `events_prematch` is therefore the SportPesa
-        # public-API ceiling, not a full multi-day catalogue like the other
-        # bookmakers expose.
+        # Public API ceiling: see docstring. We union /api/upcoming/games
+        # and /api/highlights/{id} per sport because highlights occasionally
+        # surfaces a handful of events outside the rolling-100 window.
         SP_CAP = 100
         for s in sports:
             sid = str(s.get("id"))
+            upcoming: list = []
+            highlights: list = []
             try:
-                games = await sp.get_events(sport_id=sid, pag_count=SP_CAP)
+                upcoming = await sp.get_events(sport_id=sid, pag_count=SP_CAP)
             except Exception:
-                games = []
-            if games:
-                sports_with_prematch += 1
-            prematch_events += len(games)
-            for g in games:
+                pass
+            try:
+                highlights = await sp._request(
+                    "GET", f"/api/highlights/{sid}", params={"pag_count": "200"}
+                )
+                if not isinstance(highlights, list):
+                    highlights = []
+            except Exception:
+                highlights = []
+            sport_event_ids: set = set()
+            for g in list(upcoming) + list(highlights):
+                gid = g.get("id")
+                if gid is not None:
+                    sport_event_ids.add(gid)
+                    prematch_event_ids_seen.add((sid, gid))
                 comp_id = (g.get("competition") or {}).get("id")
                 if comp_id is not None:
                     prematch_tournaments_seen.add((sid, comp_id))
+            if sport_event_ids:
+                sports_with_prematch += 1
             if s.get("eventNumber", 0) > 0:
                 try:
                     live_games = await sp.get_events(
@@ -375,7 +395,7 @@ async def count_sportpesa() -> dict:
                         live_tournaments_seen.add((sid, comp_id))
 
         out["sports_with_prematch"] = sports_with_prematch
-        out["events_prematch"] = prematch_events
+        out["events_prematch"] = len(prematch_event_ids_seen)
         out["tournaments_prematch"] = len(prematch_tournaments_seen)
         out["tournaments_live"] = len(live_tournaments_seen)
     return out
@@ -410,7 +430,16 @@ async def main():
         ep_str = "n/a" if ep is None else str(ep)
         print(f"{r['name']:<12} {sp:>7} {tp:>8} {tl:>8} {ep_str:>10} {el:>10}")
     print("=" * 90)
-    print("\nLegend: Tour(P)=prematch tournaments, Tour(L)=live tournaments, Events(P/L)=events totals")  # noqa: E501
+    print(
+        "\nLegend: Tour(P)=prematch tournaments, Tour(L)=live tournaments, "
+        "Events(P/L)=events totals"
+    )
+    if any(r.get("name", "").endswith("*") for r in results):
+        print(
+            "* SportPesa public API caps at ~100 events per sport in a rolling "
+            "window (~24h). Numbers reflect the visible catalogue, not a full "
+            "multi-day total — see docs/sportpesa.md for the API limitation."
+        )
 
 
 if __name__ == "__main__":
