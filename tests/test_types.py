@@ -161,3 +161,22 @@ def test_outcome_mapping_sportpesa_field_round_trips():
         betway="__HOME__", msport="Home", sportpesa="1",
     )
     assert om.sportpesa == "1"
+
+
+def test_market_mapping_sportpesa_id_defaults_to_none():
+    from bookieskit.markets.types import MarketMapping
+    mm = MarketMapping(
+        canonical_id="1x2_ft", name="1X2 - Full Time",
+        betpawa_id="3743", sportybet_id="1", bet9ja_key="S_1X2",
+    )
+    assert mm.sportpesa_id is None
+
+
+def test_market_mapping_sportpesa_id_round_trips():
+    from bookieskit.markets.types import MarketMapping
+    mm = MarketMapping(
+        canonical_id="1x2_ft", name="1X2 - Full Time",
+        betpawa_id="3743", sportybet_id="1", bet9ja_key="S_1X2",
+        betway_id="[Win/Draw/Win]", msport_id="1", sportpesa_id="1",
+    )
+    assert mm.sportpesa_id == "1"
