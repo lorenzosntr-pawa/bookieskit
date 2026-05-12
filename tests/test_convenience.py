@@ -125,3 +125,23 @@ def test_sync_get_markets():
         markets = client.get_markets(event_id="123")
     assert len(markets) == 1
     assert markets[0].canonical_id == "btts_ft"
+
+
+@pytest.mark.asyncio
+@respx.mock
+async def test_sportpesa_get_markets_routes_to_event_markets_endpoint():
+    """SportPesa.get_markets must call /api/games/markets, not the detail endpoint."""
+    from bookieskit import SportPesa
+
+    markets_route = respx.get(
+        "https://www.ke.sportpesa.com/api/games/markets"
+    ).respond(json={"data": [{"id": 8868005, "markets": []}]})
+    detail_route = respx.get(
+        "https://www.ke.sportpesa.com/api/upcoming/games"
+    ).respond(json={"data": [{"id": 8868005}]})
+
+    async with SportPesa(country="ke") as client:
+        await client.get_markets(event_id="8868005")
+
+    assert markets_route.called
+    assert not detail_route.called
