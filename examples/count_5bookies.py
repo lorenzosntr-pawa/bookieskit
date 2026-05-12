@@ -239,10 +239,19 @@ async def count_sportpesa() -> dict:
         prematch_tournaments_seen: set = set()
         live_tournaments_seen: set = set()
         sports_with_prematch = 0
+        # SportPesa's /api/upcoming/games is hard-capped at 100 entries per
+        # sport in a rolling ~24-hour window. No `page`/`offset`/`date_from`
+        # parameter walks past it (verified empirically — every offset value
+        # returns the same first-100). Per-competition fan-out also adds
+        # nothing because every visible event already appears in the per-sport
+        # seed list. The reported `events_prematch` is therefore the SportPesa
+        # public-API ceiling, not a full multi-day catalogue like the other
+        # bookmakers expose.
+        SP_CAP = 100
         for s in sports:
             sid = str(s.get("id"))
             try:
-                games = await sp.get_events(sport_id=sid)
+                games = await sp.get_events(sport_id=sid, pag_count=SP_CAP)
             except Exception:
                 games = []
             if games:
@@ -254,7 +263,9 @@ async def count_sportpesa() -> dict:
                     prematch_tournaments_seen.add((sid, comp_id))
             if s.get("eventNumber", 0) > 0:
                 try:
-                    live_games = await sp.get_events(sport_id=sid, live=True)
+                    live_games = await sp.get_events(
+                        sport_id=sid, live=True, pag_count=SP_CAP
+                    )
                 except Exception:
                     live_games = []
                 for g in live_games:
