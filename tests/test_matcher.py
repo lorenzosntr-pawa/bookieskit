@@ -104,3 +104,21 @@ def test_match_events_handles_betway_and_msport():
     assert matched[0].sportradar_id == "12345"
     assert matched[0].betway is bw_event
     assert matched[0].msport is ms_event
+
+
+def test_match_events_populates_sportpesa_field():
+    from bookieskit.matching.matcher import match_events
+
+    bw_event = {"sportEvent": {"eventId": "12345"}}
+    sp_event = {"data": [{"additional_info": {"sportradar_id": "12345"}}]}
+
+    results = match_events(
+        ("betway", [bw_event]),
+        ("sportpesa", [sp_event]),
+    )
+
+    assert len(results) == 1
+    me = results[0]
+    assert me.sportradar_id == "12345"
+    assert me.betway is bw_event
+    assert me.sportpesa is sp_event

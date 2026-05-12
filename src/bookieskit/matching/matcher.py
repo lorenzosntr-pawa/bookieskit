@@ -15,6 +15,7 @@ class MatchedEvent:
     bet9ja: dict | None = None
     betway: dict | None = None
     msport: dict | None = None
+    sportpesa: dict | None = None
 
 
 def match_events(
@@ -52,6 +53,7 @@ def match_events(
                 bet9ja=platforms.get("bet9ja"),
                 betway=platforms.get("betway"),
                 msport=platforms.get("msport"),
+                sportpesa=platforms.get("sportpesa"),
             )
         )
 
