@@ -4,6 +4,7 @@ from bookieskit.bookmakers.bet9ja import Bet9ja
 from bookieskit.bookmakers.betpawa import BetPawa
 from bookieskit.bookmakers.betway import Betway
 from bookieskit.bookmakers.msport import MSport
+from bookieskit.bookmakers.sportpesa import SportPesa
 from bookieskit.bookmakers.sportybet import SportyBet
 from bookieskit.event_info import (
     LiveInfo,
@@ -16,13 +17,14 @@ from bookieskit.event_info import (
 )
 from bookieskit.markets.parser import ProbabilityMode
 
-__version__ = "0.4.0"
+__version__ = "0.5.0"
 __all__ = [
     "BetPawa",
     "SportyBet",
     "Bet9ja",
     "Betway",
     "MSport",
+    "SportPesa",
     "LiveInfo",
     "Mode",
     "Participants",

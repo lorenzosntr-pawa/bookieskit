@@ -116,3 +116,14 @@ async def test_get_events():
     async with SportPesa(country="ke") as client:
         result = await client.get_events(sport_id="1", competition_id="200")
     assert result["data"][0]["home_team"] == "Arsenal"
+
+
+def test_sportpesa_exported_from_top_level():
+    from bookieskit import SportPesa as SP
+    from bookieskit.bookmakers.sportpesa import SportPesa as SP2
+    assert SP is SP2
+
+
+def test_top_level_version_bumped():
+    import bookieskit
+    assert bookieskit.__version__ == "0.5.0"
