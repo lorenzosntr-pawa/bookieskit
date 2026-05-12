@@ -19,6 +19,7 @@ def extract_sportradar_id(
         "bet9ja": _extract_bet9ja,
         "betway": _extract_betway,
         "msport": _extract_msport,
+        "sportpesa": _extract_sportpesa,
     }
     extractor = extractors.get(platform)
     if extractor is None:
@@ -86,3 +87,25 @@ def _extract_msport(response: dict) -> str | None:
     if event_id:
         return _strip_sr_prefix(str(event_id))
     return None
+
+
+def _extract_sportpesa(response: dict) -> str | None:
+    """Extract from SportPesa data[0].additional_info.sportradar_id.
+
+    Path is fixture-resolved — checks four candidate locations. After
+    fixture capture lands, prune the unused fallback branches.
+    """
+    games = response.get("data") or response.get("games") or []
+    if not isinstance(games, list) or not games:
+        return None
+    game = games[0]
+    info = game.get("additional_info") or {}
+    sr = (
+        info.get("sportradar_id")
+        or info.get("betradar_id")
+        or info.get("sr_id")
+        or game.get("external_id")
+    )
+    if not sr:
+        return None
+    return _strip_sr_prefix(str(sr))

@@ -119,3 +119,16 @@ def test_extract_from_msport_no_event_id():
 def test_extract_from_msport_no_data():
     sr_id = extract_sportradar_id({"bizCode": 10000}, platform="msport")
     assert sr_id is None
+
+
+def test_extract_sportradar_id_sportpesa_missing_returns_none():
+    from bookieskit.matching.extractor import extract_sportradar_id
+    assert extract_sportradar_id({}, platform="sportpesa") is None
+    assert extract_sportradar_id({"data": []}, platform="sportpesa") is None
+    assert extract_sportradar_id({"data": [{}]}, platform="sportpesa") is None
+
+
+def test_extract_sportradar_id_sportpesa_strips_prefix():
+    from bookieskit.matching.extractor import extract_sportradar_id
+    response = {"data": [{"additional_info": {"sportradar_id": "sr:match:12345"}}]}
+    assert extract_sportradar_id(response, platform="sportpesa") == "12345"
