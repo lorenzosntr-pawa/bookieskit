@@ -170,7 +170,7 @@ class Betway(BaseBookmaker):
         sport_id: str = "soccer",
         skip: int = 0,
         take: int = 100,
-        market_types: str = "[Win/Draw/Win]",
+        market_types: str = "",
     ) -> dict[str, Any]:
         """Get in-play (live) events for one sport.
 
@@ -178,8 +178,15 @@ class Betway(BaseBookmaker):
             sport_id: Sport slug (required by the API, e.g., "soccer").
             skip: Pagination offset.
             take: Page size.
-            market_types: Comma-bracketed market-type filter — required by
-                the API; the default surfaces 1X2-style live events.
+            market_types: Comma-bracketed market-type filter. Default is
+                an empty string, which the API treats as "no filter" and
+                returns every in-play event for the sport regardless of
+                which market types are available. Pass a specific value
+                (e.g. ``"[Win/Draw/Win]"`` for football 1X2, or
+                ``"[Match Winner]"`` for tennis) to filter. Passing a
+                sport-incompatible filter (e.g. ``"[Win/Draw/Win]"`` for
+                tennis) silently returns zero events — every sport carries
+                its own ``defaultMarkets`` in the sports-list response.
 
         Returns:
             Raw JSON with the same shape as ``get_events``:
