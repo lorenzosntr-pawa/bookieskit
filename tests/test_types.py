@@ -146,3 +146,18 @@ def test_market_mapping_msport_id_defaults_none():
         outcomes={},
     )
     assert mm.msport_id is None
+
+
+def test_outcome_mapping_sportpesa_field_defaults_to_empty():
+    from bookieskit.markets.types import OutcomeMapping
+    om = OutcomeMapping(canonical_name="home", betpawa="1", sportybet="Home", bet9ja="1")
+    assert om.sportpesa == ""
+
+
+def test_outcome_mapping_sportpesa_field_round_trips():
+    from bookieskit.markets.types import OutcomeMapping
+    om = OutcomeMapping(
+        canonical_name="home", betpawa="1", sportybet="Home", bet9ja="1",
+        betway="__HOME__", msport="Home", sportpesa="1",
+    )
+    assert om.sportpesa == "1"
