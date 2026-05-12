@@ -16,3 +16,4 @@ venv/
 sportpesa_cookie.txt
 probe_sportpesa.py
 capture_now.py
+probe_gaps.py

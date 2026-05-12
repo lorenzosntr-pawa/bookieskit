@@ -36,9 +36,13 @@ async def count_betpawa() -> dict:
         out["events_live"] = sum(
             s.get("eventCounts", {}).get("live", 0) for s in sports
         )
-        # Tournament total: iterate ALL sports
+        # Tournament total: iterate ALL sports for prematch.
+        # Live tournaments: BetPawa has no dedicated "live competitions" endpoint,
+        # but every live event carries `competition.id` — derive by paginating
+        # get_events(event_type="LIVE") per sport and collecting distinct ids.
+        # BetPawa caps take at 100.
         prematch_tournaments = 0
-        live_tournaments = 0
+        live_competition_ids: set = set()
         for s in sports:
             sid = str(s["category"]["id"])
             try:
@@ -51,8 +55,33 @@ async def count_betpawa() -> dict:
                 prematch_tournaments += comp_count
             except Exception:
                 pass
+            # Only walk live-events when the sport has live activity (avoids
+            # an extra call per empty sport).
+            if s.get("eventCounts", {}).get("live", 0) == 0:
+                continue
+            skip = 0
+            while True:
+                try:
+                    page = await bp.get_events(
+                        event_type="LIVE", sport_id=sid, take=100, skip=skip
+                    )
+                except Exception:
+                    break
+                inner = (page.get("responses") or [{}])[0].get("responses") or []
+                if not inner:
+                    break
+                for e in inner:
+                    if not isinstance(e, dict):
+                        continue
+                    comp = e.get("competition") or {}
+                    cid = comp.get("id")
+                    if cid:
+                        live_competition_ids.add((sid, cid))
+                if len(inner) < 100:
+                    break
+                skip += 100
         out["tournaments_prematch"] = prematch_tournaments
-        out["tournaments_live"] = live_tournaments  # BetPawa doesn't expose live tournaments distinctly  # noqa: E501
+        out["tournaments_live"] = len(live_competition_ids)
     return out
 
 
@@ -116,23 +145,36 @@ async def count_bet9ja() -> dict:
             prematch_tournaments += sum(len(g.get("G", {}) or {}) for g in sg.values())
         out["tournaments_prematch"] = prematch_tournaments
 
-        # Live
+        # Live — get_live_events returns D.E (events dict) AND D.G (groups
+        # dict). D.G is the live-tournaments grouping keyed by group id; each
+        # entry has a `DS` description (e.g. "Eredivisie-Zoom"). Count both.
         live = (await b9.get_live_sports()).get("D", {}).get("S", {}) or {}
         out["sports_with_live"] = len(live)
-        # Bet9ja live: fetch events per live sport and count D.E entries
         live_events = 0
+        live_tournaments = 0
         for sid in live.keys():
             try:
-                ev = (await b9.get_live_events(sport_id=str(sid))).get("D", {}).get("E", {}) or {}  # noqa: E501
-                live_events += len(ev)
+                D = (await b9.get_live_events(sport_id=str(sid))).get("D", {}) or {}
+                live_events += len(D.get("E") or {})
+                live_tournaments += len(D.get("G") or {})
             except Exception:
                 pass
         out["events_live"] = live_events
-        out["tournaments_live"] = 0  # Bet9ja live shape doesn't expose tournament counts here  # noqa: E501
+        out["tournaments_live"] = live_tournaments
     return out
 
 
 async def count_betway() -> dict:
+    """Betway has no per-sport upcoming count and its Highlights endpoint
+    caps at 29 events and ignores `skip`. The only way to get an accurate
+    prematch event total is to fan out (region, league) calls per sport
+    (the BetBook/Filtered endpoint, which paginates honestly per league).
+
+    The fan-out is bounded by Betway's MAX_CONCURRENT=50 semaphore, so this
+    runs in a handful of seconds even though it issues hundreds of HTTP
+    calls. Live tournaments are derived the same way: collect distinct
+    `league` ids from live events surfaced by Highlights/Filtered.
+    """
     out = {"name": "Betway", "country": "ng"}
     async with Betway(country="ng") as bw:
         sports = [s for s in (await bw.get_sports()).get("sports", []) if s.get("sportType") == "Sport"]  # noqa: E501
@@ -140,22 +182,81 @@ async def count_betway() -> dict:
         out["sports_with_prematch"] = sum(1 for s in sports if s.get("hasUpcomingEvents", False))  # noqa: E501
         out["sports_with_live"] = sum(1 for s in sports if s.get("liveInPlayCount", 0) > 0)  # noqa: E501
         out["events_live"] = sum(s.get("liveInPlayCount", 0) for s in sports)
-        # Betway doesn't surface a per-sport upcoming count — leave None
-        out["events_prematch"] = None
 
-        # Tournaments: iterate each sport's regions/leagues
+        # Walk each sport's regions/leagues once. We use the result for
+        # both tournaments_prematch (count of leagues) and events_prematch
+        # (fan out get_events per league).
         prematch_tournaments = 0
+        # (sport_id, region_id, league_id) tuples for per-league fan-out
+        league_calls: list[tuple[str, str, str]] = []
         for s in sports:
             sid = s.get("sportId")
             if not sid:
                 continue
             try:
                 regions = (await bw.get_countries(sport_id=sid)).get("regions", [])
-                prematch_tournaments += sum(len(r.get("leagues", [])) for r in regions)
             except Exception:
-                pass
+                continue
+            for r in regions:
+                rid = r.get("regionId")
+                if not rid:
+                    continue
+                leagues = r.get("leagues", []) or []
+                prematch_tournaments += len(leagues)
+                for lg in leagues:
+                    lid = lg.get("leagueId")
+                    if lid:
+                        league_calls.append((sid, rid, lid))
         out["tournaments_prematch"] = prematch_tournaments
-        out["tournaments_live"] = 0
+
+        async def _league_event_count(sid: str, rid: str, lid: str) -> int:
+            try:
+                r = await bw.get_events(
+                    region_id=rid, league_id=lid, sport_id=sid, take=100
+                )
+                return len(r.get("events", []) or [])
+            except Exception:
+                return 0
+
+        # Run all per-league calls concurrently; the client's semaphore
+        # (MAX_CONCURRENT=50) gates in-flight requests automatically.
+        if league_calls:
+            counts = await asyncio.gather(
+                *[_league_event_count(*c) for c in league_calls]
+            )
+            out["events_prematch"] = sum(counts)
+        else:
+            out["events_prematch"] = 0
+
+        # Live tournaments: walk get_live_events per sport with live activity,
+        # collect distinct leagueIds. The LiveInPlay endpoint paginates honestly
+        # and requires `sportId` + `marketTypes`.
+        live_league_ids: set = set()
+        for s in sports:
+            if s.get("liveInPlayCount", 0) == 0:
+                continue
+            sid = s.get("sportId")
+            if not sid:
+                continue
+            skip = 0
+            while True:
+                try:
+                    page = await bw.get_live_events(
+                        sport_id=sid, skip=skip, take=100
+                    )
+                except Exception:
+                    break
+                evs = page.get("events", []) or []
+                for e in evs:
+                    if not isinstance(e, dict):
+                        continue
+                    lid = e.get("leagueId")
+                    if lid:
+                        live_league_ids.add((sid, lid))
+                if page.get("isFinalPage", True) or len(evs) < 100:
+                    break
+                skip += 100
+        out["tournaments_live"] = len(live_league_ids)
     return out
 
 

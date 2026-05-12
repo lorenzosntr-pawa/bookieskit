@@ -165,6 +165,42 @@ class Betway(BaseBookmaker):
             endpoint = "/br/_apis/sport/v1/BetBook/Highlights/"
         return await self._request("GET", endpoint, params=params)
 
+    async def get_live_events(
+        self,
+        sport_id: str = "soccer",
+        skip: int = 0,
+        take: int = 100,
+        market_types: str = "[Win/Draw/Win]",
+    ) -> dict[str, Any]:
+        """Get in-play (live) events for one sport.
+
+        Args:
+            sport_id: Sport slug (required by the API, e.g., "soccer").
+            skip: Pagination offset.
+            take: Page size.
+            market_types: Comma-bracketed market-type filter — required by
+                the API; the default surfaces 1X2-style live events.
+
+        Returns:
+            Raw JSON with the same shape as ``get_events``:
+            ``events[]``, ``markets[]``, ``outcomes[]``, ``prices[]``.
+            Each event carries ``leagueId``/``league``, ``isLive`` etc.
+        """
+        return await self._request(
+            "GET",
+            "/br/_apis/sport/v1/BetBook/LiveInPlay/",
+            params={
+                "countryCode": self._country_code,
+                "sportId": sport_id,
+                "Skip": str(skip),
+                "Take": str(take),
+                "cultureCode": "en-US",
+                "isEsport": "false",
+                "boostedOnly": "false",
+                "marketTypes": market_types,
+            },
+        )
+
     async def get_event_detail(
         self, event_id: str
     ) -> dict[str, Any]:
