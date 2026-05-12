@@ -153,7 +153,7 @@ class SportPesa(BaseBookmaker):
     async def get_events(
         self,
         sport_id: str = "1",
-        competition_id: str | None = None,
+        league_id: str | None = None,
         live: bool = False,
         pag_count: int | None = None,
     ) -> list[dict[str, Any]]:
@@ -162,8 +162,14 @@ class SportPesa(BaseBookmaker):
 
         Args:
             sport_id: SportPesa sport id (default ``"1"`` for Football).
-            competition_id: Optional competition id filter — passed as
-                ``competitionId`` to ``/api/upcoming/games`` when set.
+            league_id: Optional league/competition filter — passed as
+                ``leagueId`` to ``/api/upcoming/games``. **Important:** the
+                ``leagueId`` filter walks past the rolling-100-event window
+                and returns the full league catalogue, which is the only
+                way to enumerate prematch events beyond the rolling view.
+                (Earlier versions accepted ``competition_id`` which mapped
+                to ``competitionId`` — that query parameter is silently
+                ignored by the SportPesa API; use ``league_id`` instead.)
             live: If ``True``, query ``/api/highlights/{sport_id}?live=true``.
             pag_count: Optional page size; absent param means full list.
 
@@ -180,13 +186,50 @@ class SportPesa(BaseBookmaker):
                 "GET", f"/api/highlights/{sport_id}", params=params
             )
         params = {"sportId": sport_id}
-        if competition_id:
-            params["competitionId"] = competition_id
+        if league_id:
+            params["leagueId"] = league_id
         if pag_count is not None:
             params["pag_count"] = str(pag_count)
         return await self._request("GET", "/api/upcoming/games", params=params)
 
-    # NOTE: SportPesa has no dedicated tournament / competition list endpoint.
-    # The closest you can do is group `get_events(sport_id=...)` by
-    # `competition.id`. `get_countries` / `get_tournaments` are intentionally
-    # absent from this client — adding placeholders would be misleading.
+    async def get_navigation(self) -> list[dict[str, Any]]:
+        """Get the full sport → country → league navigation tree.
+
+        This is the endpoint that powers SportPesa's left-nav. It is the
+        only way to enumerate the complete league catalogue: the per-sport
+        ``/api/upcoming/games`` endpoint hard-caps at 100 events in a
+        rolling window, but ``get_navigation()`` exposes every league
+        SportPesa knows about, including leagues whose events fall outside
+        that window.
+
+        Returns:
+            JSON list of sport objects::
+
+                [
+                    {
+                        "id": 1, "name": "Football", "order": 0,
+                        "has_matches": True,
+                        "countries": [
+                            {
+                                "id": 61, "name": "England", "iso_name": "eng",
+                                "leagues": [
+                                    {"id": 67600, "name": "Premier League",
+                                     "top_league_pos": 2},
+                                    ...
+                                ],
+                            },
+                            ...
+                        ],
+                    },
+                    ...
+                ]
+
+        Pair with ``get_events(sport_id, league_id=L)`` to enumerate the
+        full per-league event catalogue.
+        """
+        return await self._request("GET", "/api/navigation")
+
+    # NOTE: SportPesa has no dedicated tournament / competition list endpoint
+    # in the classic shape — `get_navigation()` is the equivalent and returns
+    # the full sport → country → league tree in one call. `get_countries`
+    # and `get_tournaments` are intentionally absent from this client.

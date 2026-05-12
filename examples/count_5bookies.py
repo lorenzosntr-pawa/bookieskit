@@ -303,100 +303,111 @@ async def count_msport() -> dict:
 
 
 async def count_sportpesa() -> dict:
-    """SportPesa totals — derived because SportPesa has no per-sport
-    summary endpoint.
+    """SportPesa totals via navigation-tree walk.
 
     Strategy:
-    - `/api/live/sports` returns the live sport catalogue with per-sport
-      `eventNumber` (live event count). Sum for `events_live`.
-    - For each sport, union the prematch lists from `/api/upcoming/games?
-      sportId={id}` (rolling ~24h) and `/api/highlights/{id}` (featured /
-      slightly longer window). From that union, count unique competition
-      ids for `tournaments_prematch` and `len(union)` for `events_prematch`.
-    - Live tournaments derived from `/api/highlights/{sportId}?live=true`
-      by grouping on competition.id.
+    - ``/api/navigation`` returns the full sport → country → league tree.
+      Use that to enumerate every league SportPesa exposes (302 across
+      13 sports as of writing).
+    - For each league, ``get_events(sport_id=S, league_id=L)`` returns
+      the full league catalogue. The ``leagueId`` filter walks past the
+      rolling-100-event window that limits per-sport calls (verified
+      empirically — ``competitionId`` does NOT, it is silently ignored).
+    - Run all per-league calls concurrently. SportPesa's
+      ``MAX_CONCURRENT=15`` semaphore caps in-flight requests.
+    - ``/api/live/sports`` is used for live counts (it carries per-sport
+      ``eventNumber`` plus the live-tournaments grouping derivation).
 
-    IMPORTANT — public-API ceiling: SportPesa's `/api/upcoming/games`
-    hard-caps at 100 events per sport in a rolling window (~24h). No
-    `page`/`offset`/`pageNumber`/`countryId`/`competitionId`/date filter
-    walks past it (verified empirically). The `/api/highlights/{id}`
-    endpoint surfaces at most a few extra featured events. So
-    `events_prematch` here represents the rolling visible catalogue, not
-    a multi-day total. Other bookmakers (BetPawa, SportyBet, Bet9ja,
-    Betway, MSport) expose multi-day catalogues, so their numbers are
-    structurally larger; this is a SportPesa API design choice, not
-    a bug. The script marks the SportPesa row with `*` for clarity.
-
-    Per-bookmaker assumption: SportPesa carries the same sport catalogue
-    prematch and live, so `sports_total` is the size of the live list.
+    This is the only known path to the complete SportPesa prematch
+    catalogue. The rolling-window cap discussion in earlier versions of
+    this docstring still applies to the per-sport ``/api/upcoming/games``
+    call, but ``leagueId``-filtered calls bypass it cleanly.
     """
-    out = {"name": "SportPesa*", "country": "ke"}
+    out = {"name": "SportPesa", "country": "ke"}
     cookie = os.environ.get("SPORTPESA_COOKIE")
     if not cookie:
         return {"name": "SportPesa", "error": "SPORTPESA_COOKIE env var not set"}
     async with SportPesa(country="ke") as sp:
         sp._http_client.headers["cookie"] = cookie
-        try:
-            sports_resp = await sp.get_sports()
-        except Exception as e:
-            return {"name": "SportPesa", "error": f"get_sports failed: {e!r}"}
-        sports = sports_resp.get("sports", []) or []
-        out["sports_total"] = len(sports)
-        out["sports_with_live"] = sum(
-            1 for s in sports if s.get("eventNumber", 0) > 0
-        )
-        out["events_live"] = sum(s.get("eventNumber", 0) for s in sports)
 
-        prematch_event_ids_seen: set = set()
-        prematch_tournaments_seen: set = set()
-        live_tournaments_seen: set = set()
-        sports_with_prematch = 0
-        # Public API ceiling: see docstring. We union /api/upcoming/games
-        # and /api/highlights/{id} per sport because highlights occasionally
-        # surfaces a handful of events outside the rolling-100 window.
-        SP_CAP = 100
-        for s in sports:
-            sid = str(s.get("id"))
-            upcoming: list = []
-            highlights: list = []
+        # Navigation tree drives the catalogue enumeration.
+        try:
+            nav = await sp.get_navigation()
+        except Exception as e:
+            return {"name": "SportPesa", "error": f"get_navigation failed: {e!r}"}
+        out["sports_total"] = len(nav)
+
+        # Live counts from /api/live/sports — independent of navigation.
+        try:
+            live_resp = await sp.get_sports()
+            live_sports = live_resp.get("sports", []) or []
+        except Exception:
+            live_sports = []
+        out["sports_with_live"] = sum(
+            1 for s in live_sports if s.get("eventNumber", 0) > 0
+        )
+        out["events_live"] = sum(s.get("eventNumber", 0) for s in live_sports)
+
+        # Build the per-league call list from navigation.
+        league_calls: list[tuple[str, str]] = []  # (sport_id, league_id)
+        sports_with_leagues = set()
+        for sport in nav:
+            sid = str(sport.get("id"))
+            if not sport.get("has_matches"):
+                continue
+            for country in sport.get("countries", []) or []:
+                for league in country.get("leagues", []) or []:
+                    lid = league.get("id")
+                    if lid is not None:
+                        league_calls.append((sid, str(lid)))
+                        sports_with_leagues.add(sid)
+
+        out["tournaments_prematch"] = len(league_calls)
+
+        async def _fetch_league(sid: str, lid: str) -> tuple[str, str, list]:
             try:
-                upcoming = await sp.get_events(sport_id=sid, pag_count=SP_CAP)
-            except Exception:
-                pass
-            try:
-                highlights = await sp._request(
-                    "GET", f"/api/highlights/{sid}", params={"pag_count": "200"}
+                events = await sp.get_events(
+                    sport_id=sid, league_id=lid, pag_count=100
                 )
-                if not isinstance(highlights, list):
-                    highlights = []
+                return sid, lid, events if isinstance(events, list) else []
             except Exception:
-                highlights = []
-            sport_event_ids: set = set()
-            for g in list(upcoming) + list(highlights):
+                return sid, lid, []
+
+        # Concurrent per-league fan-out (semaphore-bounded).
+        results = await asyncio.gather(
+            *[_fetch_league(sid, lid) for sid, lid in league_calls]
+        )
+
+        prematch_event_ids: set = set()
+        sports_with_prematch = set()
+        for sid, lid, events in results:
+            for g in events:
                 gid = g.get("id")
                 if gid is not None:
-                    sport_event_ids.add(gid)
-                    prematch_event_ids_seen.add((sid, gid))
+                    prematch_event_ids.add(gid)
+            if events:
+                sports_with_prematch.add(sid)
+
+        out["sports_with_prematch"] = len(sports_with_prematch)
+        out["events_prematch"] = len(prematch_event_ids)
+
+        # Live tournaments: walk /api/highlights/{sportId}?live=true per
+        # sport with live activity and collect distinct competition ids.
+        live_tournaments_seen: set = set()
+        for s in live_sports:
+            if s.get("eventNumber", 0) == 0:
+                continue
+            sid = str(s.get("id"))
+            try:
+                live_games = await sp.get_events(
+                    sport_id=sid, live=True, pag_count=100
+                )
+            except Exception:
+                live_games = []
+            for g in live_games:
                 comp_id = (g.get("competition") or {}).get("id")
                 if comp_id is not None:
-                    prematch_tournaments_seen.add((sid, comp_id))
-            if sport_event_ids:
-                sports_with_prematch += 1
-            if s.get("eventNumber", 0) > 0:
-                try:
-                    live_games = await sp.get_events(
-                        sport_id=sid, live=True, pag_count=SP_CAP
-                    )
-                except Exception:
-                    live_games = []
-                for g in live_games:
-                    comp_id = (g.get("competition") or {}).get("id")
-                    if comp_id is not None:
-                        live_tournaments_seen.add((sid, comp_id))
-
-        out["sports_with_prematch"] = sports_with_prematch
-        out["events_prematch"] = len(prematch_event_ids_seen)
-        out["tournaments_prematch"] = len(prematch_tournaments_seen)
+                    live_tournaments_seen.add((sid, comp_id))
         out["tournaments_live"] = len(live_tournaments_seen)
     return out
 
@@ -434,12 +445,6 @@ async def main():
         "\nLegend: Tour(P)=prematch tournaments, Tour(L)=live tournaments, "
         "Events(P/L)=events totals"
     )
-    if any(r.get("name", "").endswith("*") for r in results):
-        print(
-            "* SportPesa public API caps at ~100 events per sport in a rolling "
-            "window (~24h). Numbers reflect the visible catalogue, not a full "
-            "multi-day total — see docs/sportpesa.md for the API limitation."
-        )
 
 
 if __name__ == "__main__":

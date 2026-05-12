@@ -95,7 +95,7 @@ async def test_get_events_prematch():
         json=[{"id": 8868005, "competition": {"id": 100, "name": "EPL"}}]
     )
     async with SportPesa(country="ke") as client:
-        result = await client.get_events(sport_id="1", competition_id="100")
+        result = await client.get_events(sport_id="1", league_id="100")
     assert result[0]["competition"]["name"] == "EPL"
 
 
