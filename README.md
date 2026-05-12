@@ -1,6 +1,6 @@
 # bookieskit
 
-Async HTTP clients for 5 African sportsbooks (BetPawa, SportyBet, Bet9ja, Betway, MSport), with normalized markets and cross-bookmaker matching by SportRadar id.
+Async HTTP clients for 6 African sportsbooks (BetPawa, SportyBet, Bet9ja, Betway, MSport, SportPesa), with normalized markets and cross-bookmaker matching by SportRadar id.
 
 ## Installation
 
@@ -30,7 +30,7 @@ async def main():
 asyncio.run(main())
 ```
 
-### 2. Compare odds across all 5 by SportRadar id
+### 2. Compare odds across all 6 by SportRadar id
 
 ```bash
 python examples/odds_for_sr_id.py 69339436
@@ -55,6 +55,7 @@ See `examples/odds_for_betpawa_competition.py`.
 | Bet9ja    | ng | [docs/bet9ja.md](docs/bet9ja.md) |
 | Betway    | ng, gh, ke, tz, ug, zm | [docs/betway.md](docs/betway.md) |
 | MSport    | ng, gh, ke | [docs/msport.md](docs/msport.md) |
+| SportPesa | ke, tz | [docs/sportpesa.md](docs/sportpesa.md) |
 
 ## How the lib is structured
 
@@ -64,24 +65,24 @@ See `examples/odds_for_betpawa_competition.py`.
 
 ## Built-in markets
 
-| Canonical id | Name | BetPawa | SportyBet | Bet9ja | Betway | MSport |
-|---|---|---|---|---|---|---|
-| `1x2_ft` | 1X2 — Full Time | ✅ | ✅ | ✅ | ✅ | ✅ |
-| `over_under_ft` | Over/Under — Full Time | ✅ | ✅ | ✅ | ✅ | ✅ |
-| `btts_ft` | Both Teams To Score — Full Time | ✅ | ✅ | ✅ | ✅ | ✅ |
-| `double_chance_ft` | Double Chance — Full Time | ✅ | ✅ | ✅ | ✅ | ✅ |
-| `1x2_1up_ft` | 1X2 1Up — Full Time | — | ✅ | ✅ | ✅ | — |
-| `1x2_2up_ft` | 1X2 2Up — Full Time | — | ✅ | ✅ | ✅ | — |
+| Canonical id | Name | BetPawa | SportyBet | Bet9ja | Betway | MSport | SportPesa |
+|---|---|---|---|---|---|---|---|
+| `1x2_ft` | 1X2 — Full Time | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| `over_under_ft` | Over/Under — Full Time | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| `btts_ft` | Both Teams To Score — Full Time | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| `double_chance_ft` | Double Chance — Full Time | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| `1x2_1up_ft` | 1X2 1Up — Full Time | — | ✅ | ✅ | ✅ | — | — |
+| `1x2_2up_ft` | 1X2 2Up — Full Time | — | ✅ | ✅ | ✅ | — | — |
 
-The 1Up / 2Up markets pay as a 1X2 if your team gets to a 1- or 2-goal lead at any point. BetPawa and MSport are intentionally unmapped (BetPawa to be added at production cutover; MSport doesn't expose this market).
+The 1Up / 2Up markets pay as a 1X2 if your team gets to a 1- or 2-goal lead at any point. BetPawa, MSport and SportPesa are intentionally unmapped (BetPawa to be added at production cutover; MSport and SportPesa don't expose this market).
 
 ## Examples
 
 Each example is a self-contained async script in `examples/`.
 
-- **`count_5bookies.py`** — totals (sports / tournaments / events) per bookmaker. Run: `python examples/count_5bookies.py`.
-- **`odds_for_sr_id.py`** — given a SportRadar id, fetch the mapped odds across all 5 bookmakers. Run: `python examples/odds_for_sr_id.py 69339436` (defaults to live; pass `--prematch` for upcoming).
-- **`odds_from_betpawa_id.py`** — given a BetPawa internal id, derive the SR id from the SPORTRADAR widget and fetch all 5. Outputs CSV. Run: `python examples/odds_from_betpawa_id.py 34716684`.
+- **`count_5bookies.py`** — totals (sports / tournaments / events) per bookmaker. Now iterates all 6 bookmakers; the original filename is kept to avoid breaking external references. Run: `python examples/count_5bookies.py`.
+- **`odds_for_sr_id.py`** — given a SportRadar id, fetch the mapped odds across all 6 bookmakers. Run: `python examples/odds_for_sr_id.py 69339436` (defaults to live; pass `--prematch` for upcoming).
+- **`odds_from_betpawa_id.py`** — given a BetPawa internal id, derive the SR id from the SPORTRADAR widget and fetch all 5 others. Outputs CSV. Run: `python examples/odds_from_betpawa_id.py 34716684`.
 - **`odds_for_betpawa_competition.py`** — for every event in a BetPawa competition, run the above flow. Outputs one CSV row per (event, market, line, outcome). Run: `python examples/odds_for_betpawa_competition.py 12546`.
 
 See [docs/examples.md](docs/examples.md) for more detail.
@@ -110,6 +111,9 @@ Pass `registry=registry` to `client.get_markets(event_id, registry=registry)` or
 
 ## Limitations / known gaps
 
+- **SportPesa endpoints are gated by Akamai Bot Manager.** The client does NOT solve the challenge. Callers must supply warmed cookies harvested from a browser session — for example, by setting `self._http_client.headers["cookie"] = "..."` after entering the async context. Same posture as the BetPawa SR-id reverse-search gap. See [docs/sportpesa.md](docs/sportpesa.md).
+- **SportPesa SR-id reverse search not implemented.** Same shape as the BetPawa gap below — extract an SR id from a SportPesa event-detail response, but no SR id → SportPesa internal id lookup.
+- **SportPesa list-endpoint paths are best-evidence pending fixture capture.** `get_sports`, `get_countries`, `get_tournaments`, `get_events` use the most likely SportPesa URLs; the two confirmed endpoints (`get_event_detail`, `get_event_markets`) come from real captured requests. A `# fixture-resolve` comment marks each unconfirmed path; the smoke run pins them down.
 - **BetPawa SR-id reverse search not implemented.** The lib can extract a BetPawa event's SR id from the SPORTRADAR widget, but cannot find a BetPawa internal id from a SR id. Workaround: start from a BetPawa id (see `examples/odds_from_betpawa_id.py`).
 - **Bet9ja prematch SR-id search.** `Bet9ja.build_prematch_event_map(sport_id="1")` walks every soccer tournament — takes a few seconds on first call. Cache the returned dict if you need to look up many SR ids in one session.
 - **Betway live event-detail returns only scoreboard.** `Betway.get_event_detail()` does not include markets. Use `Betway.get_markets(event_id)` (which calls `get_event_markets` under the hood).
