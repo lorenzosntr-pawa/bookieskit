@@ -261,44 +261,91 @@ async def count_betway() -> dict:
 
 
 async def count_msport() -> dict:
+    """MSport totals via cursor-paginated sports-matches-list walk.
+
+    MSport's `/sports-matches-list?sportId=N` returns ~50 events / ~12
+    tournaments per page by default and exposes a `lastEventId` cursor for
+    pagination (the `count` field on `/sports` is misleadingly zero for
+    every sport, hence the per-sport walk).
+
+    To get accurate totals we paginate per sport: pass `last_event_id`
+    plus `limit=100` until the next call adds no new events. Without
+    pagination the script reported only ~131 tournaments / ~668 events —
+    in reality MSport carries ~1000+ events for soccer alone.
+    """
     out = {"name": "MSport", "country": "ng"}
     async with MSport(country="ng") as ms:
         prematch = (await ms.get_sports()).get("data", {}).get("sports", [])
         live = (await ms.get_live_sports()).get("data", {}).get("sports", [])
         out["sports_total"] = len(prematch)
-        out["sports_with_prematch"] = sum(1 for s in prematch if s.get("count", 0) > 0)
         out["sports_with_live"] = sum(1 for s in live if s.get("count", 0) > 0)
-        out["events_prematch"] = sum(s.get("count", 0) for s in prematch)
         out["events_live"] = sum(s.get("count", 0) for s in live)
 
-        # MSport bundles tournaments+events per sport call — iterate sports
-        # The /sports endpoint returns count=0 universally; real counts are inside
-        # the per-sport sports-matches-list payload.
-        prematch_tournaments = 0
-        prematch_events = 0
-        for s in prematch:
-            sid = s.get("sportId")
-            if not sid:
-                continue
-            try:
-                tours = (await ms.get_events(sport_id=sid)).get("data", {}).get("tournaments", [])  # noqa: E501
-                prematch_tournaments += len(tours)
-                prematch_events += sum(len(t.get("events", []) or []) for t in tours)
-            except Exception:
-                pass
+        async def _walk_sport(sport_id: str) -> tuple[set, set]:
+            """Walk all pages for one sport; returns (event_ids, tournament_ids)."""
+            event_ids: set = set()
+            tournament_ids: set = set()
+            last_id: str | None = None
+            for _ in range(100):  # safety
+                try:
+                    resp = await ms.get_events(
+                        sport_id=sport_id, last_event_id=last_id, limit=100
+                    )
+                except Exception:
+                    break
+                data = resp.get("data") or {}
+                tours = data.get("tournaments") or []
+                new_event_count = 0
+                for t in tours:
+                    tid = t.get("tournamentId")
+                    if tid is not None:
+                        tournament_ids.add(tid)
+                    for e in t.get("events") or []:
+                        eid = e.get("eventId")
+                        if eid and eid not in event_ids:
+                            event_ids.add(eid)
+                            new_event_count += 1
+                next_cursor = data.get("lastEventId")
+                # Terminate when no progress is made or no cursor returned.
+                if not tours or new_event_count == 0 or next_cursor == last_id:
+                    break
+                last_id = next_cursor
+            return event_ids, tournament_ids
+
+        # Fan out the per-sport walks concurrently. MSport's MAX_CONCURRENT=50
+        # caps in-flight requests.
+        walks = await asyncio.gather(
+            *[_walk_sport(s.get("sportId")) for s in prematch if s.get("sportId")]
+        )
+        prematch_event_ids: set = set()
+        prematch_tournament_ids: set = set()
+        sports_with_prematch = 0
+        for evs, tours in walks:
+            if evs:
+                sports_with_prematch += 1
+            prematch_event_ids |= evs
+            prematch_tournament_ids |= tours
+        out["sports_with_prematch"] = sports_with_prematch
+        out["events_prematch"] = len(prematch_event_ids)
+        out["tournaments_prematch"] = len(prematch_tournament_ids)
+
+        # Live: the live-matches/list endpoint already returns everything
+        # (no cursor pagination needed). Walk per live sport.
         live_tournaments = 0
         for s in live:
             sid = s.get("sportId")
             if not sid:
                 continue
             try:
-                tours = (await ms.get_live_events(sport_id=sid)).get("data", {}).get("tournaments", [])  # noqa: E501
+                tours = (
+                    (await ms.get_live_events(sport_id=sid))
+                    .get("data", {})
+                    .get("tournaments", [])
+                )
                 live_tournaments += len(tours)
             except Exception:
                 pass
-        out["tournaments_prematch"] = prematch_tournaments
         out["tournaments_live"] = live_tournaments
-        out["events_prematch"] = prematch_events  # override the meaningless 0
     return out
 
 

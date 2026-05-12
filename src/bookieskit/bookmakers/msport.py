@@ -59,24 +59,43 @@ class MSport(BaseBookmaker):
         )
 
     async def get_events(
-        self, sport_id: str = "sr:sport:1"
+        self,
+        sport_id: str = "sr:sport:1",
+        last_event_id: str | None = None,
+        limit: int | None = None,
     ) -> dict[str, Any]:
-        """Get all prematch events for a sport, grouped by tournament.
+        """Get prematch events for a sport, grouped by tournament.
 
-        MSport bundles the entire sport's match list per call — there is
-        no per-tournament endpoint.
+        MSport uses CURSOR-BASED pagination on this endpoint: the response
+        carries a ``lastEventId`` cursor; pass it back as ``last_event_id``
+        to advance to the next page. Without ``last_event_id``, the first
+        page is returned (default ~50 events / 12 tournaments for soccer).
+        With ``limit=100``, page size doubles.
+
+        To enumerate the full per-sport catalogue, loop until the next call
+        either returns no tournaments or returns the same ``lastEventId``.
 
         Args:
-            sport_id: SportRadar sport ID (default: "sr:sport:1" for Soccer)
+            sport_id: SportRadar sport ID (default: "sr:sport:1" for Soccer).
+            last_event_id: Cursor from the previous page's ``lastEventId``
+                (the SR match id of the last event seen). ``None`` for the
+                first page.
+            limit: Page size hint (default ~50 if absent; supports 100+).
 
         Returns:
             Raw JSON with data.tournaments list — each tournament has
-            category, tournament, tournamentId, and events.
+            category, tournament, tournamentId, and events. The response
+            top level carries ``lastEventId`` for cursor pagination.
         """
+        params: dict[str, Any] = {"sportId": sport_id}
+        if last_event_id is not None:
+            params["lastEventId"] = last_event_id
+        if limit is not None:
+            params["limit"] = str(limit)
         return await self._request(
             "GET",
             f"{self._api_prefix}/sports-matches-list",
-            params={"sportId": sport_id},
+            params=params,
         )
 
     async def get_event_detail(
