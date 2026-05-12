@@ -384,16 +384,43 @@ async def count_sportpesa() -> dict:
             return {"name": "SportPesa", "error": f"get_navigation failed: {e!r}"}
         out["sports_total"] = len(nav)
 
-        # Live counts from /api/live/sports — independent of navigation.
+        # Live: /api/live/sports lists the sports, then for each sport we
+        # call /api/live/sports/{sid}/events/started for the authoritative
+        # in-play event list. The `eventNumber` field on /api/live/sports
+        # is a separately-cached counter that is unreliable (observed
+        # returning all zeros even when sports clearly have in-play events).
         try:
             live_resp = await sp.get_sports()
             live_sports = live_resp.get("sports", []) or []
         except Exception:
             live_sports = []
-        out["sports_with_live"] = sum(
-            1 for s in live_sports if s.get("eventNumber", 0) > 0
+
+        async def _live_started(sid: str) -> list:
+            try:
+                resp = await sp.get_live_events_started(sport_id=sid)
+                return resp.get("events", []) or []
+            except Exception:
+                return []
+
+        live_walks = await asyncio.gather(
+            *[_live_started(str(s.get("id"))) for s in live_sports]
         )
-        out["events_live"] = sum(s.get("eventNumber", 0) for s in live_sports)
+        live_event_ids: set = set()
+        live_tournament_ids: set = set()
+        sports_with_live = 0
+        for evs in live_walks:
+            if evs:
+                sports_with_live += 1
+            for e in evs:
+                eid = e.get("id")
+                if eid is not None:
+                    live_event_ids.add(eid)
+                tour = e.get("tournament") or {}
+                tid = tour.get("id")
+                if tid is not None:
+                    live_tournament_ids.add(tid)
+        out["sports_with_live"] = sports_with_live
+        out["events_live"] = len(live_event_ids)
 
         # Build the per-league call list from navigation.
         league_calls: list[tuple[str, str]] = []  # (sport_id, league_id)
@@ -438,24 +465,12 @@ async def count_sportpesa() -> dict:
         out["sports_with_prematch"] = len(sports_with_prematch)
         out["events_prematch"] = len(prematch_event_ids)
 
-        # Live tournaments: walk /api/highlights/{sportId}?live=true per
-        # sport with live activity and collect distinct competition ids.
-        live_tournaments_seen: set = set()
-        for s in live_sports:
-            if s.get("eventNumber", 0) == 0:
-                continue
-            sid = str(s.get("id"))
-            try:
-                live_games = await sp.get_events(
-                    sport_id=sid, live=True, pag_count=100
-                )
-            except Exception:
-                live_games = []
-            for g in live_games:
-                comp_id = (g.get("competition") or {}).get("id")
-                if comp_id is not None:
-                    live_tournaments_seen.add((sid, comp_id))
-        out["tournaments_live"] = len(live_tournaments_seen)
+        # Live tournaments come from the same started-events walk above.
+        # Using `/api/live/sports/{sid}/events/started` is authoritative
+        # (vs the older /api/highlights/{sid}?live=true which mixed
+        # in-play with about-to-start "highlight" events and had no
+        # `started`/`live` flag to filter on).
+        out["tournaments_live"] = len(live_tournament_ids)
     return out
 
 

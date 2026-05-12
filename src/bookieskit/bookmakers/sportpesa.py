@@ -192,6 +192,49 @@ class SportPesa(BaseBookmaker):
             params["pag_count"] = str(pag_count)
         return await self._request("GET", "/api/upcoming/games", params=params)
 
+    async def get_live_events_started(
+        self, sport_id: str = "1"
+    ) -> dict[str, Any]:
+        """Get events that are currently in-play (ball-is-rolling) for a sport.
+
+        This is the authoritative source for "live now" counts. The
+        ``eventNumber`` field on ``/api/live/sports`` is a separately-cached
+        counter that is unreliable (observed returning all zeros even when
+        many events are in-play).
+
+        Args:
+            sport_id: SportPesa sport id (default ``"1"`` for Football).
+
+        Returns:
+            JSON dict with ``events`` list. Each event has ``id``,
+            ``legacyId``, ``externalId``, ``marketCount``, ``kickoffTimeUTC``,
+            ``sport``, ``country``, ``tournament``, ``competitors``.
+        """
+        return await self._request(
+            "GET", f"/api/live/sports/{sport_id}/events/started"
+        )
+
+    async def get_live_sport_events(
+        self, sport_id: str = "1"
+    ) -> dict[str, Any]:
+        """Get every event available for live betting on a sport.
+
+        Broader than ``get_live_events_started``: includes both currently
+        in-play matches AND events that have not started yet but will be
+        offered with live markets when they kick off. Useful for an
+        "available-for-live" catalogue count.
+
+        Args:
+            sport_id: SportPesa sport id.
+
+        Returns:
+            JSON dict with ``events`` list (same shape as
+            ``get_live_events_started``).
+        """
+        return await self._request(
+            "GET", f"/api/live/sports/{sport_id}/events"
+        )
+
     async def get_navigation(self) -> list[dict[str, Any]]:
         """Get the full sport → country → league navigation tree.
 
