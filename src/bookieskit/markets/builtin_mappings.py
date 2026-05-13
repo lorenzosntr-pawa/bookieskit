@@ -12,6 +12,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
         betway_id="[Win/Draw/Win]",
         msport_id="1",
         sportpesa_id="10",
+        betika_id="1",
         outcomes={
             "home": OutcomeMapping(
                 canonical_name="home",
@@ -21,6 +22,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 betway="__HOME__",
                 msport="Home",
                 sportpesa="1",
+                betika="1",
             ),
             "draw": OutcomeMapping(
                 canonical_name="draw",
@@ -30,6 +32,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 betway="Draw",
                 msport="Draw",
                 sportpesa="X",
+                betika="X",
             ),
             "away": OutcomeMapping(
                 canonical_name="away",
@@ -39,6 +42,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 betway="__AWAY__",
                 msport="Away",
                 sportpesa="2",
+                betika="2",
             ),
         },
         parameterized=False,
@@ -52,6 +56,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
         betway_id="[Total Goals]",
         msport_id="18",
         sportpesa_id="52",
+        betika_id="18",
         outcomes={
             "over": OutcomeMapping(
                 canonical_name="over",
@@ -61,6 +66,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 betway="Over",
                 msport="Over",
                 sportpesa="OV",
+                betika="Over",
             ),
             "under": OutcomeMapping(
                 canonical_name="under",
@@ -70,6 +76,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 betway="Under",
                 msport="Under",
                 sportpesa="UN",
+                betika="Under",
             ),
         },
         parameterized=True,
@@ -83,6 +90,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
         betway_id="[Both Teams To Score]",
         msport_id="29",
         sportpesa_id="43",
+        betika_id="29",
         outcomes={
             "yes": OutcomeMapping(
                 canonical_name="yes",
@@ -92,6 +100,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 betway="Yes",
                 msport="Yes",
                 sportpesa="Yes",
+                betika="Yes",
             ),
             "no": OutcomeMapping(
                 canonical_name="no",
@@ -101,6 +110,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 betway="No",
                 msport="No",
                 sportpesa="No",
+                betika="No",
             ),
         },
         parameterized=False,
@@ -114,6 +124,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
         betway_id="[Double Chance]",
         msport_id="10",
         sportpesa_id="46",
+        betika_id="10",
         outcomes={
             "home_draw": OutcomeMapping(
                 canonical_name="home_draw",
@@ -123,6 +134,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 betway="__POS_1__",
                 msport="1 X",
                 sportpesa="1X",
+                betika="1/X",
             ),
             "draw_away": OutcomeMapping(
                 canonical_name="draw_away",
@@ -132,6 +144,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 betway="__POS_3__",
                 msport="X 2",
                 sportpesa="X2",
+                betika="X/2",
             ),
             "home_away": OutcomeMapping(
                 canonical_name="home_away",
@@ -141,6 +154,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 betway="__POS_2__",
                 msport="1 2",
                 sportpesa="12",
+                betika="1/2",
             ),
         },
         parameterized=False,
@@ -157,6 +171,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
         betway_id="1X2 (1Up)",
         msport_id=None,
         sportpesa_id=None,
+        betika_id=None,
         outcomes={
             "home": OutcomeMapping(
                 canonical_name="home",
@@ -166,6 +181,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 betway="__HOME__",
                 msport="",
                 sportpesa="",
+                betika="",
             ),
             "draw": OutcomeMapping(
                 canonical_name="draw",
@@ -175,6 +191,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 betway="Draw",
                 msport="",
                 sportpesa="",
+                betika="",
             ),
             "away": OutcomeMapping(
                 canonical_name="away",
@@ -184,6 +201,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 betway="__AWAY__",
                 msport="",
                 sportpesa="",
+                betika="",
             ),
         },
         parameterized=False,
@@ -199,6 +217,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
         betway_id="1X2 (2Up)",
         msport_id=None,
         sportpesa_id=None,
+        betika_id=None,
         outcomes={
             "home": OutcomeMapping(
                 canonical_name="home",
@@ -208,6 +227,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 betway="__HOME__",
                 msport="",
                 sportpesa="",
+                betika="",
             ),
             "draw": OutcomeMapping(
                 canonical_name="draw",
@@ -217,6 +237,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 betway="Draw",
                 msport="",
                 sportpesa="",
+                betika="",
             ),
             "away": OutcomeMapping(
                 canonical_name="away",
@@ -226,6 +247,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 betway="__AWAY__",
                 msport="",
                 sportpesa="",
+                betika="",
             ),
         },
         parameterized=False,

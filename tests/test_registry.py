@@ -215,3 +215,59 @@ def test_registry_betika_lookup_returns_none_for_unknown_id():
     from bookieskit.markets.registry import MarketRegistry
     registry = MarketRegistry(load_builtins=False)
     assert registry.get_by_platform_id("betika", "999") is None
+
+
+def test_builtin_1x2_ft_has_betika_mapping():
+    from bookieskit.markets.registry import MarketRegistry
+    registry = MarketRegistry()
+    m = registry.get_by_platform_id("betika", "1")
+    assert m is not None
+    assert m.canonical_id == "1x2_ft"
+    assert m.outcomes["home"].betika == "1"
+    assert m.outcomes["draw"].betika == "X"
+    assert m.outcomes["away"].betika == "2"
+
+
+def test_builtin_over_under_ft_has_betika_mapping():
+    from bookieskit.markets.registry import MarketRegistry
+    registry = MarketRegistry()
+    m = registry.get_by_platform_id("betika", "18")
+    assert m is not None
+    assert m.canonical_id == "over_under_ft"
+    assert m.parameterized is True
+    assert m.outcomes["over"].betika == "Over"
+    assert m.outcomes["under"].betika == "Under"
+
+
+def test_builtin_btts_ft_has_betika_mapping():
+    from bookieskit.markets.registry import MarketRegistry
+    registry = MarketRegistry()
+    m = registry.get_by_platform_id("betika", "29")
+    assert m is not None
+    assert m.canonical_id == "btts_ft"
+    assert m.outcomes["yes"].betika == "Yes"
+    assert m.outcomes["no"].betika == "No"
+
+
+def test_builtin_dc_ft_has_betika_mapping():
+    from bookieskit.markets.registry import MarketRegistry
+    registry = MarketRegistry()
+    m = registry.get_by_platform_id("betika", "10")
+    assert m is not None
+    assert m.canonical_id == "double_chance_ft"
+    assert m.outcomes["home_draw"].betika == "1/X"
+    assert m.outcomes["draw_away"].betika == "X/2"
+    assert m.outcomes["home_away"].betika == "1/2"
+
+
+def test_builtin_1up_2up_have_no_betika_mapping():
+    from bookieskit.markets.registry import MarketRegistry
+    registry = MarketRegistry()
+    one_up = registry.get_by_canonical("1x2_1up_ft")
+    two_up = registry.get_by_canonical("1x2_2up_ft")
+    assert one_up.betika_id is None
+    assert two_up.betika_id is None
+    for om in one_up.outcomes.values():
+        assert om.betika == ""
+    for om in two_up.outcomes.values():
+        assert om.betika == ""
