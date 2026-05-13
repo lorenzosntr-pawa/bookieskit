@@ -357,6 +357,39 @@ def _live_info_sportpesa(response, _mode: Mode | None) -> LiveInfo:
     return _EMPTY_LIVE_INFO
 
 
+# ---- Betika ---------------------------------------------------------------
+
+def _betika_first_match(response) -> dict | None:
+    """Betika's match endpoints return {"data": [<match>], "meta": {...}}.
+
+    Tolerates bare-list shape (callers passing the inner list directly).
+    """
+    if isinstance(response, list):
+        data = response
+    elif isinstance(response, dict):
+        data = response.get("data") or []
+    else:
+        return None
+    if not isinstance(data, list) or not data:
+        return None
+    m = data[0]
+    return m if isinstance(m, dict) else None
+
+
+def _kickoff_betika(response, _mode: Mode | None) -> datetime | None:
+    m = _betika_first_match(response)
+    if m is None:
+        return None
+    s = m.get("start_time")
+    if not isinstance(s, str):
+        return None
+    # Betika format: "YYYY-MM-DD HH:MM:SS" — naive ISO, UTC.
+    try:
+        return datetime.fromisoformat(s).replace(tzinfo=timezone.utc)
+    except ValueError:
+        return None
+
+
 # ---- Dispatch tables -------------------------------------------------------
 
 _KICKOFF_DISPATCH: dict[str, Callable[[dict, Mode | None], datetime | None]] = {
@@ -366,6 +399,7 @@ _KICKOFF_DISPATCH: dict[str, Callable[[dict, Mode | None], datetime | None]] = {
     "betway": _kickoff_betway,
     "msport": _kickoff_msport,
     "sportpesa": _kickoff_sportpesa,
+    "betika": _kickoff_betika,
 }
 
 _PARTICIPANTS_DISPATCH: dict[str, Callable[[dict, Mode | None], Participants]] = {

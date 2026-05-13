@@ -443,3 +443,19 @@ def test_sportpesa_live_info_returns_empty():
     for phase in ("prematch", "live"):
         li = extract_live_info(_load("sportpesa", phase), "sportpesa")
         assert li == LiveInfo()
+
+
+def test_extract_kickoff_betika_prematch():
+    from datetime import timezone
+    d = _load("betika", "prematch")
+    k = extract_kickoff(d, "betika")
+    assert k is not None
+    assert k.tzinfo is not None
+    assert k.tzinfo.utcoffset(k) == timezone.utc.utcoffset(k)
+
+
+def test_extract_kickoff_betika_malformed_returns_none():
+    assert extract_kickoff({}, "betika") is None
+    assert extract_kickoff({"data": []}, "betika") is None
+    assert extract_kickoff([], "betika") is None
+    assert extract_kickoff([{"start_time": "not-a-date"}], "betika") is None
