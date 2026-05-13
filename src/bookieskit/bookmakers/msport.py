@@ -1,8 +1,10 @@
 """MSport client — supports ng, gh, ke."""
 
-from typing import Any
+import asyncio
+from typing import Any, AsyncIterator
 
 from bookieskit.base import BaseBookmaker
+from bookieskit.bookmakers.types import PrematchEventStub
 from bookieskit.config import MSPORT_MAX_CONCURRENT, MSPORT_REQUEST_DELAY
 
 
@@ -154,3 +156,74 @@ class MSport(BaseBookmaker):
             f"{self._api_prefix}/live-matches/list",
             params={"sportId": sport_id},
         )
+
+    async def iter_all_prematch_events(
+        self,
+    ) -> AsyncIterator[PrematchEventStub]:
+        """Yield every prematch event in MSport's catalogue.
+
+        Per sport, walks ``/sports-matches-list`` with cursor pagination
+        (``last_event_id`` + ``limit=100``). The default first page returns
+        ~50 events; the cursor walks the full sport catalogue (soccer
+        alone is ~11 pages = 1000+ events at writing). Per-sport walks
+        run concurrently under the client's ``MAX_CONCURRENT=50``
+        semaphore.
+
+        Loop termination is defensive: stops when the response has no
+        tournaments, no new events, or the cursor stops advancing.
+        Caps each per-sport walk at 100 pages as a safety bound.
+
+        Yields:
+            :class:`PrematchEventStub` for each unique event across all
+            sports. ``event_id`` is the MSport SR match id (e.g.
+            ``sr:match:69339436``), ``league_id`` is the
+            ``tournamentId`` of the parent tournament, ``sport_id`` is
+            the MSport sport id (e.g. ``sr:sport:1`` for Soccer).
+        """
+        sports_resp = await self.get_sports()
+        sports = (sports_resp.get("data") or {}).get("sports") or []
+
+        async def _walk(sport_id: str) -> list[tuple[str, str, str]]:
+            collected: list[tuple[str, str, str]] = []
+            last_id: str | None = None
+            for _ in range(100):
+                try:
+                    resp = await self.get_events(
+                        sport_id=sport_id, last_event_id=last_id, limit=100
+                    )
+                except Exception:
+                    break
+                data = resp.get("data") or {}
+                tours = data.get("tournaments") or []
+                if not tours:
+                    break
+                new_count = 0
+                for t in tours:
+                    tid = t.get("tournamentId")
+                    if tid is None:
+                        continue
+                    for ev in t.get("events") or []:
+                        eid = ev.get("eventId")
+                        if eid is not None:
+                            collected.append((sport_id, str(tid), str(eid)))
+                            new_count += 1
+                next_cursor = data.get("lastEventId")
+                if new_count == 0 or next_cursor == last_id:
+                    break
+                last_id = next_cursor
+            return collected
+
+        results = await asyncio.gather(
+            *[_walk(s.get("sportId")) for s in sports if s.get("sportId")]
+        )
+        seen: set[str] = set()
+        for sport_results in results:
+            for sport_id, tournament_id, event_id in sport_results:
+                if event_id in seen:
+                    continue
+                seen.add(event_id)
+                yield PrematchEventStub(
+                    event_id=event_id,
+                    league_id=tournament_id,
+                    sport_id=sport_id,
+                )

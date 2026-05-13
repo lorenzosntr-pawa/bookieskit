@@ -6,6 +6,7 @@ from bookieskit.bookmakers.betway import Betway
 from bookieskit.bookmakers.msport import MSport
 from bookieskit.bookmakers.sportpesa import SportPesa
 from bookieskit.bookmakers.sportybet import SportyBet
+from bookieskit.bookmakers.types import PrematchEventStub
 from bookieskit.event_info import (
     LiveInfo,
     Mode,
@@ -25,6 +26,7 @@ __all__ = [
     "Betway",
     "MSport",
     "SportPesa",
+    "PrematchEventStub",
     "LiveInfo",
     "Mode",
     "Participants",

@@ -1,10 +1,12 @@
 """Betway client — supports ng, gh, ke, tz, ug, zm."""
 
-from typing import Any
+import asyncio
+from typing import Any, AsyncIterator
 
 import httpx
 
 from bookieskit.base import BaseBookmaker
+from bookieskit.bookmakers.types import PrematchEventStub
 from bookieskit.config import (  # noqa: E501
     BETWAY_MAX_CONCURRENT,
     BETWAY_REQUEST_DELAY,
@@ -293,3 +295,89 @@ class Betway(BaseBookmaker):
             The event ID as string (same value).
         """
         return str(event_id)
+
+    async def iter_all_prematch_events(
+        self,
+    ) -> AsyncIterator[PrematchEventStub]:
+        """Yield every prematch event in Betway's catalogue.
+
+        Walks all sports (``get_sports()``) → regions/leagues
+        (``get_countries(sport_id)``) → per-league events
+        (``get_events(region_id, league_id, sport_id, take=100)``).
+        The unfiltered Highlights endpoint caps at 29 events and ignores
+        ``skip``, so per-league fan-out via the BetBook/Filtered endpoint
+        is the only way to enumerate the full multi-day catalogue.
+
+        Per-league calls run concurrently under the client's
+        ``MAX_CONCURRENT=50`` semaphore. Sports without
+        ``hasUpcomingEvents`` are skipped. Failed per-league calls yield
+        no events and don't abort the walk.
+
+        Yields:
+            :class:`PrematchEventStub` for each unique event across all
+            sports. ``event_id`` is the Betway eventId (=SR numeric id),
+            ``league_id`` is the league slug (e.g. ``premier-league``),
+            ``sport_id`` is the sport slug (e.g. ``soccer``).
+        """
+        sports_resp = await self.get_sports()
+        sports = [
+            s
+            for s in sports_resp.get("sports", [])
+            if s.get("sportType") == "Sport" and s.get("hasUpcomingEvents")
+        ]
+
+        # Collect every (sport_id, region_id, league_id) triple.
+        league_calls: list[tuple[str, str, str]] = []
+        for s in sports:
+            sid = s.get("sportId")
+            if not sid:
+                continue
+            try:
+                regions = (await self.get_countries(sport_id=sid)).get(
+                    "regions", []
+                )
+            except Exception:
+                continue
+            for r in regions:
+                rid = r.get("regionId")
+                if not rid:
+                    continue
+                for lg in r.get("leagues", []) or []:
+                    lid = lg.get("leagueId")
+                    if lid:
+                        league_calls.append((sid, rid, lid))
+
+        async def _fetch(
+            sid: str, rid: str, lid: str
+        ) -> tuple[str, str, list]:
+            # Pass market_types="" — the default "[Win/Draw/Win]" is
+            # football-specific and silently drops events from sports
+            # that don't carry 1X2 (tennis, basketball, etc.).
+            try:
+                resp = await self.get_events(
+                    region_id=rid,
+                    league_id=lid,
+                    sport_id=sid,
+                    take=100,
+                    market_types="",
+                )
+                return sid, lid, resp.get("events", []) or []
+            except Exception:
+                return sid, lid, []
+
+        results = await asyncio.gather(
+            *[_fetch(sid, rid, lid) for sid, rid, lid in league_calls]
+        )
+        seen: set[str] = set()
+        for sid, lid, events in results:
+            for ev in events:
+                eid = ev.get("eventId")
+                if eid is None:
+                    continue
+                eid_str = str(eid)
+                if eid_str in seen:
+                    continue
+                seen.add(eid_str)
+                yield PrematchEventStub(
+                    event_id=eid_str, league_id=lid, sport_id=sid
+                )
