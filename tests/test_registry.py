@@ -198,3 +198,20 @@ def test_builtin_1up_2up_have_no_sportpesa_mapping():
     assert two_up.sportpesa_id is None
     for om in one_up.outcomes.values():
         assert om.sportpesa == ""
+
+
+def test_registry_resolves_by_betika_id():
+    from bookieskit.markets.registry import MarketRegistry
+    registry = MarketRegistry(load_builtins=False)
+    registry.add(
+        canonical_id="test_market", name="Test", betika_id="42",
+    )
+    m = registry.get_by_platform_id("betika", "42")
+    assert m is not None
+    assert m.canonical_id == "test_market"
+
+
+def test_registry_betika_lookup_returns_none_for_unknown_id():
+    from bookieskit.markets.registry import MarketRegistry
+    registry = MarketRegistry(load_builtins=False)
+    assert registry.get_by_platform_id("betika", "999") is None
