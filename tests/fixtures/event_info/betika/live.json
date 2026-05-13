@@ -1,0 +1,289 @@
+{
+    "data": [
+        {
+            "match_id": 4734371,
+            "game_id": 0,
+            "competition_id": 701,
+            "sport_name": "Soccer",
+            "category_id": 1238,
+            "category": "Kenya",
+            "priority": "99",
+            "match_priority": "99",
+            "match_country_bet_channel_priority": null,
+            "sport_id": 14,
+            "streamble": {
+                "String": "0",
+                "Valid": true
+            },
+            "competition_name": "Premier League",
+            "competition": "Premier League",
+            "competition_priority": "1950",
+            "live_match_status": 1,
+            "is_esport": 0,
+            "is_srl": 0,
+            "home_team": "Ulinzi Stars",
+            "away_team": "Leopards",
+            "start_time": "2026-05-13 16:00:00",
+            "parent_match_id": 71463790,
+            "side_bets": 27,
+            "will_go_live": 1,
+            "will_stream": 0,
+            "bet_closure": "2026-05-13 16:00:00",
+            "bet_status": "STARTED",
+            "result": "null",
+            "sub_type_id": 90,
+            "match_time": "35:51",
+            "home_red_card": 0,
+            "away_red_card": 0,
+            "home_yellow_card": 0,
+            "away_yellow_card": 0,
+            "home_corners": 3,
+            "away_corners": 3,
+            "current_score": "0:0",
+            "active": 1,
+            "sequence_no": 1778679409598,
+            "event_status": "1st half",
+            "betradar_timestamp": "2026-05-13 16:36:49",
+            "match_status": "ACTIVE",
+            "bet_stop_reason": "",
+            "ht_score": "-:-",
+            "ft_score": "-:-",
+            "set_score": [
+                {
+                    "score": "0:0",
+                    "set": "1"
+                }
+            ],
+            "odd_active": 1,
+            "sys_modified": 1778679409598,
+            "home_odd": "4.30",
+            "away_odd": "2.40",
+            "neutral_odd": "2.20",
+            "home_odd_key": "Ulinzi Stars",
+            "away_odd_key": "Leopards",
+            "neutral_odd_key": "draw",
+            "home_odd_outcome_id": "1",
+            "neutral_odd_outcome_id": "2",
+            "away_odd_outcome_id": "3",
+            "home_seq": 1778679409598,
+            "neutral_seq": 1778679409598,
+            "away_seq": 1778679409598,
+            "market_active": 1,
+            "current_timestamp": "2026-05-13 16:36:49",
+            "timestamp": "2026-05-13 16:36:49",
+            "NOW": "2026-05-13 16:36:49",
+            "diff": 271,
+            "provider": "",
+            "now": "2026-05-13 16:36:49",
+            "status": 0,
+            "streamable": null,
+            "odds": [
+                {
+                    "sub_type_id": 1,
+                    "name": "1X2",
+                    "market_active": 1,
+                    "odds": [
+                        {
+                            "display": "1",
+                            "odd_key": "Ulinzi Stars",
+                            "odd_def": "{$competitor1}",
+                            "odd_value": "4.30",
+                            "special_bet_value": "",
+                            "odd_active": 1,
+                            "market_active": 1,
+                            "sequence_no": 1778679409598,
+                            "diff": 271,
+                            "outcome_id": "1",
+                            "parsed_special_bet_value": {
+                                "": ""
+                            },
+                            "event_odd_id": null,
+                            "sport_id": 14
+                        },
+                        {
+                            "display": "X",
+                            "odd_key": "draw",
+                            "odd_def": "draw",
+                            "odd_value": "2.20",
+                            "special_bet_value": "",
+                            "odd_active": 1,
+                            "market_active": 1,
+                            "sequence_no": 1778679409598,
+                            "diff": 271,
+                            "outcome_id": "2",
+                            "parsed_special_bet_value": {
+                                "": ""
+                            },
+                            "event_odd_id": null,
+                            "sport_id": 14
+                        },
+                        {
+                            "display": "2",
+                            "odd_key": "Leopards",
+                            "odd_def": "{$competitor2}",
+                            "odd_value": "2.40",
+                            "special_bet_value": "",
+                            "odd_active": 1,
+                            "market_active": 1,
+                            "sequence_no": 1778679409598,
+                            "diff": 271,
+                            "outcome_id": "3",
+                            "parsed_special_bet_value": {
+                                "": ""
+                            },
+                            "event_odd_id": null,
+                            "sport_id": 14
+                        }
+                    ]
+                }
+            ],
+            "total": 85
+        }
+    ],
+    "meta": {
+        "filters": [
+            {
+                "name": "1x2 / Winner",
+                "sub_type_id": "1,186,340,113",
+                "sport_ids": [
+                    "14",
+                    "28",
+                    "29",
+                    "30",
+                    "33",
+                    "35",
+                    "37",
+                    "39",
+                    "41",
+                    "44",
+                    "56"
+                ],
+                "odd_keys": [
+                    "1",
+                    "X",
+                    "2"
+                ]
+            },
+            {
+                "name": "Double Chance",
+                "sub_type_id": "10",
+                "sport_ids": [
+                    "14",
+                    "29",
+                    "33",
+                    "41",
+                    "56"
+                ],
+                "odd_keys": [
+                    "1X",
+                    "12",
+                    "X2"
+                ]
+            },
+            {
+                "name": "Which team will score next?",
+                "sub_type_id": "8",
+                "sport_ids": [
+                    "14",
+                    "28",
+                    "29",
+                    "30",
+                    "33",
+                    "35",
+                    "37",
+                    "39",
+                    "41",
+                    "44",
+                    "56"
+                ],
+                "odd_keys": [
+                    "1",
+                    "None",
+                    "2"
+                ]
+            },
+            {
+                "name": "1st Half 1x2",
+                "sub_type_id": "60,119",
+                "sport_ids": [
+                    "14",
+                    "30"
+                ],
+                "odd_keys": [
+                    "1",
+                    "X",
+                    "2"
+                ]
+            },
+            {
+                "name": "Both Teams To Score",
+                "sub_type_id": "29",
+                "sport_ids": [
+                    "14"
+                ],
+                "odd_keys": [
+                    "Yes",
+                    "No"
+                ]
+            },
+            {
+                "name": "1st Set Winner",
+                "sub_type_id": "202",
+                "sport_ids": [
+                    "28"
+                ],
+                "odd_keys": [
+                    "1",
+                    "2"
+                ]
+            },
+            {
+                "name": "Which team wins the rest of the match?",
+                "sub_type_id": "7",
+                "sport_ids": [
+                    "14",
+                    "28",
+                    "29",
+                    "30",
+                    "33",
+                    "35",
+                    "37",
+                    "39",
+                    "41",
+                    "44",
+                    "56"
+                ],
+                "odd_keys": [
+                    "1",
+                    "X",
+                    "2"
+                ]
+            }
+        ],
+        "sort_filters": [
+            {
+                "id": 1,
+                "name": "Top leagues"
+            },
+            {
+                "id": 2,
+                "name": "Ending soon"
+            },
+            {
+                "id": 3,
+                "name": "Just started"
+            }
+        ],
+        "sports": [
+            {
+                "sport_name": "Soccer",
+                "count": 1,
+                "sport_id": 14
+            }
+        ],
+        "limit": "1",
+        "total": 85,
+        "current_page": 1,
+        "took": 0.00813889503479
+    }
+}
