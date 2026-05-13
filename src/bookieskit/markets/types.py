@@ -67,5 +67,6 @@ class MarketMapping:
     betway_id: str | None = None
     msport_id: str | None = None
     sportpesa_id: str | None = None
+    betika_id: str | None = None
     outcomes: dict[str, OutcomeMapping] = field(default_factory=dict)
     parameterized: bool = False
