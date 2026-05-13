@@ -13,6 +13,11 @@ Strategy:
 Bet9ja needs a SR-id -> internal-id translation:
   - prematch: build_prematch_event_map (slow walk)
   - live:     scan get_live_events (cheap)
+
+For Betika capture (optional — script auto-picks the first soccer match
+when env vars are unset):
+    BETIKA_PREMATCH_EVENT_ID — Betika match id to capture for prematch
+    BETIKA_LIVE_EVENT_ID — Betika match id to capture for live
 """
 
 import asyncio
@@ -21,7 +26,7 @@ import os
 from pathlib import Path
 from typing import Any
 
-from bookieskit import Bet9ja, BetPawa, Betway, MSport, SportyBet
+from bookieskit import Bet9ja, BetPawa, Betika, Betway, MSport, SportyBet
 from bookieskit.matching import extract_sportradar_id
 
 
@@ -112,6 +117,48 @@ async def _capture_for_event(
             print(f"  bet9ja ERROR: {e}")
 
 
+async def _capture_betika(phase: str, event_id: str) -> None:
+    """Capture Betika prematch/live for one event.
+
+    Unlike SportPesa, no warmed cookies are needed — the Betika API is
+    open. The block runs unconditionally when an event id is supplied.
+    """
+    try:
+        async with Betika(country="ke") as bk:
+            detail = await bk.get_event_detail(
+                event_id=event_id, live=(phase == "live")
+            )
+            _save("betika", phase, detail)
+    except Exception as e:
+        print(f"  [betika/{phase}] capture failed: {e!r}")
+
+
+async def _capture_betika_phase(phase: str) -> None:
+    """Resolve a Betika event id (from env or auto-pick) and capture."""
+    # Betika needs its own event id — pass via env, or pick the first
+    # match from /v1/uo/matches if not provided.
+    bt_event_id = os.environ.get(f"BETIKA_{phase.upper()}_EVENT_ID")
+    if not bt_event_id:
+        # Auto-pick the first soccer match for this phase.
+        try:
+            async with Betika(country="ke") as bk:
+                if phase == "live":
+                    resp = await bk.get_live_matches(
+                        sport_id="14", page=1, limit=1
+                    )
+                else:
+                    resp = await bk.get_matches(
+                        sport_id="14", page=1, limit=1
+                    )
+                data = resp.get("data") or []
+                if data:
+                    bt_event_id = str(data[0].get("match_id"))
+        except Exception as e:
+            print(f"  [betika/{phase}] auto-pick failed: {e!r}")
+    if bt_event_id:
+        await _capture_betika(phase, bt_event_id)
+
+
 async def main() -> None:
     async with (
         BetPawa(country="ng") as bp,
@@ -146,6 +193,7 @@ async def main() -> None:
             phase="prematch",
             bet9ja_lookup=prematch_lookup,
         )
+        await _capture_betika_phase("prematch")
 
         # ---- capture live ----
         if live_id:
@@ -157,6 +205,7 @@ async def main() -> None:
             )
         else:
             print("\nno live BetPawa event right now — skipping live phase")
+        await _capture_betika_phase("live")
 
 
 if __name__ == "__main__":
