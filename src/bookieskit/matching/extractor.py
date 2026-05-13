@@ -20,6 +20,7 @@ def extract_sportradar_id(
         "betway": _extract_betway,
         "msport": _extract_msport,
         "sportpesa": _extract_sportpesa,
+        "betika": _extract_betika,
     }
     extractor = extractors.get(platform)
     if extractor is None:
@@ -109,6 +110,34 @@ def _extract_sportpesa(response) -> str | None:
     if not isinstance(game, dict):
         return None
     sr = game.get("betradarId")
+    if sr in (None, 0, "0", ""):
+        return None
+    return _strip_sr_prefix(str(sr))
+
+
+def _extract_betika(response) -> str | None:
+    """Extract from Betika ``data[0].parent_match_id``.
+
+    Betika's match endpoints return ``{"data": [<match>], "meta": {...}}``.
+    `match_id` is Betika's internal id; `parent_match_id` is the SR
+    canonical id (bare numeric, no `sr:match:` prefix).
+
+    The `parent_match_id` field type varies across endpoints — string in
+    prematch (e.g. ``"70784812"``), integer in live (e.g. ``71463790``).
+    Both are coerced via ``str()`` before returning.
+    """
+    if isinstance(response, dict):
+        data = response.get("data") or []
+    elif isinstance(response, list):
+        data = response
+    else:
+        return None
+    if not isinstance(data, list) or not data:
+        return None
+    match = data[0]
+    if not isinstance(match, dict):
+        return None
+    sr = match.get("parent_match_id")
     if sr in (None, 0, "0", ""):
         return None
     return _strip_sr_prefix(str(sr))

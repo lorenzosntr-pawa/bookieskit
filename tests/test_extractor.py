@@ -153,3 +153,51 @@ def test_extract_sportradar_id_sportpesa_from_fixture():
     response = json.loads(fixture.read_text(encoding="utf-8"))
     sr = extract_sportradar_id(response, platform="sportpesa")
     assert sr is not None and sr.isdigit()
+
+
+def test_extract_sportradar_id_betika_from_dict_shape():
+    from bookieskit.matching.extractor import extract_sportradar_id
+    response = {"data": [{"match_id": "10846988", "parent_match_id": "70784812"}]}
+    assert extract_sportradar_id(response, platform="betika") == "70784812"
+
+
+def test_extract_sportradar_id_betika_from_bare_list():
+    from bookieskit.matching.extractor import extract_sportradar_id
+    response = [{"match_id": "10846988", "parent_match_id": "70784812"}]
+    assert extract_sportradar_id(response, platform="betika") == "70784812"
+
+
+def test_extract_sportradar_id_betika_handles_int_parent_match_id():
+    # Live responses return parent_match_id as int (not string).
+    from bookieskit.matching.extractor import extract_sportradar_id
+    response = [{"match_id": "4734371", "parent_match_id": 71463790}]
+    assert extract_sportradar_id(response, platform="betika") == "71463790"
+
+
+def test_extract_sportradar_id_betika_missing_returns_none():
+    from bookieskit.matching.extractor import extract_sportradar_id
+    assert extract_sportradar_id({}, platform="betika") is None
+    assert extract_sportradar_id([], platform="betika") is None
+    assert extract_sportradar_id([{}], platform="betika") is None
+    assert extract_sportradar_id({"data": []}, platform="betika") is None
+    assert extract_sportradar_id(
+        [{"parent_match_id": 0}], platform="betika"
+    ) is None
+    assert extract_sportradar_id(
+        [{"parent_match_id": "0"}], platform="betika"
+    ) is None
+
+
+def test_extract_sportradar_id_betika_from_fixture():
+    import json
+    from pathlib import Path
+    from bookieskit.matching.extractor import extract_sportradar_id
+
+    fixture = (
+        Path(__file__).parent
+        / "fixtures" / "event_info" / "betika" / "prematch.json"
+    )
+    response = json.loads(fixture.read_text(encoding="utf-8"))
+    sr = extract_sportradar_id(response, platform="betika")
+    assert sr is not None
+    assert sr.isdigit()
