@@ -52,6 +52,7 @@ class OutcomeMapping:
     betway: str = ""
     msport: str = ""
     sportpesa: str = ""
+    betika: str = ""
 
 
 @dataclass(frozen=True)

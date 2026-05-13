@@ -182,3 +182,20 @@ def test_market_mapping_sportpesa_id_round_trips():
         betway_id="[Win/Draw/Win]", msport_id="1", sportpesa_id="1",
     )
     assert mm.sportpesa_id == "1"
+
+
+def test_outcome_mapping_betika_field_defaults_to_empty():
+    from bookieskit.markets.types import OutcomeMapping
+    om = OutcomeMapping(
+        canonical_name="home", betpawa="1", sportybet="Home", bet9ja="1"
+    )
+    assert om.betika == ""
+
+
+def test_outcome_mapping_betika_field_round_trips():
+    from bookieskit.markets.types import OutcomeMapping
+    om = OutcomeMapping(
+        canonical_name="home", betpawa="1", sportybet="Home", bet9ja="1",
+        betway="__HOME__", msport="Home", sportpesa="1", betika="1",
+    )
+    assert om.betika == "1"
