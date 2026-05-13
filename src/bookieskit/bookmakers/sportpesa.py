@@ -131,25 +131,22 @@ class SportPesa(BaseBookmaker):
         raw = await self.get_event_markets(event_id=event_id)
         return parse_markets(raw, platform=self.PLATFORM_KEY, registry=registry)
 
-    async def get_sports(self, live: bool = True) -> dict[str, Any]:
-        """Get the available sports list.
+    async def get_sports(self) -> dict[str, Any]:
+        """Get the live sport list.
 
         SportPesa only exposes a dedicated sports endpoint for the live
-        catalogue (``/api/live/sports``). The prematch catalogue has no
-        sports endpoint — derive it by walking ``get_events`` per sport,
-        or accept the live list as a reasonable approximation (SportPesa
-        carries the same sports prematch and live).
-
-        Args:
-            live: Default ``True``. Calling with ``live=False`` is a
-                no-op — the endpoint is the same; kept for API symmetry.
+        catalogue (``/api/live/sports``). There is no prematch-only sports
+        endpoint — for the prematch catalogue, use :meth:`get_navigation`,
+        which returns the full sport → country → league tree in one call.
 
         Returns:
             Raw JSON shaped as ``{"sports": [{"id": int, "name": str,
-            "eventNumber": int}, ...]}``. ``eventNumber`` is the count
-            of currently-live events on that sport.
+            "eventNumber": int}, ...]}``. ``eventNumber`` is meant to be
+            the count of currently-live events on that sport, but the
+            counter is separately cached and is observed to be unreliable
+            (sometimes all zeros). Use :meth:`get_live_events_started`
+            per sport for authoritative in-play counts.
         """
-        del live  # symmetry only — SportPesa has just the one sports endpoint
         return await self._request("GET", "/api/live/sports")
 
     async def get_events(

@@ -60,13 +60,19 @@ def test_parse_markets_default_off_leaves_probabilities_none():
 
 
 @pytest.mark.parametrize(
-    "platform", ["betpawa", "sportybet", "bet9ja", "betway", "msport"]
+    "platform",
+    ["betpawa", "sportybet", "bet9ja", "betway", "msport", "sportpesa"],
 )
 @pytest.mark.parametrize("mode", ["off", "true", "with_void"])
 def test_parse_markets_accepts_probability_kwarg_without_error(platform, mode):
-    """The probability kwarg must be accepted by all 5 platforms in all 3
-    modes — even platforms that don't support probability (Bet9ja, Betway)
-    silently accept it."""
+    """The probability kwarg must be accepted by all 6 platforms in all 3
+    modes — even platforms that don't support probability (Bet9ja, Betway,
+    SportPesa) silently accept it.
+
+    For SportPesa the prematch fixture is the event-detail payload (list
+    shape), which the markets parser receives but doesn't recognize —
+    parse_markets returns [] silently rather than raising.
+    """
     d = _load(platform)
     parse_markets(d, platform=platform, probability=mode)
 

@@ -20,16 +20,17 @@ SportPesa event ids are SportPesa-internal integers (e.g. `"8868005"`), NOT Spor
 
 | Method | HTTP | Path | When to use |
 |--------|------|------|-------------|
-| `get_sports(live=False)` | GET | `/api/sports` / `/api/live/sports` | Top-level sport list. |
-| `get_countries(sport_id, live=False)` | GET | `/api/upcoming/categories` / `/api/live/categories` | Country/category list. |
-| `get_tournaments(sport_id, category_id, live=False)` | GET | `/api/upcoming/competitions` / `/api/live/competitions` | Competition/league list. |
-| `get_events(sport_id, competition_id, live=False, page, per_page)` | GET | `/api/upcoming/games` / `/api/live/games` | Event list (paginated). |
-| `get_event_detail(event_id, live=False)` | GET | `/api/upcoming/games?gameId=...` | Metadata + SR id — **no markets**. |
-| `get_event_markets(event_id)` | GET | `/api/games/markets?games=...&markets=all` | Full markets feed. |
-| `get_markets(event_id, registry=None)` | (calls `get_event_markets`) | — | Inherited convenience overridden — calls the markets endpoint. |
-| `get_sportradar_id(event_id, live=False)` | (calls `get_event_detail`) | — | Fetches detail, runs the extractor. |
-
-Endpoint paths for `get_sports`, `get_countries`, `get_tournaments`, and `get_events` are fixture-resolved best-evidence defaults pending capture. The paths for `get_event_detail` (prematch) and `get_event_markets` are confirmed from real captured requests.
+| `get_sports()` | GET | `/api/live/sports` | Live sport list with per-sport `eventNumber` (note: that counter is unreliable — see Quirks). SportPesa has no prematch-only sports endpoint; use `get_navigation()` for the prematch catalogue. |
+| `get_navigation()` | GET | `/api/navigation` | Full sport → country → league tree in one call. The only known way to enumerate the complete league catalogue. |
+| `get_events(sport_id, league_id=None, live=False, pag_count=None)` | GET | `/api/upcoming/games` (prematch) / `/api/highlights/{sport_id}?live=true` (live) | Event list. Pass `league_id` to walk past the rolling-100-event window (see Quirks). |
+| `get_event_detail(event_id, live=False)` | GET | `/api/upcoming/games?gameId=...` | Event metadata + SR id. Returns a list of length 1. Same endpoint for prematch and live; the `live` parameter is accepted for symmetry. |
+| `get_event_markets(event_id)` | GET | `/api/games/markets?games=...&markets=all` | Full markets feed for an event. Returns `{<event_id>: [<market>, ...]}`. |
+| `get_live_events_started(sport_id)` | GET | `/api/live/sports/{sport_id}/events/started` | Authoritative currently-in-play events for one sport. |
+| `get_live_sport_events(sport_id)` | GET | `/api/live/sports/{sport_id}/events` | All events offering live markets (broader than `_started`: includes near-future events). |
+| `iter_all_prematch_events()` | async iterator | (navigation tree + per-league fan-out) | Yields `PrematchEventStub(event_id, league_id, sport_id)` for every event in the full prematch catalogue. The complete-catalogue entry point. |
+| `get_markets(event_id, registry=None)` | (calls `get_event_markets`) | — | Inherited convenience overridden — calls the markets endpoint, runs the parser. |
+| `get_sportradar_id(event_id, live=False)` | (calls `get_event_detail`) | — | Fetches detail, extracts `[0].betradarId`. |
+| `set_cookie(cookie)` | — | — | Inherited from `BaseBookmaker`. Sets/refreshes the `Cookie:` header for subsequent requests; works pre- and post-context. The `cookie=` constructor kwarg is equivalent for pre-context setup. |
 
 ## Quirks
 

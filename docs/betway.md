@@ -28,11 +28,14 @@ Betway's `eventId` IS the bare numeric SportRadar id (no `sr:match:` prefix). Th
 | `get_sports()` | GET | config | `/cron/sports/{countryCode}/en-US` | Top-level sport list with live counts. |
 | `get_countries(sport_id)` | GET | feeds | `/br/_apis/sport/v1/Feeds/RegionsAndLeagues/{sport_id}` | Regions + leagues for one sport. |
 | `get_tournaments(sport_id)` | GET | feeds | (same) | Alias for `get_countries`. |
-| `get_events(...)` | GET | feeds | `BetBook/Highlights/` or `BetBook/Filtered/` | Events for a sport / region / league. |
+| `get_events(...)` | GET | feeds | `BetBook/Highlights/` (unfiltered, ≤29 events) or `BetBook/Filtered/` (when region_id+league_id are set) | Events for a sport / region / league. Highlights is silently capped — for catalogue enumeration use `iter_all_prematch_events`. The `market_types` parameter defaults to `[Win/Draw/Win]` (football 1X2); pass `""` to include sports without that market. |
+| `get_live_events(sport_id, skip, take, market_types)` | GET | feeds | `BetBook/LiveInPlay/` | In-play events for one sport. `market_types` defaults to `""` (all) — passing a sport-incompatible filter silently returns zero events. |
 | `get_event_detail(event_id)` | GET | feeds | `Feeds/Events/EventAndGameState` | Scoreboard / state info — **no markets**. |
 | `get_event_markets(event_id, skip, take)` | GET | feeds | `MarketGroupings/MarketGroupNamesAndMarketsForEvent` | Full markets feed for an event. |
+| `iter_all_prematch_events()` | async iterator | feeds | (walks regions/leagues, fans out per-league) | Yields `PrematchEventStub(event_id, league_id, sport_id)` for every event in the full prematch catalogue. Passes `market_types=""` so all sports are covered. |
 | `get_markets(event_id, registry=None)` | (calls `get_event_markets`) | — | Inherited convenience overridden — calls the markets endpoint, not event_detail. |
 | `get_sportradar_id(event_id)` | (no API call) | — | Returns the input — `event_id` IS the SR numeric id. |
+| `set_cookie(cookie)` | — | — | Inherited from `BaseBookmaker`. Rarely needed for Betway (no Akamai gate). |
 
 ### `get_sports() -> dict`
 

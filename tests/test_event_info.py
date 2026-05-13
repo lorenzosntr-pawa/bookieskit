@@ -309,7 +309,8 @@ def test_msport_live_info_live():
 
 
 @pytest.mark.parametrize(
-    "platform", ["betpawa", "sportybet", "bet9ja", "betway", "msport"]
+    "platform",
+    ["betpawa", "sportybet", "bet9ja", "betway", "msport", "sportpesa"],
 )
 def test_empty_dict_does_not_raise(platform):
     assert extract_kickoff({}, platform) is None
@@ -413,3 +414,32 @@ def test_explicit_mode_matches_auto_on_prematch_fixture(platform):
     d = _load(platform, "prematch")
     assert extract_live_info(d, platform, mode="prematch") == \
            extract_live_info(d, platform)
+
+
+# ---- SportPesa fixture-bound tests ----------------------------------------
+# SportPesa's captured fixtures cover a different event than the other 5
+# (Akamai requires a warmed session — captures were taken separately), so
+# SportPesa is excluded from the cross-platform "kickoffs agree" tests. It
+# is included in the per-platform tests below.
+
+
+def test_sportpesa_kickoff_prematch():
+    d = _load("sportpesa", "prematch")
+    k = extract_kickoff(d, "sportpesa")
+    assert k is not None
+    assert k.tzinfo is not None
+
+
+def test_sportpesa_participants_prematch():
+    d = _load("sportpesa", "prematch")
+    p = extract_participants(d, "sportpesa")
+    assert p.home and p.away
+
+
+def test_sportpesa_live_info_returns_empty():
+    # SportPesa's event-detail `state` is `{}` on both prematch and live;
+    # live-info is not exposed by this endpoint. The extractor returns
+    # `_EMPTY_LIVE_INFO` for both fixtures.
+    for phase in ("prematch", "live"):
+        li = extract_live_info(_load("sportpesa", phase), "sportpesa")
+        assert li == LiveInfo()

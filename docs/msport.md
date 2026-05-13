@@ -19,12 +19,14 @@ MSport's `eventId` IS `sr:match:<numeric>` (same as SportyBet). The library's `e
 | Method | HTTP | Path | When to use |
 |--------|------|------|-------------|
 | `get_sports()` | GET | `/sports` | Top-level prematch sport list. |
-| `get_events(sport_id)` | GET | `/sports-matches-list?sportId=...` | All matches for a sport, grouped by tournament. No per-tournament endpoint. |
+| `get_events(sport_id, last_event_id=None, limit=None)` | GET | `/sports-matches-list?sportId=...` | One page of matches for a sport, grouped by tournament. **Cursor-paginated** via `lastEventId` — pass the response's `lastEventId` as `last_event_id` to advance. `limit=100` widens the default ~50/page. To enumerate the full per-sport catalogue, walk pages until the cursor stops advancing or use `iter_all_prematch_events`. |
 | `get_event_detail(event_id, live=False)` | GET | `/match/detail?eventId=...&productId=...` | Full event detail. **`live=True` is required for in-play markets.** |
 | `get_live_sports()` | GET | `/live-matches/sports` | Sports currently in-play with counts. |
-| `get_live_events(sport_id)` | GET | `/live-matches/list?sportId=...` | Live events, tournaments, and `comingSoons` for a sport. |
+| `get_live_events(sport_id)` | GET | `/live-matches/list?sportId=...` | Live events, tournaments, and `comingSoons` for a sport. Returns everything in one call (no cursor pagination needed). |
+| `iter_all_prematch_events()` | async iterator | (cursor walk per sport, concurrent) | Yields `PrematchEventStub(event_id, league_id, sport_id)` for every event in the full prematch catalogue. Walks all pages of `/sports-matches-list` per sport via `lastEventId`. |
 | `get_markets(event_id)` | (calls `get_event_detail`) | — | Inherited convenience. Prematch by default. |
 | `get_sportradar_id(event_id)` | (calls `get_event_detail`) | — | Inherited convenience. |
+| `set_cookie(cookie)` | — | — | Inherited from `BaseBookmaker`. Rarely needed for MSport. |
 
 (All paths are relative to `/api/{country}/facts-center/query/frontend`.)
 
