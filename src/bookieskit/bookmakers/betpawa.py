@@ -50,7 +50,7 @@ class BetPawa(BaseBookmaker):
     PLATFORM_KEY = "betpawa"
 
     def _build_headers(self) -> dict[str, str]:
-        headers = dict(self.DEFAULT_HEADERS)
+        headers = super()._build_headers()
         headers["x-pawa-brand"] = _BRAND_MAP.get(
             self._country, f"betpawa-{self._country}"
         )

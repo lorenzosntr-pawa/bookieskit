@@ -165,72 +165,38 @@ async def count_bet9ja() -> dict:
 
 
 async def count_betway() -> dict:
-    """Betway has no per-sport upcoming count and its Highlights endpoint
-    caps at 29 events and ignores `skip`. The only way to get an accurate
-    prematch event total is to fan out (region, league) calls per sport
-    (the BetBook/Filtered endpoint, which paginates honestly per league).
+    """Betway totals via the iter_all_prematch_events catalogue iterator.
 
-    The fan-out is bounded by Betway's MAX_CONCURRENT=50 semaphore, so this
-    runs in a handful of seconds even though it issues hundreds of HTTP
-    calls. Live tournaments are derived the same way: collect distinct
-    `league` ids from live events surfaced by Highlights/Filtered.
+    Static metadata (sports / live counts) comes from the sports list.
+    Prematch enumeration delegates to the client's iterator which fans
+    out per-league concurrently under MAX_CONCURRENT=50. Live tournament
+    derivation still walks LiveInPlay per sport (no library iterator for
+    live events yet).
     """
     out = {"name": "Betway", "country": "ng"}
     async with Betway(country="ng") as bw:
-        sports = [s for s in (await bw.get_sports()).get("sports", []) if s.get("sportType") == "Sport"]  # noqa: E501
+        sports = [
+            s for s in (await bw.get_sports()).get("sports", [])
+            if s.get("sportType") == "Sport"
+        ]
         out["sports_total"] = len(sports)
-        out["sports_with_prematch"] = sum(1 for s in sports if s.get("hasUpcomingEvents", False))  # noqa: E501
-        out["sports_with_live"] = sum(1 for s in sports if s.get("liveInPlayCount", 0) > 0)  # noqa: E501
+        out["sports_with_prematch"] = sum(
+            1 for s in sports if s.get("hasUpcomingEvents", False)
+        )
+        out["sports_with_live"] = sum(
+            1 for s in sports if s.get("liveInPlayCount", 0) > 0
+        )
         out["events_live"] = sum(s.get("liveInPlayCount", 0) for s in sports)
 
-        # Walk each sport's regions/leagues once. We use the result for
-        # both tournaments_prematch (count of leagues) and events_prematch
-        # (fan out get_events per league).
-        prematch_tournaments = 0
-        # (sport_id, region_id, league_id) tuples for per-league fan-out
-        league_calls: list[tuple[str, str, str]] = []
-        for s in sports:
-            sid = s.get("sportId")
-            if not sid:
-                continue
-            try:
-                regions = (await bw.get_countries(sport_id=sid)).get("regions", [])
-            except Exception:
-                continue
-            for r in regions:
-                rid = r.get("regionId")
-                if not rid:
-                    continue
-                leagues = r.get("leagues", []) or []
-                prematch_tournaments += len(leagues)
-                for lg in leagues:
-                    lid = lg.get("leagueId")
-                    if lid:
-                        league_calls.append((sid, rid, lid))
-        out["tournaments_prematch"] = prematch_tournaments
+        event_ids: set = set()
+        league_pairs: set = set()
+        async for ev in bw.iter_all_prematch_events():
+            event_ids.add(ev.event_id)
+            league_pairs.add((ev.sport_id, ev.league_id))
+        out["events_prematch"] = len(event_ids)
+        out["tournaments_prematch"] = len(league_pairs)
 
-        async def _league_event_count(sid: str, rid: str, lid: str) -> int:
-            try:
-                r = await bw.get_events(
-                    region_id=rid, league_id=lid, sport_id=sid, take=100
-                )
-                return len(r.get("events", []) or [])
-            except Exception:
-                return 0
-
-        # Run all per-league calls concurrently; the client's semaphore
-        # (MAX_CONCURRENT=50) gates in-flight requests automatically.
-        if league_calls:
-            counts = await asyncio.gather(
-                *[_league_event_count(*c) for c in league_calls]
-            )
-            out["events_prematch"] = sum(counts)
-        else:
-            out["events_prematch"] = 0
-
-        # Live tournaments: walk get_live_events per sport with live activity,
-        # collect distinct leagueIds. The LiveInPlay endpoint paginates honestly
-        # and requires `sportId` + `marketTypes`.
+        # Live tournaments: walk LiveInPlay per sport with live activity.
         live_league_ids: set = set()
         for s in sports:
             if s.get("liveInPlayCount", 0) == 0:
@@ -261,18 +227,7 @@ async def count_betway() -> dict:
 
 
 async def count_msport() -> dict:
-    """MSport totals via cursor-paginated sports-matches-list walk.
-
-    MSport's `/sports-matches-list?sportId=N` returns ~50 events / ~12
-    tournaments per page by default and exposes a `lastEventId` cursor for
-    pagination (the `count` field on `/sports` is misleadingly zero for
-    every sport, hence the per-sport walk).
-
-    To get accurate totals we paginate per sport: pass `last_event_id`
-    plus `limit=100` until the next call adds no new events. Without
-    pagination the script reported only ~131 tournaments / ~668 events —
-    in reality MSport carries ~1000+ events for soccer alone.
-    """
+    """MSport totals via the iter_all_prematch_events catalogue iterator."""
     out = {"name": "MSport", "country": "ng"}
     async with MSport(country="ng") as ms:
         prematch = (await ms.get_sports()).get("data", {}).get("sports", [])
@@ -281,53 +236,18 @@ async def count_msport() -> dict:
         out["sports_with_live"] = sum(1 for s in live if s.get("count", 0) > 0)
         out["events_live"] = sum(s.get("count", 0) for s in live)
 
-        async def _walk_sport(sport_id: str) -> tuple[set, set]:
-            """Walk all pages for one sport; returns (event_ids, tournament_ids)."""
-            event_ids: set = set()
-            tournament_ids: set = set()
-            last_id: str | None = None
-            for _ in range(100):  # safety
-                try:
-                    resp = await ms.get_events(
-                        sport_id=sport_id, last_event_id=last_id, limit=100
-                    )
-                except Exception:
-                    break
-                data = resp.get("data") or {}
-                tours = data.get("tournaments") or []
-                new_event_count = 0
-                for t in tours:
-                    tid = t.get("tournamentId")
-                    if tid is not None:
-                        tournament_ids.add(tid)
-                    for e in t.get("events") or []:
-                        eid = e.get("eventId")
-                        if eid and eid not in event_ids:
-                            event_ids.add(eid)
-                            new_event_count += 1
-                next_cursor = data.get("lastEventId")
-                # Terminate when no progress is made or no cursor returned.
-                if not tours or new_event_count == 0 or next_cursor == last_id:
-                    break
-                last_id = next_cursor
-            return event_ids, tournament_ids
-
-        # Fan out the per-sport walks concurrently. MSport's MAX_CONCURRENT=50
-        # caps in-flight requests.
-        walks = await asyncio.gather(
-            *[_walk_sport(s.get("sportId")) for s in prematch if s.get("sportId")]
-        )
-        prematch_event_ids: set = set()
-        prematch_tournament_ids: set = set()
-        sports_with_prematch = 0
-        for evs, tours in walks:
-            if evs:
-                sports_with_prematch += 1
-            prematch_event_ids |= evs
-            prematch_tournament_ids |= tours
-        out["sports_with_prematch"] = sports_with_prematch
-        out["events_prematch"] = len(prematch_event_ids)
-        out["tournaments_prematch"] = len(prematch_tournament_ids)
+        event_ids: set = set()
+        sport_event_counts: dict = {}
+        league_pairs: set = set()
+        async for ev in ms.iter_all_prematch_events():
+            event_ids.add(ev.event_id)
+            league_pairs.add((ev.sport_id, ev.league_id))
+            sport_event_counts[ev.sport_id] = (
+                sport_event_counts.get(ev.sport_id, 0) + 1
+            )
+        out["sports_with_prematch"] = len(sport_event_counts)
+        out["events_prematch"] = len(event_ids)
+        out["tournaments_prematch"] = len(league_pairs)
 
         # Live: the live-matches/list endpoint already returns everything
         # (no cursor pagination needed). Walk per live sport.
@@ -350,51 +270,46 @@ async def count_msport() -> dict:
 
 
 async def count_sportpesa() -> dict:
-    """SportPesa totals via navigation-tree walk.
+    """SportPesa totals via the iter_all_prematch_events catalogue iterator.
 
-    Strategy:
-    - ``/api/navigation`` returns the full sport → country → league tree.
-      Use that to enumerate every league SportPesa exposes (302 across
-      13 sports as of writing).
-    - For each league, ``get_events(sport_id=S, league_id=L)`` returns
-      the full league catalogue. The ``leagueId`` filter walks past the
-      rolling-100-event window that limits per-sport calls (verified
-      empirically — ``competitionId`` does NOT, it is silently ignored).
-    - Run all per-league calls concurrently. SportPesa's
-      ``MAX_CONCURRENT=15`` semaphore caps in-flight requests.
-    - ``/api/live/sports`` enumerates the live sport ids only; for each,
-      ``/api/live/sports/{sid}/events/started`` is the authoritative
-      currently-in-play list (the ``eventNumber`` counter on
-      ``/api/live/sports`` is separately cached and unreliable — observed
-      returning all zeros even when many events are in-play).
-
-    This is the only known path to the complete SportPesa prematch
-    catalogue. The rolling-window cap discussion in earlier versions of
-    this docstring still applies to the per-sport ``/api/upcoming/games``
-    call, but ``leagueId``-filtered calls bypass it cleanly.
+    Prematch enumeration delegates to the navigation-tree + per-league
+    fan-out inside ``SportPesa.iter_all_prematch_events``. Live counts
+    come from ``/api/live/sports/{sid}/events/started`` per sport (the
+    ``eventNumber`` counter on ``/api/live/sports`` is unreliable —
+    observed returning all zeros even when sports clearly have in-play
+    events). ``sports_total`` comes from the navigation tree (13 sports
+    at writing) rather than the live-sports endpoint (9), because the
+    navigation tree is the authoritative full-catalogue view.
     """
     out = {"name": "SportPesa", "country": "ke"}
     cookie = os.environ.get("SPORTPESA_COOKIE")
     if not cookie:
         return {"name": "SportPesa", "error": "SPORTPESA_COOKIE env var not set"}
-    async with SportPesa(country="ke") as sp:
-        sp._http_client.headers["cookie"] = cookie
-
-        # Navigation tree drives the catalogue enumeration.
+    async with SportPesa(country="ke", cookie=cookie) as sp:
+        # Navigation tree is the source of truth for the sport catalogue.
         try:
             nav = await sp.get_navigation()
         except Exception as e:
             return {"name": "SportPesa", "error": f"get_navigation failed: {e!r}"}
         out["sports_total"] = len(nav)
 
-        # Live: /api/live/sports lists the sports, then for each sport we
-        # call /api/live/sports/{sid}/events/started for the authoritative
-        # in-play event list. The `eventNumber` field on /api/live/sports
-        # is a separately-cached counter that is unreliable (observed
-        # returning all zeros even when sports clearly have in-play events).
+        # Prematch: delegate to the iterator.
+        prematch_event_ids: set = set()
+        league_pairs: set = set()
+        sport_event_counts: dict = {}
+        async for ev in sp.iter_all_prematch_events():
+            prematch_event_ids.add(ev.event_id)
+            league_pairs.add((ev.sport_id, ev.league_id))
+            sport_event_counts[ev.sport_id] = (
+                sport_event_counts.get(ev.sport_id, 0) + 1
+            )
+        out["sports_with_prematch"] = len(sport_event_counts)
+        out["tournaments_prematch"] = len(league_pairs)
+        out["events_prematch"] = len(prematch_event_ids)
+
+        # Live: walk /api/live/sports/{sid}/events/started per live sport.
         try:
-            live_resp = await sp.get_sports()
-            live_sports = live_resp.get("sports", []) or []
+            live_sports = (await sp.get_sports()).get("sports", []) or []
         except Exception:
             live_sports = []
 
@@ -424,55 +339,6 @@ async def count_sportpesa() -> dict:
                     live_tournament_ids.add(tid)
         out["sports_with_live"] = sports_with_live
         out["events_live"] = len(live_event_ids)
-
-        # Build the per-league call list from navigation.
-        league_calls: list[tuple[str, str]] = []  # (sport_id, league_id)
-        sports_with_leagues = set()
-        for sport in nav:
-            sid = str(sport.get("id"))
-            if not sport.get("has_matches"):
-                continue
-            for country in sport.get("countries", []) or []:
-                for league in country.get("leagues", []) or []:
-                    lid = league.get("id")
-                    if lid is not None:
-                        league_calls.append((sid, str(lid)))
-                        sports_with_leagues.add(sid)
-
-        out["tournaments_prematch"] = len(league_calls)
-
-        async def _fetch_league(sid: str, lid: str) -> tuple[str, str, list]:
-            try:
-                events = await sp.get_events(
-                    sport_id=sid, league_id=lid, pag_count=100
-                )
-                return sid, lid, events if isinstance(events, list) else []
-            except Exception:
-                return sid, lid, []
-
-        # Concurrent per-league fan-out (semaphore-bounded).
-        results = await asyncio.gather(
-            *[_fetch_league(sid, lid) for sid, lid in league_calls]
-        )
-
-        prematch_event_ids: set = set()
-        sports_with_prematch = set()
-        for sid, lid, events in results:
-            for g in events:
-                gid = g.get("id")
-                if gid is not None:
-                    prematch_event_ids.add(gid)
-            if events:
-                sports_with_prematch.add(sid)
-
-        out["sports_with_prematch"] = len(sports_with_prematch)
-        out["events_prematch"] = len(prematch_event_ids)
-
-        # Live tournaments come from the same started-events walk above.
-        # Using `/api/live/sports/{sid}/events/started` is authoritative
-        # (vs the older /api/highlights/{sid}?live=true which mixed
-        # in-play with about-to-start "highlight" events and had no
-        # `started`/`live` flag to filter on).
         out["tournaments_live"] = len(live_tournament_ids)
     return out
 

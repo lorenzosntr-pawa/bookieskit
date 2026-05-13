@@ -52,6 +52,7 @@ class BaseBookmaker:
         backoff_factor: float = DEFAULT_BACKOFF_FACTOR,
         max_concurrent: int | None = None,
         request_delay: float | None = None,
+        cookie: str | None = None,
     ) -> None:
         """Initialise the client for the given country.
 
@@ -62,6 +63,9 @@ class BaseBookmaker:
             backoff_factor: Exponential backoff multiplier.
             max_concurrent: Maximum concurrent requests (overrides class default).
             request_delay: Per-request delay in seconds (overrides class default).
+            cookie: Optional ``Cookie:`` header value sent on every request.
+                Primarily needed for SportPesa (Akamai-gated); callers can
+                also use :meth:`set_cookie` to refresh mid-session.
 
         Raises:
             UnsupportedCountryError: If ``country`` is not in DOMAINS.
@@ -82,12 +86,38 @@ class BaseBookmaker:
         self._request_delay = (
             request_delay if request_delay is not None else self.REQUEST_DELAY
         )
+        self._cookie = cookie
         self._http_client: httpx.AsyncClient | None = None
         self._semaphore: asyncio.Semaphore | None = None
 
     def _build_headers(self) -> dict[str, str]:
-        """Build request headers. Override in subclass for country-specific headers."""
-        return dict(self.DEFAULT_HEADERS)
+        """Build request headers. Override in subclass for country-specific headers.
+
+        Subclasses that override should call ``super()._build_headers()`` first
+        so cookie injection (set via the ``cookie=`` constructor kwarg or
+        :meth:`set_cookie`) is preserved.
+        """
+        headers = dict(self.DEFAULT_HEADERS)
+        if self._cookie:
+            headers["cookie"] = self._cookie
+        return headers
+
+    def set_cookie(self, cookie: str) -> None:
+        """Set or replace the ``Cookie:`` header for subsequent requests.
+
+        Works both before entering the async context (sets the value
+        :meth:`_build_headers` will pick up) and after (updates the
+        live ``httpx.AsyncClient`` headers in-place so the next call
+        carries the new cookie). Primarily needed for SportPesa, but
+        available on every client.
+
+        Args:
+            cookie: Full ``Cookie:`` header value (semicolon-separated
+                ``name=value`` pairs, as captured from a browser).
+        """
+        self._cookie = cookie
+        if self._http_client is not None:
+            self._http_client.headers["cookie"] = cookie
 
     async def __aenter__(self):
         self._http_client = httpx.AsyncClient(

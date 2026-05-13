@@ -33,10 +33,15 @@ Endpoint paths for `get_sports`, `get_countries`, `get_tournaments`, and `get_ev
 
 ## Quirks
 
-- **Akamai Bot Manager.** SportPesa endpoints are gated by Akamai. The client does NOT solve the challenge. Callers must supply warmed cookies harvested from a browser session — for example, after entering the async context:
+- **Akamai Bot Manager.** SportPesa endpoints are gated by Akamai. The client does NOT solve the challenge. Callers must supply warmed cookies harvested from a browser session, either as a constructor kwarg or via `set_cookie()`:
   ```python
+  # Constructor (preferred)
+  async with SportPesa(country="ke", cookie="<full Cookie: header from a browser tab>") as sp:
+      markets = await sp.get_markets(event_id="8868005")
+
+  # Or refresh mid-session
   async with SportPesa(country="ke") as sp:
-      sp._http_client.headers["cookie"] = "<full Cookie: header from a browser tab>"
+      sp.set_cookie("<full Cookie: header from a browser tab>")
       markets = await sp.get_markets(event_id="8868005")
   ```
 - **Markets and event detail are SEPARATE endpoints.** `get_event_detail` returns metadata + SR id only — NO markets. Use `get_event_markets` (or the `get_markets` convenience) for odds.
@@ -48,16 +53,20 @@ Endpoint paths for `get_sports`, `get_countries`, `get_tournaments`, and `get_ev
 
 ### List soccer competitions for Kenya
 
+SportPesa has no dedicated tournaments-list endpoint; use `get_navigation()` and walk the tree:
+
 ```python
 import asyncio
 from bookieskit import SportPesa
 
 async def main():
-    async with SportPesa(country="ke") as sp:
-        sp._http_client.headers["cookie"] = "<warmed cookie>"
-        raw = await sp.get_tournaments(sport_id="1")
-        for t in raw.get("data", [])[:5]:
-            print(f"{t.get('id')}: {t.get('name')}")
+    async with SportPesa(country="ke", cookie="<warmed cookie>") as sp:
+        nav = await sp.get_navigation()
+        soccer = next((s for s in nav if s.get("id") == 1), None)
+        if soccer:
+            for country in soccer.get("countries", [])[:3]:
+                for league in country.get("leagues", []):
+                    print(f"{country['name']:<20} {league['id']:<6} {league['name']}")
 
 asyncio.run(main())
 ```
@@ -69,8 +78,7 @@ import asyncio
 from bookieskit import SportPesa
 
 async def main():
-    async with SportPesa(country="ke") as sp:
-        sp._http_client.headers["cookie"] = "<warmed cookie>"
+    async with SportPesa(country="ke", cookie="<warmed cookie>") as sp:
         markets = await sp.get_markets(event_id="8868005")
         for m in markets:
             if m.lines:
@@ -92,8 +100,7 @@ import asyncio
 from bookieskit import SportPesa
 
 async def main():
-    async with SportPesa(country="ke") as sp:
-        sp._http_client.headers["cookie"] = "<warmed cookie>"
+    async with SportPesa(country="ke", cookie="<warmed cookie>") as sp:
         raw = await sp.get_event_markets(event_id="8868005")
         games = raw.get("data", [])
         if games:

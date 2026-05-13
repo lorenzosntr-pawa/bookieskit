@@ -110,3 +110,40 @@ async def test_custom_config_overrides_defaults():
         assert client._timeout == 10.0
         assert client._max_retries == 5
         assert client._max_concurrent == 20
+
+
+def test_cookie_kwarg_included_in_built_headers():
+    client = MockBookmaker(country="ng", cookie="bm_sv=abc; ak_bmsc=def")
+    headers = client._build_headers()
+    assert headers.get("cookie") == "bm_sv=abc; ak_bmsc=def"
+
+
+def test_no_cookie_kwarg_means_no_cookie_header():
+    client = MockBookmaker(country="ng")
+    headers = client._build_headers()
+    assert "cookie" not in headers
+
+
+def test_set_cookie_before_context_updates_built_headers():
+    client = MockBookmaker(country="ng")
+    client.set_cookie("foo=1")
+    assert client._build_headers().get("cookie") == "foo=1"
+
+
+@pytest.mark.asyncio
+@respx.mock
+async def test_set_cookie_after_context_updates_live_headers():
+    respx.get("https://mock.example.com/api/test").respond(json={"ok": True})
+    async with MockBookmaker(country="ng") as client:
+        client.set_cookie("session=xyz")
+        await client._request("GET", "/api/test")
+        assert client._http_client.headers.get("cookie") == "session=xyz"
+
+
+@pytest.mark.asyncio
+@respx.mock
+async def test_cookie_kwarg_carried_into_live_headers():
+    respx.get("https://mock.example.com/api/test").respond(json={"ok": True})
+    async with MockBookmaker(country="ng", cookie="ck=1") as client:
+        await client._request("GET", "/api/test")
+        assert client._http_client.headers.get("cookie") == "ck=1"

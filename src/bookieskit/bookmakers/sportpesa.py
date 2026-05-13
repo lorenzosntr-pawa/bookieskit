@@ -1,8 +1,10 @@
 """SportPesa client — supports ke, tz."""
 
-from typing import Any
+import asyncio
+from typing import Any, AsyncIterator
 
 from bookieskit.base import BaseBookmaker
+from bookieskit.bookmakers.types import PrematchEventStub
 from bookieskit.config import SPORTPESA_MAX_CONCURRENT, SPORTPESA_REQUEST_DELAY
 
 
@@ -54,7 +56,7 @@ class SportPesa(BaseBookmaker):
     }
 
     def _build_headers(self) -> dict[str, str]:
-        headers = dict(self.DEFAULT_HEADERS)
+        headers = super()._build_headers()
         headers["x-app-timezone"] = self._TIMEZONE_PER_COUNTRY.get(
             self._country, "Africa/Nairobi"
         )
@@ -276,3 +278,64 @@ class SportPesa(BaseBookmaker):
     # in the classic shape — `get_navigation()` is the equivalent and returns
     # the full sport → country → league tree in one call. `get_countries`
     # and `get_tournaments` are intentionally absent from this client.
+
+    async def iter_all_prematch_events(
+        self,
+    ) -> AsyncIterator[PrematchEventStub]:
+        """Yield every prematch event in SportPesa's catalogue.
+
+        Walks the navigation tree (:meth:`get_navigation`) to enumerate
+        every league, then concurrently fetches ``get_events(sport_id=S,
+        league_id=L, pag_count=100)`` for each. The per-sport
+        ``/api/upcoming/games`` endpoint hard-caps at 100 events in a
+        rolling ~24h window, but the ``leagueId``-filtered variant walks
+        past it — so per-league fan-out via the navigation tree is the
+        only known way to enumerate the full multi-day catalogue.
+
+        Concurrency is bounded by the client's ``MAX_CONCURRENT=15``
+        semaphore. Failed per-league calls yield no events and don't
+        abort the walk.
+
+        Yields:
+            :class:`PrematchEventStub` for each unique event in the
+            catalogue. ``event_id`` is the SportPesa internal game id,
+            ``league_id`` matches the league walked, ``sport_id`` matches
+            the parent sport.
+        """
+        nav = await self.get_navigation()
+        league_calls: list[tuple[str, str]] = []
+        for sport in nav:
+            if not sport.get("has_matches"):
+                continue
+            sid = str(sport.get("id"))
+            for country in sport.get("countries", []) or []:
+                for league in country.get("leagues", []) or []:
+                    lid = league.get("id")
+                    if lid is not None:
+                        league_calls.append((sid, str(lid)))
+
+        async def _fetch(sid: str, lid: str) -> tuple[str, str, list]:
+            try:
+                events = await self.get_events(
+                    sport_id=sid, league_id=lid, pag_count=100
+                )
+                return sid, lid, events if isinstance(events, list) else []
+            except Exception:
+                return sid, lid, []
+
+        results = await asyncio.gather(
+            *[_fetch(sid, lid) for sid, lid in league_calls]
+        )
+        seen: set[str] = set()
+        for sid, lid, events in results:
+            for ev in events:
+                eid = ev.get("id")
+                if eid is None:
+                    continue
+                eid_str = str(eid)
+                if eid_str in seen:
+                    continue
+                seen.add(eid_str)
+                yield PrematchEventStub(
+                    event_id=eid_str, league_id=lid, sport_id=sid
+                )
