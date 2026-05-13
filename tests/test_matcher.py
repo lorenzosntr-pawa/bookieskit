@@ -125,3 +125,23 @@ def test_match_events_populates_sportpesa_field():
     assert me.sportradar_id == "12345"
     assert me.betway is bw_event
     assert me.sportpesa is sp_event
+
+
+def test_match_events_populates_betika_field():
+    # Betika's parent_match_id is the SR id. Once the extractor branch
+    # for "betika" lands (Task 9), this test passes end-to-end.
+    from bookieskit.matching.matcher import match_events
+
+    bw_event = {"sportEvent": {"eventId": "70784812"}}
+    bk_event = [{"match_id": "10846988", "parent_match_id": "70784812"}]
+
+    results = match_events(
+        ("betway", [bw_event]),
+        ("betika", [bk_event]),
+    )
+
+    assert len(results) == 1
+    me = results[0]
+    assert me.sportradar_id == "70784812"
+    assert me.betway is bw_event
+    assert me.betika is bk_event
