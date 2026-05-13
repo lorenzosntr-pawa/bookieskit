@@ -1,0 +1,88 @@
+# Changelog
+
+All notable changes to this project are documented in this file. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [0.6.0] — 2026-05-13
+
+### Added
+
+- **`BaseBookmaker.set_cookie(cookie)` and `cookie=` constructor kwarg.** Replaces the `client._http_client.headers["cookie"] = ...` workaround. Primarily needed for SportPesa (Akamai-gated) but available on every client. Works pre- and post-context; calling `set_cookie` mid-session updates both the stored value and the live httpx headers so the next request carries the new cookie.
+- **`PrematchEventStub(event_id, league_id, sport_id)`** — minimal event identifier type re-exported from the top-level `bookieskit` package. Yielded by the new catalogue iterators.
+- **`Betway.iter_all_prematch_events()`**, **`MSport.iter_all_prematch_events()`**, **`SportPesa.iter_all_prematch_events()`** — async iterators that yield `PrematchEventStub` for every event in the bookmaker's full prematch catalogue. Each one wraps the per-bookmaker fan-out pattern (Betway: regions → leagues → per-league events; MSport: cursor pagination via `lastEventId`; SportPesa: navigation tree → per-league fan-out). All run their underlying HTTP calls concurrently under the client's existing `MAX_CONCURRENT` semaphore, deduplicate by event id, and tolerate per-call failures gracefully.
+- **`Betway.get_live_events(sport_id, ...)`** — new method hitting `/br/_apis/sport/v1/BetBook/LiveInPlay/`. `market_types` defaults to `""` (no filter) so the call covers every sport — passing the football-specific `"[Win/Draw/Win]"` silently drops non-football events.
+- **`SportPesa.get_navigation()`** — fetches `/api/navigation`, returning the full sport → country → league tree (13 sports, ~302 leagues at writing).
+- **`SportPesa.get_live_events_started(sport_id)`** — authoritative currently-in-play events from `/api/live/sports/{sport_id}/events/started`. Use instead of the `eventNumber` field on `/api/live/sports` (that field is a separately-cached counter and unreliable).
+- **`SportPesa.get_live_sport_events(sport_id)`** — broader `/api/live/sports/{sport_id}/events` (all events offering live markets, including near-future ones).
+- **`MSport.get_events()`** gains `last_event_id` and `limit` kwargs for cursor pagination. `/sports-matches-list` returns ~50 events per page by default — without the cursor, callers were seeing only ~12 tournaments / ~50 events for soccer instead of the real ~200 / ~1000+.
+
+### Changed (potentially breaking)
+
+- **`SportPesa.get_events(...)` parameter renamed** `competition_id` → `league_id`. The SportPesa API silently ignores `competitionId` (it accepts the parameter but returns the unfiltered rolling 100 events) — only `leagueId` actually filters. Callers using the old name need to rename the kwarg. There is no compatibility shim.
+- **`SportPesa.get_countries()` and `SportPesa.get_tournaments()` removed.** SportPesa exposes no dedicated countries or tournaments endpoint. Use `get_navigation()` and walk the returned tree (`countries`, `leagues` are nested under each `sport`).
+- **`SportPesa.get_sports()` no longer accepts a `live=` parameter.** The previous `live=False`/`live=True` argument was a no-op (the endpoint is `/api/live/sports` regardless); callers passing `live=` will now see a `TypeError`.
+- **`SportPesa.get_event_detail(event_id, live=False)`** still accepts the `live=` argument for API symmetry but it is ignored — the SportPesa endpoint serves the same payload for prematch and in-play games.
+- **`Betway.get_live_events()` `market_types` default is now `""` (was `"[Win/Draw/Win]"`).** Empty means "no filter"; the previous default silently dropped events from sports that don't carry 1X2 (tennis, cricket, basketball, table tennis, handball, cycling). Callers that depended on the filter behaviour should pass an explicit `market_types=...` value.
+- **`Betway.get_events()`** continues to default `market_types` to `"[Win/Draw/Win]"` for backward compatibility, but the new `iter_all_prematch_events()` overrides this to `""` internally so cross-sport enumeration works correctly. Callers using `get_events()` directly across non-football sports should pass `market_types=""`.
+
+### Fixed
+
+- **SportPesa parser** binds to the real captured shape: response is `{<game_id>: [<market>, ...]}` (not `data[0].markets`), selections use `shortName` not `name`, parameterized markets use `specValue` not `special_bet_value`, and the canonical market ids are `10` (1X2), `52` (O/U), `43` (BTTS), `46` (DC) — not `1`/`18`/`29`/`10` as the original spec guessed.
+- **SportPesa SR-id extractor** now reads `[0].betradarId` from the list-shaped event-detail response (was previously expecting `data[0].additional_info.sportradar_id`, which doesn't exist).
+- **SportPesa event-info extractors** (kickoff, participants, live_info) bound to real fixture shapes: `[0].dateTimestamp` (epoch ms), `[0].competitors[0/1].name`, `state: {}` (live-info not in this endpoint, returns empty).
+- **`count_5bookies.py`** now reports accurate cross-bookmaker totals. Previously several columns were stubbed (BetPawa Tour(L)=0, Bet9ja Tour(L)=0, Betway Events(P)=n/a) because of unread response fields or unwalked endpoints. All six bookmakers now report real numbers and sit in consistent ranges.
+
+### Documentation
+
+- `docs/sportpesa.md` overhauled. Methods table reflects the real API (no `get_countries`/`get_tournaments`, `league_id` not `competition_id`, plus the new methods). Quirks section enumerates every pagination parameter that's been verified to be silently ignored — the `competitionId` vs `leagueId` asymmetry is called out explicitly.
+- `docs/betway.md` and `docs/msport.md` methods tables extended with `iter_all_prematch_events`, plus `Betway.get_live_events` and the `last_event_id`/`limit` kwargs on `MSport.get_events`.
+- `tests/fixtures/event_info/sportpesa/RESOLVED.md` (new) — decision record for the captured fixtures: which JSON paths hold the SR id, kickoff, participants, etc.
+
+### Migration notes (0.5.0 → 0.6.0)
+
+Callers that pinned to `0.5.0` and used any of the following will need a small change:
+
+```python
+# OLD (0.5.0)
+async with SportPesa(country="ke") as sp:
+    sp._http_client.headers["cookie"] = warmed_cookie
+    events = await sp.get_events(sport_id="1", competition_id="67600")
+    sports = await sp.get_sports(live=False)
+    countries = await sp.get_countries(sport_id="1")
+
+# NEW (0.6.0)
+async with SportPesa(country="ke", cookie=warmed_cookie) as sp:
+    events = await sp.get_events(sport_id="1", league_id="67600")
+    sports = await sp.get_sports()                # no `live=` kwarg
+    nav = await sp.get_navigation()                # replaces get_countries/get_tournaments
+```
+
+For `Betway.get_live_events()`, code that relied on the previous football-1X2 default must pass it explicitly:
+
+```python
+# OLD: implicitly filtered to football 1X2
+events = await bw.get_live_events(sport_id="soccer")
+
+# NEW (0.6.0): pass it if you need it
+events = await bw.get_live_events(sport_id="soccer", market_types="[Win/Draw/Win]")
+```
+
+## [0.5.0] — 2026-05-12
+
+### Added
+
+- **`SportPesa` client** as the 6th supported bookmaker. Countries: `ke`, `tz`. Carries the full event-detail / markets / SR-id contract in line with the existing 5 bookmakers.
+- Six built-in markets (1X2, O/U, BTTS, DC + the 1Up/2Up specialty variants) gained a `sportpesa_id` / `sportpesa=` column on `MarketMapping` / `OutcomeMapping` for the 4 universal markets.
+- `MatchedEvent.sportpesa: dict | None = None` added to the cross-bookmaker matcher.
+- Probability-mode plumbing on the SportPesa parser (the platform doesn't actually expose probability fields; the parser accepts the kwarg silently).
+- `examples/odds_for_sr_id.py`, `examples/count_5bookies.py`, `examples/odds_from_betpawa_id.py`, `examples/odds_for_betpawa_competition.py` fan out across all 6 bookmakers.
+
+### Changed
+
+- Tagline `5 African sportsbooks` → `6 African sportsbooks` in README, pyproject description, and several docs.
+
+## [0.4.0] and earlier
+
+See git history. Pre-CHANGELOG release; supported BetPawa / SportyBet / Bet9ja / Betway / MSport with cross-bookmaker normalization via SportRadar ids.
+
+[0.6.0]: https://github.com/<user>/bookieskit/compare/v0.5.0...v0.6.0
+[0.5.0]: https://github.com/<user>/bookieskit/compare/v0.4.0...v0.5.0
