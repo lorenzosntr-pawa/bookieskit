@@ -10,16 +10,16 @@ The `bookieskit.markets` package normalizes per-bookmaker market formats into a 
 
 Six markets ship in the default `MarketRegistry`:
 
-| Canonical id | Name | Parameterized? | BetPawa | SportyBet | Bet9ja | Betway | MSport | SportPesa |
-|---|---|---|---|---|---|---|---|---|
-| `1x2_ft` | 1X2 — Full Time | no | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| `over_under_ft` | Over/Under — Full Time | yes (line=goals) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| `btts_ft` | Both Teams To Score — Full Time | no | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| `double_chance_ft` | Double Chance — Full Time | no | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| `1x2_1up_ft` | 1X2 1Up — Full Time | no | — | ✅ | ✅ | ✅ | — | — |
-| `1x2_2up_ft` | 1X2 2Up — Full Time | no | — | ✅ | ✅ | ✅ | — | — |
+| Canonical id | Name | Parameterized? | BetPawa | SportyBet | Bet9ja | Betway | MSport | SportPesa | Betika |
+|---|---|---|---|---|---|---|---|---|---|
+| `1x2_ft` | 1X2 — Full Time | no | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| `over_under_ft` | Over/Under — Full Time | yes (line=goals) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| `btts_ft` | Both Teams To Score — Full Time | no | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| `double_chance_ft` | Double Chance — Full Time | no | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| `1x2_1up_ft` | 1X2 1Up — Full Time | no | — | ✅ | ✅ | ✅ | — | — | — |
+| `1x2_2up_ft` | 1X2 2Up — Full Time | no | — | ✅ | ✅ | ✅ | — | — | — |
 
-The 1Up / 2Up markets pay as a 1X2 if your team gets to a 1- or 2-goal lead at any point. BetPawa, MSport and SportPesa are intentionally unmapped (BetPawa to be added at production cutover; MSport and SportPesa do not expose this market).
+The 1Up / 2Up markets pay as a 1X2 if your team gets to a 1- or 2-goal lead at any point. BetPawa, MSport, SportPesa and Betika are intentionally unmapped (BetPawa to be added at production cutover; the others do not expose this market).
 
 ## Types
 
@@ -47,6 +47,7 @@ Frozen dataclass. One per canonical outcome:
 - `betway: str` — either the literal name (`"Over"`) or a position sentinel (see below).
 - `msport: str` — e.g. `"Home"`, `"1 X"` for DC.
 - `sportpesa: str` — e.g. `"1"`, `"Over"`, `"1X"`. SportPesa's selection names align with the SportRadar feed it consumes.
+- `betika: str` — e.g. `"1"`, `"Over"`, `"1/X"`, `"Yes"`. Matched case-insensitively. For parameterized markets (Over/Under), Betika embeds the line in the display label as `"OVER 2.5"`; the parser strips the trailing token before resolving.
 
 ### `NormalizedMarket`
 
@@ -72,7 +73,7 @@ Use `__HOME__` / `__AWAY__` on 1X2 (clearest intent) and `__POS_N__` for Double 
 
 ## Parser dispatcher
 
-`parse_markets(response, platform, registry=None)` looks up `platform` in the dispatcher dict and calls the right `_parse_<platform>` function. Currently registered: `"betpawa"`, `"sportybet"`, `"bet9ja"`, `"betway"`, `"msport"`, `"sportpesa"`. Returns `[]` if `platform` is unknown.
+`parse_markets(response, platform, registry=None)` looks up `platform` in the dispatcher dict and calls the right `_parse_<platform>` function. Currently registered: `"betpawa"`, `"sportybet"`, `"bet9ja"`, `"betway"`, `"msport"`, `"sportpesa"`, `"betika"`. Returns `[]` if `platform` is unknown.
 
 The Bet9ja parser handles BOTH the prematch `S_*` keys AND the live `LIVES_*` keys. It also unwraps the `{"v": <float>}` odds shape used in live responses (vs bare strings prematch).
 
@@ -157,8 +158,9 @@ because of the bookmaker's margin.
 | Betway | n/a | n/a | Verified absent from `get_event_markets` (no `probability` / `prob` / `impliedOdds` / `margin` / `voidProbability` keys anywhere in their 400 KB markets payload) |
 | Bet9ja | n/a | n/a | Not in `D.O` (live) nor in their prematch event-detail response |
 | SportPesa | fixture-resolved | fixture-resolved | Per-selection `probability` / `void_probability` field presence not yet confirmed against a captured payload; the parser populates whichever fields the response carries and leaves the rest `None` |
+| Betika | n/a | n/a | No probability / void-probability fields on selections; both stay `None` |
 
-For Betway and Bet9ja, both fields are always `None` regardless of the
+For Betway, Bet9ja and Betika, both fields are always `None` regardless of the
 `probability` mode — `parse_markets` accepts the keyword silently. For
 SportPesa, the same silent-acceptance contract applies; fields that the
 captured payload doesn't carry stay `None`.
