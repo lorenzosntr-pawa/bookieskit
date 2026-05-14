@@ -2,16 +2,19 @@
 
 ## Supported Countries
 
-| Code | Domain | Notes |
-|------|--------|-------|
-| `ng` | https://www.betpawa.ng | Nigeria |
-| `gh` | https://www.betpawa.com.gh | Ghana |
-| `ke` | https://www.betpawa.co.ke | Kenya |
-| `ug` | https://www.betpawa.co.ug | Uganda |
-| `tz` | https://www.betpawa.co.tz | Tanzania |
-| `zm` | https://www.betpawa.co.zm | Zambia |
+| Code | Country | Domain | `x-pawa-brand` |
+|------|---------|--------|----------------|
+| `ng` | Nigeria | https://www.betpawa.ng | `betpawa-nigeria` |
+| `gh` | Ghana | https://www.betpawa.com.gh | `betpawa-ghana` |
+| `ke` | Kenya | https://www.betpawa.co.ke | `betpawa-kenya` |
+| `ug` | Uganda | https://www.betpawa.co.ug | `betpawa-uganda` |
+| `tz` | Tanzania | https://www.betpawa.co.tz | `betpawa-tanzania` |
+| `zm` | Zambia | https://www.betpawa.co.zm | `betpawa-zambia` |
+| `rw` | Rwanda | https://www.betpawa.rw | `betpawa-rwanda` |
+| `cm` | Cameroon | https://www.betpawa.cm | `betpawa-cameroon` |
+| `sl` | Sierra Leone | https://www.betpawa.sl | `betpawa-sierraleone` |
 
-Country also drives the `x-pawa-brand` request header (e.g. `betpawa-nigeria` for `ng`).
+Each country pairs a subdomain TLD with a brand header — both move together in `DOMAINS` and `_BRAND_MAP` in `bookmakers/betpawa.py`. The three additions in 0.8.0 (`rw`, `cm`, `sl`) were verified against the live sportsbook API. Other African TLDs (`bf`, `ci`, `sn`, `cd`, `cg`, `ss`, `ml`, `bi`, `et`) either don't resolve or return 4xx and are not currently supported.
 
 ## SportRadar id
 

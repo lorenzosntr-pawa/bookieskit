@@ -1,4 +1,4 @@
-"""BetPawa client — supports ng, gh, ke, ug, tz, zm."""
+"""BetPawa client — supports ng, gh, ke, ug, tz, zm, rw, cm, sl."""
 
 import json
 from typing import Any
@@ -7,7 +7,8 @@ from urllib.parse import quote
 from bookieskit.base import BaseBookmaker
 from bookieskit.config import BETPAWA_MAX_CONCURRENT, BETPAWA_REQUEST_DELAY
 
-# Country code to x-pawa-brand header value
+# Country code to x-pawa-brand header value. Each entry pairs with a
+# DOMAINS row; both must move together when adding a new country.
 _BRAND_MAP = {
     "ng": "betpawa-nigeria",
     "gh": "betpawa-ghana",
@@ -15,6 +16,9 @@ _BRAND_MAP = {
     "ug": "betpawa-uganda",
     "tz": "betpawa-tanzania",
     "zm": "betpawa-zambia",
+    "rw": "betpawa-rwanda",
+    "cm": "betpawa-cameroon",
+    "sl": "betpawa-sierraleone",
 }
 
 
@@ -22,7 +26,7 @@ class BetPawa(BaseBookmaker):
     """HTTP client for BetPawa sportsbook API.
 
     Args:
-        country: Country code (ng, gh, ke, ug, tz, zm)
+        country: Country code (ng, gh, ke, ug, tz, zm, rw, cm, sl)
         timeout: Request timeout in seconds (default: 30)
         max_retries: Max retry attempts (default: 3)
         backoff_factor: Exponential backoff base (default: 1.0)
@@ -37,6 +41,9 @@ class BetPawa(BaseBookmaker):
         "ug": "https://www.betpawa.co.ug",
         "tz": "https://www.betpawa.co.tz",
         "zm": "https://www.betpawa.co.zm",
+        "rw": "https://www.betpawa.rw",
+        "cm": "https://www.betpawa.cm",
+        "sl": "https://www.betpawa.sl",
     }
     DEFAULT_HEADERS = {
         "accept": "*/*",
