@@ -18,8 +18,9 @@ from bookieskit.event_info import (
     is_live_now,
 )
 from bookieskit.markets.parser import ProbabilityMode
+from bookieskit.matching import EventIds, extract_event_ids
 
-__version__ = "0.8.0"
+__version__ = "0.9.0"
 __all__ = [
     "BetPawa",
     "SportyBet",
@@ -33,6 +34,8 @@ __all__ = [
     "Mode",
     "Participants",
     "ProbabilityMode",
+    "EventIds",
+    "extract_event_ids",
     "extract_kickoff",
     "extract_live_info",
     "extract_participants",

@@ -2,6 +2,39 @@
 
 All notable changes to this project are documented in this file. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.9.0] — 2026-05-14
+
+Added a second provider — **BetGenius / Genius Sports** — alongside SportRadar for cross-bookmaker event matching. BetPawa and SportyBet expose Genius ids in their event-detail responses; the matcher now pairs events that share **any** provider id, so a BetPawa row with both SR and Genius widgets bridges a Betway row (SR only) with a SportyBet Genius event (Genius only).
+
+### Added
+
+- **`EventIds` dataclass** (`bookieskit.matching.EventIds`) — frozen `(sportradar: str | None, genius: str | None)` with a `keys()` helper that yields provider-prefixed strings (`"sr:NNN"`, `"genius:MMM"`) for the matcher's union-find.
+- **`extract_event_ids(response, platform)`** — new unified entry point. Returns an `EventIds` per platform, populating whichever provider ids the payload carries. Re-exported from the top-level package.
+- **BetPawa Genius widget extraction.** `widgets[type=GENIUSSPORTS].id` is parsed alongside `widgets[type=SPORTRADAR].id`. Both already present in captured prematch + live fixtures.
+- **SportyBet `eventSource` + `11111111` decoding.** Primary path: `data.eventSource.{preMatchSource,liveSource}.{sourceType,sourceId}` — `BET_RADAR` → `sportradar`, `BET_GENIUS` → `genius`. Fallback: `data.eventId == "sr:match:11111111<genius_id>"` (the synthetic encoding SportyBet uses for BetGenius events). When both signals are present and disagree, a `WARNING` is logged via `bookieskit.matching.extractor` and `eventSource` wins.
+- **`MatchedEvent.genius_id`** field on the matcher's output row. `sportradar_id` was relaxed from required `str` to `str | None = None` so Genius-only matches (no SR id on either side) can still produce a row.
+- **Union-find matcher.** `match_events` now groups events by any shared provider id; transitive bridges (BetPawa SR ↔ Betway; BetPawa Genius ↔ SportyBet → all three in one group) are handled correctly. ~30 lines of DSU replaces the previous keyed-dict implementation.
+
+### Changed
+
+- `MatchedEvent.sportradar_id` is now `str | None = None` (was `str`). Pre-existing callers that construct `MatchedEvent(sportradar_id="x")` keep working unchanged. Callers that read `me.sportradar_id` as if always non-None should add a None-check if they want to support Genius-only matches.
+- `extract_sportradar_id` is now a thin wrapper around `extract_event_ids(...).sportradar`. Behaviour for SR-only payloads is unchanged; an event with only a Genius widget (no SR) now correctly returns `None` (previously also `None` — same outcome via a cleaner path).
+
+### Deferred
+
+- **Bet9ja live BetGenius**. The captured live fixture is a SportRadar event (`D.A.PRV=60`, `D.A.BRMATCHID` populated). Without a Bet9ja-live Genius-event fixture we can't confirm the path for the Genius case, so `extract_event_ids(response, platform="bet9ja").genius` returns `None` today. Open an issue with a captured live Genius payload to land the wiring.
+
+### Documentation
+
+- `docs/matching.md` rewritten around the two-provider model: new `EventIds` section, full per-platform path table for both providers, SportyBet `11111111` encoding documented, union-find matcher described, `MatchedEvent` dataclass shape updated.
+- `docs/betpawa.md` documents the parallel SPORTRADAR / GENIUSSPORTS widgets.
+- `docs/sportybet.md` documents the `eventSource` typed paths plus the `11111111` synthetic encoding and the cross-check / warning behaviour.
+- `docs/bet9ja.md` flags the deferred live-Genius wiring with the open-fixture caveat.
+
+### Test count
+
+428 → 456 passing (+28 across the `EventIds` dataclass contract, 7-platform `extract_event_ids` dispatch, BetPawa both-widgets fixture-bound, SportyBet eventSource + eventId fallback + cross-check warning, MatchedEvent `genius_id` field, and 4 union-find matcher scenarios including transitive bridge and Genius-only match).
+
 ## [0.8.0] — 2026-05-14
 
 Expanded country coverage across BetPawa, MSport, and Betway after probing each bookmaker's live API endpoints. Fixed a latent MSport bug discovered during the probe — `GH` and `KE` country entries in `DOMAINS` had been silently broken since they were added.
