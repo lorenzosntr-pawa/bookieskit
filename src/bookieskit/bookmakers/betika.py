@@ -10,10 +10,15 @@ The API is open: no Cloudflare gate, no warmed cookies, no observed
 rate limiting under bursty traffic.
 """
 
+import asyncio
 from typing import Any
 
 from bookieskit.base import BaseBookmaker
 from bookieskit.config import BETIKA_MAX_CONCURRENT, BETIKA_REQUEST_DELAY
+
+# Universal market sub_type_ids — 1X2, Double Chance, Over/Under, BTTS.
+# Match the four canonical markets exposed in `BUILTIN_MAPPINGS`.
+_UNIVERSAL_SUB_TYPE_IDS = ("1", "10", "18", "29")
 
 
 class Betika(BaseBookmaker):
@@ -155,3 +160,105 @@ class Betika(BaseBookmaker):
         if match_id is not None:
             params["match_id"] = match_id
         return await self._live_request("GET", "/v1/uo/matches", params=params)
+
+    async def get_event_detail(
+        self, event_id: str, live: bool = False
+    ) -> dict[str, Any]:
+        """Get the event-detail payload for one match.
+
+        Args:
+            event_id: Betika internal ``match_id``.
+            live: If True, fetch from ``live.betika.com``; otherwise from
+                ``api.betika.com``.
+
+        Returns:
+            JSON shaped as ``{"data": [<match>], "meta": {...}}``. The
+            default response carries a single market group (1X2);
+            :meth:`get_event_markets` aggregates the full universal set.
+        """
+        params = {"match_id": event_id, "limit": "1"}
+        if live:
+            return await self._live_request(
+                "GET", "/v1/uo/matches", params=params
+            )
+        return await self._request("GET", "/v1/uo/matches", params=params)
+
+    async def get_event_markets(
+        self, event_id: str, live: bool = False
+    ) -> dict[str, Any]:
+        """Fetch the universal market set for one event in one merged payload.
+
+        Betika's ``/v1/uo/matches`` returns a single market group per call
+        by default; to fetch a different market you must repeat the call
+        with ``&sub_type_id=N``. This method fans out the four universal
+        market ids concurrently and stitches their ``odds`` groups into a
+        single match-shaped response — exactly the shape the parser
+        expects.
+
+        Args:
+            event_id: Betika internal ``match_id``.
+            live: If True, fetch from ``live.betika.com``.
+
+        Returns:
+            JSON shaped as ``{"data": [<match>], "meta": {...}}`` where
+            ``<match>.odds`` contains one entry per universal market id
+            (1, 10, 18, 29). If a particular market is unavailable for
+            the event it is silently skipped.
+        """
+        async def _fetch_one(sub_type_id: str) -> dict[str, Any]:
+            params = {
+                "match_id": event_id,
+                "limit": "1",
+                "sub_type_id": sub_type_id,
+            }
+            if live:
+                return await self._live_request(
+                    "GET", "/v1/uo/matches", params=params
+                )
+            return await self._request("GET", "/v1/uo/matches", params=params)
+
+        responses = await asyncio.gather(
+            *(_fetch_one(s) for s in _UNIVERSAL_SUB_TYPE_IDS),
+            return_exceptions=True,
+        )
+
+        merged_match: dict[str, Any] | None = None
+        merged_odds: list[dict[str, Any]] = []
+        merged_meta: dict[str, Any] = {}
+        for r in responses:
+            if isinstance(r, BaseException) or not isinstance(r, dict):
+                continue
+            data = r.get("data") or []
+            if not isinstance(data, list) or not data:
+                continue
+            match = data[0]
+            if not isinstance(match, dict):
+                continue
+            if merged_match is None:
+                merged_match = dict(match)
+                merged_match["odds"] = []
+            for grp in match.get("odds") or []:
+                if isinstance(grp, dict):
+                    merged_odds.append(grp)
+            if isinstance(r.get("meta"), dict):
+                merged_meta = r["meta"]
+
+        if merged_match is None:
+            return {"data": [], "meta": {}}
+        merged_match["odds"] = merged_odds
+        return {"data": [merged_match], "meta": merged_meta}
+
+    async def get_markets(
+        self, event_id: str, registry: Any = None
+    ) -> list:
+        """Fetch the universal market set and return normalized markets.
+
+        Overrides the base because Betika requires four calls (one per
+        universal market id) to assemble a complete event payload.
+        """
+        from bookieskit.markets.parser import parse_markets
+
+        raw = await self.get_event_markets(event_id=event_id)
+        return parse_markets(
+            raw, platform=self.PLATFORM_KEY, registry=registry
+        )
