@@ -461,6 +461,20 @@ def test_extract_kickoff_betika_malformed_returns_none():
     assert extract_kickoff([{"start_time": "not-a-date"}], "betika") is None
 
 
+def test_extract_kickoff_betika_preserves_tz_aware_offset():
+    """If Betika ever switches from naive UTC to tz-aware ISO, the
+    parser must respect the offset rather than overwriting it with UTC.
+    Today's payloads are naive (test above); this guards the future."""
+    from datetime import datetime, timezone
+    # 22:00 at +03:00 == 19:00 UTC. If the fix is wrong, the parser
+    # would replace +03:00 with UTC and report 22:00 UTC (3 hours off).
+    payload = [{"start_time": "2026-05-13T22:00:00+03:00"}]
+    k = extract_kickoff(payload, "betika")
+    assert k is not None
+    expected = datetime(2026, 5, 13, 19, 0, 0, tzinfo=timezone.utc)
+    assert k == expected
+
+
 def test_extract_participants_betika_prematch():
     d = _load("betika", "prematch")
     p = extract_participants(d, "betika")
