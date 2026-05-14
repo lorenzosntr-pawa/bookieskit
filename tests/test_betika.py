@@ -232,3 +232,60 @@ async def test_betika_get_markets_returns_normalized():
             markets = await client.get_markets(event_id="M")
     canonical_ids = {m.canonical_id for m in markets}
     assert "1x2_ft" in canonical_ids
+
+
+# ---- iter_all_prematch_events ---------------------------------------------
+
+
+@pytest.mark.asyncio
+async def test_betika_iter_all_prematch_events_walks_meta_total():
+    """``iter_all_prematch_events`` should derive the total page count
+    from ``meta.total`` on the first call and fan the remaining pages
+    out concurrently."""
+    import httpx
+    import respx
+
+    def _page(req: httpx.Request) -> httpx.Response:
+        page = int(req.url.params.get("page", "1"))
+        # 250 total events with limit=100 → 3 pages.
+        events = [
+            {"match_id": f"M{(page - 1) * 100 + i}",
+             "competition_id": "C", "sport_id": "14"}
+            for i in range(
+                100 if page < 3 else 50
+            )
+        ]
+        return httpx.Response(
+            200,
+            json={"data": events, "meta": {"total": 250, "page": page}},
+        )
+
+    base = "https://api.betika.com"
+    with respx.mock(base_url=base) as mock:
+        route = mock.get("/v1/uo/matches").mock(side_effect=_page)
+        async with Betika(country="ke") as client:
+            stubs = []
+            async for stub in client.iter_all_prematch_events():
+                stubs.append(stub)
+
+    assert len(stubs) == 250
+    assert all(s.event_id.startswith("M") for s in stubs)
+    assert all(s.league_id == "C" for s in stubs)
+    assert all(s.sport_id == "14" for s in stubs)
+    # Exactly 3 page requests (page=1, 2, 3) — no off-by-one.
+    pages_seen = sorted(int(c.request.url.params.get("page", "0"))
+                        for c in route.calls)
+    assert pages_seen == [1, 2, 3]
+
+
+@pytest.mark.asyncio
+async def test_betika_iter_all_prematch_events_empty():
+    import respx
+    base = "https://api.betika.com"
+    with respx.mock(base_url=base) as mock:
+        mock.get("/v1/uo/matches").respond(
+            json={"data": [], "meta": {"total": 0}}
+        )
+        async with Betika(country="ke") as client:
+            stubs = [s async for s in client.iter_all_prematch_events()]
+    assert stubs == []

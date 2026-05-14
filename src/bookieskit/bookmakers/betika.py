@@ -11,9 +11,11 @@ rate limiting under bursty traffic.
 """
 
 import asyncio
-from typing import Any
+import math
+from typing import Any, AsyncIterator
 
 from bookieskit.base import BaseBookmaker
+from bookieskit.bookmakers.types import PrematchEventStub
 from bookieskit.config import BETIKA_MAX_CONCURRENT, BETIKA_REQUEST_DELAY
 
 # Universal market sub_type_ids — 1X2, Double Chance, Over/Under, BTTS.
@@ -262,3 +264,76 @@ class Betika(BaseBookmaker):
         return parse_markets(
             raw, platform=self.PLATFORM_KEY, registry=registry
         )
+
+    async def iter_all_prematch_events(
+        self,
+        sport_id: int = 14,
+        limit: int = 100,
+    ) -> AsyncIterator[PrematchEventStub]:
+        """Yield every prematch event in Betika's catalogue.
+
+        Uses ``meta.total`` from the first page response to compute the
+        total page count and fans the remaining pages out concurrently —
+        bounded by the client's ``MAX_CONCURRENT`` semaphore.
+
+        Args:
+            sport_id: Betika sport id (default ``14`` = Football).
+            limit: Page size (default 100, the API maximum).
+
+        Yields:
+            :class:`PrematchEventStub` for each match. ``event_id`` is
+            Betika's internal ``match_id``; ``league_id`` is
+            ``competition_id``; ``sport_id`` mirrors the requested sport.
+        """
+        first = await self.get_matches(
+            sport_id=sport_id, page=1, limit=limit
+        )
+        for stub in _stubs_from_page(first, sport_id):
+            yield stub
+
+        meta = first.get("meta") if isinstance(first, dict) else None
+        total = meta.get("total") if isinstance(meta, dict) else 0
+        if not isinstance(total, int) or total <= limit:
+            return
+        total_pages = math.ceil(total / limit)
+        remaining = range(2, total_pages + 1)
+
+        async def _fetch(page: int) -> dict[str, Any]:
+            try:
+                return await self.get_matches(
+                    sport_id=sport_id, page=page, limit=limit
+                )
+            except Exception:
+                return {"data": [], "meta": {}}
+
+        results = await asyncio.gather(*(_fetch(p) for p in remaining))
+        for r in results:
+            for stub in _stubs_from_page(r, sport_id):
+                yield stub
+
+
+def _stubs_from_page(
+    response: Any, sport_id: int
+) -> list[PrematchEventStub]:
+    """Extract :class:`PrematchEventStub`s from one ``/v1/uo/matches`` page."""
+    if not isinstance(response, dict):
+        return []
+    data = response.get("data") or []
+    if not isinstance(data, list):
+        return []
+    stubs: list[PrematchEventStub] = []
+    for match in data:
+        if not isinstance(match, dict):
+            continue
+        mid = match.get("match_id")
+        if mid is None:
+            continue
+        league = match.get("competition_id")
+        stubs.append(
+            PrematchEventStub(
+                event_id=str(mid),
+                league_id=str(league) if league is not None else "",
+                sport_id=str(match.get("sport_id") or sport_id),
+            )
+        )
+    return stubs
