@@ -1,5 +1,6 @@
 """Market parser — transforms raw event responses into NormalizedMarkets."""
 
+import re
 from typing import Literal
 
 from bookieskit.bookmakers._betpawa_obfuscation import decode_betpawa_probability
@@ -58,6 +59,7 @@ def parse_markets(
         "betway": _parse_betway,
         "msport": _parse_msport,
         "sportpesa": _parse_sportpesa,
+        "betika": _parse_betika,
     }
     parser = parsers.get(platform)
     if parser is None:
@@ -1051,5 +1053,185 @@ def _resolve_outcome_sportpesa(
     """
     for om in mapping.outcomes.values():
         if om.sportpesa and om.sportpesa == short_name:
+            return om.canonical_name
+    return None
+
+
+# ---- Betika ---------------------------------------------------------------
+
+_BETIKA_NUMERIC_RE = re.compile(r"-?\d+(?:\.\d+)?")
+
+
+def _betika_first_match(response) -> dict | None:
+    """Return the first match dict from a Betika response.
+
+    Accepts the documented ``{"data": [<match>], "meta": {...}}`` shape
+    plus a bare-list shape for symmetry with the event_info helper.
+    """
+    if isinstance(response, list):
+        data = response
+    elif isinstance(response, dict):
+        data = response.get("data") or []
+    else:
+        return None
+    if not isinstance(data, list) or not data:
+        return None
+    m = data[0]
+    return m if isinstance(m, dict) else None
+
+
+def _parse_betika(
+    response, registry: MarketRegistry, _mode: ProbabilityMode = "off"
+) -> list[NormalizedMarket]:
+    """Parse a Betika ``/v1/uo/matches`` payload.
+
+    Response shape: ``{"data": [<match>], "meta": {...}}`` where
+    ``<match>.odds`` is a list of market groups. Each group has
+    ``sub_type_id`` (canonical market key), ``name``, and an ``odds`` list
+    of selections (each with ``display``, ``odd_value``,
+    ``special_bet_value``).
+
+    Betika does not expose ``probability`` on selections — ``_mode`` is
+    accepted for symmetry but both Outcome probability fields stay None.
+    """
+    m = _betika_first_match(response)
+    if m is None:
+        return []
+    groups = m.get("odds") or []
+    if not isinstance(groups, list):
+        return []
+
+    results: list[NormalizedMarket] = []
+    for grp in groups:
+        if not isinstance(grp, dict):
+            continue
+        sub_type_id = str(grp.get("sub_type_id", ""))
+        mapping = registry.get_by_platform_id("betika", sub_type_id)
+        if mapping is None:
+            continue
+        selections = grp.get("odds") or []
+        if not isinstance(selections, list):
+            continue
+        if mapping.parameterized:
+            results.append(_parse_betika_parameterized(selections, mapping))
+        else:
+            results.append(_parse_betika_simple(selections, mapping))
+    return results
+
+
+def _parse_betika_simple(
+    selections: list, mapping: MarketMapping
+) -> NormalizedMarket:
+    """Parse a simple Betika market (1X2, BTTS, DC)."""
+    outcomes: list[Outcome] = []
+    for sel in selections:
+        if not isinstance(sel, dict):
+            continue
+        display = str(sel.get("display", ""))
+        try:
+            odds = float(sel.get("odd_value", 0))
+        except (TypeError, ValueError):
+            continue
+        canonical = _resolve_outcome_betika(display, mapping)
+        if canonical:
+            outcomes.append(
+                Outcome(
+                    canonical_name=canonical,
+                    odds=odds,
+                    platform_name=display,
+                )
+            )
+    return NormalizedMarket(
+        canonical_id=mapping.canonical_id,
+        name=mapping.name,
+        outcomes=outcomes,
+        lines=None,
+    )
+
+
+def _parse_betika_parameterized(
+    selections: list, mapping: MarketMapping
+) -> NormalizedMarket:
+    """Parse a parameterized Betika market (Over/Under).
+
+    All selections live in one market group; the line is read from
+    ``special_bet_value`` when present and otherwise extracted from the
+    ``display`` label (e.g. ``"OVER 2.5"`` → 2.5).
+    """
+    lines: dict[float, list[Outcome]] = {}
+    for sel in selections:
+        if not isinstance(sel, dict):
+            continue
+        line = _parse_betika_line(sel)
+        if line is None:
+            continue
+        display = str(sel.get("display", ""))
+        try:
+            odds = float(sel.get("odd_value", 0))
+        except (TypeError, ValueError):
+            continue
+        canonical = _resolve_outcome_betika(display, mapping)
+        if canonical is None:
+            continue
+        lines.setdefault(line, []).append(
+            Outcome(
+                canonical_name=canonical,
+                odds=odds,
+                platform_name=display,
+            )
+        )
+    return NormalizedMarket(
+        canonical_id=mapping.canonical_id,
+        name=mapping.name,
+        outcomes=[],
+        lines=lines,
+    )
+
+
+def _parse_betika_line(sel: dict) -> float | None:
+    """Extract the line value for a parameterized Betika selection.
+
+    Prefers ``special_bet_value`` (an explicit numeric string). Falls back
+    to the first number found in ``display`` (e.g. ``"OVER 2.5"`` → 2.5).
+    """
+    sbv = sel.get("special_bet_value")
+    if isinstance(sbv, (int, float)):
+        return float(sbv)
+    if isinstance(sbv, str) and sbv:
+        try:
+            return float(sbv)
+        except ValueError:
+            pass
+    display = sel.get("display")
+    if isinstance(display, str):
+        m = _BETIKA_NUMERIC_RE.search(display)
+        if m:
+            try:
+                return float(m.group(0))
+            except ValueError:
+                return None
+    return None
+
+
+def _resolve_outcome_betika(
+    display: str, mapping: MarketMapping
+) -> str | None:
+    """Resolve a Betika selection ``display`` label to a canonical name.
+
+    Case-insensitive. Accepts both exact tokens (``"1"``, ``"X"``,
+    ``"Yes"``, ``"1/X"``) and labels with an embedded line (``"OVER 2.5"``
+    — first whitespace-delimited token compared).
+    """
+    if not isinstance(display, str) or not display:
+        return None
+    target = display.strip().lower()
+    if not target:
+        return None
+    first = target.split()[0]
+    for om in mapping.outcomes.values():
+        if not om.betika:
+            continue
+        ref = om.betika.lower()
+        if target == ref or first == ref:
             return om.canonical_name
     return None
