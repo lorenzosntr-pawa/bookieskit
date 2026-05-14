@@ -289,3 +289,20 @@ async def test_betika_iter_all_prematch_events_empty():
         async with Betika(country="ke") as client:
             stubs = [s async for s in client.iter_all_prematch_events()]
     assert stubs == []
+
+
+# ---- convenience checks ---------------------------------------------------
+
+
+def test_betika_exported_from_top_level():
+    from bookieskit import Betika as BK
+    from bookieskit.bookmakers.betika import Betika as BK2
+    assert BK is BK2
+
+
+def test_betika_listed_in_supported_count():
+    """Sanity check: the package description should advertise 7 bookmakers."""
+    from importlib.metadata import metadata
+    desc = (metadata("bookieskit").get("Summary") or "").lower()
+    assert "betika" in desc
+    assert "7 african" in desc
