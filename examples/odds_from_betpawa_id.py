@@ -42,6 +42,7 @@ from bookieskit import (
     BetPawa,
     Betway,
     MSport,
+    Betika,  # noqa: F401
     SportPesa,  # noqa: F401
     SportyBet,
 )
@@ -255,6 +256,7 @@ async def main(betpawa_id: str, live: bool, csv_path: str) -> None:
         "Betway": bw_res,
         "Bet9ja": b9_res,
         "SportPesa": {"markets": []},
+        "Betika": {"markets": []},
     }
 
     # Quick console summary so the user can see at a glance whether each
@@ -271,7 +273,7 @@ async def main(betpawa_id: str, live: bool, csv_path: str) -> None:
 if __name__ == "__main__":
     # `argparse` keeps the CLI surface tiny but discoverable.
     parser = argparse.ArgumentParser(
-        description="Compare odds across 6 bookmakers, starting from a BetPawa event id."  # noqa: E501
+        description="Compare odds across 7 bookmakers, starting from a BetPawa event id."  # noqa: E501
     )
     parser.add_argument("betpawa_id", help="BetPawa internal event id (e.g. 32299257)")
     parser.add_argument(

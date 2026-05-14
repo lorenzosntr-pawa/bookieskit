@@ -39,6 +39,7 @@ from collections import defaultdict
 # into the fan-out below.
 from bookieskit import (
     Bet9ja,
+    Betika,  # noqa: F401
     BetPawa,
     Betway,
     MSport,
@@ -272,9 +273,14 @@ async def main(competition_id: str, live: bool, csv_path: str) -> None:
     mode = "LIVE" if live else "PREMATCH"
     print(f"BetPawa competition: {competition_id}  mode: {mode}")
 
-    # SportPesa is included as a placeholder column (always empty markets).
-    # No SR-id reverse search yet; the API also needs warmed Akamai cookies.
-    bookies_order = ["BetPawa", "SportyBet", "MSport", "Betway", "Bet9ja", "SportPesa"]
+    # SportPesa and Betika are included as placeholder columns (always
+    # empty markets). Neither supports SR-id reverse search yet; SportPesa
+    # also needs warmed Akamai cookies. Both columns are kept so the CSV
+    # schema is forward-compatible with future wiring.
+    bookies_order = [
+        "BetPawa", "SportyBet", "MSport", "Betway", "Bet9ja",
+        "SportPesa", "Betika",
+    ]
     all_rows: list[dict] = []
 
     async with BetPawa(country="ng") as bp, Bet9ja(country="ng") as b9_lookup:
@@ -305,7 +311,7 @@ async def main(competition_id: str, live: bool, csv_path: str) -> None:
                     per_bookmaker = {
                         "BetPawa": bp_data["markets"],
                         "SportyBet": [], "MSport": [], "Betway": [], "Bet9ja": [],
-                        "SportPesa": [],
+                        "SportPesa": [], "Betika": [],
                     }
                 else:
                     sr_prefixed = f"sr:match:{sr_numeric}"
@@ -320,7 +326,7 @@ async def main(competition_id: str, live: bool, csv_path: str) -> None:
                     per_bookmaker = {
                         "BetPawa": bp_data["markets"],
                         "SportyBet": sb, "MSport": ms, "Betway": bw, "Bet9ja": b9,
-                        "SportPesa": [],
+                        "SportPesa": [], "Betika": [],
                     }
 
                     # Per-event progress line: lets you see at a glance
@@ -330,6 +336,7 @@ async def main(competition_id: str, live: bool, csv_path: str) -> None:
                     short = {
                         "BetPawa": "BP", "SportyBet": "SB", "MSport": "MS",
                         "Betway": "BW", "Bet9ja": "B9", "SportPesa": "SP",
+                        "Betika": "BK",
                     }
                     counts = " ".join(
                         f"{short[name]}={len(per_bookmaker[name])}"

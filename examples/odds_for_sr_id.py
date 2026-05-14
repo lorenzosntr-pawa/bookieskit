@@ -136,6 +136,13 @@ async def odds_sportpesa(sr_numeric: str, sr_prefixed: str, *, live: bool) -> di
     }
 
 
+async def odds_betika(sr_numeric: str, sr_prefixed: str, *, live: bool) -> dict:
+    return {
+        "name": "Betika",
+        "status": "skipped (no SR-ID reverse search yet — pass a Betika internal match_id)",  # noqa: E501
+    }
+
+
 def _print(r: dict) -> None:
     name = r["name"]
     status = r.get("status", "?")
@@ -172,6 +179,7 @@ async def main(sr_input: str, live: bool):
         odds_bet9ja(sr_numeric, sr_prefixed, live=live),
         odds_betpawa(sr_numeric, sr_prefixed, live=live),
         odds_sportpesa(sr_numeric, sr_prefixed, live=live),
+        odds_betika(sr_numeric, sr_prefixed, live=live),
     )
     for r in results:
         _print(r)

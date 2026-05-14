@@ -16,7 +16,9 @@ external references; the script now iterates 6 bookmakers.
 import asyncio
 import os
 
-from bookieskit import Bet9ja, BetPawa, Betway, MSport, SportPesa, SportyBet
+from bookieskit import (
+    Bet9ja, Betika, BetPawa, Betway, MSport, SportPesa, SportyBet,
+)
 
 
 async def count_betpawa() -> dict:
@@ -343,11 +345,60 @@ async def count_sportpesa() -> dict:
     return out
 
 
+async def count_betika() -> dict:
+    """Betika totals via iter_all_prematch_events plus get_live_matches.
+
+    Betika is country-agnostic at the API layer; pick any supported code.
+    No warmed cookies are needed — the API is open.
+    """
+    out = {"name": "Betika", "country": "ke"}
+    async with Betika(country="ke") as bk:
+        try:
+            sports = (await bk.get_sports()).get("data", []) or []
+        except Exception:
+            sports = []
+        out["sports_total"] = len(sports)
+
+        prematch_event_ids: set = set()
+        league_ids: set = set()
+        async for ev in bk.iter_all_prematch_events():
+            prematch_event_ids.add(ev.event_id)
+            if ev.league_id:
+                league_ids.add(ev.league_id)
+        out["tournaments_prematch"] = len(league_ids)
+        out["events_prematch"] = len(prematch_event_ids)
+
+        live_event_ids: set = set()
+        live_competition_ids: set = set()
+        page = 1
+        while True:
+            try:
+                resp = await bk.get_live_matches(page=page, limit=100)
+            except Exception:
+                break
+            data = (resp.get("data") or []) if isinstance(resp, dict) else []
+            for ev in data:
+                mid = ev.get("match_id")
+                if mid is not None:
+                    live_event_ids.add(str(mid))
+                cid = ev.get("competition_id")
+                if cid is not None:
+                    live_competition_ids.add(str(cid))
+            meta = resp.get("meta") if isinstance(resp, dict) else None
+            total = meta.get("total") if isinstance(meta, dict) else 0
+            if not isinstance(total, int) or page * 100 >= total:
+                break
+            page += 1
+        out["events_live"] = len(live_event_ids)
+        out["tournaments_live"] = len(live_competition_ids)
+    return out
+
+
 async def main():
     results = []
     for fn in (
         count_betpawa, count_sportybet, count_bet9ja,
-        count_betway, count_msport, count_sportpesa,
+        count_betway, count_msport, count_sportpesa, count_betika,
     ):
         try:
             r = await fn()
