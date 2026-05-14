@@ -12,6 +12,8 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 from typing import Callable, Literal
 
+from bookieskit.bookmakers._betika_shape import betika_first_match
+
 Mode = Literal["prematch", "live"]
 
 
@@ -359,39 +361,33 @@ def _live_info_sportpesa(response, _mode: Mode | None) -> LiveInfo:
 
 # ---- Betika ---------------------------------------------------------------
 
-def _betika_first_match(response) -> dict | None:
-    """Betika's match endpoints return {"data": [<match>], "meta": {...}}.
-
-    Tolerates bare-list shape (callers passing the inner list directly).
-    """
-    if isinstance(response, list):
-        data = response
-    elif isinstance(response, dict):
-        data = response.get("data") or []
-    else:
-        return None
-    if not isinstance(data, list) or not data:
-        return None
-    m = data[0]
-    return m if isinstance(m, dict) else None
+# Shape helper (`betika_first_match`) lives in
+# bookieskit.bookmakers._betika_shape so the markets parser and SR-id
+# extractor can share it. M1 fix below: kickoff parsing must preserve a
+# tz-aware ISO offset rather than overwriting it with UTC.
 
 
 def _kickoff_betika(response, _mode: Mode | None) -> datetime | None:
-    m = _betika_first_match(response)
+    m = betika_first_match(response)
     if m is None:
         return None
     s = m.get("start_time")
     if not isinstance(s, str):
         return None
-    # Betika format: "YYYY-MM-DD HH:MM:SS" — naive ISO, UTC.
     try:
-        return datetime.fromisoformat(s).replace(tzinfo=timezone.utc)
+        parsed = datetime.fromisoformat(s)
     except ValueError:
         return None
+    # Betika serves naive "YYYY-MM-DD HH:MM:SS" (UTC) today, but if the
+    # API ever switches to tz-aware ISO ("...+03:00"), respect the offset
+    # instead of overwriting it.
+    if parsed.tzinfo is None:
+        return parsed.replace(tzinfo=timezone.utc)
+    return parsed
 
 
 def _participants_betika(response, _mode: Mode | None) -> Participants:
-    m = _betika_first_match(response)
+    m = betika_first_match(response)
     if m is None:
         return _EMPTY_PARTICIPANTS
     home = m.get("home_team") or None
@@ -402,7 +398,7 @@ def _participants_betika(response, _mode: Mode | None) -> Participants:
 def _live_info_betika(response, mode: Mode | None) -> LiveInfo:
     if mode == "prematch":
         return _EMPTY_LIVE_INFO
-    m = _betika_first_match(response)
+    m = betika_first_match(response)
     if m is None:
         return _EMPTY_LIVE_INFO
     minute = None
