@@ -1,5 +1,7 @@
 """SportRadar ID extraction from platform-specific responses."""
 
+from bookieskit.bookmakers._betika_shape import betika_first_match
+
 
 def extract_sportradar_id(
     response: dict, platform: str
@@ -8,7 +10,8 @@ def extract_sportradar_id(
 
     Args:
         response: Raw JSON from get_event_detail()
-        platform: "betpawa", "sportybet", "bet9ja", "betway", or "msport"
+        platform: One of "betpawa", "sportybet", "bet9ja", "betway",
+            "msport", "sportpesa", "betika". Unknown values return None.
 
     Returns:
         SportRadar ID as numeric string (no prefix), or None if not found.
@@ -126,16 +129,8 @@ def _extract_betika(response) -> str | None:
     prematch (e.g. ``"70784812"``), integer in live (e.g. ``71463790``).
     Both are coerced via ``str()`` before returning.
     """
-    if isinstance(response, dict):
-        data = response.get("data") or []
-    elif isinstance(response, list):
-        data = response
-    else:
-        return None
-    if not isinstance(data, list) or not data:
-        return None
-    match = data[0]
-    if not isinstance(match, dict):
+    match = betika_first_match(response)
+    if match is None:
         return None
     sr = match.get("parent_match_id")
     if sr in (None, 0, "0", ""):

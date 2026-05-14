@@ -3,6 +3,7 @@
 import re
 from typing import Literal
 
+from bookieskit.bookmakers._betika_shape import betika_first_match
 from bookieskit.bookmakers._betpawa_obfuscation import decode_betpawa_probability
 from bookieskit.markets.registry import MarketRegistry
 from bookieskit.markets.types import (
@@ -35,14 +36,16 @@ def parse_markets(
 
     Args:
         response: Raw JSON from get_event_detail()
-        platform: "betpawa", "sportybet", "bet9ja", "betway", or "msport"
+        platform: One of "betpawa", "sportybet", "bet9ja", "betway",
+            "msport", "sportpesa", "betika". Unknown values return [].
         registry: Market registry to use (default: built-in 6 markets)
         probability: How much probability data to extract per outcome.
             "off" (default) — no probability parsing; both fields None.
             "true" — populate true_probability where the platform supports it.
             "with_void" — populate true_probability AND void_probability.
-            Bet9ja and Betway don't expose probability — both fields stay
-            None for them regardless of mode.
+            Bet9ja, Betway, SportPesa, and Betika don't expose probability
+            on their selections — both fields stay None for them regardless
+            of mode.
 
     Returns:
         List of NormalizedMarket for all recognized markets.
@@ -1062,24 +1065,6 @@ def _resolve_outcome_sportpesa(
 _BETIKA_NUMERIC_RE = re.compile(r"-?\d+(?:\.\d+)?")
 
 
-def _betika_first_match(response) -> dict | None:
-    """Return the first match dict from a Betika response.
-
-    Accepts the documented ``{"data": [<match>], "meta": {...}}`` shape
-    plus a bare-list shape for symmetry with the event_info helper.
-    """
-    if isinstance(response, list):
-        data = response
-    elif isinstance(response, dict):
-        data = response.get("data") or []
-    else:
-        return None
-    if not isinstance(data, list) or not data:
-        return None
-    m = data[0]
-    return m if isinstance(m, dict) else None
-
-
 def _parse_betika(
     response, registry: MarketRegistry, _mode: ProbabilityMode = "off"
 ) -> list[NormalizedMarket]:
@@ -1094,7 +1079,7 @@ def _parse_betika(
     Betika does not expose ``probability`` on selections — ``_mode`` is
     accepted for symmetry but both Outcome probability fields stay None.
     """
-    m = _betika_first_match(response)
+    m = betika_first_match(response)
     if m is None:
         return []
     groups = m.get("odds") or []
@@ -1191,8 +1176,10 @@ def _parse_betika_parameterized(
 def _parse_betika_line(sel: dict) -> float | None:
     """Extract the line value for a parameterized Betika selection.
 
-    Prefers ``special_bet_value`` (an explicit numeric string). Falls back
-    to the first number found in ``display`` (e.g. ``"OVER 2.5"`` → 2.5).
+    ``special_bet_value`` shape varies: bare numeric string (``"2.5"``),
+    key=value (``"total=2.5"``), or empty. Falls back to the first number
+    found in ``display`` (e.g. ``"OVER 2.5"`` → 2.5) when no numeric
+    candidate is present in ``special_bet_value``.
     """
     sbv = sel.get("special_bet_value")
     if isinstance(sbv, (int, float)):
@@ -1201,7 +1188,12 @@ def _parse_betika_line(sel: dict) -> float | None:
         try:
             return float(sbv)
         except ValueError:
-            pass
+            m = _BETIKA_NUMERIC_RE.search(sbv)
+            if m:
+                try:
+                    return float(m.group(0))
+                except ValueError:
+                    pass
     display = sel.get("display")
     if isinstance(display, str):
         m = _BETIKA_NUMERIC_RE.search(display)
