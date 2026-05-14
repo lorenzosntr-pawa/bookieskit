@@ -171,7 +171,15 @@ class BaseBookmaker:
             RateLimitError: Platform returned 429
             RequestError: Request failed after all retries
         """
-        url = f"{self.base_url}{path}"
+        # `path` may be absolute when a subclass routes to a different host
+        # (e.g. Betika._live_request -> https://live.betika.com/...). httpx
+        # honours absolute URLs even when a base_url is bound on the client;
+        # the URL we record on errors must reflect that or operator logs
+        # will see "https://base.example.comhttps://other.example.com/...".
+        if path.startswith(("http://", "https://")):
+            url = path
+        else:
+            url = f"{self.base_url}{path}"
         last_error: Exception | None = None
 
         for attempt in range(self._max_retries):

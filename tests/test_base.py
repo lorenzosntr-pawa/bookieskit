@@ -102,6 +102,35 @@ async def test_timeout_raises_timeout_error():
 
 @pytest.mark.asyncio
 @respx.mock
+async def test_absolute_path_reports_absolute_url_in_request_error():
+    """When a subclass routes to a different host via an absolute URL,
+    the URL recorded on a raised RequestError must be the absolute one,
+    not ``base_url + absolute_url`` concatenated together."""
+    respx.get("https://other.example.com/api/test").respond(500)
+    async with MockBookmaker(
+        country="ng", max_retries=1, backoff_factor=0.01,
+    ) as client:
+        with pytest.raises(RequestError) as exc_info:
+            await client._request("GET", "https://other.example.com/api/test")
+    assert exc_info.value.url == "https://other.example.com/api/test"
+
+
+@pytest.mark.asyncio
+@respx.mock
+async def test_absolute_path_reports_absolute_url_in_rate_limit_error():
+    respx.get("https://other.example.com/api/test").respond(
+        429, headers={"Retry-After": "1"}
+    )
+    async with MockBookmaker(
+        country="ng", max_retries=1, backoff_factor=0.01,
+    ) as client:
+        with pytest.raises(RateLimitError) as exc_info:
+            await client._request("GET", "https://other.example.com/api/test")
+    assert exc_info.value.url == "https://other.example.com/api/test"
+
+
+@pytest.mark.asyncio
+@respx.mock
 async def test_custom_config_overrides_defaults():
     respx.get("https://mock.example.com/api/test").respond(json={"ok": True})
     async with MockBookmaker(
