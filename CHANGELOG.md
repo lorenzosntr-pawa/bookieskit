@@ -2,6 +2,33 @@
 
 All notable changes to this project are documented in this file. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.7.0] — 2026-05-14
+
+### Added
+
+- **Betika client** (`bookieskit.Betika`) — async HTTP client for the Betika sportsbook API. Country-agnostic at the API layer; supports `ke`, `ug`, `tz`, `mw`, `gh` (all map to `api.betika.com` for prematch and `live.betika.com` for in-play). Methods: `get_sports`, `get_navigation` (alias), `get_matches`, `get_live_matches`, `get_event_detail`, `get_event_markets` (4-call aggregation across `sub_type_id ∈ {1, 10, 18, 29}`), `get_markets`, `iter_all_prematch_events` (driven by `meta.total`), plus inherited `get_sportradar_id` / `set_cookie`. API is open — no Cloudflare gate, no warmed cookies needed, `MAX_CONCURRENT=50` / `REQUEST_DELAY=0.0`.
+- **Betika field on `OutcomeMapping`** (`betika: str`) **and `betika_id: str | None` on `MarketMapping`.** The four universal builtin markets (1X2, Over/Under, BTTS, Double Chance) wire to Betika `sub_type_id` `1` / `18` / `29` / `10` respectively, with outcome display labels (`"1"`/`"X"`/`"2"`, `"Over"`/`"Under"`, `"Yes"`/`"No"`, `"1/X"`/`"X/2"`/`"1/2"`).
+- **Betika parser branch** in `bookieskit.markets.parser`. Case-insensitive outcome resolution (Betika's BTTS feed has been observed returning both `"YES"`/`"NO"` and `"Yes"`/`"No"`). Over/Under line value parsed from `special_bet_value` when present, falling back to the embedded number in the display label (`"OVER 2.5"` → 2.5).
+- **Betika SR-id extractor** at `data[0].parent_match_id`. Tolerates both string (prematch) and integer (live) types via `str()` coercion. Cross-verified against SportyBet: `parent_match_id="70784812"` resolves to the same Man City vs Crystal Palace match.
+- **`MatchedEvent.betika` field** on `bookieskit.matching.MatchedEvent`. The cross-bookmaker `match_events(*platforms)` helper now accepts a `("betika", [...])` tuple alongside the other six platforms; matched events populate `.betika` like any other field.
+- **Betika event-info extractors** for kickoff (`data[0].start_time`, naive ISO → UTC), participants (`data[0].home_team` / `away_team`), and live info (`data[0].match_time`, `event_status`, `current_score`).
+- **Top-level `Betika` export** (`from bookieskit import Betika`). Version bumped to `0.7.0`.
+
+### Changed
+
+- **Package description and README tagline** now advertise 7 bookmakers (was 6). Supported tables and built-in markets matrices include a Betika column.
+- **Examples (`count_5bookies.py`, `odds_for_sr_id.py`, `odds_from_betpawa_id.py`, `odds_for_betpawa_competition.py`) fanned to include Betika.** `count_5bookies.py` runs Betika's full prematch enumeration plus per-page live walks. The CSV-producing scripts add a `Betika` column; like SportPesa it is currently a placeholder (no SR-id reverse search yet — pass a Betika `match_id` directly to `get_event_detail` if you need its odds).
+
+### Documentation
+
+- `docs/betika.md` (new) — methods table, quirks (open API, country-agnostic, two hosts, one-market-per-call, case-insensitive outcome resolution, line embedded in display label), and recipes.
+- `docs/markets.md`, `docs/matching.md`, `docs/examples.md` extended with Betika rows / mentions.
+- `tests/fixtures/event_info/betika/RESOLVED.md` — decision record for captured fixtures: which JSON paths hold the SR id, kickoff, participants, live info, and the four universal `sub_type_id` mappings.
+
+### Migration notes (0.6.0 → 0.7.0)
+
+Purely additive — no breaking changes. Existing callers do not need to update unless they explicitly want to include Betika in cross-bookmaker fan-outs (in which case add a `("betika", [...])` tuple to `match_events` calls, or `Betika` to client lists).
+
 ## [0.6.0] — 2026-05-13
 
 ### Added
