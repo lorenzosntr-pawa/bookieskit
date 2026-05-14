@@ -16,9 +16,18 @@
 
 Each country pairs a subdomain TLD with a brand header — both move together in `DOMAINS` and `_BRAND_MAP` in `bookmakers/betpawa.py`. The three additions in 0.8.0 (`rw`, `cm`, `sl`) were verified against the live sportsbook API. Other African TLDs (`bf`, `ci`, `sn`, `cd`, `cg`, `ss`, `ml`, `bi`, `et`) either don't resolve or return 4xx and are not currently supported.
 
-## SportRadar id
+## Provider ids (SportRadar + BetGenius)
 
-BetPawa hides the SR id inside `widgets[]` on the event-detail response — look for the entry with `type == "SPORTRADAR"`, then read `id` (preferred) or `value` (legacy). The library's `extract_sportradar_id(response, platform="betpawa")` does this and strips the `sr:match:` prefix. There is **no** SR-id-to-BetPawa-id reverse search yet — start workflows from a BetPawa internal id.
+BetPawa publishes provider ids as parallel entries in `widgets[]`:
+
+| `widget.type` | Field | Meaning |
+|---|---|---|
+| `SPORTRADAR` | `.id` | Numeric SportRadar match id (strips `sr:match:` if present). Multiple SPORTRADAR rows may appear with `retention=PREMATCH` / `INPLAY` — they all carry the same id. |
+| `GENIUSSPORTS` | `.id` | Numeric Genius Sports match id. Used to cross-match against SportyBet BetGenius events and Bet9ja-live Genius events. |
+
+`extract_event_ids(response, platform="betpawa")` returns both. `extract_sportradar_id(response, platform="betpawa")` is kept as a back-compat shorthand for the SR id only.
+
+There is **no** reverse search (provider id → BetPawa internal id) yet — start workflows from a BetPawa internal id, fetch the event detail, then extract both provider ids.
 
 ## Methods
 

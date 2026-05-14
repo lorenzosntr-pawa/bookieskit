@@ -14,9 +14,20 @@ All countries share the same `https://www.sportybet.com` base — the country se
 
 SportyBet publicly operates in additional markets (Tanzania, Uganda, Zambia, South Africa, Côte d'Ivoire, etc.). A v0.8.0 enumeration attempt was blocked by anti-bot / TLS-cert issues when probing from outside an African residential IP, so those entries are **not** added to the `DOMAINS` dict — adding them speculatively would expose `UnsupportedCountryError`-free code paths that fail at the first HTTP call. Open an issue or PR with a successful probe transcript to land another country.
 
-## SportRadar id
+## Provider ids (SportRadar + BetGenius)
 
-SportyBet's `eventId` IS `sr:match:<numeric>` (the SportRadar match id with prefix). The library's `extract_sportradar_id(response, platform="sportybet")` reads `data.eventId` and strips the prefix. SR-id-by-id reverse search needs no extra step — pass `event_id="sr:match:<numeric>"` directly to `get_event_detail`.
+SportyBet exposes provider info two ways. The primary (typed) source on event-detail responses:
+
+| Path | Meaning |
+|---|---|
+| `data.eventSource.preMatchSource.sourceType` ∈ `{BET_RADAR, BET_GENIUS}` | Which provider routed the prematch markets |
+| `data.eventSource.preMatchSource.sourceId` | The provider's raw id (numeric string) |
+| `data.eventSource.liveSource.{sourceType, sourceId}` | Same shape, may differ from the prematch source |
+| `data.bgEvent` (bool) | Quick flag — `True` when this is a BetGenius event |
+
+Fallback / cross-check: `data.eventId` carries `sr:match:<sr_id>` for SR events and `sr:match:11111111<genius_id>` for BetGenius events (eight leading `1`s mark the synthetic encoding). When both signals are present and disagree, `extract_event_ids` logs a `WARNING` via the `bookieskit.matching.extractor` logger and prefers `eventSource`.
+
+For direct lookups by SR id, pass `event_id="sr:match:<numeric>"` to `get_event_detail`. For Genius events, you can also pass the synthetic `sr:match:11111111<genius_id>` form.
 
 ## Methods
 

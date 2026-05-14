@@ -24,6 +24,10 @@ Bet9ja exposes the SR id as `EXTID` on every event in BOTH prematch and live eve
 
 Once you have the internal id, use `get_event_detail` (prematch) or `get_live_event_detail` (live) to fetch markets.
 
+## BetGenius id (live only, deferred)
+
+Bet9ja's **live** event-detail response includes `D.A.PRV` (a provider code; `60` is the captured value for a SportRadar event) and `D.A.BRMATCHID` ("BetRadar Match ID"). Other PRV values likely indicate BetGenius events but the binding fixture for a Genius case isn't captured yet, so `extract_event_ids(response, platform="bet9ja").genius` always returns `None` today. Bet9ja **prematch** events do not appear to ship Genius ids at all. Open an issue with a captured Bet9ja-live Genius event payload to land the wiring.
+
 ## Methods
 
 | Method | HTTP | Path | When to use |

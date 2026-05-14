@@ -62,7 +62,7 @@ See `examples/odds_for_betpawa_competition.py`.
 
 - **Clients** — `bookieskit/bookmakers/`. One subclass of `BaseBookmaker` per platform; methods like `get_sports`, `get_events`, `get_event_detail` return raw JSON. The base class provides retry, rate-limiting, async context management, plus the convenience methods `get_markets()` and `get_sportradar_id()`.
 - **Markets** — `bookieskit/markets/`. A `MarketRegistry` holds `MarketMapping` entries (one per canonical market). The parser dispatches by platform key and returns `NormalizedMarket` instances. Six markets ship as builtins. See [docs/markets.md](docs/markets.md).
-- **Matching** — `bookieskit/matching/`. `extract_sportradar_id(response, platform)` pulls the SR id out of a raw event-detail response. `match_events(...)` groups events from multiple bookmakers by shared SR id. See [docs/matching.md](docs/matching.md).
+- **Matching** — `bookieskit/matching/`. Two providers: SportRadar (every bookmaker) and BetGenius / Genius Sports (BetPawa, SportyBet, Bet9ja-live). `extract_event_ids(response, platform)` returns an `EventIds(sportradar, genius)` per platform; `match_events(...)` groups events from multiple bookmakers by **any** shared provider id via union-find. See [docs/matching.md](docs/matching.md).
 
 ## Built-in markets
 

@@ -1,31 +1,55 @@
-# Matching — SportRadar id extraction and cross-bookmaker pairing
+# Matching — provider-id extraction and cross-bookmaker pairing
 
-The `bookieskit.matching` package finds the same real-world event across multiple bookmakers using SportRadar ids.
+The `bookieskit.matching` package finds the same real-world event across multiple bookmakers using **two providers**: SportRadar (universal) and BetGenius / Genius Sports (BetPawa, SportyBet, Bet9ja-live). The matcher unions events that share **any** provider id, so a BetPawa row carrying both SR and Genius widgets bridges a Betway row (SR only) with a SportyBet Genius event (Genius only).
 
-## `extract_sportradar_id(response, platform)`
+## `EventIds`
 
-Pulls the SR id out of a raw event-detail response. Returns the bare numeric id (e.g. `"69339436"`), or `None` if not found. Where each bookmaker stores the id:
+Frozen dataclass returned by `extract_event_ids`:
 
-| Platform | Field path | Notes |
+```python
+@dataclass(frozen=True)
+class EventIds:
+    sportradar: str | None = None
+    genius: str | None = None
+    def keys(self) -> tuple[str, ...]: ...  # ('sr:NNN', 'genius:MMM') in stable order
+```
+
+## `extract_event_ids(response, platform)`
+
+New unified entry point. Returns an `EventIds` with whichever provider ids the payload carries. Where each bookmaker stores each kind of id:
+
+| Platform | SR id field | Genius id field |
 |---|---|---|
-| `betpawa` | `widgets[].id` where `type == "SPORTRADAR"` | Falls back to `value` for legacy responses; strips `sr:match:`. |
-| `sportybet` | `data.eventId` | Strips `sr:match:`. |
-| `bet9ja` | `D.EXTID` | Prematch detail only. Live detail (`get_live_event_detail`) stores EXTID at `D.A.EXTID` — the extractor does **not** handle that path and returns `None` for live responses. |
-| `betway` | `sportEvent.eventId` | The id IS the SR numeric — already prefix-free. |
-| `msport` | `data.eventId` | Strips `sr:match:`. |
-| `sportpesa` | `data[0].additional_info.sportradar_id` | Best-evidence path; fixture-resolved. The extractor probes three sibling fallbacks (`betradar_id`, `sr_id`, and `data[0].external_id`) until the captured payload confirms one. Strips `sr:match:`. |
-| `betika` | `data[0].parent_match_id` | Already prefix-free. Type varies: string in prematch, int in live — coerced via `str()`. Betika's own `match_id` is a separate internal identifier (not the SR id). |
+| `betpawa` | widget `type=SPORTRADAR`, `.id` | widget `type=GENIUSSPORTS`, `.id` |
+| `sportybet` | `data.eventSource.preMatchSource.sourceId` when `sourceType=BET_RADAR`; fallback to `data.eventId` | `data.eventSource.preMatchSource.sourceId` when `sourceType=BET_GENIUS`; fallback to decoding `data.eventId == sr:match:11111111<gid>` |
+| `bet9ja` (prematch) | `D.EXTID` | — |
+| `bet9ja` (live) | `D.A.BRMATCHID` | *deferred — needs Genius-event fixture* |
+| `betway` | `sportEvent.eventId` | — |
+| `msport` | `data.eventId` | — |
+| `sportpesa` | `data[0].betradarId` | — |
+| `betika` | `data[0].parent_match_id` | — |
+
+### SportyBet's `11111111` encoding
+
+SportyBet encodes BetGenius event ids by prepending eight `1`s inside the `sr:match:` namespace — a Genius event with id `13599033` ships as `data.eventId = "sr:match:1111111113599033"`. The extractor uses `data.eventSource.preMatchSource.sourceId` as the typed primary source and treats the `11111111` prefix as a fallback / cross-check. When both signals are present and disagree, a `WARNING` is logged via `bookieskit.matching.extractor` and the structured `eventSource` value wins.
+
+## `extract_sportradar_id(response, platform)` — back-compat
+
+Equivalent to `extract_event_ids(response, platform).sportradar`. Pre-0.9.0 callers that only care about SR ids keep working without code changes; pick up Genius matching by switching to `extract_event_ids`.
 
 Unknown platforms return `None`.
 
 ## `match_events(*event_lists)`
 
-Groups events from multiple bookmakers by shared SR id. Each argument is a tuple `(platform, [event_response, ...])`. Returns a list of `MatchedEvent` records, one per SR id seen on any input platform.
+Groups events from multiple bookmakers by **any** shared provider id (SR or Genius) using a small union-find. Each argument is a tuple `(platform, [event_response, ...])`. Returns a list of `MatchedEvent` records, one per group.
+
+The union-find matters when one bookmaker bridges two others: BetPawa carries both SR (`widgets[type=SPORTRADAR]`) and Genius (`widgets[type=GENIUSSPORTS]`), so it links a Betway row that only knows the SR id to a SportyBet row that only knows the Genius id.
 
 ```python
 @dataclass
 class MatchedEvent:
-    sportradar_id: str
+    sportradar_id: str | None = None  # may be None on Genius-only matches
+    genius_id: str | None = None      # may be None on SR-only matches
     betpawa: dict | None = None
     sportybet: dict | None = None
     bet9ja: dict | None = None
@@ -67,7 +91,9 @@ async def main():
     )
 
     overlap = sum(1 for m in matched if m.betpawa and m.sportybet and m.bet9ja)
-    print(f"{len(matched)} unique SR ids, {overlap} present on all 3 bookmakers")
+    print(f"{len(matched)} unique events, {overlap} present on all 3 bookmakers")
+    genius_only = sum(1 for m in matched if m.sportradar_id is None and m.genius_id)
+    print(f"  of which {genius_only} matched only via BetGenius")
 
 asyncio.run(main())
 ```
