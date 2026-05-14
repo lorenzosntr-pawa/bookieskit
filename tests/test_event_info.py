@@ -459,3 +459,26 @@ def test_extract_kickoff_betika_malformed_returns_none():
     assert extract_kickoff({"data": []}, "betika") is None
     assert extract_kickoff([], "betika") is None
     assert extract_kickoff([{"start_time": "not-a-date"}], "betika") is None
+
+
+def test_extract_participants_betika_prematch():
+    d = _load("betika", "prematch")
+    p = extract_participants(d, "betika")
+    assert p.home == "Man City"
+    assert p.away == "Crystal Palace"
+
+
+def test_extract_participants_betika_live():
+    d = _load("betika", "live")
+    p = extract_participants(d, "betika")
+    assert p.home == "Ulinzi Stars"
+    assert p.away == "Leopards"
+
+
+def test_extract_participants_betika_malformed_returns_empty():
+    p = extract_participants({}, "betika")
+    assert p.home is None and p.away is None
+    p = extract_participants({"data": []}, "betika")
+    assert p.home is None and p.away is None
+    p = extract_participants([{"home_team": "", "away_team": ""}], "betika")
+    assert p.home is None and p.away is None

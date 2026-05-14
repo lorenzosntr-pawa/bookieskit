@@ -390,6 +390,15 @@ def _kickoff_betika(response, _mode: Mode | None) -> datetime | None:
         return None
 
 
+def _participants_betika(response, _mode: Mode | None) -> Participants:
+    m = _betika_first_match(response)
+    if m is None:
+        return _EMPTY_PARTICIPANTS
+    home = m.get("home_team") or None
+    away = m.get("away_team") or None
+    return Participants(home=home, away=away)
+
+
 # ---- Dispatch tables -------------------------------------------------------
 
 _KICKOFF_DISPATCH: dict[str, Callable[[dict, Mode | None], datetime | None]] = {
@@ -409,6 +418,7 @@ _PARTICIPANTS_DISPATCH: dict[str, Callable[[dict, Mode | None], Participants]] =
     "betway": _participants_betway,
     "msport": _participants_msport,
     "sportpesa": _participants_sportpesa,
+    "betika": _participants_betika,
 }
 
 _LIVE_INFO_DISPATCH: dict[str, Callable[[dict, Mode | None], LiveInfo]] = {
