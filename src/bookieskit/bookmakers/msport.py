@@ -1,4 +1,4 @@
-"""MSport client — supports ng, gh, ke."""
+"""MSport client — supports ng, gh, ke, ug, zm."""
 
 import asyncio
 from typing import Any, AsyncIterator
@@ -6,6 +6,19 @@ from typing import Any, AsyncIterator
 from bookieskit.base import BaseBookmaker
 from bookieskit.bookmakers.types import PrematchEventStub
 from bookieskit.config import MSPORT_MAX_CONCURRENT, MSPORT_REQUEST_DELAY
+
+# MSport rejects requests with the wrong operId per country; the value
+# differs across markets and the API responds with bizCode 19000
+# "invalid operId" when mismatched. Discovered by sweeping values 1..15
+# per country. Each new country added here must come with its verified
+# operId or the country code is unusable at runtime.
+_OPERID_PER_COUNTRY = {
+    "ng": "2",
+    "gh": "3",
+    "ke": "1",
+    "ug": "4",
+    "zm": "5",
+}
 
 
 class MSport(BaseBookmaker):
@@ -17,7 +30,7 @@ class MSport(BaseBookmaker):
     sport — there is no per-tournament fetch.
 
     Args:
-        country: Country code (ng, gh, ke)
+        country: Country code (ng, gh, ke, ug, zm)
         timeout: Request timeout in seconds (default: 30)
         max_retries: Max retry attempts (default: 3)
         backoff_factor: Exponential backoff base (default: 1.0)
@@ -29,12 +42,13 @@ class MSport(BaseBookmaker):
         "ng": "https://www.msport.com",
         "gh": "https://www.msport.com",
         "ke": "https://www.msport.com",
+        "ug": "https://www.msport.com",
+        "zm": "https://www.msport.com",
     }
     DEFAULT_HEADERS = {
         "accept": "*/*",
         "accept-language": "en",
         "clientid": "web",
-        "operid": "2",
         "platform": "web",
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",  # noqa: E501
     }
@@ -42,6 +56,14 @@ class MSport(BaseBookmaker):
     REQUEST_DELAY = MSPORT_REQUEST_DELAY
     NAME = "MSport"
     PLATFORM_KEY = "msport"
+
+    def _build_headers(self) -> dict[str, str]:
+        headers = super()._build_headers()
+        # Per-country operId — see _OPERID_PER_COUNTRY for the discovered
+        # mapping. Falls back to NG's "2" for any unforeseen country code
+        # so the call at least doesn't raise on a missing key.
+        headers["operid"] = _OPERID_PER_COUNTRY.get(self._country, "2")
+        return headers
 
     @property
     def _api_prefix(self) -> str:

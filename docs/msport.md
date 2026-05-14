@@ -2,13 +2,17 @@
 
 ## Supported Countries
 
-| Code | Domain | API Path |
-|------|--------|----------|
-| `ng` | https://www.msport.com | `/api/ng/...` |
-| `gh` | https://www.msport.com | `/api/gh/...` |
-| `ke` | https://www.msport.com | `/api/ke/...` |
+| Code | Country | API Path | `operid` header |
+|------|---------|----------|-----------------|
+| `ng` | Nigeria | `/api/ng/...` | `2` |
+| `gh` | Ghana | `/api/gh/...` | `3` |
+| `ke` | Kenya | `/api/ke/...` | `1` |
+| `ug` | Uganda | `/api/ug/...` | `4` |
+| `zm` | Zambia | `/api/zm/...` | `5` |
 
-All countries share the same domain — the country segment lives in the URL path under `/api/{country}/facts-center/query/frontend/...`.
+All countries share the same `https://www.msport.com` base — the country segment lives in the URL path under `/api/{country}/facts-center/query/frontend/...`.
+
+**Per-country `operid`** — MSport's API rejects requests with `bizCode 19000 "invalid operId"` when the header value is wrong for the country. The lib sets the right one automatically from `_OPERID_PER_COUNTRY` in `bookmakers/msport.py`. Adding a new country requires both a `DOMAINS` row AND an `_OPERID_PER_COUNTRY` row. (Discovered in 0.8.0 — prior versions hardcoded `operid=2`, so only NG worked at runtime; GH and KE were silently broken even though listed in `DOMAINS`.)
 
 ## SportRadar id
 

@@ -40,6 +40,48 @@ async def test_msport_headers():
     assert headers["platform"] == "web"
 
 
+@pytest.mark.parametrize(
+    "country,expected_operid",
+    [
+        ("ng", "2"),
+        ("gh", "3"),
+        ("ke", "1"),
+        ("ug", "4"),
+        ("zm", "5"),
+    ],
+)
+def test_msport_operid_is_per_country(country, expected_operid):
+    """MSport's API rejects requests with the wrong operId for a country.
+    The lib previously hardcoded operid=2, which only worked for NG —
+    GH/KE/UG/ZM silently returned bizCode 19000 'invalid operId'.
+    Each country MUST send its own operid."""
+    client = MSport(country=country)
+    headers = client._build_headers()
+    assert headers["operid"] == expected_operid
+
+
+@pytest.mark.parametrize("country", ["ug", "zm"])
+def test_msport_new_countries_resolve_domain(country):
+    """UG and ZM added in 0.8.0 — same base URL as the original three;
+    the operid map differentiates them at the API layer."""
+    client = MSport(country=country)
+    assert client.base_url == "https://www.msport.com"
+
+
+@pytest.mark.asyncio
+@respx.mock
+async def test_msport_ke_sends_operid_1_not_2():
+    """Regression: before 0.8.0 the lib sent operid=2 for every country,
+    breaking MSport KE on the live API. Pin the fix."""
+    route = respx.get(
+        "https://www.msport.com/api/ke/facts-center/query/frontend/sports"
+    ).respond(json={"bizCode": 10000, "data": {"sports": []}})
+    async with MSport(country="ke") as client:
+        await client.get_sports()
+    headers = route.calls[0].request.headers
+    assert headers["operid"] == "1"
+
+
 @pytest.mark.asyncio
 @respx.mock
 async def test_get_sports():
