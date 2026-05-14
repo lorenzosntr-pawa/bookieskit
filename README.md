@@ -50,11 +50,11 @@ See `examples/odds_for_betpawa_competition.py`.
 
 | Bookmaker | Countries | Doc |
 |-----------|-----------|------|
-| BetPawa   | ng, gh, ke, ug, tz, zm | [docs/betpawa.md](docs/betpawa.md) |
+| BetPawa   | ng, gh, ke, ug, tz, zm, rw, cm, sl | [docs/betpawa.md](docs/betpawa.md) |
 | SportyBet | ng, gh, ke | [docs/sportybet.md](docs/sportybet.md) |
 | Bet9ja    | ng | [docs/bet9ja.md](docs/bet9ja.md) |
-| Betway    | ng, gh, ke, tz, ug, zm | [docs/betway.md](docs/betway.md) |
-| MSport    | ng, gh, ke | [docs/msport.md](docs/msport.md) |
+| Betway    | ng, gh, ke, tz, ug, zm, za | [docs/betway.md](docs/betway.md) |
+| MSport    | ng, gh, ke, ug, zm | [docs/msport.md](docs/msport.md) |
 | SportPesa | ke, tz | [docs/sportpesa.md](docs/sportpesa.md) |
 | Betika    | ke, ug, tz, mw, gh | [docs/betika.md](docs/betika.md) |
 

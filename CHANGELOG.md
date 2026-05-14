@@ -2,6 +2,29 @@
 
 All notable changes to this project are documented in this file. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.8.0] — 2026-05-14
+
+Expanded country coverage across BetPawa, MSport, and Betway after probing each bookmaker's live API endpoints. Fixed a latent MSport bug discovered during the probe — `GH` and `KE` country entries in `DOMAINS` had been silently broken since they were added.
+
+### Fixed
+
+- **MSport per-country `operid` header.** The lib previously hardcoded `operid=2` in `DEFAULT_HEADERS`, but the MSport API rejects every other country with `bizCode 19000 "invalid operId"`. Country-to-operid mapping discovered by sweeping values 1..15 per country: `ng=2, gh=3, ke=1, ug=4, zm=5`. The `gh` and `ke` entries that shipped with the original MSport client never actually worked at runtime; only `ng` did. New `_OPERID_PER_COUNTRY` map in `bookmakers/msport.py` plus `_build_headers` override resolves the correct value per instance. (`msport.py`, `tests/test_msport.py`)
+
+### Added
+
+- **BetPawa 3 new countries**: `rw` (https://www.betpawa.rw / `betpawa-rwanda`), `cm` (https://www.betpawa.cm / `betpawa-cameroon`), `sl` (https://www.betpawa.sl / `betpawa-sierraleone`). Verified against the live `/api/sportsbook/v2/categories/list/by-sport` endpoint with the candidate brand header. BetPawa total: 9 countries.
+- **MSport 2 new countries**: `ug` (operid=4), `zm` (operid=5). Verified by live `get_sports()` calls returning 31 sports each. MSport total: 5 countries (and `gh`/`ke` now actually work, see above).
+- **Betway 1 new country**: `za` (countryCode=ZA). Verified against `config.betwayafrica.com/cron/sports/ZA/en-US`. Betway total: 7 countries.
+
+### Documentation
+
+- Per-bookmaker doc pages (`docs/{betpawa,msport,betway,sportybet}.md`) now have a full Countries table including the URL/header pattern that pairs with each country code. README "Supported Bookmakers" table reflects the expanded counts.
+- `docs/sportybet.md` notes that further SportyBet country expansion was attempted in 0.8.0 but blocked by anti-bot / TLS-cert issues when probing from outside an African residential IP. The lib keeps the existing `ng`/`gh`/`ke` entries; future additions should be PR'd with a successful probe transcript.
+
+### Test count
+
+416 → 428 passing (+12 across `_OPERID_PER_COUNTRY` parametrize, the 3 new BetPawa countries' DOMAINS+brand assertions, the new Betway `za` country code, MSport new-country domain resolution, and the explicit `ke→operid=1` regression test).
+
 ## [0.7.1] — 2026-05-14
 
 Patch release addressing five issues surfaced by code review of the 0.7.0 Betika integration. All changes additive — no breaking changes.
