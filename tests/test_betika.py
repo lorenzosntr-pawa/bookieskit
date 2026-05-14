@@ -35,3 +35,28 @@ def test_betika_live_base_url_constant():
 
 def test_betika_platform_key():
     assert Betika.PLATFORM_KEY == "betika"
+
+
+# ---- get_sports / get_navigation ------------------------------------------
+
+
+@pytest.mark.asyncio
+async def test_betika_get_sports():
+    import respx
+    payload = {"data": [{"id": 14, "name": "Soccer"}], "meta": {}}
+    with respx.mock(base_url="https://api.betika.com") as mock:
+        mock.get("/v1/sports").respond(json=payload)
+        async with Betika(country="ke") as client:
+            result = await client.get_sports()
+    assert result["data"][0]["name"] == "Soccer"
+
+
+@pytest.mark.asyncio
+async def test_betika_get_navigation_aliases_get_sports():
+    import respx
+    payload = {"data": [{"id": 14, "name": "Soccer"}], "meta": {}}
+    with respx.mock(base_url="https://api.betika.com") as mock:
+        mock.get("/v1/sports").respond(json=payload)
+        async with Betika(country="ke") as client:
+            result = await client.get_navigation()
+    assert result["data"][0]["id"] == 14

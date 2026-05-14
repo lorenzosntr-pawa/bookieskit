@@ -66,3 +66,24 @@ class Betika(BaseBookmaker):
         return await self._request(
             method, f"{self.LIVE_BASE_URL}{path}", params=params
         )
+
+    async def get_sports(self) -> dict[str, Any]:
+        """Get the sport catalogue.
+
+        Returns:
+            Raw JSON shaped as ``{"data": [{"id": int, "name": str, ...},
+            ...], "meta": {...}}``. Football is ``id=14``.
+        """
+        return await self._request("GET", "/v1/sports")
+
+    async def get_navigation(self) -> dict[str, Any]:
+        """Alias for :meth:`get_sports`.
+
+        Betika does not expose a single endpoint that returns the full
+        sport → category → competition tree (those live on separate
+        endpoints). ``get_navigation`` is kept as an alias of
+        :meth:`get_sports` so cross-bookmaker code that calls
+        ``client.get_navigation()`` continues to receive *something*
+        useful (the sport list) for Betika.
+        """
+        return await self.get_sports()
