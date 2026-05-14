@@ -399,6 +399,24 @@ def _participants_betika(response, _mode: Mode | None) -> Participants:
     return Participants(home=home, away=away)
 
 
+def _live_info_betika(response, mode: Mode | None) -> LiveInfo:
+    if mode == "prematch":
+        return _EMPTY_LIVE_INFO
+    m = _betika_first_match(response)
+    if m is None:
+        return _EMPTY_LIVE_INFO
+    minute = None
+    mt = m.get("match_time")
+    if isinstance(mt, str) and ":" in mt:
+        minute = _try_int(mt.split(":", 1)[0])
+    period = m.get("event_status") or None
+    score_home, score_away = _split_score(m.get("current_score"))
+    return LiveInfo(
+        minute=minute, period=period,
+        score_home=score_home, score_away=score_away,
+    )
+
+
 # ---- Dispatch tables -------------------------------------------------------
 
 _KICKOFF_DISPATCH: dict[str, Callable[[dict, Mode | None], datetime | None]] = {
@@ -428,6 +446,7 @@ _LIVE_INFO_DISPATCH: dict[str, Callable[[dict, Mode | None], LiveInfo]] = {
     "betway": _live_info_betway,
     "msport": _live_info_msport,
     "sportpesa": _live_info_sportpesa,
+    "betika": _live_info_betika,
 }
 
 

@@ -482,3 +482,33 @@ def test_extract_participants_betika_malformed_returns_empty():
     assert p.home is None and p.away is None
     p = extract_participants([{"home_team": "", "away_team": ""}], "betika")
     assert p.home is None and p.away is None
+
+
+def test_extract_live_info_betika_prematch_returns_empty():
+    d = _load("betika", "prematch")
+    li = extract_live_info(d, "betika")
+    assert li == LiveInfo()
+
+
+def test_extract_live_info_betika_live():
+    d = _load("betika", "live")
+    li = extract_live_info(d, "betika")
+    assert li.minute == 35
+    assert li.period == "1st half"
+    assert li.score_home == 0
+    assert li.score_away == 0
+
+
+def test_extract_live_info_betika_mode_prematch_overrides_live_data():
+    # Explicit prematch mode wins even when the response carries live fields.
+    d = _load("betika", "live")
+    li = extract_live_info(d, "betika", mode="prematch")
+    assert li == LiveInfo()
+
+
+def test_extract_live_info_betika_malformed_returns_empty():
+    assert extract_live_info({}, "betika") == LiveInfo()
+    assert extract_live_info({"data": []}, "betika") == LiveInfo()
+    assert extract_live_info(
+        [{"match_time": "not-a-time", "current_score": "bad"}], "betika"
+    ) == LiveInfo()
