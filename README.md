@@ -1,6 +1,6 @@
 # bookieskit
 
-Async HTTP clients for 6 African sportsbooks (BetPawa, SportyBet, Bet9ja, Betway, MSport, SportPesa), with normalized markets and cross-bookmaker matching by SportRadar id.
+Async HTTP clients for 7 African sportsbooks (BetPawa, SportyBet, Bet9ja, Betway, MSport, SportPesa, Betika), with normalized markets and cross-bookmaker matching by SportRadar id.
 
 ## Installation
 
@@ -30,7 +30,7 @@ async def main():
 asyncio.run(main())
 ```
 
-### 2. Compare odds across all 6 by SportRadar id
+### 2. Compare odds across all 7 by SportRadar id
 
 ```bash
 python examples/odds_for_sr_id.py 69339436
@@ -56,6 +56,7 @@ See `examples/odds_for_betpawa_competition.py`.
 | Betway    | ng, gh, ke, tz, ug, zm | [docs/betway.md](docs/betway.md) |
 | MSport    | ng, gh, ke | [docs/msport.md](docs/msport.md) |
 | SportPesa | ke, tz | [docs/sportpesa.md](docs/sportpesa.md) |
+| Betika    | ke, ug, tz, mw, gh | [docs/betika.md](docs/betika.md) |
 
 ## How the lib is structured
 
@@ -65,16 +66,16 @@ See `examples/odds_for_betpawa_competition.py`.
 
 ## Built-in markets
 
-| Canonical id | Name | BetPawa | SportyBet | Bet9ja | Betway | MSport | SportPesa |
-|---|---|---|---|---|---|---|---|
-| `1x2_ft` | 1X2 — Full Time | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| `over_under_ft` | Over/Under — Full Time | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| `btts_ft` | Both Teams To Score — Full Time | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| `double_chance_ft` | Double Chance — Full Time | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| `1x2_1up_ft` | 1X2 1Up — Full Time | — | ✅ | ✅ | ✅ | — | — |
-| `1x2_2up_ft` | 1X2 2Up — Full Time | — | ✅ | ✅ | ✅ | — | — |
+| Canonical id | Name | BetPawa | SportyBet | Bet9ja | Betway | MSport | SportPesa | Betika |
+|---|---|---|---|---|---|---|---|---|
+| `1x2_ft` | 1X2 — Full Time | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| `over_under_ft` | Over/Under — Full Time | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| `btts_ft` | Both Teams To Score — Full Time | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| `double_chance_ft` | Double Chance — Full Time | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| `1x2_1up_ft` | 1X2 1Up — Full Time | — | ✅ | ✅ | ✅ | — | — | — |
+| `1x2_2up_ft` | 1X2 2Up — Full Time | — | ✅ | ✅ | ✅ | — | — | — |
 
-The 1Up / 2Up markets pay as a 1X2 if your team gets to a 1- or 2-goal lead at any point. BetPawa, MSport and SportPesa are intentionally unmapped (BetPawa to be added at production cutover; MSport and SportPesa don't expose this market).
+The 1Up / 2Up markets pay as a 1X2 if your team gets to a 1- or 2-goal lead at any point. BetPawa, MSport, SportPesa and Betika are intentionally unmapped (BetPawa to be added at production cutover; the others don't expose this market).
 
 ## Examples
 
