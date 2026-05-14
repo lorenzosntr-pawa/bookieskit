@@ -87,3 +87,71 @@ class Betika(BaseBookmaker):
         useful (the sport list) for Betika.
         """
         return await self.get_sports()
+
+    async def get_matches(
+        self,
+        sport_id: int = 14,
+        page: int = 1,
+        limit: int = 100,
+        sub_type_id: str | None = None,
+        competition_id: str | None = None,
+        match_id: str | None = None,
+    ) -> dict[str, Any]:
+        """Get prematch matches from ``/v1/uo/matches``.
+
+        Args:
+            sport_id: Betika sport id (default ``14`` = Football).
+            page: 1-indexed page number.
+            limit: Page size (max observed: 100).
+            sub_type_id: Optional market filter (e.g. ``"18"`` to embed
+                Over/Under markets in each match's ``odds`` list instead
+                of the default 1X2).
+            competition_id: Optional competition (league) filter.
+            match_id: Fetch a single match (overrides paging).
+
+        Returns:
+            JSON shaped as ``{"data": [<match>, ...], "meta":
+            {"total": int, "page": int, ...}}``. ``meta.total`` is
+            authoritative — use it to drive iterator pagination.
+        """
+        params: dict[str, Any] = {
+            "sport_id": str(sport_id),
+            "page": str(page),
+            "limit": str(limit),
+        }
+        if sub_type_id is not None:
+            params["sub_type_id"] = sub_type_id
+        if competition_id is not None:
+            params["competition_id"] = competition_id
+        if match_id is not None:
+            params["match_id"] = match_id
+        return await self._request("GET", "/v1/uo/matches", params=params)
+
+    async def get_live_matches(
+        self,
+        sport_id: int = 14,
+        page: int = 1,
+        limit: int = 100,
+        match_id: str | None = None,
+    ) -> dict[str, Any]:
+        """Get currently-live matches from ``live.betika.com/v1/uo/matches``.
+
+        Args:
+            sport_id: Betika sport id (default ``14`` = Football).
+            page: 1-indexed page number.
+            limit: Page size.
+            match_id: Fetch a single in-play match by id (overrides paging).
+
+        Returns:
+            JSON in the same shape as :meth:`get_matches`, plus the rich
+            in-play fields documented in ``betika/RESOLVED.md``
+            (``match_time``, ``event_status``, ``current_score`` etc.).
+        """
+        params: dict[str, Any] = {
+            "sport_id": str(sport_id),
+            "page": str(page),
+            "limit": str(limit),
+        }
+        if match_id is not None:
+            params["match_id"] = match_id
+        return await self._live_request("GET", "/v1/uo/matches", params=params)

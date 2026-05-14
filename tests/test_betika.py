@@ -60,3 +60,71 @@ async def test_betika_get_navigation_aliases_get_sports():
         async with Betika(country="ke") as client:
             result = await client.get_navigation()
     assert result["data"][0]["id"] == 14
+
+
+# ---- get_matches / get_live_matches ---------------------------------------
+
+
+@pytest.mark.asyncio
+async def test_betika_get_matches_default_params():
+    import respx
+    payload = {"data": [{"match_id": "X"}], "meta": {"total": 1}}
+    with respx.mock(base_url="https://api.betika.com") as mock:
+        route = mock.get("/v1/uo/matches").respond(json=payload)
+        async with Betika(country="ke") as client:
+            result = await client.get_matches()
+    assert result["meta"]["total"] == 1
+    # Defaults: sport_id=14 (football), page=1, limit=100.
+    req = route.calls[0].request
+    assert "sport_id=14" in req.url.query.decode()
+    assert "page=1" in req.url.query.decode()
+    assert "limit=100" in req.url.query.decode()
+
+
+@pytest.mark.asyncio
+async def test_betika_get_matches_with_filters():
+    import respx
+    payload = {"data": [], "meta": {"total": 0}}
+    with respx.mock(base_url="https://api.betika.com") as mock:
+        route = mock.get("/v1/uo/matches").respond(json=payload)
+        async with Betika(country="ke") as client:
+            await client.get_matches(
+                sport_id=14, page=2, limit=50,
+                sub_type_id="18", competition_id="123", match_id="456",
+            )
+    q = route.calls[0].request.url.query.decode()
+    assert "page=2" in q
+    assert "limit=50" in q
+    assert "sub_type_id=18" in q
+    assert "competition_id=123" in q
+    assert "match_id=456" in q
+
+
+@pytest.mark.asyncio
+async def test_betika_get_live_matches_uses_live_host():
+    import respx
+    payload = {"data": [], "meta": {"total": 0}}
+    with respx.mock() as mock:
+        route = mock.get("https://live.betika.com/v1/uo/matches").respond(
+            json=payload
+        )
+        async with Betika(country="ke") as client:
+            await client.get_live_matches()
+    assert route.calls.call_count == 1
+    q = route.calls[0].request.url.query.decode()
+    assert "sport_id=14" in q
+
+
+@pytest.mark.asyncio
+async def test_betika_get_live_matches_with_match_id():
+    import respx
+    payload = {"data": [{"match_id": "X"}], "meta": {"total": 1}}
+    with respx.mock() as mock:
+        route = mock.get("https://live.betika.com/v1/uo/matches").respond(
+            json=payload
+        )
+        async with Betika(country="ke") as client:
+            result = await client.get_live_matches(match_id="X")
+    assert result["data"][0]["match_id"] == "X"
+    q = route.calls[0].request.url.query.decode()
+    assert "match_id=X" in q
