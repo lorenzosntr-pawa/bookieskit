@@ -2,13 +2,17 @@
 
 ## Supported Countries
 
-| Code | Domain | API Path |
-|------|--------|----------|
-| `ng` | https://www.sportybet.com | `/api/ng/...` |
-| `gh` | https://www.sportybet.com | `/api/gh/...` |
-| `ke` | https://www.sportybet.com | `/api/ke/...` |
+| Code | Country | API Path |
+|------|---------|----------|
+| `ng` | Nigeria | `/api/ng/...` |
+| `gh` | Ghana | `/api/gh/...` |
+| `ke` | Kenya | `/api/ke/...` |
 
-All countries share the same domain — the country segment lives in the URL path.
+All countries share the same `https://www.sportybet.com` base — the country segment lives in the URL path under `/api/{country}/factsCenter/...`.
+
+### Country expansion (deferred)
+
+SportyBet publicly operates in additional markets (Tanzania, Uganda, Zambia, South Africa, Côte d'Ivoire, etc.). A v0.8.0 enumeration attempt was blocked by anti-bot / TLS-cert issues when probing from outside an African residential IP, so those entries are **not** added to the `DOMAINS` dict — adding them speculatively would expose `UnsupportedCountryError`-free code paths that fail at the first HTTP call. Open an issue or PR with a successful probe transcript to land another country.
 
 ## SportRadar id
 
