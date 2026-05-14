@@ -2,6 +2,30 @@
 
 All notable changes to this project are documented in this file. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.7.1] — 2026-05-14
+
+Patch release addressing five issues surfaced by code review of the 0.7.0 Betika integration. All changes additive — no breaking changes.
+
+### Fixed
+
+- **`BaseBookmaker._request` now preserves absolute URLs in error reporting.** Previously, when a subclass routed to a different host via an absolute path (e.g. `Betika._live_request` → `https://live.betika.com/...`), exceptions like `RequestError`/`RateLimitError` carried a corrupted URL string `"https://api.betika.com" + "https://live.betika.com/..."`. The retry logic itself was correct; only the recorded URL was wrong, which would mislead operator logs and Sentry. (`base.py`)
+- **`_parse_betika_line` now extracts the line from `special_bet_value="total=N.N"`** in addition to bare numeric strings. Captured fixtures show Betika's Over/Under selections use the `total=N.N` format; the parser previously fell through silently to the `display`-label fallback (which works today but is brittle if Betika ever drops the line from the label). (`markets/parser.py`)
+- **`_kickoff_betika` preserves tz-aware ISO offsets** instead of overwriting them with UTC. Betika serves naive UTC today; this guards against a future shift to offset-aware serialization (where overwriting `+03:00` with UTC would silently shift the moment by 3 hours). (`event_info.py`)
+
+### Changed
+
+- **Consolidated three near-duplicate `_betika_first_match` helpers into a single shared module.** The dict-or-bare-list shape walk previously lived in `event_info.py`, `markets/parser.py`, and inline in `matching/extractor.py`. All three now import from `bookmakers/_betika_shape.py` (`betika_first_match`). DRY win; tests in `test_betika_shape.py` pin the contract.
+- **Parser and SR-id extractor docstrings now list all 7 supported platforms.** Both `parse_markets` and `extract_sportradar_id` previously omitted `sportpesa` (stale from 0.6.0) and `betika` (new in 0.7.0) from their `platform` parameter docstrings.
+
+### Added
+
+- **Multi-market fixture `tests/fixtures/event_info/betika/markets.json`** — real `Betika.get_event_markets` payload for one event with all four universal market groups (1X2, Double Chance, Over/Under, BTTS) merged. Five new fixture-bound parser tests bind against this real shape rather than relying purely on synthetic payloads.
+- **`test_betika_listed_in_supported_count` now reads `pyproject.toml` directly via `tomllib`** instead of `importlib.metadata.metadata("bookieskit").get("Summary")`. The previous form would fail spuriously when developers edited the package description without running `pip install -e .` again.
+
+### Test count
+
+399 → 416 passing (+17 across the new shape helper module, fixture-bound parser tests, absolute-URL regression tests, the tz-aware kickoff guard, and the `total=N` line-format test).
+
 ## [0.7.0] — 2026-05-14
 
 ### Added

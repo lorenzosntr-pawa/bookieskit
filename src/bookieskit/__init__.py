@@ -19,7 +19,7 @@ from bookieskit.event_info import (
 )
 from bookieskit.markets.parser import ProbabilityMode
 
-__version__ = "0.7.0"
+__version__ = "0.7.1"
 __all__ = [
     "BetPawa",
     "SportyBet",
