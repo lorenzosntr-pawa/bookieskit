@@ -39,10 +39,10 @@ from collections import defaultdict
 # the fan-out below — see the module docstring for why.
 from bookieskit import (
     Bet9ja,
+    Betika,  # noqa: F401
     BetPawa,
     Betway,
     MSport,
-    Betika,  # noqa: F401
     SportPesa,  # noqa: F401
     SportyBet,
 )

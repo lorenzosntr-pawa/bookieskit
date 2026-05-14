@@ -191,6 +191,7 @@ def test_extract_sportradar_id_betika_missing_returns_none():
 def test_extract_sportradar_id_betika_from_fixture():
     import json
     from pathlib import Path
+
     from bookieskit.matching.extractor import extract_sportradar_id
 
     fixture = (

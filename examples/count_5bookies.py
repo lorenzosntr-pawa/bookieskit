@@ -17,7 +17,13 @@ import asyncio
 import os
 
 from bookieskit import (
-    Bet9ja, Betika, BetPawa, Betway, MSport, SportPesa, SportyBet,
+    Bet9ja,
+    Betika,
+    BetPawa,
+    Betway,
+    MSport,
+    SportPesa,
+    SportyBet,
 )
 
 
