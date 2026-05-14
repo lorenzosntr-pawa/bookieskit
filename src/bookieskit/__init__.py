@@ -1,6 +1,7 @@
 """Bookieskit — HTTP clients for betting data scraping."""
 
 from bookieskit.bookmakers.bet9ja import Bet9ja
+from bookieskit.bookmakers.betika import Betika
 from bookieskit.bookmakers.betpawa import BetPawa
 from bookieskit.bookmakers.betway import Betway
 from bookieskit.bookmakers.msport import MSport
@@ -18,7 +19,7 @@ from bookieskit.event_info import (
 )
 from bookieskit.markets.parser import ProbabilityMode
 
-__version__ = "0.6.0"
+__version__ = "0.7.0"
 __all__ = [
     "BetPawa",
     "SportyBet",
@@ -26,6 +27,7 @@ __all__ = [
     "Betway",
     "MSport",
     "SportPesa",
+    "Betika",
     "PrematchEventStub",
     "LiveInfo",
     "Mode",
