@@ -103,6 +103,7 @@ class Betika(BaseBookmaker):
         sub_type_id: str | None = None,
         competition_id: str | None = None,
         match_id: str | None = None,
+        period_id: int | None = None,
     ) -> dict[str, Any]:
         """Get prematch matches from ``/v1/uo/matches``.
 
@@ -115,11 +116,17 @@ class Betika(BaseBookmaker):
                 of the default 1X2).
             competition_id: Optional competition (league) filter.
             match_id: Fetch a single match (overrides paging).
+            period_id: Optional date-window filter. The endpoint defaults
+                to a rolling 48hr ``"Next 48hrs"`` view (~176 football
+                events at writing); pass ``9`` for the full multi-month
+                catalogue (~1210 football events). Other documented ids:
+                ``-1`` Today, ``1`` Tomorrow, ``2``–``7`` named weekdays.
 
         Returns:
             JSON shaped as ``{"data": [<match>, ...], "meta":
-            {"total": int, "page": int, ...}}``. ``meta.total`` is
-            authoritative — use it to drive iterator pagination.
+            {"total": int, "page": int, ...}}``. ``meta.total`` arrives
+            as a string in real responses; iterator code should coerce
+            it with :func:`int` before paginating.
         """
         params: dict[str, Any] = {
             "sport_id": str(sport_id),
@@ -132,6 +139,8 @@ class Betika(BaseBookmaker):
             params["competition_id"] = competition_id
         if match_id is not None:
             params["match_id"] = match_id
+        if period_id is not None:
+            params["period_id"] = str(period_id)
         return await self._request("GET", "/v1/uo/matches", params=params)
 
     async def get_live_matches(
@@ -269,6 +278,7 @@ class Betika(BaseBookmaker):
         self,
         sport_id: int = 14,
         limit: int = 100,
+        period_id: int | None = 9,
     ) -> AsyncIterator[PrematchEventStub]:
         """Yield every prematch event in Betika's catalogue.
 
@@ -279,6 +289,10 @@ class Betika(BaseBookmaker):
         Args:
             sport_id: Betika sport id (default ``14`` = Football).
             limit: Page size (default 100, the API maximum).
+            period_id: Date-window filter; defaults to ``9`` (All) so the
+                iterator returns the full multi-month catalogue rather
+                than the API's rolling-48hr default. Pass ``None`` to
+                accept the API default.
 
         Yields:
             :class:`PrematchEventStub` for each match. ``event_id`` is
@@ -286,14 +300,14 @@ class Betika(BaseBookmaker):
             ``competition_id``; ``sport_id`` mirrors the requested sport.
         """
         first = await self.get_matches(
-            sport_id=sport_id, page=1, limit=limit
+            sport_id=sport_id, page=1, limit=limit, period_id=period_id
         )
         for stub in _stubs_from_page(first, sport_id):
             yield stub
 
         meta = first.get("meta") if isinstance(first, dict) else None
-        total = meta.get("total") if isinstance(meta, dict) else 0
-        if not isinstance(total, int) or total <= limit:
+        total = _coerce_int(meta.get("total")) if isinstance(meta, dict) else 0
+        if total <= limit:
             return
         total_pages = math.ceil(total / limit)
         remaining = range(2, total_pages + 1)
@@ -301,7 +315,8 @@ class Betika(BaseBookmaker):
         async def _fetch(page: int) -> dict[str, Any]:
             try:
                 return await self.get_matches(
-                    sport_id=sport_id, page=page, limit=limit
+                    sport_id=sport_id, page=page, limit=limit,
+                    period_id=period_id,
                 )
             except Exception:
                 return {"data": [], "meta": {}}
@@ -310,6 +325,22 @@ class Betika(BaseBookmaker):
         for r in results:
             for stub in _stubs_from_page(r, sport_id):
                 yield stub
+
+
+def _coerce_int(v: Any) -> int:
+    """Best-effort int coercion — used for Betika's stringy ``meta.total``."""
+    if isinstance(v, bool):
+        return 0
+    if isinstance(v, int):
+        return v
+    if isinstance(v, str):
+        try:
+            return int(v)
+        except ValueError:
+            return 0
+    if isinstance(v, float):
+        return int(v)
+    return 0
 
 
 def _stubs_from_page(

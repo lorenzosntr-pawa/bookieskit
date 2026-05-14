@@ -306,3 +306,78 @@ def test_betika_listed_in_supported_count():
     desc = (metadata("bookieskit").get("Summary") or "").lower()
     assert "betika" in desc
     assert "7 african" in desc
+
+
+# ---- regression: meta.total comes back as a string ------------------------
+
+
+@pytest.mark.asyncio
+async def test_betika_iter_all_handles_string_total():
+    """Real Betika responses serialize ``meta.total`` as a string
+    (``"176"``). The iterator must coerce it before computing page count,
+    otherwise pagination stops after page 1 — undercounting by every page
+    past the first."""
+    import httpx
+    import respx
+
+    def _page(req: httpx.Request) -> httpx.Response:
+        page = int(req.url.params.get("page", "1"))
+        # 250 events across 3 pages, but meta.total is a STRING.
+        events = [
+            {"match_id": f"M{(page - 1) * 100 + i}",
+             "competition_id": "C", "sport_id": "14"}
+            for i in range(100 if page < 3 else 50)
+        ]
+        return httpx.Response(
+            200,
+            json={"data": events, "meta": {"total": "250", "current_page": page}},
+        )
+
+    with respx.mock(base_url="https://api.betika.com") as mock:
+        mock.get("/v1/uo/matches").mock(side_effect=_page)
+        async with Betika(country="ke") as client:
+            stubs = [s async for s in client.iter_all_prematch_events()]
+
+    assert len(stubs) == 250
+
+
+@pytest.mark.asyncio
+async def test_betika_iter_all_defaults_to_period_id_9_full_catalogue():
+    """The iterator should default to ``period_id=9`` so it returns the
+    full multi-month catalogue rather than the API's rolling-48hr view."""
+    import respx
+    with respx.mock(base_url="https://api.betika.com") as mock:
+        route = mock.get("/v1/uo/matches").respond(
+            json={"data": [], "meta": {"total": "0"}}
+        )
+        async with Betika(country="ke") as client:
+            _ = [s async for s in client.iter_all_prematch_events()]
+    assert route.calls.call_count == 1
+    q = route.calls[0].request.url.query.decode()
+    assert "period_id=9" in q
+
+
+@pytest.mark.asyncio
+async def test_betika_get_matches_passes_period_id_when_set():
+    import respx
+    with respx.mock(base_url="https://api.betika.com") as mock:
+        route = mock.get("/v1/uo/matches").respond(
+            json={"data": [], "meta": {"total": "0"}}
+        )
+        async with Betika(country="ke") as client:
+            await client.get_matches(period_id=9)
+    q = route.calls[0].request.url.query.decode()
+    assert "period_id=9" in q
+
+
+@pytest.mark.asyncio
+async def test_betika_get_matches_omits_period_id_when_none():
+    import respx
+    with respx.mock(base_url="https://api.betika.com") as mock:
+        route = mock.get("/v1/uo/matches").respond(
+            json={"data": [], "meta": {"total": "0"}}
+        )
+        async with Betika(country="ke") as client:
+            await client.get_matches()
+    q = route.calls[0].request.url.query.decode()
+    assert "period_id" not in q

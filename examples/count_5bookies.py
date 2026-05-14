@@ -352,49 +352,94 @@ async def count_sportpesa() -> dict:
 
 
 async def count_betika() -> dict:
-    """Betika totals via iter_all_prematch_events plus get_live_matches.
+    """Betika totals — walks every sport via iter_all_prematch_events.
 
     Betika is country-agnostic at the API layer; pick any supported code.
-    No warmed cookies are needed — the API is open.
+    No warmed cookies are needed — the API is open. The iterator's
+    default ``period_id=9`` returns the full multi-month catalogue.
+    Live counts iterate live.betika.com per-page until ``meta.total`` is
+    exhausted; that endpoint is sport-scoped, so we fan over every sport
+    id surfaced by ``get_sports()``.
     """
+    def _coerce_total(v):
+        try:
+            return int(v)
+        except (TypeError, ValueError):
+            return 0
+
     out = {"name": "Betika", "country": "ke"}
     async with Betika(country="ke") as bk:
         try:
             sports = (await bk.get_sports()).get("data", []) or []
         except Exception:
             sports = []
-        out["sports_total"] = len(sports)
+        sport_ids = [
+            int(s["sport_id"]) for s in sports
+            if isinstance(s, dict) and str(s.get("sport_id", "")).lstrip("-").isdigit()  # noqa: E501
+        ]
+        out["sports_total"] = len(sport_ids)
 
+        # Prematch: iter_all_prematch_events per sport, concurrent fan-out.
+        async def _prematch_for(sid):
+            ids: set = set()
+            leagues: set = set()
+            try:
+                async for ev in bk.iter_all_prematch_events(sport_id=sid):
+                    ids.add(ev.event_id)
+                    if ev.league_id:
+                        leagues.add(ev.league_id)
+            except Exception:
+                pass
+            return ids, leagues
+
+        per_sport_prematch = await asyncio.gather(
+            *[_prematch_for(sid) for sid in sport_ids]
+        )
         prematch_event_ids: set = set()
         league_ids: set = set()
-        async for ev in bk.iter_all_prematch_events():
-            prematch_event_ids.add(ev.event_id)
-            if ev.league_id:
-                league_ids.add(ev.league_id)
+        for ids, leagues in per_sport_prematch:
+            prematch_event_ids |= ids
+            league_ids |= leagues
         out["tournaments_prematch"] = len(league_ids)
         out["events_prematch"] = len(prematch_event_ids)
 
+        # Live: walk pages per sport.
+        async def _live_for(sid):
+            ids: set = set()
+            comps: set = set()
+            page = 1
+            while True:
+                try:
+                    resp = await bk.get_live_matches(
+                        sport_id=sid, page=page, limit=100
+                    )
+                except Exception:
+                    break
+                data = (resp.get("data") or []) if isinstance(resp, dict) else []
+                for ev in data:
+                    mid = ev.get("match_id")
+                    if mid is not None:
+                        ids.add(str(mid))
+                    cid = ev.get("competition_id")
+                    if cid is not None:
+                        comps.add(str(cid))
+                meta = resp.get("meta") if isinstance(resp, dict) else None
+                total = _coerce_total(
+                    meta.get("total") if isinstance(meta, dict) else 0
+                )
+                if total <= 0 or page * 100 >= total:
+                    break
+                page += 1
+            return ids, comps
+
+        per_sport_live = await asyncio.gather(
+            *[_live_for(sid) for sid in sport_ids]
+        )
         live_event_ids: set = set()
         live_competition_ids: set = set()
-        page = 1
-        while True:
-            try:
-                resp = await bk.get_live_matches(page=page, limit=100)
-            except Exception:
-                break
-            data = (resp.get("data") or []) if isinstance(resp, dict) else []
-            for ev in data:
-                mid = ev.get("match_id")
-                if mid is not None:
-                    live_event_ids.add(str(mid))
-                cid = ev.get("competition_id")
-                if cid is not None:
-                    live_competition_ids.add(str(cid))
-            meta = resp.get("meta") if isinstance(resp, dict) else None
-            total = meta.get("total") if isinstance(meta, dict) else 0
-            if not isinstance(total, int) or page * 100 >= total:
-                break
-            page += 1
+        for ids, comps in per_sport_live:
+            live_event_ids |= ids
+            live_competition_ids |= comps
         out["events_live"] = len(live_event_ids)
         out["tournaments_live"] = len(live_competition_ids)
     return out
