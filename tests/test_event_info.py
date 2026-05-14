@@ -310,7 +310,7 @@ def test_msport_live_info_live():
 
 @pytest.mark.parametrize(
     "platform",
-    ["betpawa", "sportybet", "bet9ja", "betway", "msport", "sportpesa"],
+    ["betpawa", "sportybet", "bet9ja", "betway", "msport", "sportpesa", "betika"],
 )
 def test_empty_dict_does_not_raise(platform):
     assert extract_kickoff({}, platform) is None
