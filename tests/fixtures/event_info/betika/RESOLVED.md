@@ -52,6 +52,20 @@ Additional live-only fields available on the same object: `bet_status`, `bet_sto
 
 Parser MUST match outcomes case-insensitively (the parser's `_resolve_outcome_betika` lowercases both sides before comparing).
 
+## OU `special_bet_value` format
+
+The Over/Under selection's `special_bet_value` is NOT a bare numeric string. Captured shape:
+
+```
+{"display": "OVER 2.5", "odd_value": "2.15", "special_bet_value": "total=2.5"}
+```
+
+The parser's `_parse_betika_line` handles both formats (`"2.5"` and `"total=2.5"`) plus the display-fallback path (`"OVER 2.5"` → 2.5) when `special_bet_value` is empty or malformed.
+
+## Captured `markets.json` fixture
+
+`tests/fixtures/event_info/betika/markets.json` is the output of `Betika.get_event_markets(event_id="10908218")` — Valencia vs Rayo Vallecano, captured 2026-05-14. Carries all four universal market groups merged into one `data[0].odds[]` array. Used by the fixture-bound parser tests to exercise the real response shape for every canonical market in one go.
+
 ## Notes
 
 - No probability fields on selections. `_parse_betika` accepts `probability` kwarg but both `Outcome` probability fields stay `None`.

@@ -18,6 +18,12 @@ def _load(phase: str = "prematch") -> dict:
     return json.loads((FIXTURE_DIR / f"{phase}.json").read_text(encoding="utf-8"))
 
 
+def _load_markets() -> dict:
+    return json.loads(
+        (FIXTURE_DIR / "markets.json").read_text(encoding="utf-8")
+    )
+
+
 def _wrap(market_groups: list[dict]) -> dict:
     """Build a Betika-shaped response containing the given market groups."""
     return {"data": [{"odds": market_groups}], "meta": {}}
@@ -40,6 +46,71 @@ def test_parse_betika_1x2_from_fixture():
         assert isinstance(o.odds, float)
         assert o.odds > 1.0
         assert o.platform_name in ("1", "X", "2")
+
+
+# ---- multi-market fixture (captured via Betika.get_event_markets) --------
+
+
+def test_parse_betika_markets_fixture_yields_all_four_canonicals():
+    """Real captured payload (Valencia vs Rayo Vallecano, all 4 universal
+    sub_type_ids merged). Verifies the parser recognises every market
+    against a real Betika response, not just synthetic shapes."""
+    result = parse_markets(_load_markets(), platform="betika")
+    canonical_ids = {m.canonical_id for m in result}
+    assert canonical_ids == {
+        "1x2_ft", "double_chance_ft", "over_under_ft", "btts_ft",
+    }
+
+
+def test_parse_betika_over_under_from_fixture_has_25_line():
+    """OU line 2.5 is universally present on football OU payloads;
+    pin it explicitly. The captured fixture's ``special_bet_value`` uses
+    the ``"total=2.5"`` format rather than a bare ``"2.5"`` — the parser
+    must recover the line from either format."""
+    result = parse_markets(_load_markets(), platform="betika")
+    ou = next(m for m in result if m.canonical_id == "over_under_ft")
+    assert ou.outcomes == []
+    assert ou.lines is not None
+    assert 2.5 in ou.lines
+    over_25 = next(
+        o for o in ou.lines[2.5] if o.canonical_name == "over"
+    )
+    assert over_25.odds > 1.0
+
+
+def test_parse_betika_btts_from_fixture_case_insensitive():
+    """The captured fixture has BTTS outcomes as uppercase ``"YES"`` /
+    ``"NO"``. The parser must resolve these against the registry's
+    case-mixed ``betika="Yes"`` / ``"No"`` keys."""
+    result = parse_markets(_load_markets(), platform="betika")
+    btts = next(m for m in result if m.canonical_id == "btts_ft")
+    names = sorted(o.canonical_name for o in btts.outcomes)
+    assert names == ["no", "yes"]
+
+
+def test_parse_betika_double_chance_from_fixture_three_outcomes():
+    """The captured fixture's DC selections come back as ``"1/X"``,
+    ``"1/2"``, ``"X/2"`` — the registry maps these to canonical
+    ``home_draw`` / ``home_away`` / ``draw_away``."""
+    result = parse_markets(_load_markets(), platform="betika")
+    dc = next(m for m in result if m.canonical_id == "double_chance_ft")
+    names = sorted(o.canonical_name for o in dc.outcomes)
+    assert names == ["draw_away", "home_away", "home_draw"]
+
+
+def test_parse_betika_line_extracts_total_equals_format():
+    """``special_bet_value`` was observed in captured payloads as
+    ``"total=2.5"`` — not a bare numeric string. The line extractor
+    must recover the number from either format."""
+    from bookieskit.markets.parser import _parse_betika_line
+    assert _parse_betika_line({"special_bet_value": "total=2.5"}) == 2.5
+    assert _parse_betika_line({"special_bet_value": "2.5"}) == 2.5
+    assert _parse_betika_line(
+        {"special_bet_value": "", "display": "OVER 1.5"}
+    ) == 1.5
+    assert _parse_betika_line(
+        {"special_bet_value": "garbage", "display": "no number here"}
+    ) is None
 
 
 # ---------- synthetic edge cases -------------------------------------------
