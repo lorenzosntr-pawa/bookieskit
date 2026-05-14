@@ -301,9 +301,18 @@ def test_betika_exported_from_top_level():
 
 
 def test_betika_listed_in_supported_count():
-    """Sanity check: the package description should advertise 7 bookmakers."""
-    from importlib.metadata import metadata
-    desc = (metadata("bookieskit").get("Summary") or "").lower()
+    """Sanity check: the package description should advertise 7 bookmakers.
+
+    Reads ``pyproject.toml`` directly (not ``importlib.metadata.metadata``)
+    so the test doesn't depend on a fresh ``pip install -e .`` after the
+    description changes — that was a CI hazard flagged in code review.
+    """
+    import tomllib
+    from pathlib import Path
+    pyproject = Path(__file__).resolve().parent.parent / "pyproject.toml"
+    with pyproject.open("rb") as f:
+        meta = tomllib.load(f)
+    desc = (meta.get("project", {}).get("description") or "").lower()
     assert "betika" in desc
     assert "7 african" in desc
 
