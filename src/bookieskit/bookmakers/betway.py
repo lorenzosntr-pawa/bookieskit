@@ -21,6 +21,7 @@ _COUNTRY_CODES = {
     "tz": "TZ",
     "ug": "UG",
     "zm": "ZM",
+    "za": "ZA",
 }
 
 # Config domain (sports list only)
@@ -53,6 +54,7 @@ class Betway(BaseBookmaker):
         "tz": "https://feeds-roa2.betwayafrica.com",
         "ug": "https://feeds-roa2.betwayafrica.com",
         "zm": "https://feeds-roa2.betwayafrica.com",
+        "za": "https://feeds-roa2.betwayafrica.com",
     }
     DEFAULT_HEADERS = {
         "accept": "application/json",

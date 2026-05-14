@@ -2,16 +2,17 @@
 
 ## Supported Countries
 
-| Code | Country |
-|------|---------|
-| `ng` | Nigeria |
-| `gh` | Ghana |
-| `ke` | Kenya |
-| `tz` | Tanzania |
-| `ug` | Uganda |
-| `zm` | Zambia |
+| Code | Country | `countryCode` param |
+|------|---------|---------------------|
+| `ng` | Nigeria | `NG` |
+| `gh` | Ghana | `GH` |
+| `ke` | Kenya | `KE` |
+| `tz` | Tanzania | `TZ` |
+| `ug` | Uganda | `UG` |
+| `zm` | Zambia | `ZM` |
+| `za` | South Africa | `ZA` |
 
-All countries share the same data domain (`https://feeds-roa2.betwayafrica.com`); the country is passed via the `countryCode` query parameter on every request. The sports list comes from a separate config domain (`https://config.betwayafrica.com`).
+All countries share the same data domain (`https://feeds-roa2.betwayafrica.com`); the country is passed via the `countryCode` query parameter on every request. The sports list comes from a separate config domain (`https://config.betwayafrica.com`). `za` was added in 0.8.0 after probing `https://config.betwayafrica.com/cron/sports/ZA/en-US` and getting a populated 200 response.
 
 ## SportRadar id
 

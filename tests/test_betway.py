@@ -23,6 +23,14 @@ def test_betway_country_code_mapping():
     assert client_gh._country_code == "GH"
 
 
+def test_betway_za_resolves_country_code():
+    """South Africa added in 0.8.0 — verified against the live config
+    endpoint (config.betwayafrica.com/cron/sports/ZA/en-US)."""
+    client = Betway(country="za")
+    assert client.base_url == "https://feeds-roa2.betwayafrica.com"
+    assert client._country_code == "ZA"
+
+
 @pytest.mark.asyncio
 @respx.mock
 async def test_get_sports():
