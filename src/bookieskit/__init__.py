@@ -20,7 +20,7 @@ from bookieskit.event_info import (
 from bookieskit.markets.parser import ProbabilityMode
 from bookieskit.matching import EventIds, extract_event_ids
 
-__version__ = "0.9.0"
+__version__ = "0.9.1"
 __all__ = [
     "BetPawa",
     "SportyBet",

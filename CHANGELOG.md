@@ -2,6 +2,27 @@
 
 All notable changes to this project are documented in this file. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.9.1] — 2026-05-15
+
+Patch release addressing review feedback on the 0.9.0 BetGenius integration. The 0.9.0 release shipped a code path (and supporting tests) for a SportyBet payload shape that doesn't appear in production. This release replaces it with the correct shape, observed via the live API.
+
+### Fixed
+
+- **SportyBet's BetGenius prefix is on `eventSource.sourceId`, not `data.eventId`** — and it's seven `1`s, not eight. The 0.9.0 extractor checked for `data.eventId == "sr:match:11111111<gid>"` (8 ones, on eventId), but the live probe behind `examples/find_betgenius_matches.py` showed SportyBet's `eventId` always carries the SportRadar id regardless of provider, and the 7-ones prefix appears on `eventSource.{preMatchSource,liveSource}.sourceId` for BET_GENIUS rows (and BET_RADAR preMatchSource rows). The 0.9.0 fallback branch therefore never fired on real data. Replaced with a `_strip_sportybet_source_prefix` helper that strips the 7-ones prefix from any sourceId, so the bare provider id matches BetPawa's `GENIUSSPORTS` widget id format. A real BetGenius event now correctly produces an `EventIds` with both `sportradar` and `genius` populated (the eventId carries the SR id; sourceId carries the Genius id). (`src/bookieskit/matching/extractor.py`, `tests/test_extractor.py`, `tests/test_matcher.py`)
+- **Synthetic test payloads replaced with real-shape ones.** Six tests in `test_extractor.py` and three in `test_matcher.py` were binding against `eventId = "sr:match:1111111113599033"` — a shape that never exists in real SportyBet responses. They now use `eventId = "sr:match:<real_sr_id>"` + `eventSource.sourceId = "1111111<id>"`, mirroring the actual fixture shapes the audit captured.
+
+### Changed
+
+- **`examples/find_betgenius_matches.py` logs failures instead of swallowing them.** Both `fetch_betpawa_event` and `sportybet_lookup` previously did `except Exception: return None`, which conflated network timeouts / 500s / parse errors with "no Genius widget found." Now uses `logger.warning(...)` so operators can see per-event failures in stderr. `logging.basicConfig` wired in `__main__`.
+
+### Documentation
+
+- `docs/matching.md` and `docs/sportybet.md` corrected: the 0.9.0 entries claimed an 8-ones synthetic encoding on `eventId`; both pages now describe the actual 7-ones prefix on `eventSource.sourceId` and note that `eventId` always carries the SR id even for BetGenius events.
+
+### Test count
+
+456 → 461 passing (+5 net; removed one synthetic-payload test, added four `_strip_sportybet_source_prefix` unit tests + a mixed-phase eventSource test + a shared-SR regression test).
+
 ## [0.9.0] — 2026-05-14
 
 Added a second provider — **BetGenius / Genius Sports** — alongside SportRadar for cross-bookmaker event matching. BetPawa and SportyBet expose Genius ids in their event-detail responses; the matcher now pairs events that share **any** provider id, so a BetPawa row with both SR and Genius widgets bridges a Betway row (SR only) with a SportyBet Genius event (Genius only).
