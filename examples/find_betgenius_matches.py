@@ -28,6 +28,7 @@ USAGE
 """
 
 import asyncio
+import logging
 import sys
 
 from bookieskit import BetPawa, SportyBet
@@ -35,6 +36,13 @@ from bookieskit.matching import extract_event_ids
 
 DEFAULT_SPORT_ID = "2"
 PAGE_SIZE = 100
+
+# Per-event errors (timeouts, 500s, parse errors) are common at this
+# scale; surface them via a logger so they don't masquerade as "no
+# Genius widget" and inflate false-negative counts. The basicConfig
+# call at __main__ wires this to stderr so the user can see what's
+# going on without disrupting the stdout match table.
+logger = logging.getLogger(__name__)
 
 
 async def walk_betpawa_event_ids(bp, event_type: str, sport_id: str) -> set[str]:
@@ -70,7 +78,8 @@ async def fetch_betpawa_event(bp, eid: str):
     """
     try:
         d = await bp.get_event_detail(event_id=eid)
-    except Exception:
+    except Exception as e:
+        logger.warning("BetPawa get_event_detail(%s) failed: %r", eid, e)
         return None
     ids = extract_event_ids(d, platform="betpawa")
     if ids.genius is None or ids.sportradar is None:
@@ -105,7 +114,8 @@ async def sportybet_lookup(sb, sr_id: str):
     """
     try:
         d = await sb.get_event_detail(event_id=f"sr:match:{sr_id}", live=False)
-    except Exception:
+    except Exception as e:
+        logger.warning("SportyBet get_event_detail(sr:match:%s) failed: %r", sr_id, e)
         return None
     data = d.get("data") if isinstance(d, dict) else None
     if not isinstance(data, dict) or not data.get("eventId"):
@@ -178,5 +188,9 @@ async def main(sport_id: str) -> None:
 
 
 if __name__ == "__main__":
+    logging.basicConfig(
+        level=logging.WARNING,
+        format="%(asctime)s %(levelname)s %(name)s: %(message)s",
+    )
     sport = sys.argv[1] if len(sys.argv) > 1 else DEFAULT_SPORT_ID
     asyncio.run(main(sport))
