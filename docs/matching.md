@@ -21,7 +21,7 @@ New unified entry point. Returns an `EventIds` with whichever provider ids the p
 | Platform | SR id field | Genius id field |
 |---|---|---|
 | `betpawa` | widget `type=SPORTRADAR`, `.id` | widget `type=GENIUSSPORTS`, `.id` |
-| `sportybet` | `data.eventSource.preMatchSource.sourceId` when `sourceType=BET_RADAR`; fallback to `data.eventId` | `data.eventSource.preMatchSource.sourceId` when `sourceType=BET_GENIUS`; fallback to decoding `data.eventId == sr:match:11111111<gid>` |
+| `sportybet` | `data.eventSource.{preMatchSource,liveSource}.sourceId` when `sourceType=BET_RADAR` (7-ones prefix stripped); fallback to `data.eventId` (always carries the SR id) | `data.eventSource.{preMatchSource,liveSource}.sourceId` when `sourceType=BET_GENIUS` (7-ones prefix stripped to yield the bare 8-digit Genius id matching BetPawa's widget id) |
 | `bet9ja` (prematch) | `D.EXTID` | — |
 | `bet9ja` (live) | `D.A.BRMATCHID` | *deferred — needs Genius-event fixture* |
 | `betway` | `sportEvent.eventId` | — |
@@ -29,9 +29,11 @@ New unified entry point. Returns an `EventIds` with whichever provider ids the p
 | `sportpesa` | `data[0].betradarId` | — |
 | `betika` | `data[0].parent_match_id` | — |
 
-### SportyBet's `11111111` encoding
+### SportyBet's `1111111` source-id prefix
 
-SportyBet encodes BetGenius event ids by prepending eight `1`s inside the `sr:match:` namespace — a Genius event with id `13599033` ships as `data.eventId = "sr:match:1111111113599033"`. The extractor uses `data.eventSource.preMatchSource.sourceId` as the typed primary source and treats the `11111111` prefix as a fallback / cross-check. When both signals are present and disagree, a `WARNING` is logged via `bookieskit.matching.extractor` and the structured `eventSource` value wins.
+SportyBet's `eventSource.sourceId` is namespaced with seven leading `1`s on some rows: BET_GENIUS sourceIds always carry the prefix (e.g. `"111111113899686"` for Genius id `13899686`); BET_RADAR `preMatchSource.sourceId` rows usually carry it too (`"111111171127902"` strips to SR id `71127902`), while `liveSource.sourceId` for BET_RADAR ships the bare id. The extractor strips the prefix unconditionally so the resulting bare id matches BetPawa's `GENIUSSPORTS` widget id (8 digits, typically starting with `13...`).
+
+Note: `data.eventId` **always** carries the SportRadar id (`"sr:match:<sr_id>"`), regardless of provider — a SportyBet BetGenius event still has an SR id for the same physical match. So an event with sourceType=BET_GENIUS produces an `EventIds` with BOTH `sportradar` and `genius` populated. If the SR id parsed from `eventId` disagrees with the SR id from an `eventSource` BET_RADAR row, a `WARNING` is logged and `eventSource` wins. (Earlier 0.9.0 docs incorrectly claimed a `sr:match:11111111<gid>` synthetic encoding on `eventId`; that form never appears in real responses.)
 
 ## `extract_sportradar_id(response, platform)` — back-compat
 

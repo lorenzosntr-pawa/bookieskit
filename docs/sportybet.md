@@ -21,13 +21,15 @@ SportyBet exposes provider info two ways. The primary (typed) source on event-de
 | Path | Meaning |
 |---|---|
 | `data.eventSource.preMatchSource.sourceType` ∈ `{BET_RADAR, BET_GENIUS}` | Which provider routed the prematch markets |
-| `data.eventSource.preMatchSource.sourceId` | The provider's raw id (numeric string) |
-| `data.eventSource.liveSource.{sourceType, sourceId}` | Same shape, may differ from the prematch source |
-| `data.bgEvent` (bool) | Quick flag — `True` when this is a BetGenius event |
+| `data.eventSource.preMatchSource.sourceId` | The provider's id (often with a 7-ones namespace prefix — see below) |
+| `data.eventSource.liveSource.{sourceType, sourceId}` | Same shape; provider may differ from prematch (e.g. prematch via BET_RADAR, live via BET_GENIUS) |
+| `data.bgEvent` (bool) | Quick flag — but **not reliable**; live probe found it `False` on real BetGenius events |
 
-Fallback / cross-check: `data.eventId` carries `sr:match:<sr_id>` for SR events and `sr:match:11111111<genius_id>` for BetGenius events (eight leading `1`s mark the synthetic encoding). When both signals are present and disagree, `extract_event_ids` logs a `WARNING` via the `bookieskit.matching.extractor` logger and prefers `eventSource`.
+**The 7-ones `sourceId` prefix.** SportyBet prepends `"1111111"` (seven `1`s) to `eventSource.sourceId` on some rows: BET_GENIUS sourceIds always carry it (e.g. `"111111113899686"` strips to Genius id `13899686`); BET_RADAR `preMatchSource.sourceId` rows usually carry it (`"111111171127902"` strips to SR id `71127902`), while `liveSource.sourceId` for BET_RADAR ships the bare id. `extract_event_ids` strips the prefix unconditionally so the bare provider id matches BetPawa's `GENIUSSPORTS` widget id format.
 
-For direct lookups by SR id, pass `event_id="sr:match:<numeric>"` to `get_event_detail`. For Genius events, you can also pass the synthetic `sr:match:11111111<genius_id>` form.
+Fallback: `data.eventId` **always** carries `"sr:match:<sr_id>"` regardless of provider — a SportyBet BetGenius event still has an SR id for the same physical match. So an event with `sourceType=BET_GENIUS` produces an `EventIds` with BOTH `sportradar` and `genius` populated. If the SR id parsed from `eventId` disagrees with the SR id from a BET_RADAR `eventSource` row, a `WARNING` is logged via the `bookieskit.matching.extractor` logger and `eventSource` wins.
+
+For direct lookups, pass `event_id="sr:match:<numeric>"` to `get_event_detail` — same form for SR events and BetGenius events alike (no synthetic encoding on the lookup path).
 
 ## Methods
 
