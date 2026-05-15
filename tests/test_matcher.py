@@ -160,9 +160,11 @@ def test_matched_event_supports_genius_id_field():
 
 def test_match_events_pairs_betpawa_sportybet_via_genius():
     """BetPawa exposes both SR and Genius widgets; SportyBet exposes
-    Genius via eventSource.preMatchSource.sourceType=BET_GENIUS. The
-    matcher must pair them — these two are the platforms where most
-    Genius-only matching happens."""
+    Genius via eventSource.preMatchSource.sourceType=BET_GENIUS (with
+    the sourceId prefixed by seven '1's). The matcher must pair them
+    on the Genius id even though BetPawa's SR widget id (68995116)
+    differs from SportyBet's SR id (71453928 — different sources may
+    pick different SportRadar ids for the same physical match)."""
     from bookieskit.matching.matcher import match_events
 
     bp_event = {
@@ -173,11 +175,11 @@ def test_match_events_pairs_betpawa_sportybet_via_genius():
     }
     sb_event = {
         "data": {
-            "eventId": "sr:match:1111111113599033",
-            "bgEvent": True,
+            "eventId": "sr:match:71453928",  # SportyBet's own SR id
             "eventSource": {
                 "preMatchSource": {
-                    "sourceType": "BET_GENIUS", "sourceId": "13599033",
+                    "sourceType": "BET_GENIUS",
+                    "sourceId": "111111113599033",  # 7-ones + Genius id
                 },
             },
         },
@@ -186,17 +188,22 @@ def test_match_events_pairs_betpawa_sportybet_via_genius():
     results = match_events(("betpawa", [bp_event]), ("sportybet", [sb_event]))
     assert len(results) == 1
     me = results[0]
-    assert me.sportradar_id == "68995116"  # from BetPawa
+    # Both bookmakers' SR ids end up in the same group (only one of them
+    # appears on `sportradar_id`; first-seen wins). The Genius id is
+    # what actually bridges them.
     assert me.genius_id == "13599033"
+    assert me.sportradar_id in ("68995116", "71453928")
     assert me.betpawa is bp_event
     assert me.sportybet is sb_event
 
 
 def test_match_events_union_find_three_platforms_bridge_via_betpawa():
     """The union-find algorithm must group three events transitively:
-    Betway provides SR id, SportyBet provides Genius id, BetPawa provides
-    both — all three end up in one MatchedEvent because BetPawa bridges
-    them."""
+    Betway provides SR id, SportyBet provides a different SR id plus
+    a Genius id, BetPawa provides both BetPawa's SR id and the same
+    Genius id. The Genius id bridges BetPawa <-> SportyBet, and the
+    BetPawa SR id bridges BetPawa <-> Betway — all three end up in
+    one MatchedEvent."""
     from bookieskit.matching.matcher import match_events
 
     bp_event = {
@@ -205,13 +212,14 @@ def test_match_events_union_find_three_platforms_bridge_via_betpawa():
             {"id": "13599033", "type": "GENIUSSPORTS"},
         ],
     }
-    bw_event = {"sportEvent": {"eventId": "70784812"}}  # SR only
-    sb_event = {  # Genius only
+    bw_event = {"sportEvent": {"eventId": "70784812"}}  # BetPawa-bridged SR
+    sb_event = {  # Genius-bridged
         "data": {
-            "eventId": "sr:match:1111111113599033",
+            "eventId": "sr:match:71453928",
             "eventSource": {
                 "preMatchSource": {
-                    "sourceType": "BET_GENIUS", "sourceId": "13599033",
+                    "sourceType": "BET_GENIUS",
+                    "sourceId": "111111113599033",
                 },
             },
         },
@@ -224,26 +232,56 @@ def test_match_events_union_find_three_platforms_bridge_via_betpawa():
     )
     assert len(results) == 1
     me = results[0]
-    assert me.sportradar_id == "70784812"
     assert me.genius_id == "13599033"
+    # sportradar_id is one of the two SR ids in the group (first-seen wins).
+    assert me.sportradar_id in ("70784812", "71453928")
     assert me.betpawa is bp_event
     assert me.betway is bw_event
     assert me.sportybet is sb_event
 
 
 def test_match_events_genius_only_match_has_no_sportradar_id():
-    """When neither side carries an SR id (BetPawa Genius widget alone,
-    SportyBet Genius event alone), the match still happens via the
-    Genius id; sportradar_id stays None."""
+    """When the only known signal is a Genius id (BetPawa carries
+    just the GENIUSSPORTS widget, no SPORTRADAR widget), the match
+    produces a MatchedEvent with sportradar_id=None.
+
+    NB: in practice this is a single-bookmaker case — real SportyBet
+    payloads always carry an SR id on data.eventId even for Genius
+    events. The contract being pinned is the matcher's behaviour when
+    the SR id is genuinely absent."""
     from bookieskit.matching.matcher import match_events
 
     bp_event = {"widgets": [{"id": "13599033", "type": "GENIUSSPORTS"}]}
+
+    results = match_events(("betpawa", [bp_event]))
+    assert len(results) == 1
+    me = results[0]
+    assert me.sportradar_id is None
+    assert me.genius_id == "13599033"
+    assert me.betpawa is bp_event
+
+
+def test_match_events_pairs_betpawa_sportybet_via_shared_sr():
+    """When BetPawa and SportyBet both expose the SAME SR id for the
+    same match (the common case for non-Genius events), they pair on
+    the SR key. This was true before 0.9.0 too — pinning it here for
+    regression coverage."""
+    from bookieskit.matching.matcher import match_events
+
+    bp_event = {
+        "widgets": [{"id": "71127902", "type": "SPORTRADAR"}],
+    }
     sb_event = {
         "data": {
-            "eventId": "sr:match:1111111113599033",
+            "eventId": "sr:match:71127902",
             "eventSource": {
                 "preMatchSource": {
-                    "sourceType": "BET_GENIUS", "sourceId": "13599033",
+                    "sourceType": "BET_RADAR",
+                    "sourceId": "111111171127902",  # prefixed
+                },
+                "liveSource": {
+                    "sourceType": "BET_RADAR",
+                    "sourceId": "71127902",  # bare
                 },
             },
         },
@@ -252,8 +290,8 @@ def test_match_events_genius_only_match_has_no_sportradar_id():
     results = match_events(("betpawa", [bp_event]), ("sportybet", [sb_event]))
     assert len(results) == 1
     me = results[0]
-    assert me.sportradar_id is None
-    assert me.genius_id == "13599033"
+    assert me.sportradar_id == "71127902"
+    assert me.genius_id is None
     assert me.betpawa is bp_event
     assert me.sportybet is sb_event
 

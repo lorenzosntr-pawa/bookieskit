@@ -23,12 +23,28 @@ from bookieskit.bookmakers._betika_shape import betika_first_match
 
 logger = logging.getLogger(__name__)
 
-# SportyBet's synthetic Genius encoding: real event id is
-# ``sr:match:11111111<genius_id>`` where the 8 leading ``1``s mark the
-# id as a BetGenius event. Real SportRadar ids are typically <= 8
-# digits, so a numeric tail starting with eight ``1``s and longer than
-# 8 chars is unambiguously a Genius encoding.
-_SPORTYBET_GENIUS_PREFIX = "11111111"
+# SportyBet's eventSource.sourceId namespacing marker — seven leading
+# ``1``s prepended to the provider id on some rows (preMatchSource for
+# both BET_RADAR and BET_GENIUS; liveSource for BET_GENIUS). Stripping
+# yields the bare provider id that matches BetPawa's GENIUSSPORTS
+# widget id (for Genius) or the raw SR id (for BetRadar). Observed via
+# live probe in 2026-05; see ``docs/sportybet.md`` for details.
+_SPORTYBET_SOURCE_ID_PREFIX = "1111111"
+
+
+def _strip_sportybet_source_prefix(source_id: str) -> str:
+    """Strip the 7-ones SportyBet namespacing prefix from a sourceId.
+
+    No-op when the prefix is absent or when stripping would leave an
+    empty string (defensive guard against a degenerate ``"1111111"``
+    payload).
+    """
+    if (
+        source_id.startswith(_SPORTYBET_SOURCE_ID_PREFIX)
+        and len(source_id) > len(_SPORTYBET_SOURCE_ID_PREFIX)
+    ):
+        return source_id[len(_SPORTYBET_SOURCE_ID_PREFIX):]
+    return source_id
 
 
 @dataclass(frozen=True)
@@ -140,17 +156,18 @@ def _extract_event_ids_betpawa(response: dict) -> EventIds:
 def _extract_event_ids_sportybet(response: dict) -> EventIds:
     """SportyBet exposes provider info two ways; we use both.
 
-    Primary (typed):
-        ``data.eventSource.preMatchSource.{sourceType, sourceId}`` plus
-        the parallel ``liveSource``. ``sourceType`` is ``"BET_RADAR"`` or
-        ``"BET_GENIUS"``.
+    Primary (typed): ``data.eventSource.{preMatchSource, liveSource}``
+    each carry ``sourceType`` (``BET_RADAR`` / ``BET_GENIUS``) and
+    ``sourceId``. The sourceId is sometimes prefixed with seven ``1``s
+    as a SportyBet namespacing marker — the prefix is stripped so the
+    Genius id matches BetPawa's GENIUSSPORTS widget id.
 
-    Fallback / cross-check:
-        ``data.eventId`` carries ``"sr:match:<sr_id>"`` for SR events and
-        ``"sr:match:11111111<genius_id>"`` for Genius events (eight
-        leading ``1``s mark the synthetic encoding). When both signals
-        are present and disagree, eventSource wins and a warning is
-        logged.
+    Fallback / cross-check: ``data.eventId`` always carries
+    ``"sr:match:<sr_id>"`` regardless of provider (a BetGenius event
+    still has an SR id for the same physical match). Used to populate
+    ``sportradar`` when eventSource is absent (minimal list-view
+    payloads). When both signals are present and the SR ids disagree,
+    a warning is logged and eventSource wins.
     """
     data = response.get("data") or {}
     if not isinstance(data, dict):
@@ -159,7 +176,10 @@ def _extract_event_ids_sportybet(response: dict) -> EventIds:
     sr_id: str | None = None
     genius_id: str | None = None
 
-    # Primary path: structured eventSource.
+    # Primary path: structured eventSource. preMatchSource and
+    # liveSource may carry different providers (e.g. prematch via
+    # SportRadar and live via BetGenius) — populate both ids when
+    # seen.
     source = data.get("eventSource") or {}
     if isinstance(source, dict):
         for key in ("preMatchSource", "liveSource"):
@@ -170,48 +190,30 @@ def _extract_event_ids_sportybet(response: dict) -> EventIds:
             sid = s.get("sourceId")
             if sid in (None, "", 0):
                 continue
-            sid_str = str(sid)
+            bare = _strip_sportybet_source_prefix(str(sid))
             if stype == "BET_RADAR" and sr_id is None:
-                sr_id = _strip_sr_prefix(sid_str)
+                sr_id = _strip_sr_prefix(bare)
             elif stype == "BET_GENIUS" and genius_id is None:
-                genius_id = sid_str
+                genius_id = bare
 
-    # Fallback / cross-check: data.eventId. Accepts ``sr:match:<id>``
-    # and bare-numeric forms; the ``sr:match:11111111<gid>`` synthetic
-    # encoding is only recognised when the prefix is present (a bare
-    # number can never be a synthetic Genius id).
+    # Fallback / cross-check: data.eventId carries the SR id. Accepts
+    # ``sr:match:<id>`` and bare-numeric forms (the latter for legacy
+    # responses that omit the prefix).
     event_id = data.get("eventId")
     if isinstance(event_id, (str, int)) and event_id != "":
         ev_str = str(event_id)
         if ev_str.startswith("sr:match:"):
-            numeric = ev_str[len("sr:match:"):]
-            is_genius_encoding = (
-                numeric.startswith(_SPORTYBET_GENIUS_PREFIX)
-                and len(numeric) > len(_SPORTYBET_GENIUS_PREFIX)
+            from_eventid = ev_str[len("sr:match:"):]
+        else:
+            from_eventid = ev_str
+        if sr_id is None:
+            sr_id = from_eventid
+        elif sr_id != from_eventid:
+            logger.warning(
+                "SportyBet eventId SR id %r disagrees with "
+                "eventSource SR id %r — using eventSource value",
+                from_eventid, sr_id,
             )
-        else:
-            numeric = ev_str
-            is_genius_encoding = False
-
-        if is_genius_encoding:
-            decoded = numeric[len(_SPORTYBET_GENIUS_PREFIX):]
-            if genius_id is None:
-                genius_id = decoded
-            elif genius_id != decoded:
-                logger.warning(
-                    "SportyBet eventId genius decode %r disagrees with "
-                    "eventSource.sourceId %r — using eventSource value",
-                    decoded, genius_id,
-                )
-        else:
-            if sr_id is None:
-                sr_id = numeric
-            elif sr_id != numeric:
-                logger.warning(
-                    "SportyBet eventId SR id %r disagrees with "
-                    "eventSource.sourceId %r — using eventSource value",
-                    numeric, sr_id,
-                )
 
     return EventIds(sportradar=sr_id, genius=genius_id)
 

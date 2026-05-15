@@ -101,66 +101,104 @@ def test_extract_event_ids_betpawa_from_live_fixture():
     assert ids.genius == "13571147"
 
 
-# ---- extract_event_ids — SportyBet (eventSource + 11111111 fallback) -----
+# ---- extract_event_ids — SportyBet (eventSource + sourceId prefix) -------
+#
+# Real SportyBet payloads (observed via live probe, 2026-05) ship:
+#   data.eventId   = "sr:match:<sr_id>"      (ALWAYS the SR id, regardless
+#                                             of provider — including for
+#                                             BetGenius events)
+#   data.eventSource.{preMatchSource,liveSource}.sourceType = "BET_RADAR"
+#                                                          or "BET_GENIUS"
+#   data.eventSource.*.sourceId = "1111111<id>" (7-ones prefix) on some
+#                                                rows, bare id on others
+# The 7-ones prefix is a SportyBet namespacing marker; strip it before
+# returning the provider id so SportyBet's Genius id matches BetPawa's
+# GENIUSSPORTS widget id (which is the bare 8-digit form like "13599033").
 
 
 def test_extract_event_ids_sportybet_event_source_radar():
+    """Pure SportRadar event — sourceType=BET_RADAR on both phases.
+    preMatchSource.sourceId carries the 7-ones prefix in this real-world
+    capture; liveSource.sourceId is bare. The extractor strips when
+    present and produces the same bare SR id regardless."""
     from bookieskit.matching.extractor import extract_event_ids
     response = {
         "data": {
-            "eventId": "sr:match:70784812",
+            "eventId": "sr:match:71127902",
             "bgEvent": False,
             "eventSource": {
                 "preMatchSource": {
-                    "sourceType": "BET_RADAR", "sourceId": "70784812",
+                    "sourceType": "BET_RADAR", "sourceId": "111111171127902",
                 },
                 "liveSource": {
-                    "sourceType": "BET_RADAR", "sourceId": "70784812",
+                    "sourceType": "BET_RADAR", "sourceId": "71127902",
                 },
             },
         },
     }
     ids = extract_event_ids(response, platform="sportybet")
-    assert ids.sportradar == "70784812"
+    assert ids.sportradar == "71127902"
     assert ids.genius is None
 
 
 def test_extract_event_ids_sportybet_event_source_genius():
-    """When sourceType=BET_GENIUS the sourceId is the Genius event id."""
+    """Real BetGenius event — sourceType=BET_GENIUS on both phases,
+    sourceId carries the 7-ones prefix. The eventId is STILL the
+    SportRadar id (SportyBet's eventId is always sr:match:<sr_id>
+    regardless of provider — BetGenius events have BOTH a Genius id
+    and an SR id for the same physical match)."""
     from bookieskit.matching.extractor import extract_event_ids
     response = {
         "data": {
-            "eventId": "sr:match:1111111113599033",
-            "bgEvent": True,
+            # SR id of the same match — SportyBet always carries this.
+            "eventId": "sr:match:71453928",
+            "bgEvent": False,  # observed: bgEvent is NOT reliably set
             "eventSource": {
                 "preMatchSource": {
-                    "sourceType": "BET_GENIUS", "sourceId": "13599033",
+                    "sourceType": "BET_GENIUS",
+                    "sourceId": "111111113899686",  # 7 ones + Genius id
                 },
                 "liveSource": {
-                    "sourceType": "BET_GENIUS", "sourceId": "13599033",
+                    "sourceType": "BET_GENIUS",
+                    "sourceId": "111111113899686",
                 },
             },
         },
     }
     ids = extract_event_ids(response, platform="sportybet")
-    assert ids.genius == "13599033"
-    # Plain SR id is NOT recovered (the eventId is a synthetic
-    # Genius encoding, not a real SR id).
-    assert ids.sportradar is None
+    # BOTH provider ids are populated for a real Genius event.
+    assert ids.sportradar == "71453928"
+    assert ids.genius == "13899686"
 
 
-def test_extract_event_ids_sportybet_event_id_genius_fallback():
-    """No eventSource → recover Genius id from the
-    sr:match:11111111<gid> synthetic encoding on data.eventId."""
+def test_extract_event_ids_sportybet_mixed_phase_providers():
+    """SportyBet sometimes routes prematch via SportRadar and live via
+    BetGenius (or vice versa) for the same event. Both ids must be
+    extracted — the SR id from the BET_RADAR phase, the Genius id from
+    the BET_GENIUS phase."""
     from bookieskit.matching.extractor import extract_event_ids
-    response = {"data": {"eventId": "sr:match:1111111113599033"}}
+    response = {
+        "data": {
+            "eventId": "sr:match:71494650",
+            "eventSource": {
+                "preMatchSource": {
+                    "sourceType": "BET_RADAR", "sourceId": "71494650",
+                },
+                "liveSource": {
+                    "sourceType": "BET_GENIUS",
+                    "sourceId": "111111113902741",
+                },
+            },
+        },
+    }
     ids = extract_event_ids(response, platform="sportybet")
-    assert ids.genius == "13599033"
-    assert ids.sportradar is None
+    assert ids.sportradar == "71494650"
+    assert ids.genius == "13902741"
 
 
-def test_extract_event_ids_sportybet_event_id_sr_fallback():
-    """No eventSource, plain eventId → SR id only."""
+def test_extract_event_ids_sportybet_event_id_only_fallback():
+    """When eventSource is absent (e.g. minimal list-view payloads),
+    data.eventId is the only signal — and it always carries the SR id."""
     from bookieskit.matching.extractor import extract_event_ids
     response = {"data": {"eventId": "sr:match:70784812"}}
     ids = extract_event_ids(response, platform="sportybet")
@@ -168,26 +206,65 @@ def test_extract_event_ids_sportybet_event_id_sr_fallback():
     assert ids.genius is None
 
 
-def test_extract_event_ids_sportybet_cross_check_disagreement_warns(caplog):
-    """When eventSource and the 11111111-decoded id disagree, log a
-    warning and prefer eventSource."""
+def test_extract_event_ids_sportybet_eventid_disagreement_warns(caplog):
+    """If the SR id derived from eventSource (BET_RADAR sourceId stripped
+    of prefix) disagrees with the SR id on data.eventId, log a warning
+    and prefer the eventSource value. This is the only realistic
+    cross-check disagreement scenario; the prior synthetic-encoding
+    disagreement test was based on a payload shape that never exists
+    in production."""
     import logging
 
     from bookieskit.matching.extractor import extract_event_ids
     response = {
         "data": {
-            "eventId": "sr:match:1111111199999999",  # decodes to 99999999
+            # eventId says SR id is "99999999"
+            "eventId": "sr:match:99999999",
             "eventSource": {
                 "preMatchSource": {
-                    "sourceType": "BET_GENIUS", "sourceId": "13599033",
+                    # eventSource says SR id is "70784812" (after strip)
+                    "sourceType": "BET_RADAR",
+                    "sourceId": "111111170784812",
                 },
             },
         },
     }
     with caplog.at_level(logging.WARNING, logger="bookieskit.matching.extractor"):
         ids = extract_event_ids(response, platform="sportybet")
-    assert ids.genius == "13599033"  # eventSource wins
-    assert any("13599033" in r.getMessage() for r in caplog.records)
+    assert ids.sportradar == "70784812"  # eventSource wins
+    assert any(
+        "70784812" in r.getMessage() and "99999999" in r.getMessage()
+        for r in caplog.records
+    )
+
+
+# ---- SportyBet sourceId prefix-stripping unit tests -----------------------
+
+
+def test_sportybet_prefix_strips_genius_sourceid():
+    """The 7-ones prefix is what makes SportyBet's Genius sourceId match
+    BetPawa's bare 8-digit Genius widget id."""
+    from bookieskit.matching.extractor import _strip_sportybet_source_prefix
+    assert _strip_sportybet_source_prefix("111111113899686") == "13899686"
+
+
+def test_sportybet_prefix_strips_radar_sourceid():
+    """The same prefix appears on BET_RADAR preMatchSource rows."""
+    from bookieskit.matching.extractor import _strip_sportybet_source_prefix
+    assert _strip_sportybet_source_prefix("111111171127902") == "71127902"
+
+
+def test_sportybet_prefix_passes_bare_sourceid_through():
+    """liveSource for BET_RADAR rows ships the bare id (no prefix).
+    The strip helper must be a no-op."""
+    from bookieskit.matching.extractor import _strip_sportybet_source_prefix
+    assert _strip_sportybet_source_prefix("71127902") == "71127902"
+
+
+def test_sportybet_prefix_requires_more_than_prefix():
+    """Don't strip if the result would be empty."""
+    from bookieskit.matching.extractor import _strip_sportybet_source_prefix
+    assert _strip_sportybet_source_prefix("1111111") == "1111111"
 
 
 # ---- extract_event_ids — SR-only platforms ---------------------------------
