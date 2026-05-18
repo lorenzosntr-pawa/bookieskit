@@ -25,12 +25,41 @@ def _normalised_probability_mode(mode: object) -> ProbabilityMode:
     return "off"
 
 
+class _SportScopedRegistry:
+    """Thin wrapper that injects a ``sport=`` filter into every
+    ``get_by_platform_id`` call without requiring per-parser changes.
+
+    Per-platform parsers issue ``registry.get_by_platform_id(platform,
+    id)`` to resolve raw market ids to canonical mappings. For
+    sport-scoped ids (SportPesa's "52" is football O/U AND basketball
+    O/U), the bare lookup returns the first-registered mapping
+    (typically soccer). When parse_markets is invoked with
+    ``sport="basketball"``, this wrapper rewrites those lookups to use
+    the sport-aware index instead.
+    """
+
+    def __init__(self, inner: MarketRegistry, sport: str) -> None:
+        self._inner = inner
+        self._sport = sport
+
+    def get_by_platform_id(
+        self, platform: str, platform_id: str
+    ) -> MarketMapping | None:
+        return self._inner.get_by_platform_id(
+            platform, platform_id, sport=self._sport
+        )
+
+    def __getattr__(self, name: str):
+        return getattr(self._inner, name)
+
+
 def parse_markets(
     response: dict,
     platform: str,
     registry: MarketRegistry | None = None,
     *,
     probability: ProbabilityMode = "off",
+    sport: str | None = None,
 ) -> list[NormalizedMarket]:
     """Parse raw event detail response into normalized markets.
 
@@ -38,7 +67,7 @@ def parse_markets(
         response: Raw JSON from get_event_detail()
         platform: One of "betpawa", "sportybet", "bet9ja", "betway",
             "msport", "sportpesa", "betika". Unknown values return [].
-        registry: Market registry to use (default: built-in 6 markets)
+        registry: Market registry to use (default: built-in markets)
         probability: How much probability data to extract per outcome.
             "off" (default) — no probability parsing; both fields None.
             "true" — populate true_probability where the platform supports it.
@@ -46,6 +75,13 @@ def parse_markets(
             Bet9ja, Betway, SportPesa, and Betika don't expose probability
             on their selections — both fields stay None for them regardless
             of mode.
+        sport: Optional sport filter for registry lookups. Pass
+            ``"basketball"`` to disambiguate market ids that overlap
+            with football on the same bookmaker (notably SportPesa's
+            id ``"52"`` is football O/U AND basketball O/U). Defaults
+            to ``None``, preserving pre-0.12.0 behaviour (each shared
+            id resolves to whichever mapping was registered first,
+            typically soccer).
 
     Returns:
         List of NormalizedMarket for all recognized markets.
@@ -53,6 +89,8 @@ def parse_markets(
     """
     if registry is None:
         registry = MarketRegistry()
+    if sport is not None:
+        registry = _SportScopedRegistry(registry, sport)  # type: ignore[assignment]
     mode = _normalised_probability_mode(probability)
 
     parsers = {
@@ -388,11 +426,12 @@ def _parse_bet9ja(
     parameterized_groups: dict[str, dict[float, list[tuple[str, float]]]] = {}
 
     for key, value in odds_dict.items():
-        # Bet9ja prematch keys start with "S_"; live keys start with "LIVES_".
-        # Normalize both to "S_..." so the rest of the parser is unchanged.
+        # Bet9ja prematch soccer keys start with "S_"; live with "LIVES_";
+        # basketball with "B_". Normalize "LIVES_" → "S_" so soccer-live
+        # parses through the soccer path; otherwise require S_ or B_.
         if key.startswith("LIVES_"):
             key = "S_" + key[len("LIVES_"):]
-        elif not key.startswith("S_"):
+        elif not (key.startswith("S_") or key.startswith("B_")):
             continue
 
         # Live odds are wrapped as {"v": <float>}; prematch are bare strings.
@@ -467,12 +506,23 @@ def _parse_bet9ja_key(
 ) -> tuple[str, float | None, str] | None:
     """Parse a Bet9ja odds key into (market_key, line, outcome_suffix).
 
+    Bet9ja uses a single-letter sport prefix on every key: ``S_`` for
+    soccer, ``B_`` for basketball. The rebuilt ``market_key`` preserves
+    the original prefix so the registry lookup matches the right
+    ``MarketMapping.bet9ja_key``.
+
     Examples:
-        "S_1X2_1" -> ("S_1X2", None, "1")
+        "S_1X2_1"   -> ("S_1X2", None, "1")
         "S_OU@2.5_O" -> ("S_OU", 2.5, "O")
-        "S_DC_1X" -> ("S_DC", None, "1X")
+        "S_DC_1X"   -> ("S_DC", None, "1X")
+        "B_12_1"    -> ("B_12", None, "1")
+        "B_OUN@157.5_O" -> ("B_OUN", 157.5, "O")
+        "B_H@-3.5_1" -> ("B_H", -3.5, "1")  (signed line)
     """
-    # Remove "S_" prefix for parsing
+    # The prefix is always 2 chars (S_ / B_) — preserve it on rebuild.
+    if not (key.startswith("S_") or key.startswith("B_")):
+        return None
+    prefix = key[:2]
     without_prefix = key[2:]
 
     # Check for line (@ separator)
@@ -490,17 +540,17 @@ def _parse_bet9ja_key(
         except ValueError:
             return None
         outcome = rest[last_us + 1:]
-        return (f"S_{market_part}", line, outcome)
+        return (f"{prefix}{market_part}", line, outcome)
     else:
         # Format: MARKET_OUTCOME (find the split point)
-        # Market keys: 1X2, OU, GGNG, DC, etc.
+        # Market keys: 1X2, OU, GGNG, DC, 12, OUN, H, etc.
         # Try splitting at last underscore
         last_us = without_prefix.rfind("_")
         if last_us == -1:
             return None
         market_part = without_prefix[:last_us]
         outcome = without_prefix[last_us + 1:]
-        return (f"S_{market_part}", None, outcome)
+        return (f"{prefix}{market_part}", None, outcome)
 
 
 def _build_bet9ja_outcomes(
