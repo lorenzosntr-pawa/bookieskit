@@ -426,12 +426,16 @@ def _parse_bet9ja(
     parameterized_groups: dict[str, dict[float, list[tuple[str, float]]]] = {}
 
     for key, value in odds_dict.items():
-        # Bet9ja prematch soccer keys start with "S_"; live with "LIVES_";
-        # basketball with "B_". Normalize "LIVES_" → "S_" so soccer-live
-        # parses through the soccer path; otherwise require S_ or B_.
+        # Bet9ja prematch keys are sport-prefixed: "S_" for soccer,
+        # "B_" for basketball, "T_" for tennis. Live soccer is "LIVES_"
+        # which we normalise to "S_" for the rest of the parser.
         if key.startswith("LIVES_"):
             key = "S_" + key[len("LIVES_"):]
-        elif not (key.startswith("S_") or key.startswith("B_")):
+        elif not (
+            key.startswith("S_")
+            or key.startswith("B_")
+            or key.startswith("T_")
+        ):
             continue
 
         # Live odds are wrapped as {"v": <float>}; prematch are bare strings.
@@ -519,8 +523,12 @@ def _parse_bet9ja_key(
         "B_OUN@157.5_O" -> ("B_OUN", 157.5, "O")
         "B_H@-3.5_1" -> ("B_H", -3.5, "1")  (signed line)
     """
-    # The prefix is always 2 chars (S_ / B_) — preserve it on rebuild.
-    if not (key.startswith("S_") or key.startswith("B_")):
+    # The prefix is always 2 chars (S_ / B_ / T_) — preserve it on rebuild.
+    if not (
+        key.startswith("S_")
+        or key.startswith("B_")
+        or key.startswith("T_")
+    ):
         return None
     prefix = key[:2]
     without_prefix = key[2:]
