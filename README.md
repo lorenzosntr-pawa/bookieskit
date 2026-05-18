@@ -161,18 +161,37 @@ Pass `registry=registry` to `client.get_markets(event_id, registry=registry)` or
 
 ## Limitations / known gaps
 
-- **SportPesa endpoints are gated by Akamai Bot Manager.** The client does NOT solve the challenge. Callers must supply warmed cookies harvested from a browser session — for example, by setting `self._http_client.headers["cookie"] = "..."` after entering the async context. Same posture as the BetPawa SR-id reverse-search gap. See [docs/sportpesa.md](docs/sportpesa.md).
-- **SportPesa SR-id reverse search not implemented.** Same shape as the BetPawa gap below — extract an SR id from a SportPesa event-detail response, but no SR id → SportPesa internal id lookup.
-- **SportPesa list-endpoint paths are best-evidence pending fixture capture.** `get_sports`, `get_countries`, `get_tournaments`, `get_events` use the most likely SportPesa URLs; the two confirmed endpoints (`get_event_detail`, `get_event_markets`) come from real captured requests. A `# fixture-resolve` comment marks each unconfirmed path; the smoke run pins them down.
-- **BetPawa SR-id reverse search not implemented.** The lib can extract a BetPawa event's SR id from the SPORTRADAR widget, but cannot find a BetPawa internal id from a SR id. Workaround: start from a BetPawa id (see `examples/odds_from_betpawa_id.py`).
+### Network gates
+
+- **SportPesa endpoints are gated by Akamai Bot Manager.** The client does NOT solve the challenge. Callers must supply a warmed cookie harvested from a browser session, via either the constructor kwarg or the runtime setter:
+
+  ```python
+  async with SportPesa(country="ke", cookie=cookie_str) as sp:
+      ...
+  # Or refresh mid-session:
+  sp.set_cookie(new_cookie_str)
+  ```
+
+  Without a valid cookie every request fails with Akamai's anti-bot HTML page. See [docs/sportpesa.md](docs/sportpesa.md).
+
+### Reverse lookups not implemented
+
+- **BetPawa SR-id reverse search not implemented.** The lib can extract a BetPawa event's SR id from the SPORTRADAR widget, but cannot find a BetPawa internal id from a SR id. Workaround: start from a BetPawa id (see `examples/odds_from_betpawa_id.py`) or walk a competition (`examples/odds_for_betpawa_competition.py`).
+- **SportPesa SR-id reverse search not implemented.** Same shape: can extract an SR id (via `betradarId` on event rows), but no direct SR-id → SportPesa game-id lookup. The example index builder in `examples/compare_betpawa_competition_full.py:build_sportpesa_index` walks `get_navigation` + per-league `get_events` once to assemble a `{sr_id: game_id}` map.
+
+### Bookmaker-specific quirks that callers must work around
+
 - **Betika `match_id` is not globally unique — pass `competition_id`.** Within a sport, multiple matches can share the same `match_id`; the API only disambiguates when `competition_id` is also supplied. A bare lookup by `match_id + sport_id` may resolve to a different match (observed: tennis match_id `10945420` resolves to either Svrcina/Den Ouden or Tsitsipas/Mpetshi depending on which competition is in scope). `Betika.get_event_detail()` and `Betika.get_event_markets()` accept an optional `competition_id` parameter — always pass it when you have it (it's on every match row from the listing endpoint). The example index builder in `examples/compare_betpawa_competition_full.py` shows the pattern.
-- **Bet9ja prematch SR-id search.** `Bet9ja.build_prematch_event_map(sport_id="1")` walks every soccer tournament — takes a few seconds on first call. Cache the returned dict if you need to look up many SR ids in one session.
-- **Betway live event-detail returns only scoreboard.** `Betway.get_event_detail()` does not include markets. Use `Betway.get_markets(event_id)` (which calls `get_event_markets` under the hood).
-- **SportyBet/MSport require `live=True` for live markets.** Default `live=False` uses `productId=3` which returns only player-prop markets for in-play events. Pass `live=True` to use `productId=1`.
-- **GeniusSport-fed events are not handled.** Cross-bookmaker matching is built on SportRadar ids; events sourced from the GeniusSport feed don't carry an SR id and won't appear in matched results.
-- **Test-coverage gaps (9 methods).** The following methods have no test: `SportyBet.get_sportradar_id` (inherited), `Bet9ja.get_live_sports`, `Bet9ja.get_live_events`, `Bet9ja.get_countries`, `Bet9ja.get_tournaments`, `Bet9ja.get_markets` (inherited), `Betway.get_tournaments`, `MSport.get_markets` (inherited), `MSport.get_sportradar_id` (inherited). The live-endpoint methods (`get_live_sports`, `get_live_events`) are the highest-risk gaps given their structurally different payload.
-- **Silent error swallow in `Bet9ja.build_prematch_event_map`.** `bet9ja.py:142` contains a bare `except Exception: return {}` inside the inner `_fetch` coroutine. Any per-tournament HTTP error (rate-limit, 5xx, timeout) is silently swallowed and treated as an empty result — the caller cannot tell which tournaments failed. This is intentional best-effort behaviour but masks transient errors; a logged `BookiesKitError` subclass should replace the bare swallow.
+- **Bet9ja prematch SR-id search walks every tournament.** `Bet9ja.build_prematch_event_map(sport_id=...)` fans out one call per tournament under the sport (soccer `"1"`, basketball `"2"`, tennis `"5"`), so the first call takes a few seconds. Cache the returned `{sr_id: internal_id}` dict if you need to look up many SR ids in one session.
+- **Betway event-detail returns only scoreboard.** `Betway.get_event_detail()` does not include markets — use `Betway.get_markets(event_id)` (which calls `get_event_markets` under the hood) or `Betway.get_event_markets(event_id)` for the raw response.
+- **SportyBet/MSport require `live=True` for live markets.** Default `live=False` uses `productId=3`, which returns only player-prop markets for in-play events. Pass `live=True` to use `productId=1` for the full live market book.
+- **Bet9ja basketball/tennis use prefixed market keys.** Soccer uses `S_*` (prematch) and `LIVES_*` (live); basketball uses `B_*`; tennis uses `T_*`. The parser dispatcher handles all four prefixes; the only impact on callers is that custom `MarketMapping`s for non-soccer Bet9ja markets must use the correct prefix in `bet9ja_key`.
+
+### Internal behaviour worth knowing
+
+- **Silent error swallow in `Bet9ja.build_prematch_event_map`.** `src/bookieskit/bookmakers/bet9ja.py:140` contains a bare `except Exception: return {}` inside the inner `_fetch` coroutine. Any per-tournament HTTP error (rate-limit, 5xx, timeout) is silently swallowed and treated as an empty result — the caller cannot tell which tournaments failed. This is intentional best-effort behaviour but masks transient errors; a logged `BookiesKitError` subclass should replace the bare swallow.
+- **Cross-bookmaker matching uses two provider ids.** SportRadar is the primary; BetGenius / Genius Sports is the secondary (used by BetPawa, SportyBet, and Bet9ja-live). `match_events(...)` groups events from multiple bookmakers by ANY shared provider id via union-find, so events that share only the BetGenius id still match. See [docs/matching.md](docs/matching.md).
 
 ## License
 
-(Whatever the project's license is. Leave a placeholder if not yet set.)
+Not yet set. Add a `LICENSE` file and a `license` field to `pyproject.toml` before publishing.
