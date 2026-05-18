@@ -1,4 +1,12 @@
-"""SportyBet client — supports ng, gh, ke."""
+"""SportyBet client — supports ng, gh, ke, tz, za, cm, zm.
+
+SportyBet also operates a Canadian market under https://sportybet.ca,
+but that platform uses a different API shape and authentication flow.
+The current client (which assumes /api/{cc}/factsCenter/... on the
+www.sportybet.com data domain) doesn't apply there; the ``ca`` country
+code is intentionally not in ``DOMAINS``. Add a dedicated client (or
+parallel codepath) if Canadian coverage is needed.
+"""
 
 import time
 from typing import Any
@@ -10,11 +18,14 @@ from bookieskit.config import SPORTYBET_MAX_CONCURRENT, SPORTYBET_REQUEST_DELAY
 class SportyBet(BaseBookmaker):
     """HTTP client for SportyBet API.
 
-    SportyBet uses the same base domain for all countries but differentiates
-    via the API path (e.g., /api/ng/... vs /api/gh/...).
+    SportyBet uses the same base domain for all African countries but
+    differentiates via the API path (e.g., /api/ng/... vs /api/gh/...).
+    Each country code added here was verified live by calling
+    ``/api/{cc}/factsCenter/popularAndSportList`` and confirming a
+    populated ``data.sportList``.
 
     Args:
-        country: Country code (ng, gh, ke)
+        country: Country code (one of: ng, gh, ke, tz, za, cm, zm)
         timeout: Request timeout in seconds (default: 30)
         max_retries: Max retry attempts (default: 3)
         backoff_factor: Exponential backoff base (default: 1.0)
@@ -26,6 +37,10 @@ class SportyBet(BaseBookmaker):
         "ng": "https://www.sportybet.com",
         "gh": "https://www.sportybet.com",
         "ke": "https://www.sportybet.com",
+        "tz": "https://www.sportybet.com",
+        "za": "https://www.sportybet.com",
+        "cm": "https://www.sportybet.com",
+        "zm": "https://www.sportybet.com",
     }
     DEFAULT_HEADERS = {
         "accept": "*/*",

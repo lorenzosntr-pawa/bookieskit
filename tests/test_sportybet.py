@@ -9,6 +9,24 @@ def test_sportybet_country_ng_resolves_domain():
     assert client.base_url == "https://www.sportybet.com"
 
 
+@pytest.mark.parametrize("country", ["tz", "za", "cm", "zm"])
+def test_sportybet_new_countries_resolve_domain(country):
+    """4 SportyBet countries added in 0.10.0 — verified live via
+    /factsCenter/popularAndSportList. All share the same base; country
+    is differentiated by the URL path segment."""
+    client = SportyBet(country=country)
+    assert client.base_url == "https://www.sportybet.com"
+
+
+def test_sportybet_canada_not_supported():
+    """SportyBet operates sportybet.ca but on a different platform with
+    a different API shape — intentionally NOT in DOMAINS. Pin the
+    behaviour so future maintainers don't add it speculatively."""
+    from bookieskit.exceptions import UnsupportedCountryError
+    with pytest.raises(UnsupportedCountryError):
+        SportyBet(country="ca")
+
+
 def test_sportybet_unsupported_country():
     from bookieskit.exceptions import UnsupportedCountryError
 

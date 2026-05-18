@@ -2,17 +2,21 @@
 
 ## Supported Countries
 
-| Code | Country | API Path |
-|------|---------|----------|
-| `ng` | Nigeria | `/api/ng/...` |
-| `gh` | Ghana | `/api/gh/...` |
-| `ke` | Kenya | `/api/ke/...` |
+| Code | Country | API Path | Verified |
+|------|---------|----------|----------|
+| `ng` | Nigeria | `/api/ng/...` | live |
+| `gh` | Ghana | `/api/gh/...` | live |
+| `ke` | Kenya | `/api/ke/...` | live |
+| `tz` | Tanzania | `/api/tz/...` | live (0.10.0) |
+| `za` | South Africa | `/api/za/...` | live (0.10.0) |
+| `cm` | Cameroon | `/api/cm/...` | live (0.10.0) |
+| `zm` | Zambia | `/api/zm/...` | live (0.10.0) |
 
-All countries share the same `https://www.sportybet.com` base — the country segment lives in the URL path under `/api/{country}/factsCenter/...`.
+All countries share the same `https://www.sportybet.com` base — the country segment lives in the URL path under `/api/{country}/factsCenter/...`. Each entry was confirmed by calling `/factsCenter/popularAndSportList` and observing a populated `data.sportList` (16–22 sports per country).
 
-### Country expansion (deferred)
+### Canada (not supported)
 
-SportyBet publicly operates in additional markets (Tanzania, Uganda, Zambia, South Africa, Côte d'Ivoire, etc.). A v0.8.0 enumeration attempt was blocked by anti-bot / TLS-cert issues when probing from outside an African residential IP, so those entries are **not** added to the `DOMAINS` dict — adding them speculatively would expose `UnsupportedCountryError`-free code paths that fail at the first HTTP call. Open an issue or PR with a successful probe transcript to land another country.
+SportyBet operates a Canadian market at `https://sportybet.ca/`, but that platform uses a different API shape (Express-style routes, different authentication) — the `/api/{cc}/factsCenter/...` contract this client targets returns HTTP 502 there. The `ca` country code is intentionally NOT in `DOMAINS`; adding it speculatively would surface `UnsupportedCountryError`-free code paths that fail at the first HTTP call. Open an issue or PR with a `sportybet.ca` probe transcript if Canadian coverage is needed (it would warrant a dedicated client class given the divergent API).
 
 ## Provider ids (SportRadar + BetGenius)
 
