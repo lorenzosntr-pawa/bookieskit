@@ -1,0 +1,3259 @@
+{
+  "R": "OK",
+  "D": {
+    "INCTYPE": 0,
+    "ST": 1,
+    "GID": 4215694,
+    "SPORTCAST_FIXTURE_ID": "",
+    "C": "1248",
+    "STARTDATE": "2026-05-18 16:30:00",
+    "SGID": 43479,
+    "EXTID": "71427986",
+    "PLAYER_EID": 0,
+    "DS": "Baskets Bonn - Wurzburg Baskets",
+    "SID": 2,
+    "P": 0,
+    "PRV": 1,
+    "IS_BOOSTED": false,
+    "IS_BETBUILDER": false,
+    "ENDVISIBILITYDATE": "2026-05-18 16:30:00",
+    "ID": 775268202,
+    "PL": 0,
+    "TYPE": 0,
+    "ISSTREAMINGVIDEO": false,
+    "GN": "BBL",
+    "GP": 100,
+    "SG": "Germany",
+    "S": "Basketball",
+    "O": {
+      "B_OUA12@18.5_O": "1.65",
+      "B_OUH11@40.5_O": "2.15",
+      "B_OUN@155.5_O": "1.71",
+      "B_3QOU@38.5_U": "1.92",
+      "B_OUH@81.5_O": "2.15",
+      "B_4QD_1D": "1.79",
+      "B_OUN@155.5_U": "2.1",
+      "B_OUA11@36.5_U": "2.4",
+      "B_3Q1X2_X": "14.5",
+      "B_1HOU@75.5_O": "1.59",
+      "B_OUH@81.5_U": "1.64",
+      "B_OUN@163.5_O": "2.55",
+      "B_OUH11@40.5_U": "1.63",
+      "B_OUN@163.5_U": "1.51",
+      "B_1HH@-3.5_1": "2.4",
+      "B_1HOU@79.5_U": "1.67",
+      "B_3Q1X2_2": "2.05",
+      "B_1HH@-3.5_2": "1.54",
+      "B_3Q1X2_1": "1.86",
+      "B_H@-6.5_1": "2.7",
+      "B_4QD_2D": "1.92",
+      "B_H@-6.5_2": "1.45",
+      "B_3QH@-0.5_2": "1.83",
+      "B_1X21T_XHT": "19.6",
+      "B_3QH@-0.5_1": "1.86",
+      "B_3QOU@38.5_O": "1.79",
+      "B_OUA12@18.5_U": "2.1",
+      "B_DNB_1DBN": "1.7",
+      "B_1QWM_AWAY3": "2.6",
+      "B_1HOU@80.5_U": "1.58",
+      "B_OUA@79.5_O": "2.1",
+      "B_1HH@-0.5_1": "1.82",
+      "B_DNB1T_2DNBHT": "2",
+      "B_4Q1X2_2": "2",
+      "B_1QOU@39.5_U": "1.75",
+      "B_1HOU@80.5_O": "2.3",
+      "B_OE1P_EV": "1.85",
+      "B_1HH@-0.5_2": "1.92",
+      "B_OUA11@39.5_O": "2.1",
+      "B_OUN@151.5_U": "2.65",
+      "B_4Q1X2_1": "1.88",
+      "B_21X2_22": "2.05",
+      "B_OUH@77.5_U": "2.25",
+      "B_1HH@2.5_2": "2.55",
+      "B_H@-3.5_1": "2.05",
+      "B_H@-3.5_2": "1.74",
+      "B_OUN@151.5_O": "1.47",
+      "B_WMIO_AWAY1620": "17",
+      "B_OUH@77.5_O": "1.59",
+      "B_DNB_2DBN": "2.15",
+      "B_2QOU@38.5_U": "1.89",
+      "B_OUH11@39.5_O": "1.89",
+      "B_3QWM_O": "3",
+      "B_1QH@-1.5_1": "2.1",
+      "B_OURT@155.5_U": "2",
+      "B_2QOU@38.5_O": "1.81",
+      "B_1QH@-1.5_2": "1.66",
+      "B_1HOU@78.5_O": "1.96",
+      "B_4Q1X2_X": "14.2",
+      "B_OUH11@39.5_U": "1.82",
+      "B_WMIO_HOME1620": "11",
+      "B_1HH@2.5_1": "1.47",
+      "B_2HH@-1.5_1": "1.98",
+      "B_2QH@0.5_1": "1.69",
+      "B_2HH@-1.5_2": "1.74",
+      "B_2QH@0.5_2": "2.05",
+      "B_1QOU@39.5_O": "1.96",
+      "B_21X2_12": "1.83",
+      "B_H@3.5_2": "2.65",
+      "B_H@3.5_1": "1.46",
+      "B_OURT@155.5_O": "1.79",
+      "B_WMIO_AWAY610": "5.6",
+      "B_OUA@79.5_U": "1.69",
+      "B_1HOU@76.5_U": "2.1",
+      "B_4QWM_HOME3": "2.35",
+      "B_12_2": "2.1",
+      "B_H@-9.5_1": "3.7",
+      "B_12_1": "1.7",
+      "B_H@-9.5_2": "1.26",
+      "B_WMIO_HOME2125": "23",
+      "B_2HH@0.5_1": "1.69",
+      "B_2HH@0.5_2": "2.05",
+      "B_H@1.5_2": "2.25",
+      "B_H@1.5_1": "1.63",
+      "B_1X2HRT@-1_1": "1.87",
+      "B_1X2HRT@-1_2": "1.94",
+      "B_OUA12@19.5_U": "1.77",
+      "B_2HH@-2.5_2": "1.62",
+      "B_OUA12@19.5_O": "1.94",
+      "B_2HH@-2.5_1": "2.15",
+      "B_3QOU@37.5_O": "1.62",
+      "B_OUN@154.5_O": "1.64",
+      "B_2QWM_AWAY3": "2.6",
+      "B_12OU2@157.5_2O": "3.85",
+      "B_2HOU@80.5_O": "2.15",
+      "B_1HOU@74.5_O": "1.5",
+      "B_OUN@154.5_U": "2.2",
+      "B_12OU2@157.5_2U": "3.95",
+      "B_2HOU@80.5_U": "1.63",
+      "B_OE2TN_Even": "1.87",
+      "B_OUN@158.5_U": "1.83",
+      "B_WMIO_HOME15": "4.2",
+      "B_1QOU@40.5_U": "1.6",
+      "B_OUA@76.5_O": "1.65",
+      "B_4QOEP_E": "1.85",
+      "B_OUA@76.5_U": "2.15",
+      "B_OUN@158.5_O": "1.95",
+      "B_1QOU@40.5_O": "2.2",
+      "B_OUH@79.5_O": "1.84",
+      "B_OUA11@39.5_U": "1.66",
+      "B_1HH@-4.5_1": "2.65",
+      "B_H@-5.5_1": "2.45",
+      "B_1HH@-4.5_2": "1.44",
+      "B_3QOU@37.5_U": "2.15",
+      "B_H@-5.5_2": "1.53",
+      "B_2HOU@78.5_U": "1.85",
+      "B_4QOEP_O": "1.85",
+      "B_1QD_2D": "1.95",
+      "B_OUH@79.5_U": "1.9",
+      "B_H@-4.5_1": "2.25",
+      "B_2HOU@78.5_O": "1.85",
+      "B_H@-4.5_2": "1.63",
+      "B_OE1T_EV": "1.87",
+      "B_1QOU@38.5_O": "1.76",
+      "B_OUH@78.5_O": "1.7",
+      "B_1QOU@38.5_U": "1.95",
+      "B_1X2_1B": "1.79",
+      "B_2HOU@79.5_O": "1.99",
+      "B_OUN@160.5_U": "1.68",
+      "B_2QD_2D": "1.94",
+      "B_2QH@-1.5_2": "1.66",
+      "B_2HOU@79.5_U": "1.73",
+      "B_2QH@-1.5_1": "2.1",
+      "B_OUH@78.5_U": "2.05",
+      "B_1QH@-2.5_2": "1.51",
+      "B_OUN@160.5_O": "2.15",
+      "B_OUN@159.5_U": "1.75",
+      "B_OUA12@20.5_O": "2.35",
+      "B_OUA11@38.5_O": "1.85",
+      "B_3QWM_HOME3": "2.3",
+      "B_1QH@-2.5_1": "2.4",
+      "B_1HOU@79.5_O": "2.1",
+      "B_OUH12@18.5_O": "1.56",
+      "B_HFT_2/2": "3.05",
+      "B_HFT_2/1": "6.8",
+      "B_1X2HRT@-1_X": "34",
+      "B_OUN@159.5_O": "2.05",
+      "B_OUA12@20.5_U": "1.53",
+      "B_OUH12@18.5_U": "2.3",
+      "B_2QOU@37.5_O": "1.64",
+      "B_1X2_2B": "2.25",
+      "B_OUH12@20.5_O": "2.15",
+      "B_OUH@80.5_U": "1.76",
+      "B_1HOU@75.5_U": "2.25",
+      "B_2QD_1D": "1.77",
+      "B_2QOU@37.5_U": "2.1",
+      "B_OUH12@20.5_U": "1.63",
+      "B_OUH@80.5_O": "1.99",
+      "B_1HOU@81.5_U": "1.49",
+      "B_H@2.5_2": "2.45",
+      "B_H@2.5_1": "1.54",
+      "B_OUA11@40.5_U": "1.51",
+      "B_OUH11@38.5_U": "2.05",
+      "B_OUA11@40.5_O": "2.4",
+      "B_1HOU@81.5_O": "2.5",
+      "B_1HH@1.5_2": "2.3",
+      "B_1HH@1.5_1": "1.57",
+      "B_OUH11@38.5_O": "1.69",
+      "B_3QOEP_E": "1.85",
+      "B_HSQ_3": "3.85",
+      "B_2HH@1.5_2": "2.25",
+      "B_1HOU@77.5_U": "1.92",
+      "B_HSQ_2": "3.95",
+      "B_HSQ_4": "3.35",
+      "B_3QOEP_O": "1.85",
+      "B_WMIO_HOME1115": "7.6",
+      "B_HSQ_1": "3.9",
+      "B_OE1P_OD": "1.85",
+      "B_H@-8.5_1": "3.35",
+      "B_H@-8.5_2": "1.32",
+      "B_HFT_1/2": "7.85",
+      "B_2HH@-3.5_1": "2.4",
+      "B_HFT_1/1": "2.35",
+      "B_2HH@-3.5_2": "1.51",
+      "B_OUN@161.5_O": "2.25",
+      "B_1HH@3.5_1": "1.39",
+      "B_1HH@3.5_2": "2.85",
+      "B_HFT_2/X": "26.7",
+      "B_1HOU@73.5_O": "1.42",
+      "B_4QH@-0.5_1": "1.88",
+      "B_4QH@-0.5_2": "1.81",
+      "B_2HOU@77.5_U": "1.99",
+      "B_OUA11@38.5_U": "1.85",
+      "B_1HOU@73.5_U": "2.7",
+      "B_WMIO_HOME610": "4.5",
+      "B_3QD_1D": "1.77",
+      "B_WMIO_AWAY1115": "10",
+      "B_4QOU@40.5_U": "1.68",
+      "B_OUN@157.5_U": "1.91",
+      "B_2HH@1.5_1": "1.57",
+      "B_4QWM_O": "2.95",
+      "B_OUN@157.5_O": "1.86",
+      "B_1QH@1.5_2": "2.35",
+      "B_21X2_X2": "19.6",
+      "B_OUN@161.5_U": "1.62",
+      "B_HSQ_E": "12.2",
+      "B_1QH@1.5_1": "1.53",
+      "B_2HDNB_1D2": "1.75",
+      "B_3QH@0.5_2": "2.05",
+      "B_3QH@0.5_1": "1.69",
+      "B_4QOU@40.5_O": "2.05",
+      "B_2QH@-0.5_2": "1.83",
+      "B_OUH11@37.5_U": "2.35",
+      "B_2QH@-0.5_1": "1.86",
+      "B_WMIO_HOME26": "35",
+      "B_1HH@0.5_1": "1.68",
+      "B_OUH11@37.5_O": "1.53",
+      "B_1HH@0.5_2": "2.1",
+      "B_4QOU@39.5_O": "1.87",
+      "B_2QOEP_O": "1.85",
+      "B_OUH12@19.5_U": "1.9",
+      "B_2HOU@77.5_O": "1.73",
+      "B_3QD_2D": "1.94",
+      "B_DNB1T_1DNBHT": "1.74",
+      "B_1QOU@37.5_O": "1.6",
+      "B_1QOU@37.5_U": "2.2",
+      "B_1HH@-2.5_1": "2.15",
+      "B_OUH12@19.5_O": "1.81",
+      "B_1HH@-2.5_2": "1.64",
+      "B_OUA@77.5_O": "1.78",
+      "B_2QOEP_E": "1.85",
+      "B_1QD_1D": "1.77",
+      "B_OUA@77.5_U": "1.97",
+      "B_1HOU@74.5_U": "2.5",
+      "B_OUN@153.5_U": "2.35",
+      "B_OUN@153.5_O": "1.58",
+      "B_3QWM_AWAY3": "2.6",
+      "B_OUA11@37.5_O": "1.66",
+      "B_HFT_1/X": "26.2",
+      "B_1X2_XB": "13",
+      "B_12OU2@157.5_1O": "3.1",
+      "B_4QOU@39.5_U": "1.84",
+      "B_H@-1.5_1": "1.79",
+      "B_H@-1.5_2": "1.99",
+      "B_12OU2@157.5_1U": "3.2",
+      "B_2HDNB_2D2": "1.97",
+      "B_1HOU@76.5_O": "1.7",
+      "B_OUN@156.5_U": "2",
+      "B_1X21T_2HT": "2.1",
+      "B_OUH11@41.5_U": "1.49",
+      "B_OUN@156.5_O": "1.78",
+      "B_HFT_X/X": "220",
+      "B_WMIO_AWAY26": "70",
+      "B_3QOU@39.5_U": "1.73",
+      "B_OUH11@41.5_O": "2.45",
+      "B_2HH@2.5_1": "1.47",
+      "B_2HH@2.5_2": "2.5",
+      "B_2QOU@39.5_O": "2",
+      "B_3QH@-1.5_2": "1.66",
+      "B_3QH@-1.5_1": "2.1",
+      "B_OUA11@37.5_U": "2.1",
+      "B_1HOU@78.5_U": "1.79",
+      "B_HFT_X/1": "38",
+      "B_1QOU@36.5_U": "2.5",
+      "B_HFT_X/2": "45",
+      "B_4QH@-1.5_2": "1.64",
+      "B_2HOU@76.5_U": "2.15",
+      "B_OUA@80.5_O": "2.3",
+      "B_OUA@80.5_U": "1.58",
+      "B_H@-7.5_1": "3",
+      "B_H@-7.5_2": "1.38",
+      "B_OUN@162.5_U": "1.56",
+      "B_1QOU@36.5_O": "1.47",
+      "B_3QOU@39.5_O": "2",
+      "B_2QOU@39.5_U": "1.71",
+      "B_2QWM_HOME3": "2.3",
+      "B_OUN@162.5_O": "2.4",
+      "B_1QH@0.5_1": "1.68",
+      "B_1QH@0.5_2": "2.05",
+      "B_1QWM_HOME3": "2.3",
+      "B_WMIO_AWAY2125": "40",
+      "B_1QWM_O": "3",
+      "B_4QH@-1.5_1": "2.15",
+      "B_1HH@-1.5_2": "1.77",
+      "B_1HH@-1.5_1": "1.98",
+      "B_4QWM_AWAY3": "2.6",
+      "B_2QWM_O": "3",
+      "B_OUA@78.5_O": "1.92",
+      "B_4QOU@38.5_O": "1.7",
+      "B_1X21T_1HT": "1.82",
+      "B_2Q1X2_X": "14.3",
+      "B_1Q1X2_2": "2.05",
+      "B_1Q1X2_1": "1.86",
+      "B_2HOU@76.5_O": "1.63",
+      "B_2HH@-0.5_2": "1.88",
+      "B_H@4.5_2": "2.95",
+      "B_OE2TN_Odd": "1.87",
+      "B_H@4.5_1": "1.39",
+      "B_OE1T_OD": "1.87",
+      "B_4QOU@38.5_U": "2.05",
+      "B_H@-2.5_1": "1.92",
+      "B_H@-2.5_2": "1.86",
+      "B_2HH@-0.5_1": "1.83",
+      "B_OUA@78.5_U": "1.82",
+      "B_WMIO_AWAY15": "4.6",
+      "B_OUN@152.5_U": "2.5",
+      "B_4QH@0.5_2": "2",
+      "B_1HOU@77.5_O": "1.82",
+      "B_OUN@152.5_O": "1.52",
+      "B_OUA11@36.5_O": "1.5",
+      "B_1QH@-0.5_1": "1.86",
+      "B_4QH@0.5_1": "1.7",
+      "B_1QH@-0.5_2": "1.84",
+      "B_2Q1X2_2": "2.05",
+      "B_2Q1X2_1": "1.86",
+      "B_1Q1X2_X": "14.3"
+    },
+    "AUX": {
+      "B_4QH": {
+        "-1.5": -1.5,
+        "-0.5": -0.5,
+        "0.5": 0.5
+      },
+      "B_2QH": {
+        "-1.5": -1.5,
+        "-0.5": -0.5,
+        "0.5": 0.5
+      },
+      "B_3QH": {
+        "-1.5": -1.5,
+        "-0.5": -0.5,
+        "0.5": 0.5
+      },
+      "B_OUN": {
+        "151.5": 151.5,
+        "152.5": 152.5,
+        "153.5": 153.5,
+        "154.5": 154.5,
+        "155.5": 155.5,
+        "156.5": 156.5,
+        "157.5": 157.5,
+        "158.5": 158.5,
+        "159.5": 159.5,
+        "160.5": 160.5,
+        "161.5": 161.5,
+        "162.5": 162.5,
+        "163.5": 163.5
+      },
+      "B_1QH": {
+        "-2.5": -2.5,
+        "-1.5": -1.5,
+        "-0.5": -0.5,
+        "0.5": 0.5,
+        "1.5": 1.5
+      },
+      "B_OUA11": {
+        "36.5": 36.5,
+        "37.5": 37.5,
+        "38.5": 38.5,
+        "39.5": 39.5,
+        "40.5": 40.5
+      },
+      "B_OUA12": {
+        "18.5": 18.5,
+        "19.5": 19.5,
+        "20.5": 20.5
+      },
+      "B_H": {
+        "-9.5": -9.5,
+        "-8.5": -8.5,
+        "-7.5": -7.5,
+        "-6.5": -6.5,
+        "-5.5": -5.5,
+        "-4.5": -4.5,
+        "-3.5": -3.5,
+        "-2.5": -2.5,
+        "-1.5": -1.5,
+        "1.5": 1.5,
+        "2.5": 2.5,
+        "3.5": 3.5,
+        "4.5": 4.5
+      },
+      "B_1HOU": {
+        "73.5": 73.5,
+        "74.5": 74.5,
+        "75.5": 75.5,
+        "76.5": 76.5,
+        "77.5": 77.5,
+        "78.5": 78.5,
+        "79.5": 79.5,
+        "80.5": 80.5,
+        "81.5": 81.5,
+        "82.5": 82.5
+      },
+      "B_2HOU": {
+        "76.5": 76.5,
+        "77.5": 77.5,
+        "78.5": 78.5,
+        "79.5": 79.5,
+        "80.5": 80.5
+      },
+      "B_OUH": {
+        "77.5": 77.5,
+        "78.5": 78.5,
+        "79.5": 79.5,
+        "80.5": 80.5,
+        "81.5": 81.5
+      },
+      "B_12OU2": {
+        "157.5": 157.5
+      },
+      "B_OUA": {
+        "75.5": 75.5,
+        "76.5": 76.5,
+        "77.5": 77.5,
+        "78.5": 78.5,
+        "79.5": 79.5,
+        "80.5": 80.5
+      },
+      "B_2QOU": {
+        "37.5": 37.5,
+        "38.5": 38.5,
+        "39.5": 39.5
+      },
+      "B_1QOU": {
+        "36.5": 36.5,
+        "37.5": 37.5,
+        "38.5": 38.5,
+        "39.5": 39.5,
+        "40.5": 40.5,
+        "41.5": 41.5
+      },
+      "B_4QOU": {
+        "38.5": 38.5,
+        "39.5": 39.5,
+        "40.5": 40.5
+      },
+      "B_3QOU": {
+        "37.5": 37.5,
+        "38.5": 38.5,
+        "39.5": 39.5
+      },
+      "B_1X2HRT": {
+        "-2": -2,
+        "-1": -1
+      },
+      "B_1HH": {
+        "-5.5": -5.5,
+        "-4.5": -4.5,
+        "-3.5": -3.5,
+        "-2.5": -2.5,
+        "-1.5": -1.5,
+        "-0.5": -0.5,
+        "0.5": 0.5,
+        "1.5": 1.5,
+        "2.5": 2.5,
+        "3.5": 3.5
+      },
+      "B_OURT": {
+        "155.5": 155.5
+      },
+      "B_2HH": {
+        "-3.5": -3.5,
+        "-2.5": -2.5,
+        "-1.5": -1.5,
+        "-0.5": -0.5,
+        "0.5": 0.5,
+        "1.5": 1.5,
+        "2.5": 2.5
+      },
+      "B_OUH11": {
+        "37.5": 37.5,
+        "38.5": 38.5,
+        "39.5": 39.5,
+        "40.5": 40.5,
+        "41.5": 41.5
+      },
+      "B_OUH12": {
+        "18.5": 18.5,
+        "19.5": 19.5,
+        "20.5": 20.5
+      }
+    },
+    "EXCLUDED_BONUS": [],
+    "BOOSTED_ODDS": [],
+    "BOOSTED_MARKETS": [],
+    "MK": [
+      {
+        "ID": "B_OUA12",
+        "DS": "Over/under Away 1stQ",
+        "MDESC": "You have to predict if the total number of points scored by the Away team during the first quarter will be over or under the spread indicate.",
+        "P": "127",
+        "VW": "3",
+        "GCAT": "1QUARTER",
+        "MARKETID": "14875",
+        "M_PAYOUT": "120",
+        "CNT": "P",
+        "CNTLABEL": "Points",
+        "SGN": [
+          "Over",
+          "Under"
+        ],
+        "SGNK": [
+          "O",
+          "U"
+        ]
+      },
+      {
+        "ID": "B_OUH11",
+        "DS": "Over/Under Home 1HT",
+        "MDESC": "You have to predict if the total number of points scored by the Home team during the first\u00a0half will be over or under the spread indicated, if the half is uncompleted this market will be made void.",
+        "P": "114",
+        "VW": "3",
+        "GCAT": "HALVES",
+        "MARKETID": "14869",
+        "M_PAYOUT": "120",
+        "CNT": "P",
+        "CNTLABEL": "Points",
+        "SGN": [
+          "Over",
+          "Under"
+        ],
+        "SGNK": [
+          "O",
+          "U"
+        ]
+      },
+      {
+        "ID": "B_OUN",
+        "DS": "Over/Under",
+        "MDESC": "You have to predict if the total number of points scored during the entire match will be over or under the spread indicated.",
+        "P": "3",
+        "VW": "3",
+        "GCAT": "POPULAR",
+        "MARKETID": "9333",
+        "M_PAYOUT": "120",
+        "CNT": "P",
+        "CNTLABEL": "Points",
+        "SGN": [
+          "Over",
+          "Under"
+        ],
+        "SGNK": [
+          "O",
+          "U"
+        ]
+      },
+      {
+        "ID": "B_3QOU",
+        "DS": "3rd Quarter - Over/Under",
+        "MDESC": "You have to predict if the total number of points scored during the third quarter will be over or under the spread indicated.",
+        "P": "141",
+        "VW": "3",
+        "GCAT": "3QUARTER",
+        "MARKETID": "14873",
+        "M_PAYOUT": "120",
+        "CNT": "P",
+        "CNTLABEL": "Points",
+        "SGN": [
+          "Over",
+          "Under"
+        ],
+        "SGNK": [
+          "O",
+          "U"
+        ]
+      },
+      {
+        "ID": "B_OUH",
+        "DS": "Over/Under Home",
+        "MDESC": "You have to predict if the total number of points scored by the Home team during the entire match will be over or under the spread indicated.",
+        "P": "107",
+        "VW": "3",
+        "GCAT": "POPULAR",
+        "MARKETID": "14878",
+        "M_PAYOUT": "120",
+        "CNT": "P",
+        "CNTLABEL": "Points",
+        "SGN": [
+          "Over",
+          "Under"
+        ],
+        "SGNK": [
+          "O",
+          "U"
+        ]
+      },
+      {
+        "ID": "B_4QD",
+        "DS": "4th Quarter - DNB",
+        "MDESC": "You have to predict the winner of the 4th quarter",
+        "P": "144",
+        "VW": "0",
+        "GCAT": "4QUARTER",
+        "MARKETID": "14850",
+        "M_PAYOUT": "120",
+        "CNT": "GR",
+        "CNTLABEL": "Generic Result",
+        "SGN": [
+          "1 DNB",
+          "2 DNB"
+        ],
+        "SGNK": [
+          "1D",
+          "2D"
+        ]
+      },
+      {
+        "ID": "B_OUA11",
+        "DS": "Over/Under Away 1HT",
+        "MDESC": "You have to predict if the total number of points scored by the Away team during the first\u00a0half will be over or under the spread indicated, if the half is uncompleted this market will be made void.",
+        "P": "115",
+        "VW": "3",
+        "GCAT": "HALVES",
+        "MARKETID": "14868",
+        "M_PAYOUT": "120",
+        "CNT": "P",
+        "CNTLABEL": "Points",
+        "SGN": [
+          "Over",
+          "Under"
+        ],
+        "SGNK": [
+          "O",
+          "U"
+        ]
+      },
+      {
+        "ID": "B_3Q1X2",
+        "DS": "3rd Quarter - 1X2",
+        "MDESC": "What will be the result of the third quarter?",
+        "P": "140",
+        "VW": "0",
+        "GCAT": "3QUARTER",
+        "MARKETID": "14865",
+        "M_PAYOUT": "120",
+        "CNT": "GR",
+        "CNTLABEL": "Generic Result",
+        "SGN": [
+          "1",
+          "X",
+          "2"
+        ],
+        "SGNK": [
+          "1",
+          "X",
+          "2"
+        ]
+      },
+      {
+        "ID": "B_1HOU",
+        "DS": "1st Half - Over/Under",
+        "MDESC": "You have to predict if the total number of points scored during the first half will be over or under the spread indicated.",
+        "P": "113",
+        "VW": "3",
+        "GCAT": "HALVES",
+        "MARKETID": "14867",
+        "M_PAYOUT": "120",
+        "CNT": "P",
+        "CNTLABEL": "Points",
+        "SGN": [
+          "Over",
+          "Under"
+        ],
+        "SGNK": [
+          "O",
+          "U"
+        ]
+      },
+      {
+        "ID": "B_1HH",
+        "DS": "1st Half - Handicap",
+        "MDESC": "You have to predict the winner of the first half adding or subtracting the indicated spread to the result of the first half.",
+        "P": "111",
+        "VW": "9",
+        "GCAT": "HALVES",
+        "MARKETID": "14883",
+        "M_PAYOUT": "120",
+        "CNT": "P",
+        "CNTLABEL": "Points",
+        "SGN": [
+          "1",
+          "2"
+        ],
+        "SGNK": [
+          "1",
+          "2"
+        ]
+      },
+      {
+        "ID": "B_H",
+        "DS": "Handicap",
+        "MDESC": "You have to predict the winner of the entire match adding or subtracting the indicated spread to the result of the match.",
+        "P": "102",
+        "VW": "9",
+        "GCAT": "POPULAR",
+        "MARKETID": "14589",
+        "M_PAYOUT": "120",
+        "CNT": "P",
+        "CNTLABEL": "Points",
+        "SGN": [
+          "1",
+          "2"
+        ],
+        "SGNK": [
+          "1",
+          "2"
+        ]
+      },
+      {
+        "ID": "B_3QH",
+        "DS": "3rd Quarter Handicap",
+        "MDESC": "You have to predict the winner of the third quarter adding or subtracting the indicated spread to the result of the third quarter.",
+        "P": "139",
+        "VW": "9",
+        "GCAT": "3QUARTER",
+        "MARKETID": "14887",
+        "M_PAYOUT": "120",
+        "CNT": "P",
+        "CNTLABEL": "Points",
+        "SGN": [
+          "1",
+          "2"
+        ],
+        "SGNK": [
+          "1",
+          "2"
+        ]
+      },
+      {
+        "ID": "B_1X21T",
+        "DS": "1st Half - 1X2",
+        "MDESC": "What will be the result of the first half?",
+        "P": "12",
+        "VW": "0",
+        "GCAT": "HALVES",
+        "MARKETID": "137",
+        "M_PAYOUT": "120",
+        "CNT": "GR",
+        "CNTLABEL": "Generic Result",
+        "SGN": [
+          "1 HT",
+          "X HT",
+          "2 HT"
+        ],
+        "SGNK": [
+          "1HT",
+          "XHT",
+          "2HT"
+        ]
+      },
+      {
+        "ID": "B_DNB",
+        "DS": "Draw no bet",
+        "MDESC": "You have to predict which team will win the match. If the teams draw the selection will be voided.",
+        "P": "1001",
+        "VW": "0",
+        "GCAT": "POPULAR",
+        "MARKETID": "2377",
+        "M_PAYOUT": "120",
+        "CNT": "GR",
+        "CNTLABEL": "Generic Result",
+        "SGN": [
+          "1 DNB",
+          "2 DNB"
+        ],
+        "SGNK": [
+          "1DBN",
+          "2DBN"
+        ]
+      },
+      {
+        "ID": "B_1QWM",
+        "DS": "1st Quarter - Winning Margin",
+        "MDESC": "You have to predict the winning margin of the first quarter for home or away team.",
+        "P": "128",
+        "VW": "0",
+        "GCAT": "1QUARTER",
+        "MARKETID": "14855",
+        "M_PAYOUT": "120",
+        "CNT": "GR",
+        "CNTLABEL": "Generic Result",
+        "SGN": [
+          "Home By 3+",
+          "Away By 3+",
+          "Other"
+        ],
+        "SGNK": [
+          "HOME3",
+          "AWAY3",
+          "O"
+        ]
+      },
+      {
+        "ID": "B_OUA",
+        "DS": "Over/Under Away",
+        "MDESC": "You have to predict if the total number of points scored by the Away team during the entire match will be over or under the spread indicated.",
+        "P": "108",
+        "VW": "3",
+        "GCAT": "POPULAR",
+        "MARKETID": "14877",
+        "M_PAYOUT": "120",
+        "CNT": "P",
+        "CNTLABEL": "Points",
+        "SGN": [
+          "Over",
+          "Under"
+        ],
+        "SGNK": [
+          "O",
+          "U"
+        ]
+      },
+      {
+        "ID": "B_DNB1T",
+        "DS": "1st Half - Draw no bet",
+        "MDESC": "Which team will win the first half?",
+        "P": "14",
+        "VW": "0",
+        "GCAT": "HALVES",
+        "MARKETID": "154",
+        "M_PAYOUT": "120",
+        "CNT": "GR",
+        "CNTLABEL": "Generic Result",
+        "SGN": [
+          "1 DNB HT",
+          "2 DNB HT"
+        ],
+        "SGNK": [
+          "1DNBHT",
+          "2DNBHT"
+        ]
+      },
+      {
+        "ID": "B_4Q1X2",
+        "DS": "4th Quarter - 1X2",
+        "MDESC": "What will be the result of the fourth quarter?",
+        "P": "146",
+        "VW": "0",
+        "GCAT": "4QUARTER",
+        "MARKETID": "14866",
+        "M_PAYOUT": "120",
+        "CNT": "GR",
+        "CNTLABEL": "Generic Result",
+        "SGN": [
+          "1",
+          "X",
+          "2"
+        ],
+        "SGNK": [
+          "1",
+          "X",
+          "2"
+        ]
+      },
+      {
+        "ID": "B_1QOU",
+        "DS": "1st Quarter - Over/Under",
+        "MDESC": "You have to predict if the total number of points scored during the first quarter will be over or under the spread indicated.",
+        "P": "125",
+        "VW": "3",
+        "GCAT": "1QUARTER",
+        "MARKETID": "14871",
+        "M_PAYOUT": "120",
+        "CNT": "P",
+        "CNTLABEL": "Points",
+        "SGN": [
+          "Over",
+          "Under"
+        ],
+        "SGNK": [
+          "O",
+          "U"
+        ]
+      },
+      {
+        "ID": "B_OE1P",
+        "DS": "1st Quarter - Odd/Even Points",
+        "MDESC": "Predict if the total number points scored during the first quarter of the match is going to be odd or even.",
+        "P": "23",
+        "VW": "0",
+        "GCAT": "1QUARTER",
+        "MARKETID": "175",
+        "M_PAYOUT": "120",
+        "CNT": "P",
+        "CNTLABEL": "Points",
+        "SGN": [
+          "Odd",
+          "Even"
+        ],
+        "SGNK": [
+          "OD",
+          "EV"
+        ]
+      },
+      {
+        "ID": "B_21X2",
+        "DS": "2ndH - 1X2",
+        "MDESC": "What will be the result of the Second half?",
+        "P": "118",
+        "VW": "0",
+        "GCAT": "HALVES",
+        "MARKETID": "14843",
+        "M_PAYOUT": "120",
+        "CNT": "GR",
+        "CNTLABEL": "Generic Result",
+        "SGN": [
+          "1 2T",
+          "X 2T",
+          "2 2T"
+        ],
+        "SGNK": [
+          "12",
+          "X2",
+          "22"
+        ]
+      },
+      {
+        "ID": "B_WMIO",
+        "DS": "Win Margin Inc Ov",
+        "MDESC": "You have to predict the winning margin of the match for home or away team (including overtime).\u00a0 The Sections are 1-5 points, 6-10 points, 11-15 points, 16-20 points, 21-25 points and 26 or more points.",
+        "P": "157",
+        "VW": "0",
+        "GCAT": "OTHER",
+        "MARKETID": "14839",
+        "M_PAYOUT": "120",
+        "CNT": "GR",
+        "CNTLABEL": "Generic Result",
+        "SGN": [
+          "Home By 1-5",
+          "Home By 6-10",
+          "Home By 11-15",
+          "Home By 16-20",
+          "Home By 21-25",
+          "Home By 26+",
+          "Away By 1-5",
+          "Away By 6-10",
+          "Away By 11-15",
+          "Away By 16-20",
+          "Away By 21-25",
+          "Away By 26+"
+        ],
+        "SGNK": [
+          "HOME15",
+          "HOME610",
+          "HOME1115",
+          "HOME1620",
+          "HOME2125",
+          "HOME26",
+          "AWAY15",
+          "AWAY610",
+          "AWAY1115",
+          "AWAY1620",
+          "AWAY2125",
+          "AWAY26"
+        ]
+      },
+      {
+        "ID": "B_2QOU",
+        "DS": "2nd Quarter - Over/Under",
+        "MDESC": "You have to predict if the total number of points scored during the second quarter will be over or under the spread indicated.",
+        "P": "134",
+        "VW": "3",
+        "GCAT": "2QUARTER",
+        "MARKETID": "14872",
+        "M_PAYOUT": "120",
+        "CNT": "P",
+        "CNTLABEL": "Points",
+        "SGN": [
+          "Over",
+          "Under"
+        ],
+        "SGNK": [
+          "O",
+          "U"
+        ]
+      },
+      {
+        "ID": "B_3QWM",
+        "DS": "3rd Quarter - Winning Margin",
+        "MDESC": "You have to predict the winning margin of the third quarter for home or away team.",
+        "P": "142",
+        "VW": "0",
+        "GCAT": "3QUARTER",
+        "MARKETID": "14857",
+        "M_PAYOUT": "120",
+        "CNT": "GR",
+        "CNTLABEL": "Generic Result",
+        "SGN": [
+          "Home By 3+",
+          "Away By 3+",
+          "Other"
+        ],
+        "SGNK": [
+          "HOME3",
+          "AWAY3",
+          "O"
+        ]
+      },
+      {
+        "ID": "B_1QH",
+        "DS": "1st Quarter - Handicap",
+        "MDESC": "You have to predict the winner of the first quarter adding or subtracting the indicated spread to the result of the first Quarter.",
+        "P": "123",
+        "VW": "9",
+        "GCAT": "1QUARTER",
+        "MARKETID": "14885",
+        "M_PAYOUT": "120",
+        "CNT": "P",
+        "CNTLABEL": "Points",
+        "SGN": [
+          "1",
+          "2"
+        ],
+        "SGNK": [
+          "1",
+          "2"
+        ]
+      },
+      {
+        "ID": "B_OURT",
+        "DS": "Over/Under Regular Time",
+        "MDESC": "You have to predict if the total number of points scored during the regular time  will be over or under the spread indicated.",
+        "P": "106",
+        "VW": "3",
+        "GCAT": "POPULAR",
+        "MARKETID": "14863",
+        "M_PAYOUT": "120",
+        "CNT": "P",
+        "CNTLABEL": "Points",
+        "SGN": [
+          "Over",
+          "Under"
+        ],
+        "SGNK": [
+          "O",
+          "U"
+        ]
+      },
+      {
+        "ID": "B_2HH",
+        "DS": "2nd Half - Handicap",
+        "MDESC": "You have to predict the winner of the second half adding or subtracting the indicated spread to the result of the second half.",
+        "P": "117",
+        "VW": "9",
+        "GCAT": "HALVES",
+        "MARKETID": "14884",
+        "M_PAYOUT": "120",
+        "CNT": "P",
+        "CNTLABEL": "Points",
+        "SGN": [
+          "1",
+          "2"
+        ],
+        "SGNK": [
+          "1",
+          "2"
+        ]
+      },
+      {
+        "ID": "B_2QH",
+        "DS": "2nd Quarter - Handicap",
+        "MDESC": "You have to predict the winner of the second quarter adding or subtracting the indicated spread to the result of the second quarter.",
+        "P": "132",
+        "VW": "9",
+        "GCAT": "2QUARTER",
+        "MARKETID": "14886",
+        "M_PAYOUT": "120",
+        "CNT": "P",
+        "CNTLABEL": "Points",
+        "SGN": [
+          "1",
+          "2"
+        ],
+        "SGNK": [
+          "1",
+          "2"
+        ]
+      },
+      {
+        "ID": "B_4QWM",
+        "DS": "4th Quarter - Winning Margin",
+        "MDESC": "You have to predict the winning margin of the fourth quarter for home or away team.",
+        "P": "148",
+        "VW": "0",
+        "GCAT": "4QUARTER",
+        "MARKETID": "14858",
+        "M_PAYOUT": "120",
+        "CNT": "GR",
+        "CNTLABEL": "Generic Result",
+        "SGN": [
+          "Home By 3+",
+          "Away By 3+",
+          "Other"
+        ],
+        "SGNK": [
+          "HOME3",
+          "AWAY3",
+          "O"
+        ]
+      },
+      {
+        "ID": "B_12",
+        "DS": "2 Way",
+        "MDESC": "Predict the winner of the match. There are two possible outcomes: 1 (the first player/team wins), 2 (the second player/team wins).",
+        "P": "1",
+        "VW": "0",
+        "GCAT": "POPULAR",
+        "MARKETID": "318",
+        "M_PAYOUT": "120",
+        "CNT": "GR",
+        "CNTLABEL": "Generic Result",
+        "SGN": [
+          "1",
+          "2"
+        ],
+        "SGNK": [
+          "1",
+          "2"
+        ]
+      },
+      {
+        "ID": "B_1X2HRT",
+        "DS": "1X2 Handicap Regular Time",
+        "MDESC": "You have to predict the final result of the match excluding any extra time taking in consideration the handicap in brackets. The handicap in brackets represents the home team.",
+        "P": "104",
+        "VW": "16",
+        "GCAT": "POPULAR",
+        "MARKETID": "14889",
+        "M_PAYOUT": "120",
+        "CNT": "P",
+        "CNTLABEL": "Points",
+        "SGN": [
+          "1",
+          "X",
+          "2"
+        ],
+        "SGNK": [
+          "1",
+          "X",
+          "2"
+        ]
+      },
+      {
+        "ID": "B_2QWM",
+        "DS": "2nd Quarter - Winning Margin",
+        "MDESC": "You have to predict the winning margin of the second quarter for home or away team.",
+        "P": "135",
+        "VW": "0",
+        "GCAT": "2QUARTER",
+        "MARKETID": "14856",
+        "M_PAYOUT": "120",
+        "CNT": "GR",
+        "CNTLABEL": "Generic Result",
+        "SGN": [
+          "Home By 3+",
+          "Away By 3+",
+          "Other"
+        ],
+        "SGNK": [
+          "HOME3",
+          "AWAY3",
+          "O"
+        ]
+      },
+      {
+        "ID": "B_12OU2",
+        "DS": "1-2+Ov/Un",
+        "MDESC": "You have to predict the combination of the final result of the match and whether the total points scored in the match are over or under the specified spread",
+        "P": "155",
+        "VW": "3",
+        "GCAT": "COMBO",
+        "MARKETID": "14701",
+        "M_PAYOUT": "120",
+        "CNT": "P",
+        "CNTLABEL": "Points",
+        "SGN": [
+          "1+Ov",
+          "1+Un",
+          "2+Ov",
+          "2+Un"
+        ],
+        "SGNK": [
+          "1O",
+          "1U",
+          "2O",
+          "2U"
+        ]
+      },
+      {
+        "ID": "B_2HOU",
+        "DS": "2nd Half - Over/Under",
+        "MDESC": "You have to predict if the total number of points scored during the second half will be over or under the spread indicated.",
+        "P": "119",
+        "VW": "3",
+        "GCAT": "HALVES",
+        "MARKETID": "14870",
+        "M_PAYOUT": "120",
+        "CNT": "P",
+        "CNTLABEL": "Points",
+        "SGN": [
+          "Over",
+          "Under"
+        ],
+        "SGNK": [
+          "O",
+          "U"
+        ]
+      },
+      {
+        "ID": "B_OE2TN",
+        "DS": "Odd/Even 2nd H",
+        "MDESC": "You have to predict if the total number points scored in the 2nd\u00a0half will be odd or even, if the half is uncompleted this market will be void.",
+        "P": "16",
+        "VW": "0",
+        "GCAT": "HALVES",
+        "MARKETID": "10163",
+        "M_PAYOUT": "120",
+        "CNT": "GR",
+        "CNTLABEL": "Generic Result",
+        "SGN": [
+          "Odd",
+          "Even"
+        ],
+        "SGNK": [
+          "Odd",
+          "Even"
+        ]
+      },
+      {
+        "ID": "B_4QOEP",
+        "DS": "4th Quarter - Odd/Even Points",
+        "MDESC": "Predict if the total number points scored during the fourth quarter of the match is going to be odd or even.",
+        "P": "149",
+        "VW": "0",
+        "GCAT": "4QUARTER",
+        "MARKETID": "14854",
+        "M_PAYOUT": "120",
+        "CNT": "GR",
+        "CNTLABEL": "Generic Result",
+        "SGN": [
+          "Odd",
+          "Even"
+        ],
+        "SGNK": [
+          "O",
+          "E"
+        ]
+      },
+      {
+        "ID": "B_1QD",
+        "DS": "1st Quarter - DNB",
+        "MDESC": "You have to predict the winner of the 1st quarter",
+        "P": "122",
+        "VW": "0",
+        "GCAT": "1QUARTER",
+        "MARKETID": "14847",
+        "M_PAYOUT": "120",
+        "CNT": "GR",
+        "CNTLABEL": "Generic Result",
+        "SGN": [
+          "1 DNB",
+          "2 DNB"
+        ],
+        "SGNK": [
+          "1D",
+          "2D"
+        ]
+      },
+      {
+        "ID": "B_OE1T",
+        "DS": "1st Half - Odd/Even Points",
+        "MDESC": "Odd or even total number of points at half time (HT).",
+        "P": "15",
+        "VW": "0",
+        "GCAT": "HALVES",
+        "MARKETID": "145",
+        "M_PAYOUT": "120",
+        "CNT": "P",
+        "CNTLABEL": "Points",
+        "SGN": [
+          "Odd",
+          "Even"
+        ],
+        "SGNK": [
+          "OD",
+          "EV"
+        ]
+      },
+      {
+        "ID": "B_1X2",
+        "DS": "3way",
+        "MDESC": "What will the result be at the end of Regular time (FT).",
+        "P": "4",
+        "VW": "0",
+        "GCAT": "POPULAR",
+        "MARKETID": "149",
+        "M_PAYOUT": "120",
+        "CNT": "GR",
+        "CNTLABEL": "Generic Result",
+        "SGN": [
+          "1",
+          "X",
+          "2"
+        ],
+        "SGNK": [
+          "1B",
+          "XB",
+          "2B"
+        ]
+      },
+      {
+        "ID": "B_2QD",
+        "DS": "2nd Quarter - DNB",
+        "MDESC": "You have to predict the winner of the 2nd quarter",
+        "P": "131",
+        "VW": "0",
+        "GCAT": "2QUARTER",
+        "MARKETID": "14848",
+        "M_PAYOUT": "120",
+        "CNT": "GR",
+        "CNTLABEL": "Generic Result",
+        "SGN": [
+          "1 DNB",
+          "2 DNB"
+        ],
+        "SGNK": [
+          "1D",
+          "2D"
+        ]
+      },
+      {
+        "ID": "B_OUH12",
+        "DS": "Over/under Home 1stQ",
+        "MDESC": "You have to predict if the total number of points scored by the Home team during the first quarter will be over or under the spread indicate.",
+        "P": "126",
+        "VW": "3",
+        "GCAT": "1QUARTER",
+        "MARKETID": "14876",
+        "M_PAYOUT": "120",
+        "CNT": "P",
+        "CNTLABEL": "Points",
+        "SGN": [
+          "Over",
+          "Under"
+        ],
+        "SGNK": [
+          "O",
+          "U"
+        ]
+      },
+      {
+        "ID": "B_HFT",
+        "DS": "Halftime/Fulltime",
+        "MDESC": "You have to predict the outcome of the 1st\u00a0half combined with the outcome of the match (regular time only).",
+        "P": "30",
+        "VW": "0",
+        "GCAT": "HALVES",
+        "MARKETID": "10159",
+        "M_PAYOUT": "120",
+        "CNT": "GR",
+        "CNTLABEL": "Generic Result",
+        "SGN": [
+          "1/1",
+          "1/X",
+          "1/2",
+          "X/1",
+          "X/X",
+          "X/2",
+          "2/1",
+          "2/X",
+          "2/2"
+        ],
+        "SGNK": [
+          "1/1",
+          "1/X",
+          "1/2",
+          "X/1",
+          "X/X",
+          "X/2",
+          "2/1",
+          "2/X",
+          "2/2"
+        ]
+      },
+      {
+        "ID": "B_3QOEP",
+        "DS": "3rd Quarter - Odd/Even Points",
+        "MDESC": "Predict if the total number points scored during the third quarter of the match is going to be odd or even.",
+        "P": "143",
+        "VW": "0",
+        "GCAT": "3QUARTER",
+        "MARKETID": "14853",
+        "M_PAYOUT": "120",
+        "CNT": "GR",
+        "CNTLABEL": "Generic Result",
+        "SGN": [
+          "Odd",
+          "Even"
+        ],
+        "SGNK": [
+          "O",
+          "E"
+        ]
+      },
+      {
+        "ID": "B_HSQ",
+        "DS": "Highest Scoring Quarter",
+        "MDESC": "You have to predict which quarter in the match will see the most points scored.",
+        "P": "158",
+        "VW": "0",
+        "GCAT": "OTHER",
+        "MARKETID": "14840",
+        "M_PAYOUT": "120",
+        "CNT": "GR",
+        "CNTLABEL": "Generic Result",
+        "SGN": [
+          "1stQ",
+          "2ndQ",
+          "3rdQ",
+          "4thQ",
+          "Eq"
+        ],
+        "SGNK": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "E"
+        ]
+      },
+      {
+        "ID": "B_4QH",
+        "DS": "4th Quarter - Handicap",
+        "MDESC": "You have to predict the winner of the fourth quarter adding or subtracting the indicated spread to the result of the fourth quarter.",
+        "P": "145",
+        "VW": "9",
+        "GCAT": "4QUARTER",
+        "MARKETID": "14888",
+        "M_PAYOUT": "120",
+        "CNT": "P",
+        "CNTLABEL": "Points",
+        "SGN": [
+          "1",
+          "2"
+        ],
+        "SGNK": [
+          "1",
+          "2"
+        ]
+      },
+      {
+        "ID": "B_3QD",
+        "DS": "3rd Quarter - DNB",
+        "MDESC": "You have to predict the winner of the 3rd quarter",
+        "P": "138",
+        "VW": "0",
+        "GCAT": "3QUARTER",
+        "MARKETID": "14849",
+        "M_PAYOUT": "120",
+        "CNT": "GR",
+        "CNTLABEL": "Generic Result",
+        "SGN": [
+          "1 DNB",
+          "2 DNB"
+        ],
+        "SGNK": [
+          "1D",
+          "2D"
+        ]
+      },
+      {
+        "ID": "B_4QOU",
+        "DS": "4th Quarter - Over/Under",
+        "MDESC": "You have to predict if the total number of points scored during the fourth quarter will be over or under the spread indicated.",
+        "P": "147",
+        "VW": "3",
+        "GCAT": "4QUARTER",
+        "MARKETID": "14874",
+        "M_PAYOUT": "120",
+        "CNT": "P",
+        "CNTLABEL": "Points",
+        "SGN": [
+          "Over",
+          "Under"
+        ],
+        "SGNK": [
+          "O",
+          "U"
+        ]
+      },
+      {
+        "ID": "B_2HDNB",
+        "DS": "2nd Half - Draw no bet",
+        "MDESC": "Which team will win the Second half?",
+        "P": "116",
+        "VW": "0",
+        "GCAT": "HALVES",
+        "MARKETID": "14844",
+        "M_PAYOUT": "120",
+        "CNT": "GR",
+        "CNTLABEL": "Generic Result",
+        "SGN": [
+          "1 DNB 2HT",
+          "2 DNB 2HT"
+        ],
+        "SGNK": [
+          "1D2",
+          "2D2"
+        ]
+      },
+      {
+        "ID": "B_2QOEP",
+        "DS": "2nd Quarter - Odd/Even Points",
+        "MDESC": "Predict if the total number points scored during the second quarter of the match is going to be odd or even.",
+        "P": "136",
+        "VW": "0",
+        "GCAT": "2QUARTER",
+        "MARKETID": "14852",
+        "M_PAYOUT": "120",
+        "CNT": "GR",
+        "CNTLABEL": "Generic Result",
+        "SGN": [
+          "Odd",
+          "Even"
+        ],
+        "SGNK": [
+          "O",
+          "E"
+        ]
+      },
+      {
+        "ID": "B_2Q1X2",
+        "DS": "2nd Quarter - 1X2",
+        "MDESC": "What will be the result of the second quarter?",
+        "P": "133",
+        "VW": "0",
+        "GCAT": "2QUARTER",
+        "MARKETID": "14864",
+        "M_PAYOUT": "120",
+        "CNT": "GR",
+        "CNTLABEL": "Generic Result",
+        "SGN": [
+          "1",
+          "X",
+          "2"
+        ],
+        "SGNK": [
+          "1",
+          "X",
+          "2"
+        ]
+      },
+      {
+        "ID": "B_1Q1X2",
+        "DS": "1st Quarter - 1X2",
+        "MDESC": "What will be the result of the first Quarter?",
+        "P": "124",
+        "VW": "0",
+        "GCAT": "1QUARTER",
+        "MARKETID": "14846",
+        "M_PAYOUT": "120",
+        "CNT": "GR",
+        "CNTLABEL": "Generic Result",
+        "SGN": [
+          "1",
+          "X",
+          "2"
+        ],
+        "SGNK": [
+          "1",
+          "X",
+          "2"
+        ]
+      }
+    ],
+    "CATMARKET": [
+      {
+        "CODE": "10",
+        "VALUE": "1QUARTER"
+      },
+      {
+        "CODE": "3",
+        "VALUE": "HALVES"
+      },
+      {
+        "CODE": "1",
+        "VALUE": "POPULAR"
+      },
+      {
+        "CODE": "12",
+        "VALUE": "3QUARTER"
+      },
+      {
+        "CODE": "13",
+        "VALUE": "4QUARTER"
+      },
+      {
+        "CODE": "999",
+        "VALUE": "OTHER"
+      },
+      {
+        "CODE": "11",
+        "VALUE": "2QUARTER"
+      },
+      {
+        "CODE": "129",
+        "VALUE": "COMBO"
+      }
+    ],
+    "TRANS": {
+      "M#B_1X2HND": {
+        "NAME": "European Handicap",
+        "DESC": "What will the result be after the allotted European Handicap is applied to the score at"
+      },
+      "M#B_1X2HND_1H": "1",
+      "MCU#B_1X2HND_1H": "{T1} (Home {HNDS})",
+      "MH#B_1X2HND": "Home|Draw|Away",
+      "M#B_12HND3P": {
+        "NAME": "3rd Quarter - Points Spread",
+        "DESC": "Which team is winning after the Point Spread is applied to the third period score?"
+      },
+      "M#B_12HND3P_2H": "2",
+      "MCU#B_12HND3P_2H": "{T2} (Home {HNDS})",
+      "MH#B_12HND3P": "Home|Away",
+      "M#B_12HND3P_1H": "1",
+      "MCU#B_12HND3P_1H": "{T1} (Home {HNDS})",
+      "M#B_OUHND1T": {
+        "NAME": "1st Half - Total Spread",
+        "DESC": "Predict if the total number points scored during the first half of the match will be over or under the spread indicated."
+      },
+      "M#B_OUHND1T_OHNDHT": "Over HT",
+      "MCU#B_OUHND1T_OHNDHT": "Over HT ({HND})",
+      "M#B_OUHND1P": {
+        "NAME": "1st Quarter - Total Spread",
+        "DESC": "Will the first period score have more or less total goals than the allotted Total Spread line?"
+      },
+      "M#B_OUHND1P_U": "Under",
+      "MCU#B_OUHND1P_U": "Under ({HND})",
+      "MH#B_OUHND1P": "Over|Under",
+      "M#B_OUHND3P": {
+        "NAME": "3rd Quarter - Total Spread",
+        "DESC": "Will the third period score have more or less total goals than the allotted Total Spread line?"
+      },
+      "M#B_OUHND3P_O": "Over",
+      "MCU#B_OUHND3P_O": "Over ({HND})",
+      "MH#B_OUHND3P": "Over|Under",
+      "M#B_H": {
+        "NAME": "Handicap",
+        "DESC": "You have to predict the winner of the entire match adding or subtracting the indicated spread to the result of the match."
+      },
+      "M#B_H_1": "1",
+      "MCU#B_H_1": "{T1} (Home {HNDS})",
+      "M#B_H_2": "2",
+      "MCU#B_H_2": "{T2} (Home {HNDS})",
+      "M#B_OU1": {
+        "NAME": "Ov/Un 1Q  ",
+        "DESC": "You have to predict if the total number of points scored during the 1st quarter will be over or under the spread indicated"
+      },
+      "M#B_OU1_O": "Over",
+      "MCU#B_OU1_O": "Over ({HND})",
+      "M#B_OU1_U": "Under",
+      "MCU#B_OU1_U": "Under ({HND})",
+      "M#B_OUA1": {
+        "NAME": "Over/Under Away 1H",
+        "DESC": "You have to predict if the total number of points scored by the named team (Home or Away) during the 1st half will be over or under the spread indicated,"
+      },
+      "M#B_OUA1_O": "Over",
+      "MCU#B_OUA1_O": "Over ({HND})",
+      "MH#B_OUA1": "Over|Under",
+      "M#B_OUA1_U": "Under",
+      "MCU#B_OUA1_U": "Under ({HND})",
+      "M#B_OUH1": {
+        "NAME": "Over/Under Home 1H",
+        "DESC": "You have to predict if the total number of points scored by the named team (Home or Away) during the 1st half will be over or under the spread indicated,"
+      },
+      "M#B_OUH1_O": "Over",
+      "MCU#B_OUH1_O": "Over ({HND})",
+      "MH#B_OUH1": "Over|Under",
+      "M#B_OUH1_U": "Under",
+      "MCU#B_OUH1_U": "Under ({HND})",
+      "M#B_OE2P": {
+        "NAME": "2nd Quarter - Odd/Even Points",
+        "DESC": "Odd or even total number of points scored in second period."
+      },
+      "M#B_OE2P_OD": "Odd",
+      "MCU#B_OE2P_OD": "Odd",
+      "M#B_OUH11": {
+        "NAME": "Over/Under Home 1HT",
+        "DESC": "You have to predict if the total number of points scored by the Home team during the first\u00a0half will be over or under the spread indicated, if the half is uncompleted this market will be made void."
+      },
+      "M#B_OUH11_O": "Over",
+      "MCU#B_OUH11_O": "Over ({HND})",
+      "MH#B_OUH11": "Over|Under",
+      "M#B_OUH11_U": "Under",
+      "MCU#B_OUH11_U": "Under ({HND})",
+      "M#B_OUA11": {
+        "NAME": "Over/Under Away 1HT",
+        "DESC": "You have to predict if the total number of points scored by the Away team during the first\u00a0half will be over or under the spread indicated, if the half is uncompleted this market will be made void."
+      },
+      "M#B_OUA11_O": "Over",
+      "MCU#B_OUA11_O": "Over ({HND})",
+      "MH#B_OUA11": "Over|Under",
+      "M#B_OUA11_U": "Under",
+      "MCU#B_OUA11_U": "Under ({HND})",
+      "M#B_2HOU": {
+        "NAME": "2nd Half - Over/Under",
+        "DESC": "You have to predict if the total number of points scored during the second half will be over or under the spread indicated."
+      },
+      "M#B_2HOU_O": "Over",
+      "MCU#B_2HOU_O": "Over ({HND})",
+      "MH#B_2HOU": "Over|Under",
+      "M#B_2HOU_U": "Under",
+      "MCU#B_2HOU_U": "Under ({HND})",
+      "M#B_1QOU": {
+        "NAME": "1st Quarter - Over/Under",
+        "DESC": "You have to predict if the total number of points scored during the first quarter will be over or under the spread indicated."
+      },
+      "M#B_1QOU_O": "Over",
+      "MCU#B_1QOU_O": "Over ({HND})",
+      "MH#B_1QOU": "Over|Under",
+      "M#B_1QOU_U": "Under",
+      "MCU#B_1QOU_U": "Under ({HND})",
+      "M#B_2QOU": {
+        "NAME": "2nd Quarter - Over/Under",
+        "DESC": "You have to predict if the total number of points scored during the second quarter will be over or under the spread indicated."
+      },
+      "M#B_2QOU_O": "Over",
+      "MCU#B_2QOU_O": "Over ({HND})",
+      "MH#B_2QOU": "Over|Under",
+      "M#B_2QOU_U": "Under",
+      "MCU#B_2QOU_U": "Under ({HND})",
+      "M#B_3QOU": {
+        "NAME": "3rd Quarter - Over/Under",
+        "DESC": "You have to predict if the total number of points scored during the third quarter will be over or under the spread indicated."
+      },
+      "M#B_3QOU_O": "Over",
+      "MCU#B_3QOU_O": "Over ({HND})",
+      "MH#B_3QOU": "Over|Under",
+      "M#B_3QOU_U": "Under",
+      "MCU#B_3QOU_U": "Under ({HND})",
+      "M#B_4QOU": {
+        "NAME": "4th Quarter - Over/Under",
+        "DESC": "You have to predict if the total number of points scored during the fourth quarter will be over or under the spread indicated."
+      },
+      "M#B_4QOU_O": "Over",
+      "MCU#B_4QOU_O": "Over ({HND})",
+      "MH#B_4QOU": "Over|Under",
+      "M#B_4QOU_U": "Under",
+      "MCU#B_4QOU_U": "Under ({HND})",
+      "M#B_OUA12": {
+        "NAME": "Over/under Away 1stQ",
+        "DESC": "You have to predict if the total number of points scored by the Away team during the first quarter will be over or under the spread indicate."
+      },
+      "M#B_OUA12_O": "Over",
+      "MCU#B_OUA12_O": "Over ({HND})",
+      "MH#B_OUA12": "Over|Under",
+      "M#B_OUA12_U": "Under",
+      "MCU#B_OUA12_U": "Under ({HND})",
+      "M#B_OUH12": {
+        "NAME": "Over/under Home 1stQ",
+        "DESC": "You have to predict if the total number of points scored by the Home team during the first quarter will be over or under the spread indicate."
+      },
+      "M#B_OUH12_O": "Over",
+      "MCU#B_OUH12_O": "Over ({HND})",
+      "MH#B_OUH12": "Over|Under",
+      "M#B_OUH12_U": "Under",
+      "MCU#B_OUH12_U": "Under ({HND})",
+      "M#B_OUA": {
+        "NAME": "Over/Under Away",
+        "DESC": "You have to predict if the total number of points scored by the Away team during the entire match will be over or under the spread indicated."
+      },
+      "M#B_OUA_O": "Over",
+      "MCU#B_OUA_O": "Over ({HND})",
+      "MH#B_OUA": "Over|Under",
+      "M#B_OUA_U": "Under",
+      "MCU#B_OUA_U": "Under ({HND})",
+      "M#B_OUH": {
+        "NAME": "Over/Under Home",
+        "DESC": "You have to predict if the total number of points scored by the Home team during the entire match will be over or under the spread indicated."
+      },
+      "M#B_OUH_O": "Over",
+      "MCU#B_OUH_O": "Over ({HND})",
+      "MH#B_OUH": "Over|Under",
+      "M#B_OUH_U": "Under",
+      "MCU#B_OUH_U": "Under ({HND})",
+      "M#B_1HH": {
+        "NAME": "1st Half - Handicap",
+        "DESC": "You have to predict the winner of the first half adding or subtracting the indicated spread to the result of the first half."
+      },
+      "M#B_1HH_1": "1",
+      "MCU#B_1HH_1": "{T1} (Home {HNDS})",
+      "M#B_1HH_2": "2",
+      "MCU#B_1HH_2": "{T2} (Home {HNDS})",
+      "M#B_2HH": {
+        "NAME": "2nd Half - Handicap",
+        "DESC": "You have to predict the winner of the second half adding or subtracting the indicated spread to the result of the second half."
+      },
+      "M#B_2HH_1": "1",
+      "MCU#B_2HH_1": "{T1} (Home {HNDS})",
+      "M#B_2HH_2": "2",
+      "MCU#B_2HH_2": "{T2} (Home {HNDS})",
+      "M#B_1QH": {
+        "NAME": "1st Quarter - Handicap",
+        "DESC": "You have to predict the winner of the first quarter adding or subtracting the indicated spread to the result of the first Quarter."
+      },
+      "M#B_1QH_1": "1",
+      "MCU#B_1QH_1": "{T1} (Home {HNDS})",
+      "M#B_1QH_2": "2",
+      "MCU#B_1QH_2": "{T2} (Home {HNDS})",
+      "M#B_2QH": {
+        "NAME": "2nd Quarter - Handicap",
+        "DESC": "You have to predict the winner of the second quarter adding or subtracting the indicated spread to the result of the second quarter."
+      },
+      "M#B_2QH_1": "1",
+      "MCU#B_2QH_1": "{T1} (Home {HNDS})",
+      "M#B_2QH_2": "2",
+      "MCU#B_2QH_2": "{T2} (Home {HNDS})",
+      "M#B_3QH": {
+        "NAME": "3rd Quarter Handicap",
+        "DESC": "You have to predict the winner of the third quarter adding or subtracting the indicated spread to the result of the third quarter."
+      },
+      "M#B_3QH_1": "1",
+      "MCU#B_3QH_1": "{T1} (Home {HNDS})",
+      "M#B_3QH_2": "2",
+      "MCU#B_3QH_2": "{T2} (Home {HNDS})",
+      "M#B_4QH": {
+        "NAME": "4th Quarter - Handicap",
+        "DESC": "You have to predict the winner of the fourth quarter adding or subtracting the indicated spread to the result of the fourth quarter."
+      },
+      "M#B_4QH_1": "1",
+      "MCU#B_4QH_1": "{T1} (Home {HNDS})",
+      "M#B_4QH_2": "2",
+      "MCU#B_4QH_2": "{T2} (Home {HNDS})",
+      "M#B_1X2HRT": {
+        "NAME": "1X2 Handicap Regular Time",
+        "DESC": "You have to predict the final result of the match excluding any extra time taking in consideration the handicap in brackets. The handicap in brackets represents the home team."
+      },
+      "M#B_1X2HRT_1": "1",
+      "MCU#B_1X2HRT_1": "{T1} (Home {HNDS})",
+      "MH#B_1X2HRT": "Home|Draw|Away",
+      "M#B_1X2HRT_2": "2",
+      "MCU#B_1X2HRT_2": "{T2} (Home {HNDS})",
+      "M#B_1X2HRT_X": "X",
+      "MCU#B_1X2HRT_X": "Draw (Home {HNDS})",
+      "M#B_R10P": {
+        "NAME": "Race to 10 points",
+        "DESC": "You have to predict which team will score 10 points first. Overtime included."
+      },
+      "M#B_R10P_1": "1",
+      "MCU#B_R10P_1": "{T1}",
+      "M#B_R10P_2": "2 ",
+      "MCU#B_R10P_2": "{T2}",
+      "M#B_R20P": {
+        "NAME": "Race to 20 Points",
+        "DESC": "You have to predict which team will score 20 points first. Overtime included."
+      },
+      "M#B_R20P_1": "1",
+      "MCU#B_R20P_1": "{T1}",
+      "M#B_R20P_2": "2 ",
+      "MCU#B_R20P_2": " {T2}",
+      "M#B_R30P": {
+        "NAME": "Race to 30 Points",
+        "DESC": "You have to predict which team will score 30 points first. Overtime included."
+      },
+      "M#B_R30P_1": "1",
+      "MCU#B_R30P_1": "{T1}",
+      "M#B_R30P_2": "2 ",
+      "MCU#B_R30P_2": "{T2}",
+      "M#B_R40P": {
+        "NAME": "Race to 40 Points",
+        "DESC": "You have to predict which team will score 40 points first. Overtime included."
+      },
+      "M#B_R40P_1": "1",
+      "MCU#B_R40P_1": "{T1}",
+      "M#B_R40P_2": "2 ",
+      "MCU#B_R40P_2": "{T2}",
+      "M#B_R50P": {
+        "NAME": "Race to 50 Points",
+        "DESC": "You have to predict which team will score 50 points first. Overtime included."
+      },
+      "M#B_R50P_1": "1",
+      "MCU#B_R50P_1": "{T1}",
+      "M#B_R50P_2": "2 ",
+      "MCU#B_R50P_2": "{T2}",
+      "M#B_T1H": {
+        "NAME": "Total 1st Half",
+        "DESC": "You have to predict if the total number of points scored during the 1st half will be over or under the spread indicated"
+      },
+      "M#B_T1H_O": "Over",
+      "MCU#B_T1H_O": "Over ({HND})",
+      "MH#B_T1H": "Over|Under",
+      "M#B_T1H_U": "Under",
+      "MCU#B_T1H_U": "Under ({HND})",
+      "M#B_12OU2": {
+        "NAME": "1-2+Ov/Un",
+        "DESC": "You have to predict the combination of the final result of the match and whether the total points scored in the match are over or under the specified spread"
+      },
+      "M#B_12OU2_1O": "1+Ov",
+      "MCU#B_12OU2_1O": "1+Ov  ({HND})",
+      "MH#B_12OU2": "Over|Under",
+      "M#B_12OU2_1U": "1+Un",
+      "MCU#B_12OU2_1U": "1+Un  ({HND})",
+      "M#B_12OU2_2O": "2+Ov",
+      "MCU#B_12OU2_2O": "2+Ov  ({HND})",
+      "M#B_12OU2_2U": "2+Un",
+      "MCU#B_12OU2_2U": "2+Un  ({HND})",
+      "M#B_T1": {
+        "NAME": "Total 1Q",
+        "DESC": "You have to predict if the total number of points scored during the 1st quarter will be over or under the spread indicated"
+      },
+      "M#B_T1_O": "Over",
+      "MCU#B_T1_O": "Over ({HND})",
+      "MH#B_T1": "Over|Under",
+      "M#B_T1_U": "Under",
+      "MCU#B_T1_U": "Under ({HND})",
+      "M#B_HF": {
+        "NAME": "HT/FT",
+        "DESC": "You have to predict the outcome of the first half time of the match together with the outcome of the entire match."
+      },
+      "M#B_HF_11": "1/1",
+      "MCU#B_HF_11": "{T1}/{T1}",
+      "M#B_HF_12": "1/2",
+      "MCU#B_HF_12": "{T1}/{T2}",
+      "M#B_HF_1X": "1/X",
+      "MCU#B_HF_1X": "{T1}/Draw",
+      "M#B_HF_21": "2/1",
+      "MCU#B_HF_21": "{T2}/{T1}",
+      "M#B_HF_22": "2/2",
+      "MCU#B_HF_22": "{T2}/{T2}",
+      "M#B_HF_2X": "2/X",
+      "MCU#B_HF_2X": "{T2}/Draw",
+      "M#B_HF_X1": "X/1",
+      "MCU#B_HF_X1": "Draw/{T1}",
+      "M#B_HF_X2": "X/2",
+      "MCU#B_HF_X2": "Draw/{T2}",
+      "M#B_HF_XX": "X/X",
+      "MCU#B_HF_XX": "Draw/Draw",
+      "M#B_WMIO": {
+        "NAME": "Win Margin Inc Ov",
+        "DESC": "You have to predict the winning margin of the match for home or away team (including overtime).\u00a0 The Sections are 1-5 points, 6-10 points, 11-15 points, 16-20 points, 21-25 points and 26 or more points."
+      },
+      "M#B_WMIO_AWAY1115": "Away By 11-15",
+      "MCU#B_WMIO_AWAY1115": "Away By 11-15",
+      "M#B_WMIO_AWAY15": "Away By 1-5",
+      "MCU#B_WMIO_AWAY15": "Away By 1-5",
+      "M#B_WMIO_AWAY1620": "Away By 16-20",
+      "MCU#B_WMIO_AWAY1620": "Away By 16-20",
+      "M#B_WMIO_AWAY2125": "Away By 21-25",
+      "MCU#B_WMIO_AWAY2125": "Away By 21-25",
+      "M#B_WMIO_AWAY26": "Away By 26+",
+      "MCU#B_WMIO_AWAY26": "Away By 26+",
+      "M#B_WMIO_AWAY610": "Away By 6-10",
+      "MCU#B_WMIO_AWAY610": "Away By 6-10",
+      "M#B_WMIO_HOME1115": "Home By 11-15",
+      "MCU#B_WMIO_HOME1115": "Home By 11-15",
+      "M#B_WMIO_HOME15": "Home By 1-5",
+      "MCU#B_WMIO_HOME15": "Home By 1-5",
+      "M#B_WMIO_HOME1620": "Home By 16-20",
+      "MCU#B_WMIO_HOME1620": "Home By 16-20",
+      "M#B_WMIO_HOME2125": "Home By 21-25",
+      "MCU#B_WMIO_HOME2125": "Home By 21-25",
+      "M#B_WMIO_HOME26": "Home By 26+",
+      "MCU#B_WMIO_HOME26": "Home By 26+",
+      "M#B_WMIO_HOME610": "Home By 6-10",
+      "MCU#B_WMIO_HOME610": "Home By 6-10",
+      "M#B_HSQ": {
+        "NAME": "Highest Scoring Quarter",
+        "DESC": "You have to predict which quarter in the match will see the most points scored."
+      },
+      "M#B_HSQ_1": "1stQ",
+      "MCU#B_HSQ_1": "1stQ",
+      "M#B_HSQ_2": "2ndQ",
+      "MCU#B_HSQ_2": "2ndQ",
+      "M#B_HSQ_3": "3rdQ",
+      "MCU#B_HSQ_3": "3rdQ",
+      "M#B_HSQ_4": "4thQ",
+      "MCU#B_HSQ_4": "4thQ",
+      "M#B_HSQ_E": "Eq",
+      "MCU#B_HSQ_E": "Eq",
+      "M#B_1H1X2": {
+        "NAME": "1st Half - 1X2",
+        "DESC": "What will be the result of the first half?"
+      },
+      "M#B_1H1X2_1HT": "1 HT",
+      "MCU#B_1H1X2_1HT": "1 HT",
+      "M#B_1H1X2_2HT": "2 HT",
+      "MCU#B_1H1X2_2HT": "2 HT",
+      "M#B_1H1X2_XHT": "X HT",
+      "MCU#B_1H1X2_XHT": "X HT",
+      "M#B_1HOEP": {
+        "NAME": "1st Half - Odd/Even Points",
+        "DESC": "Odd or even total number of points at half time (HT)."
+      },
+      "M#B_1HOEP_E": "Even",
+      "MCU#B_1HOEP_E": "Even",
+      "M#B_1HOEP_O": "Odd",
+      "MCU#B_1HOEP_O": "Odd",
+      "M#B_21X2": {
+        "NAME": "2ndH - 1X2",
+        "DESC": "What will be the result of the Second half?"
+      },
+      "M#B_21X2_12": "1 2T",
+      "MCU#B_21X2_12": "1 2T",
+      "M#B_21X2_22": "2 2T",
+      "MCU#B_21X2_22": "2 2T",
+      "M#B_21X2_X2": "X 2T",
+      "MCU#B_21X2_X2": "X 2T",
+      "M#B_2HDNB": {
+        "NAME": "2nd Half - Draw no bet",
+        "DESC": "Which team will win the Second half?"
+      },
+      "M#B_2HDNB_1D2": "1 DNB 2HT",
+      "MCU#B_2HDNB_1D2": "1 DNB 2HT",
+      "M#B_2HDNB_2D2": "2 DNB 2HT",
+      "MCU#B_2HDNB_2D2": "2 DNB 2HT",
+      "M#B_2HOEP": {
+        "NAME": "2nd Half - Odd/Even Points",
+        "DESC": "You have to predict if the total number points scored in the 2nd\u00a0half will be odd or even"
+      },
+      "M#B_2HOEP_E": "Even",
+      "MCU#B_2HOEP_E": "Even",
+      "M#B_2HOEP_O": "Odd",
+      "MCU#B_2HOEP_O": "Odd",
+      "M#B_1Q1X2": {
+        "NAME": "1st Quarter - 1X2",
+        "DESC": "What will be the result of the first Quarter?"
+      },
+      "M#B_1Q1X2_1": "1",
+      "MCU#B_1Q1X2_1": "{T1}",
+      "M#B_1Q1X2_2": "2",
+      "MCU#B_1Q1X2_2": "{T2}",
+      "M#B_1Q1X2_X": "X",
+      "MCU#B_1Q1X2_X": "Draw",
+      "M#B_2QD": {
+        "NAME": "2nd Quarter - DNB",
+        "DESC": "You have to predict the winner of the 2nd\u00a0quarter"
+      },
+      "M#B_2QD_1D": "1 DNB",
+      "MCU#B_2QD_1D": "1 DNB",
+      "M#B_2QD_2D": "2 DNB",
+      "MCU#B_2QD_2D": "2 DNB",
+      "M#B_1QD": {
+        "NAME": "1st Quarter - DNB",
+        "DESC": "You have to predict the winner of the 1st\u00a0quarter"
+      },
+      "M#B_1QD_1D": "1 DNB",
+      "MCU#B_1QD_1D": "1 DNB",
+      "M#B_1QD_2D": "2 DNB",
+      "MCU#B_1QD_2D": "2 DNB",
+      "M#B_3QD": {
+        "NAME": "3rd Quarter - DNB",
+        "DESC": "You have to predict the winner of the 3rd\u00a0quarter"
+      },
+      "M#B_3QD_1D": "1 DNB",
+      "MCU#B_3QD_1D": "1 DNB",
+      "M#B_3QD_2D": "2 DNB",
+      "MCU#B_3QD_2D": "2 DNB",
+      "M#B_4QD": {
+        "NAME": "4th Quarter - DNB",
+        "DESC": "You have to predict the winner of the 4th\u00a0quarter"
+      },
+      "M#B_4QD_1D": "1 DNB",
+      "MCU#B_4QD_1D": "1 DNB",
+      "M#B_4QD_2D": "2 DNB",
+      "MCU#B_4QD_2D": "2 DNB",
+      "M#B_1QOEP": {
+        "NAME": "1st Quarter - Odd/Even Points",
+        "DESC": "Predict if the total number points scored during the first quarter of the match is going to be odd or even."
+      },
+      "M#B_1QOEP_E": "Even",
+      "MCU#B_1QOEP_E": "Even",
+      "M#B_1QOEP_O": "Odd",
+      "MCU#B_1QOEP_O": "Odd",
+      "M#B_2QOEP": {
+        "NAME": "2nd Quarter - Odd/Even Points",
+        "DESC": "Predict if the total number points scored during the second quarter of the match is going to be odd or even."
+      },
+      "M#B_2QOEP_E": "Even",
+      "MCU#B_2QOEP_E": "Even",
+      "M#B_2QOEP_O": "Odd",
+      "MCU#B_2QOEP_O": "Odd",
+      "M#B_3QOEP": {
+        "NAME": "3rd Quarter - Odd/Even Points",
+        "DESC": "Predict if the total number points scored during the third quarter of the match is going to be odd or even."
+      },
+      "M#B_3QOEP_E": "Even",
+      "MCU#B_3QOEP_E": "Even",
+      "M#B_3QOEP_O": "Odd",
+      "MCU#B_3QOEP_O": "Odd",
+      "M#B_4QOEP": {
+        "NAME": "4th Quarter - Odd/Even Points",
+        "DESC": "Predict if the total number points scored during the fourth quarter of the match is going to be odd or even."
+      },
+      "M#B_4QOEP_E": "Even",
+      "MCU#B_4QOEP_E": "Even",
+      "M#B_4QOEP_O": "Odd",
+      "MCU#B_4QOEP_O": "Odd",
+      "M#B_1QWM": {
+        "NAME": "1st Quarter - Winning Margin",
+        "DESC": "You have to predict the winning margin of the first quarter for home or away team."
+      },
+      "M#B_1QWM_AWAY3": "Away By 3+",
+      "MCU#B_1QWM_AWAY3": "Away By 3+",
+      "M#B_1QWM_HOME3": "Home By 3+",
+      "MCU#B_1QWM_HOME3": "Home By 3+",
+      "M#B_1QWM_O": "Other",
+      "MCU#B_1QWM_O": "Other",
+      "M#B_2QWM": {
+        "NAME": "2nd Quarter - Winning Margin",
+        "DESC": "You have to predict the winning margin of the second quarter for home or away team."
+      },
+      "M#B_2QWM_AWAY3": "Away By 3+",
+      "MCU#B_2QWM_AWAY3": "Away By 3+",
+      "M#B_2QWM_HOME3": "Home By 3+",
+      "MCU#B_2QWM_HOME3": "Home By 3+",
+      "M#B_2QWM_O": "Other",
+      "MCU#B_2QWM_O": "Other",
+      "M#B_3QWM": {
+        "NAME": "3rd Quarter - Winning Margin",
+        "DESC": "You have to predict the winning margin of the third quarter for home or away team."
+      },
+      "M#B_3QWM_AWAY3": "Away By 3+",
+      "MCU#B_3QWM_AWAY3": "Away By 3+",
+      "M#B_3QWM_HOME3": "Home By 3+",
+      "MCU#B_3QWM_HOME3": "Home By 3+",
+      "M#B_3QWM_O": "Other",
+      "MCU#B_3QWM_O": "Other",
+      "M#B_4QWM": {
+        "NAME": "4th Quarter - Winning Margin",
+        "DESC": "You have to predict the winning margin of the fourth quarter for home or away team."
+      },
+      "M#B_4QWM_AWAY3": "Away By 3+",
+      "MCU#B_4QWM_AWAY3": "Away By 3+",
+      "M#B_4QWM_HOME3": "Home By 3+",
+      "MCU#B_4QWM_HOME3": "Home By 3+",
+      "M#B_4QWM_O": "Other",
+      "MCU#B_4QWM_O": "Other",
+      "M#B_1QLP": {
+        "NAME": "1st Quarter - Last Point",
+        "DESC": "You have to predict which team will score the last point in the first quarter."
+      },
+      "M#B_1QLP_AWAY": "Away",
+      "MCU#B_1QLP_AWAY": "Away",
+      "M#B_1QLP_HOME": "Home",
+      "MCU#B_1QLP_HOME": "Home",
+      "M#B_2QLP": {
+        "NAME": "2nd Quarter - Last Point",
+        "DESC": "You have to predict which team will score the last point in the 2nd quarter."
+      },
+      "M#B_2QLP_AWAY": "Away",
+      "MCU#B_2QLP_AWAY": "Away",
+      "M#B_2QLP_HOME": "Home",
+      "MCU#B_2QLP_HOME": "Home",
+      "M#B_OYN": {
+        "NAME": "Overtime Yes/No",
+        "DESC": "Predict if the game will go to Overtime"
+      },
+      "M#B_OYN_N": "No",
+      "MCU#B_OYN_N": "No",
+      "M#B_OYN_Y": "Yes",
+      "MCU#B_OYN_Y": "Yes",
+      "M#B_FFTS": {
+        "NAME": "First Free Throw Scored",
+        "DESC": "You have to predict which team will score the first Free Throw of the match."
+      },
+      "M#B_FFTS_AWAY": "Away",
+      "MCU#B_FFTS_AWAY": "Away",
+      "M#B_FFTS_HOME": "Home",
+      "MCU#B_FFTS_HOME": "Home",
+      "M#B_OURT": {
+        "NAME": "Over/Under Regular Time",
+        "DESC": "You have to predict if the total number of points scored during the regular time  will be over or under the spread indicated."
+      },
+      "M#B_OURT_O": "Over",
+      "MCU#B_OURT_O": "Over ({HND})",
+      "MH#B_OURT": "Over|Under",
+      "M#B_OURT_U": "Under",
+      "MCU#B_OURT_U": "Under ({HND})",
+      "M#B_2Q1X2": {
+        "NAME": "2nd Quarter - 1X2",
+        "DESC": "What will be the result of the second quarter?"
+      },
+      "M#B_2Q1X2_1": "1",
+      "MCU#B_2Q1X2_1": "{T1}",
+      "M#B_2Q1X2_2": "2",
+      "MCU#B_2Q1X2_2": "{T2}",
+      "M#B_2Q1X2_X": "X",
+      "MCU#B_2Q1X2_X": "Draw",
+      "M#B_3Q1X2": {
+        "NAME": "3rd Quarter - 1X2",
+        "DESC": "What will be the result of the third quarter?"
+      },
+      "M#B_3Q1X2_1": "1",
+      "MCU#B_3Q1X2_1": "{T1}",
+      "M#B_3Q1X2_2": "2",
+      "MCU#B_3Q1X2_2": "{T2}",
+      "M#B_3Q1X2_X": "X",
+      "MCU#B_3Q1X2_X": "Draw",
+      "M#B_4Q1X2": {
+        "NAME": "4th Quarter - 1X2",
+        "DESC": "What will be the result of the fourth quarter?"
+      },
+      "M#B_4Q1X2_1": "1",
+      "MCU#B_4Q1X2_1": "{T1}",
+      "M#B_4Q1X2_2": "2",
+      "MCU#B_4Q1X2_2": "{T2}",
+      "M#B_4Q1X2_X": "X",
+      "MCU#B_4Q1X2_X": "Draw",
+      "M#B_1HOU": {
+        "NAME": "1st Half - Over/Under",
+        "DESC": "You have to predict if the total number of points scored during the first half will be over or under the spread indicated."
+      },
+      "M#B_1HOU_O": "Over",
+      "MCU#B_1HOU_O": "Over ({HND})",
+      "MH#B_1HOU": "Over|Under",
+      "M#B_1HOU_U": "Under",
+      "MCU#B_1HOU_U": "Under ({HND})",
+      "M#B_1X21T": {
+        "NAME": "1st Half - 1X2",
+        "DESC": "What will be the result of the first half?"
+      },
+      "M#B_1X21T_1HT": "1 HT",
+      "MCU#B_1X21T_1HT": "1 HT",
+      "M#B_1X21T_XHT": "X HT",
+      "MCU#B_1X21T_XHT": "X HT",
+      "M#B_1X21T_2HT": "2 HT",
+      "MCU#B_1X21T_2HT": "2 HT",
+      "M#B_HTFT": {
+        "NAME": "Half Time / Full Time",
+        "DESC": "A combination of the result at Halftime, coupled with the result at Fulltime."
+      },
+      "M#B_HTFT_1/1": "1/1",
+      "MCU#B_HTFT_1/1": "1/1",
+      "M#B_HTFT_X/X": "X/X",
+      "MCU#B_HTFT_X/X": "X/X",
+      "M#B_HTFT_X/2": "X/2",
+      "MCU#B_HTFT_X/2": "X/2",
+      "M#B_HTFT_2/2": "2/2",
+      "MCU#B_HTFT_2/2": "2/2",
+      "M#B_OE": {
+        "NAME": "Odd/Even Points",
+        "DESC": "Predict if the total number points scored during the match is going to be odd or even."
+      },
+      "M#B_OE_OD": "Odd",
+      "MCU#B_OE_OD": "Odd",
+      "M#B_OUHND": {
+        "NAME": "Total Spreads",
+        "DESC": "Predict if the total number of goals/points scored during the entire match will be over or under the spread indicated."
+      },
+      "M#B_OUHND_O": "Over",
+      "MCU#B_OUHND_O": "Over ({HND})",
+      "MH#B_OUHND": "Over|Under",
+      "M#B_OUHND_U": "Under",
+      "MCU#B_OUHND_U": "Under ({HND})",
+      "M#B_OE3P": {
+        "NAME": "3rd Quarter - Odd/Even Points",
+        "DESC": "Odd or even total number of points scored in third period."
+      },
+      "M#B_OE3P_EV": "Even",
+      "MCU#B_OE3P_EV": "Even",
+      "M#B_OUHNDAAMS": {
+        "NAME": "Total AAMS",
+        "DESC": "Will the final score have more or less total points than the allotted Total Spread?"
+      },
+      "M#B_OUHNDAAMS_U": "Under",
+      "MCU#B_OUHNDAAMS_U": "Under ({HND})",
+      "M#B_1X2": {
+        "NAME": "3way",
+        "DESC": "What will the result be at the end of Regular time (FT)."
+      },
+      "M#B_1X2_1B": "1",
+      "MCU#B_1X2_1B": "1",
+      "M#B_12": {
+        "NAME": "2 Way",
+        "DESC": "Predict the winner of the match. There are two possible outcomes: 1 (the first player/team wins), 2 (the second player/team wins)."
+      },
+      "M#B_12_1": "1",
+      "MCU#B_12_1": "1",
+      "M#B_12_2": "2",
+      "MCU#B_12_2": "2",
+      "M#B_12HND1T": {
+        "NAME": "1st Half - Points Spread",
+        "DESC": "Which team is winning after the Points Spread is applied to the Halftime score?"
+      },
+      "M#B_12HND1T_2H": "2",
+      "MCU#B_12HND1T_2H": "{T2} (Home {HNDS})",
+      "MH#B_12HND1T": "Home|Away",
+      "M#B_1X2HND_XH": "X",
+      "MCU#B_1X2HND_XH": "Draw (Home {HNDS})",
+      "M#B_OE1T": {
+        "NAME": "1st Half - Odd/Even Points",
+        "DESC": "Odd or even total number of points at half time (HT)."
+      },
+      "M#B_OE1T_EV": "Even",
+      "MCU#B_OE1T_EV": "Even",
+      "M#B_OT": {
+        "NAME": "Overtime Yes/No",
+        "DESC": "Predict if the match will go into overtime or not. "
+      },
+      "M#B_OT_Y": "Yes",
+      "MCU#B_OT_Y": "Yes",
+      "M#B_HIGHTIME": {
+        "NAME": "Highest Scoring Quarter",
+        "DESC": "Which quarter will see the most points scored?"
+      },
+      "M#B_HIGHTIME_1": "1st quarter",
+      "MCU#B_HIGHTIME_1": "1st quarter",
+      "M#B_HIGHTIME_4": "4th quarter",
+      "MCU#B_HIGHTIME_4": "4th quarter",
+      "M#B_1X22T": {
+        "NAME": "2nd Half - 1X2",
+        "DESC": "What will be the result of the second half?"
+      },
+      "M#B_1X22T_1": "1",
+      "MCU#B_1X22T_1": "1",
+      "M#B_1X22T_X": "X",
+      "MCU#B_1X22T_X": "X",
+      "M#B_1X22T_2": "2",
+      "MCU#B_1X22T_2": "2",
+      "M#B_12HND2T": {
+        "NAME": "2nd Half - Points Spread",
+        "DESC": "Which team is winning after the Point Spread is applied to the second half score?"
+      },
+      "M#B_12HND2T_1H": "1",
+      "MCU#B_12HND2T_1H": "{T1} (Home {HNDS})",
+      "MH#B_12HND2T": "Home|Away",
+      "M#B_OUHND2T": {
+        "NAME": "2nd Half - Total Spread",
+        "DESC": "Will the second half score have more or less total goals than the allotted Total Spread line?"
+      },
+      "M#B_OUHND2T_O": "Over",
+      "MCU#B_OUHND2T_O": "Over ({HND})",
+      "MH#B_OUHND2T": "Over|Under",
+      "M#B_OE2T": {
+        "NAME": "2nd Half - Odd/Even Points",
+        "DESC": "Odd or even total number of points scored in second half."
+      },
+      "M#B_OE2T_OD": "Odd",
+      "MCU#B_OE2T_OD": "Odd",
+      "M#B_OE2T_EV": "Even",
+      "MCU#B_OE2T_EV": "Even",
+      "M#B_DNB2T": {
+        "NAME": "2nd Half - Draw no bet",
+        "DESC": "Which team will win the second half?"
+      },
+      "M#B_DNB2T_1": "1",
+      "MCU#B_DNB2T_1": "1",
+      "M#B_DNB2T_2": "2",
+      "MCU#B_DNB2T_2": "2",
+      "M#B_OUHOME": {
+        "NAME": "Totals home team",
+        "DESC": "Will the home team score more or less points than the allotted Total line."
+      },
+      "M#B_OUHOME_O": "Over",
+      "MCU#B_OUHOME_O": "Over ({HND})",
+      "M#B_1X21P": {
+        "NAME": "1st Quarter - 1X2",
+        "DESC": "What will be the result of the first period?"
+      },
+      "M#B_1X21P_11Q": "1",
+      "MCU#B_1X21P_11Q": "1",
+      "M#B_1X21P_21Q": "2",
+      "MCU#B_1X21P_21Q": "2",
+      "M#B_1X22P": {
+        "NAME": "2nd Quarter - 1X2",
+        "DESC": "What will be the result of the second period?"
+      },
+      "M#B_1X22P_1": "1",
+      "MCU#B_1X22P_1": "1",
+      "M#B_1X22P_2": "2",
+      "MCU#B_1X22P_2": "2",
+      "M#B_1X23P": {
+        "NAME": "3rd Quarter - 1X2",
+        "DESC": "What will be the result of the third period?"
+      },
+      "M#B_1X23P_X": "X",
+      "MCU#B_1X23P_X": "X",
+      "M#B_1X24P": {
+        "NAME": "4th Quarter - 1X2",
+        "DESC": "What will be the result of the fourth period?"
+      },
+      "M#B_1X24P_1": "1",
+      "MCU#B_1X24P_1": "1",
+      "M#B_DNB1P": {
+        "NAME": "1st Quarter - Draw no bet",
+        "DESC": "Which team will win the first period?"
+      },
+      "M#B_DNB1P_1": "1",
+      "MCU#B_DNB1P_1": "1",
+      "M#B_DNB2P": {
+        "NAME": "2nd Quarter - Draw no bet",
+        "DESC": "Which team will win the second period?"
+      },
+      "M#B_DNB2P_1": "1",
+      "MCU#B_DNB2P_1": "1",
+      "M#B_DNB3P": {
+        "NAME": "3rd Quarter - Draw no bet",
+        "DESC": "Which team will win the third period?"
+      },
+      "M#B_DNB3P_1": "1",
+      "MCU#B_DNB3P_1": "1",
+      "M#B_DNB4P": {
+        "NAME": "4th Quarter - Draw no bet",
+        "DESC": "Which team will win the fourth period?"
+      },
+      "M#B_DNB4P_2": "2",
+      "MCU#B_DNB4P_2": "2",
+      "M#B_OUHND1P_O": "Over",
+      "MCU#B_OUHND1P_O": "Over ({HND})",
+      "M#B_OUHND2P": {
+        "NAME": "2nd Quarter - Total Spread",
+        "DESC": "Will the second period score have more or less total goals than the allotted Total Spread line?"
+      },
+      "M#B_OUHND2P_U": "Under",
+      "MCU#B_OUHND2P_U": "Under ({HND})",
+      "MH#B_OUHND2P": "Over|Under",
+      "M#B_OUHND4P": {
+        "NAME": "4th Quarter - Total Spread",
+        "DESC": "Will the fourth period score have more or less total goals than the allotted Total Spread line?"
+      },
+      "M#B_OUHND4P_U": "Under",
+      "MCU#B_OUHND4P_U": "Under ({HND})",
+      "MH#B_OUHND4P": "Over|Under",
+      "M#B_12HND2P": {
+        "NAME": "2nd Quarter - Points Spread",
+        "DESC": "Which team is winning after the Point Spread is applied to the second period score?"
+      },
+      "M#B_12HND2P_2H": "2",
+      "MCU#B_12HND2P_2H": "{T2} (Home {HNDS})",
+      "MH#B_12HND2P": "Home|Away",
+      "M#B_12HND4P": {
+        "NAME": "4th Quarter - Points Spread",
+        "DESC": "Which team is winning after the Point Spread is applied to the fourth period score?"
+      },
+      "M#B_12HND4P_1H": "1",
+      "MCU#B_12HND4P_1H": "{T1} (Home {HNDS})",
+      "MH#B_12HND4P": "Home|Away",
+      "M#B_OE1P": {
+        "NAME": "1st Quarter - Odd/Even Points",
+        "DESC": "Predict if the total number points scored during the first quarter of the match is going to be odd or even."
+      },
+      "M#B_OE1P_OD": "Odd",
+      "MCU#B_OE1P_OD": "Odd",
+      "M#B_OE3P_OD": "Odd",
+      "MCU#B_OE3P_OD": "Odd",
+      "M#B_OT_N": "No",
+      "MCU#B_OT_N": "No",
+      "M#B_DNB1T": {
+        "NAME": "1st Half - Draw no bet",
+        "DESC": "Which team will win the first half?"
+      },
+      "M#B_DNB1T_2DNBHT": "2 DNB HT",
+      "MCU#B_DNB1T_2DNBHT": "2 DNB HT",
+      "M#B_OUHNDAAMS_O": "Over",
+      "MCU#B_OUHNDAAMS_O": "Over ({HND})",
+      "M#B_DNB4P_1": "1",
+      "MCU#B_DNB4P_1": "1",
+      "M#B_OUHND4P_O": "Over",
+      "MCU#B_OUHND4P_O": "Over ({HND})",
+      "M#B_WIN": {
+        "NAME": "Win Margin",
+        "DESC": "You have to predict which is the point margin between the two teams, including extra time"
+      },
+      "M#B_WIN_W6-10": "Win 6-10",
+      "MCU#B_WIN_W6-10": "Win 6-10",
+      "M#B_WIN_W11-15": "Win 11-15",
+      "MCU#B_WIN_W11-15": "Win 11-15",
+      "M#B_WIN_W16-20": "Win 16-20",
+      "MCU#B_WIN_W16-20": "Win 16-20",
+      "M#B_DC": {
+        "NAME": "Double Chance",
+        "DESC": "You have to predict the outcome of the entire match. There are 3 possible outcomes: 1X (at the end of the match the home team wins or draws), X2 (at the end of the match the away team wins or draws), 12 (at the end of the match the home team wins or the away team wins)."
+      },
+      "M#B_DC_X2": "X2",
+      "MCU#B_DC_X2": "X2",
+      "M#B_DC_12": "12",
+      "MCU#B_DC_12": "12",
+      "M#B_DNB": {
+        "NAME": "Draw no bet",
+        "DESC": "You have to predict which team will win the match. If the teams draw the selection will be voided."
+      },
+      "M#B_DNB_1DBN": "1 DNB",
+      "MCU#B_DNB_1DBN": "1 DNB",
+      "M#B_DC1T": {
+        "NAME": "Double Chance HT",
+        "DESC": "Predict the winner of the match at half time. There are 3 possible outcomes: 1X (at the end of the match the home team wins or draws), X2 (at the end of the match the away team wins or draws), 12 (at the end of the match the home team wins or the away team wins)."
+      },
+      "M#B_DC1T_X2HT": "X2 HT",
+      "MCU#B_DC1T_X2HT": "X2 HT",
+      "M#B_1X2M": {
+        "NAME": "3way Margin",
+        "DESC": "You have to predict which is the point margin between the two teams"
+      },
+      "M#B_1X2M_2>5": "2 (>5)",
+      "MCU#B_1X2M_2>5": "2 (>5)",
+      "M#B_WINHA": {
+        "NAME": "Win Margin Home/Away",
+        "DESC": "You have to predict which is the point margin between the two teams, including extra time."
+      },
+      "M#B_WINHA_WINHOME1-5": "Home By 1-5",
+      "MCU#B_WINHA_WINHOME1-5": "Home By 1-5",
+      "M#B_WINHA_WINHOME11-15": "Home By 11-15",
+      "MCU#B_WINHA_WINHOME11-15": "Home By 11-15",
+      "M#B_WINHA_WINHOME21-25": "Home By 21-25",
+      "MCU#B_WINHA_WINHOME21-25": "Home By 21-25",
+      "M#B_WINHA_WINAWAY1-5": "Away By 1-5",
+      "MCU#B_WINHA_WINAWAY1-5": "Away By 1-5",
+      "M#B_WINHA_WINAWAY6-10": "Away By 6-10",
+      "MCU#B_WINHA_WINAWAY6-10": "Away By 6-10",
+      "M#B_WINHA_WINAWAY16-20": "Away By 16-20",
+      "MCU#B_WINHA_WINAWAY16-20": "Away By 16-20",
+      "M#B_WINHA_WINAWAY26+": "Away By 26+",
+      "MCU#B_WINHA_WINAWAY26+": "Away By 26+",
+      "M#B_HTFT_X/1": "X/1",
+      "MCU#B_HTFT_X/1": "X/1",
+      "M#B_HTFT_2/X": "2/X",
+      "MCU#B_HTFT_2/X": "2/X",
+      "M#B_OUHOME_U": "Under",
+      "MCU#B_OUHOME_U": "Under ({HND})",
+      "M#B_WINHA_WINHOME6-10": "Home By 6-10",
+      "MCU#B_WINHA_WINHOME6-10": "Home By 6-10",
+      "M#B_WINHA_WINHOME16-20": "Home By 16-20",
+      "MCU#B_WINHA_WINHOME16-20": "Home By 16-20",
+      "M#B_WINHA_WINHOME26+": "Home By 26+",
+      "MCU#B_WINHA_WINHOME26+": "Home By 26+",
+      "M#B_WINHA_WINAWAY11-15": "Away By 11-15",
+      "MCU#B_WINHA_WINAWAY11-15": "Away By 11-15",
+      "M#B_WINHA_WINAWAY21-25": "Away By 21-25",
+      "MCU#B_WINHA_WINAWAY21-25": "Away By 21-25",
+      "M#B_WIN_W21-25": "Win 21-25",
+      "MCU#B_WIN_W21-25": "Win 21-25",
+      "M#B_1X2M_1>5": "1 (>5)",
+      "MCU#B_1X2M_1>5": "1 (>5)",
+      "M#B_1X24Q": {
+        "NAME": "1X2 4thQ",
+        "DESC": "You have to predict the outcome of the 4th\u00a0quarter, selections are 1-the home team, 2-the away team and X-draw. If the quarter is uncompleted this market will be void."
+      },
+      "M#B_1X24Q_2": "2",
+      "MCU#B_1X24Q_2": "{T2}",
+      "M#B_1X24Q_X": "X",
+      "MCU#B_1X24Q_X": "Draw",
+      "M#B_O33Q": {
+        "NAME": "Odd/Even 3rdQ",
+        "DESC": "You have to predict if the total number points scored in the 3rd\u00a0quarter will be odd or even, if the quarter is uncompleted this market will be void."
+      },
+      "M#B_O33Q_Odd": "Odd",
+      "MCU#B_O33Q_Odd": "Odd",
+      "M#B_1X24Q_1": "1",
+      "MCU#B_1X24Q_1": "{T1}",
+      "M#B_DNB2Q": {
+        "NAME": "DNB 2ndQ",
+        "DESC": "You have to predict the winner of the 2nd\u00a0quarter, if the quarter finishes as a draw all bets will be made void for this market, if the quarter is uncompleted this market will be made void."
+      },
+      "M#B_DNB2Q_2": "2",
+      "MCU#B_DNB2Q_2": "{T2}",
+      "M#B_OU4Q": {
+        "NAME": "Over/Under 4thQ",
+        "DESC": "You have to predict if the total number of points scored during the 4th\u00a0quarter will be over or under the spread indicated, if the quarter is uncompleted this market will be void."
+      },
+      "M#B_OU4Q_Under": "Under",
+      "MCU#B_OU4Q_Under": "Under ({HND})",
+      "MH#B_OU4Q": "Over|Under",
+      "M#B_OU4Q_Over": "Over",
+      "MCU#B_OU4Q_Over": "Over ({HND})",
+      "M#B_DNB2Q_1": "1",
+      "MCU#B_DNB2Q_1": "{T1}",
+      "M#B_HND4Q": {
+        "NAME": "HND 4thQ",
+        "DESC": "You have to predict the winner of the 4th\u00a0quarter adding or subtracting the indicated spread to the result of the quarter, if the quarter is uncompleted this market will be made void."
+      },
+      "M#B_HND4Q_2": "2",
+      "MCU#B_HND4Q_2": "{T2} (Home {HNDS})",
+      "MH#B_HND4Q": "Home|Away",
+      "M#B_HND4Q_1": "1",
+      "MCU#B_HND4Q_1": "{T1} (Home {HNDS})",
+      "M#B_1X22Q": {
+        "NAME": "1X2 2ndQ",
+        "DESC": "You have to predict the outcome of the 2nd\u00a0quarter, selections are 1-the home team, 2-the away team and X-draw. If the quarter is uncompleted this market will be void."
+      },
+      "M#B_1X22Q_2": "2",
+      "MCU#B_1X22Q_2": "{T2}",
+      "M#B_OE4Q": {
+        "NAME": "Odd/Even 4thQ",
+        "DESC": "You have to predict if the total number points scored in the 4th\u00a0quarter will be odd or even, if the quarter is uncompleted this market will be void."
+      },
+      "M#B_OE4Q_Even": "Even",
+      "MCU#B_OE4Q_Even": "Even",
+      "M#B_OE4Q_Odd": "Odd",
+      "MCU#B_OE4Q_Odd": "Odd",
+      "M#B_DNB3Q": {
+        "NAME": "DNB 3rdQ",
+        "DESC": "You have to predict the winner of the 3rd\u00a0quarter, if the quarter finishes as a draw all bets will be made void for this market, if the quarter is uncompleted this market will be made void."
+      },
+      "M#B_DNB3Q_2": "2",
+      "MCU#B_DNB3Q_2": "{T2}",
+      "M#B_1X22Q_X": "X",
+      "MCU#B_1X22Q_X": "Draw",
+      "M#B_DNB3Q_1": "1",
+      "MCU#B_DNB3Q_1": "{T1}",
+      "M#B_1X23Q": {
+        "NAME": "1X2 3rdQ",
+        "DESC": "You have to predict the outcome of the 3rd\u00a0quarter, selections are 1-the home team, 2-the away team and X-draw. If the quarter is uncompleted this market will be void."
+      },
+      "M#B_1X23Q_2": "2",
+      "MCU#B_1X23Q_2": "{T2}",
+      "M#B_1X23Q_X": "X",
+      "MCU#B_1X23Q_X": "Draw",
+      "M#B_1X23Q_1": "1",
+      "MCU#B_1X23Q_1": "{T1}",
+      "M#B_OU3Q": {
+        "NAME": "Over/Under 3rdQ",
+        "DESC": "You have to predict if the total number of points scored during the 3rd\u00a0quarter will be over or under the spread indicated, if the quarter is uncompleted this market will be void."
+      },
+      "M#B_OU3Q_Under": "Under",
+      "MCU#B_OU3Q_Under": "Under ({HND})",
+      "MH#B_OU3Q": "Over|Under",
+      "M#B_OU3Q_Over": "Over",
+      "MCU#B_OU3Q_Over": "Over ({HND})",
+      "M#B_HND3Q": {
+        "NAME": "HND 3rdQ",
+        "DESC": "You have to predict the winner of the 3rd\u00a0quarter adding or subtracting the indicated spread to the result of the quarter, if the quarter is uncompleted this market will be made void."
+      },
+      "M#B_HND3Q_2": "2",
+      "MCU#B_HND3Q_2": "{T2} (Home {HNDS})",
+      "MH#B_HND3Q": "Home|Away",
+      "M#B_HND3Q_1": "1",
+      "MCU#B_HND3Q_1": "{T1} (Home {HNDS})",
+      "M#B_O33Q_Even": "Even",
+      "MCU#B_O33Q_Even": "Even",
+      "M#B_WIN_W26+": "Win 26+",
+      "MCU#B_WIN_W26+": "Win 26+",
+      "M#B_DNB_2DBN": "2 DNB",
+      "MCU#B_DNB_2DBN": "2 DNB",
+      "M#B_1X2M_X5": "X (0-5)",
+      "MCU#B_1X2M_X5": "X (0-5)",
+      "M#B_HTFT_1/X": "1/X",
+      "MCU#B_HTFT_1/X": "1/X",
+      "M#B_OE4P": {
+        "NAME": "4th Quarter - Odd/Even Points",
+        "DESC": "Odd or even total number of points scored in fourth period."
+      },
+      "M#B_OE4P_OD": "Odd",
+      "MCU#B_OE4P_OD": "Odd",
+      "M#B_1X2_XB": "X",
+      "MCU#B_1X2_XB": "X",
+      "M#B_WIN_W1-5": "Win 1-5",
+      "MCU#B_WIN_W1-5": "Win 1-5",
+      "M#B_DC_1X": "1X",
+      "MCU#B_DC_1X": "1X",
+      "M#B_DC1T_1XHT": "1X HT",
+      "MCU#B_DC1T_1XHT": "1X HT",
+      "M#B_12HND1T_1H": "1",
+      "MCU#B_12HND1T_1H": "{T1} (Home {HNDS})",
+      "M#B_OUHND1T_UHNDHT": "Under HT",
+      "MCU#B_OUHND1T_UHNDHT": "Under HT ({HND})",
+      "M#B_121T": {
+        "NAME": "1st Half - 2way",
+        "DESC": "Predict the winner of the match at half time. There are two possible outcomes: 1 (the first player/team wins), 2 (the second player/team wins)."
+      },
+      "M#B_121T_2": "2",
+      "MCU#B_121T_2": "2",
+      "M#B_HIGHTIME_2": "2nd quarter",
+      "MCU#B_HIGHTIME_2": "2nd quarter",
+      "M#B_HIGHTIME_E": "Equals",
+      "MCU#B_HIGHTIME_E": "Equals",
+      "M#B_12HND2T_2H": "2",
+      "MCU#B_12HND2T_2H": "{T2} (Home {HNDS})",
+      "M#B_DNB1T_1DNBHT": "1 DNB HT",
+      "MCU#B_DNB1T_1DNBHT": "1 DNB HT",
+      "M#B_1X21P_X1Q": "X",
+      "MCU#B_1X21P_X1Q": "X",
+      "M#B_1X23P_1": "1",
+      "MCU#B_1X23P_1": "1",
+      "M#B_1X23P_2": "2",
+      "MCU#B_1X23P_2": "2",
+      "M#B_1X24P_2": "2",
+      "MCU#B_1X24P_2": "2",
+      "M#B_DNB1P_2": "2",
+      "MCU#B_DNB1P_2": "2",
+      "M#B_DNB3P_2": "2",
+      "MCU#B_DNB3P_2": "2",
+      "M#B_OUHND3P_U": "Under",
+      "MCU#B_OUHND3P_U": "Under ({HND})",
+      "M#B_OE1P_EV": "Even",
+      "MCU#B_OE1P_EV": "Even",
+      "M#B_12HND1P": {
+        "NAME": "1st Quarter - Points Spread",
+        "DESC": "Which team is winning after the Point Spread is applied to the first period score?"
+      },
+      "M#B_12HND1P_1H": "1",
+      "MCU#B_12HND1P_1H": "{T1} (Home {HNDS})",
+      "MH#B_12HND1P": "Home|Away",
+      "M#B_12HND4P_2H": "2",
+      "MCU#B_12HND4P_2H": "{T2} (Home {HNDS})",
+      "M#B_WINM": {
+        "NAME": "Win Margin",
+        "DESC": "You have to predict which is the point margin."
+      },
+      "M#B_WINM_15": "Win 1-5",
+      "MCU#B_WINM_15": "Win 1-5",
+      "M#B_WINM_610": "Win 6-10",
+      "MCU#B_WINM_610": "Win 6-10",
+      "M#B_WINM_1115": "Win 11-15",
+      "MCU#B_WINM_1115": "Win 11-15",
+      "M#B_WINM_1620": "Win 16-20",
+      "MCU#B_WINM_1620": "Win 16-20",
+      "M#B_WINM_2125": "Win 21-25",
+      "MCU#B_WINM_2125": "Win 21-25",
+      "M#B_WINM_26": "Win 26+",
+      "MCU#B_WINM_26": "Win 26+",
+      "M#B_HTFT_2/1": "2/1",
+      "MCU#B_HTFT_2/1": "2/1",
+      "M#B_HTFT_1/2": "1/2",
+      "MCU#B_HTFT_1/2": "1/2",
+      "M#B_12HND": {
+        "NAME": "Points Spreads",
+        "DESC": "A number of points or goals is added to the outsider or subtracted from the favourite. The handicap bets are settled on the outcome of the event after adjusting for the handicaps."
+      },
+      "M#B_12HND_1H": "1",
+      "MCU#B_12HND_1H": "{T1} (Home {HNDS})",
+      "MH#B_12HND": "Home|Away",
+      "M#B_OE4P_EV": "Even",
+      "MCU#B_OE4P_EV": "Even",
+      "M#B_12HND_2H": "2",
+      "MCU#B_12HND_2H": "{T2} (Home {HNDS})",
+      "M#B_1X2_2B": "2",
+      "MCU#B_1X2_2B": "2",
+      "M#B_1X2HND_2H": "2",
+      "MCU#B_1X2HND_2H": "{T2} (Home {HNDS})",
+      "M#B_121T_1": "1",
+      "MCU#B_121T_1": "1",
+      "M#B_HIGHTIME_3": "3rd quarter",
+      "MCU#B_HIGHTIME_3": "3rd quarter",
+      "M#B_OUHND2T_U": "Under",
+      "MCU#B_OUHND2T_U": "Under ({HND})",
+      "M#B_OUAWAY": {
+        "NAME": "Totals away team",
+        "DESC": "Will the away team score more or less points than the allotted Total line."
+      },
+      "M#B_OUAWAY_U": "Under",
+      "MCU#B_OUAWAY_U": "Under ({HND})",
+      "M#B_1X22P_X": "X",
+      "MCU#B_1X22P_X": "X",
+      "M#B_1X24P_X": "X",
+      "MCU#B_1X24P_X": "X",
+      "M#B_DNB2P_2": "2",
+      "MCU#B_DNB2P_2": "2",
+      "M#B_OUHND2P_O": "Over",
+      "MCU#B_OUHND2P_O": "Over ({HND})",
+      "M#B_12HND1P_2H": "2",
+      "MCU#B_12HND1P_2H": "{T2} (Home {HNDS})",
+      "M#B_OE2P_EV": "Even",
+      "MCU#B_OE2P_EV": "Even",
+      "M#B_OUN": {
+        "NAME": "Over/Under",
+        "DESC": "You have to predict if the total number of points scored during the entire match will be over or under the spread indicated."
+      },
+      "M#B_OUN_U": "Under",
+      "MCU#B_OUN_U": "Under ({HND})",
+      "MH#B_OUN": "Over|Under",
+      "M#B_OUN_O": "Over",
+      "MCU#B_OUN_O": "Over ({HND})",
+      "M#B_OE1T_OD": "Odd",
+      "MCU#B_OE1T_OD": "Odd",
+      "M#B_12HND2P_1H": "1",
+      "MCU#B_12HND2P_1H": "{T1} (Home {HNDS})",
+      "M#B_OE_EV": "Even",
+      "MCU#B_OE_EV": "Even",
+      "M#B_1X22Q_1": "1",
+      "MCU#B_1X22Q_1": "{T1}",
+      "M#B_O2Q": {
+        "NAME": "Ov/Un 2ndQ",
+        "DESC": "You have to predict if the total number of points scored during the 2nd\u00a0quarter will be over or under the spread indicated, if the quarter is uncompleted this market will be void."
+      },
+      "M#B_O2Q_Under": "Under",
+      "MCU#B_O2Q_Under": "Under ({HND})",
+      "MH#B_O2Q": "Over|Under",
+      "M#B_O2Q_Over": "Over",
+      "MCU#B_O2Q_Over": "Over ({HND})",
+      "M#B_HND2Q": {
+        "NAME": "HND 2ndQ",
+        "DESC": "You have to predict the winner of the 2nd\u00a0quarter adding or subtracting the indicated spread to the result of the quarter, if the quarter is uncompleted this market will be made void."
+      },
+      "M#B_HND2Q_2": "2",
+      "MCU#B_HND2Q_2": "{T2} (Home {HNDS})",
+      "MH#B_HND2Q": "Home|Away",
+      "M#B_HND2Q_1": "1",
+      "MCU#B_HND2Q_1": "{T1} (Home {HNDS})",
+      "M#B_OE2Q": {
+        "NAME": "Odd/Even 2ndQ",
+        "DESC": "You have to predict if the total number points scored in the 2nd\u00a0quarter will be odd or even, if the quarter is uncompleted this market will be void."
+      },
+      "M#B_OE2Q_Even": "Even",
+      "MCU#B_OE2Q_Even": "Even",
+      "M#B_OE2Q_Odd": "Odd",
+      "MCU#B_OE2Q_Odd": "Odd",
+      "M#B_DNB1Q": {
+        "NAME": "DNB 1stQ",
+        "DESC": "You have to predict the winner of the 1st\u00a0quarter, if the quarter finishes as a draw all bets will be made void for this market, if the quarter is uncompleted this market will be made void."
+      },
+      "M#B_DNB1Q_2": "2",
+      "MCU#B_DNB1Q_2": "{T2}",
+      "M#B_DNB1Q_1": "1",
+      "MCU#B_DNB1Q_1": "{T1}",
+      "M#B_D1Q": {
+        "NAME": "DC 1stQ",
+        "DESC": "You have to predict the result of the 1st\u00a0quarter. There are 2 possible results: 1X-home or draw and X2-draw or away win. If the quarter is uncompleted this market will be made void."
+      },
+      "M#B_D1Q_X2": "X2",
+      "MCU#B_D1Q_X2": "X2",
+      "M#B_D1Q_1X": "1X",
+      "MCU#B_D1Q_1X": "1X",
+      "M#B_OUHOME2T": {
+        "NAME": "Over/Under Home 2H",
+        "DESC": "You have to predict if the total number of points scored by the Home team during the 2nd\u00a0half will be over or under the spread indicated, if the half is uncompleted this market will be made void."
+      },
+      "M#B_OUHOME2T_Under": "Under",
+      "MCU#B_OUHOME2T_Under": "Under ({HND})",
+      "MH#B_OUHOME2T": "Over|Under",
+      "M#B_OUHOME2T_Over": "Over",
+      "MCU#B_OUHOME2T_Over": "Over ({HND})",
+      "M#B_OUAWAY2T": {
+        "NAME": "Over/Under Away 2H",
+        "DESC": "You have to predict if the total number of points scored by the Away team during the 2nd\u00a0half will be over or under the spread indicated, if the half is uncompleted this market will be made void."
+      },
+      "M#B_OUAWAY2T_Under": "Under",
+      "MCU#B_OUAWAY2T_Under": "Under ({HND})",
+      "MH#B_OUAWAY2T": "Over|Under",
+      "M#B_OUAWAY2T_Over": "Over",
+      "MCU#B_OUAWAY2T_Over": "Over ({HND})",
+      "M#B_OU2T": {
+        "NAME": "Over/Under 2nd H",
+        "DESC": "You have to predict if the total number of points scored during the 2nd\u00a0half will be over or under the spread indicated, if the half is uncompleted this market will be void."
+      },
+      "M#B_OU2T_Under": "Under",
+      "MCU#B_OU2T_Under": "Under ({HND})",
+      "MH#B_OU2T": "Over|Under",
+      "M#B_OU2T_Over": "Over",
+      "MCU#B_OU2T_Over": "Over ({HND})",
+      "M#B_OE2TN": {
+        "NAME": "Odd/Even 2nd H",
+        "DESC": "You have to predict if the total number points scored in the 2nd\u00a0half will be odd or even, if the half is uncompleted this market will be void."
+      },
+      "M#B_OE2TN_Even": "Even",
+      "MCU#B_OE2TN_Even": "Even",
+      "M#B_OE2TN_Odd": "Odd",
+      "MCU#B_OE2TN_Odd": "Odd",
+      "M#B_DNB2TN": {
+        "NAME": "DNB 2nd H",
+        "DESC": "You have to predict the winner of the 2nd half, if the half finishes as a draw all bets will be made void for this market, if the quarter is uncompleted this market will be made void."
+      },
+      "M#B_DNB2TN_2": "2",
+      "MCU#B_DNB2TN_2": "{T2}",
+      "M#B_DNB2TN_1": "1",
+      "MCU#B_DNB2TN_1": "{T1}",
+      "M#B_D2T": {
+        "NAME": "DC 2nd H",
+        "DESC": "You have to predict the result of the 2nd half. There are 2 possible results: 1X-home or draw and X2-draw or away win. If the half is uncompleted this market will be made void."
+      },
+      "M#B_D2T_X2": "X2",
+      "MCU#B_D2T_X2": "X2",
+      "M#B_D2T_1X": "1X",
+      "MCU#B_D2T_1X": "1X",
+      "M#B_1X22TN": {
+        "NAME": "1X2 2nd Half",
+        "DESC": "You have to predict the outcome of the 2nd\u00a0half (not including overtime), selections are 1-the home team, 2-the away team and X-draw. If the half is uncompleted this market will be void."
+      },
+      "M#B_1X22TN_2": "2",
+      "MCU#B_1X22TN_2": "{T2}",
+      "M#B_1X22TN_X": "X",
+      "MCU#B_1X22TN_X": "Draw",
+      "M#B_1X22TN_1": "1",
+      "MCU#B_1X22TN_1": "{T1}",
+      "M#B_HFT": {
+        "NAME": "Halftime/Fulltime",
+        "DESC": "You have to predict the outcome of the 1st\u00a0half combined with the outcome of the match (regular time only)."
+      },
+      "M#B_HFT_2/2": "2/2",
+      "MCU#B_HFT_2/2": "{T2}/{T2}",
+      "M#B_HFT_2/X": "2/X",
+      "MCU#B_HFT_2/X": "{T2}/Draw",
+      "M#B_HFT_2/1": "2/1",
+      "MCU#B_HFT_2/1": "{T2}/{T1}",
+      "M#B_HFT_X/2": "X/2",
+      "MCU#B_HFT_X/2": "Draw/{T2}",
+      "M#B_HFT_X/X": "X/X",
+      "MCU#B_HFT_X/X": "Draw/Draw",
+      "M#B_HFT_X/1": "X/1",
+      "MCU#B_HFT_X/1": "Draw/{T1}",
+      "M#B_HFT_1/2": "1/2",
+      "MCU#B_HFT_1/2": "{T1}/{T2}",
+      "M#B_HFT_1/X": "1/X",
+      "MCU#B_HFT_1/X": "{T1}/Draw",
+      "M#B_HFT_1/1": "1/1",
+      "MCU#B_HFT_1/1": "{T1}/{T1}",
+      "M#B_OEAWAY": {
+        "NAME": "Odd/Even Away",
+        "DESC": "You have to predict if the number of goals scored by the away team during the entire match is going to be odd or even. If the away team does not score any goal the winning selection is even"
+      },
+      "M#B_OEAWAY_Even": "Even",
+      "MCU#B_OEAWAY_Even": "Even",
+      "M#B_OEAWAY_Odd": "Odd",
+      "MCU#B_OEAWAY_Odd": "Odd",
+      "M#B_OEHOME": {
+        "NAME": "Odd/Even Home",
+        "DESC": "You have to predict if the number of goals scored by the home team during the entire match is going to be odd or even. If the home team does not score any goal the winning selection is even. "
+      },
+      "M#B_OEHOME_Even": "Even",
+      "MCU#B_OEHOME_Even": "Even",
+      "M#B_OEHOME_Odd": "Odd",
+      "MCU#B_OEHOME_Odd": "Odd",
+      "M#B_OU": {
+        "NAME": "Totals",
+        "DESC": "Predict if the total number of goals/points scored during the entire match will be over or under the spread indicated."
+      },
+      "M#B_OU_O": "Over",
+      "MCU#B_OU_O": "Over ({HND})",
+      "MH#B_OU": "Over|Under",
+      "M#B_OUAWAY_O": "Over",
+      "MCU#B_OUAWAY_O": "Over ({HND})",
+      "M#B_OU_U": "Under",
+      "MCU#B_OU_U": "Under ({HND})",
+      "M#B_1X2HNDN": {
+        "NAME": "1X2 (5.5 points)",
+        "DESC": "You have to predict the whether the home or away winning margin will be above or below 6 points. Selections are 1-home wins by 6 or more points, X-either team wins by 5 or less points and 2-away team wins by 6 or more points."
+      },
+      "M#B_1X2HNDN_2H": "2",
+      "MCU#B_1X2HNDN_2H": "{T2}",
+      "MH#B_1X2HNDN": "Home|Draw|Away",
+      "M#B_1X2HNDN_XH": "X",
+      "MCU#B_1X2HNDN_XH": "Draw",
+      "M#B_1X2HNDN_1H": "1",
+      "MCU#B_1X2HNDN_1H": "{T1}",
+      "M#B_MARGINFT": {
+        "NAME": "Margin Fulltime",
+        "DESC": "You have to predict the winning margin of the match for either team (including overtime).\u00a0 The Sections are 1-5 points, 6-10 points, 11-15 points, 16-20 points, 21-25 points and 26 or more points."
+      },
+      "M#B_MARGINFT_25+": "25+",
+      "MCU#B_MARGINFT_25+": "25+",
+      "M#B_MARGINFT_21-25": "21-25",
+      "MCU#B_MARGINFT_21-25": "21-25",
+      "M#B_MARGINFT_16-20": "16-20",
+      "MCU#B_MARGINFT_16-20": "16-20",
+      "M#B_MARGINFT_11-15": "11-15",
+      "MCU#B_MARGINFT_11-15": "11-15",
+      "M#B_MARGINFT_6-10": "6-10",
+      "MCU#B_MARGINFT_6-10": "6-10",
+      "M#B_MARGINFT_1-5": "1-5",
+      "MCU#B_MARGINFT_1-5": "1-5",
+      "M#B_MARGINAWAY": {
+        "NAME": "Margin Away",
+        "DESC": "You have to predict the winning margin of the match for the away team (including overtime).\u00a0 The Sections are 1-5 points, 6-10 points, 11-15 points, 16-20 points, 21-25 points and 26 or more points."
+      },
+      "M#B_MARGINAWAY_Away25+": "Away 25+",
+      "MCU#B_MARGINAWAY_Away25+": "Away 25+",
+      "M#B_MARGINAWAY_Away21-25": "Away 21-25",
+      "MCU#B_MARGINAWAY_Away21-25": "Away 21-25",
+      "M#B_MARGINAWAY_Away16-20": "Away 16-20",
+      "MCU#B_MARGINAWAY_Away16-20": "Away 16-20",
+      "M#B_MARGINAWAY_Away11-15": "Away 11-15",
+      "MCU#B_MARGINAWAY_Away11-15": "Away 11-15",
+      "M#B_MARGINAWAY_Away6-10": "Away 6-10",
+      "MCU#B_MARGINAWAY_Away6-10": "Away 6-10",
+      "M#B_MARGINAWAY_Away1-5": "Away 1-5",
+      "MCU#B_MARGINAWAY_Away1-5": "Away 1-5",
+      "M#B_MARGINHOME": {
+        "NAME": "Margin Home",
+        "DESC": "You have to predict the winning margin of the match for the home team (including overtime).\u00a0 The Sections are 1-5 points, 6-10 points, 11-15 points, 16-20 points, 21-25 points and 26 or more points."
+      },
+      "M#B_MARGINHOME_Home25+": "Home 25+",
+      "MCU#B_MARGINHOME_Home25+": "Home 25+",
+      "M#B_MARGINHOME_Home21-25": "Home 21-25",
+      "MCU#B_MARGINHOME_Home21-25": "Home 21-25",
+      "M#B_MARGINHOME_Home16-20": "Home 16-20",
+      "MCU#B_MARGINHOME_Home16-20": "Home 16-20",
+      "M#B_MARGINHOME_Home11-15": "Home 11-15",
+      "MCU#B_MARGINHOME_Home11-15": "Home 11-15",
+      "M#B_MARGINHOME_Home6-10": "Home 6-10",
+      "MCU#B_MARGINHOME_Home6-10": "Home 6-10",
+      "M#B_MARGINHOME_Home1-5": "Home 1-5",
+      "MCU#B_MARGINHOME_Home1-5": "Home 1-5",
+      "M#B_12OU": {
+        "NAME": "1-2 + Ov/Un",
+        "DESC": "You have to predict the winner of the match and whether the number of points played is over or under the indicated spread."
+      },
+      "M#B_12OU_2+Under": "2 + Under",
+      "MCU#B_12OU_2+Under": "{T2} + Under ({HND})",
+      "M#B_12OU_2+Over": "2 + Over",
+      "MCU#B_12OU_2+Over": "{T2} + Over ({HND})",
+      "M#B_12OU_1+Under": "1 + Under",
+      "MCU#B_12OU_1+Under": "{T1} + Under ({HND})",
+      "M#B_12OU_1+Over": "1 + Over",
+      "MCU#B_12OU_1+Over": "{T1} + Over ({HND})",
+      "M#B_OUAWAY4Q": {
+        "NAME": "O/U Away 4thQ",
+        "DESC": "You have to predict if the total number of points scored by the Away team during the 4th quarter will be over or under the spread indicated, if the quarter is uncompleted this market will be made void."
+      },
+      "M#B_OUAWAY4Q_Under": "Under",
+      "MCU#B_OUAWAY4Q_Under": "Under ({HND})",
+      "MH#B_OUAWAY4Q": "Over|Under",
+      "M#B_OUAWAY4Q_Over": "Over",
+      "MCU#B_OUAWAY4Q_Over": "Over ({HND})",
+      "M#B_OUAWAY3Q": {
+        "NAME": "O/U Away 3rdQ",
+        "DESC": "You have to predict if the total number of points scored by the Away team during the 3rd quarter will be over or under the spread indicated, if the quarter is uncompleted this market will be made void."
+      },
+      "M#B_OUAWAY3Q_Under": "Under",
+      "MCU#B_OUAWAY3Q_Under": "Under ({HND})",
+      "MH#B_OUAWAY3Q": "Over|Under",
+      "M#B_OUAWAY3Q_Over": "Over",
+      "MCU#B_OUAWAY3Q_Over": "Over ({HND})",
+      "M#B_OUHOME4Q": {
+        "NAME": "O/U Home 4thQ",
+        "DESC": "You have to predict if the total number of points scored by the Home team during the 4th quarter will be over or under the spread indicated, if the quarter is uncompleted this market will be made void."
+      },
+      "M#B_OUHOME4Q_Under": "Under",
+      "MCU#B_OUHOME4Q_Under": "Under ({HND})",
+      "MH#B_OUHOME4Q": "Over|Under",
+      "M#B_OUHOME4Q_Over": "Over",
+      "MCU#B_OUHOME4Q_Over": "Over ({HND})",
+      "M#B_OUHOME3Q": {
+        "NAME": "Ov/Un Home 3rdQ",
+        "DESC": "You have to predict if the total number of points scored by the Home team during the 3rd quarter will be over or under the spread indicated, if the quarter is uncompleted this market will be made void."
+      },
+      "M#B_OUHOME3Q_Under": "Under",
+      "MCU#B_OUHOME3Q_Under": "Under ({HND})",
+      "MH#B_OUHOME3Q": "Over|Under",
+      "M#B_OUHOME3Q_Over": "Over",
+      "MCU#B_OUHOME3Q_Over": "Over ({HND})",
+      "M#B_OUAWAY2Q": {
+        "NAME": "Ov/Un Away 2ndQ",
+        "DESC": "You have to predict if the total number of points scored by the Away team during the 3rd quarter will be over or under the spread indicated, if the quarter is uncompleted this market will be made void."
+      },
+      "M#B_OUAWAY2Q_Under": "Under",
+      "MCU#B_OUAWAY2Q_Under": "Under ({HND})",
+      "MH#B_OUAWAY2Q": "Over|Under",
+      "M#B_OUAWAY2Q_Over": "Over",
+      "MCU#B_OUAWAY2Q_Over": "Over ({HND})",
+      "M#B_OUHOME2Q": {
+        "NAME": "Ov/Un Home 2ndQ",
+        "DESC": "You have to predict if the total number of points scored by the Home team during the 2nd quarter will be over or under the spread indicated, if the quarter is uncompleted this market will be made void."
+      },
+      "M#B_OUHOME2Q_Under": "Under",
+      "MCU#B_OUHOME2Q_Under": "Under ({HND})",
+      "MH#B_OUHOME2Q": "Over|Under",
+      "M#B_OUHOME2Q_Over": "Over",
+      "MCU#B_OUHOME2Q_Over": "Over ({HND})",
+      "M#B_OTYESNO": {
+        "NAME": "Overtime Yes/No",
+        "DESC": "Predict if the game will go to Overtime "
+      },
+      "M#B_OTYESNO_No": "No",
+      "MCU#B_OTYESNO_No": "No",
+      "M#B_OTYESNO_Yes": "Yes",
+      "MCU#B_OTYESNO_Yes": "Yes",
+      "M#B_RACE50": {
+        "NAME": "Race to 50",
+        "DESC": "Predict which team wins race to 50 points, including overtime"
+      },
+      "M#B_RACE50_2": "2",
+      "MCU#B_RACE50_2": "{T2}",
+      "M#B_RACE50_1": "1",
+      "MCU#B_RACE50_1": "{T1}",
+      "M#B_RACE40": {
+        "NAME": "Race to 40",
+        "DESC": "Predict which team wins race to 40 points, including overtime"
+      },
+      "M#B_RACE40_2": "2",
+      "MCU#B_RACE40_2": "{T2}",
+      "M#B_RACE40_1": "1",
+      "MCU#B_RACE40_1": "{T1}",
+      "M#B_RACE30": {
+        "NAME": "Race to 30",
+        "DESC": "Predict which team wins race to 30 points, including overtime"
+      },
+      "M#B_RACE30_2": "2",
+      "MCU#B_RACE30_2": "{T2}",
+      "M#B_RACE30_1": "1",
+      "MCU#B_RACE30_1": "{T1}",
+      "M#B_RACE20": {
+        "NAME": "Race to 20",
+        "DESC": "Predict which team wins race to 20 points, including overtime"
+      },
+      "M#B_RACE20_2": "2",
+      "MCU#B_RACE20_2": "{T2}",
+      "M#B_RACE20_1": "1",
+      "MCU#B_RACE20_1": "{T1}",
+      "M#B_RACE15": {
+        "NAME": "Race to 15",
+        "DESC": "Predict which team wins race to 15 points, including overtime"
+      },
+      "M#B_RACE15_2": "2",
+      "MCU#B_RACE15_2": "{T2}",
+      "M#B_RACE15_1": "1",
+      "MCU#B_RACE15_1": "{T1}",
+      "M#B_RACE10": {
+        "NAME": "Race to 10",
+        "DESC": "Predict which team wins race to 10 points, including overtime"
+      },
+      "M#B_RACE10_2": "2",
+      "MCU#B_RACE10_2": "{T2}",
+      "M#B_RACE10_1": "1",
+      "MCU#B_RACE10_1": "{T1}",
+      "M#B_RACE5": {
+        "NAME": "Race to 5",
+        "DESC": "Predict which team wins race to 5 points, including overtime"
+      },
+      "M#B_RACE5_2": "2",
+      "MCU#B_RACE5_2": "{T2}",
+      "M#B_RACE5_1": "1",
+      "MCU#B_RACE5_1": "{T1}",
+      "M#B_DNB4Q": {
+        "NAME": "DNB 4thQ",
+        "DESC": "You have to predict the winner of the 4th\u00a0quarter, if the quarter finishes as a draw all bets will be made void for this market, if the quarter is uncompleted this market will be made void."
+      },
+      "M#B_DNB4Q_2": "2",
+      "MCU#B_DNB4Q_2": "{T2}",
+      "M#B_DNB4Q_1": "1",
+      "MCU#B_DNB4Q_1": "{T1}",
+      "CNT#TRI": "Throw-ins",
+      "CNT#GKS": "Goal Kicks",
+      "CNT#PST": "Posts",
+      "CNT#GA": "Games",
+      "CNT#1P": "1st Player",
+      "CNT#P": "Points",
+      "CNT#HP": "Home Points",
+      "CNT#180": "180s",
+      "CNT#HG": "Home Goals",
+      "CNT#R": "Runs",
+      "CNT#RO": "Rounds",
+      "CNT#HR": "Home Runs",
+      "CNT#C": "Cards",
+      "CNT#CO": "Corners",
+      "CNT#HCO": "Home Corners",
+      "CNT#G": "Goals",
+      "CNT#GR": "Generic Result",
+      "CNT#HS": "Home Sets",
+      "CNT#WOODW": "Woodworks",
+      "CNT#TACKL": "Tackles",
+      "CNT#SAVES": "Saves",
+      "CNT#ACE": "Ace",
+      "CNT#DF": "Double Fault",
+      "CNT#GP": "Game {HND1} - Home ({HNDS2})",
+      "CNT#RO1": "Round",
+      "CNT#LT": "Total {HND2} (Lap {HND1})",
+      "CNT#PEN": "Penalty {HND}",
+      "CNT#INOVH": "Inning {HND1} over {HND2} - delivery {HND3} ({HND4})",
+      "CNT#TRIES": "Tries",
+      "CNT#TRIEH": "Tries  Halves",
+      "CNT#PNCT": "{P1} (Card {HND2})",
+      "CNT#PF": "{P1} (Foul {HND2})",
+      "CNT#PSHOT": "{P1} (Shot {HND2})",
+      "CNT#PSOT": "{P1} (SoT {HND2})",
+      "CNT#HNDG": "{HND} Goal",
+      "CNT#PP": "Quarter {HND1} - {HND2} Points",
+      "CNT#CSD": "Combo + Duo",
+      "CNT#GSD": "Goalscorer Duo",
+      "CNT#CD": "Cards Duo",
+      "CNT#SHOTD": "Shots Duo",
+      "CNT#AD": "Assist Duo",
+      "CNT#STDUO": "Shots On Target Duo",
+      "CNT#PA": "Passes",
+      "CNT#HPS": "Sets",
+      "CNT#CS": "Current Score {HND}",
+      "CNT#S": "Sets",
+      "CNT#NG": "Goal {HND}",
+      "CNT#SHOT": "Shots",
+      "CNT#SETT": "Set",
+      "CNT#L2P1": "Lap {HND2} - {P1}",
+      "CNT#LFTP1": "Laps {HND2} to {HND3} - {P1}",
+      "CNT#P2P3": "{P2} vs {P3}",
+      "CNT#T2L1": "Total {HND2} Lap {HND1}",
+      "CNT#TO2P1": "Top {HND2} {P1}",
+      "CNT#CTD": "Touchdown Number {HND}",
+      "CNT#CAP": "{HND} Away Penalty",
+      "CNT#CHP": "{HND} Home Penalty",
+      "CNT#PG": "{P1} (Goal {HND2})",
+      "CNT#GAM": "Game {HND}",
+      "CNT#SGP": "Set {HND1} - Game {HND2}, Point {HND3}",
+      "CNT#SG": "Set {HND1} - Game {HND2}",
+      "CNT#COS": "Correct Score",
+      "CNT#LEGS": "Legs",
+      "CNT#CKOUT": "Checkout",
+      "CNT#GMT": "Goal Method",
+      "CNT#COA": "Coach",
+      "CNT#SUB": "Substitutions",
+      "CNT#GSC": "{P1} ({HND2})",
+      "CNT#L2P2": "Lap {HND1} - {HND2}",
+      "CNT#TD": "TD",
+      "CNT#FG": "FG",
+      "CNT#RB": "Rebounds",
+      "CNT#A": "Assist",
+      "CNT#MAP": "Maps",
+      "CNT#TL": "Tot. League",
+      "CNT#P1": "{P1}",
+      "CNT#HND12": "{HND1}-{HND2} min",
+      "CNT#HND23": "{HND2}-{HND3} min",
+      "CNT#CSHND": "Current Score {HND1} Home {HND2}",
+      "CNT#CSHOU": "Current Score {HND1} ({HND2})",
+      "CNT#PER": "Period {HND1} ({HND2})",
+      "CNT#BP": "Ball Poss %",
+      "CNT#OFF": "Offsides",
+      "CNT#ST": "Shots Target",
+      "CNT#F": "Fouls",
+      "CNT#PCS": "Next Goal scorer ({HND2})",
+      "CNT#PGS": "Point {HND1} Game {HND2} Set {HND3}",
+      "CNT#COHND": "Corner {HND}",
+      "CNT#GS": "Game {HND2} Set {HND1}",
+      "CNT#STE": "Steals",
+      "CNT#BL": "Blocks",
+      "CNT#3MO": "3pt Made",
+      "CNT#SET": "Set {HND}",
+      "CNT#INN": "Inning {HND1}",
+      "CNT#INNTO": "Inning {HND1} ({HND2})",
+      "CNT#INNDI": "Inning {HND1} - Dismissal {HND2}",
+      "CNT#INNOH": "Inning {HND1} overs 0 to {HND2} ({HND3})",
+      "CNT#INNOA": "Inning {HND1} overs 0 to {HND2} ({HND3})",
+      "CNT#INNOV": "Inning {HND1} (overs 0 to {HND2})",
+      "CNT#INOV1": "Inning {HND1} over {HND2}",
+      "CNT#INOV": "Inning {HND1} over {HND2} ({HND3})",
+      "CNT#HNDCO": "{HND} Corner",
+      "CNT#NCT": "{HND} Card",
+      "CNT#HNDH": "{HND} Home",
+      "CNT#GSP": "Goalscorer Plus",
+      "CNT#CMP": "Combo+ Plus",
+      "CNT#SOTP": "Shots On Target Plus",
+      "CNT#GSDN": "Goalscorer Plus (No Duo)"
+    }
+  }
+}

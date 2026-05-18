@@ -1,0 +1,684 @@
+{
+  "8902111": [
+    {
+      "id": 382,
+      "specValue": 0,
+      "name": "2 Way - OT incl.",
+      "order": 101,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2668020599,
+          "name": "Zhejiang Guangsha",
+          "odds": "1.27",
+          "shortName": "1",
+          "specValue": 0
+        },
+        {
+          "id": 2668020609,
+          "name": "Shenzhen",
+          "odds": "2.85",
+          "shortName": "2",
+          "specValue": 0
+        }
+      ]
+    },
+    {
+      "id": 51,
+      "specValue": -8.5,
+      "name": "Handicap - OT incl.",
+      "order": 103,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2668105301,
+          "name": "Zhejiang Guangsha [-8.50]",
+          "odds": "1.91",
+          "shortName": "1",
+          "specValue": -8.5
+        },
+        {
+          "id": 2668105303,
+          "name": "Shenzhen [+8.50]",
+          "odds": "1.60",
+          "shortName": "2",
+          "specValue": -8.5
+        }
+      ]
+    },
+    {
+      "id": 51,
+      "specValue": -7.5,
+      "name": "Handicap - OT incl.",
+      "order": 103,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2668104847,
+          "name": "Zhejiang Guangsha [-7.50]",
+          "odds": "1.77",
+          "shortName": "1",
+          "specValue": -7.5
+        },
+        {
+          "id": 2668104849,
+          "name": "Shenzhen [+7.50]",
+          "odds": "1.71",
+          "shortName": "2",
+          "specValue": -7.5
+        }
+      ]
+    },
+    {
+      "id": 51,
+      "specValue": -6.5,
+      "name": "Handicap - OT incl.",
+      "order": 103,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2668096031,
+          "name": "Zhejiang Guangsha [-6.50]",
+          "odds": "1.66",
+          "shortName": "1",
+          "specValue": -6.5
+        },
+        {
+          "id": 2668096033,
+          "name": "Shenzhen [+6.50]",
+          "odds": "1.82",
+          "shortName": "2",
+          "specValue": -6.5
+        }
+      ]
+    },
+    {
+      "id": 52,
+      "specValue": 189.5,
+      "name": "Total Points - OT incl.",
+      "order": 106,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2668124643,
+          "name": "OVER 189.50",
+          "odds": "1.67",
+          "shortName": "OV",
+          "specValue": 189.5
+        },
+        {
+          "id": 2668124649,
+          "name": "UNDER 189.50",
+          "odds": "1.81",
+          "shortName": "UN",
+          "specValue": 189.5
+        }
+      ]
+    },
+    {
+      "id": 52,
+      "specValue": 190.5,
+      "name": "Total Points - OT incl.",
+      "order": 106,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2668062919,
+          "name": "OVER 190.50",
+          "odds": "1.73",
+          "shortName": "OV",
+          "specValue": 190.5
+        },
+        {
+          "id": 2668062921,
+          "name": "UNDER 190.50",
+          "odds": "1.75",
+          "shortName": "UN",
+          "specValue": 190.5
+        }
+      ]
+    },
+    {
+      "id": 52,
+      "specValue": 191.5,
+      "name": "Total Points - OT incl.",
+      "order": 106,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2668020603,
+          "name": "OVER 191.50",
+          "odds": "1.80",
+          "shortName": "OV",
+          "specValue": 191.5
+        },
+        {
+          "id": 2668020615,
+          "name": "UNDER 191.50",
+          "odds": "1.68",
+          "shortName": "UN",
+          "specValue": 191.5
+        }
+      ]
+    },
+    {
+      "id": 42,
+      "specValue": 0,
+      "name": "3 Way - First Half",
+      "order": 109,
+      "columns": 3,
+      "columnsApp": 3,
+      "selections": [
+        {
+          "id": 2668020605,
+          "name": "Zhejiang Guangsha",
+          "odds": "1.43",
+          "shortName": "1",
+          "specValue": 0
+        },
+        {
+          "id": 2668020613,
+          "name": "DRAW",
+          "odds": "21.00",
+          "shortName": "X",
+          "specValue": 0
+        },
+        {
+          "id": 2668020619,
+          "name": "Shenzhen",
+          "odds": "2.55",
+          "shortName": "2",
+          "specValue": 0
+        }
+      ]
+    },
+    {
+      "id": 53,
+      "specValue": -5.5,
+      "name": "Handicap - First Half",
+      "order": 112,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2668123361,
+          "name": "Zhejiang Guangsha [-5.50]",
+          "odds": "1.91",
+          "shortName": "1",
+          "specValue": -5.5
+        },
+        {
+          "id": 2668123365,
+          "name": "Shenzhen [+5.50]",
+          "odds": "1.57",
+          "shortName": "2",
+          "specValue": -5.5
+        }
+      ]
+    },
+    {
+      "id": 53,
+      "specValue": -4.5,
+      "name": "Handicap - First Half",
+      "order": 112,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2668109717,
+          "name": "Zhejiang Guangsha [-4.50]",
+          "odds": "1.78",
+          "shortName": "1",
+          "specValue": -4.5
+        },
+        {
+          "id": 2668109761,
+          "name": "Shenzhen [+4.50]",
+          "odds": "1.67",
+          "shortName": "2",
+          "specValue": -4.5
+        }
+      ]
+    },
+    {
+      "id": 53,
+      "specValue": -3.5,
+      "name": "Handicap - First Half",
+      "order": 112,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2668109723,
+          "name": "Zhejiang Guangsha [-3.50]",
+          "odds": "1.67",
+          "shortName": "1",
+          "specValue": -3.5
+        },
+        {
+          "id": 2668109755,
+          "name": "Shenzhen [+3.50]",
+          "odds": "1.79",
+          "shortName": "2",
+          "specValue": -3.5
+        }
+      ]
+    },
+    {
+      "id": 54,
+      "specValue": 96.5,
+      "name": "Total Points - First Half",
+      "order": 115,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2668123377,
+          "name": "OVER 96.50",
+          "odds": "1.72",
+          "shortName": "OV",
+          "specValue": 96.5
+        },
+        {
+          "id": 2668123379,
+          "name": "UNDER 96.50",
+          "odds": "1.76",
+          "shortName": "UN",
+          "specValue": 96.5
+        }
+      ]
+    },
+    {
+      "id": 45,
+      "specValue": 0,
+      "name": "Odd/Even Points - OT incl.",
+      "order": 118,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2668089189,
+          "name": "ODD",
+          "odds": "1.74",
+          "shortName": "OD",
+          "specValue": 0
+        },
+        {
+          "id": 2668089197,
+          "name": "EVEN",
+          "odds": "1.83",
+          "shortName": "EV",
+          "specValue": 0
+        }
+      ]
+    },
+    {
+      "id": 224,
+      "specValue": 0,
+      "name": "Highest Scoring Quarter",
+      "order": 119,
+      "columns": 3,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2668109725,
+          "name": "First Quarter",
+          "odds": "3.00",
+          "shortName": "1stq",
+          "specValue": 0
+        },
+        {
+          "id": 2668109757,
+          "name": "Second Quarter",
+          "odds": "3.20",
+          "shortName": "2ndq",
+          "specValue": 0
+        },
+        {
+          "id": 2668109765,
+          "name": "Third Quarter",
+          "odds": "3.45",
+          "shortName": "3rdq",
+          "specValue": 0
+        },
+        {
+          "id": 2668109767,
+          "name": "Fourth quarter",
+          "odds": "5.40",
+          "shortName": "4thq",
+          "specValue": 0
+        },
+        {
+          "id": 2668109771,
+          "name": "Equal Quarters",
+          "odds": "13.00",
+          "shortName": "eql",
+          "specValue": 0
+        }
+      ]
+    },
+    {
+      "id": 362,
+      "specValue": 48.5,
+      "name": "1st Quarter Over/Under Total Points",
+      "order": 120,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2668109713,
+          "name": "OVER 48.50",
+          "odds": "1.75",
+          "shortName": "OV",
+          "specValue": 48.5
+        },
+        {
+          "id": 2668109743,
+          "name": "UNDER 48.50",
+          "odds": "1.70",
+          "shortName": "UN",
+          "specValue": 48.5
+        }
+      ]
+    },
+    {
+      "id": 366,
+      "specValue": -1.5,
+      "name": "1st Quarter Points Handicap",
+      "order": 122,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2668109703,
+          "name": "Zhejiang Guangsha [-1.50]",
+          "odds": "1.67",
+          "shortName": "1",
+          "specValue": -1.5
+        },
+        {
+          "id": 2668109737,
+          "name": "Shenzhen [+1.50]",
+          "odds": "1.78",
+          "shortName": "2",
+          "specValue": -1.5
+        }
+      ]
+    },
+    {
+      "id": 367,
+      "specValue": -2.5,
+      "name": "2nd Quarter Points Handicap",
+      "order": 126,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2668109707,
+          "name": "Zhejiang Guangsha [-2.50]",
+          "odds": "1.78",
+          "shortName": "1",
+          "specValue": -2.5
+        },
+        {
+          "id": 2668109745,
+          "name": "Shenzhen [+2.50]",
+          "odds": "1.67",
+          "shortName": "2",
+          "specValue": -2.5
+        }
+      ]
+    },
+    {
+      "id": 368,
+      "specValue": -1.5,
+      "name": "3rd Quarter Points Handicap",
+      "order": 130,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2668109705,
+          "name": "Zhejiang Guangsha [-1.50]",
+          "odds": "1.69",
+          "shortName": "1",
+          "specValue": -1.5
+        },
+        {
+          "id": 2668109739,
+          "name": "Shenzhen [+1.50]",
+          "odds": "1.75",
+          "shortName": "2",
+          "specValue": -1.5
+        }
+      ]
+    },
+    {
+      "id": 369,
+      "specValue": -0.5,
+      "name": "4th Quarter Points handicap",
+      "order": 134,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2668109695,
+          "name": "Zhejiang Guangsha [-0.50]",
+          "odds": "1.65",
+          "shortName": "1",
+          "specValue": -0.5
+        },
+        {
+          "id": 2668109731,
+          "name": "Shenzhen [+0.50]",
+          "odds": "1.80",
+          "shortName": "2",
+          "specValue": -0.5
+        }
+      ]
+    },
+    {
+      "id": 353,
+      "specValue": 97.5,
+      "name": "Home Team Over/Under Total Points - Full Time OT incl",
+      "order": 136,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2668124641,
+          "name": "OVER 97.50",
+          "odds": "1.60",
+          "shortName": "OV",
+          "specValue": 97.5
+        },
+        {
+          "id": 2668124647,
+          "name": "UNDER 97.50",
+          "odds": "1.88",
+          "shortName": "UN",
+          "specValue": 97.5
+        }
+      ]
+    },
+    {
+      "id": 353,
+      "specValue": 98.5,
+      "name": "Home Team Over/Under Total Points - Full Time OT incl",
+      "order": 136,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2668109709,
+          "name": "OVER 98.50",
+          "odds": "1.70",
+          "shortName": "OV",
+          "specValue": 98.5
+        },
+        {
+          "id": 2668109741,
+          "name": "UNDER 98.50",
+          "odds": "1.75",
+          "shortName": "UN",
+          "specValue": 98.5
+        }
+      ]
+    },
+    {
+      "id": 353,
+      "specValue": 99.5,
+      "name": "Home Team Over/Under Total Points - Full Time OT incl",
+      "order": 136,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2668109697,
+          "name": "OVER 99.50",
+          "odds": "1.82",
+          "shortName": "OV",
+          "specValue": 99.5
+        },
+        {
+          "id": 2668109733,
+          "name": "UNDER 99.50",
+          "odds": "1.64",
+          "shortName": "UN",
+          "specValue": 99.5
+        }
+      ]
+    },
+    {
+      "id": 352,
+      "specValue": 90.5,
+      "name": "Away Team Over/Under Total Points - Full Time OT incl.",
+      "order": 138,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2668124645,
+          "name": "OVER 90.50",
+          "odds": "1.57",
+          "shortName": "OV",
+          "specValue": 90.5
+        },
+        {
+          "id": 2668124651,
+          "name": "UNDER 90.50",
+          "odds": "1.92",
+          "shortName": "UN",
+          "specValue": 90.5
+        }
+      ]
+    },
+    {
+      "id": 352,
+      "specValue": 91.5,
+      "name": "Away Team Over/Under Total Points - Full Time OT incl.",
+      "order": 138,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2668109699,
+          "name": "OVER 91.50",
+          "odds": "1.67",
+          "shortName": "OV",
+          "specValue": 91.5
+        },
+        {
+          "id": 2668109735,
+          "name": "UNDER 91.50",
+          "odds": "1.78",
+          "shortName": "UN",
+          "specValue": 91.5
+        }
+      ]
+    },
+    {
+      "id": 352,
+      "specValue": 92.5,
+      "name": "Away Team Over/Under Total Points - Full Time OT incl.",
+      "order": 138,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2668109701,
+          "name": "OVER 92.50",
+          "odds": "1.79",
+          "shortName": "OV",
+          "specValue": 92.5
+        },
+        {
+          "id": 2668109729,
+          "name": "UNDER 92.50",
+          "odds": "1.66",
+          "shortName": "UN",
+          "specValue": 92.5
+        }
+      ]
+    },
+    {
+      "id": 222,
+      "specValue": 0,
+      "name": "Winning Margin",
+      "order": 172,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2668109763,
+          "name": "Home by 1-5 pts",
+          "odds": "5.40",
+          "shortName": "H15",
+          "specValue": 0
+        },
+        {
+          "id": 2668109759,
+          "name": "Home by  6-10 pts",
+          "odds": "4.40",
+          "shortName": "H610",
+          "specValue": 0
+        },
+        {
+          "id": 2668109727,
+          "name": "Home by 11+ pts",
+          "odds": "2.27",
+          "shortName": "H_10",
+          "specValue": 0
+        },
+        {
+          "id": 2668109769,
+          "name": "Away by 1-5 pts",
+          "odds": "7.20",
+          "shortName": "A15",
+          "specValue": 0
+        },
+        {
+          "id": 2668109773,
+          "name": "Away by 6-10 pts",
+          "odds": "9.20",
+          "shortName": "A610",
+          "specValue": 0
+        },
+        {
+          "id": 2668109775,
+          "name": "Away by 11+ pts",
+          "odds": "10.00",
+          "shortName": "A_10",
+          "specValue": 0
+        }
+      ]
+    }
+  ]
+}

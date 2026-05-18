@@ -1,0 +1,1218 @@
+{
+  "id": "35318281",
+  "name": "Csb Blazers - Uphsd Altas",
+  "results": {
+    "display": {
+      "minute": "7",
+      "currentPeriod": {
+        "id": "3000",
+        "name": "4th Quarter",
+        "slug": "4TH_QUARTER"
+      },
+      "currentServer": null
+    },
+    "participantPeriodResults": [
+      {
+        "participant": {
+          "id": "670999",
+          "type": "HOME"
+        },
+        "periodResults": [
+          {
+            "period": {
+              "id": "3010",
+              "name": "Full Time (Excluding Overtime)",
+              "slug": "FULL_TIME_EXCLUDING_OVERTIME"
+            },
+            "result": "54",
+            "type": "SCORE"
+          },
+          {
+            "period": {
+              "id": "3000",
+              "name": "4th Quarter",
+              "slug": "4TH_QUARTER"
+            },
+            "result": "7",
+            "type": "SCORE"
+          },
+          {
+            "period": {
+              "id": "2998",
+              "name": "3rd Quarter",
+              "slug": "3RD_QUARTER"
+            },
+            "result": "8",
+            "type": "SCORE"
+          },
+          {
+            "period": {
+              "id": "2995",
+              "name": "2nd Quarter",
+              "slug": "2ND_QUARTER"
+            },
+            "result": "24",
+            "type": "SCORE"
+          },
+          {
+            "period": {
+              "id": "2992",
+              "name": "1st Quarter",
+              "slug": "1ST_QUARTER"
+            },
+            "result": "15",
+            "type": "SCORE"
+          }
+        ]
+      },
+      {
+        "participant": {
+          "id": "672204",
+          "type": "AWAY"
+        },
+        "periodResults": [
+          {
+            "period": {
+              "id": "3010",
+              "name": "Full Time (Excluding Overtime)",
+              "slug": "FULL_TIME_EXCLUDING_OVERTIME"
+            },
+            "result": "54",
+            "type": "SCORE"
+          },
+          {
+            "period": {
+              "id": "3000",
+              "name": "4th Quarter",
+              "slug": "4TH_QUARTER"
+            },
+            "result": "7",
+            "type": "SCORE"
+          },
+          {
+            "period": {
+              "id": "2998",
+              "name": "3rd Quarter",
+              "slug": "3RD_QUARTER"
+            },
+            "result": "22",
+            "type": "SCORE"
+          },
+          {
+            "period": {
+              "id": "2995",
+              "name": "2nd Quarter",
+              "slug": "2ND_QUARTER"
+            },
+            "result": "11",
+            "type": "SCORE"
+          },
+          {
+            "period": {
+              "id": "2992",
+              "name": "1st Quarter",
+              "slug": "1ST_QUARTER"
+            },
+            "result": "14",
+            "type": "SCORE"
+          }
+        ]
+      }
+    ]
+  },
+  "widgets": [
+    {
+      "id": "71453210",
+      "type": "SPORTRADAR",
+      "retention": null
+    }
+  ],
+  "participants": [
+    {
+      "id": "670999",
+      "name": "Csb Blazers",
+      "position": 1
+    },
+    {
+      "id": "672204",
+      "name": "Uphsd Altas",
+      "position": 2
+    }
+  ],
+  "startTime": "2026-05-18T07:00:00Z",
+  "markets": [
+    {
+      "marketType": {
+        "id": "4791",
+        "name": "Moneyline - FT incl OT",
+        "displayName": "Moneyline | Full Time (incl. OT)",
+        "explainer": "Pick what the result will be for the stated period.",
+        "priority": 101,
+        "tabs": [
+          "popular",
+          "all"
+        ],
+        "handicapType": "",
+        "priceColumnCount": 2,
+        "priceSortingMethod": "PRICE_TYPE_ID"
+      },
+      "row": [
+        {
+          "id": "377993856",
+          "handicap": null,
+          "formattedHandicap": null,
+          "prices": [
+            {
+              "id": "1461717251",
+              "name": "1",
+              "typeId": "4792",
+              "price": 1.48,
+              "suspended": false,
+              "handicap": null,
+              "displayName": "1",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOjczNDQzODcxOTUyNzc3NzY0NTgsInJlZnVuZCI6NjQ4OTUyODY4NzIxMjc4MjEzMiwia2V5IjotNDMwNzY2ODUyNjg2MTM3ODAxNX0="
+            },
+            {
+              "id": "1461717252",
+              "name": "2",
+              "typeId": "4793",
+              "price": 2.35,
+              "suspended": false,
+              "handicap": null,
+              "displayName": "2",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOjkwMDM1ODg0ODk1NDMzODI3ODcsInJlZnVuZCI6NDgzOTk3ODA3MTI5MzM4Njc1OSwia2V5IjotMjUxNDAwMjc1MjkyODY3MDcwMn0="
+            }
+          ]
+        }
+      ],
+      "displayNameRows": [],
+      "displayNameColumns": [],
+      "additionalInfo": {
+        "boosted": false,
+        "cashoutable": true,
+        "twoUp": false
+      }
+    },
+    {
+      "marketType": {
+        "id": "5009",
+        "name": "Total Score Over/Under - FT incl OT",
+        "displayName": "Over/Under | Full Time (incl. OT)",
+        "explainer": "Pick how many points will be scored during the stated period. Over is more than that amount, Under is less.",
+        "priority": 102,
+        "tabs": [
+          "popular",
+          "points",
+          "all"
+        ],
+        "handicapType": "NORMAL",
+        "priceColumnCount": 2,
+        "priceSortingMethod": "PRICE_TYPE_ID"
+      },
+      "row": [
+        {
+          "id": "377994999",
+          "handicap": 526,
+          "formattedHandicap": null,
+          "prices": [
+            {
+              "id": "1461721167",
+              "name": "Over",
+              "typeId": "5010",
+              "price": 1.46,
+              "suspended": false,
+              "handicap": "131.5",
+              "displayName": "Over {formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOjY1Njk1MjAwMTE4NjA1MDg2NTEsInJlZnVuZCI6NzI2NDIxNTU5MzgxNzI0OTY5NCwia2V5IjotMzYyMzA2NTMxMTY0NzU1MDYxfQ=="
+            },
+            {
+              "id": "1461721166",
+              "name": "Under",
+              "typeId": "5011",
+              "price": 2.4,
+              "suspended": false,
+              "handicap": "131.5",
+              "displayName": "Under {formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOi0zNzIxNDY0NjQwNDk1ODUxMTY5LCJyZWZ1bmQiOi04OTcwMTY2MDQ2NTc2OTUxNjAsImtleSI6NzkwNjcyMTg0MzE0NjAxMzI3N30="
+            }
+          ]
+        },
+        {
+          "id": "377994996",
+          "handicap": 530,
+          "formattedHandicap": null,
+          "prices": [
+            {
+              "id": "1461721159",
+              "name": "Over",
+              "typeId": "5010",
+              "price": 1.6,
+              "suspended": false,
+              "handicap": "132.5",
+              "displayName": "Over {formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOjI1NDc5NTUxNTQ4NDE1ODExMDIsInJlZnVuZCI6MjA3MTE2OTg4MTkxOTcyNzE2NSwia2V5IjotOTA0MDYyNDc0NDIwNDE4MzAwMH0="
+            },
+            {
+              "id": "1461721158",
+              "name": "Under",
+              "typeId": "5011",
+              "price": 2.1,
+              "suspended": false,
+              "handicap": "132.5",
+              "displayName": "Under {formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOi04NTYzODczNTU0MTYwNDA4NjQxLCJyZWZ1bmQiOi01MjYxMjYxMTE2Mjk5OTM3NjkwLCJrZXkiOjI5Mzk1MjE2MzYzOTgyMzY3ODd9"
+            }
+          ]
+        },
+        {
+          "id": "378018122",
+          "handicap": 534,
+          "formattedHandicap": null,
+          "prices": [
+            {
+              "id": "1461741248",
+              "name": "Over",
+              "typeId": "5010",
+              "price": 1.74,
+              "suspended": false,
+              "handicap": "133.5",
+              "displayName": "Over {formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOi00NzI1Mjg5NjQ0ODg0NzQ5ODY1LCJyZWZ1bmQiOi05MTExNjQzMDM0MTgxOTYyMDA0LCJrZXkiOjIyODY1NzIyNDIxMDgyNTQ5Njl9"
+            },
+            {
+              "id": "1461741247",
+              "name": "Under",
+              "typeId": "5011",
+              "price": 1.89,
+              "suspended": false,
+              "handicap": "133.5",
+              "displayName": "Under {formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOjYyMTU0NDAwNzYzMDI0MTE5NzksInJlZnVuZCI6NzYxMDk0MjM3NjI4MTA2OTg4OSwia2V5IjotNjAxMjIzNDE1MzgyNTk2MjY4fQ=="
+            }
+          ]
+        },
+        {
+          "id": "377994655",
+          "handicap": 538,
+          "formattedHandicap": null,
+          "prices": [
+            {
+              "id": "1461720021",
+              "name": "Over",
+              "typeId": "5010",
+              "price": 1.95,
+              "suspended": false,
+              "handicap": "134.5",
+              "displayName": "Over {formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOjE1MjU1NzY4Njg5MDA5NDQwNDEsInJlZnVuZCI6MzA5NTc0Mjk3NzE2Nzg0NTcyOSwia2V5IjotNTQyMTk5OTIzMzYzNTYwOTIyOH0="
+            },
+            {
+              "id": "1461720020",
+              "name": "Under",
+              "typeId": "5011",
+              "price": 1.7,
+              "suspended": false,
+              "handicap": "134.5",
+              "displayName": "Under {formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOjkwNzg1NTExOTY0Mjg5MTY0OCwicmVmdW5kIjozNzA4ODQ4OTM1OTE2NzgyMjM2LCJrZXkiOi01OTU4NTM5NjAwNjc0ODMyNzU5fQ=="
+            }
+          ]
+        },
+        {
+          "id": "377994652",
+          "handicap": 542,
+          "formattedHandicap": null,
+          "prices": [
+            {
+              "id": "1461720011",
+              "name": "Over",
+              "typeId": "5010",
+              "price": 2.15,
+              "suspended": false,
+              "handicap": "135.5",
+              "displayName": "Over {formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOi01MzIxNDU3Nzk0NzM3MDY1NDc1LCJyZWZ1bmQiOi04NTAzODkyMjc0MDQ5MzI0NDU5LCJrZXkiOjE3MTQ1NzI1OTY0NzE4OTU2MTZ9"
+            },
+            {
+              "id": "1461720010",
+              "name": "Under",
+              "typeId": "5011",
+              "price": 1.57,
+              "suspended": false,
+              "handicap": "135.5",
+              "displayName": "Under {formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOi05MTczNDM4NTUzODkyNTczMDA3LCJyZWZ1bmQiOi00NjYwMTk5MzAxMzY1NjAzNjgzLCJrZXkiOjI0MDYyOTA5MDU3MDYxNDMzNjh9"
+            }
+          ]
+        }
+      ],
+      "displayNameRows": [],
+      "displayNameColumns": [],
+      "additionalInfo": {
+        "boosted": false,
+        "cashoutable": true,
+        "twoUp": false
+      }
+    },
+    {
+      "marketType": {
+        "id": "3777",
+        "name": "Asian Handicap - FT incl OT",
+        "displayName": "2-Way Handicap | Full Time (incl. OT)",
+        "explainer": "Bet on the result with a handicap applied in the stated period. 1 (-1.5)  means the Home team starts with 1.5-goal/point disadvantage. In order for the bet to be successful, Home team must win the game by at least 2 goals/points or more. 2 (+1.5) means the Away team starts with 1.5-goal/point advantage. In order for the bet to be successful, Away team must either win, draw or lose the game by no more than 1 goal/point.",
+        "priority": 104,
+        "tabs": [
+          "popular",
+          "all"
+        ],
+        "handicapType": "ASIAN",
+        "priceColumnCount": 2,
+        "priceSortingMethod": "PRICE_TYPE_ID"
+      },
+      "row": [
+        {
+          "id": "377994314",
+          "handicap": -10,
+          "formattedHandicap": null,
+          "prices": [
+            {
+              "id": "1461719130",
+              "name": "1",
+              "typeId": "3778",
+              "price": 1.85,
+              "suspended": false,
+              "handicap": "-2.5",
+              "displayName": "{formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOi0xOTg3OTk4MjkwNjM5NDk3NjkyLCJyZWZ1bmQiOi0yNjE0ODk2NTgxODQ3ODAzMzUxLCJrZXkiOjUwMDg0MjE0OTY1OTMyMTI5ODh9"
+            },
+            {
+              "id": "1461719131",
+              "name": "2",
+              "typeId": "3779",
+              "price": 1.75,
+              "suspended": false,
+              "handicap": "+2.5",
+              "displayName": "{formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOjc2NzUxOTMwNzc0OTM2ODU0MjQsInJlZnVuZCI6NjE1Mjk0MzE0Mjc3MTY4ODc3Nywia2V5IjotMzc5NTE2NjEwNDEzNTk2MDIyOH0="
+            }
+          ]
+        }
+      ],
+      "displayNameRows": [],
+      "displayNameColumns": [
+        "1",
+        "2"
+      ],
+      "additionalInfo": {
+        "boosted": false,
+        "cashoutable": true,
+        "twoUp": false
+      }
+    },
+    {
+      "marketType": {
+        "id": "4389697",
+        "name": "Match Winner and Totals - FT incl OT",
+        "displayName": "Match Winner and Total Score | Full Time (incl. OT)",
+        "explainer": "Pick the winner and the total points scored. 1 - Over (155.5) is a home win with 156+ total points.",
+        "priority": 106,
+        "tabs": [
+          "popular",
+          "points",
+          "all"
+        ],
+        "handicapType": "NORMAL",
+        "priceColumnCount": 2,
+        "priceSortingMethod": "PRICE_TYPE_ID"
+      },
+      "row": [
+        {
+          "handicap": 534,
+          "formattedHandicap": null,
+          "prices": [
+            {
+              "id": "1461721162",
+              "name": "1 - Over",
+              "typeId": "4389698",
+              "price": 2.7,
+              "suspended": false,
+              "handicap": "133.5",
+              "displayName": "Over {formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOjQzMTYwNDc3NTcwNzAxOTcyMzAsInJlZnVuZCI6MzAyMjk3MDA2ODU4MzIyMzg0LCJrZXkiOi03MzQ4MDQ0NzMwNDI2NTczMzcxfQ=="
+            },
+            {
+              "id": "1461721163",
+              "name": "2 - Over",
+              "typeId": "4389699",
+              "price": 4.15,
+              "suspended": false,
+              "handicap": "133.5",
+              "displayName": "Over {formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOjQyMDM2MjEzMTk3ODc4ODI0NjYsInJlZnVuZCI6NDA1MzA1MjMxMzMzOTQ4MzA0LCJrZXkiOi03MjMwMzYyODQ2NDUxODU3NTMxfQ=="
+            }
+          ]
+        },
+        {
+          "handicap": 534,
+          "formattedHandicap": null,
+          "prices": [
+            {
+              "id": "1461721164",
+              "name": "1 - Under",
+              "typeId": "4389700",
+              "price": 2.8,
+              "suspended": false,
+              "handicap": "133.5",
+              "displayName": "Under {formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOi0zNzAzMjQ1ODMyNTc5NzQ0NjIxLCJyZWZ1bmQiOi05MTYyMjMxMDY0NjY3OTQ0NTEsImtleSI6Nzg5MDE4NTkxNDg2Mzg5NjYzMn0="
+            },
+            {
+              "id": "1461721165",
+              "name": "2 - Under",
+              "typeId": "4389701",
+              "price": 4.7,
+              "suspended": false,
+              "handicap": "133.5",
+              "displayName": "Under {formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOi04NzY1OTA4NTUyNjAyNzEzNDQyLCJyZWZ1bmQiOi01MDcxMTQ1OTI3NTgzODM3NDMxLCJrZXkiOjI4NTc3NjQ5ODUwNTAyNDY5NDB9"
+            }
+          ]
+        }
+      ],
+      "displayNameRows": [],
+      "displayNameColumns": [
+        "1",
+        "2"
+      ],
+      "additionalInfo": {
+        "boosted": false,
+        "cashoutable": true,
+        "twoUp": false
+      }
+    },
+    {
+      "marketType": {
+        "id": "4839",
+        "name": "Odd / Even - FT incl OT",
+        "displayName": "Odd/Even | Full Time (incl. OT)",
+        "explainer": "Pick whether the total points scored during the stated period will be Odd or Even. 0 is considered Even.",
+        "priority": 109,
+        "tabs": [
+          "points",
+          "all"
+        ],
+        "handicapType": "",
+        "priceColumnCount": 2,
+        "priceSortingMethod": "PRICE_TYPE_ID"
+      },
+      "row": [
+        {
+          "id": "377993850",
+          "handicap": null,
+          "formattedHandicap": null,
+          "prices": [
+            {
+              "id": "1461717232",
+              "name": "Odd",
+              "typeId": "4840",
+              "price": 1.75,
+              "suspended": false,
+              "handicap": null,
+              "displayName": "Odd",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOjI2MTU5NzYzMTk3MDE5OTc5MjEsInJlZnVuZCI6MTk5NDQyODE5MjgzNzk5ODQ5Niwia2V5IjotODgxOTQ5ODk4NDkxMTkwMTc3MX0="
+            },
+            {
+              "id": "1461717233",
+              "name": "Even",
+              "typeId": "4841",
+              "price": 1.85,
+              "suspended": false,
+              "handicap": null,
+              "displayName": "Even",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOi04MzQ5MzA2NzA5OTY3NzMxMzc2LCJyZWZ1bmQiOi01NDc2ODUxMzI2NDEzNzczMDEwLCJrZXkiOjMyOTkyMTMzMDM1ODEwMjMwMzV9"
+            }
+          ]
+        }
+      ],
+      "displayNameRows": [],
+      "displayNameColumns": [],
+      "additionalInfo": {
+        "boosted": false,
+        "cashoutable": true,
+        "twoUp": false
+      }
+    },
+    {
+      "marketType": {
+        "id": "1396223",
+        "name": "Will the Match be Tied after Regular Time",
+        "displayName": "Will the Match be Tied after Regular Time? (Excluding Overtime)",
+        "explainer": "Predict whether the game goes to overtime or not.",
+        "priority": 113,
+        "tabs": [
+          "popular",
+          "all"
+        ],
+        "handicapType": "",
+        "priceColumnCount": 2,
+        "priceSortingMethod": "PRICE_TYPE_ID"
+      },
+      "row": [
+        {
+          "id": "377993833",
+          "handicap": null,
+          "formattedHandicap": null,
+          "prices": [
+            {
+              "id": "1461717194",
+              "name": "Yes",
+              "typeId": "1400698",
+              "price": 5.25,
+              "suspended": false,
+              "handicap": null,
+              "displayName": "Yes",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOjM3NjUxMzAyMzMxMzAzMTQyNDMsInJlZnVuZCI6ODI4NzI4NzU5NTAyNDg0Nzg3LCJrZXkiOi03NjU4NTc1ODY4NzQ2MTUxNjQyfQ=="
+            },
+            {
+              "id": "1461717195",
+              "name": "No",
+              "typeId": "1400699",
+              "price": 1.09,
+              "suspended": false,
+              "handicap": null,
+              "displayName": "No",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOjg4MTc5NzIxMzg5NjQ5ODgzNDYsInJlZnVuZCI6NTAyMjcyOTAwMTQ5Nzg5MzI2Miwia2V5IjotMjYyOTIxMjg2OTk3NzE4NDg2OX0="
+            }
+          ]
+        }
+      ],
+      "displayNameRows": [],
+      "displayNameColumns": [],
+      "additionalInfo": {
+        "boosted": false,
+        "cashoutable": true,
+        "twoUp": false
+      }
+    },
+    {
+      "marketType": {
+        "id": "4997",
+        "name": "Total Score Over/Under - 4Q",
+        "displayName": "Total Score Over/Under | 4th Quarter",
+        "explainer": "Pick how many points will be scored during the stated period. Over is more than that amount, Under is less.",
+        "priority": 342,
+        "tabs": [
+          "quarters",
+          "points",
+          "all"
+        ],
+        "handicapType": "NORMAL",
+        "priceColumnCount": 2,
+        "priceSortingMethod": "PRICE_TYPE_ID"
+      },
+      "row": [
+        {
+          "id": "378018278",
+          "handicap": 146,
+          "formattedHandicap": null,
+          "prices": [
+            {
+              "id": "1461741682",
+              "name": "Over",
+              "typeId": "4998",
+              "price": 1.44,
+              "suspended": false,
+              "handicap": "36.5",
+              "displayName": "Over {formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOjY4OTI4MTI0MzQ4MTUzODA0NCwicmVmdW5kIjozOTIzODU3ODEyNTA1NTQzNzg2LCJrZXkiOi02MzIyMTU4NDczMTczNjE2NTEzfQ=="
+            },
+            {
+              "id": "1461741681",
+              "name": "Under",
+              "typeId": "4999",
+              "price": 2.45,
+              "suspended": false,
+              "handicap": "36.5",
+              "displayName": "Under {formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOjg2MjgxNTIyNjQzNTE4Mjc2NDMsInJlZnVuZCI6NTIxODQ1MTE5MTE4NjI0NjI0OCwia2V5IjotMzAwMDI5NDQ5ODQzNzM4NDU3OX0="
+            }
+          ]
+        },
+        {
+          "id": "378018385",
+          "handicap": 150,
+          "formattedHandicap": null,
+          "prices": [
+            {
+              "id": "1461741900",
+              "name": "Over",
+              "typeId": "4998",
+              "price": 1.6,
+              "suspended": false,
+              "handicap": "37.5",
+              "displayName": "Over {formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOjY4NTYwODIxOTA0NDg5OTcwMjQsInJlZnVuZCI6Njk3Mzc2NjYwMDY3ODQ1NTYzNCwia2V5IjotNzYzNjQ5MzQzODU2MTM0OTd9"
+            },
+            {
+              "id": "1461741899",
+              "name": "Under",
+              "typeId": "4999",
+              "price": 2.1,
+              "suspended": false,
+              "handicap": "37.5",
+              "displayName": "Under {formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOjg0MTY2Mjc1OTY2ODI3ODM0MjQsInJlZnVuZCI6NTQxMDc0MzU3NTQ2MDc3NDYxOSwia2V5IjotMzA4ODk5OTY5NzUzMTMwNjI5MH0="
+            }
+          ]
+        },
+        {
+          "id": "378018386",
+          "handicap": 154,
+          "formattedHandicap": null,
+          "prices": [
+            {
+              "id": "1461741902",
+              "name": "Over",
+              "typeId": "4998",
+              "price": 1.79,
+              "suspended": false,
+              "handicap": "38.5",
+              "displayName": "Over {formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOi0xNjk5MTg4Njk1Mzc3ODA4MjgzLCJyZWZ1bmQiOi0yOTE1MTk5OTUwMzU4Mzc1NjEzLCJrZXkiOjUzMTMyMTkxNjYxMjkxODg2OTR9"
+            },
+            {
+              "id": "1461741901",
+              "name": "Under",
+              "typeId": "4999",
+              "price": 1.84,
+              "suspended": false,
+              "handicap": "38.5",
+              "displayName": "Under {formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOi02NzAyMjg2MTA2OTc2Mjg5NDk5LCJyZWZ1bmQiOi03MTIzNzAyNDQzNTcwOTM0NjQwLCJrZXkiOjIyMjA4MzY1MTk2OTgyMjg1M30="
+            }
+          ]
+        },
+        {
+          "id": "377995452",
+          "handicap": 158,
+          "formattedHandicap": null,
+          "prices": [
+            {
+              "id": "1461752241",
+              "name": "Over",
+              "typeId": "4998",
+              "price": 2.0,
+              "suspended": false,
+              "handicap": "39.5",
+              "displayName": "Over {formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOi04NzY2MDY3NTM0ODcxMzc0NjAzLCJyZWZ1bmQiOi01MDc4OTAxMTc2Mzg2MjY5MjM4LCJrZXkiOjI4NjA3NDQ0ODM2MjEwOTAyNzF9"
+            },
+            {
+              "id": "1461752240",
+              "name": "Under",
+              "typeId": "4999",
+              "price": 1.65,
+              "suspended": false,
+              "handicap": "39.5",
+              "displayName": "Under {formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOjQxNDM0MjA5MTM2NTM2Njc2NDMsInJlZnVuZCI6NDU5ODY1ODE4Mzk2NDE5NDE4LCJrZXkiOi03NDY5NTc1OTUzMTM1MDAzMzEzfQ=="
+            }
+          ]
+        },
+        {
+          "id": "377995467",
+          "handicap": 162,
+          "formattedHandicap": null,
+          "prices": [
+            {
+              "id": "1461752271",
+              "name": "Over",
+              "typeId": "4998",
+              "price": 2.3,
+              "suspended": false,
+              "handicap": "40.5",
+              "displayName": "Over {formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOjkxOTY5OTcyNTM2Mjc2NTY2NCwicmVmdW5kIjozNjgyNzI4NDM3NjU2NjQxMTg5LCJrZXkiOi01OTY4MTU4MjEyNDg0MzI0Njg4fQ=="
+            },
+            {
+              "id": "1461752270",
+              "name": "Under",
+              "typeId": "4999",
+              "price": 1.5,
+              "suspended": false,
+              "handicap": "40.5",
+              "displayName": "Under {formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOi05MDk0NzQ0MjA2OTM4MjUxMTYyLCJyZWZ1bmQiOi00NzQzNTg2MDA4ODAxODUzNTczLCJrZXkiOjIzMTM3NTUxNjg1ODIxNTcxNjZ9"
+            }
+          ]
+        }
+      ],
+      "displayNameRows": [],
+      "displayNameColumns": [],
+      "additionalInfo": {
+        "boosted": false,
+        "cashoutable": true,
+        "twoUp": false
+      }
+    },
+    {
+      "marketType": {
+        "id": "3719",
+        "name": "1X2 - 4Q",
+        "displayName": "1X2 | 4th Quarter",
+        "explainer": "Pick what the result will be for the stated period: 1 (home win), X (draw), 2 (away win).",
+        "priority": 343,
+        "tabs": [
+          "quarters",
+          "all"
+        ],
+        "handicapType": "",
+        "priceColumnCount": 3,
+        "priceSortingMethod": "PRICE_TYPE_ID"
+      },
+      "row": [
+        {
+          "id": "378018275",
+          "handicap": null,
+          "formattedHandicap": null,
+          "prices": [
+            {
+              "id": "1461741674",
+              "name": "1",
+              "typeId": "3720",
+              "price": 1.7,
+              "suspended": false,
+              "handicap": null,
+              "displayName": "1",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOi03ODY1ODQwNDYwMDE5Mzc1ODkzLCJyZWZ1bmQiOi01OTY1MTM5NDA1MjQ4MjMzNTU1LCJrZXkiOjM2NzUxOTMzODYzOTk0MzM2NTZ9"
+            },
+            {
+              "id": "1461741675",
+              "name": "X",
+              "typeId": "3721",
+              "price": 6.75,
+              "suspended": false,
+              "handicap": null,
+              "displayName": "X",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOi01MTgzOTA0MTI4NDc1NTg1NTQxLCJyZWZ1bmQiOi04NjYwNjI5NjMwMTYwMjQxNDYxLCJrZXkiOjE4NzEzMDk5OTEyMzc0NTE5OTh9"
+            },
+            {
+              "id": "1461741676",
+              "name": "2",
+              "typeId": "3722",
+              "price": 2.7,
+              "suspended": false,
+              "handicap": null,
+              "displayName": "2",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOi02MDQ4NDYyNzI1MzU5NzA1NTksInJlZnVuZCI6LTQwMTI3NzE1MzAwMDQ3NDcwNDQsImtleSI6NjIzMDkzNzAxODg0NDQ2NzQwMX0="
+            }
+          ]
+        }
+      ],
+      "displayNameRows": [],
+      "displayNameColumns": [],
+      "additionalInfo": {
+        "boosted": false,
+        "cashoutable": true,
+        "twoUp": false
+      }
+    },
+    {
+      "marketType": {
+        "id": "3771",
+        "name": "Asian Handicap - 4Q",
+        "displayName": "2-Way Handicap | 4th Quarter",
+        "explainer": "Pick the result for the stated period with a handicap applied. In order for 1 (-1.5) to be a successful bet, it requires Home team to win by at least 2 points or more. 2 (+1.5) means the Away team starts with 1.5-point advantage. For this the bet to be won, Away team must either win, draw or lose the game by no more than 1 point.",
+        "priority": 344,
+        "tabs": [
+          "quarters",
+          "all"
+        ],
+        "handicapType": "ASIAN",
+        "priceColumnCount": 2,
+        "priceSortingMethod": "PRICE_TYPE_ID"
+      },
+      "row": [
+        {
+          "id": "378018281",
+          "handicap": -10,
+          "formattedHandicap": null,
+          "prices": [
+            {
+              "id": "1461741687",
+              "name": "1",
+              "typeId": "3772",
+              "price": 2.1,
+              "suspended": false,
+              "handicap": "-2.5",
+              "displayName": "{formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOjIyNjQyMTY3MDQzNzM5NjEwMjgsInJlZnVuZCI6MjM1NzQ4OTAzNzU0ODg0NTIyOCwia2V5IjotNDcxOTc2OTcxNDQ2NDQyMjcyN30="
+            },
+            {
+              "id": "1461741688",
+              "name": "2",
+              "typeId": "3773",
+              "price": 1.6,
+              "suspended": false,
+              "handicap": "+2.5",
+              "displayName": "{formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOjcxMDgxNzE4MzU1NzI0NDUzMTgsInJlZnVuZCI6NjcyMTM0MTAwNzU4NTM0NDM5NCwia2V5IjotNDM2Mzg1NDI0MDAxNzcwOTE1M30="
+            }
+          ]
+        },
+        {
+          "id": "378018276",
+          "handicap": -6,
+          "formattedHandicap": null,
+          "prices": [
+            {
+              "id": "1461741677",
+              "name": "1",
+              "typeId": "3772",
+              "price": 1.84,
+              "suspended": false,
+              "handicap": "-1.5",
+              "displayName": "{formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOi04ODEzNTA2OTgwNDg1OTM3OTA5LCJyZWZ1bmQiOi01MDEyNzA0NjczNjE0NTQwMDgyLCJrZXkiOjI2MTg4OTgyMzIzNDg2MTg0NTl9"
+            },
+            {
+              "id": "1461741678",
+              "name": "2",
+              "typeId": "3773",
+              "price": 1.79,
+              "suspended": false,
+              "handicap": "+1.5",
+              "displayName": "{formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOjUxNDY3NTE1MDEwOTQzNTkwODIsInJlZnVuZCI6ODY4NjQ5ODIzNDQ0MTcyMDg4NCwia2V5IjotMTgyMDYxNzkxNzI0NzYxMjg5NX0="
+            }
+          ]
+        },
+        {
+          "id": "378018280",
+          "handicap": -2,
+          "formattedHandicap": null,
+          "prices": [
+            {
+              "id": "1461741685",
+              "name": "1",
+              "typeId": "3772",
+              "price": 1.68,
+              "suspended": false,
+              "handicap": "-0.5",
+              "displayName": "{formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOi03Mzc1Mzc1ODM5ODYxNjY2MTUwLCJyZWZ1bmQiOi02NDY2MDEyMDA4Nzg3MjA5NzY0LCJrZXkiOjQwNjc3MDY5NjcyNTUwNTE3MjF9"
+            },
+            {
+              "id": "1461741686",
+              "name": "2",
+              "typeId": "3773",
+              "price": 1.97,
+              "suspended": false,
+              "handicap": "+0.5",
+              "displayName": "{formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOjg1MzMyODA4OTE4MDk3MTQwNTQsInJlZnVuZCI6NTMxMDEwMzU3NTMwNzU4NzMxNSwia2V5IjotMjkxNjU3NDgxNjU2MjA1NjQ3NH0="
+            }
+          ]
+        }
+      ],
+      "displayNameRows": [],
+      "displayNameColumns": [
+        "1",
+        "2"
+      ],
+      "additionalInfo": {
+        "boosted": false,
+        "cashoutable": true,
+        "twoUp": false
+      }
+    },
+    {
+      "marketType": {
+        "id": "4830",
+        "name": "Odd / Even - 4Q",
+        "displayName": "Odd/Even | 4th Quarter",
+        "explainer": "Pick whether the total points scored during the stated period will be Odd or Even. 0 is considered Even.",
+        "priority": 345,
+        "tabs": [
+          "quarters",
+          "points",
+          "all"
+        ],
+        "handicapType": "",
+        "priceColumnCount": 2,
+        "priceSortingMethod": "PRICE_TYPE_ID"
+      },
+      "row": [
+        {
+          "id": "378018279",
+          "handicap": null,
+          "formattedHandicap": null,
+          "prices": [
+            {
+              "id": "1461741683",
+              "name": "Odd",
+              "typeId": "4831",
+              "price": 1.97,
+              "suspended": false,
+              "handicap": null,
+              "displayName": "Odd",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOjM0NDgyOTM3MzcwMDg1NjgyNDYsInJlZnVuZCI6MTE1NDY1Mjc2MjAxMjMyOTY5MSwia2V5IjotODIwMDY2ODgxNzk0MzA3ODE5NH0="
+            },
+            {
+              "id": "1461741684",
+              "name": "Even",
+              "typeId": "4832",
+              "price": 1.68,
+              "suspended": false,
+              "handicap": null,
+              "displayName": "Even",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOjgxOTI3NzI5NTY5OTI2NDMyMzcsInJlZnVuZCI6NTY0Mzg4MjY1MzIyNzY0OTAwNywia2V5IjotMzQzMDUxMDQ2ODEzMDI3NjM1OH0="
+            }
+          ]
+        }
+      ],
+      "displayNameRows": [],
+      "displayNameColumns": [],
+      "additionalInfo": {
+        "boosted": false,
+        "cashoutable": true,
+        "twoUp": false
+      }
+    }
+  ],
+  "totalMarketCount": 20,
+  "category": {
+    "id": "3",
+    "name": "Basketball"
+  },
+  "region": {
+    "id": "172",
+    "name": "Philippines"
+  },
+  "competition": {
+    "id": "13473",
+    "name": "Filoil Flying V Preseason Premier Cup"
+  },
+  "additionalInfo": {
+    "live": true
+  },
+  "score": 0.0,
+  "neutralVenue": false,
+  "inplayBooked": true,
+  "version": 482
+}

@@ -252,4 +252,129 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
         },
         parameterized=False,
     ),
+    # =================== Basketball =====================================
+    # Basketball market ids for 6 of 7 bookmakers, discovered by probing
+    # live basketball events in 2026-05. SportPesa is **deferred** here
+    # because its market ids are sport-scoped: SportPesa's id=52 maps to
+    # football O/U (already in this registry) AND basketball O/U,
+    # creating a registry collision. Adding SportPesa basketball needs
+    # sport-aware registry lookups; left as future work.
+    #
+    # Outcome conventions per platform:
+    #   - BetPawa, Bet9ja, Betika: numeric "1"/"2" for ML and handicap
+    #     (matches their soccer 1X2 convention minus the X)
+    #   - SportyBet, MSport: word labels "Home"/"Away"
+    #   - Betway: team-name outcomes; the parser maps these via the
+    #     __HOME__/__AWAY__ position sentinels (same as soccer 1X2)
+    #
+    # Betika does NOT currently offer handicap markets for basketball
+    # (probed; sub_type_id 223 returned nothing for in-play events),
+    # so its handicap mapping is left empty.
+    MarketMapping(
+        canonical_id="moneyline_basketball_ft",
+        name="Moneyline - Full Time (incl. OT)",
+        betpawa_id="4791",
+        sportybet_id="219",
+        bet9ja_key="B_12",
+        betway_id="Winner (Incl. Overtime)",
+        msport_id="219",
+        sportpesa_id=None,  # deferred — sport-scoped id collision
+        betika_id="219",
+        outcomes={
+            "home": OutcomeMapping(
+                canonical_name="home",
+                betpawa="1",
+                sportybet="Home",
+                bet9ja="1",
+                betway="__HOME__",
+                msport="Home",
+                sportpesa="",
+                betika="1",
+            ),
+            "away": OutcomeMapping(
+                canonical_name="away",
+                betpawa="2",
+                sportybet="Away",
+                bet9ja="2",
+                betway="__AWAY__",
+                msport="Away",
+                sportpesa="",
+                betika="2",
+            ),
+        },
+        parameterized=False,
+    ),
+    MarketMapping(
+        canonical_id="over_under_basketball_ft",
+        name="Over/Under Total Points - Full Time (incl. OT)",
+        betpawa_id="5009",
+        sportybet_id="225",
+        bet9ja_key="B_OUN",
+        betway_id="Total (Incl. Overtime)",
+        msport_id="225",
+        sportpesa_id=None,  # deferred — sport-scoped id collision (52)
+        betika_id="225",
+        outcomes={
+            "over": OutcomeMapping(
+                canonical_name="over",
+                betpawa="Over",
+                sportybet="Over",
+                bet9ja="O",
+                betway="Over",
+                msport="Over",
+                sportpesa="",
+                betika="Over",
+            ),
+            "under": OutcomeMapping(
+                canonical_name="under",
+                betpawa="Under",
+                sportybet="Under",
+                bet9ja="U",
+                betway="Under",
+                msport="Under",
+                sportpesa="",
+                betika="Under",
+            ),
+        },
+        parameterized=True,
+    ),
+    # Basketball handicap uses signed lines: home -5.5 means home gives
+    # 5.5 points. The bookmakers ship the home-perspective signed line
+    # (e.g. -5.5); the parser stores the home outcome at key=-5.5 and
+    # the away outcome at key=+5.5 per the spec ("each side ships with
+    # its own signed line"). Callers pair entries by abs().
+    MarketMapping(
+        canonical_id="handicap_basketball_ft",
+        name="Handicap - Full Time (incl. OT)",
+        betpawa_id="3777",
+        sportybet_id="223",
+        bet9ja_key="B_H",
+        betway_id="Handicap (Incl. Overtime)",
+        msport_id="223",
+        sportpesa_id=None,  # deferred — sport-scoped id collision
+        betika_id=None,  # Betika does not currently expose basketball handicap
+        outcomes={
+            "home": OutcomeMapping(
+                canonical_name="home",
+                betpawa="1",
+                sportybet="Home",
+                bet9ja="1",
+                betway="__HOME__",
+                msport="Home",
+                sportpesa="",
+                betika="",
+            ),
+            "away": OutcomeMapping(
+                canonical_name="away",
+                betpawa="2",
+                sportybet="Away",
+                bet9ja="2",
+                betway="__AWAY__",
+                msport="Away",
+                sportpesa="",
+                betika="",
+            ),
+        },
+        parameterized=True,
+    ),
 ]
