@@ -2,6 +2,23 @@
 
 All notable changes to this project are documented in this file. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.13.1] — 2026-05-18
+
+Two bug fixes uncovered by cross-bookmaker validation on an OKC/SAS basketball event and a Svrcina/Den Ouden tennis event.
+
+### Fixed
+
+- **Betika `match_id` collisions** — within a sport, multiple matches can share the same `match_id`; Betika's API only disambiguates when `competition_id` is also supplied. A bare `match_id + sport_id` lookup was silently returning a different match (observed: tennis match_id `10945420` resolves to either Svrcina/Den Ouden or Tsitsipas/Mpetshi depending on which competition is in scope). `Betika.get_event_detail()` and `Betika.get_event_markets()` now accept an optional `competition_id` parameter and forward it on every sub_type_id call. The `examples/compare_betpawa_competition_full.py` Betika index builder now stores `(match_id, competition_id)` tuples and the per-match fetcher forwards the competition id. Documented as a quirk in `docs/betika.md` and as a known gap in the README.
+- **Betway parameterized parser per-line index** — the parameterized parser was passing the parent-list index `i` to `_resolve_outcome_betway`, which broke position sentinels (`__POS_2__`) for every line whose outcomes don't land at the start of the parent list. Fixed by filtering to each line's outcome group first, then enumerating within that group so `i` is line-local.
+
+### Added
+
+- **Betika tennis Game Handicap** — registry now maps `betika_id="187"` on `handicap_games_tennis_match`. Live re-validation confirms Betika tennis handicap odds are within rounding of BetPawa / SportyBet / MSport / Bet9ja / SportPesa at every shared line. The earlier `betika_id=None` was a fixture artifact: the captured fixture had been taken with a bare `match_id` and was silently fetching a different match that had no handicap group.
+
+### Tests
+
+527 → 530 passing (+3: two for the Betika client `competition_id` forwarding, one for the parser-side Game Handicap mapping).
+
 ## [0.13.0] — 2026-05-18
 
 Second non-soccer sport: tennis. Four canonical markets land across all 7 bookmakers.

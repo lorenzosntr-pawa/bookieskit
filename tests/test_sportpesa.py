@@ -197,4 +197,4 @@ def test_sportpesa_exported_from_top_level():
 
 def test_top_level_version_bumped():
     import bookieskit
-    assert bookieskit.__version__ == "0.13.0"
+    assert bookieskit.__version__ == "0.13.1"

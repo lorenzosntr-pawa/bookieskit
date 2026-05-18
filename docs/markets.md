@@ -44,14 +44,15 @@ The 1Up / 2Up markets pay as a 1X2 if your team gets to a 1- or 2-goal lead at a
 | `moneyline_tennis_match` | Match Winner | no | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | `over_under_games_tennis_match` | Over/Under Total Games | yes (line=games) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | `over_under_sets_tennis_match` | Over/Under Total Sets | yes (line=sets) | ✅ | ✅ | ✅ | ✅ | — | — | — |
-| `handicap_games_tennis_match` | Game Handicap | yes (signed line=games) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | — |
+| `handicap_games_tennis_match` | Game Handicap | yes (signed line=games) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 
-Working on all 7 bookmakers at v0.13.0. Some bookmakers don't publish every market on every event — those rows are `None` in `BUILTIN_MAPPINGS` and produce no normalised market when the parser hits them. Per-bookmaker conventions:
+Working on all 7 bookmakers. Some bookmakers don't publish every market on every event — those rows are `None` in `BUILTIN_MAPPINGS` and produce no normalised market when the parser hits them. Per-bookmaker conventions:
 
 - **BetPawa**: bespoke numeric ids (4895 = Total Games, 3597899 = Total Sets, 3532590 = Match Handicap Games 2-way, 2043818 = Moneyline). Outcomes "1" / "2".
-- **SportyBet / MSport / Betway / Betika**: SR-standard codes `186` (Winner), `189` (Total Games), `314` (Total Sets), `187` (Game Handicap). MSport doesn't expose `314`; Betika confirmed only on `186` + `189` on captured events.
-- **Bet9ja**: `T_*`-prefixed keys (`T_12`, `T_OUG`, `T_TS`, `T_GH`). The shared parser dispatcher now accepts `S_*` (soccer), `B_*` (basketball), `T_*` (tennis), and `LIVES_*` (soccer-live).
+- **SportyBet / MSport / Betway / Betika**: SR-standard codes `186` (Winner), `189` (Total Games), `314` (Total Sets), `187` (Game Handicap). MSport doesn't expose `314` (Total Sets).
+- **Bet9ja**: `T_*`-prefixed keys (`T_12`, `T_OUG`, `T_TS`, `T_GH`). The shared parser dispatcher accepts `S_*` (soccer), `B_*` (basketball), `T_*` (tennis), and `LIVES_*` (soccer-live).
 - **SportPesa**: `382` Moneyline, `226` Total Games, `51` Game Handicap. Note `51` ALSO maps to basketball handicap — the sport-aware registry lookup added in 0.12.0 disambiguates via `parse_markets(..., sport="tennis")`.
+- **Betika quirk**: Betika's `match_id` is unique only within `(sport_id, competition_id)`. Bare lookups by `match_id` may resolve to a different match. Always pass `competition_id` to `Betika.get_event_detail()` / `get_event_markets()` (it's on every match row from the listing endpoint). See `examples/compare_betpawa_competition_full.py:build_betika_index` for the pattern.
 
 Tennis ML is 2-way (no draw possible — match has to end). Game Handicap follows the same signed-line convention as basketball handicap: `line=-3.5` means home is favored by 3.5 games; both outcomes ship under that single key.
 
@@ -59,14 +60,15 @@ Tennis ML is 2-way (no draw possible — match has to end). Game Handicap follow
 
 | Canonical id | Name | Parameterized? | BetPawa | SportyBet | Bet9ja | Betway | MSport | SportPesa | Betika |
 |---|---|---|---|---|---|---|---|---|---|
-| `moneyline_basketball_ft` | Moneyline (incl. OT) | no | ✅ | ✅ | ⏳ | ✅ | ✅ | ⏳ | ✅ |
-| `over_under_basketball_ft` | Over/Under Total Points (incl. OT) | yes (line=points) | ✅ | ✅ | ⏳ | ✅ | ✅ | ⏳ | ✅ |
-| `handicap_basketball_ft` | Handicap (incl. OT) | yes (signed line=points) | ✅ | ✅ | ⏳ | ✅ | ✅ | ⏳ | — |
+| `moneyline_basketball_ft` | Moneyline (incl. OT) | no | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| `over_under_basketball_ft` | Over/Under Total Points (incl. OT) | yes (line=points) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| `handicap_basketball_ft` | Handicap (incl. OT) | yes (signed line=points) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | — |
 
-**Working at v0.11.0:** BetPawa, SportyBet, MSport, Betway — each fixture-bound by `tests/test_parser_basketball.py`. **Deferred (⏳):**
-- **Bet9ja**: basketball uses a `B_*` market-key prefix (vs soccer's `S_*`); the existing parser doesn't dispatch on it yet. Mapping rows are wired (`B_12`, `B_OUN`, `B_H`) so a one-line parser tweak unlocks it.
-- **SportPesa**: market ids are sport-scoped — e.g. id `52` maps to football O/U **and** basketball O/U. The flat `_by_sportpesa` registry index can't disambiguate; a sport-aware lookup is needed.
-- **Betika**: ML + O/U mappings work (Betika uses SR-standard codes 219/225 like SportyBet), but a multi-market capture (calling `get_event_markets` with basketball-specific `sub_type_id`s) is needed to bind fixture tests. Handicap is **not offered** by Betika for basketball — `sub_type_id=223` returned nothing for the captured event.
+Working across all 7 bookmakers. Each platform is fixture-bound by `tests/test_parser_basketball.py`. The one gap is **Betika basketball handicap**, which is genuinely not offered by Betika (`sub_type_id=223` returned nothing on captured events) — the canonical row carries `betika_id=None` so the parser produces no market for it.
+
+Cross-sport id collisions to be aware of:
+- **Bet9ja** uses a `B_*` market-key prefix for basketball (vs `S_*` for soccer, `T_*` for tennis, `LIVES_*` for soccer-live); the parser preserves the original prefix on registry lookup.
+- **SportPesa** market ids are sport-scoped — id `52` maps to football O/U AND basketball O/U; id `51` is basketball Handicap AND tennis Game Handicap. The sport-aware registry lookup added in 0.12.0 disambiguates: call `parse_markets(..., sport="basketball")` to resolve to the basketball mapping.
 
 **Outcome conventions:**
 - BetPawa, Betika: numeric `"1"` / `"2"` (matches their soccer 1X2 convention minus the X).
@@ -90,6 +92,8 @@ Frozen dataclass. Fields:
 - `betway_id: str | None` — the literal market name as Betway returns it (e.g. `"[Total Goals]"`, `"1X2 (1Up)"`).
 - `msport_id: str | None`
 - `sportpesa_id: str | None`
+- `betika_id: str | None` — Betika's `sub_type_id` for this market (e.g. `"18"` for soccer O/U, `"189"` for tennis Total Games).
+- `sport: str` — sport tag for collision-safe lookups. Defaults to `"soccer"`. Set to `"basketball"` / `"tennis"` for non-soccer mappings so the sport-aware registry can disambiguate ids that overlap across sports on the same platform.
 - `outcomes: dict[str, OutcomeMapping]` — keyed by canonical outcome name (`"home"`, `"over"`, etc.).
 - `parameterized: bool` — `True` for markets with line variants (Over/Under, handicaps).
 
