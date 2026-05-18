@@ -1,4 +1,4 @@
-"""BetPawa client — supports ng, gh, ke, ug, tz, zm, rw, cm, sl."""
+"""BetPawa client — supports all 15 of BetPawa's advertised countries."""
 
 import json
 from typing import Any
@@ -19,14 +19,36 @@ _BRAND_MAP = {
     "rw": "betpawa-rwanda",
     "cm": "betpawa-cameroon",
     "sl": "betpawa-sierraleone",
+    "bj": "betpawa-benin",
+    "cg": "betpawa-congobrazzaville",
+    "cd": "betpawa-drc",
+    "ls": "betpawa-lesotho",
+    "mw": "betpawa-malawi",
+    "mz": "betpawa-mozambique",
 }
 
 
 class BetPawa(BaseBookmaker):
     """HTTP client for BetPawa sportsbook API.
 
+    Covers the 15 countries advertised on https://www.betpawa.com/
+    (the country selector landing page). Each country code maps to a
+    canonical sportsbook URL plus an ``x-pawa-brand`` header value;
+    both are wired through ``DOMAINS`` and ``_BRAND_MAP`` in this
+    module. Three URL patterns are in use:
+
+    - ``www.betpawa.<cc>`` — single-letter ccTLD (ng, sl, rw, cm,
+      bj, cd, mw).
+    - ``www.betpawa.<co|com>.<cc>`` — second-level domain (gh, ke, ug,
+      tz, zm, mz).
+    - ``<cc>.betpawa.com`` — country subdomain on the .com root
+      (cg, ls). The ``www.betpawa.<cc>`` form 308-redirects to this;
+      bookieskit binds to the direct form to avoid a redirect on
+      every request.
+
     Args:
-        country: Country code (ng, gh, ke, ug, tz, zm, rw, cm, sl)
+        country: Country code (one of: ng, gh, ke, ug, tz, zm, rw,
+            cm, sl, bj, cg, cd, ls, mw, mz)
         timeout: Request timeout in seconds (default: 30)
         max_retries: Max retry attempts (default: 3)
         backoff_factor: Exponential backoff base (default: 1.0)
@@ -44,6 +66,12 @@ class BetPawa(BaseBookmaker):
         "rw": "https://www.betpawa.rw",
         "cm": "https://www.betpawa.cm",
         "sl": "https://www.betpawa.sl",
+        "bj": "https://www.betpawa.bj",
+        "cg": "https://cg.betpawa.com",
+        "cd": "https://www.betpawa.cd",
+        "ls": "https://ls.betpawa.com",
+        "mw": "https://www.betpawa.mw",
+        "mz": "https://www.betpawa.co.mz",
     }
     DEFAULT_HEADERS = {
         "accept": "*/*",

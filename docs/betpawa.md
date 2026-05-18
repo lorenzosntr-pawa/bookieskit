@@ -13,8 +13,20 @@
 | `rw` | Rwanda | https://www.betpawa.rw | `betpawa-rwanda` |
 | `cm` | Cameroon | https://www.betpawa.cm | `betpawa-cameroon` |
 | `sl` | Sierra Leone | https://www.betpawa.sl | `betpawa-sierraleone` |
+| `bj` | Benin | https://www.betpawa.bj | `betpawa-benin` |
+| `cg` | Congo - Brazzaville | https://cg.betpawa.com | `betpawa-congobrazzaville` |
+| `cd` | DR Congo | https://www.betpawa.cd | `betpawa-drc` |
+| `ls` | Lesotho | https://ls.betpawa.com | `betpawa-lesotho` |
+| `mw` | Malawi | https://www.betpawa.mw | `betpawa-malawi` |
+| `mz` | Mozambique | https://www.betpawa.co.mz | `betpawa-mozambique` |
 
-Each country pairs a subdomain TLD with a brand header — both move together in `DOMAINS` and `_BRAND_MAP` in `bookmakers/betpawa.py`. The three additions in 0.8.0 (`rw`, `cm`, `sl`) were verified against the live sportsbook API. Other African TLDs (`bf`, `ci`, `sn`, `cd`, `cg`, `ss`, `ml`, `bi`, `et`) either don't resolve or return 4xx and are not currently supported.
+All 15 country codes that BetPawa exposes on its [country selector landing page](https://www.betpawa.com/) are supported. Each pairs a canonical sportsbook URL with a brand header — both move together in `DOMAINS` and `_BRAND_MAP` in `bookmakers/betpawa.py`. Three URL patterns appear:
+
+- **`www.betpawa.<cc>`** — single-letter ccTLD: `ng`, `sl`, `rw`, `cm`, `bj`, `cd`, `mw`.
+- **`www.betpawa.<co\|com>.<cc>`** — second-level domain: `gh`, `ke`, `ug`, `tz`, `zm`, `mz`.
+- **`<cc>.betpawa.com`** — country subdomain on the `.com` root: `cg`, `ls`. The `www.betpawa.<cc>` form 308-redirects to this; the client binds to the direct form to avoid a redirect on every request.
+
+The 6 additions in 0.10.0 (`bj`, `cg`, `cd`, `ls`, `mw`, `mz`) were verified against the live `/api/sportsbook/v2/categories/list/by-sport` endpoint with the discovered brand header. The 3 additions in 0.8.0 (`rw`, `cm`, `sl`) were verified the same way.
 
 ## Provider ids (SportRadar + BetGenius)
 

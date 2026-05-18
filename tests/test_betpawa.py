@@ -24,16 +24,26 @@ def test_betpawa_unsupported_country():
 @pytest.mark.parametrize(
     "country,expected_url,expected_brand",
     [
+        # Added in 0.8.0
         ("rw", "https://www.betpawa.rw", "betpawa-rwanda"),
         ("cm", "https://www.betpawa.cm", "betpawa-cameroon"),
         ("sl", "https://www.betpawa.sl", "betpawa-sierraleone"),
+        # Added in 0.10.0 — completes the full 15-country BetPawa footprint
+        # advertised on the landing-page country selector. URLs and brand
+        # headers verified against the live sportsbook API.
+        ("bj", "https://www.betpawa.bj", "betpawa-benin"),
+        ("cg", "https://cg.betpawa.com", "betpawa-congobrazzaville"),
+        ("cd", "https://www.betpawa.cd", "betpawa-drc"),
+        ("ls", "https://ls.betpawa.com", "betpawa-lesotho"),
+        ("mw", "https://www.betpawa.mw", "betpawa-malawi"),
+        ("mz", "https://www.betpawa.co.mz", "betpawa-mozambique"),
     ],
 )
 def test_betpawa_new_countries_resolve_domain_and_brand(
     country, expected_url, expected_brand
 ):
-    """3 BetPawa countries added in 0.8.0 — verified against the live
-    landing page + brand header probe."""
+    """BetPawa countries added in 0.8.0 (rw/cm/sl) and 0.10.0
+    (bj/cg/cd/ls/mw/mz) — verified against the live sportsbook API."""
     client = BetPawa(country=country)
     assert client.base_url == expected_url
     headers = client._build_headers()
