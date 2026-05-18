@@ -2,6 +2,49 @@
 
 All notable changes to this project are documented in this file. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.13.0] — 2026-05-18
+
+Second non-soccer sport: tennis. Four canonical markets land across all 7 bookmakers.
+
+### Added
+
+- **Four tennis canonical markets** in the default `MarketRegistry`:
+  - `moneyline_tennis_match` (non-parameterized, 2 outcomes — no draw)
+  - `over_under_games_tennis_match` (parameterized, line = total games)
+  - `over_under_sets_tennis_match` (parameterized, line = total sets)
+  - `handicap_games_tennis_match` (parameterized, signed game-spread line)
+
+- **Working tennis coverage on all 7 bookmakers** (each fixture-bound to a live ATP match). Per-bookmaker market id discovery:
+  - BetPawa: `2043818` ML, `4895` Total Games, `3597899` Total Sets, `3532590` Match Handicap Games
+  - SportyBet, MSport, Betway, Betika: SR-standard codes `186` (Winner), `189` (Total Games), `314` (Total Sets), `187` (Game Handicap)
+  - Bet9ja: `T_*`-prefixed keys (`T_12`, `T_OUG`, `T_TS`, `T_GH`) — parser now accepts `T_*` prefix alongside `S_*` (soccer), `B_*` (basketball), `LIVES_*` (soccer-live)
+  - SportPesa: `382` ML, `226` Total Games, `51` Game Handicap
+
+- **Sport-aware registry collision handling**: SportPesa `id=51` is BOTH basketball Handicap AND tennis Game Handicap. The sport-aware lookup added in 0.12.0 disambiguates: `parse_markets(..., sport="tennis")` resolves `51` to game handicap, `sport="basketball"` to basketball handicap. Both pinned with regression tests.
+
+### Coverage gaps
+
+By design, captured at the platform/event level:
+- **MSport** doesn't expose Total Sets directly (no SR market id `314` in any tennis event captured).
+- **Betika** offers only ML + Total Games for tennis on the captured event; sub_type_ids 187/188/314 returned nothing.
+- **SportPesa** doesn't expose Total Sets on the captured event (only 13 market types ship; no id matches the SR `314` code).
+
+These gaps are mapped as `None` in `BUILTIN_MAPPINGS` — the lib won't synthesise markets that bookmakers don't publish. Documented in `docs/markets.md`.
+
+### Example script
+
+`examples/compare_betpawa_competition_full.py` now ships a third `SPORT_CONFIG` row for `sport_id="452"` (tennis). Run it against any BetPawa tennis competition:
+
+```
+python examples/compare_betpawa_competition_full.py 16133 452   # French Open Men
+```
+
+Verified live across the 52-event French Open Men's Singles: every event resolves on every bookmaker via SR id, with each bookmaker reporting whichever subset of the 4 markets it offers for that specific match.
+
+### Test count
+
+502 → 527 passing (+25 from the new tennis parser parametrize sweep — 7 platforms × ML/OU-G + 3 platforms × OU-S + 6 platforms × HCAP-G + 2 sport-scoping regressions).
+
 ## [0.12.0] — 2026-05-18
 
 Completes basketball coverage to all 7 bookmakers by closing the three gaps deferred from 0.11.0.
