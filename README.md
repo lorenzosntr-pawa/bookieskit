@@ -1,6 +1,6 @@
 # bookieskit
 
-Async HTTP clients for 7 African sportsbooks (BetPawa, SportyBet, Bet9ja, Betway, MSport, SportPesa, Betika), with normalized markets and cross-bookmaker matching by SportRadar id.
+Async HTTP clients for 7 African sportsbooks (BetPawa, SportyBet, Bet9ja, Betway, MSport, SportPesa, Betika) covering **soccer, basketball, and tennis**, with normalized markets and cross-bookmaker matching by SportRadar **or** BetGenius id.
 
 ## Installation
 
@@ -20,31 +20,46 @@ Requires Python 3.11+.
 ```python
 import asyncio
 from bookieskit import SportyBet
+from bookieskit.markets import parse_markets
 
 async def main():
     async with SportyBet(country="ng") as sb:
-        markets = await sb.get_markets(event_id="sr:match:69339436")
+        # Soccer event — the default registry handles soccer ids automatically.
+        detail = await sb.get_event_detail(event_id="sr:match:69339436")
+        markets = parse_markets(detail, platform="sportybet")
         for m in markets:
-            print(m.canonical_id, m.name, len(m.outcomes or []))
+            print(m.canonical_id, m.name)
+
+        # Basketball event — pass sport="basketball" so SportPesa-style
+        # cross-sport id collisions (e.g. id 52 = football O/U AND basketball
+        # O/U) resolve to the right canonical. Other bookmakers ignore the
+        # arg, so it's always safe to pass.
+        detail = await sb.get_event_detail(event_id="sr:match:71550420")
+        markets = parse_markets(detail, platform="sportybet", sport="basketball")
 
 asyncio.run(main())
 ```
 
-### 2. Compare odds across all 7 by SportRadar id
+### 2. Compare odds across all 7 by SportRadar id (soccer)
 
 ```bash
 python examples/odds_for_sr_id.py 69339436
 ```
 
-See `examples/odds_for_sr_id.py` for the implementation.
-
-### 3. Walk a BetPawa competition into a CSV
+### 3. Walk a BetPawa competition across all 7 bookmakers (any sport)
 
 ```bash
-python examples/odds_for_betpawa_competition.py 12546
+# Soccer (sport_id=2 is the default)
+python examples/compare_betpawa_competition_full.py 12546
+
+# Basketball (NBA, BetPawa sport_id=3)
+python examples/compare_betpawa_competition_full.py 11971 3
+
+# Tennis (French Open Men, BetPawa sport_id=452)
+python examples/compare_betpawa_competition_full.py 16133 452
 ```
 
-See `examples/odds_for_betpawa_competition.py`.
+Prints a per-event coverage table showing which canonical markets each bookmaker exposes. See `examples/compare_betpawa_competition_full.py` for the lookup strategy (SR-id direct on SB/MS/Betway, pre-built SR-id maps for Bet9ja/Betika/SportPesa).
 
 ## Supported Bookmakers
 
@@ -61,30 +76,64 @@ See `examples/odds_for_betpawa_competition.py`.
 ## How the lib is structured
 
 - **Clients** — `bookieskit/bookmakers/`. One subclass of `BaseBookmaker` per platform; methods like `get_sports`, `get_events`, `get_event_detail` return raw JSON. The base class provides retry, rate-limiting, async context management, plus the convenience methods `get_markets()` and `get_sportradar_id()`.
-- **Markets** — `bookieskit/markets/`. A `MarketRegistry` holds `MarketMapping` entries (one per canonical market). The parser dispatches by platform key and returns `NormalizedMarket` instances. Six markets ship as builtins. See [docs/markets.md](docs/markets.md).
+- **Markets** — `bookieskit/markets/`. A `MarketRegistry` holds `MarketMapping` entries indexed by canonical id AND by (sport, platform, platform_id) for cross-sport collision handling. **13 markets ship as builtins** across 3 sports (6 soccer + 3 basketball + 4 tennis). `parse_markets(response, platform, sport=...)` returns `NormalizedMarket` instances. See [docs/markets.md](docs/markets.md).
 - **Matching** — `bookieskit/matching/`. Two providers: SportRadar (every bookmaker) and BetGenius / Genius Sports (BetPawa, SportyBet, Bet9ja-live). `extract_event_ids(response, platform)` returns an `EventIds(sportradar, genius)` per platform; `match_events(...)` groups events from multiple bookmakers by **any** shared provider id via union-find. See [docs/matching.md](docs/matching.md).
 
 ## Built-in markets
 
-| Canonical id | Name | BetPawa | SportyBet | Bet9ja | Betway | MSport | SportPesa | Betika |
-|---|---|---|---|---|---|---|---|---|
-| `1x2_ft` | 1X2 — Full Time | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| `over_under_ft` | Over/Under — Full Time | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| `btts_ft` | Both Teams To Score — Full Time | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| `double_chance_ft` | Double Chance — Full Time | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| `1x2_1up_ft` | 1X2 1Up — Full Time | — | ✅ | ✅ | ✅ | — | — | — |
-| `1x2_2up_ft` | 1X2 2Up — Full Time | — | ✅ | ✅ | ✅ | — | — | — |
+**13 canonical markets across 3 sports.** Pass `sport=` to `parse_markets` for cross-sport id collisions (e.g. SportPesa's id `52` is both football O/U and basketball O/U; `sport="basketball"` picks the right one). Soccer is the default — existing soccer callers don't need to pass `sport=`.
 
-The 1Up / 2Up markets pay as a 1X2 if your team gets to a 1- or 2-goal lead at any point. BetPawa, MSport, SportPesa and Betika are intentionally unmapped (BetPawa to be added at production cutover; the others don't expose this market).
+### Soccer (6 markets, `sport="soccer"` — the default)
+
+| Canonical id | Notes |
+|---|---|
+| `1x2_ft` | Home / Draw / Away |
+| `over_under_ft` | Parameterized — line = total goals |
+| `btts_ft` | Both Teams To Score (Yes / No) |
+| `double_chance_ft` | 1X / X2 / 12 |
+| `1x2_1up_ft` | Pays if your team gets a 1-goal lead at any point (SportyBet / Bet9ja / Betway only) |
+| `1x2_2up_ft` | Same but 2-goal lead (SportyBet / Bet9ja / Betway only) |
+
+### Basketball (3 markets, `sport="basketball"`)
+
+| Canonical id | Notes |
+|---|---|
+| `moneyline_basketball_ft` | 2-way (home / away — no draw) |
+| `over_under_basketball_ft` | Parameterized — line = total points |
+| `handicap_basketball_ft` | Parameterized — **signed** line (home's perspective); both outcomes under one key |
+
+### Tennis (4 markets, `sport="tennis"`)
+
+| Canonical id | Notes |
+|---|---|
+| `moneyline_tennis_match` | 2-way (player1 / player2) |
+| `over_under_games_tennis_match` | Parameterized — line = total games |
+| `over_under_sets_tennis_match` | Parameterized — line = total sets |
+| `handicap_games_tennis_match` | Parameterized — signed game-spread line |
+
+**See [docs/markets.md](docs/markets.md)** for the per-bookmaker × per-market support matrix, outcome conventions, and the handicap line representation contract.
 
 ## Examples
 
 Each example is a self-contained async script in `examples/`.
 
-- **`count_5bookies.py`** — totals (sports / tournaments / events) per bookmaker. Now iterates all 6 bookmakers; the original filename is kept to avoid breaking external references. Run: `python examples/count_5bookies.py`.
-- **`odds_for_sr_id.py`** — given a SportRadar id, fetch the mapped odds across all 6 bookmakers. Run: `python examples/odds_for_sr_id.py 69339436` (defaults to live; pass `--prematch` for upcoming).
-- **`odds_from_betpawa_id.py`** — given a BetPawa internal id, derive the SR id from the SPORTRADAR widget and fetch all 5 others. Outputs CSV. Run: `python examples/odds_from_betpawa_id.py 34716684`.
-- **`odds_for_betpawa_competition.py`** — for every event in a BetPawa competition, run the above flow. Outputs one CSV row per (event, market, line, outcome). Run: `python examples/odds_for_betpawa_competition.py 12546`.
+**Multi-sport (recommended for new code):**
+
+- **`compare_betpawa_competition_full.py`** — walks any BetPawa competition (soccer, basketball, tennis) and shows per-event mapped-market coverage across all 7 bookmakers. Sport-aware via a CLI arg.
+  ```bash
+  python examples/compare_betpawa_competition_full.py 12546         # soccer (default)
+  python examples/compare_betpawa_competition_full.py 11971 3       # basketball (NBA)
+  python examples/compare_betpawa_competition_full.py 16133 452     # tennis (French Open)
+  ```
+
+- **`find_betgenius_matches.py`** — walks all BetPawa events for one sport, extracts the BetGenius widget id, and confirms which events SportyBet also routes through BetGenius. Useful for cross-bookmaker matching when SR ids differ but the Genius id is the same. Run: `python examples/find_betgenius_matches.py` (defaults to soccer; pass a sport id arg for others).
+
+**Soccer-focused (original):**
+
+- **`count_5bookies.py`** — totals (sports / tournaments / events) per bookmaker across all 7. Run: `python examples/count_5bookies.py`.
+- **`odds_for_sr_id.py`** — given a SportRadar id, fetch the mapped odds across all 7 bookmakers. Run: `python examples/odds_for_sr_id.py 69339436`.
+- **`odds_from_betpawa_id.py`** — given a BetPawa internal id, derive the SR id from the SPORTRADAR widget and fetch all 6 others. Outputs CSV. Run: `python examples/odds_from_betpawa_id.py 34716684`.
+- **`odds_for_betpawa_competition.py`** — for every event in a BetPawa soccer competition, run the above flow. Outputs one CSV row per (event, market, line, outcome). Run: `python examples/odds_for_betpawa_competition.py 12546`.
 
 See [docs/examples.md](docs/examples.md) for more detail.
 

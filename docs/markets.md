@@ -1,14 +1,28 @@
 # Markets — registry, builtins, parser
 
-The `bookieskit.markets` package normalizes per-bookmaker market formats into a small set of canonical markets. Three pieces:
+The `bookieskit.markets` package normalizes per-bookmaker market formats into a small set of canonical markets across three sports. Three pieces:
 
 - **Types** (`markets/types.py`) — `MarketMapping`, `OutcomeMapping`, `NormalizedMarket`, `Outcome`.
-- **Registry** (`markets/registry.py`) — `MarketRegistry` holds `MarketMapping` entries, indexed by canonical id and by each platform's id.
-- **Parser** (`markets/parser.py`) — `parse_markets(response, platform, registry=None)` dispatches to a per-platform parser and returns `list[NormalizedMarket]`.
+- **Registry** (`markets/registry.py`) — `MarketRegistry` holds `MarketMapping` entries, indexed by canonical id, by `(platform, platform_id)` (first-registered wins, typically soccer), and by `(platform, sport, platform_id)` for sport-aware lookups.
+- **Parser** (`markets/parser.py`) — `parse_markets(response, platform, registry=None, *, sport=None, probability=...)` dispatches to a per-platform parser and returns `list[NormalizedMarket]`.
+
+## Sport-aware lookup
+
+Some bookmakers reuse the same `platform_id` across sports. The clearest example is SportPesa: id `52` is **both** football Over/Under and basketball Total Points; id `51` is **both** basketball Handicap and tennis Game Handicap. To resolve correctly, callers pass `sport="basketball"` (or `"tennis"`) to `parse_markets`:
+
+```python
+# Without sport — id 52 resolves to soccer over_under_ft (back-compat).
+parse_markets(response, platform="sportpesa")
+
+# With sport — id 52 resolves to over_under_basketball_ft.
+parse_markets(response, platform="sportpesa", sport="basketball")
+```
+
+The flag is a no-op for bookmakers whose market ids don't overlap across sports (BetPawa, SportyBet, MSport, Betway, Bet9ja, Betika) — pass it always if you're working with non-soccer events; pass it never if you're only doing soccer.
 
 ## Built-in mappings
 
-Nine markets ship in the default `MarketRegistry` — six soccer + three basketball.
+13 markets ship in the default `MarketRegistry` — 6 soccer + 3 basketball + 4 tennis.
 
 ### Soccer (full time)
 
