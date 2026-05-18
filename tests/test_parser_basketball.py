@@ -1,23 +1,19 @@
 """Cross-bookmaker basketball parser tests.
 
-Four bookmakers ship working basketball coverage at v0.11.0: BetPawa,
-SportyBet, MSport, Betway. Each fixture was captured live from a real
-basketball event (BetPawa: Baskets Bonn vs Wurzburg Baskets live;
-SportyBet: an Argentina LNB game; MSport: a similar live event;
-Betway: Baskets Bonn vs Wurzburg Baskets).
+All 7 bookmakers ship working basketball coverage at v0.12.0:
+BetPawa, SportyBet, MSport, Betway, Bet9ja, Betika (ML+O/U only),
+and SportPesa (via the sport-aware registry lookup —
+``parse_markets(..., sport="basketball")``).
 
-Bet9ja basketball uses a different market-key prefix (``B_*`` rather
-than soccer's ``S_*``) which the current parser doesn't handle; left as
-a follow-up. Betika ML + O/U work in principle (same SR-standard
-sub_type_ids 219/225 the parser already accepts) but the captured
-fixture is the default 1X2-only view rather than the multi-market
-aggregator output, so it shows 0 basketball markets parsed. Capturing
-a multi-market Betika fixture is a small follow-up.
+Each fixture was captured live from a real basketball event in
+2026-05. Betika does not currently expose handicap markets for
+basketball, so it's only tested for ML + O/U.
 
-SportPesa basketball is deferred: its market ids are sport-scoped
-(id=52 maps to both football O/U and basketball O/U), so a sport-aware
-registry lookup is needed before sportpesa basketball mappings can be
-added to the default registry.
+SportPesa requires the ``sport="basketball"`` filter because its
+market id ``52`` collides between football O/U and basketball O/U.
+The other 6 bookmakers' ids are sport-disjoint so the bare lookup
+works without sport disambiguation, but they're tested both ways
+for completeness.
 """
 import json
 from pathlib import Path
@@ -28,19 +24,28 @@ from bookieskit.markets.parser import parse_markets
 
 FIXTURE_DIR = Path(__file__).parent / "fixtures" / "event_info"
 
-WORKING_PLATFORMS = ("betpawa", "sportybet", "msport", "betway")
+# Bookmakers with all three basketball markets working end-to-end via
+# the bare ``parse_markets(response, platform=...)`` call (no sport
+# filter required — their basketball market ids don't collide with
+# soccer ids on the same platform).
+WORKING_PLATFORMS = ("betpawa", "sportybet", "msport", "betway", "bet9ja")
+
+# Betika offers ML + O/U but not handicap on basketball — handled
+# in dedicated tests below.
+ML_OU_PLATFORMS = WORKING_PLATFORMS + ("betika",)
+HANDICAP_PLATFORMS = WORKING_PLATFORMS
 
 
-def _load(platform: str) -> dict:
+def _load(platform: str, name: str = "basketball") -> dict:
     return json.loads(
-        (FIXTURE_DIR / platform / "basketball.json").read_text(encoding="utf-8")
+        (FIXTURE_DIR / platform / f"{name}.json").read_text(encoding="utf-8")
     )
 
 
 @pytest.mark.parametrize("platform", WORKING_PLATFORMS)
 def test_basketball_parser_recognises_three_markets(platform):
-    """Each of the four working bookmakers' fixtures must expose all
-    three basketball markets through the default registry."""
+    """Each of the bookmakers offering full basketball coverage exposes
+    all three markets through the default registry."""
     result = parse_markets(_load(platform), platform=platform)
     canonical = {m.canonical_id for m in result}
     assert "moneyline_basketball_ft" in canonical, (
@@ -54,7 +59,17 @@ def test_basketball_parser_recognises_three_markets(platform):
     )
 
 
-@pytest.mark.parametrize("platform", WORKING_PLATFORMS)
+def test_betika_basketball_ml_and_ou_only_no_handicap():
+    """Betika offers ML and O/U for basketball but not handicap
+    (sub_type_id 223 returned nothing for the captured event)."""
+    result = parse_markets(_load("betika"), platform="betika")
+    canonical = {m.canonical_id for m in result}
+    assert "moneyline_basketball_ft" in canonical
+    assert "over_under_basketball_ft" in canonical
+    assert "handicap_basketball_ft" not in canonical
+
+
+@pytest.mark.parametrize("platform", ML_OU_PLATFORMS)
 def test_basketball_moneyline_has_two_outcomes(platform):
     """Basketball ML is 2-way (home/away) — no draw, unlike soccer 1X2."""
     result = parse_markets(_load(platform), platform=platform)
@@ -69,7 +84,7 @@ def test_basketball_moneyline_has_two_outcomes(platform):
     assert ml.lines is None
 
 
-@pytest.mark.parametrize("platform", WORKING_PLATFORMS)
+@pytest.mark.parametrize("platform", ML_OU_PLATFORMS)
 def test_basketball_over_under_has_lines(platform):
     """O/U is parameterized — lines populated, outcomes empty."""
     result = parse_markets(_load(platform), platform=platform)
@@ -92,7 +107,52 @@ def test_basketball_over_under_has_lines(platform):
         )
 
 
-@pytest.mark.parametrize("platform", WORKING_PLATFORMS)
+# ---- SportPesa basketball (requires sport-aware registry lookup) ---------
+
+
+def test_sportpesa_basketball_requires_sport_filter():
+    """SportPesa's market id ``52`` is used for both football O/U and
+    basketball O/U; without the ``sport="basketball"`` filter the
+    registry returns the soccer mapping (first-registered wins). Pin
+    both behaviours so the sport-aware design contract is explicit."""
+    raw = _load("sportpesa", "basketball_markets")
+
+    # Without sport filter — id=52 resolves to the soccer O/U mapping.
+    default = parse_markets(raw, platform="sportpesa")
+    canonical_default = {m.canonical_id for m in default}
+    assert "over_under_ft" in canonical_default
+    assert "over_under_basketball_ft" not in canonical_default
+
+    # With sport=basketball — id=52 resolves to the basketball O/U mapping.
+    bb = parse_markets(raw, platform="sportpesa", sport="basketball")
+    canonical_bb = {m.canonical_id for m in bb}
+    assert "moneyline_basketball_ft" in canonical_bb
+    assert "over_under_basketball_ft" in canonical_bb
+    assert "handicap_basketball_ft" in canonical_bb
+    assert "over_under_ft" not in canonical_bb
+
+
+def test_sportpesa_basketball_moneyline():
+    raw = _load("sportpesa", "basketball_markets")
+    result = parse_markets(raw, platform="sportpesa", sport="basketball")
+    ml = next(m for m in result if m.canonical_id == "moneyline_basketball_ft")
+    names = sorted(o.canonical_name for o in ml.outcomes)
+    assert names == ["away", "home"]
+    assert ml.lines is None
+
+
+def test_sportpesa_basketball_handicap():
+    raw = _load("sportpesa", "basketball_markets")
+    result = parse_markets(raw, platform="sportpesa", sport="basketball")
+    hcap = next(
+        m for m in result if m.canonical_id == "handicap_basketball_ft"
+    )
+    assert hcap.outcomes == []
+    assert hcap.lines is not None
+    assert len(hcap.lines) >= 1
+
+
+@pytest.mark.parametrize("platform", HANDICAP_PLATFORMS)
 def test_basketball_handicap_signed_lines(platform):
     """Handicap uses signed lines keyed by the home team's perspective.
     line=-5.5 means home favored by 5.5; both home and away outcomes
