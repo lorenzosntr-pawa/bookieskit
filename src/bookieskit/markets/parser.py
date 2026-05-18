@@ -768,24 +768,32 @@ def _build_betway_parameterized(
     # If we have parent outcomes, distribute them by line
     if parent_outcomes and line_market_ids:
         for line, line_mid in line_market_ids:
+            # Filter to the per-line outcomes first, THEN enumerate. The
+            # position index passed to _resolve_outcome_betway must be the
+            # index within this line's outcome group (0 = first outcome of
+            # the line) — not the index within the full parent list. Using
+            # the parent-list index breaks position sentinels like
+            # __POS_2__ for every line whose outcomes don't happen to land
+            # at the front of the parent list (e.g. basketball Handicap
+            # where only the first line's outcomes were resolved).
+            matched = [
+                o for o in parent_outcomes
+                if str(o.get("outcomeId", "")).startswith(line_mid)
+            ]
             line_outcomes: list[Outcome] = []
-            # Find outcomes whose outcomeId starts with this line's marketId
-            for i, outcome_data in enumerate(parent_outcomes):
+            for i, outcome_data in enumerate(matched):
+                name = str(outcome_data.get("name", ""))
                 oid = str(outcome_data.get("outcomeId", ""))
-                if oid.startswith(line_mid):
-                    name = str(outcome_data.get("name", ""))
-                    odds = price_map.get(oid, 0)
-                    canonical = _resolve_outcome_betway(
-                        name, i, mapping
-                    )
-                    if canonical:
-                        line_outcomes.append(
-                            Outcome(
-                                canonical_name=canonical,
-                                odds=odds,
-                                platform_name=name,
-                            )
+                odds = price_map.get(oid, 0)
+                canonical = _resolve_outcome_betway(name, i, mapping)
+                if canonical:
+                    line_outcomes.append(
+                        Outcome(
+                            canonical_name=canonical,
+                            odds=odds,
+                            platform_name=name,
                         )
+                    )
             if line_outcomes:
                 lines[line] = line_outcomes
     else:
