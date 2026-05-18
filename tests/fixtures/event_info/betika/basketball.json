@@ -20,27 +20,16 @@
       "is_srl": false,
       "odds": [
         {
-          "sub_type_id": "1",
-          "name": "1X2",
+          "sub_type_id": "219",
+          "name": "WINNER (INCL. OVERTIME)",
           "odds": [
             {
               "display": "1",
               "odd_key": "Oklahoma",
               "odd_def": "{$competitor1}",
-              "odd_value": "1.45",
+              "odd_value": "1.40",
               "special_bet_value": "",
-              "outcome_id": "1",
-              "parsed_special_bet_value": {
-                "": ""
-              }
-            },
-            {
-              "display": "X",
-              "odd_key": "draw",
-              "odd_def": "draw",
-              "odd_value": "18.00",
-              "special_bet_value": "",
-              "outcome_id": "2",
+              "outcome_id": "4",
               "parsed_special_bet_value": {
                 "": ""
               }
@@ -49,11 +38,171 @@
               "display": "2",
               "odd_key": "San Antonio",
               "odd_def": "{$competitor2}",
-              "odd_value": "3.20",
+              "odd_value": "3.05",
               "special_bet_value": "",
-              "outcome_id": "3",
+              "outcome_id": "5",
               "parsed_special_bet_value": {
                 "": ""
+              }
+            }
+          ]
+        },
+        {
+          "sub_type_id": "225",
+          "name": "TOTAL (INCL. OVERTIME)",
+          "odds": [
+            {
+              "display": "OVER 216.5",
+              "odd_key": "over 216.5",
+              "odd_def": "over {total}",
+              "odd_value": "1.73",
+              "special_bet_value": "total=216.5",
+              "outcome_id": "12",
+              "parsed_special_bet_value": {
+                "total": "216.5"
+              }
+            },
+            {
+              "display": "OVER 217.5",
+              "odd_key": "over 217.5",
+              "odd_def": "over {total}",
+              "odd_value": "1.80",
+              "special_bet_value": "total=217.5",
+              "outcome_id": "12",
+              "parsed_special_bet_value": {
+                "total": "217.5"
+              }
+            },
+            {
+              "display": "OVER 218.5",
+              "odd_key": "over 218.5",
+              "odd_def": "over {total}",
+              "odd_value": "1.88",
+              "special_bet_value": "total=218.5",
+              "outcome_id": "12",
+              "parsed_special_bet_value": {
+                "total": "218.5"
+              }
+            },
+            {
+              "display": "OVER 219.5",
+              "odd_key": "over 219.5",
+              "odd_def": "over {total}",
+              "odd_value": "1.97",
+              "special_bet_value": "total=219.5",
+              "outcome_id": "12",
+              "parsed_special_bet_value": {
+                "total": "219.5"
+              }
+            },
+            {
+              "display": "OVER 220.5",
+              "odd_key": "over 220.5",
+              "odd_def": "over {total}",
+              "odd_value": "2.06",
+              "special_bet_value": "total=220.5",
+              "outcome_id": "12",
+              "parsed_special_bet_value": {
+                "total": "220.5"
+              }
+            },
+            {
+              "display": "OVER 221.5",
+              "odd_key": "over 221.5",
+              "odd_def": "over {total}",
+              "odd_value": "2.16",
+              "special_bet_value": "total=221.5",
+              "outcome_id": "12",
+              "parsed_special_bet_value": {
+                "total": "221.5"
+              }
+            },
+            {
+              "display": "OVER 222.5",
+              "odd_key": "over 222.5",
+              "odd_def": "over {total}",
+              "odd_value": "2.27",
+              "special_bet_value": "total=222.5",
+              "outcome_id": "12",
+              "parsed_special_bet_value": {
+                "total": "222.5"
+              }
+            },
+            {
+              "display": "UNDER 216.5",
+              "odd_key": "under 216.5",
+              "odd_def": "under {total}",
+              "odd_value": "2.17",
+              "special_bet_value": "total=216.5",
+              "outcome_id": "13",
+              "parsed_special_bet_value": {
+                "total": "216.5"
+              }
+            },
+            {
+              "display": "UNDER 217.5",
+              "odd_key": "under 217.5",
+              "odd_def": "under {total}",
+              "odd_value": "2.06",
+              "special_bet_value": "total=217.5",
+              "outcome_id": "13",
+              "parsed_special_bet_value": {
+                "total": "217.5"
+              }
+            },
+            {
+              "display": "UNDER 218.5",
+              "odd_key": "under 218.5",
+              "odd_def": "under {total}",
+              "odd_value": "1.97",
+              "special_bet_value": "total=218.5",
+              "outcome_id": "13",
+              "parsed_special_bet_value": {
+                "total": "218.5"
+              }
+            },
+            {
+              "display": "UNDER 219.5",
+              "odd_key": "under 219.5",
+              "odd_def": "under {total}",
+              "odd_value": "1.88",
+              "special_bet_value": "total=219.5",
+              "outcome_id": "13",
+              "parsed_special_bet_value": {
+                "total": "219.5"
+              }
+            },
+            {
+              "display": "UNDER 220.5",
+              "odd_key": "under 220.5",
+              "odd_def": "under {total}",
+              "odd_value": "1.80",
+              "special_bet_value": "total=220.5",
+              "outcome_id": "13",
+              "parsed_special_bet_value": {
+                "total": "220.5"
+              }
+            },
+            {
+              "display": "UNDER 221.5",
+              "odd_key": "under 221.5",
+              "odd_def": "under {total}",
+              "odd_value": "1.73",
+              "special_bet_value": "total=221.5",
+              "outcome_id": "13",
+              "parsed_special_bet_value": {
+                "total": "221.5"
+              }
+            },
+            {
+              "display": "UNDER 222.5",
+              "odd_key": "under 222.5",
+              "odd_def": "under {total}",
+              "odd_value": "1.67",
+              "special_bet_value": "total=222.5",
+              "outcome_id": "13",
+              "parsed_special_bet_value": {
+                "total": "222.5"
               }
             }
           ]
@@ -62,335 +211,6 @@
     }
   ],
   "meta": {
-    "total": "31",
-    "tags": [
-      {
-        "tag_id": -1,
-        "tag_title": "Top Countries & Leagues",
-        "tag_group_id": -1,
-        "tag_group_type_reference": "",
-        "tag_group_type_id": -1,
-        "tag_group_type": "",
-        "country": null,
-        "status": 1
-      }
-    ],
-    "limit": "1",
-    "current_page": 1,
-    "filters": [
-      {
-        "name": "1x2 / Winner",
-        "sub_type_id": "1",
-        "sport_ids": [
-          "14",
-          "28",
-          "29",
-          "30",
-          "33",
-          "35",
-          "37",
-          "39",
-          "41",
-          "44",
-          "56"
-        ],
-        "odd_keys": [
-          "1",
-          "X",
-          "2"
-        ]
-      },
-      {
-        "name": "1st Half 1x2",
-        "sub_type_id": "60",
-        "sport_ids": [
-          "14",
-          "30"
-        ],
-        "odd_keys": [
-          "1",
-          "X",
-          "2"
-        ]
-      }
-    ],
-    "sports": [
-      {
-        "sport_id": -1,
-        "sport_name": "All Sports"
-      },
-      {
-        "sport_id": "14",
-        "sport_name": "Soccer"
-      },
-      {
-        "sport_id": "28",
-        "sport_name": "Tennis"
-      },
-      {
-        "sport_id": "29",
-        "sport_name": "Ice Hockey"
-      },
-      {
-        "sport_id": "30",
-        "sport_name": "Basketball"
-      },
-      {
-        "sport_id": "31",
-        "sport_name": "Baseball"
-      },
-      {
-        "sport_id": "33",
-        "sport_name": "Handball"
-      },
-      {
-        "sport_id": "35",
-        "sport_name": "Volleyball"
-      },
-      {
-        "sport_id": "37",
-        "sport_name": "Cricket"
-      },
-      {
-        "sport_id": "39",
-        "sport_name": "Boxing"
-      },
-      {
-        "sport_id": "40",
-        "sport_name": "Futsal"
-      },
-      {
-        "sport_id": "41",
-        "sport_name": "Rugby"
-      },
-      {
-        "sport_id": "43",
-        "sport_name": "Aussie Rules"
-      },
-      {
-        "sport_id": "44",
-        "sport_name": "Darts"
-      },
-      {
-        "sport_id": "45",
-        "sport_name": "Table Tennis"
-      },
-      {
-        "sport_id": "105",
-        "sport_name": "eSoccer"
-      },
-      {
-        "sport_id": "132",
-        "sport_name": "ESport Counter-Strike"
-      },
-      {
-        "sport_id": "133",
-        "sport_name": "ESport Dota"
-      },
-      {
-        "sport_id": "134",
-        "sport_name": "ESport League of Legends"
-      }
-    ],
-    "tabs": [
-      {
-        "id": -1,
-        "date": "2026-05-18",
-        "name": "Today's Highlights",
-        "period_start": "2026-05-18 04:00:00",
-        "period_end": "2026-05-19 04:01:00",
-        "prioritized": true
-      },
-      {
-        "id": -2,
-        "date": "2026-05-18",
-        "name": "\ud83d\udd25 Next 48hrs",
-        "period_start": "2026-05-18 04:00:00",
-        "period_end": "2026-07-17 04:01:00",
-        "prioritized": false
-      },
-      {
-        "id": 1,
-        "date": "2026-05-19",
-        "name": "Tomorrow",
-        "period_start": "2026-05-19 04:00:00",
-        "period_end": "2026-05-20 04:01:00",
-        "prioritized": true
-      },
-      {
-        "id": 2,
-        "date": "2026-05-20",
-        "name": "Wednesday",
-        "period_start": "2026-05-20 04:00:00",
-        "period_end": "2026-05-21 04:01:00",
-        "prioritized": true
-      },
-      {
-        "id": 3,
-        "date": "2026-05-21",
-        "name": "Thursday",
-        "period_start": "2026-05-21 04:00:00",
-        "period_end": "2026-05-22 04:01:00",
-        "prioritized": true
-      },
-      {
-        "id": 4,
-        "date": "2026-05-22",
-        "name": "Friday",
-        "period_start": "2026-05-22 04:00:00",
-        "period_end": "2026-05-23 04:01:00",
-        "prioritized": true
-      },
-      {
-        "id": 5,
-        "date": "2026-05-23",
-        "name": "Saturday",
-        "period_start": "2026-05-23 04:00:00",
-        "period_end": "2026-05-24 04:01:00",
-        "prioritized": true
-      },
-      {
-        "id": 6,
-        "date": "2026-05-24",
-        "name": "Sunday",
-        "period_start": "2026-05-24 04:00:00",
-        "period_end": "2026-05-25 04:01:00",
-        "prioritized": true
-      },
-      {
-        "id": 7,
-        "date": "2026-05-25",
-        "name": "Monday",
-        "period_start": "2026-05-25 04:00:00",
-        "period_end": "2026-05-26 04:01:00",
-        "prioritized": true
-      },
-      {
-        "id": 8,
-        "date": "2026-05-26",
-        "name": "Next Week",
-        "period_start": "2026-05-26 04:00:00",
-        "period_end": "2026-07-17 04:01:00",
-        "prioritized": false
-      }
-    ],
-    "periods": [
-      {
-        "id": -1,
-        "date": "2026-05-18",
-        "name": "Today",
-        "period_start": "2026-05-18 04:00:00",
-        "period_end": "2026-05-19 04:01:00",
-        "prioritized": true
-      },
-      {
-        "id": -2,
-        "date": "2026-05-18",
-        "name": "Next 48hrs",
-        "period_start": "2026-05-18 04:00:00",
-        "period_end": "2026-05-20 04:01:00",
-        "prioritized": false
-      },
-      {
-        "id": 1,
-        "date": "2026-05-19",
-        "name": "Tomorrow",
-        "period_start": "2026-05-19 04:00:00",
-        "period_end": "2026-05-20 04:01:00",
-        "prioritized": true
-      },
-      {
-        "id": 2,
-        "date": "2026-05-20",
-        "name": "Wednesday",
-        "period_start": "2026-05-20 04:00:00",
-        "period_end": "2026-05-21 04:01:00",
-        "prioritized": true
-      },
-      {
-        "id": 3,
-        "date": "2026-05-21",
-        "name": "Thursday",
-        "period_start": "2026-05-21 04:00:00",
-        "period_end": "2026-05-22 04:01:00",
-        "prioritized": true
-      },
-      {
-        "id": 4,
-        "date": "2026-05-22",
-        "name": "Friday",
-        "period_start": "2026-05-22 04:00:00",
-        "period_end": "2026-05-23 04:01:00",
-        "prioritized": true
-      },
-      {
-        "id": 5,
-        "date": "2026-05-23",
-        "name": "Saturday",
-        "period_start": "2026-05-23 04:00:00",
-        "period_end": "2026-05-24 04:01:00",
-        "prioritized": true
-      },
-      {
-        "id": 6,
-        "date": "2026-05-24",
-        "name": "Sunday",
-        "period_start": "2026-05-24 04:00:00",
-        "period_end": "2026-05-25 04:01:00",
-        "prioritized": true
-      },
-      {
-        "id": 7,
-        "date": "2026-05-25",
-        "name": "Monday",
-        "period_start": "2026-05-25 04:00:00",
-        "period_end": "2026-05-26 04:01:00",
-        "prioritized": true
-      },
-      {
-        "id": 8,
-        "date": "2026-05-26",
-        "name": "Next Week",
-        "period_start": "2026-05-26 04:00:00",
-        "period_end": "2026-09-15 04:01:00",
-        "prioritized": false
-      },
-      {
-        "id": 9,
-        "date": "2026-05-18",
-        "name": "All",
-        "period_start": "2026-05-18 04:00:00",
-        "period_end": "2026-09-15 04:01:00",
-        "prioritized": false
-      }
-    ],
-    "sort_options": [
-      {
-        "id": 1,
-        "name": "Highlights"
-      },
-      {
-        "id": 2,
-        "name": "Start time"
-      },
-      {
-        "id": 3,
-        "name": "Top leagues"
-      }
-    ],
-    "current_tab": [
-      {
-        "id": -2,
-        "date": "2026-05-18",
-        "name": "\ud83d\udd25 Next 48hrs",
-        "period_start": "2026-05-18 04:00:00",
-        "period_end": "2026-07-17 04:01:00",
-        "prioritized": false
-      }
-    ],
-    "is_boosted": false,
-    "is_esports": false,
-    "is_srl": false
-  },
-  "time_elapsed_secs": 0.01157808303833
+    "total": 1
+  }
 }
