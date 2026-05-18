@@ -207,6 +207,53 @@ async def test_betika_get_event_markets_aggregates_four_sub_type_ids():
 
 
 @pytest.mark.asyncio
+async def test_betika_get_event_detail_forwards_competition_id():
+    """Betika's ``match_id`` is unique only per ``(sport_id, competition_id)``;
+    callers MUST be able to pass ``competition_id`` to disambiguate."""
+    import respx
+    payload = {"data": [{"match_id": "M"}], "meta": {}}
+    with respx.mock(base_url="https://api.betika.com") as mock:
+        route = mock.get("/v1/uo/matches").respond(json=payload)
+        async with Betika(country="ke") as client:
+            await client.get_event_detail(event_id="M", competition_id="26639")
+    q = route.calls[0].request.url.query.decode()
+    assert "match_id=M" in q
+    assert "competition_id=26639" in q
+
+
+@pytest.mark.asyncio
+async def test_betika_get_event_markets_forwards_competition_id_on_every_call():
+    """Every sub_type_id fan-out call must include ``competition_id``."""
+    import respx
+    base = "https://api.betika.com"
+    with respx.mock(base_url=base) as mock:
+        route = mock.get("/v1/uo/matches").mock(
+            side_effect=lambda req: __import__("httpx").Response(
+                200,
+                json={
+                    "data": [{
+                        "match_id": "M",
+                        "odds": [{
+                            "sub_type_id": req.url.params.get("sub_type_id", "1"),
+                            "name": "X",
+                            "odds": [],
+                        }],
+                    }],
+                    "meta": {},
+                },
+            )
+        )
+        async with Betika(country="ke") as client:
+            await client.get_event_markets(
+                event_id="M", competition_id="26639"
+            )
+    assert route.calls.call_count == 4
+    for call in route.calls:
+        q = call.request.url.query.decode()
+        assert "competition_id=26639" in q
+
+
+@pytest.mark.asyncio
 async def test_betika_get_markets_returns_normalized():
     import respx
     base = "https://api.betika.com"

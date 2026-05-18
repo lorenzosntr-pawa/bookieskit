@@ -173,7 +173,10 @@ class Betika(BaseBookmaker):
         return await self._live_request("GET", "/v1/uo/matches", params=params)
 
     async def get_event_detail(
-        self, event_id: str, live: bool = False
+        self,
+        event_id: str,
+        live: bool = False,
+        competition_id: str | None = None,
     ) -> dict[str, Any]:
         """Get the event-detail payload for one match.
 
@@ -181,13 +184,22 @@ class Betika(BaseBookmaker):
             event_id: Betika internal ``match_id``.
             live: If True, fetch from ``live.betika.com``; otherwise from
                 ``api.betika.com``.
+            competition_id: Optional Betika ``competition_id`` filter.
+                Betika's ``match_id`` is unique only within a
+                ``(sport_id, competition_id)`` pair — a bare
+                ``match_id`` lookup may resolve to a different match
+                that happens to share the same id. Pass the
+                ``competition_id`` from the listing response to
+                disambiguate.
 
         Returns:
             JSON shaped as ``{"data": [<match>], "meta": {...}}``. The
             default response carries a single market group (1X2);
             :meth:`get_event_markets` aggregates the full universal set.
         """
-        params = {"match_id": event_id, "limit": "1"}
+        params: dict[str, Any] = {"match_id": event_id, "limit": "1"}
+        if competition_id is not None:
+            params["competition_id"] = str(competition_id)
         if live:
             return await self._live_request(
                 "GET", "/v1/uo/matches", params=params
@@ -195,7 +207,10 @@ class Betika(BaseBookmaker):
         return await self._request("GET", "/v1/uo/matches", params=params)
 
     async def get_event_markets(
-        self, event_id: str, live: bool = False
+        self,
+        event_id: str,
+        live: bool = False,
+        competition_id: str | None = None,
     ) -> dict[str, Any]:
         """Fetch the universal market set for one event in one merged payload.
 
@@ -209,6 +224,12 @@ class Betika(BaseBookmaker):
         Args:
             event_id: Betika internal ``match_id``.
             live: If True, fetch from ``live.betika.com``.
+            competition_id: Optional Betika ``competition_id`` filter.
+                Betika's ``match_id`` is unique only within a
+                ``(sport_id, competition_id)`` pair — without this filter
+                a bare ``match_id`` lookup may return a different match
+                with the same id. Always pass this when you have it
+                (the listing endpoint includes it on every match row).
 
         Returns:
             JSON shaped as ``{"data": [<match>], "meta": {...}}`` where
@@ -217,11 +238,13 @@ class Betika(BaseBookmaker):
             the event it is silently skipped.
         """
         async def _fetch_one(sub_type_id: str) -> dict[str, Any]:
-            params = {
+            params: dict[str, Any] = {
                 "match_id": event_id,
                 "limit": "1",
                 "sub_type_id": sub_type_id,
             }
+            if competition_id is not None:
+                params["competition_id"] = str(competition_id)
             if live:
                 return await self._live_request(
                     "GET", "/v1/uo/matches", params=params

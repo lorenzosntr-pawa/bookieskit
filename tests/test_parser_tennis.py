@@ -105,9 +105,16 @@ def test_tennis_game_handicap_signed_lines(platform):
             assert isinstance(o.odds, float) and o.odds > 1.0
 
 
-def test_tennis_betika_only_ml_and_ou_games():
-    """Betika exposes only ML and O/U Games for tennis (sub_type_ids
-    187 / 188 / 314 returned nothing on the captured event)."""
+def test_tennis_betika_fixture_carries_ml_and_ou_games_only():
+    """The captured Betika tennis fixture only includes sub_type_ids 186
+    (WINNER) and 189 (TOTAL GAMES) because the capture script did not
+    include 187 (GAME HANDICAP) or 188 (SET HANDICAP).
+
+    Live, Betika DOES expose 187 for tennis; see
+    ``test_tennis_betika_parses_game_handicap_when_present`` for the
+    parser-side proof that sub_type_id=187 maps to
+    ``handicap_games_tennis_match``.
+    """
     result = parse_markets(_load("betika"), platform="betika", sport="tennis")
     tennis_canonicals = {
         m.canonical_id for m in result if "tennis" in m.canonical_id
@@ -116,6 +123,50 @@ def test_tennis_betika_only_ml_and_ou_games():
         "moneyline_tennis_match",
         "over_under_games_tennis_match",
     }
+
+
+def test_tennis_betika_parses_game_handicap_when_present():
+    """Synthetic Betika response carrying sub_type_id=187 (GAME HANDICAP).
+
+    Confirms the parser maps it to ``handicap_games_tennis_match`` and
+    groups the six selections under three signed lines.
+    """
+    raw = {
+        "data": [{
+            "match_id": "10945420",
+            "parent_match_id": "71557920",
+            "sport_id": "28",
+            "odds": [{
+                "sub_type_id": "187",
+                "sub_type_name": "GAME HANDICAP",
+                "odds": [
+                    {"display": "1 (-3.5)", "odd_value": "1.62", "special_bet_value": "hcp=-3.5"},
+                    {"display": "1 (-4.5)", "odd_value": "1.92", "special_bet_value": "hcp=-4.5"},
+                    {"display": "1 (-5.5)", "odd_value": "2.42", "special_bet_value": "hcp=-5.5"},
+                    {"display": "2 (+3.5)", "odd_value": "2.21", "special_bet_value": "hcp=-3.5"},
+                    {"display": "2 (+4.5)", "odd_value": "1.82", "special_bet_value": "hcp=-4.5"},
+                    {"display": "2 (+5.5)", "odd_value": "1.52", "special_bet_value": "hcp=-5.5"},
+                ],
+            }],
+        }],
+        "meta": {},
+    }
+    markets = parse_markets(raw, platform="betika", sport="tennis")
+    hcap = next(
+        m for m in markets if m.canonical_id == "handicap_games_tennis_match"
+    )
+    assert set(hcap.lines.keys()) == {-3.5, -4.5, -5.5}
+    for line, outcomes in hcap.lines.items():
+        names = {o.canonical_name for o in outcomes}
+        assert names == {"home", "away"}
+    home_at_neg45 = next(
+        o for o in hcap.lines[-4.5] if o.canonical_name == "home"
+    )
+    away_at_neg45 = next(
+        o for o in hcap.lines[-4.5] if o.canonical_name == "away"
+    )
+    assert home_at_neg45.odds == 1.92
+    assert away_at_neg45.odds == 1.82
 
 
 def test_tennis_sportpesa_requires_sport_filter():

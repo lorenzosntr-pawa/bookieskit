@@ -519,7 +519,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
         betway_id="Game Handicap",
         msport_id="187",
         sportpesa_id="51",
-        betika_id=None,  # Betika didn't expose sub_type_id 187 on the captured event
+        betika_id="187",
         sport="tennis",
         outcomes={
             "home": OutcomeMapping(
@@ -530,7 +530,9 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 betway="__HOME__",
                 msport="Home",
                 sportpesa="1",
-                betika="",
+                # Betika display is "1 (-3.5)" / "1 (-4.5)" / etc.;
+                # _resolve_outcome_betika matches on the first token.
+                betika="1",
             ),
             "away": OutcomeMapping(
                 canonical_name="away",
@@ -540,7 +542,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 betway="__POS_2__",
                 msport="Away",
                 sportpesa="2",
-                betika="",
+                betika="2",
             ),
         },
         parameterized=True,
