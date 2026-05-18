@@ -2,6 +2,40 @@
 
 All notable changes to this project are documented in this file. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.10.0] — 2026-05-18
+
+Closed the country-coverage gap on BetPawa (now matches their full advertised footprint) and added 4 new SportyBet markets.
+
+### Added
+
+- **BetPawa: 6 new countries** completing the 15-country list advertised on BetPawa's [country selector landing page](https://www.betpawa.com/). Discovered by clicking each entry on the live landing page via Playwright and reading the redirect target, then verified by probing `/api/sportsbook/v2/categories/list/by-sport` with the discovered `x-pawa-brand` header:
+  - `bj` (Benin) → `https://www.betpawa.bj` / `betpawa-benin`
+  - `cg` (Congo - Brazzaville) → `https://cg.betpawa.com` / `betpawa-congobrazzaville`
+  - `cd` (DR Congo) → `https://www.betpawa.cd` / `betpawa-drc`
+  - `ls` (Lesotho) → `https://ls.betpawa.com` / `betpawa-lesotho`
+  - `mw` (Malawi) → `https://www.betpawa.mw` / `betpawa-malawi`
+  - `mz` (Mozambique) → `https://www.betpawa.co.mz` / `betpawa-mozambique`
+
+  `cg` and `ls` introduce a third URL pattern (`<cc>.betpawa.com`) alongside the existing `www.betpawa.<cc>` and `www.betpawa.<co|com>.<cc>` patterns. The lib binds to the direct subdomain form to avoid a 308 redirect on every request. The `cd` brand header is `betpawa-drc` (not `drcongo` or `democraticrepublicofcongo`; discovered via brand sweep).
+- **SportyBet: 4 new countries** verified via `/factsCenter/popularAndSportList` returning 16-22 sports each:
+  - `tz` (Tanzania): 22 sports
+  - `za` (South Africa): 21 sports
+  - `cm` (Cameroon): 16 sports
+  - `zm` (Zambia): 21 sports
+
+### Documented (not supported)
+
+- **SportyBet `ca` (Canada)** is a real SportyBet market (`https://sportybet.ca/` returns 200) but uses a different API platform. The current client's `/api/{cc}/factsCenter/...` contract returns HTTP 502 for `ca`. Intentionally NOT in `DOMAINS`; documented in `docs/sportybet.md` with the path that would be needed for a future Canadian client.
+
+### Documentation
+
+- `docs/betpawa.md` and `docs/sportybet.md` now show the full per-country URL/brand/path tables. The BetPawa doc enumerates the three URL patterns explicitly.
+- README "Supported Bookmakers" table reflects the new BetPawa (15) and SportyBet (7) country lists.
+
+### Test count
+
+461 → 472 passing (+11; parametrized 6 new BetPawa countries and 4 new SportyBet countries, plus a regression test pinning that `ca` raises `UnsupportedCountryError`).
+
 ## [0.9.1] — 2026-05-15
 
 Patch release addressing review feedback on the 0.9.0 BetGenius integration. The 0.9.0 release shipped a code path (and supporting tests) for a SportyBet payload shape that doesn't appear in production. This release replaces it with the correct shape, observed via the live API.
