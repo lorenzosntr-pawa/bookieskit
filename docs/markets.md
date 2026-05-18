@@ -23,6 +23,24 @@ Nine markets ship in the default `MarketRegistry` — six soccer + three basketb
 
 The 1Up / 2Up markets pay as a 1X2 if your team gets to a 1- or 2-goal lead at any point. BetPawa, MSport, SportPesa and Betika are intentionally unmapped (BetPawa to be added at production cutover; the others do not expose this market).
 
+### Tennis (full match)
+
+| Canonical id | Name | Parameterized? | BetPawa | SportyBet | Bet9ja | Betway | MSport | SportPesa | Betika |
+|---|---|---|---|---|---|---|---|---|---|
+| `moneyline_tennis_match` | Match Winner | no | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| `over_under_games_tennis_match` | Over/Under Total Games | yes (line=games) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| `over_under_sets_tennis_match` | Over/Under Total Sets | yes (line=sets) | ✅ | ✅ | ✅ | ✅ | — | — | — |
+| `handicap_games_tennis_match` | Game Handicap | yes (signed line=games) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | — |
+
+Working on all 7 bookmakers at v0.13.0. Some bookmakers don't publish every market on every event — those rows are `None` in `BUILTIN_MAPPINGS` and produce no normalised market when the parser hits them. Per-bookmaker conventions:
+
+- **BetPawa**: bespoke numeric ids (4895 = Total Games, 3597899 = Total Sets, 3532590 = Match Handicap Games 2-way, 2043818 = Moneyline). Outcomes "1" / "2".
+- **SportyBet / MSport / Betway / Betika**: SR-standard codes `186` (Winner), `189` (Total Games), `314` (Total Sets), `187` (Game Handicap). MSport doesn't expose `314`; Betika confirmed only on `186` + `189` on captured events.
+- **Bet9ja**: `T_*`-prefixed keys (`T_12`, `T_OUG`, `T_TS`, `T_GH`). The shared parser dispatcher now accepts `S_*` (soccer), `B_*` (basketball), `T_*` (tennis), and `LIVES_*` (soccer-live).
+- **SportPesa**: `382` Moneyline, `226` Total Games, `51` Game Handicap. Note `51` ALSO maps to basketball handicap — the sport-aware registry lookup added in 0.12.0 disambiguates via `parse_markets(..., sport="tennis")`.
+
+Tennis ML is 2-way (no draw possible — match has to end). Game Handicap follows the same signed-line convention as basketball handicap: `line=-3.5` means home is favored by 3.5 games; both outcomes ship under that single key.
+
 ### Basketball (full time, including overtime)
 
 | Canonical id | Name | Parameterized? | BetPawa | SportyBet | Bet9ja | Betway | MSport | SportPesa | Betika |

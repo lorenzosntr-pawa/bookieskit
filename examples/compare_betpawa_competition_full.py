@@ -89,6 +89,21 @@ SPORT_CONFIG = {
             "handicap_basketball_ft",
         ),
     },
+    "452": {  # BetPawa tennis
+        "name": "tennis",
+        "bet9ja_sport_id": "5",
+        "betika_sport_id": 28,
+        "sportpesa_sport_id": 5,
+        # Betika tennis: only ML + O/U Games confirmed
+        # (sub_type_ids 187/188/314 returned nothing on captured event).
+        "betika_sub_type_ids": ("186", "189"),
+        "expected_canonicals": (
+            "moneyline_tennis_match",
+            "over_under_games_tennis_match",
+            "over_under_sets_tennis_match",
+            "handicap_games_tennis_match",
+        ),
+    },
 }
 
 
@@ -364,6 +379,10 @@ def _canonical_short(canonical_id: str) -> str:
         "moneyline_basketball_ft": "ML",
         "over_under_basketball_ft": "O/U",
         "handicap_basketball_ft": "HCAP",
+        "moneyline_tennis_match": "ML",
+        "over_under_games_tennis_match": "OU-G",
+        "over_under_sets_tennis_match": "OU-S",
+        "handicap_games_tennis_match": "HCAP-G",
     }.get(canonical_id, canonical_id)
 
 
