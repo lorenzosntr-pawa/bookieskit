@@ -8,7 +8,9 @@ The `bookieskit.markets` package normalizes per-bookmaker market formats into a 
 
 ## Built-in mappings
 
-Six markets ship in the default `MarketRegistry`:
+Nine markets ship in the default `MarketRegistry` — six soccer + three basketball.
+
+### Soccer (full time)
 
 | Canonical id | Name | Parameterized? | BetPawa | SportyBet | Bet9ja | Betway | MSport | SportPesa | Betika |
 |---|---|---|---|---|---|---|---|---|---|
@@ -20,6 +22,28 @@ Six markets ship in the default `MarketRegistry`:
 | `1x2_2up_ft` | 1X2 2Up — Full Time | no | — | ✅ | ✅ | ✅ | — | — | — |
 
 The 1Up / 2Up markets pay as a 1X2 if your team gets to a 1- or 2-goal lead at any point. BetPawa, MSport, SportPesa and Betika are intentionally unmapped (BetPawa to be added at production cutover; the others do not expose this market).
+
+### Basketball (full time, including overtime)
+
+| Canonical id | Name | Parameterized? | BetPawa | SportyBet | Bet9ja | Betway | MSport | SportPesa | Betika |
+|---|---|---|---|---|---|---|---|---|---|
+| `moneyline_basketball_ft` | Moneyline (incl. OT) | no | ✅ | ✅ | ⏳ | ✅ | ✅ | ⏳ | ✅ |
+| `over_under_basketball_ft` | Over/Under Total Points (incl. OT) | yes (line=points) | ✅ | ✅ | ⏳ | ✅ | ✅ | ⏳ | ✅ |
+| `handicap_basketball_ft` | Handicap (incl. OT) | yes (signed line=points) | ✅ | ✅ | ⏳ | ✅ | ✅ | ⏳ | — |
+
+**Working at v0.11.0:** BetPawa, SportyBet, MSport, Betway — each fixture-bound by `tests/test_parser_basketball.py`. **Deferred (⏳):**
+- **Bet9ja**: basketball uses a `B_*` market-key prefix (vs soccer's `S_*`); the existing parser doesn't dispatch on it yet. Mapping rows are wired (`B_12`, `B_OUN`, `B_H`) so a one-line parser tweak unlocks it.
+- **SportPesa**: market ids are sport-scoped — e.g. id `52` maps to football O/U **and** basketball O/U. The flat `_by_sportpesa` registry index can't disambiguate; a sport-aware lookup is needed.
+- **Betika**: ML + O/U mappings work (Betika uses SR-standard codes 219/225 like SportyBet), but a multi-market capture (calling `get_event_markets` with basketball-specific `sub_type_id`s) is needed to bind fixture tests. Handicap is **not offered** by Betika for basketball — `sub_type_id=223` returned nothing for the captured event.
+
+**Outcome conventions:**
+- BetPawa, Betika: numeric `"1"` / `"2"` (matches their soccer 1X2 convention minus the X).
+- SportyBet, MSport: word labels `"Home"` / `"Away"`.
+- Betway: team-name outcomes resolved by position sentinel `__POS_2__` for the away side (basketball ML is 2-way, so the soccer `__AWAY__` sentinel at index 2 doesn't apply).
+- Bet9ja: key suffix `_1` / `_2` (ML and handicap) or `_O` / `_U` (O/U).
+- SportPesa: numeric `"1"` / `"2"` (ML and handicap) or `"OV"` / `"UN"` (O/U) — same as soccer.
+
+**Handicap line convention** — handicap uses **signed lines** keyed by the home team's perspective. `line=-5.5` means home is favored by 5.5 points; both outcomes (home and away) live under that single key. The away team's effective `+5.5` line is inferred by negating the key. (The wire-faithful shape — one key per row with both prices — was chosen over the alternative of splitting `{-5.5: [home], +5.5: [away]}`, which would have required parser-side sign-flipping.)
 
 ## Types
 

@@ -2,6 +2,42 @@
 
 All notable changes to this project are documented in this file. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.11.0] — 2026-05-18
+
+First non-soccer sport: basketball. Three canonical markets land for the big-three basketball bets across 4 of 7 bookmakers.
+
+### Added
+
+- **Three basketball canonical markets** in the default `MarketRegistry`:
+  - `moneyline_basketball_ft` (non-parameterized, 2 outcomes — home / away, no draw)
+  - `over_under_basketball_ft` (parameterized, total points line)
+  - `handicap_basketball_ft` (parameterized, signed point spread)
+
+- **Working basketball coverage on 4 bookmakers**, fixture-bound to live captures: **BetPawa**, **SportyBet**, **MSport**, **Betway**. Each fixture lives under `tests/fixtures/event_info/<platform>/basketball.json` and is exercised by `tests/test_parser_basketball.py`.
+
+- **Per-bookmaker market ids discovered by live probe**:
+  - BetPawa: `4791` / `5009` / `3777` ("Asian Handicap"), outcomes `"1"` / `"2"`
+  - SportyBet, MSport: `"219"` / `"225"` / `"223"` (SR-standard codes), outcomes `"Home"` / `"Away"`
+  - Betway: names `"Winner (Incl. Overtime)"` / `"Total (Incl. Overtime)"` / `"Handicap (Incl. Overtime)"`, team-name outcomes resolved via the `__POS_2__` position sentinel for away (basketball ML is 2-way, so the soccer `__AWAY__` sentinel at index 2 doesn't apply).
+
+### Design decisions
+
+- **Handicap shape** uses one signed line key per row with both outcomes (home + away) in the same bucket — wire-faithful with how bookmakers actually ship the data. The earlier-considered alternative of splitting into `{-5.5: [home], +5.5: [away]}` was dropped in favour of the simpler wire-faithful shape; callers infer the away team's effective line by negating the key.
+
+### Deferred
+
+- **Bet9ja basketball**: market key prefix is `B_*` (vs soccer's `S_*`); the existing parser doesn't dispatch on it yet. Mappings are wired (`B_12`, `B_OUN`, `B_H`) so a small parser tweak unlocks it. Live fixture captured.
+- **SportPesa basketball**: SportPesa's market ids are sport-scoped — id `52` maps to football O/U **and** basketball O/U, which collides in the registry's flat `_by_sportpesa` index. Sport-aware registry lookups are needed before SportPesa basketball can land. Live fixture (plus full markets payload) captured for the future implementation.
+- **Betika basketball**: ML + O/U mappings work in principle (Betika uses the same SR-standard codes 219/225 the parser already accepts), but the captured fixture is the default 1X2-only view rather than the multi-market aggregator output. A small follow-up will capture a multi-market basketball fixture for fixture-bound coverage. Handicap is **not offered** by Betika for basketball.
+
+### Documentation
+
+- `docs/markets.md` rewritten around two sport-scoped tables (soccer + basketball) plus a notes section covering outcome conventions per platform, the handicap signed-line contract, and the three deferred platforms.
+
+### Test count
+
+472 → 492 passing (+20 across the 4-platform basketball parser parametrize, three new registry assertions for the basketball builtins, and the BetPawa-specific fixture-bound suite).
+
 ## [0.10.0] — 2026-05-18
 
 Closed the country-coverage gap on BetPawa (now matches their full advertised footprint) and added 4 new SportyBet markets.
