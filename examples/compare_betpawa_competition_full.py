@@ -171,12 +171,15 @@ async def fetch_betika(
     sr_id: str,
     lookup: dict[str, str],
     sub_type_ids: tuple[str, ...],
+    sport_id: int,
 ) -> list:
     match_id = lookup.get(sr_id)
     if match_id is None:
         return []
     try:
-        return await fetch_betika_markets_sportaware(bk, match_id, sub_type_ids)
+        return await fetch_betika_markets_sportaware(
+            bk, match_id, sub_type_ids, sport_id,
+        )
     except Exception as e:
         logger.warning("Betika sr:%s (match %s) failed: %r", sr_id, match_id, e)
         return []
@@ -292,21 +295,35 @@ async def build_sportpesa_index(
 
 
 async def fetch_betika_markets_sportaware(
-    bk: Betika, match_id: str, sub_type_ids: tuple[str, ...],
+    bk: Betika,
+    match_id: str,
+    sub_type_ids: tuple[str, ...],
+    sport_id: int,
 ) -> list:
     """Aggregate Betika markets for any sport.
 
     The lib's ``Betika.get_event_markets`` hardcodes the four soccer
     universal sub_type_ids (1/10/18/29). For other sports (basketball:
-    219/225, etc.) we have to assemble the merged shape ourselves
-    before handing it to ``parse_markets``.
+    219/225, etc.) we have to assemble the merged shape ourselves.
+
+    Crucially, every request MUST include ``sport_id`` — Betika's
+    ``match_id`` namespace is per-sport, so a bare lookup by
+    ``match_id`` returns the soccer event with the same numeric id
+    (often a totally different match) rather than the intended
+    basketball event. This was the silent gap in earlier versions
+    that made Betika appear empty for NBA games.
     """
     from bookieskit.markets.parser import parse_markets as _parse
 
     async def _fetch_one(stid: str) -> dict:
         return await bk._request(
             "GET", "/v1/uo/matches",
-            params={"match_id": match_id, "sub_type_id": stid, "limit": "1"},
+            params={
+                "match_id": match_id,
+                "sport_id": str(sport_id),
+                "sub_type_id": stid,
+                "limit": "1",
+            },
         )
 
     responses = await asyncio.gather(
@@ -484,7 +501,9 @@ async def main(competition_id: str, sport_id: str) -> None:
                     bw_task = fetch_betway(bw, sr_id)
                     b9_task = fetch_bet9ja(b9, sr_id, bet9ja_map)
                     bk_task = fetch_betika(
-                        bk, sr_id, betika_map, cfg["betika_sub_type_ids"],
+                        bk, sr_id, betika_map,
+                        cfg["betika_sub_type_ids"],
+                        cfg["betika_sport_id"],
                     )
                     if sp_ctx is not None:
                         sp_task = fetch_sportpesa(
