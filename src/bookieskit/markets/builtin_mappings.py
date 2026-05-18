@@ -380,4 +380,169 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
         },
         parameterized=True,
     ),
+    # =================== Tennis =========================================
+    # Tennis market ids discovered by live probe against a real match
+    # (Rinderknech vs Tirante, SR 71529092). Four canonical markets:
+    # moneyline, total games, total sets, game handicap. Each carries
+    # ``sport="tennis"`` so the registry's sport-aware index resolves
+    # cross-sport id collisions correctly (e.g. SportPesa id "51" is
+    # basketball Handicap AND tennis Game Handicap).
+    #
+    # Per-bookmaker conventions:
+    #   - BetPawa: bespoke numeric ids; outcomes "1" / "2".
+    #   - SportyBet/MSport/Betway/Betika: SR-standard codes 186 (ML),
+    #     189 (Total Games), 314 (Total Sets), 187 (Game Handicap).
+    #   - Bet9ja: T_-prefixed keys T_12, T_OUG, T_TS, T_GH.
+    #   - SportPesa: 382 (ML), 226 (Total Games), 51 (Game Handicap).
+    #     Total Sets is unavailable on the captured event — None mapping.
+    #
+    # MSport doesn't expose Total Sets directly on the captured event
+    # (only set-related markets are 196 Exact Sets / 194 Any Set To Nil
+    # — neither is a clean O/U). Marked None; document gap.
+    # Betika doesn't offer Set or Game Handicap or Total Sets on the
+    # captured event (sub_type_ids 187/188/314 returned nothing).
+    MarketMapping(
+        canonical_id="moneyline_tennis_match",
+        name="Moneyline - Match",
+        betpawa_id="2043818",
+        sportybet_id="186",
+        bet9ja_key="T_12",
+        betway_id="[Match Winner]",
+        msport_id="186",
+        sportpesa_id="382",
+        betika_id="186",
+        sport="tennis",
+        outcomes={
+            "home": OutcomeMapping(
+                canonical_name="home",
+                betpawa="1",
+                sportybet="Home",
+                bet9ja="1",
+                betway="__HOME__",
+                msport="Home",
+                sportpesa="1",
+                betika="1",
+            ),
+            "away": OutcomeMapping(
+                canonical_name="away",
+                betpawa="2",
+                sportybet="Away",
+                bet9ja="2",
+                betway="__POS_2__",
+                msport="Away",
+                sportpesa="2",
+                betika="2",
+            ),
+        },
+        parameterized=False,
+    ),
+    MarketMapping(
+        canonical_id="over_under_games_tennis_match",
+        name="Over/Under Total Games - Match",
+        betpawa_id="4895",
+        sportybet_id="189",
+        bet9ja_key="T_OUG",
+        betway_id="Total Games",
+        msport_id="189",
+        sportpesa_id="226",
+        betika_id="189",
+        sport="tennis",
+        outcomes={
+            "over": OutcomeMapping(
+                canonical_name="over",
+                betpawa="Over",
+                sportybet="Over",
+                bet9ja="O",
+                betway="Over",
+                msport="Over",
+                sportpesa="OV",
+                betika="Over",
+            ),
+            "under": OutcomeMapping(
+                canonical_name="under",
+                betpawa="Under",
+                sportybet="Under",
+                bet9ja="U",
+                betway="Under",
+                msport="Under",
+                sportpesa="UN",
+                betika="Under",
+            ),
+        },
+        parameterized=True,
+    ),
+    MarketMapping(
+        canonical_id="over_under_sets_tennis_match",
+        name="Over/Under Total Sets - Match",
+        betpawa_id="3597899",
+        sportybet_id="314",
+        bet9ja_key="T_TS",
+        betway_id="Total Sets",
+        msport_id=None,  # MSport doesn't expose a clean Total Sets O/U
+        sportpesa_id=None,  # not available on the captured event
+        betika_id=None,  # captured event didn't expose 314
+        sport="tennis",
+        outcomes={
+            "over": OutcomeMapping(
+                canonical_name="over",
+                betpawa="Over",
+                sportybet="Over",
+                bet9ja="O",
+                betway="Over",
+                msport="",
+                sportpesa="",
+                betika="",
+            ),
+            "under": OutcomeMapping(
+                canonical_name="under",
+                betpawa="Under",
+                sportybet="Under",
+                bet9ja="U",
+                betway="Under",
+                msport="",
+                sportpesa="",
+                betika="",
+            ),
+        },
+        parameterized=True,
+    ),
+    # Tennis handicap uses signed lines on game count (e.g. home -3.5
+    # games means home has to win by 4+ more games than away). Both
+    # outcomes (home, away) live under one signed key just like the
+    # basketball handicap convention.
+    MarketMapping(
+        canonical_id="handicap_games_tennis_match",
+        name="Game Handicap - Match",
+        betpawa_id="3532590",
+        sportybet_id="187",
+        bet9ja_key="T_GH",
+        betway_id="Game Handicap",
+        msport_id="187",
+        sportpesa_id="51",
+        betika_id=None,  # Betika didn't expose sub_type_id 187 on the captured event
+        sport="tennis",
+        outcomes={
+            "home": OutcomeMapping(
+                canonical_name="home",
+                betpawa="1",
+                sportybet="Home",
+                bet9ja="1",
+                betway="__HOME__",
+                msport="Home",
+                sportpesa="1",
+                betika="",
+            ),
+            "away": OutcomeMapping(
+                canonical_name="away",
+                betpawa="2",
+                sportybet="Away",
+                bet9ja="2",
+                betway="__POS_2__",
+                msport="Away",
+                sportpesa="2",
+                betika="",
+            ),
+        },
+        parameterized=True,
+    ),
 ]

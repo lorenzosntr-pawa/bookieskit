@@ -8,7 +8,8 @@ def test_registry_loads_builtins_by_default():
     markets = registry.list_markets()
     # 6 soccer markets: 1X2, O/U, BTTS, DC + 1X2 1Up, 1X2 2Up
     # 3 basketball markets: moneyline, O/U, handicap (basketball_ft suffix)
-    assert len(markets) == 9
+    # 4 tennis markets: moneyline, O/U games, O/U sets, handicap games
+    assert len(markets) == 13
 
 
 def test_registry_no_builtins():
@@ -78,8 +79,8 @@ def test_registry_add_custom_mapping():
             ),
         },
     )
-    # 9 builtins (6 soccer + 3 basketball) + the new draw_no_bet custom
-    assert len(registry.list_markets()) == 10
+    # 13 builtins (6 soccer + 3 basketball + 4 tennis) + draw_no_bet
+    assert len(registry.list_markets()) == 14
     mapping = registry.get_by_canonical("draw_no_bet_ft")
     assert mapping is not None
     assert mapping.betpawa_id == "4703"

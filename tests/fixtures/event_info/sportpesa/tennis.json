@@ -1,0 +1,560 @@
+{
+  "8899005": [
+    {
+      "id": 382,
+      "specValue": 0,
+      "name": "2 Way - Who will win?",
+      "order": 101,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2667770025,
+          "name": "Rinderknech, Arthur",
+          "odds": "2.25",
+          "shortName": "1",
+          "specValue": 0
+        },
+        {
+          "id": 2667770071,
+          "name": "Tirante, Thiago Agustin",
+          "odds": "1.57",
+          "shortName": "2",
+          "specValue": 0
+        }
+      ]
+    },
+    {
+      "id": 204,
+      "specValue": 0,
+      "name": "First Set Winner",
+      "order": 103,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2667770057,
+          "name": "Rinderknech, Arthur",
+          "odds": "2.10",
+          "shortName": "1",
+          "specValue": 0
+        },
+        {
+          "id": 2667770095,
+          "name": "Tirante, Thiago Agustin",
+          "odds": "1.66",
+          "shortName": "2",
+          "specValue": 0
+        }
+      ]
+    },
+    {
+      "id": 51,
+      "specValue": 1.5,
+      "name": "Game Handicap",
+      "order": 106,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2667770031,
+          "name": "Rinderknech, Arthur [+1.50]",
+          "odds": "1.93",
+          "shortName": "1",
+          "specValue": 1.5
+        },
+        {
+          "id": 2667770077,
+          "name": "Tirante, Thiago Agustin [-1.50]",
+          "odds": "1.78",
+          "shortName": "2",
+          "specValue": 1.5
+        }
+      ]
+    },
+    {
+      "id": 226,
+      "specValue": 22.5,
+      "name": "Total Games",
+      "order": 109,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2667770053,
+          "name": "OVER 22.50",
+          "odds": "1.77",
+          "shortName": "OV",
+          "specValue": 22.5
+        },
+        {
+          "id": 2667770101,
+          "name": "UNDER 22.50",
+          "odds": "1.94",
+          "shortName": "UN",
+          "specValue": 22.5
+        }
+      ]
+    },
+    {
+      "id": 233,
+      "specValue": 0,
+      "name": "Correct Score (per set)",
+      "order": 112,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2667770051,
+          "name": "2:0",
+          "odds": "3.80",
+          "shortName": "2:0",
+          "specValue": 0
+        },
+        {
+          "id": 2667770097,
+          "name": "2:1",
+          "odds": "4.70",
+          "shortName": "2:1",
+          "specValue": 0
+        },
+        {
+          "id": 2667770107,
+          "name": "1:2",
+          "odds": "3.65",
+          "shortName": "1:2",
+          "specValue": 0
+        },
+        {
+          "id": 2667770111,
+          "name": "0:2",
+          "odds": "2.50",
+          "shortName": "0:2",
+          "specValue": 0
+        }
+      ]
+    },
+    {
+      "id": 439,
+      "specValue": -1.5,
+      "name": "Set Handicap",
+      "order": 116,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2667770023,
+          "name": "Rinderknech, Arthur [-1.50]",
+          "odds": "3.70",
+          "shortName": "1",
+          "specValue": -1.5
+        },
+        {
+          "id": 2667770073,
+          "name": "Tirante, Thiago Agustin [+1.50]",
+          "odds": "1.24",
+          "shortName": "2",
+          "specValue": -1.5
+        }
+      ]
+    },
+    {
+      "id": 439,
+      "specValue": 1.5,
+      "name": "Set Handicap",
+      "order": 116,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2667770065,
+          "name": "Rinderknech, Arthur [+1.50]",
+          "odds": "1.45",
+          "shortName": "1",
+          "specValue": 1.5
+        },
+        {
+          "id": 2667770105,
+          "name": "Tirante, Thiago Agustin [-1.50]",
+          "odds": "2.55",
+          "shortName": "2",
+          "specValue": 1.5
+        }
+      ]
+    },
+    {
+      "id": 45,
+      "specValue": 0,
+      "name": "Odd/Even Number of Games",
+      "order": 119,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2667770035,
+          "name": "ODD",
+          "odds": "1.86",
+          "shortName": "OD",
+          "specValue": 0
+        },
+        {
+          "id": 2667770083,
+          "name": "EVEN",
+          "odds": "1.85",
+          "shortName": "EV",
+          "specValue": 0
+        }
+      ]
+    },
+    {
+      "id": 339,
+      "specValue": -1.5,
+      "name": "1st Set Game Handicap",
+      "order": 120,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2667770037,
+          "name": "Rinderknech, Arthur [-1.50]",
+          "odds": "2.90",
+          "shortName": "1",
+          "specValue": -1.5
+        },
+        {
+          "id": 2667770087,
+          "name": "Tirante, Thiago Agustin [+1.50]",
+          "odds": "1.36",
+          "shortName": "2",
+          "specValue": -1.5
+        }
+      ]
+    },
+    {
+      "id": 339,
+      "specValue": -0.5,
+      "name": "1st Set Game Handicap",
+      "order": 120,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2667770055,
+          "name": "Rinderknech, Arthur [-0.50]",
+          "odds": "2.10",
+          "shortName": "1",
+          "specValue": -0.5
+        },
+        {
+          "id": 2667770103,
+          "name": "Tirante, Thiago Agustin [+0.50]",
+          "odds": "1.66",
+          "shortName": "2",
+          "specValue": -0.5
+        }
+      ]
+    },
+    {
+      "id": 339,
+      "specValue": 1.5,
+      "name": "1st Set Game Handicap",
+      "order": 120,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2667770029,
+          "name": "Rinderknech, Arthur [+1.50]",
+          "odds": "1.59",
+          "shortName": "1",
+          "specValue": 1.5
+        },
+        {
+          "id": 2667770075,
+          "name": "Tirante, Thiago Agustin [-1.50]",
+          "odds": "2.21",
+          "shortName": "2",
+          "specValue": 1.5
+        }
+      ]
+    },
+    {
+      "id": 340,
+      "specValue": 9.5,
+      "name": "1st Set Over/Under Number of Games",
+      "order": 122,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2667770047,
+          "name": "OVER 9.50",
+          "odds": "1.48",
+          "shortName": "OV",
+          "specValue": 9.5
+        },
+        {
+          "id": 2667770089,
+          "name": "UNDER 9.50",
+          "odds": "2.48",
+          "shortName": "UN",
+          "specValue": 9.5
+        }
+      ]
+    },
+    {
+      "id": 340,
+      "specValue": 10.5,
+      "name": "1st Set Over/Under Number of Games",
+      "order": 122,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2667770011,
+          "name": "OVER 10.50",
+          "odds": "2.42",
+          "shortName": "OV",
+          "specValue": 10.5
+        },
+        {
+          "id": 2667770049,
+          "name": "UNDER 10.50",
+          "odds": "1.50",
+          "shortName": "UN",
+          "specValue": 10.5
+        }
+      ]
+    },
+    {
+      "id": 340,
+      "specValue": 12.5,
+      "name": "1st Set Over/Under Number of Games",
+      "order": 122,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2668123025,
+          "name": "OVER 12.50",
+          "odds": "3.05",
+          "shortName": "OV",
+          "specValue": 12.5
+        },
+        {
+          "id": 2668123027,
+          "name": "UNDER 12.50",
+          "odds": "1.33",
+          "shortName": "UN",
+          "specValue": 12.5
+        }
+      ]
+    },
+    {
+      "id": 433,
+      "specValue": 0,
+      "name": "1st Set/Match Winner",
+      "order": 123,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2667770045,
+          "name": "Player1 / Player1",
+          "odds": "2.85",
+          "shortName": "11",
+          "specValue": 0
+        },
+        {
+          "id": 2667770109,
+          "name": "Player1 / Player2",
+          "odds": "7.40",
+          "shortName": "12",
+          "specValue": 0
+        },
+        {
+          "id": 2667770099,
+          "name": "Player2 / Player1",
+          "odds": "9.20",
+          "shortName": "21",
+          "specValue": 0
+        },
+        {
+          "id": 2667770113,
+          "name": "Player2 / Player2",
+          "odds": "1.98",
+          "shortName": "22",
+          "specValue": 0
+        }
+      ]
+    },
+    {
+      "id": 231,
+      "specValue": 0,
+      "name": "2nd Set Winner",
+      "order": 124,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2667770013,
+          "name": "Rinderknech, Arthur",
+          "odds": "2.08",
+          "shortName": "1",
+          "specValue": 0
+        },
+        {
+          "id": 2667770059,
+          "name": "Tirante, Thiago Agustin",
+          "odds": "1.67",
+          "shortName": "2",
+          "specValue": 0
+        }
+      ]
+    },
+    {
+      "id": 353,
+      "specValue": 11.5,
+      "name": "Player 1 Over/Under Number of Games - Full Time",
+      "order": 126,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2667770015,
+          "name": "OVER 11.50",
+          "odds": "1.46",
+          "shortName": "OV",
+          "specValue": 11.5
+        },
+        {
+          "id": 2667770063,
+          "name": "UNDER 11.50",
+          "odds": "2.55",
+          "shortName": "UN",
+          "specValue": 11.5
+        }
+      ]
+    },
+    {
+      "id": 353,
+      "specValue": 12.5,
+      "name": "Player 1 Over/Under Number of Games - Full Time",
+      "order": 126,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2667770043,
+          "name": "OVER 12.50",
+          "odds": "1.81",
+          "shortName": "OV",
+          "specValue": 12.5
+        },
+        {
+          "id": 2667770093,
+          "name": "UNDER 12.50",
+          "odds": "1.89",
+          "shortName": "UN",
+          "specValue": 12.5
+        }
+      ]
+    },
+    {
+      "id": 353,
+      "specValue": 13.5,
+      "name": "Player 1 Over/Under Number of Games - Full Time",
+      "order": 126,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2667770039,
+          "name": "OVER 13.50",
+          "odds": "2.47",
+          "shortName": "OV",
+          "specValue": 13.5
+        },
+        {
+          "id": 2667770081,
+          "name": "UNDER 13.50",
+          "odds": "1.48",
+          "shortName": "UN",
+          "specValue": 13.5
+        }
+      ]
+    },
+    {
+      "id": 352,
+      "specValue": 11.5,
+      "name": "Player 2 Over/Under Number of Games - Full Time",
+      "order": 128,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2667770041,
+          "name": "OVER 11.50",
+          "odds": "1.23",
+          "shortName": "OV",
+          "specValue": 11.5
+        },
+        {
+          "id": 2667770091,
+          "name": "UNDER 11.50",
+          "odds": "3.75",
+          "shortName": "UN",
+          "specValue": 11.5
+        }
+      ]
+    },
+    {
+      "id": 352,
+      "specValue": 12.5,
+      "name": "Player 2 Over/Under Number of Games - Full Time",
+      "order": 128,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2667770021,
+          "name": "OVER 12.50",
+          "odds": "1.59",
+          "shortName": "OV",
+          "specValue": 12.5
+        },
+        {
+          "id": 2667770069,
+          "name": "UNDER 12.50",
+          "odds": "2.21",
+          "shortName": "UN",
+          "specValue": 12.5
+        }
+      ]
+    },
+    {
+      "id": 352,
+      "specValue": 13.5,
+      "name": "Player 2 Over/Under Number of Games - Full Time",
+      "order": 128,
+      "columns": 2,
+      "columnsApp": 2,
+      "selections": [
+        {
+          "id": 2667770019,
+          "name": "OVER 13.50",
+          "odds": "2.27",
+          "shortName": "OV",
+          "specValue": 13.5
+        },
+        {
+          "id": 2667770061,
+          "name": "UNDER 13.50",
+          "odds": "1.56",
+          "shortName": "UN",
+          "specValue": 13.5
+        }
+      ]
+    }
+  ]
+}

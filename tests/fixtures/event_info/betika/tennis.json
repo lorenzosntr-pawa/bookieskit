@@ -1,0 +1,84 @@
+{
+  "data": [
+    {
+      "home_team": "Rinderknech, Arthur",
+      "game_id": "58333",
+      "match_id": "10941652",
+      "away_team": "Tirante, Thiago Agustin",
+      "start_time": "2026-05-18 13:10:00",
+      "competition_name": "ATP Geneva, Switzerland Men Singles",
+      "category": "ATP",
+      "parent_match_id": "71529092",
+      "side_bets": "18",
+      "home_odd": "2.30",
+      "neutral_odd": null,
+      "away_odd": "1.60",
+      "competition_id": "26623",
+      "sport_id": "28",
+      "sport_name": "Tennis",
+      "is_esport": false,
+      "is_srl": false,
+      "odds": [
+        {
+          "sub_type_id": "186",
+          "name": "WINNER",
+          "odds": [
+            {
+              "display": "1",
+              "odd_key": "Rinderknech, Arthur",
+              "odd_def": "{$competitor1}",
+              "odd_value": "2.30",
+              "special_bet_value": "",
+              "outcome_id": "4",
+              "parsed_special_bet_value": {
+                "": ""
+              }
+            },
+            {
+              "display": "2",
+              "odd_key": "Tirante, Thiago Agustin",
+              "odd_def": "{$competitor2}",
+              "odd_value": "1.60",
+              "special_bet_value": "",
+              "outcome_id": "5",
+              "parsed_special_bet_value": {
+                "": ""
+              }
+            }
+          ]
+        },
+        {
+          "sub_type_id": "189",
+          "name": "TOTAL GAMES",
+          "odds": [
+            {
+              "display": "OVER 22.5",
+              "odd_key": "over 22.5",
+              "odd_def": "over {total}",
+              "odd_value": "1.80",
+              "special_bet_value": "total=22.5",
+              "outcome_id": "12",
+              "parsed_special_bet_value": {
+                "total": "22.5"
+              }
+            },
+            {
+              "display": "UNDER 22.5",
+              "odd_key": "under 22.5",
+              "odd_def": "under {total}",
+              "odd_value": "1.98",
+              "special_bet_value": "total=22.5",
+              "outcome_id": "13",
+              "parsed_special_bet_value": {
+                "total": "22.5"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "meta": {
+    "total": 1
+  }
+}

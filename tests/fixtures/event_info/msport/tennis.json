@@ -1,0 +1,1694 @@
+{
+  "bizCode": 10000,
+  "data": {
+    "allScores": null,
+    "awayTeam": "Tirante, Thiago Agustin",
+    "awayTeamIcon": "",
+    "awayTeamId": "sr:competitor:256875",
+    "bookingStatus": "Booked",
+    "category": "ATP",
+    "categoryIcon": "https://static.msport.com/public/up/1692c029-e719-42e7-b57d-d61578c16b3d.png",
+    "categoryId": "sr:category:3",
+    "eventId": "sr:match:71529092",
+    "hasLive": 1,
+    "hasLiveCoverage": 0,
+    "hasLiveWidget": 0,
+    "hasVoucher": 0,
+    "homeTeam": "Rinderknech, Arthur",
+    "homeTeamIcon": "",
+    "homeTeamId": "sr:competitor:63606",
+    "howToPlay": null,
+    "liveAudioStreamUrl": null,
+    "markets": [
+      {
+        "betAssistWidget": null,
+        "description": "Winner",
+        "expand": 1,
+        "group": "Main",
+        "guidance": null,
+        "id": 186,
+        "isFavourite": 0,
+        "isShown": 1,
+        "marketLabels": null,
+        "name": "Winner",
+        "outcomes": [
+          {
+            "description": "Home",
+            "id": "4",
+            "isActive": 1,
+            "odds": "2.30",
+            "probability": "0.4039"
+          },
+          {
+            "description": "Away",
+            "id": "5",
+            "isActive": 1,
+            "odds": "1.60",
+            "probability": "0.5962"
+          }
+        ],
+        "presentationType": 5,
+        "priority": 1,
+        "product": 3,
+        "relatedMarketId": null,
+        "relatedSpecifiers": null,
+        "specifiers": "",
+        "status": 0,
+        "title": "1,2",
+        "userFavourite": 0
+      },
+      {
+        "betAssistWidget": "winner1stSet",
+        "description": "1st set - Winner",
+        "expand": 1,
+        "group": "Main",
+        "guidance": null,
+        "id": 202,
+        "isFavourite": 0,
+        "isShown": 1,
+        "marketLabels": null,
+        "name": "Set Winner",
+        "outcomes": [
+          {
+            "description": "Home",
+            "id": "4",
+            "isActive": 1,
+            "odds": "2.10",
+            "probability": "0.4369"
+          },
+          {
+            "description": "Away",
+            "id": "5",
+            "isActive": 1,
+            "odds": "1.66",
+            "probability": "0.5631"
+          }
+        ],
+        "presentationType": 5,
+        "priority": 2,
+        "product": 3,
+        "relatedMarketId": null,
+        "relatedSpecifiers": null,
+        "specifiers": "setnr=1",
+        "status": 0,
+        "title": "Set,1,2",
+        "userFavourite": 0
+      },
+      {
+        "betAssistWidget": "winner2ndSet",
+        "description": "2nd set - Winner",
+        "expand": 1,
+        "group": "Main",
+        "guidance": null,
+        "id": 202,
+        "isFavourite": 1,
+        "isShown": 1,
+        "marketLabels": null,
+        "name": "Set Winner",
+        "outcomes": [
+          {
+            "description": "Home",
+            "id": "4",
+            "isActive": 1,
+            "odds": "2.08",
+            "probability": "0.4398"
+          },
+          {
+            "description": "Away",
+            "id": "5",
+            "isActive": 1,
+            "odds": "1.67",
+            "probability": "0.5602"
+          }
+        ],
+        "presentationType": 5,
+        "priority": 2,
+        "product": 3,
+        "relatedMarketId": null,
+        "relatedSpecifiers": null,
+        "specifiers": "setnr=2",
+        "status": 0,
+        "title": "Set,1,2",
+        "userFavourite": 0
+      },
+      {
+        "betAssistWidget": null,
+        "description": "Set Handicap",
+        "expand": 1,
+        "group": "Main",
+        "guidance": null,
+        "id": 188,
+        "isFavourite": 0,
+        "isShown": 1,
+        "marketLabels": null,
+        "name": "Set Handicap",
+        "outcomes": [
+          {
+            "description": "Home (-1.5)",
+            "id": "1714",
+            "isActive": 1,
+            "odds": "3.70",
+            "probability": "0.2280"
+          },
+          {
+            "description": "Away (+1.5)",
+            "id": "1715",
+            "isActive": 1,
+            "odds": "1.24",
+            "probability": "0.7720"
+          }
+        ],
+        "presentationType": 10,
+        "priority": 3,
+        "product": 3,
+        "relatedMarketId": null,
+        "relatedSpecifiers": null,
+        "specifiers": "hcp=-1.5",
+        "status": 0,
+        "title": "Set,1,2",
+        "userFavourite": 0
+      },
+      {
+        "betAssistWidget": null,
+        "description": "Set Handicap",
+        "expand": 1,
+        "group": "Main",
+        "guidance": null,
+        "id": 188,
+        "isFavourite": 1,
+        "isShown": 1,
+        "marketLabels": null,
+        "name": "Set Handicap",
+        "outcomes": [
+          {
+            "description": "Home (+1.5)",
+            "id": "1714",
+            "isActive": 1,
+            "odds": "1.45",
+            "probability": "0.6488"
+          },
+          {
+            "description": "Away (-1.5)",
+            "id": "1715",
+            "isActive": 1,
+            "odds": "2.55",
+            "probability": "0.3512"
+          }
+        ],
+        "presentationType": 10,
+        "priority": 3,
+        "product": 3,
+        "relatedMarketId": null,
+        "relatedSpecifiers": null,
+        "specifiers": "hcp=1.5",
+        "status": 0,
+        "title": "Set,1,2",
+        "userFavourite": 0
+      },
+      {
+        "betAssistWidget": "totalGames",
+        "description": "Game O/U",
+        "expand": 1,
+        "group": "Main",
+        "guidance": null,
+        "id": 189,
+        "isFavourite": 0,
+        "isShown": 1,
+        "marketLabels": null,
+        "name": "Game O/U",
+        "outcomes": [
+          {
+            "description": "Over 19.5",
+            "id": "12",
+            "isActive": 1,
+            "odds": "1.29",
+            "probability": "0.7455"
+          },
+          {
+            "description": "Under 19.5",
+            "id": "13",
+            "isActive": 1,
+            "odds": "3.50",
+            "probability": "0.2545"
+          }
+        ],
+        "presentationType": 1,
+        "priority": 4,
+        "product": 3,
+        "relatedMarketId": null,
+        "relatedSpecifiers": null,
+        "specifiers": "total=19.5",
+        "status": 0,
+        "title": "Games,Over,Under",
+        "userFavourite": 0
+      },
+      {
+        "betAssistWidget": "totalGames",
+        "description": "Game O/U",
+        "expand": 1,
+        "group": "Main",
+        "guidance": null,
+        "id": 189,
+        "isFavourite": 0,
+        "isShown": 1,
+        "marketLabels": null,
+        "name": "Game O/U",
+        "outcomes": [
+          {
+            "description": "Over 20.5",
+            "id": "12",
+            "isActive": 1,
+            "odds": "1.44",
+            "probability": "0.6655"
+          },
+          {
+            "description": "Under 20.5",
+            "id": "13",
+            "isActive": 1,
+            "odds": "2.75",
+            "probability": "0.3345"
+          }
+        ],
+        "presentationType": 1,
+        "priority": 4,
+        "product": 3,
+        "relatedMarketId": null,
+        "relatedSpecifiers": null,
+        "specifiers": "total=20.5",
+        "status": 0,
+        "title": "Games,Over,Under",
+        "userFavourite": 0
+      },
+      {
+        "betAssistWidget": "totalGames",
+        "description": "Game O/U",
+        "expand": 1,
+        "group": "Main",
+        "guidance": null,
+        "id": 189,
+        "isFavourite": 0,
+        "isShown": 1,
+        "marketLabels": null,
+        "name": "Game O/U",
+        "outcomes": [
+          {
+            "description": "Over 21.5",
+            "id": "12",
+            "isActive": 1,
+            "odds": "1.56",
+            "probability": "0.6102"
+          },
+          {
+            "description": "Under 21.5",
+            "id": "13",
+            "isActive": 1,
+            "odds": "2.38",
+            "probability": "0.3898"
+          }
+        ],
+        "presentationType": 1,
+        "priority": 4,
+        "product": 3,
+        "relatedMarketId": null,
+        "relatedSpecifiers": null,
+        "specifiers": "total=21.5",
+        "status": 0,
+        "title": "Games,Over,Under",
+        "userFavourite": 0
+      },
+      {
+        "betAssistWidget": "totalGames",
+        "description": "Game O/U",
+        "expand": 1,
+        "group": "Main",
+        "guidance": null,
+        "id": 189,
+        "isFavourite": 1,
+        "isShown": 1,
+        "marketLabels": null,
+        "name": "Game O/U",
+        "outcomes": [
+          {
+            "description": "Over 22.5",
+            "id": "12",
+            "isActive": 1,
+            "odds": "1.80",
+            "probability": "0.5244"
+          },
+          {
+            "description": "Under 22.5",
+            "id": "13",
+            "isActive": 1,
+            "odds": "1.98",
+            "probability": "0.4756"
+          }
+        ],
+        "presentationType": 1,
+        "priority": 4,
+        "product": 3,
+        "relatedMarketId": null,
+        "relatedSpecifiers": null,
+        "specifiers": "total=22.5",
+        "status": 0,
+        "title": "Games,Over,Under",
+        "userFavourite": 0
+      },
+      {
+        "betAssistWidget": "totalGames",
+        "description": "Game O/U",
+        "expand": 1,
+        "group": "Main",
+        "guidance": null,
+        "id": 189,
+        "isFavourite": 0,
+        "isShown": 1,
+        "marketLabels": null,
+        "name": "Game O/U",
+        "outcomes": [
+          {
+            "description": "Over 23.5",
+            "id": "12",
+            "isActive": 1,
+            "odds": "2.05",
+            "probability": "0.4585"
+          },
+          {
+            "description": "Under 23.5",
+            "id": "13",
+            "isActive": 1,
+            "odds": "1.75",
+            "probability": "0.5415"
+          }
+        ],
+        "presentationType": 1,
+        "priority": 4,
+        "product": 3,
+        "relatedMarketId": null,
+        "relatedSpecifiers": null,
+        "specifiers": "total=23.5",
+        "status": 0,
+        "title": "Games,Over,Under",
+        "userFavourite": 0
+      },
+      {
+        "betAssistWidget": "totalGames",
+        "description": "Game O/U",
+        "expand": 1,
+        "group": "Main",
+        "guidance": null,
+        "id": 189,
+        "isFavourite": 0,
+        "isShown": 1,
+        "marketLabels": null,
+        "name": "Game O/U",
+        "outcomes": [
+          {
+            "description": "Over 24.5",
+            "id": "12",
+            "isActive": 1,
+            "odds": "2.10",
+            "probability": "0.4465"
+          },
+          {
+            "description": "Under 24.5",
+            "id": "13",
+            "isActive": 1,
+            "odds": "1.71",
+            "probability": "0.5535"
+          }
+        ],
+        "presentationType": 1,
+        "priority": 4,
+        "product": 3,
+        "relatedMarketId": null,
+        "relatedSpecifiers": null,
+        "specifiers": "total=24.5",
+        "status": 0,
+        "title": "Games,Over,Under",
+        "userFavourite": 0
+      },
+      {
+        "betAssistWidget": "totalGames",
+        "description": "Game O/U",
+        "expand": 1,
+        "group": "Main",
+        "guidance": null,
+        "id": 189,
+        "isFavourite": 0,
+        "isShown": 1,
+        "marketLabels": null,
+        "name": "Game O/U",
+        "outcomes": [
+          {
+            "description": "Over 25.5",
+            "id": "12",
+            "isActive": 1,
+            "odds": "2.27",
+            "probability": "0.4102"
+          },
+          {
+            "description": "Under 25.5",
+            "id": "13",
+            "isActive": 1,
+            "odds": "1.61",
+            "probability": "0.5898"
+          }
+        ],
+        "presentationType": 1,
+        "priority": 4,
+        "product": 3,
+        "relatedMarketId": null,
+        "relatedSpecifiers": null,
+        "specifiers": "total=25.5",
+        "status": 0,
+        "title": "Games,Over,Under",
+        "userFavourite": 0
+      },
+      {
+        "betAssistWidget": "2WayHandicap",
+        "description": "Game Handicap",
+        "expand": 1,
+        "group": "Main",
+        "guidance": null,
+        "id": 187,
+        "isFavourite": 0,
+        "isShown": 1,
+        "marketLabels": null,
+        "name": "Game Handicap",
+        "outcomes": [
+          {
+            "description": "Home (+0.5)",
+            "id": "1714",
+            "isActive": 1,
+            "odds": "2.11",
+            "probability": "0.4333"
+          },
+          {
+            "description": "Away (-0.5)",
+            "id": "1715",
+            "isActive": 1,
+            "odds": "1.65",
+            "probability": "0.5667"
+          }
+        ],
+        "presentationType": 10,
+        "priority": 5,
+        "product": 3,
+        "relatedMarketId": null,
+        "relatedSpecifiers": null,
+        "specifiers": "hcp=0.5",
+        "status": 0,
+        "title": "Games,1,2",
+        "userFavourite": 0
+      },
+      {
+        "betAssistWidget": "2WayHandicap",
+        "description": "Game Handicap",
+        "expand": 1,
+        "group": "Main",
+        "guidance": null,
+        "id": 187,
+        "isFavourite": 1,
+        "isShown": 1,
+        "marketLabels": null,
+        "name": "Game Handicap",
+        "outcomes": [
+          {
+            "description": "Home (+1.5)",
+            "id": "1714",
+            "isActive": 1,
+            "odds": "1.93",
+            "probability": "0.4790"
+          },
+          {
+            "description": "Away (-1.5)",
+            "id": "1715",
+            "isActive": 1,
+            "odds": "1.78",
+            "probability": "0.5210"
+          }
+        ],
+        "presentationType": 10,
+        "priority": 5,
+        "product": 3,
+        "relatedMarketId": null,
+        "relatedSpecifiers": null,
+        "specifiers": "hcp=1.5",
+        "status": 0,
+        "title": "Games,1,2",
+        "userFavourite": 0
+      },
+      {
+        "betAssistWidget": "2WayHandicap",
+        "description": "Game Handicap",
+        "expand": 1,
+        "group": "Main",
+        "guidance": null,
+        "id": 187,
+        "isFavourite": 0,
+        "isShown": 1,
+        "marketLabels": null,
+        "name": "Game Handicap",
+        "outcomes": [
+          {
+            "description": "Home (+2.5)",
+            "id": "1714",
+            "isActive": 1,
+            "odds": "1.68",
+            "probability": "0.5553"
+          },
+          {
+            "description": "Away (-2.5)",
+            "id": "1715",
+            "isActive": 1,
+            "odds": "2.06",
+            "probability": "0.4447"
+          }
+        ],
+        "presentationType": 10,
+        "priority": 5,
+        "product": 3,
+        "relatedMarketId": null,
+        "relatedSpecifiers": null,
+        "specifiers": "hcp=2.5",
+        "status": 0,
+        "title": "Games,1,2",
+        "userFavourite": 0
+      },
+      {
+        "betAssistWidget": null,
+        "description": "Home to win a set",
+        "expand": 0,
+        "group": "Main",
+        "guidance": null,
+        "id": 192,
+        "isFavourite": 0,
+        "isShown": 1,
+        "marketLabels": null,
+        "name": "Home to win a set",
+        "outcomes": [
+          {
+            "description": "Yes",
+            "id": "74",
+            "isActive": 1,
+            "odds": "1.45",
+            "probability": "0.6488"
+          },
+          {
+            "description": "No",
+            "id": "76",
+            "isActive": 1,
+            "odds": "2.55",
+            "probability": "0.3512"
+          }
+        ],
+        "presentationType": 5,
+        "priority": 100,
+        "product": 3,
+        "relatedMarketId": null,
+        "relatedSpecifiers": null,
+        "specifiers": "",
+        "status": 0,
+        "title": "",
+        "userFavourite": 0
+      },
+      {
+        "betAssistWidget": null,
+        "description": "Away to win a set",
+        "expand": 0,
+        "group": "Main",
+        "guidance": null,
+        "id": 193,
+        "isFavourite": 0,
+        "isShown": 1,
+        "marketLabels": null,
+        "name": "Away to win a set",
+        "outcomes": [
+          {
+            "description": "Yes",
+            "id": "74",
+            "isActive": 1,
+            "odds": "1.24",
+            "probability": "0.7720"
+          },
+          {
+            "description": "No",
+            "id": "76",
+            "isActive": 1,
+            "odds": "3.70",
+            "probability": "0.2280"
+          }
+        ],
+        "presentationType": 5,
+        "priority": 100,
+        "product": 3,
+        "relatedMarketId": null,
+        "relatedSpecifiers": null,
+        "specifiers": "",
+        "status": 0,
+        "title": "",
+        "userFavourite": 0
+      },
+      {
+        "betAssistWidget": null,
+        "description": "Any set to nil",
+        "expand": 1,
+        "group": "Main",
+        "guidance": null,
+        "id": 194,
+        "isFavourite": 0,
+        "isShown": 1,
+        "marketLabels": null,
+        "name": "Any set to nil",
+        "outcomes": [
+          {
+            "description": "Yes",
+            "id": "74",
+            "isActive": 1,
+            "odds": "12.00",
+            "probability": "0.0152"
+          },
+          {
+            "description": "No",
+            "id": "76",
+            "isActive": 1,
+            "odds": "1.01",
+            "probability": "0.9848"
+          }
+        ],
+        "presentationType": 5,
+        "priority": 100,
+        "product": 3,
+        "relatedMarketId": null,
+        "relatedSpecifiers": null,
+        "specifiers": "",
+        "status": 0,
+        "title": "",
+        "userFavourite": 0
+      },
+      {
+        "betAssistWidget": null,
+        "description": "Odd/Even games",
+        "expand": 1,
+        "group": "Main",
+        "guidance": null,
+        "id": 198,
+        "isFavourite": 0,
+        "isShown": 1,
+        "marketLabels": null,
+        "name": "Odd/even games",
+        "outcomes": [
+          {
+            "description": "Odd",
+            "id": "70",
+            "isActive": 1,
+            "odds": "1.87",
+            "probability": "0.4984"
+          },
+          {
+            "description": "Even",
+            "id": "72",
+            "isActive": 1,
+            "odds": "1.86",
+            "probability": "0.5016"
+          }
+        ],
+        "presentationType": 5,
+        "priority": 100,
+        "product": 3,
+        "relatedMarketId": null,
+        "relatedSpecifiers": null,
+        "specifiers": "",
+        "status": 0,
+        "title": "",
+        "userFavourite": 0
+      },
+      {
+        "betAssistWidget": "setBetting",
+        "description": "Correct score",
+        "expand": 1,
+        "group": "Main",
+        "guidance": null,
+        "id": 199,
+        "isFavourite": 1,
+        "isShown": 1,
+        "marketLabels": null,
+        "name": "Correct score",
+        "outcomes": [
+          {
+            "description": "2:0",
+            "id": "sr:correct_score:bestof:3:4",
+            "isActive": 1,
+            "odds": "3.90",
+            "probability": "0.2280"
+          },
+          {
+            "description": "2:1",
+            "id": "sr:correct_score:bestof:3:5",
+            "isActive": 1,
+            "odds": "4.80",
+            "probability": "0.1838"
+          },
+          {
+            "description": "1:2",
+            "id": "sr:correct_score:bestof:3:6",
+            "isActive": 1,
+            "odds": "3.75",
+            "probability": "0.2368"
+          },
+          {
+            "description": "0:2",
+            "id": "sr:correct_score:bestof:3:7",
+            "isActive": 1,
+            "odds": "2.60",
+            "probability": "0.3513"
+          }
+        ],
+        "presentationType": 2,
+        "priority": 100,
+        "product": 3,
+        "relatedMarketId": null,
+        "relatedSpecifiers": null,
+        "specifiers": "variant=sr:correct_score:bestof:3",
+        "status": 0,
+        "title": "",
+        "userFavourite": 0
+      },
+      {
+        "betAssistWidget": "doubleResult",
+        "description": "Double result (1st set/match)",
+        "expand": 1,
+        "group": "Main",
+        "guidance": null,
+        "id": 201,
+        "isFavourite": 0,
+        "isShown": 1,
+        "marketLabels": null,
+        "name": "Double result (1st set/match)",
+        "outcomes": [
+          {
+            "description": "Home/Home",
+            "id": "861",
+            "isActive": 1,
+            "odds": "2.60",
+            "probability": "0.3168"
+          },
+          {
+            "description": "Away/Home",
+            "id": "862",
+            "isActive": 1,
+            "odds": "8.20",
+            "probability": "0.0950"
+          },
+          {
+            "description": "Home/Away",
+            "id": "863",
+            "isActive": 1,
+            "odds": "6.40",
+            "probability": "0.1201"
+          },
+          {
+            "description": "Away/Away",
+            "id": "864",
+            "isActive": 1,
+            "odds": "1.85",
+            "probability": "0.4680"
+          }
+        ],
+        "presentationType": 5,
+        "priority": 100,
+        "product": 3,
+        "relatedMarketId": null,
+        "relatedSpecifiers": null,
+        "specifiers": "",
+        "status": 0,
+        "title": "",
+        "userFavourite": 0
+      },
+      {
+        "betAssistWidget": null,
+        "description": "Home to win exactly 1 set",
+        "expand": 1,
+        "group": "Specials",
+        "guidance": null,
+        "id": 850,
+        "isFavourite": 0,
+        "isShown": 1,
+        "marketLabels": null,
+        "name": "Home to win exactly 1 set",
+        "outcomes": [
+          {
+            "description": "Yes",
+            "id": "74",
+            "isActive": 1,
+            "odds": "3.60",
+            "probability": "0.2369"
+          },
+          {
+            "description": "No",
+            "id": "76",
+            "isActive": 1,
+            "odds": "1.25",
+            "probability": "0.7631"
+          }
+        ],
+        "presentationType": 5,
+        "priority": 400,
+        "product": 3,
+        "relatedMarketId": null,
+        "relatedSpecifiers": null,
+        "specifiers": "",
+        "status": 0,
+        "title": "",
+        "userFavourite": 0
+      },
+      {
+        "betAssistWidget": null,
+        "description": "Away to win exactly 1 set",
+        "expand": 1,
+        "group": "Specials",
+        "guidance": null,
+        "id": 851,
+        "isFavourite": 0,
+        "isShown": 1,
+        "marketLabels": null,
+        "name": "Away to win exactly 1 set",
+        "outcomes": [
+          {
+            "description": "Yes",
+            "id": "74",
+            "isActive": 1,
+            "odds": "4.40",
+            "probability": "0.1837"
+          },
+          {
+            "description": "No",
+            "id": "76",
+            "isActive": 1,
+            "odds": "1.17",
+            "probability": "0.8164"
+          }
+        ],
+        "presentationType": 5,
+        "priority": 400,
+        "product": 3,
+        "relatedMarketId": null,
+        "relatedSpecifiers": null,
+        "specifiers": "",
+        "status": 0,
+        "title": "",
+        "userFavourite": 0
+      },
+      {
+        "betAssistWidget": null,
+        "description": "Winner & O/U",
+        "expand": 1,
+        "group": "Specials",
+        "guidance": null,
+        "id": 1055,
+        "isFavourite": 1,
+        "isShown": 1,
+        "marketLabels": null,
+        "name": "Winner & O/U",
+        "outcomes": [
+          {
+            "description": "Home & Over 22.5",
+            "id": "973",
+            "isActive": 1,
+            "odds": "3.65",
+            "probability": "0.2264"
+          },
+          {
+            "description": "Away & Over 22.5",
+            "id": "974",
+            "isActive": 1,
+            "odds": "2.85",
+            "probability": "0.2979"
+          },
+          {
+            "description": "Home & Under 22.5",
+            "id": "975",
+            "isActive": 1,
+            "odds": "4.60",
+            "probability": "0.1782"
+          },
+          {
+            "description": "Away & Under 22.5",
+            "id": "976",
+            "isActive": 1,
+            "odds": "2.85",
+            "probability": "0.2974"
+          }
+        ],
+        "presentationType": 6,
+        "priority": 400,
+        "product": 3,
+        "relatedMarketId": null,
+        "relatedSpecifiers": null,
+        "specifiers": "total=22.5",
+        "status": 0,
+        "title": null,
+        "userFavourite": 0
+      },
+      {
+        "betAssistWidget": null,
+        "description": "Home games O/U",
+        "expand": 1,
+        "group": "Games",
+        "guidance": null,
+        "id": 190,
+        "isFavourite": 0,
+        "isShown": 1,
+        "marketLabels": null,
+        "name": "Home games O/U",
+        "outcomes": [
+          {
+            "description": "Over 11.5",
+            "id": "12",
+            "isActive": 1,
+            "odds": "1.46",
+            "probability": "0.6466"
+          },
+          {
+            "description": "Under 11.5",
+            "id": "13",
+            "isActive": 1,
+            "odds": "2.55",
+            "probability": "0.3534"
+          }
+        ],
+        "presentationType": 1,
+        "priority": 9999999,
+        "product": 3,
+        "relatedMarketId": null,
+        "relatedSpecifiers": null,
+        "specifiers": "total=11.5",
+        "status": 0,
+        "title": "",
+        "userFavourite": 0
+      },
+      {
+        "betAssistWidget": null,
+        "description": "Home games O/U",
+        "expand": 1,
+        "group": "Games",
+        "guidance": null,
+        "id": 190,
+        "isFavourite": 1,
+        "isShown": 1,
+        "marketLabels": null,
+        "name": "Home games O/U",
+        "outcomes": [
+          {
+            "description": "Over 12.5",
+            "id": "12",
+            "isActive": 1,
+            "odds": "1.81",
+            "probability": "0.5116"
+          },
+          {
+            "description": "Under 12.5",
+            "id": "13",
+            "isActive": 1,
+            "odds": "1.89",
+            "probability": "0.4884"
+          }
+        ],
+        "presentationType": 1,
+        "priority": 9999999,
+        "product": 3,
+        "relatedMarketId": null,
+        "relatedSpecifiers": null,
+        "specifiers": "total=12.5",
+        "status": 0,
+        "title": "",
+        "userFavourite": 0
+      },
+      {
+        "betAssistWidget": null,
+        "description": "Home games O/U",
+        "expand": 1,
+        "group": "Games",
+        "guidance": null,
+        "id": 190,
+        "isFavourite": 0,
+        "isShown": 1,
+        "marketLabels": null,
+        "name": "Home games O/U",
+        "outcomes": [
+          {
+            "description": "Over 13.5",
+            "id": "12",
+            "isActive": 1,
+            "odds": "2.47",
+            "probability": "0.3642"
+          },
+          {
+            "description": "Under 13.5",
+            "id": "13",
+            "isActive": 1,
+            "odds": "1.48",
+            "probability": "0.6358"
+          }
+        ],
+        "presentationType": 1,
+        "priority": 9999999,
+        "product": 3,
+        "relatedMarketId": null,
+        "relatedSpecifiers": null,
+        "specifiers": "total=13.5",
+        "status": 0,
+        "title": "",
+        "userFavourite": 0
+      },
+      {
+        "betAssistWidget": null,
+        "description": "Away games O/U",
+        "expand": 1,
+        "group": "Games",
+        "guidance": null,
+        "id": 191,
+        "isFavourite": 0,
+        "isShown": 1,
+        "marketLabels": null,
+        "name": "Away games O/U",
+        "outcomes": [
+          {
+            "description": "Over 11.5",
+            "id": "12",
+            "isActive": 1,
+            "odds": "1.23",
+            "probability": "0.7759"
+          },
+          {
+            "description": "Under 11.5",
+            "id": "13",
+            "isActive": 1,
+            "odds": "3.75",
+            "probability": "0.2241"
+          }
+        ],
+        "presentationType": 1,
+        "priority": 9999999,
+        "product": 3,
+        "relatedMarketId": null,
+        "relatedSpecifiers": null,
+        "specifiers": "total=11.5",
+        "status": 0,
+        "title": "",
+        "userFavourite": 0
+      },
+      {
+        "betAssistWidget": null,
+        "description": "Away games O/U",
+        "expand": 1,
+        "group": "Games",
+        "guidance": null,
+        "id": 191,
+        "isFavourite": 1,
+        "isShown": 1,
+        "marketLabels": null,
+        "name": "Away games O/U",
+        "outcomes": [
+          {
+            "description": "Over 12.5",
+            "id": "12",
+            "isActive": 1,
+            "odds": "1.59",
+            "probability": "0.5880"
+          },
+          {
+            "description": "Under 12.5",
+            "id": "13",
+            "isActive": 1,
+            "odds": "2.21",
+            "probability": "0.4120"
+          }
+        ],
+        "presentationType": 1,
+        "priority": 9999999,
+        "product": 3,
+        "relatedMarketId": null,
+        "relatedSpecifiers": null,
+        "specifiers": "total=12.5",
+        "status": 0,
+        "title": "",
+        "userFavourite": 0
+      },
+      {
+        "betAssistWidget": null,
+        "description": "Away games O/U",
+        "expand": 1,
+        "group": "Games",
+        "guidance": null,
+        "id": 191,
+        "isFavourite": 0,
+        "isShown": 1,
+        "marketLabels": null,
+        "name": "Away games O/U",
+        "outcomes": [
+          {
+            "description": "Over 13.5",
+            "id": "12",
+            "isActive": 1,
+            "odds": "2.27",
+            "probability": "0.3995"
+          },
+          {
+            "description": "Under 13.5",
+            "id": "13",
+            "isActive": 1,
+            "odds": "1.56",
+            "probability": "0.6005"
+          }
+        ],
+        "presentationType": 1,
+        "priority": 9999999,
+        "product": 3,
+        "relatedMarketId": null,
+        "relatedSpecifiers": null,
+        "specifiers": "total=13.5",
+        "status": 0,
+        "title": "",
+        "userFavourite": 0
+      },
+      {
+        "betAssistWidget": "numberOfSets",
+        "description": "Exact sets",
+        "expand": 1,
+        "group": "Sets",
+        "guidance": null,
+        "id": 196,
+        "isFavourite": 1,
+        "isShown": 1,
+        "marketLabels": null,
+        "name": "Exact sets",
+        "outcomes": [
+          {
+            "description": "2",
+            "id": "sr:exact_sets:bestof:3:32",
+            "isActive": 1,
+            "odds": "1.62",
+            "probability": "0.5794"
+          },
+          {
+            "description": "3",
+            "id": "sr:exact_sets:bestof:3:33",
+            "isActive": 1,
+            "odds": "2.17",
+            "probability": "0.4206"
+          }
+        ],
+        "presentationType": 5,
+        "priority": 9999999,
+        "product": 3,
+        "relatedMarketId": null,
+        "relatedSpecifiers": null,
+        "specifiers": "variant=sr:exact_sets:bestof:3",
+        "status": 0,
+        "title": "",
+        "userFavourite": 0
+      },
+      {
+        "betAssistWidget": null,
+        "description": "1st set - game Handicap",
+        "expand": 1,
+        "group": "Sets",
+        "guidance": null,
+        "id": 203,
+        "isFavourite": 0,
+        "isShown": 1,
+        "marketLabels": null,
+        "name": "{!setnr} set - game handicap",
+        "outcomes": [
+          {
+            "description": "Home (-2.5)",
+            "id": "1714",
+            "isActive": 1,
+            "odds": "5.20",
+            "probability": "0.1489"
+          },
+          {
+            "description": "Away (+2.5)",
+            "id": "1715",
+            "isActive": 1,
+            "odds": "1.13",
+            "probability": "0.8511"
+          }
+        ],
+        "presentationType": 5,
+        "priority": 9999999,
+        "product": 3,
+        "relatedMarketId": null,
+        "relatedSpecifiers": null,
+        "specifiers": "setnr=1|hcp=-2.5",
+        "status": 0,
+        "title": "",
+        "userFavourite": 0
+      },
+      {
+        "betAssistWidget": null,
+        "description": "1st set - game Handicap",
+        "expand": 1,
+        "group": "Sets",
+        "guidance": null,
+        "id": 203,
+        "isFavourite": 0,
+        "isShown": 1,
+        "marketLabels": null,
+        "name": "{!setnr} set - game handicap",
+        "outcomes": [
+          {
+            "description": "Home (-1.5)",
+            "id": "1714",
+            "isActive": 1,
+            "odds": "2.90",
+            "probability": "0.3046"
+          },
+          {
+            "description": "Away (+1.5)",
+            "id": "1715",
+            "isActive": 1,
+            "odds": "1.36",
+            "probability": "0.6954"
+          }
+        ],
+        "presentationType": 5,
+        "priority": 9999999,
+        "product": 3,
+        "relatedMarketId": null,
+        "relatedSpecifiers": null,
+        "specifiers": "setnr=1|hcp=-1.5",
+        "status": 0,
+        "title": "",
+        "userFavourite": 0
+      },
+      {
+        "betAssistWidget": null,
+        "description": "1st set - game Handicap",
+        "expand": 1,
+        "group": "Sets",
+        "guidance": null,
+        "id": 203,
+        "isFavourite": 1,
+        "isShown": 1,
+        "marketLabels": null,
+        "name": "{!setnr} set - game handicap",
+        "outcomes": [
+          {
+            "description": "Home (-0.5)",
+            "id": "1714",
+            "isActive": 1,
+            "odds": "2.10",
+            "probability": "0.4369"
+          },
+          {
+            "description": "Away (+0.5)",
+            "id": "1715",
+            "isActive": 1,
+            "odds": "1.66",
+            "probability": "0.5631"
+          }
+        ],
+        "presentationType": 5,
+        "priority": 9999999,
+        "product": 3,
+        "relatedMarketId": null,
+        "relatedSpecifiers": null,
+        "specifiers": "setnr=1|hcp=-0.5",
+        "status": 0,
+        "title": "",
+        "userFavourite": 0
+      },
+      {
+        "betAssistWidget": null,
+        "description": "1st set - game Handicap",
+        "expand": 1,
+        "group": "Sets",
+        "guidance": null,
+        "id": 203,
+        "isFavourite": 0,
+        "isShown": 1,
+        "marketLabels": null,
+        "name": "{!setnr} set - game handicap",
+        "outcomes": [
+          {
+            "description": "Home (+1.5)",
+            "id": "1714",
+            "isActive": 1,
+            "odds": "1.59",
+            "probability": "0.5886"
+          },
+          {
+            "description": "Away (-1.5)",
+            "id": "1715",
+            "isActive": 1,
+            "odds": "2.21",
+            "probability": "0.4114"
+          }
+        ],
+        "presentationType": 5,
+        "priority": 9999999,
+        "product": 3,
+        "relatedMarketId": null,
+        "relatedSpecifiers": null,
+        "specifiers": "setnr=1|hcp=1.5",
+        "status": 0,
+        "title": "",
+        "userFavourite": 0
+      },
+      {
+        "betAssistWidget": "totalGames1stSet",
+        "description": "1st set - games O/U",
+        "expand": 1,
+        "group": "Sets",
+        "guidance": null,
+        "id": 204,
+        "isFavourite": 0,
+        "isShown": 1,
+        "marketLabels": null,
+        "name": "{!setnr} set - games O/U",
+        "outcomes": [
+          {
+            "description": "Over 7.5",
+            "id": "12",
+            "isActive": 1,
+            "odds": "1.02",
+            "probability": "0.9525"
+          },
+          {
+            "description": "Under 7.5",
+            "id": "13",
+            "isActive": 1,
+            "odds": "9.80",
+            "probability": "0.0475"
+          }
+        ],
+        "presentationType": 5,
+        "priority": 9999999,
+        "product": 3,
+        "relatedMarketId": null,
+        "relatedSpecifiers": null,
+        "specifiers": "setnr=1|total=7.5",
+        "status": 0,
+        "title": "",
+        "userFavourite": 0
+      },
+      {
+        "betAssistWidget": "totalGames1stSet",
+        "description": "1st set - games O/U",
+        "expand": 1,
+        "group": "Sets",
+        "guidance": null,
+        "id": 204,
+        "isFavourite": 0,
+        "isShown": 1,
+        "marketLabels": null,
+        "name": "{!setnr} set - games O/U",
+        "outcomes": [
+          {
+            "description": "Over 8.5",
+            "id": "12",
+            "isActive": 1,
+            "odds": "1.11",
+            "probability": "0.8658"
+          },
+          {
+            "description": "Under 8.5",
+            "id": "13",
+            "isActive": 1,
+            "odds": "5.60",
+            "probability": "0.1342"
+          }
+        ],
+        "presentationType": 5,
+        "priority": 9999999,
+        "product": 3,
+        "relatedMarketId": null,
+        "relatedSpecifiers": null,
+        "specifiers": "setnr=1|total=8.5",
+        "status": 0,
+        "title": "",
+        "userFavourite": 0
+      },
+      {
+        "betAssistWidget": "totalGames1stSet",
+        "description": "1st set - games O/U",
+        "expand": 1,
+        "group": "Sets",
+        "guidance": null,
+        "id": 204,
+        "isFavourite": 0,
+        "isShown": 1,
+        "marketLabels": null,
+        "name": "{!setnr} set - games O/U",
+        "outcomes": [
+          {
+            "description": "Over 9.5",
+            "id": "12",
+            "isActive": 1,
+            "odds": "1.48",
+            "probability": "0.6374"
+          },
+          {
+            "description": "Under 9.5",
+            "id": "13",
+            "isActive": 1,
+            "odds": "2.48",
+            "probability": "0.3626"
+          }
+        ],
+        "presentationType": 5,
+        "priority": 9999999,
+        "product": 3,
+        "relatedMarketId": null,
+        "relatedSpecifiers": null,
+        "specifiers": "setnr=1|total=9.5",
+        "status": 0,
+        "title": "",
+        "userFavourite": 0
+      },
+      {
+        "betAssistWidget": "totalGames1stSet",
+        "description": "1st set - games O/U",
+        "expand": 1,
+        "group": "Sets",
+        "guidance": null,
+        "id": 204,
+        "isFavourite": 1,
+        "isShown": 1,
+        "marketLabels": null,
+        "name": "{!setnr} set - games O/U",
+        "outcomes": [
+          {
+            "description": "Over 10.5",
+            "id": "12",
+            "isActive": 1,
+            "odds": "2.42",
+            "probability": "0.3716"
+          },
+          {
+            "description": "Under 10.5",
+            "id": "13",
+            "isActive": 1,
+            "odds": "1.50",
+            "probability": "0.6284"
+          }
+        ],
+        "presentationType": 5,
+        "priority": 9999999,
+        "product": 3,
+        "relatedMarketId": null,
+        "relatedSpecifiers": null,
+        "specifiers": "setnr=1|total=10.5",
+        "status": 0,
+        "title": "",
+        "userFavourite": 0
+      },
+      {
+        "betAssistWidget": "totalGames1stSet",
+        "description": "1st set - games O/U",
+        "expand": 1,
+        "group": "Sets",
+        "guidance": null,
+        "id": 204,
+        "isFavourite": 0,
+        "isShown": 1,
+        "marketLabels": null,
+        "name": "{!setnr} set - games O/U",
+        "outcomes": [
+          {
+            "description": "Over 12.5",
+            "id": "12",
+            "isActive": 1,
+            "odds": "3.05",
+            "probability": "0.2841"
+          },
+          {
+            "description": "Under 12.5",
+            "id": "13",
+            "isActive": 1,
+            "odds": "1.33",
+            "probability": "0.7159"
+          }
+        ],
+        "presentationType": 5,
+        "priority": 9999999,
+        "product": 3,
+        "relatedMarketId": null,
+        "relatedSpecifiers": null,
+        "specifiers": "setnr=1|total=12.5",
+        "status": 0,
+        "title": "",
+        "userFavourite": 0
+      },
+      {
+        "betAssistWidget": null,
+        "description": "1st set - correct score",
+        "expand": 1,
+        "group": "Sets",
+        "guidance": null,
+        "id": 207,
+        "isFavourite": 1,
+        "isShown": 1,
+        "marketLabels": null,
+        "name": "{!setnr} set - correct score",
+        "outcomes": [
+          {
+            "description": "6:0",
+            "id": "865",
+            "isActive": 1,
+            "odds": "101.00",
+            "probability": "0.0020"
+          },
+          {
+            "description": "6:1",
+            "id": "866",
+            "isActive": 1,
+            "odds": "50.00",
+            "probability": "0.0154"
+          },
+          {
+            "description": "6:2",
+            "id": "867",
+            "isActive": 1,
+            "odds": "25.00",
+            "probability": "0.0334"
+          },
+          {
+            "description": "6:3",
+            "id": "868",
+            "isActive": 1,
+            "odds": "8.60",
+            "probability": "0.0979"
+          },
+          {
+            "description": "6:4",
+            "id": "869",
+            "isActive": 1,
+            "odds": "7.20",
+            "probability": "0.1175"
+          },
+          {
+            "description": "7:5",
+            "id": "870",
+            "isActive": 1,
+            "odds": "22.00",
+            "probability": "0.0384"
+          },
+          {
+            "description": "7:6",
+            "id": "871",
+            "isActive": 1,
+            "odds": "6.40",
+            "probability": "0.1323"
+          },
+          {
+            "description": "0:6",
+            "id": "872",
+            "isActive": 1,
+            "odds": "101.00",
+            "probability": "0.0040"
+          },
+          {
+            "description": "1:6",
+            "id": "873",
+            "isActive": 1,
+            "odds": "30.00",
+            "probability": "0.0261"
+          },
+          {
+            "description": "2:6",
+            "id": "874",
+            "isActive": 1,
+            "odds": "16.00",
+            "probability": "0.0532"
+          },
+          {
+            "description": "3:6",
+            "id": "875",
+            "isActive": 1,
+            "odds": "6.60",
+            "probability": "0.1307"
+          },
+          {
+            "description": "4:6",
+            "id": "876",
+            "isActive": 1,
+            "odds": "5.80",
+            "probability": "0.1483"
+          },
+          {
+            "description": "5:7",
+            "id": "877",
+            "isActive": 1,
+            "odds": "17.00",
+            "probability": "0.0491"
+          },
+          {
+            "description": "6:7",
+            "id": "878",
+            "isActive": 1,
+            "odds": "5.60",
+            "probability": "0.1517"
+          }
+        ],
+        "presentationType": 2,
+        "priority": 9999999,
+        "product": 3,
+        "relatedMarketId": null,
+        "relatedSpecifiers": null,
+        "specifiers": "setnr=1",
+        "status": 0,
+        "title": "",
+        "userFavourite": 0
+      }
+    ],
+    "marketsCount": 45,
+    "playedTime": null,
+    "roundNumber": null,
+    "roundType": "cup",
+    "scoreInCurrentSection": null,
+    "scoreOfSection": null,
+    "scoreOfWholeMatch": null,
+    "seasonId": "sr:season:134401",
+    "seasonName": "ATP Geneva, Switzerland Men Singles 2026",
+    "sectionRemainTime": null,
+    "server": null,
+    "soccerBookingsScore": null,
+    "soccerCornerScore": null,
+    "sport": "Tennis",
+    "sportId": "sr:sport:5",
+    "startTime": 1779099000000,
+    "status": 0,
+    "statusDescription": null,
+    "stoppagePlayedTime": null,
+    "stoppageTime": null,
+    "totalPlayedTime": null,
+    "tournament": "ATP Geneva, Switzerland Men Singles",
+    "tournamentId": "sr:tournament:12315",
+    "videoInfo": null
+  },
+  "innerMsg": null,
+  "message": "success"
+}

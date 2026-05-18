@@ -1,0 +1,1604 @@
+{
+  "R": "OK",
+  "D": {
+    "INCTYPE": 0,
+    "ST": 1,
+    "GID": 5171579,
+    "SPORTCAST_FIXTURE_ID": "",
+    "C": "2712",
+    "STARTDATE": "2026-05-18 11:10:00",
+    "SGID": 43762,
+    "EXTID": "71543524",
+    "PLAYER_EID": 0,
+    "DS": "Atmane, Terence - Etcheverry, Tomas Martin",
+    "SID": 5,
+    "P": 0,
+    "PRV": 1,
+    "IS_BOOSTED": false,
+    "IS_BETBUILDER": false,
+    "ENDVISIBILITYDATE": "2026-05-18 11:10:00",
+    "ID": 776914375,
+    "PL": 0,
+    "TYPE": 0,
+    "ISSTREAMINGVIDEO": false,
+    "GN": "ATP Hamburg, Germany Men Singles",
+    "GP": 9,
+    "SG": "ATP",
+    "S": "Tennis",
+    "O": {
+      "T_1SMULTICS_061626": "5.35",
+      "T_GH@3.5_1": "1.73",
+      "T_GH@3.5_2": "2.05",
+      "T_WSET_2Yes": "1.19",
+      "T_CS3_1:2": "3.7",
+      "T_PWE1SB2_N": "1.14",
+      "T_12OUG@22.5_2U": "2.55",
+      "T_OUGP1@10.5_U": "2.2",
+      "T_PWE1SB2_Y": "5.2",
+      "T_YESNO_N": "1.02",
+      "T_12OUG@22.5_2O": "3.05",
+      "T_1SETCS_6-0": "101",
+      "T_1SETCS_6-1": "27",
+      "T_OUG@24.5_O": "2.2",
+      "T_YESNO_Y": "10.8",
+      "T_OEGAMES_EV": "1.79",
+      "T_12_1": "2.65",
+      "T_12_2": "1.48",
+      "T_C20YN_20Y": "4.3",
+      "T_1SETCS_6-7": "7.8",
+      "T_OUG@24.5_U": "1.62",
+      "T_1SETCS_6-4": "10",
+      "T_1SETCS_2-6": "7.8",
+      "T_1SETCS_6-2": "20",
+      "T_1SETCS_6-3": "6.8",
+      "T_OU1S@10.5_O": "3.15",
+      "T_OUGP2@12.5_U": "1.96",
+      "T_OUG@20.5_O": "1.52",
+      "T_OUGP2@12.5_O": "1.79",
+      "T_1SMULTICS_7576": "6.95",
+      "T_C02YN_02N": "1.61",
+      "T_2SWIN_1": "2.35",
+      "T_OU1S@10.5_U": "1.33",
+      "T_2SWIN_2": "1.56",
+      "T_1SMULTICS_606162": "11.5",
+      "T_OUG@22.5_U": "1.83",
+      "T_OEGAMES_OD": "1.95",
+      "T_1SETMATCH_12": "7",
+      "T_1SETMATCH_11": "3.25",
+      "T_OUG@22.5_O": "1.91",
+      "T_OUGP1@10.5_O": "1.61",
+      "T_WSET_2No": "4.3",
+      "T_CS3_2:1": "5.65",
+      "T_CS3_2:0": "4.4",
+      "T_GH@1.5_1": "2.3",
+      "T_GH@1.5_2": "1.58",
+      "T_OU1S@9.5_U": "2.05",
+      "T_1SETCS_1-6": "19",
+      "T_SH@1.5_1": "1.61",
+      "T_SH@1.5_2": "2.2",
+      "T_1SETCS_5-7": "14",
+      "T_OU1S@9.5_O": "1.73",
+      "T_1SGH@2.5_2": "3.3",
+      "T_1SGH@2.5_1": "1.3",
+      "T_OUG@20.5_U": "2.4",
+      "T_GH@4.5_2": "2.85",
+      "T_1S12OUG@9.5_2U": "3.35",
+      "T_TS@2.5_O": "2.3",
+      "T_GH@4.5_1": "1.4",
+      "T_1S12OUG@9.5_2O": "2.6",
+      "T_TS@2.5_U": "1.55",
+      "T_SH@-1.5_1": "4.4",
+      "T_PWE1SB_N": "1.26",
+      "T_SH@-1.5_2": "1.19",
+      "T_WSET_1No": "2.25",
+      "T_1S12OUG@9.5_1O": "4.45",
+      "T_OUG@23.5_O": "2.15",
+      "T_OUG@23.5_U": "1.66",
+      "T_1SMULTICS_3646": "2.95",
+      "T_1SETCS_0-6": "60",
+      "T_OUGP1@11.5_U": "2.05",
+      "T_1SETMATCH_21": "10.5",
+      "T_1SETMATCH_22": "1.73",
+      "T_OUGP1@11.5_O": "1.72",
+      "T_WSET_1Yes": "1.61",
+      "T_1SMULTICS_6364": "4.35",
+      "T_1SETCS_4-6": "4.4",
+      "T_C02YN_02Y": "2.25",
+      "T_1S12OUG@9.5_1U": "4.65",
+      "T_1SGH@-1.5_2": "1.37",
+      "T_1SGH@1.5_2": "1.84",
+      "T_1SGH@1.5_1": "1.9",
+      "T_OUGP1@12.5_U": "1.59",
+      "T_OUGP1@12.5_O": "2.25",
+      "T_OUG@21.5_O": "1.66",
+      "T_OUGP2@11.5_O": "1.22",
+      "T_12OUG@22.5_1U": "5.6",
+      "T_C20YN_20N": "1.19",
+      "T_OUG@21.5_U": "2.15",
+      "T_12OUG@22.5_1O": "4.6",
+      "T_OUGP2@13.5_O": "2.7",
+      "T_OUGP2@13.5_U": "1.43",
+      "T_121P_1": "2.35",
+      "T_121P_2": "1.55",
+      "T_1SGH@-1.5_1": "2.9",
+      "T_CS3_0:2": "2.2",
+      "T_OU1S@8.5_U": "3.75",
+      "T_1SMULTICS_5767": "5.35",
+      "T_GH@2.5_2": "1.76",
+      "T_GH@2.5_1": "2",
+      "T_OU1S@8.5_O": "1.25",
+      "T_OUGP2@11.5_U": "4.05",
+      "T_GH@0.5_2": "1.5",
+      "T_PWE1SB_Y": "3.65",
+      "T_GH@0.5_1": "2.5",
+      "T_1SETCS_7-5": "21",
+      "T_1SETCS_7-6": "9.6",
+      "T_1SETCS_3-6": "7.4"
+    },
+    "AUX": {
+      "T_OUGP2": {
+        "11.5": 11.5,
+        "12.5": 12.5,
+        "13.5": 13.5
+      },
+      "T_1S12OUG": {
+        "9.5": 9.5
+      },
+      "T_OU1S": {
+        "8.5": 8.5,
+        "9.5": 9.5,
+        "10.5": 10.5
+      },
+      "T_12OUG": {
+        "22.5": 22.5
+      },
+      "T_1SGH": {
+        "-1.5": -1.5,
+        "1.5": 1.5,
+        "2.5": 2.5
+      },
+      "T_SH": {
+        "-1.5": -1.5,
+        "1.5": 1.5
+      },
+      "T_OUG": {
+        "20.5": 20.5,
+        "21.5": 21.5,
+        "22.5": 22.5,
+        "23.5": 23.5,
+        "24.5": 24.5
+      },
+      "T_GH": {
+        "0.5": 0.5,
+        "1.5": 1.5,
+        "2.5": 2.5,
+        "3.5": 3.5,
+        "4.5": 4.5
+      },
+      "T_TS": {
+        "2.5": 2.5
+      },
+      "T_OUGP1": {
+        "10.5": 10.5,
+        "11.5": 11.5,
+        "12.5": 12.5
+      }
+    },
+    "EXCLUDED_BONUS": [],
+    "BOOSTED_ODDS": [],
+    "BOOSTED_MARKETS": [],
+    "MK": [
+      {
+        "ID": "T_1SMULTICS",
+        "DS": "1st Set - Multi C.Score",
+        "MDESC": "You have to predict which selection will contain the correct score of the first Set.",
+        "P": "15",
+        "VW": "0",
+        "GCAT": "SETS",
+        "MARKETID": "14938",
+        "M_PAYOUT": "120",
+        "CNT": "GR",
+        "CNTLABEL": "Generic Result",
+        "SGN": [
+          "6-0/6-1/6-2",
+          "6-3/6-4",
+          "7-5/7-6",
+          "0-6/1-6/2-6",
+          "3-6/4-6",
+          "5-7/6-7"
+        ],
+        "SGNK": [
+          "606162",
+          "6364",
+          "7576",
+          "061626",
+          "3646",
+          "5767"
+        ]
+      },
+      {
+        "ID": "T_GH",
+        "DS": "Game Handicap",
+        "MDESC": "You have to predict the winner of the match adding or subtracting the indicated spread to the result of the match.",
+        "P": "3",
+        "VW": "9",
+        "GCAT": "POPULAR",
+        "MARKETID": "14933",
+        "M_PAYOUT": "120",
+        "CNT": "GA",
+        "CNTLABEL": "Games",
+        "SGN": [
+          "1",
+          "2"
+        ],
+        "SGNK": [
+          "1",
+          "2"
+        ]
+      },
+      {
+        "ID": "T_WSET",
+        "DS": "Win at Least Set",
+        "MDESC": "You have to predict which player will win at least one set in the match.",
+        "P": "24",
+        "VW": "0",
+        "GCAT": "SETS",
+        "MARKETID": "9890",
+        "M_PAYOUT": "120",
+        "CNT": "GR",
+        "CNTLABEL": "Generic Result",
+        "SGN": [
+          "1 - Yes",
+          "1 - No",
+          "2 - Yes",
+          "2 - No"
+        ],
+        "SGNK": [
+          "1Yes",
+          "1No",
+          "2Yes",
+          "2No"
+        ]
+      },
+      {
+        "ID": "T_CS3",
+        "DS": "Correct Set Score (best of 3 sets)",
+        "MDESC": "Predict how many sets will be won by each player/team.",
+        "P": "7",
+        "VW": "6",
+        "GCAT": "POPULAR",
+        "MARKETID": "238",
+        "M_PAYOUT": "120",
+        "CNT": "GR",
+        "CNTLABEL": "Generic Result",
+        "SGN": [
+          "0:2",
+          "0-3",
+          "1:2",
+          "1-3",
+          "2:0",
+          "2:1",
+          "2-3",
+          "3-0",
+          "3-1",
+          "3-2"
+        ],
+        "SGNK": [
+          "0:2",
+          "0:3",
+          "1:2",
+          "1:3",
+          "2:0",
+          "2:1",
+          "2:3",
+          "3:0",
+          "3:1",
+          "3:2"
+        ]
+      },
+      {
+        "ID": "T_PWE1SB2",
+        "DS": "P2 Win Exact 1 set",
+        "MDESC": "Predict if the player 2 win exactly one set in the match.",
+        "P": "26",
+        "VW": "0",
+        "GCAT": "SETS",
+        "MARKETID": "14949",
+        "M_PAYOUT": "120",
+        "CNT": "GR",
+        "CNTLABEL": "Generic Result",
+        "SGN": [
+          "Yes",
+          "No"
+        ],
+        "SGNK": [
+          "Y",
+          "N"
+        ]
+      },
+      {
+        "ID": "T_12OUG",
+        "DS": "1-2 + O/U G",
+        "MDESC": "You have to predict the winner of the match and whether the number of games played is over or under the indicated spread.",
+        "P": "34",
+        "VW": "3",
+        "GCAT": "COMBO",
+        "MARKETID": "14584",
+        "M_PAYOUT": "120",
+        "CNT": "GA",
+        "CNTLABEL": "Games",
+        "SGN": [
+          "1+Ov",
+          "1+Un",
+          "2+Ov",
+          "2+Un"
+        ],
+        "SGNK": [
+          "1O",
+          "1U",
+          "2O",
+          "2U"
+        ]
+      },
+      {
+        "ID": "T_OUGP1",
+        "DS": "Over/Under Games Player 1",
+        "MDESC": "You have to predict whether the total number of games for Player 1 will be over or under the indicated spread.",
+        "P": "5",
+        "VW": "3",
+        "GCAT": "POPULAR",
+        "MARKETID": "9828",
+        "M_PAYOUT": "120",
+        "CNT": "GA",
+        "CNTLABEL": "Games",
+        "SGN": [
+          "Over",
+          "Under"
+        ],
+        "SGNK": [
+          "O",
+          "U"
+        ]
+      },
+      {
+        "ID": "T_YESNO",
+        "DS": "6-0 / 0-6 Yes/No",
+        "MDESC": "You have to predict whether or not either player will win a set 6-0 or 0-6.",
+        "P": "19",
+        "VW": "0",
+        "GCAT": "SETS",
+        "MARKETID": "10203",
+        "M_PAYOUT": "120",
+        "CNT": "GR",
+        "CNTLABEL": "Generic Result",
+        "SGN": [
+          "Yes",
+          "No"
+        ],
+        "SGNK": [
+          "Y",
+          "N"
+        ]
+      },
+      {
+        "ID": "T_1SETCS",
+        "DS": "1st Set Correct Score",
+        "MDESC": "You have to predict the correct score of the 1st set of the match",
+        "P": "14",
+        "VW": "0",
+        "GCAT": "SETS",
+        "MARKETID": "2368",
+        "M_PAYOUT": "120",
+        "CNT": "GR",
+        "CNTLABEL": "Generic Result",
+        "SGN": [
+          "6-0",
+          "6-1",
+          "6-2",
+          "6-3",
+          "6-4",
+          "7-5",
+          "7-6",
+          "0-6",
+          "1-6",
+          "2-6",
+          "3-6",
+          "4-6",
+          "5-7",
+          "6-7"
+        ],
+        "SGNK": [
+          "6-0",
+          "6-1",
+          "6-2",
+          "6-3",
+          "6-4",
+          "7-5",
+          "7-6",
+          "0-6",
+          "1-6",
+          "2-6",
+          "3-6",
+          "4-6",
+          "5-7",
+          "6-7"
+        ]
+      },
+      {
+        "ID": "T_OUG",
+        "DS": "Over/Under Games",
+        "MDESC": "Predict if the total number of games during the entire match will be over or under the spread indicated.",
+        "P": "4",
+        "VW": "3",
+        "GCAT": "POPULAR",
+        "MARKETID": "235",
+        "M_PAYOUT": "120",
+        "CNT": "GA",
+        "CNTLABEL": "Games",
+        "SGN": [
+          "Over",
+          "Under"
+        ],
+        "SGNK": [
+          "O",
+          "U"
+        ]
+      },
+      {
+        "ID": "T_OEGAMES",
+        "DS": "Odd/Even Games",
+        "MDESC": "You have to predict if the number of games played during the match is going to be odd or even",
+        "P": "9",
+        "VW": "0",
+        "GCAT": "POPULAR",
+        "MARKETID": "2230",
+        "M_PAYOUT": "120",
+        "CNT": "GA",
+        "CNTLABEL": "Games",
+        "SGN": [
+          "Odd",
+          "Even"
+        ],
+        "SGNK": [
+          "OD",
+          "EV"
+        ]
+      },
+      {
+        "ID": "T_12",
+        "DS": "Match Winner",
+        "MDESC": "Predict the winner of the match. There are two possible outcomes: 1 (the first player/team wins), 2 (the second player/team wins).",
+        "P": "1",
+        "VW": "0",
+        "GCAT": "POPULAR",
+        "MARKETID": "360",
+        "M_PAYOUT": "120",
+        "CNT": "GR",
+        "CNTLABEL": "Generic Result",
+        "SGN": [
+          "1",
+          "2"
+        ],
+        "SGNK": [
+          "1",
+          "2"
+        ]
+      },
+      {
+        "ID": "T_C20YN",
+        "DS": "Correct 2-0 Yes/No",
+        "MDESC": "You have to predict if the match will finish 2-0 to Player 1 or not.",
+        "P": "20",
+        "VW": "0",
+        "GCAT": "SETS",
+        "MARKETID": "14944",
+        "M_PAYOUT": "120",
+        "CNT": "GR",
+        "CNTLABEL": "Generic Result",
+        "SGN": [
+          "2-0 Yes",
+          "2-0 No"
+        ],
+        "SGNK": [
+          "20Y",
+          "20N"
+        ]
+      },
+      {
+        "ID": "T_OU1S",
+        "DS": "O/U 1\u00b0 Set",
+        "MDESC": "You have to predict whether the total games scored in the first set only is over or under the indicated spread.",
+        "P": "999",
+        "VW": "3",
+        "GCAT": "SET1",
+        "MARKETID": "14578",
+        "M_PAYOUT": "120",
+        "CNT": "GA",
+        "CNTLABEL": "Games",
+        "SGN": [
+          "Over",
+          "Under"
+        ],
+        "SGNK": [
+          "O",
+          "U"
+        ]
+      },
+      {
+        "ID": "T_OUGP2",
+        "DS": "Over/Under Games Player 2",
+        "MDESC": "You have to predict whether the total number of games for Player 2 will be over or under the indicated spread.",
+        "P": "6",
+        "VW": "3",
+        "GCAT": "POPULAR",
+        "MARKETID": "9829",
+        "M_PAYOUT": "120",
+        "CNT": "GA",
+        "CNTLABEL": "Games",
+        "SGN": [
+          "Over",
+          "Under"
+        ],
+        "SGNK": [
+          "O",
+          "U"
+        ]
+      },
+      {
+        "ID": "T_C02YN",
+        "DS": "Correct 0-2 Yes/No",
+        "MDESC": "You have to predict if the match will finish 0-2 to Player 2 or not.",
+        "P": "21",
+        "VW": "0",
+        "GCAT": "SETS",
+        "MARKETID": "14942",
+        "M_PAYOUT": "120",
+        "CNT": "GR",
+        "CNTLABEL": "Generic Result",
+        "SGN": [
+          "0-2 Yes",
+          "0-2 No"
+        ],
+        "SGNK": [
+          "02Y",
+          "02N"
+        ]
+      },
+      {
+        "ID": "T_2SWIN",
+        "DS": "2nd Set Winner",
+        "MDESC": "You have to predict the winner of the 2nd Set. There are 2 possible outcomes: 1 HH (the first player wins the 2nd Set), 2 HH (the second player wins the 2nd Set).",
+        "P": "13",
+        "VW": "0",
+        "GCAT": "SETS",
+        "MARKETID": "14937",
+        "M_PAYOUT": "120",
+        "CNT": "GR",
+        "CNTLABEL": "Generic Result",
+        "SGN": [
+          "1",
+          "2"
+        ],
+        "SGNK": [
+          "1",
+          "2"
+        ]
+      },
+      {
+        "ID": "T_1SETMATCH",
+        "DS": "1st Set Winner + Match Winner",
+        "MDESC": "Predict which player will win the 1st set and the match combined 1/1 = player 1 to win the 1st set and the match 1/2 = player 1 to win the 1st set and player 2 to win the match 2/2 = player 2 to win the 1st set and the match 2/1 = player 2 to win the 1st set and player 1 to win the match",
+        "P": "36",
+        "VW": "0",
+        "GCAT": "COMBO",
+        "MARKETID": "2367",
+        "M_PAYOUT": "120",
+        "CNT": "GR",
+        "CNTLABEL": "Generic Result",
+        "SGN": [
+          "1 + 1",
+          "1 + 2",
+          "2 + 1",
+          "2 + 2"
+        ],
+        "SGNK": [
+          "11",
+          "12",
+          "21",
+          "22"
+        ]
+      },
+      {
+        "ID": "T_SH",
+        "DS": "Set Handicap",
+        "MDESC": "You have to predict the result in terms of sets won by each player adding or subtracting to the final result the spread specified in the bet.",
+        "P": "2",
+        "VW": "9",
+        "GCAT": "POPULAR",
+        "MARKETID": "14935",
+        "M_PAYOUT": "120",
+        "CNT": "S",
+        "CNTLABEL": "Sets",
+        "SGN": [
+          "1",
+          "2"
+        ],
+        "SGNK": [
+          "1",
+          "2"
+        ]
+      },
+      {
+        "ID": "T_1SGH",
+        "DS": "1st Set - Game Handicap",
+        "MDESC": "You must predict the winner of the First Set by adding or subtracting the indicated spread to the First Set result",
+        "P": "12",
+        "VW": "9",
+        "GCAT": "SETS",
+        "MARKETID": "14936",
+        "M_PAYOUT": "120",
+        "CNT": "GA",
+        "CNTLABEL": "Games",
+        "SGN": [
+          "1",
+          "2"
+        ],
+        "SGNK": [
+          "1",
+          "2"
+        ]
+      },
+      {
+        "ID": "T_1S12OUG",
+        "DS": "1st Set  1-2 + O/U G",
+        "MDESC": "You have to predict the winner of the first set and whether the number of games in played in the first set is over or under the indicated spread.",
+        "P": "35",
+        "VW": "3",
+        "GCAT": "COMBO",
+        "MARKETID": "14953",
+        "M_PAYOUT": "120",
+        "CNT": "GA",
+        "CNTLABEL": "Games",
+        "SGN": [
+          "1+Ov",
+          "1+Un",
+          "2+Ov",
+          "2+Un"
+        ],
+        "SGNK": [
+          "1O",
+          "1U",
+          "2O",
+          "2U"
+        ]
+      },
+      {
+        "ID": "T_TS",
+        "DS": "Total Sets",
+        "MDESC": "Predict if the total number of sets during the entire match will be over or under the spread indicated.",
+        "P": "16",
+        "VW": "3",
+        "GCAT": "SETS",
+        "MARKETID": "14939",
+        "M_PAYOUT": "120",
+        "CNT": "HPS",
+        "CNTLABEL": "Sets",
+        "SGN": [
+          "Over",
+          "Under"
+        ],
+        "SGNK": [
+          "O",
+          "U"
+        ]
+      },
+      {
+        "ID": "T_PWE1SB",
+        "DS": "P1 Win Exact 1 set",
+        "MDESC": "Predict if the player 1 win exactly one set in the match.",
+        "P": "25",
+        "VW": "0",
+        "GCAT": "SETS",
+        "MARKETID": "14946",
+        "M_PAYOUT": "120",
+        "CNT": "GR",
+        "CNTLABEL": "Generic Result",
+        "SGN": [
+          "Yes",
+          "No"
+        ],
+        "SGNK": [
+          "Y",
+          "N"
+        ]
+      },
+      {
+        "ID": "T_121P",
+        "DS": "1st Set Winner",
+        "MDESC": "Predict the winner of the first set. There are two possible outcomes: 1 (the first player/team wins), 2 (the second player/team wins).",
+        "P": "10",
+        "VW": "0",
+        "GCAT": "SETS",
+        "MARKETID": "233",
+        "M_PAYOUT": "120",
+        "CNT": "GR",
+        "CNTLABEL": "Generic Result",
+        "SGN": [
+          "1",
+          "2"
+        ],
+        "SGNK": [
+          "1",
+          "2"
+        ]
+      }
+    ],
+    "CATMARKET": [
+      {
+        "CODE": "2",
+        "VALUE": "SETS"
+      },
+      {
+        "CODE": "1",
+        "VALUE": "POPULAR"
+      },
+      {
+        "CODE": "129",
+        "VALUE": "COMBO"
+      },
+      {
+        "CODE": "10",
+        "VALUE": "SET1"
+      }
+    ],
+    "TRANS": {
+      "M#T_SCORE2S": {
+        "NAME": "Score 2\u00b0Set",
+        "DESC": "You have to predict the score of the 2\u00b0Set, eg. 6-4 or 7-5"
+      },
+      "M#T_SCORE2S_7-6": "7-6",
+      "MCU#T_SCORE2S_7-6": "7-6",
+      "M#T_SCORE3S": {
+        "NAME": "Score 3\u00b0Set",
+        "DESC": "You have to predict the score of the 3\u00b0Set, eg. 6-4 or 7-5"
+      },
+      "M#T_SCORE3S_7-6": "7-6",
+      "MCU#T_SCORE3S_7-6": "7-6",
+      "M#T_SCORE3S_7-5": "7-5",
+      "MCU#T_SCORE3S_7-5": "7-5",
+      "M#T_SCORE2S_7-5": "7-5",
+      "MCU#T_SCORE2S_7-5": "7-5",
+      "M#T_SCORE3S_6-7": "6-7",
+      "MCU#T_SCORE3S_6-7": "6-7",
+      "M#T_SCORE2S_6-7": "6-7",
+      "MCU#T_SCORE2S_6-7": "6-7",
+      "M#T_SCORE3S_6-4": "6-4",
+      "MCU#T_SCORE3S_6-4": "6-4",
+      "M#T_SCORE2S_6-4": "6-4",
+      "MCU#T_SCORE2S_6-4": "6-4",
+      "M#T_SCORE3S_6-3": "6-3",
+      "MCU#T_SCORE3S_6-3": "6-3",
+      "M#T_SCORE2S_6-3": "6-3",
+      "MCU#T_SCORE2S_6-3": "6-3",
+      "M#T_SCORE3S_6-2": "6-2",
+      "MCU#T_SCORE3S_6-2": "6-2",
+      "M#T_SCORE2S_6-2": "6-2",
+      "MCU#T_SCORE2S_6-2": "6-2",
+      "M#T_SCORE3S_6-1": "6-1",
+      "MCU#T_SCORE3S_6-1": "6-1",
+      "M#T_SCORE2S_6-1": "6-1",
+      "MCU#T_SCORE2S_6-1": "6-1",
+      "M#T_SCORE3S_6-0": "6-0",
+      "MCU#T_SCORE3S_6-0": "6-0",
+      "M#T_SCORE2S_6-0": "6-0",
+      "MCU#T_SCORE2S_6-0": "6-0",
+      "M#T_SCORE3S_5-7": "5-7",
+      "MCU#T_SCORE3S_5-7": "5-7",
+      "M#T_SCORE2S_5-7": "5-7",
+      "MCU#T_SCORE2S_5-7": "5-7",
+      "M#T_SCORE3S_4-6": "4-6",
+      "MCU#T_SCORE3S_4-6": "4-6",
+      "M#T_SCORE2S_4-6": "4-6",
+      "MCU#T_SCORE2S_4-6": "4-6",
+      "M#T_SCORE2S_3-6": "3-6",
+      "MCU#T_SCORE2S_3-6": "3-6",
+      "M#T_SCORE3S_3-6": "3-6",
+      "MCU#T_SCORE3S_3-6": "3-6",
+      "M#T_SCORE3S_2-6": "2-6",
+      "MCU#T_SCORE3S_2-6": "2-6",
+      "M#T_SCORE2S_2-6": "2-6",
+      "MCU#T_SCORE2S_2-6": "2-6",
+      "M#T_SCORE2S_1-6": "1-6",
+      "MCU#T_SCORE2S_1-6": "1-6",
+      "M#T_SCORE3S_1-6": "1-6",
+      "MCU#T_SCORE3S_1-6": "1-6",
+      "M#T_SCORE3S_0-6": "0-6",
+      "MCU#T_SCORE3S_0-6": "0-6",
+      "M#T_SCORE2S_0-6": "0-6",
+      "MCU#T_SCORE2S_0-6": "0-6",
+      "M#T_NSET5": {
+        "NAME": "Number Set",
+        "DESC": "You should predict the total number of sets played by the two players."
+      },
+      "M#T_NSET5_S5": "Total Set 5",
+      "MCU#T_NSET5_S5": "Total Set 5",
+      "M#T_NSET5_S4": "Total Set 4",
+      "MCU#T_NSET5_S4": "Total Set 4",
+      "M#T_NSET5_S3": "Total Set 3",
+      "MCU#T_NSET5_S3": "Total Set 3",
+      "M#T_12OU": {
+        "NAME": "1-2 & Over/Under Games",
+        "DESC": "You have to predict the combined result of which player will win the match and whether the amount of games played in the match is over or under the given number. "
+      },
+      "M#T_12OU_1U": "1+Un G",
+      "MCU#T_12OU_1U": "{T1} + Under ({HND})",
+      "M#T_OU1SP1": {
+        "NAME": "Ov/Un 1\u00b0 Set Player 1",
+        "DESC": "You have to predict the number of games that player 1 wins in the first set only will be over or under the indicated spread."
+      },
+      "M#T_OU1SP1_OvG1Set1Player": "Over",
+      "MCU#T_OU1SP1_OvG1Set1Player": "Over ({HND})",
+      "M#T_OU1SP1_UnG1Set1Player": "Under",
+      "MCU#T_OU1SP1_UnG1Set1Player": "Under ({HND})",
+      "M#T_OU1SP2": {
+        "NAME": "Ov/Un 1\u00b0 Set Player 2",
+        "DESC": "You have to predict the number of games that player 2 wins in the first set only will be over or under the indicated spread."
+      },
+      "M#T_OU1SP2_OvG1Set2Player": "Over",
+      "MCU#T_OU1SP2_OvG1Set2Player": "Over ({HND})",
+      "M#T_OU1SP2_UnG1Set2Player": "Under",
+      "MCU#T_OU1SP2_UnG1Set2Player": "Under ({HND})",
+      "M#T_OU2SP1": {
+        "NAME": "Ov/Un 2\u00b0 Set Player 1",
+        "DESC": "You have to predict the number of games that player 1 wins in the second set only will be over or under the indicated spread."
+      },
+      "M#T_OU2SP1_OvG2Set1Player": "Over",
+      "MCU#T_OU2SP1_OvG2Set1Player": "Over ({HND})",
+      "M#T_OU2SP1_UnG2Set1Player": "Under",
+      "MCU#T_OU2SP1_UnG2Set1Player": "Under ({HND})",
+      "M#T_OU2SP2": {
+        "NAME": "Ov/Un 2\u00b0 Set Player 2",
+        "DESC": "You have to predict the number of games that player 2 wins in the second set only will be over or under the indicated spread."
+      },
+      "M#T_OU2SP2_OvG2Set2Player": "Over",
+      "MCU#T_OU2SP2_OvG2Set2Player": "Over ({HND})",
+      "M#T_OU2SP2_UnG2Set2Player": "Under",
+      "MCU#T_OU2SP2_UnG2Set2Player": "Under ({HND})",
+      "M#T_WSET": {
+        "NAME": "Win at Least Set",
+        "DESC": "You have to predict which player will win at least one set in the match."
+      },
+      "M#T_WSET_2Yes": "2 - Yes",
+      "MCU#T_WSET_2Yes": "{T2} - Yes",
+      "M#T_WSET_2No": "2 - No",
+      "MCU#T_WSET_2No": "{T2} - No",
+      "M#T_WSET_1No": "1 - No",
+      "MCU#T_WSET_1No": "{T1} - No",
+      "M#T_WSET_1Yes": "1 - Yes",
+      "MCU#T_WSET_1Yes": "{T1} - Yes",
+      "M#T_TIEB3S": {
+        "NAME": "TieBreak 3\u00b0Set",
+        "DESC": "You have to predict whether the third set only will finish with a tie-break. If the third set is not completed, this market will be considered void."
+      },
+      "M#T_TIEB3S_NoTieBreak3Set": "No",
+      "MCU#T_TIEB3S_NoTieBreak3Set": "No",
+      "M#T_TIEB3S_YesTieBreak3Set": "Yes",
+      "MCU#T_TIEB3S_YesTieBreak3Set": "Yes",
+      "M#T_TIEB2S": {
+        "NAME": "TieBreak 2\u00b0Set",
+        "DESC": "You have to predict whether the second set only will finish with a tie-break. If the second set is not completed, this market will be considered void."
+      },
+      "M#T_TIEB2S_NoTieBreak2Set": "No",
+      "MCU#T_TIEB2S_NoTieBreak2Set": "No",
+      "M#T_TIEB2S_YesTieBreak2Set": "Yes",
+      "MCU#T_TIEB2S_YesTieBreak2Set": "Yes",
+      "M#T_TIEB1S": {
+        "NAME": "TieBreak 1\u00b0Set",
+        "DESC": "You have to predict whether the first set only will finish with a tie-break."
+      },
+      "M#T_TIEB1S_YesTieBreak1Set": "Yes",
+      "MCU#T_TIEB1S_YesTieBreak1Set": "Yes",
+      "M#T_TIEB1S_NoTieBreak1Set": "No",
+      "MCU#T_TIEB1S_NoTieBreak1Set": "No",
+      "M#T_OEG3S": {
+        "NAME": "Odd/Even Games 3\u00b0Set",
+        "DESC": "You have to predict if the total amount of games in the third set will be odd or even."
+      },
+      "M#T_OEG3S_Even3SetTennis": "Even",
+      "MCU#T_OEG3S_Even3SetTennis": "Even",
+      "M#T_OEG3S_Odd3SetTennis": "Odd",
+      "MCU#T_OEG3S_Odd3SetTennis": "Odd",
+      "M#T_OEG2S": {
+        "NAME": "Odd/Even Games 2\u00b0Set",
+        "DESC": "You have to predict if the total amount of games in the second set will be odd or even."
+      },
+      "M#T_OEG2S_Odd2SetTennis": "Odd",
+      "MCU#T_OEG2S_Odd2SetTennis": "Odd",
+      "M#T_OEG2S_Even2SetTennis": "Even",
+      "MCU#T_OEG2S_Even2SetTennis": "Even",
+      "M#T_OEG1S": {
+        "NAME": "Odd/Even Games 1\u00b0Set",
+        "DESC": "You have to predict if the total amount of games in the first set will be odd or even."
+      },
+      "M#T_OEG1S_Odd1Set": "Odd",
+      "MCU#T_OEG1S_Odd1Set": "Odd",
+      "M#T_OEG1S_Even1Set": "Even",
+      "MCU#T_OEG1S_Even1Set": "Even",
+      "M#T_OEG": {
+        "NAME": "Odd/Even Games",
+        "DESC": "You have to predict if the number of games played during the match is going to be odd or even. If one player retires during the match this bet typology will be considered void.In the event of a Super tie-break, every point scored will be considered as a game. In the event of a Tie-break, the entire Tie-break will be considered as one game."
+      },
+      "M#T_OEG_EvenGamesT": "Even",
+      "MCU#T_OEG_EvenGamesT": "Even",
+      "M#T_OEG_OddGamesT": "Odd",
+      "MCU#T_OEG_OddGamesT": "Odd",
+      "M#T_HNDG": {
+        "NAME": "Handicap Games",
+        "DESC": "You have to predict the winner of the match adding or subtracting the indicated spread to the result of the match.The handicap, if positive or negative is always associated with the first player."
+      },
+      "M#T_HNDG_2HandGames": "2",
+      "MCU#T_HNDG_2HandGames": "{T2} (Home {HNDS})",
+      "MH#T_HNDG": "Home|Away",
+      "M#T_HNDG_1HandGames": "1",
+      "MCU#T_HNDG_1HandGames": "{T1} (Home {HNDS})",
+      "M#T_FIRST5G1S": {
+        "NAME": "First 5\u00b0 Game 1\u00b0 Set",
+        "DESC": "You have to predict which player will reach 5 games first in the first set."
+      },
+      "M#T_FIRST5G1S_2First5Games1Set": "2",
+      "MCU#T_FIRST5G1S_2First5Games1Set": "{T2}",
+      "M#T_FIRST5G1S_1First5Games1Set": "1",
+      "MCU#T_FIRST5G1S_1First5Games1Set": "{T1}",
+      "M#T_FIRST3G1S": {
+        "NAME": "First 3\u00b0 Game 1\u00b0 Set",
+        "DESC": "You have to predict which player will reach 3 games first in the first set."
+      },
+      "M#T_FIRST3G1S_2First3Games1Set": "2",
+      "MCU#T_FIRST3G1S_2First3Games1Set": "{T2}",
+      "M#T_FIRST3G1S_1First3Games1Set": "1",
+      "MCU#T_FIRST3G1S_1First3Games1Set": "{T1}",
+      "M#T_121OU": {
+        "NAME": "1-2+1stSet+O/U",
+        "DESC": "You have to predict the winner of the 1st set, the winner of the match and whether the number of games will be over or under the indicated spread"
+      },
+      "M#T_121OU_111O": "1+1-1stS+Ov",
+      "MCU#T_121OU_111O": "1+1-1stS+Ov ({HND})",
+      "M#T_121OU_111U": "1+1-1stS+Un",
+      "MCU#T_121OU_111U": "1+1-1stS+Un ({HND})",
+      "M#T_121OU_121O": "1+2-1stS+Ov",
+      "MCU#T_121OU_121O": "1+2-1stS+Ov ({HND})",
+      "M#T_121OU_121U": "1+2-1stS+Un",
+      "MCU#T_121OU_121U": "1+2-1stS+Un ({HND})",
+      "M#T_121OU_211O": "2+1-1stS+Ov",
+      "MCU#T_121OU_211O": "2+1-1stS+Ov ({HND})",
+      "M#T_121OU_211U": "2+1-1stS+Un",
+      "MCU#T_121OU_211U": "2+1-1stS+Un ({HND})",
+      "M#T_121OU_221O": "2+2-1stS+Ov",
+      "MCU#T_121OU_221O": "2+2-1stS+Ov ({HND})",
+      "M#T_121OU_221U": "2+2-1stS+Un",
+      "MCU#T_121OU_221U": "2+2-1stS+Un ({HND})",
+      "M#T_12OUG": {
+        "NAME": "1-2 + O/U G",
+        "DESC": "You have to predict the winner of the match and whether the number of games played is over or under the indicated spread."
+      },
+      "M#T_12OUG_1O": "1+Ov",
+      "MCU#T_12OUG_1O": "1+Ov ({HND})",
+      "M#T_12OUG_1U": "1+Un",
+      "MCU#T_12OUG_1U": "1+Un ({HND})",
+      "M#T_12OUG_2O": "2+Ov",
+      "MCU#T_12OUG_2O": "2+Ov ({HND})",
+      "M#T_12OUG_2U": "2+Un",
+      "MCU#T_12OUG_2U": "2+Un ({HND})",
+      "M#T_B": {
+        "NAME": "Both To Win At Least A Set",
+        "DESC": "Both players win at least one set"
+      },
+      "M#T_B_Y": "Yes",
+      "MCU#T_B_Y": "Yes",
+      "M#T_B_N": "No",
+      "MCU#T_B_N": "No",
+      "M#T_OUG1S2": {
+        "NAME": "O/U G 1\u00b0Set 2P",
+        "DESC": "You have to predict the number of games that player 2 wins in the first set only will be over or under the indicated spread."
+      },
+      "M#T_OUG1S2_O": "Over",
+      "MCU#T_OUG1S2_O": "Over ({HND})",
+      "M#T_OUG1S2_U": "Under",
+      "MCU#T_OUG1S2_U": "Under ({HND})",
+      "M#T_OUG1S1": {
+        "NAME": "O/U G 1\u00b0Set 1P",
+        "DESC": "You have to predict the number of games that player 1 wins in the first set only will be over or under the indicated spread."
+      },
+      "M#T_OUG1S1_O": "Over",
+      "MCU#T_OUG1S1_O": "Over ({HND})",
+      "M#T_OUG1S1_U": "Under",
+      "MCU#T_OUG1S1_U": "Under ({HND})",
+      "M#T_OU1S": {
+        "NAME": "O/U 1\u00b0 Set",
+        "DESC": "You have to predict whether the total games scored in the first set only is over or under the indicated spread."
+      },
+      "M#T_OU1S_O": "Over",
+      "MCU#T_OU1S_O": "Over ({HND})",
+      "M#T_OU1S_U": "Under",
+      "MCU#T_OU1S_U": "Under ({HND})",
+      "M#T_GH": {
+        "NAME": "Game Handicap",
+        "DESC": "You have to predict the winner of the match adding or subtracting the indicated spread to the result of the match."
+      },
+      "M#T_GH_2": "2",
+      "MCU#T_GH_2": "{T2} (Home {HNDS})",
+      "MH#T_GH": "Over|Under",
+      "M#T_GH_1": "1",
+      "MCU#T_GH_1": "{T1} (Home {HNDS})",
+      "M#T_1STG": {
+        "NAME": "1st Set - Total Games",
+        "DESC": "You have to predict the number of games that player 1 wins in the first set only will be over or under the indicated spread."
+      },
+      "M#T_1STG_O": "Over",
+      "MCU#T_1STG_O": "Over ({HND})",
+      "MH#T_1STG": "Over|Under",
+      "M#T_1STG_U": "Under",
+      "MCU#T_1STG_U": "Under ({HND})",
+      "M#T_SH": {
+        "NAME": "Set Handicap",
+        "DESC": "You have to predict the result in terms of sets won by each player adding or subtracting to the final result the spread specified in the bet."
+      },
+      "M#T_SH_1": "1",
+      "MCU#T_SH_1": "{T1} (Home {HNDS})",
+      "MH#T_SH": "Over|Under",
+      "M#T_SH_2": "2",
+      "MCU#T_SH_2": "{T2} (Home {HNDS})",
+      "M#T_1SGH": {
+        "NAME": "1st Set - Game Handicap",
+        "DESC": "You must predict the winner of the First Set by adding or subtracting the indicated spread to the First Set result"
+      },
+      "M#T_1SGH_1": "1",
+      "MCU#T_1SGH_1": "{T1} (Home {HNDS})",
+      "MH#T_1SGH": "Over|Under",
+      "M#T_1SGH_2": "2",
+      "MCU#T_1SGH_2": "{T2} (Home {HNDS})",
+      "M#T_2SWIN": {
+        "NAME": "2nd Set Winner",
+        "DESC": "You have to predict the winner of the 2nd Set. There are 2 possible outcomes: 1 HH (the first player wins the 2nd Set), 2 HH (the second player wins the 2nd Set)."
+      },
+      "M#T_2SWIN_1": "1",
+      "MCU#T_2SWIN_1": "{T1}",
+      "M#T_2SWIN_2": "2",
+      "MCU#T_2SWIN_2": "{T2}",
+      "M#T_1SMULTICS": {
+        "NAME": "1st Set - Multi C.Score",
+        "DESC": "You have to predict which selection will contain the correct score of the first Set."
+      },
+      "M#T_1SMULTICS_061626": "0-6/1-6/2-6",
+      "MCU#T_1SMULTICS_061626": "0-6/1-6/2-6",
+      "M#T_1SMULTICS_3646": "3-6/4-6",
+      "MCU#T_1SMULTICS_3646": "3-6/4-6",
+      "M#T_1SMULTICS_5767": "5-7/6-7",
+      "MCU#T_1SMULTICS_5767": "5-7/6-7",
+      "M#T_1SMULTICS_606162": "6-0/6-1/6-2",
+      "MCU#T_1SMULTICS_606162": "6-0/6-1/6-2",
+      "M#T_1SMULTICS_6364": "6-3/6-4",
+      "MCU#T_1SMULTICS_6364": "6-3/6-4",
+      "M#T_1SMULTICS_7576": "7-5/7-6",
+      "MCU#T_1SMULTICS_7576": "7-5/7-6",
+      "M#T_TS": {
+        "NAME": "Total Sets",
+        "DESC": "Predict if the total number of sets during the entire match will be over or under the spread indicated."
+      },
+      "M#T_TS_O": "Over",
+      "MCU#T_TS_O": "Over ({HND})",
+      "MH#T_TS": "Over|Under",
+      "M#T_TS_U": "Under",
+      "MCU#T_TS_U": "Under ({HND})",
+      "M#T_NSB3": {
+        "NAME": "N.of sets (best of 3)",
+        "DESC": "You should predict the total number of sets played by the two players."
+      },
+      "M#T_NSB3_TS2": "Total Set 2",
+      "MCU#T_NSB3_TS2": "Total Set 2",
+      "M#T_NSB3_TS3": "Total Set 3",
+      "MCU#T_NSB3_TS3": "Total Set 3",
+      "M#T_NSB5": {
+        "NAME": "N.of sets (best of 5)",
+        "DESC": "You should predict the total number of sets played by the two players."
+      },
+      "M#T_NSB5_TS3": "Total Set 3",
+      "MCU#T_NSB5_TS3": "Total Set 3",
+      "M#T_NSB5_TS4": "Total Set 4",
+      "MCU#T_NSB5_TS4": "Total Set 4",
+      "M#T_NSB5_TS5": "Total Set 5",
+      "MCU#T_NSB5_TS5": "Total Set 5",
+      "M#T_C02YN": {
+        "NAME": "Correct 0-2 Yes/No",
+        "DESC": "You have to predict if the match will finish 0-2 to Player 2 or not."
+      },
+      "M#T_C02YN_02N": "0-2 No",
+      "MCU#T_C02YN_02N": "0-2 No",
+      "M#T_C02YN_02Y": "0-2 Yes",
+      "MCU#T_C02YN_02Y": "0-2 Yes",
+      "M#T_C03YN": {
+        "NAME": "Correct 0-3 Yes/No",
+        "DESC": "You have to predict if the match will finish 0-3 to Player 2 or not."
+      },
+      "M#T_C03YN_03N": "0-3 No",
+      "MCU#T_C03YN_03N": "0-3 No",
+      "M#T_C03YN_03Y": "0-3 Yes",
+      "MCU#T_C03YN_03Y": "0-3 Yes",
+      "M#T_C20YN": {
+        "NAME": "Correct 2-0 Yes/No",
+        "DESC": "You have to predict if the match will finish 2-0 to Player 1 or not."
+      },
+      "M#T_C20YN_20N": "2-0 No",
+      "MCU#T_C20YN_20N": "2-0 No",
+      "M#T_C20YN_20Y": "2-0 Yes",
+      "MCU#T_C20YN_20Y": "2-0 Yes",
+      "M#T_C30YN": {
+        "NAME": "Correct 3-0 Yes/No",
+        "DESC": "You have to predict if the match will finish 3-0 to Player 1 or not."
+      },
+      "M#T_C30YN_30N": "3-0 No",
+      "MCU#T_C30YN_30N": "3-0 No",
+      "M#T_C30YN_30Y": "3-0 Yes",
+      "MCU#T_C30YN_30Y": "3-0 Yes",
+      "M#T_PWE1SB": {
+        "NAME": "P1 Win Exact 1 set",
+        "DESC": "Predict if the player 1 win exactly one set in the match."
+      },
+      "M#T_PWE1SB_N": "No",
+      "MCU#T_PWE1SB_N": "{T1} No",
+      "M#T_PWE1SB_Y": "Yes",
+      "MCU#T_PWE1SB_Y": "{T1} Yes",
+      "M#T_PWE2S": {
+        "NAME": "P1 Win Exact 2 sets",
+        "DESC": "Predict if the player 1 win exactly two sets in the match."
+      },
+      "M#T_PWE2S_N": "No",
+      "MCU#T_PWE2S_N": "{T1} No",
+      "M#T_PWE2S_Y": "Yes",
+      "MCU#T_PWE2S_Y": "{T1} Yes",
+      "M#T_PWE1SB2": {
+        "NAME": "P2 Win Exact 1 set",
+        "DESC": "Predict if the player 2 win exactly one set in the match."
+      },
+      "M#T_PWE1SB2_N": "No",
+      "MCU#T_PWE1SB2_N": "{T2} No",
+      "M#T_PWE1SB2_Y": "Yes",
+      "MCU#T_PWE1SB2_Y": "{T2} Yes",
+      "M#T_PWE2S1": {
+        "NAME": "P2 Win Exact 2 sets",
+        "DESC": "Predict if the player 2 win exactly two sets in the match."
+      },
+      "M#T_PWE2S1_N": "No",
+      "MCU#T_PWE2S1_N": "{T2} No",
+      "M#T_PWE2S1_Y": "Yes",
+      "MCU#T_PWE2S1_Y": "{T2} Yes",
+      "M#T_N1B": {
+        "NAME": "Next 1st Break",
+        "DESC": "Predict which player will break their opponent's serve first."
+      },
+      "M#T_N1B_11B": "1 - 1st Break",
+      "MCU#T_N1B_11B": "1 - 1st Break",
+      "M#T_N1B_21B": "2 - 1st Break",
+      "MCU#T_N1B_21B": "2 - 1st Break",
+      "M#T_N1B_N1B": "None - 1st Break",
+      "MCU#T_N1B_N1B": "None - 1st Break",
+      "M#T_1S12OUG": {
+        "NAME": "1st Set  1-2 + O/U G",
+        "DESC": "You have to predict the winner of the first set and whether the number of games in played in the first set is over or under the indicated spread."
+      },
+      "M#T_1S12OUG_1O": "1+Ov",
+      "MCU#T_1S12OUG_1O": "1+Ov ({HND})",
+      "M#T_1S12OUG_1U": "1+Un",
+      "MCU#T_1S12OUG_1U": "1+Un ({HND})",
+      "M#T_1S12OUG_2O": "2+Ov",
+      "MCU#T_1S12OUG_2O": "2+Ov ({HND})",
+      "M#T_1S12OUG_2U": "2+Un",
+      "MCU#T_1S12OUG_2U": "2+Un ({HND})",
+      "M#T_1STB": {
+        "NAME": "1st Set Tie Break",
+        "DESC": "You have to predict whether the first set only will finish with a tie-break."
+      },
+      "M#T_1STB_1STN": "1st Set TieBreak NO",
+      "MCU#T_1STB_1STN": "1st Set TieBreak NO",
+      "M#T_1STB_1STS": "1st Set TieBreak SI",
+      "MCU#T_1STB_1STS": "1st Set TieBreak SI",
+      "M#T_SB3": {
+        "NAME": "Set Bets 3",
+        "DESC": "You have to predict the correct score of the match in terms of sets won by each player/team. "
+      },
+      "M#T_SB3_02": "0-2",
+      "MCU#T_SB3_02": "0-2",
+      "M#T_SB3_12": "1-2",
+      "MCU#T_SB3_12": "1-2",
+      "M#T_SB3_20": "2-0 ",
+      "MCU#T_SB3_20": "2-0 ",
+      "M#T_SB3_21": "2-1",
+      "MCU#T_SB3_21": "2-1",
+      "M#T_SB5": {
+        "NAME": "Set Bets 5",
+        "DESC": "You have to predict the correct score of the match in terms of sets won by each player/team. "
+      },
+      "M#T_SB5_03": "0-3",
+      "MCU#T_SB5_03": "0-3",
+      "M#T_SB5_13": "1-3",
+      "MCU#T_SB5_13": "1-3",
+      "M#T_SB5_23": "2-3",
+      "MCU#T_SB5_23": "2-3",
+      "M#T_SB5_30": "3-0",
+      "MCU#T_SB5_30": "3-0",
+      "M#T_SB5_31": "3-1",
+      "MCU#T_SB5_31": "3-1",
+      "M#T_SB5_32": "3-2",
+      "MCU#T_SB5_32": "3-2",
+      "M#T_121P": {
+        "NAME": "1st Set Winner",
+        "DESC": "Predict the winner of the first set. There are two possible outcomes: 1 (the first player/team wins), 2 (the second player/team wins)."
+      },
+      "M#T_121P_2": "2",
+      "MCU#T_121P_2": "{T2}",
+      "M#T_OUG": {
+        "NAME": "Over/Under Games",
+        "DESC": "Predict if the total number of games during the entire match will be over or under the spread indicated."
+      },
+      "M#T_OUG_U": "Under",
+      "MCU#T_OUG_U": "Under ({HND})",
+      "MH#T_OUG": "Over|Under",
+      "M#T_TOTSETS5": {
+        "NAME": "Total Number of Sets (best of 5)",
+        "DESC": "Predict the total number of sets during the entire match."
+      },
+      "M#T_TOTSETS5_4": "4 sets",
+      "MCU#T_TOTSETS5_4": "4 sets",
+      "M#T_CS3": {
+        "NAME": "Correct Set Score (best of 3 sets)",
+        "DESC": "Predict how many sets will be won by each player/team."
+      },
+      "M#T_CS3_2:0": "2:0",
+      "MCU#T_CS3_2:0": "2:0",
+      "M#T_CS3_0:2": "0:2",
+      "MCU#T_CS3_0:2": "0:2",
+      "M#T_CS5": {
+        "NAME": "Correct Set Score (best of 5 sets)",
+        "DESC": "Predict how many sets will be won by each player/team."
+      },
+      "M#T_CS5_3:0": "3:0",
+      "MCU#T_CS5_3:0": "3:0",
+      "M#T_CS5_0:3": "0:3",
+      "MCU#T_CS5_0:3": "0:3",
+      "M#T_CS5_2:3": "2:3",
+      "MCU#T_CS5_2:3": "2:3",
+      "M#T_12": {
+        "NAME": "Match Winner",
+        "DESC": "Predict the winner of the match. There are two possible outcomes: 1 (the first player/team wins), 2 (the second player/team wins)."
+      },
+      "M#T_12_1": "1",
+      "MCU#T_12_1": "{T1}",
+      "M#T_12_2": "2",
+      "MCU#T_12_2": "{T2}",
+      "M#T_122P": {
+        "NAME": "2nd Set Winner",
+        "DESC": "Predict the winner of the second set. There are two possible outcomes: 1 (the first player/team wins), 2 (the second player/team wins)."
+      },
+      "M#T_122P_1": "1",
+      "MCU#T_122P_1": "1",
+      "M#T_TOTSETS3": {
+        "NAME": "Total Number of Sets (best of 3)",
+        "DESC": "Exact amount of sets played."
+      },
+      "M#T_TOTSETS3_2": "2",
+      "MCU#T_TOTSETS3_2": "2",
+      "M#T_OEGAMES": {
+        "NAME": "Odd/Even Games",
+        "DESC": "You have to predict if the number of games played during the match is going to be odd or even"
+      },
+      "M#T_OEGAMES_OD": "Odd",
+      "MCU#T_OEGAMES_OD": "Odd",
+      "M#T_12OU_2U": "2+Un G",
+      "MCU#T_12OU_2U": "{T2} + Under ({HND})",
+      "M#T_1SETMATCH": {
+        "NAME": "1st Set Winner + Match Winner",
+        "DESC": "Predict which player will win the 1st set and the match combined 1/1 = player 1 to win the 1st set and the match 1/2 = player 1 to win the 1st set and player 2 to win the match 2/2 = player 2 to win the 1st set and the match 2/1 = player 2 to win the 1st set and player 1 to win the match"
+      },
+      "M#T_1SETMATCH_22": "2 + 2",
+      "MCU#T_1SETMATCH_22": "{T2} + {T2}",
+      "M#T_1SETCS": {
+        "NAME": "1st Set Correct Score",
+        "DESC": "You have to predict the correct score of the 1st set of the match"
+      },
+      "M#T_1SETCS_2-6": "2-6",
+      "MCU#T_1SETCS_2-6": "2-6",
+      "M#T_1SETCS_3-6": "3-6",
+      "MCU#T_1SETCS_3-6": "3-6",
+      "M#T_1SETCS_6-1": "6-1",
+      "MCU#T_1SETCS_6-1": "6-1",
+      "M#T_1SETCS_6-3": "6-3",
+      "MCU#T_1SETCS_6-3": "6-3",
+      "M#T_1SETCS_6-4": "6-4",
+      "MCU#T_1SETCS_6-4": "6-4",
+      "M#T_TB": {
+        "NAME": "Tie Break",
+        "DESC": "Bet yes or no on whether there will be a tie break played in the match"
+      },
+      "M#T_TB_N": "NO",
+      "MCU#T_TB_N": "NO",
+      "M#T_1SETOU": {
+        "NAME": "1st Set Totals ",
+        "DESC": "You have to predict whether the amount of games played in the 1st set is over or under the quoted number."
+      },
+      "M#T_1SETOU_U": "Under",
+      "MCU#T_1SETOU_U": "Under ({HND})",
+      "MH#T_1SETOU": "Over|Under",
+      "M#T_OUG_O": "Over",
+      "MCU#T_OUG_O": "Over ({HND})",
+      "M#T_TOTSETS5_5": "5 sets",
+      "MCU#T_TOTSETS5_5": "5 sets",
+      "M#T_121P_1": "1",
+      "MCU#T_121P_1": "{T1}",
+      "M#T_TOTSETS3_3": "3",
+      "MCU#T_TOTSETS3_3": "3",
+      "M#T_CS3_2:1": "2:1",
+      "MCU#T_CS3_2:1": "2:1",
+      "M#T_CS3_1:2": "1:2",
+      "MCU#T_CS3_1:2": "1:2",
+      "M#T_OEGAMES_EV": "Even",
+      "MCU#T_OEGAMES_EV": "Even",
+      "M#T_1SETMATCH_11": "1 + 1",
+      "MCU#T_1SETMATCH_11": "{T1} + {T1}",
+      "M#T_1SETMATCH_21": "2 + 1",
+      "MCU#T_1SETMATCH_21": "{T2} + {T1}",
+      "M#T_CS3_2:3": "2:3",
+      "MCU#T_CS3_2:3": "2:3",
+      "M#T_CS3_3:0": "3:0",
+      "MCU#T_CS3_3:0": "3:0",
+      "M#T_CS3_3:1": "3:1",
+      "MCU#T_CS3_3:1": "3:1",
+      "M#T_CS3_3:2": "3:2",
+      "MCU#T_CS3_3:2": "3:2",
+      "M#T_CS3_0:3": "0:3",
+      "MCU#T_CS3_0:3": "0:3",
+      "M#T_CS3_1:3": "1:3",
+      "MCU#T_CS3_1:3": "1:3",
+      "M#T_1SETMATCH_12": "1 + 2",
+      "MCU#T_1SETMATCH_12": "{T1} + {T2}",
+      "M#T_1SETCS_6-0": "6-0",
+      "MCU#T_1SETCS_6-0": "6-0",
+      "M#T_1SETOU_O": "Over",
+      "MCU#T_1SETOU_O": "Over ({HND})",
+      "M#T_CS5_1:3": "1:3",
+      "MCU#T_CS5_1:3": "1:3",
+      "M#T_12OU_1O": "1+Ov G",
+      "MCU#T_12OU_1O": "{T1} + Over ({HND})",
+      "M#T_1SETCS_0-6": "0-6",
+      "MCU#T_1SETCS_0-6": "0-6",
+      "M#T_1SETCS_4-6": "4-6",
+      "MCU#T_1SETCS_4-6": "4-6",
+      "M#T_1SETCS_6-2": "6-2",
+      "MCU#T_1SETCS_6-2": "6-2",
+      "M#T_1SETCS_7-5": "7-5",
+      "MCU#T_1SETCS_7-5": "7-5",
+      "M#T_TB_Y": "YES",
+      "MCU#T_TB_Y": "YES",
+      "M#T_1SETCS_1-6": "1-6",
+      "MCU#T_1SETCS_1-6": "1-6",
+      "M#T_TOTSETS5_3": "3 sets",
+      "MCU#T_TOTSETS5_3": "3 sets",
+      "M#T_CS5_3:2": "3:2",
+      "MCU#T_CS5_3:2": "3:2",
+      "M#T_12HND": {
+        "NAME": "Set Handicap",
+        "DESC": "You have to predict who will win the match considering the quoted SET handicap."
+      },
+      "M#T_12HND_1H": "1",
+      "MCU#T_12HND_1H": "{T1} (Home {HNDS})",
+      "MH#T_12HND": "Player 1|Player 2",
+      "M#T_12HND_2H": "2",
+      "MCU#T_12HND_2H": "{T2} (Home {HNDS})",
+      "M#T_12OU_2O": "2+Ov G",
+      "MCU#T_12OU_2O": "{T2} + Over ({HND})",
+      "M#T_1SETCS_5-7": "5-7",
+      "MCU#T_1SETCS_5-7": "5-7",
+      "M#T_1SETCS_7-6": "7-6",
+      "MCU#T_1SETCS_7-6": "7-6",
+      "M#T_1SETCS_6-7": "6-7",
+      "MCU#T_1SETCS_6-7": "6-7",
+      "M#T_122P_2": "2",
+      "MCU#T_122P_2": "2",
+      "M#T_CS5_3:1": "3:1",
+      "MCU#T_CS5_3:1": "3:1",
+      "M#T_MULTIC1S": {
+        "NAME": "Multi Correct 1\u00b0Set",
+        "DESC": "You have to predict which selection will contain the correct score for the 1st\u00a0Set of the match. If the first set is not completed then the bet will be considered void."
+      },
+      "M#T_MULTIC1S_6-0/6-1/6-2": "6-0 / 6-1 / 6-2",
+      "MCU#T_MULTIC1S_6-0/6-1/6-2": "6-0 / 6-1 / 6-2",
+      "M#T_MULTIC1S_6-0/6-1": "6-0 / 6-1",
+      "MCU#T_MULTIC1S_6-0/6-1": "6-0 / 6-1",
+      "M#T_MULTIC1S_0-6/1-6/2-6": "0-6 / 1-6 / 2-6",
+      "MCU#T_MULTIC1S_0-6/1-6/2-6": "0-6 / 1-6 / 2-6",
+      "M#T_MULTIC1S_6-3/6-4/7-5": "6-3 / 6-4 / 7-5",
+      "MCU#T_MULTIC1S_6-3/6-4/7-5": "6-3 / 6-4 / 7-5",
+      "M#T_MULTIC1S_3-6/4-6/5-7": "3-6 / 4-6 / 5-7",
+      "MCU#T_MULTIC1S_3-6/4-6/5-7": "3-6 / 4-6 / 5-7",
+      "M#T_MULTIC1S_6-4/7-5": "6-4 / 7-5",
+      "MCU#T_MULTIC1S_6-4/7-5": "6-4 / 7-5",
+      "M#T_MULTIC1S_0-6/1-6": "0-6 / 1-6",
+      "MCU#T_MULTIC1S_0-6/1-6": "0-6 / 1-6",
+      "M#T_MULTIC1S_6-2/6-3": "6-2 / 6-3",
+      "MCU#T_MULTIC1S_6-2/6-3": "6-2 / 6-3",
+      "M#T_MULTIC2S": {
+        "NAME": "Multi Correct 2\u00b0Set",
+        "DESC": "You have to predict which selection will contain the correct score for the 2nd\u00a0Set of the match. If the first set is not completed then the bet will be considered void."
+      },
+      "M#T_MULTIC2S_6-2/6-3": "6-2 / 6-3",
+      "MCU#T_MULTIC2S_6-2/6-3": "6-2 / 6-3",
+      "M#T_MULTIC2S_0-6/1-6": "0-6 / 1-6",
+      "MCU#T_MULTIC2S_0-6/1-6": "0-6 / 1-6",
+      "M#T_MULTIC1S_7-6/6-7": "7-6 / 6-7",
+      "MCU#T_MULTIC1S_7-6/6-7": "7-6 / 6-7",
+      "M#T_MULTIC2S_6-3/6-4/7-5": "6-3 / 6-4 / 7-5",
+      "MCU#T_MULTIC2S_6-3/6-4/7-5": "6-3 / 6-4 / 7-5",
+      "M#T_MULTIC2S_6-4/7-5": "6-4 / 7-5",
+      "MCU#T_MULTIC2S_6-4/7-5": "6-4 / 7-5",
+      "M#T_MULTIC2S_4-6/5-7": "4-6 / 5-7",
+      "MCU#T_MULTIC2S_4-6/5-7": "4-6 / 5-7",
+      "M#T_MULTIC2S_0-6/1-6/2-6": "0-6 / 1-6 / 2-6",
+      "MCU#T_MULTIC2S_0-6/1-6/2-6": "0-6 / 1-6 / 2-6",
+      "M#T_MULTIC2S_7-6/6-7": "7-6 / 6-7",
+      "MCU#T_MULTIC2S_7-6/6-7": "7-6 / 6-7",
+      "M#T_MULTIC2S_3-6/4-6/5-7": "3-6 / 4-6 / 5-7",
+      "MCU#T_MULTIC2S_3-6/4-6/5-7": "3-6 / 4-6 / 5-7",
+      "M#T_MULTIC2S_6-0/6-1/6-2": "6-0 / 6-1 / 6-2",
+      "MCU#T_MULTIC2S_6-0/6-1/6-2": "6-0 / 6-1 / 6-2",
+      "M#T_MULTIC2S_6-0/6-1": "6-0 / 6-1",
+      "MCU#T_MULTIC2S_6-0/6-1": "6-0 / 6-1",
+      "M#T_MULTIC2S_2-6/3-6": "2-6 / 3-6",
+      "MCU#T_MULTIC2S_2-6/3-6": "2-6 / 3-6",
+      "M#T_MULTIC1S_2-6/3-6": "2-6 / 3-6",
+      "MCU#T_MULTIC1S_2-6/3-6": "2-6 / 3-6",
+      "M#T_MULTIC1S_4-6/5-7": "4-6 / 5-7",
+      "MCU#T_MULTIC1S_4-6/5-7": "4-6 / 5-7",
+      "M#T_NSET": {
+        "NAME": "Number Set",
+        "DESC": "You should predict the total number of sets played by the two players."
+      },
+      "M#T_NSET_S3": "Total Set 3",
+      "MCU#T_NSET_S3": "Total Set 3",
+      "M#T_NSET_S2": "Total Set 2",
+      "MCU#T_NSET_S2": "Total Set 2",
+      "M#T_YESNO": {
+        "NAME": "6-0 / 0-6 Yes/No",
+        "DESC": "You have to predict whether or not either player will win a set 6-0 or 0-6."
+      },
+      "M#T_YESNO_Y": "Yes",
+      "MCU#T_YESNO_Y": "Yes",
+      "M#T_YESNO_N": "No",
+      "MCU#T_YESNO_N": "No",
+      "M#T_OUGP2": {
+        "NAME": "Over/Under Games Player 2",
+        "DESC": "You have to predict whether the total number of games for Player 2 will be over or under the indicated spread."
+      },
+      "M#T_OUGP2_U": "Under",
+      "MCU#T_OUGP2_U": "Under ({HND})",
+      "MH#T_OUGP2": "Over|Under",
+      "M#T_OUGP2_O": "Over",
+      "MCU#T_OUGP2_O": "Over ({HND})",
+      "M#T_OUGP1": {
+        "NAME": "Over/Under Games Player 1",
+        "DESC": "You have to predict whether the total number of games for Player 1 will be over or under the indicated spread."
+      },
+      "M#T_OUGP1_U": "Under",
+      "MCU#T_OUGP1_U": "Under ({HND})",
+      "MH#T_OUGP1": "Over|Under",
+      "M#T_OUGP1_O": "Over",
+      "MCU#T_OUGP1_O": "Over ({HND})",
+      "CNT#TRI": "Throw-ins",
+      "CNT#GKS": "Goal Kicks",
+      "CNT#PST": "Posts",
+      "CNT#GA": "Games",
+      "CNT#1P": "1st Player",
+      "CNT#P": "Points",
+      "CNT#HP": "Home Points",
+      "CNT#180": "180s",
+      "CNT#HG": "Home Goals",
+      "CNT#R": "Runs",
+      "CNT#RO": "Rounds",
+      "CNT#HR": "Home Runs",
+      "CNT#C": "Cards",
+      "CNT#CO": "Corners",
+      "CNT#HCO": "Home Corners",
+      "CNT#G": "Goals",
+      "CNT#GR": "Generic Result",
+      "CNT#HS": "Home Sets",
+      "CNT#WOODW": "Woodworks",
+      "CNT#TACKL": "Tackles",
+      "CNT#SAVES": "Saves",
+      "CNT#ACE": "Ace",
+      "CNT#DF": "Double Fault",
+      "CNT#GP": "Game {HND1} - Home ({HNDS2})",
+      "CNT#RO1": "Round",
+      "CNT#LT": "Total {HND2} (Lap {HND1})",
+      "CNT#PEN": "Penalty {HND}",
+      "CNT#INOVH": "Inning {HND1} over {HND2} - delivery {HND3} ({HND4})",
+      "CNT#TRIES": "Tries",
+      "CNT#TRIEH": "Tries  Halves",
+      "CNT#PNCT": "{P1} (Card {HND2})",
+      "CNT#PF": "{P1} (Foul {HND2})",
+      "CNT#PSHOT": "{P1} (Shot {HND2})",
+      "CNT#PSOT": "{P1} (SoT {HND2})",
+      "CNT#HNDG": "{HND} Goal",
+      "CNT#PP": "Quarter {HND1} - {HND2} Points",
+      "CNT#CSD": "Combo + Duo",
+      "CNT#GSD": "Goalscorer Duo",
+      "CNT#CD": "Cards Duo",
+      "CNT#SHOTD": "Shots Duo",
+      "CNT#AD": "Assist Duo",
+      "CNT#STDUO": "Shots On Target Duo",
+      "CNT#PA": "Passes",
+      "CNT#HPS": "Sets",
+      "CNT#CS": "Current Score {HND}",
+      "CNT#S": "Sets",
+      "CNT#NG": "Goal {HND}",
+      "CNT#SHOT": "Shots",
+      "CNT#SETT": "Set",
+      "CNT#L2P1": "Lap {HND2} - {P1}",
+      "CNT#LFTP1": "Laps {HND2} to {HND3} - {P1}",
+      "CNT#P2P3": "{P2} vs {P3}",
+      "CNT#T2L1": "Total {HND2} Lap {HND1}",
+      "CNT#TO2P1": "Top {HND2} {P1}",
+      "CNT#CTD": "Touchdown Number {HND}",
+      "CNT#CAP": "{HND} Away Penalty",
+      "CNT#CHP": "{HND} Home Penalty",
+      "CNT#PG": "{P1} (Goal {HND2})",
+      "CNT#GAM": "Game {HND}",
+      "CNT#SGP": "Set {HND1} - Game {HND2}, Point {HND3}",
+      "CNT#SG": "Set {HND1} - Game {HND2}",
+      "CNT#COS": "Correct Score",
+      "CNT#LEGS": "Legs",
+      "CNT#CKOUT": "Checkout",
+      "CNT#GMT": "Goal Method",
+      "CNT#COA": "Coach",
+      "CNT#SUB": "Substitutions",
+      "CNT#GSC": "{P1} ({HND2})",
+      "CNT#L2P2": "Lap {HND1} - {HND2}",
+      "CNT#TD": "TD",
+      "CNT#FG": "FG",
+      "CNT#RB": "Rebounds",
+      "CNT#A": "Assist",
+      "CNT#MAP": "Maps",
+      "CNT#TL": "Tot. League",
+      "CNT#P1": "{P1}",
+      "CNT#HND12": "{HND1}-{HND2} min",
+      "CNT#HND23": "{HND2}-{HND3} min",
+      "CNT#CSHND": "Current Score {HND1} Home {HND2}",
+      "CNT#CSHOU": "Current Score {HND1} ({HND2})",
+      "CNT#PER": "Period {HND1} ({HND2})",
+      "CNT#BP": "Ball Poss %",
+      "CNT#OFF": "Offsides",
+      "CNT#ST": "Shots Target",
+      "CNT#F": "Fouls",
+      "CNT#PCS": "Next Goal scorer ({HND2})",
+      "CNT#PGS": "Point {HND1} Game {HND2} Set {HND3}",
+      "CNT#COHND": "Corner {HND}",
+      "CNT#GS": "Game {HND2} Set {HND1}",
+      "CNT#STE": "Steals",
+      "CNT#BL": "Blocks",
+      "CNT#3MO": "3pt Made",
+      "CNT#SET": "Set {HND}",
+      "CNT#INN": "Inning {HND1}",
+      "CNT#INNTO": "Inning {HND1} ({HND2})",
+      "CNT#INNDI": "Inning {HND1} - Dismissal {HND2}",
+      "CNT#INNOH": "Inning {HND1} overs 0 to {HND2} ({HND3})",
+      "CNT#INNOA": "Inning {HND1} overs 0 to {HND2} ({HND3})",
+      "CNT#INNOV": "Inning {HND1} (overs 0 to {HND2})",
+      "CNT#INOV1": "Inning {HND1} over {HND2}",
+      "CNT#INOV": "Inning {HND1} over {HND2} ({HND3})",
+      "CNT#HNDCO": "{HND} Corner",
+      "CNT#NCT": "{HND} Card",
+      "CNT#HNDH": "{HND} Home",
+      "CNT#GSP": "Goalscorer Plus",
+      "CNT#CMP": "Combo+ Plus",
+      "CNT#SOTP": "Shots On Target Plus",
+      "CNT#GSDN": "Goalscorer Plus (No Duo)"
+    }
+  }
+}

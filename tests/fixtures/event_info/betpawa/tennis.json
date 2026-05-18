@@ -1,0 +1,1298 @@
+{
+  "id": "35367899",
+  "name": "Rinderknech, Arthur - Tirante, Thiago Agustin",
+  "results": null,
+  "widgets": [
+    {
+      "id": "71529092",
+      "type": "SPORTRADAR",
+      "retention": null
+    }
+  ],
+  "participants": [
+    {
+      "id": "675657",
+      "name": "Rinderknech, Arthur",
+      "position": 1
+    },
+    {
+      "id": "675063",
+      "name": "Tirante, Thiago Agustin",
+      "position": 2
+    }
+  ],
+  "startTime": "2026-05-18T10:10:00Z",
+  "markets": [
+    {
+      "marketType": {
+        "id": "2043818",
+        "name": "Moneyline - FT",
+        "displayName": "Match Winner",
+        "explainer": "Pick who the winner will be over the stated period. Moneyline - FT refers to the overall result.",
+        "priority": 101,
+        "tabs": [
+          "all",
+          "popular"
+        ],
+        "handicapType": "",
+        "priceColumnCount": 2,
+        "priceSortingMethod": "PRICE_TYPE_ID"
+      },
+      "row": [
+        {
+          "id": "377516339",
+          "handicap": null,
+          "formattedHandicap": null,
+          "prices": [
+            {
+              "id": "1460137419",
+              "name": "1",
+              "typeId": "2043821",
+              "price": 2.3,
+              "suspended": false,
+              "handicap": null,
+              "displayName": "1",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOi03MzM2NjkzMTQ2NDc1NDYxNTQsInJlZnVuZCI6LTM4ODg2NzkwMjA5NTc4MzAzMjMsImtleSI6NjA3MDgxMTI4MDM3MTk0NTMwNH0="
+            },
+            {
+              "id": "1460137420",
+              "name": "2",
+              "typeId": "2043823",
+              "price": 1.57,
+              "suspended": false,
+              "handicap": null,
+              "displayName": "2",
+              "additionalInfo": {
+                "hot": true,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOi0zNzE3MDM4ODI0NzAwMzAzODYyLCJyZWZ1bmQiOi04OTgwNDY2NTkxMTE2NjU3NDYsImtleSI6NzkwNzc2NTYwMjg0NTM0NDY5OX0="
+            }
+          ]
+        }
+      ],
+      "displayNameRows": [],
+      "displayNameColumns": [],
+      "additionalInfo": {
+        "boosted": false,
+        "cashoutable": true,
+        "twoUp": false
+      }
+    },
+    {
+      "marketType": {
+        "id": "3532590",
+        "name": "Match Handicap Games 2-way - FT",
+        "displayName": "Game Handicap | Full Time",
+        "explainer": "Bet on who wins the most games with a handicap applied. If it\u2019s -5.5, they must win 6+ more.",
+        "priority": 102,
+        "tabs": [
+          "all",
+          "popular",
+          "games"
+        ],
+        "handicapType": "ASIAN",
+        "priceColumnCount": 2,
+        "priceSortingMethod": "PRICE_TYPE_ID"
+      },
+      "row": [
+        {
+          "id": "377516467",
+          "handicap": -2,
+          "formattedHandicap": null,
+          "prices": [
+            {
+              "id": "1460137770",
+              "name": "1",
+              "typeId": "3532591",
+              "price": 2.35,
+              "suspended": false,
+              "handicap": "-0.5",
+              "displayName": "{formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOi01MTM2NzA0NzE3ODQzMzMwOTgsInJlZnVuZCI6LTQxMDUwNTIxNjIyNTg3NjA1MTEsImtleSI6NjQyNjgwMTAwOTQ2NTc4MjQ4NH0="
+            },
+            {
+              "id": "1460137771",
+              "name": "2",
+              "typeId": "3532593",
+              "price": 1.53,
+              "suspended": false,
+              "handicap": "+0.5",
+              "displayName": "{formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOjc4ODI1NjA0ODUzMDM5ODIxNTMsInJlZnVuZCI6NTk0Njk5NzYwOTgwMDEzMTAwNSwia2V5IjotMzY5NzMxMDgxMDUwODI1NTgzMn0="
+            }
+          ]
+        },
+        {
+          "id": "377516336",
+          "handicap": 2,
+          "formattedHandicap": null,
+          "prices": [
+            {
+              "id": "1460137413",
+              "name": "1",
+              "typeId": "3532591",
+              "price": 2.11,
+              "suspended": false,
+              "handicap": "+0.5",
+              "displayName": "{formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOi02MjkyMjA0OTU4MTU1NzY4Njk5LCJyZWZ1bmQiOi03NTMyNzk1OTM3ODQzNTY0OTMxLCJrZXkiOjY2NjkxNTA2NjYwMTE2NTQxNn0="
+            },
+            {
+              "id": "1460137414",
+              "name": "2",
+              "typeId": "3532593",
+              "price": 1.64,
+              "suspended": false,
+              "handicap": "-0.5",
+              "displayName": "{formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOjMwODYzMzgwMzMwNDUzOTg3NzIsInJlZnVuZCI6MTUyODYyMzExMzA5ODU3MjQwMCwia2V5IjotODQzMDI1MTI1NDgyMzAzOTM4N30="
+            }
+          ]
+        },
+        {
+          "id": "377516337",
+          "handicap": 6,
+          "formattedHandicap": null,
+          "prices": [
+            {
+              "id": "1460137415",
+              "name": "1",
+              "typeId": "3532591",
+              "price": 1.92,
+              "suspended": false,
+              "handicap": "+1.5",
+              "displayName": "{formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOi0yMDUwNjM5ODkwMjQ2MzQ1NTk1LCJyZWZ1bmQiOi0yNTcwNDEzMTYxMzIzNDk5MDI2LCJrZXkiOjQ3ODM3OTg0ODQ3MDgzOTY1Mzl9"
+            },
+            {
+              "id": "1460137416",
+              "name": "2",
+              "typeId": "3532593",
+              "price": 1.78,
+              "suspended": false,
+              "handicap": "-1.5",
+              "displayName": "{formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOjM4OTU3Mjk2MTY5NTQxNzk1MDMsInJlZnVuZCI6NzE2Mjg5MDE1MDI1NTIyNDA0LCJrZXkiOi03NTA5ODI2NDE5MjA2NzcxOTgzfQ=="
+            }
+          ]
+        },
+        {
+          "id": "377516340",
+          "handicap": 10,
+          "formattedHandicap": null,
+          "prices": [
+            {
+              "id": "1460137421",
+              "name": "1",
+              "typeId": "3532591",
+              "price": 1.67,
+              "suspended": false,
+              "handicap": "+2.5",
+              "displayName": "{formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOi00MDg1NTQyMDAxODkxOTUzNzU1LCJyZWZ1bmQiOi01Mjc3NzI2MzM0MTU3MDY2MzQsImtleSI6NzM5MzY0NDE1NDQ5NTk1Mzg5MX0="
+            },
+            {
+              "id": "1460137422",
+              "name": "2",
+              "typeId": "3532593",
+              "price": 2.06,
+              "suspended": false,
+              "handicap": "-2.5",
+              "displayName": "{formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOjI3ODczOTEyNjE0NDMyNjA2NDksInJlZnVuZCI6MTgzMzczMzc1NDc1OTg4Njc3MSwia2V5IjotODY5OTMzMzEzMzg0NjA5OTAzNH0="
+            }
+          ]
+        },
+        {
+          "id": "377516341",
+          "handicap": 14,
+          "formattedHandicap": null,
+          "prices": [
+            {
+              "id": "1460137423",
+              "name": "1",
+              "typeId": "3532591",
+              "price": 1.41,
+              "suspended": false,
+              "handicap": "+3.5",
+              "displayName": "{formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOi00OTAzMTEwODkwMjEyOTQ1Mjg5LCJyZWZ1bmQiOi04OTMwMTA1ODE2ODIwMjE0ODIxLCJrZXkiOjE4ODQzNjY4NTQ5OTUyMTAxOTB9"
+            },
+            {
+              "id": "1460137424",
+              "name": "2",
+              "typeId": "3532593",
+              "price": 2.7,
+              "suspended": false,
+              "handicap": "-3.5",
+              "displayName": "{formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOi0xMDM0MTk2Nzg4MDI0MTgxNTAxLCJyZWZ1bmQiOi0zNTcxMTU5NDU1NzM1NDc5ODkzLCJrZXkiOjU3ODQ4MTMwOTQzMzQ1Mjg5NTh9"
+            }
+          ]
+        }
+      ],
+      "displayNameRows": [],
+      "displayNameColumns": [
+        "1",
+        "2"
+      ],
+      "additionalInfo": {
+        "boosted": false,
+        "cashoutable": true,
+        "twoUp": false
+      }
+    },
+    {
+      "marketType": {
+        "id": "4895",
+        "name": "Total Games - Over/Under - FT",
+        "displayName": "Over/Under | Total Games",
+        "explainer": "Pick how many games there will be meeting the stated criteria. Over is more than that amount, Unders is less.",
+        "priority": 103,
+        "tabs": [
+          "all",
+          "popular",
+          "games"
+        ],
+        "handicapType": "NORMAL",
+        "priceColumnCount": 2,
+        "priceSortingMethod": "PRICE_TYPE_ID"
+      },
+      "row": [
+        {
+          "id": "377516344",
+          "handicap": 82,
+          "formattedHandicap": null,
+          "prices": [
+            {
+              "id": "1460137429",
+              "name": "Over",
+              "typeId": "4896",
+              "price": 1.4,
+              "suspended": false,
+              "handicap": "20.5",
+              "displayName": "Over {formattedHandicap}",
+              "additionalInfo": {
+                "hot": true,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOi0yODQxOTgwNTQzMjQ5OTQ0OTcyLCJyZWZ1bmQiOi0xNzcxNTg4MjQ3NTUyNDI5MDcyLCJrZXkiOjg3NDUyNzM5NzkwMjM1OTM0NDV9"
+            },
+            {
+              "id": "1460137430",
+              "name": "Under",
+              "typeId": "4897",
+              "price": 2.7,
+              "suspended": false,
+              "handicap": "20.5",
+              "displayName": "Under {formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOjc0Mjk3NDQwNTkzNjU2ODM3MDEsInJlZnVuZCI6NjM5OTIzNjE3NjMyNTQ4OTkzMywia2V5IjotNDEwOTAwODE0NTYyMjI1MTI0MH0="
+            }
+          ]
+        },
+        {
+          "id": "377516343",
+          "handicap": 86,
+          "formattedHandicap": null,
+          "prices": [
+            {
+              "id": "1460137427",
+              "name": "Over",
+              "typeId": "4896",
+              "price": 1.52,
+              "suspended": false,
+              "handicap": "21.5",
+              "displayName": "Over {formattedHandicap}",
+              "additionalInfo": {
+                "hot": true,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOjgyNDQwNjQ5MzA3NDQ4MTU4NzcsInJlZnVuZCI6NTU4NzY0Mjg0NjQwNzkwMjc3OSwia2V5IjotMzE4OTYxOTI4NDEzMDE4NjcwNn0="
+            },
+            {
+              "id": "1460137428",
+              "name": "Under",
+              "typeId": "4897",
+              "price": 2.35,
+              "suspended": false,
+              "handicap": "21.5",
+              "displayName": "Under {formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOjkxNDE4MTUyNjMwODIwMjk5OTYsInJlZnVuZCI6NDY4NTYyODgxNDA0NjQ5MTE3Nywia2V5IjotMjM2Mzg4NDkzMTgwNTI3ODY2MH0="
+            }
+          ]
+        },
+        {
+          "id": "377516330",
+          "handicap": 90,
+          "formattedHandicap": null,
+          "prices": [
+            {
+              "id": "1460137401",
+              "name": "Over",
+              "typeId": "4896",
+              "price": 1.76,
+              "suspended": false,
+              "handicap": "22.5",
+              "displayName": "Over {formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOi05MDY2MzYxNjUyNTk4NjAxODQ2LCJyZWZ1bmQiOi00NzcwMTMwNTAzNjIwNzEwMzY0LCJrZXkiOjI1OTI1MDU2NzkyMjA4ODY1Nzd9"
+            },
+            {
+              "id": "1460137402",
+              "name": "Under",
+              "typeId": "4897",
+              "price": 1.94,
+              "suspended": false,
+              "handicap": "22.5",
+              "displayName": "Under {formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOi0xMDM1ODY2Mzg3MTI1MjQ0ODg2LCJyZWZ1bmQiOi0zNTg0MzkyNTk0NzQzNTI2MjYzLCJrZXkiOjU3OTgwNTUwMjk0MzM2MzA4NzZ9"
+            }
+          ]
+        },
+        {
+          "id": "377516332",
+          "handicap": 94,
+          "formattedHandicap": null,
+          "prices": [
+            {
+              "id": "1460137405",
+              "name": "Over",
+              "typeId": "4896",
+              "price": 2.0,
+              "suspended": false,
+              "handicap": "23.5",
+              "displayName": "Over {formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOi02NTIxNTI2ODc2NTc2NTgwMzEwLCJyZWZ1bmQiOi03MzAzNzkzODY4MTU5OTAyNTE3LCJrZXkiOjMzMDExNjkxNTYwNDA1NDIzOH0="
+            },
+            {
+              "id": "1460137406",
+              "name": "Under",
+              "typeId": "4897",
+              "price": 1.71,
+              "suspended": false,
+              "handicap": "23.5",
+              "displayName": "Under {formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOi0zNDgyNzA4MTc5MDAxNDI5NDc5LCJyZWZ1bmQiOi0xMTMxNjA0ODg4Nzc3MTYzNTExLCJrZXkiOjc5NjE0NTI1MDkxMDEwOTcyNDR9"
+            }
+          ]
+        },
+        {
+          "id": "377516331",
+          "handicap": 98,
+          "formattedHandicap": null,
+          "prices": [
+            {
+              "id": "1460137403",
+              "name": "Over",
+              "typeId": "4896",
+              "price": 2.06,
+              "suspended": false,
+              "handicap": "24.5",
+              "displayName": "Over {formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOi00NzM4MjczNDgxODAyNTI2NzAxLCJyZWZ1bmQiOi05MDg3NDY1Mzg0NDgyNDEzMzg0LCJrZXkiOjIyOTM5MzI5MjgxMDEzOTA1MDl9"
+            },
+            {
+              "id": "1460137404",
+              "name": "Under",
+              "typeId": "4897",
+              "price": 1.68,
+              "suspended": false,
+              "handicap": "24.5",
+              "displayName": "Under {formattedHandicap}",
+              "additionalInfo": {
+                "hot": true,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOjg1OTgxNDUwNjY2NjM5ODY1MzgsInJlZnVuZCI6NTIzODU0MDY5OTk5ODQ3ODUyOSwia2V5IjotMjk4OTE0MDMwMTk5NzY5NTc4OH0="
+            }
+          ]
+        }
+      ],
+      "displayNameRows": [],
+      "displayNameColumns": [],
+      "additionalInfo": {
+        "boosted": false,
+        "cashoutable": true,
+        "twoUp": false
+      }
+    },
+    {
+      "marketType": {
+        "id": "3597899",
+        "name": "Total Sets - Over/Under - FT",
+        "displayName": "Over/Under | Total Sets",
+        "explainer": "In a 3-set match, Under (2.5) is a bet on anyone winning 2-0.",
+        "priority": 105,
+        "tabs": [
+          "all",
+          "popular",
+          "sets"
+        ],
+        "handicapType": "NORMAL",
+        "priceColumnCount": 2,
+        "priceSortingMethod": "PRICE_TYPE_ID"
+      },
+      "row": [
+        {
+          "id": "377516334",
+          "handicap": 10,
+          "formattedHandicap": null,
+          "prices": [
+            {
+              "id": "1460137409",
+              "name": "Over",
+              "typeId": "3597900",
+              "price": 2.16,
+              "suspended": false,
+              "handicap": "2.5",
+              "displayName": "Over {formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOjQ2NDAwNDI1OTE5OTcxMzQ4NzksInJlZnVuZCI6OTIwNDg4ODc2NjI0ODA3NDI1OCwia2V5IjotMjE5NTE3NDc4NzUxMTY2NDYzM30="
+            },
+            {
+              "id": "1460137410",
+              "name": "Under",
+              "typeId": "3597901",
+              "price": 1.61,
+              "suspended": false,
+              "handicap": "2.5",
+              "displayName": "Under {formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOi0yOTA0NjY5NjYwMzAwMjAyNTA0LCJyZWZ1bmQiOi0xNzA2MzAwODIyODU1MTA0NTExLCJrZXkiOjg1MzEzNTg5NzA1NDI2NjY3NzJ9"
+            }
+          ]
+        }
+      ],
+      "displayNameRows": [],
+      "displayNameColumns": [],
+      "additionalInfo": {
+        "boosted": false,
+        "cashoutable": true,
+        "twoUp": false
+      }
+    },
+    {
+      "marketType": {
+        "id": "2068161",
+        "name": "Games Over/Under Home - FT",
+        "displayName": "Over/Under Games | {home}",
+        "explainer": "Predict if the home team player will have more or fewer individual games during the match than the line suggests.",
+        "priority": 106,
+        "tabs": [
+          "all",
+          "popular",
+          "games",
+          "players"
+        ],
+        "handicapType": "NORMAL",
+        "priceColumnCount": 2,
+        "priceSortingMethod": "PRICE_TYPE_ID"
+      },
+      "row": [
+        {
+          "id": "377523418",
+          "handicap": 46,
+          "formattedHandicap": null,
+          "prices": [
+            {
+              "id": "1460158545",
+              "name": "Over",
+              "typeId": "2068162",
+              "price": 1.45,
+              "suspended": false,
+              "handicap": "11.5",
+              "displayName": "Over {formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOi02NjYwOTQzMjgxMjM2NTQyMTI3LCJyZWZ1bmQiOi03MTc1NjAyNDk1NTk0NzU1MDg3LCJrZXkiOjE3MDExMDA3MDI4MjA5MDQ2OH0="
+            },
+            {
+              "id": "1460158546",
+              "name": "Under",
+              "typeId": "2068163",
+              "price": 2.55,
+              "suspended": false,
+              "handicap": "11.5",
+              "displayName": "Under {formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOjcxOTAwMDM2NjYyOTcwNzIxOTksInJlZnVuZCI6NjYzNzkxMDE0MTUxNzQ5MjY2OSwia2V5IjotNDQ1NTc4MjI2Mjk2NzQ2NDUzNn0="
+            }
+          ]
+        },
+        {
+          "id": "377523424",
+          "handicap": 50,
+          "formattedHandicap": null,
+          "prices": [
+            {
+              "id": "1460158559",
+              "name": "Over",
+              "typeId": "2068162",
+              "price": 1.81,
+              "suspended": false,
+              "handicap": "12.5",
+              "displayName": "Over {formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOjg3NTMyMjQwODExMzQyMTc4NzAsInJlZnVuZCI6NTA4NzM1ODYxMDY0MTQwMjAxNywia2V5IjotMjgzMzE2NDM0MTk2MjU4Njk1Nn0="
+            },
+            {
+              "id": "1460158560",
+              "name": "Under",
+              "typeId": "2068163",
+              "price": 1.89,
+              "suspended": false,
+              "handicap": "12.5",
+              "displayName": "Under {formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOi01NDk3MjEyNjU5MzYzODQwNTM0LCJyZWZ1bmQiOi04MzI4NjM4NDM3MzYwMzI3MDk1LCJrZXkiOjEzMjM0MjgwNTgyNDAzNDI2MjB9"
+            }
+          ]
+        },
+        {
+          "id": "377523423",
+          "handicap": 54,
+          "formattedHandicap": null,
+          "prices": [
+            {
+              "id": "1460158557",
+              "name": "Over",
+              "typeId": "2068162",
+              "price": 2.45,
+              "suspended": false,
+              "handicap": "13.5",
+              "displayName": "Over {formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOjg4MjQ1ODUwMDE0MjAxMzk2MjgsInJlZnVuZCI6NTAxNzE0MDY5NDY2NDI0MDAyMywia2V5IjotMjYyMzYxMTM4NjE2NzI4NTg4Nn0="
+            },
+            {
+              "id": "1460158558",
+              "name": "Under",
+              "typeId": "2068163",
+              "price": 1.48,
+              "suspended": false,
+              "handicap": "13.5",
+              "displayName": "Under {formattedHandicap}",
+              "additionalInfo": {
+                "hot": true,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOjkwMTIxMTk5ODU1NTUxMDA4ODQsInJlZnVuZCI6NDgyNDgwMTM3Mzg2MzU3OTg2Mywia2V5IjotMjUzOTM2NzI1MjUxMjI4MTQwNn0="
+            }
+          ]
+        }
+      ],
+      "displayNameRows": [],
+      "displayNameColumns": [],
+      "additionalInfo": {
+        "boosted": false,
+        "cashoutable": true,
+        "twoUp": false
+      }
+    },
+    {
+      "marketType": {
+        "id": "2068172",
+        "name": "Games Over/Under Away - FT",
+        "displayName": "Over/Under Games | {away}",
+        "explainer": "Predict if the away team player will have more or fewer individual games during the match than the line suggests.",
+        "priority": 107,
+        "tabs": [
+          "all",
+          "popular",
+          "games",
+          "players"
+        ],
+        "handicapType": "NORMAL",
+        "priceColumnCount": 2,
+        "priceSortingMethod": "PRICE_TYPE_ID"
+      },
+      "row": [
+        {
+          "id": "378015755",
+          "handicap": 46,
+          "formattedHandicap": null,
+          "prices": [
+            {
+              "id": "1461731904",
+              "name": "Over",
+              "typeId": "2068173",
+              "price": 1.22,
+              "suspended": false,
+              "handicap": "11.5",
+              "displayName": "Over {formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOjM3MTUzNTcwMDk4Nzc2NjA5NjQsInJlZnVuZCI6ODkzNzY0ODg3ODQxNTI4MTMwLCJrZXkiOi03OTAzNzYwMzQ1ODUwMTQxMzUzfQ=="
+            },
+            {
+              "id": "1461731905",
+              "name": "Under",
+              "typeId": "2068174",
+              "price": 3.75,
+              "suspended": false,
+              "handicap": "11.5",
+              "displayName": "Under {formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOi01MzQ2MTIyNzYzNTQ2NDE0NDA1LCJyZWZ1bmQiOi04NTAyMTA4MDMxMzc0NTM1Mzg1LCJrZXkiOjE0NTYwNzkzNDgyNDAzOTQ1NDZ9"
+            }
+          ]
+        },
+        {
+          "id": "377523417",
+          "handicap": 50,
+          "formattedHandicap": null,
+          "prices": [
+            {
+              "id": "1460158543",
+              "name": "Over",
+              "typeId": "2068173",
+              "price": 1.59,
+              "suspended": false,
+              "handicap": "12.5",
+              "displayName": "Over {formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOi01MjkzNzU2NjQ1Mjc2MjQxODYyLCJyZWZ1bmQiOi04NTQ0OTg1NzMyMTAxMDA2MTM1LCJrZXkiOjE2ODM2MTI5MTQzNjcxMjc3NzJ9"
+            },
+            {
+              "id": "1460158544",
+              "name": "Under",
+              "typeId": "2068174",
+              "price": 2.21,
+              "suspended": false,
+              "handicap": "12.5",
+              "displayName": "Under {formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOjEwNzI4ODgzNjQyMDA4NTc5MCwicmVmdW5kIjo0NTE0NzA1NjYxMjM5MDcwMjEyLCJrZXkiOi02ODc2OTgxOTU3MjkyMTk5NDA3fQ=="
+            }
+          ]
+        },
+        {
+          "id": "378015754",
+          "handicap": 54,
+          "formattedHandicap": null,
+          "prices": [
+            {
+              "id": "1461731902",
+              "name": "Over",
+              "typeId": "2068173",
+              "price": 2.25,
+              "suspended": false,
+              "handicap": "13.5",
+              "displayName": "Over {formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOi04NDE0NDUzMTkzMjE3MDE3MTI5LCJyZWZ1bmQiOi01NDEzMjQ0NjY4ODI1NDQ2ODI1LCJrZXkiOjMwODY5OTIyNzc4MDg4NTE1MjJ9"
+            },
+            {
+              "id": "1461731903",
+              "name": "Under",
+              "typeId": "2068174",
+              "price": 1.56,
+              "suspended": false,
+              "handicap": "13.5",
+              "displayName": "Under {formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOjcyNDE5MDAyMTQ0MzcxNTExMDcsInJlZnVuZCI6NjU4NTE5ODMzNzU5ODE1NDgxOSwia2V5IjotNDIyNzcwNjU2NjM5NzI5MTQzNH0="
+            }
+          ]
+        }
+      ],
+      "displayNameRows": [],
+      "displayNameColumns": [],
+      "additionalInfo": {
+        "boosted": false,
+        "cashoutable": true,
+        "twoUp": false
+      }
+    },
+    {
+      "marketType": {
+        "id": "4429",
+        "name": "Correct Score - FT",
+        "displayName": "Correct Score | Full Time",
+        "explainer": "Pick what the scoreline will be for the stated period. Other covers every scoreline that isn\u2019t listed.",
+        "priority": 110,
+        "tabs": [
+          "all",
+          "popular",
+          "sets"
+        ],
+        "handicapType": "",
+        "priceColumnCount": 2,
+        "priceSortingMethod": "PRICE_TYPE_ID"
+      },
+      "row": [
+        {
+          "handicap": null,
+          "formattedHandicap": null,
+          "prices": [
+            {
+              "id": "1460158555",
+              "name": "0-2",
+              "typeId": "4432",
+              "price": 2.3,
+              "suspended": false,
+              "handicap": null,
+              "displayName": "0-2",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOjI2MjY3NjI4MzM1MjE3NTIxNzgsInJlZnVuZCI6MTk5MTI1NzkxNTI4NzY4ODU2Mywia2V5IjotODgyMTEwMTE0MTg2MDE0NDc5NH0="
+            },
+            {
+              "id": "1460158556",
+              "name": "1-2",
+              "typeId": "4443",
+              "price": 3.35,
+              "suspended": false,
+              "handicap": null,
+              "displayName": "1-2",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOi02NzE5ODU3MTc1MDY2Njk1NTA4LCJyZWZ1bmQiOi03MTAyMTUzMTExMzg1NTA0NjczLCJrZXkiOjIzNjI3NzI0Mzc4MjE2NjYwMn0="
+            }
+          ]
+        },
+        {
+          "handicap": null,
+          "formattedHandicap": null,
+          "prices": [
+            {
+              "id": "1460158553",
+              "name": "2-0",
+              "typeId": "4452",
+              "price": 3.45,
+              "suspended": false,
+              "handicap": null,
+              "displayName": "2-0",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOi04Njk1OTQ4ODI2MjU1NTM4MjEwLCJyZWZ1bmQiOi01MTQzOTgyMjc0ODY5NzkwMTUwLCJrZXkiOjI3ODY0OTU1MDcyODkxMTQxNTl9"
+            },
+            {
+              "id": "1460158554",
+              "name": "2-1",
+              "typeId": "4453",
+              "price": 4.3,
+              "suspended": false,
+              "handicap": null,
+              "displayName": "2-1",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOjQ5MjY2ODQwNzUyNTczMTYwOSwicmVmdW5kIjo0MTEyMjg5ODU3MjY0NzcyNzYzLCJrZXkiOi02NDAyMjM1ODI4ODUyMDI0NjkwfQ=="
+            }
+          ]
+        }
+      ],
+      "displayNameRows": [],
+      "displayNameColumns": [],
+      "additionalInfo": {
+        "boosted": false,
+        "cashoutable": true,
+        "twoUp": false
+      }
+    },
+    {
+      "marketType": {
+        "id": "4758",
+        "name": "Moneyline - 1S",
+        "displayName": "First Set Winner",
+        "explainer": "Pick who the winner will be over the stated period. Moneyline - FT refers to the overall result.",
+        "priority": 211,
+        "tabs": [
+          "all",
+          "sets"
+        ],
+        "handicapType": "",
+        "priceColumnCount": 2,
+        "priceSortingMethod": "PRICE_TYPE_ID"
+      },
+      "row": [
+        {
+          "id": "377516333",
+          "handicap": null,
+          "formattedHandicap": null,
+          "prices": [
+            {
+              "id": "1460137407",
+              "name": "1",
+              "typeId": "4759",
+              "price": 2.09,
+              "suspended": false,
+              "handicap": null,
+              "displayName": "1",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOjgxMjc4NDIwNDgyMDc5MjMyMDEsInJlZnVuZCI6NTY5NzA3NDQ5OTk3MTIwNjk1OSwia2V5IjotMzM3NTYxMjEwOTg4MjUxMDUzNH0="
+            },
+            {
+              "id": "1460137408",
+              "name": "2",
+              "typeId": "4760",
+              "price": 1.65,
+              "suspended": false,
+              "handicap": null,
+              "displayName": "2",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOjcxMDQ5MTQ0OTgzNTI5MzExMDIsInJlZnVuZCI6NjczNjE4NzQxMDUxMjYwNDUzNSwia2V5IjotNDM3MzkwMTgwMjk3NDM3NTU4Mn0="
+            }
+          ]
+        }
+      ],
+      "displayNameRows": [],
+      "displayNameColumns": [],
+      "additionalInfo": {
+        "boosted": false,
+        "cashoutable": true,
+        "twoUp": false
+      }
+    },
+    {
+      "marketType": {
+        "id": "4666923",
+        "name": "Set 1 Game Handicap",
+        "displayName": "Game Handicap | Set 1",
+        "explainer": "Predict which player has more games won after the game handicap applies.",
+        "priority": 212,
+        "tabs": [
+          "all",
+          "sets",
+          "games"
+        ],
+        "handicapType": "ASIAN",
+        "priceColumnCount": 2,
+        "priceSortingMethod": "PRICE_TYPE_ID"
+      },
+      "row": [
+        {
+          "id": "377523419",
+          "handicap": -6,
+          "formattedHandicap": null,
+          "prices": [
+            {
+              "id": "1460158547",
+              "name": "1",
+              "typeId": "4666924",
+              "price": 2.8,
+              "suspended": false,
+              "handicap": "-1.5",
+              "displayName": "{formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOjY0NjYwNzg3NjQxMTk5Nzc3NTIsInJlZnVuZCI6NzM4MTIyMTE5MTg0NDM0ODU4OCwia2V5IjotNTUxNjUxMTk4MjAyMTY3NjIzfQ=="
+            },
+            {
+              "id": "1460158548",
+              "name": "2",
+              "typeId": "4666925",
+              "price": 1.35,
+              "suspended": false,
+              "handicap": "+1.5",
+              "displayName": "{formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOjc4NDM3MTQzMDYyNTYwNzQ1MTksInJlZnVuZCI6NTk5NzczMjE1MjkyOTA1MDE2MSwia2V5IjotMzY3MTc3MDU0NDEwMjE3MDA3Nn0="
+            }
+          ]
+        },
+        {
+          "id": "377762671",
+          "handicap": -2,
+          "formattedHandicap": null,
+          "prices": [
+            {
+              "id": "1461042391",
+              "name": "1",
+              "typeId": "4666924",
+              "price": 2.05,
+              "suspended": false,
+              "handicap": "-0.5",
+              "displayName": "{formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOi03Mzg3NjI2NDcwMDg2MDkzMTQ5LCJyZWZ1bmQiOi02NDM5NTU5NzQwNzA0MTQ5MTA3LCJrZXkiOjQwNzcyODcyOTcyMjIzMzE4MDB9"
+            },
+            {
+              "id": "1461042392",
+              "name": "2",
+              "typeId": "4666925",
+              "price": 1.63,
+              "suspended": false,
+              "handicap": "+0.5",
+              "displayName": "{formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOjg5NTYzNDcwMTI5ODE2NzY5MDUsInJlZnVuZCI6NDg3NTUxOTI3MzA5MTU4NTc5Miwia2V5IjotMjQ3NzQ5NTEzOTU5ODM1NzczOX0="
+            }
+          ]
+        },
+        {
+          "id": "377523420",
+          "handicap": 6,
+          "formattedHandicap": null,
+          "prices": [
+            {
+              "id": "1460158549",
+              "name": "1",
+              "typeId": "4666924",
+              "price": 1.57,
+              "suspended": false,
+              "handicap": "+1.5",
+              "displayName": "{formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOjU4ODU5ODI2NjA5NTYzMTI2OTgsInJlZnVuZCI6Nzk0ODI1OTU1NzA4NjQxOTE4OSwia2V5IjotMTExODQxMTg5ODA4NjgwODM1Mn0="
+            },
+            {
+              "id": "1460158550",
+              "name": "2",
+              "typeId": "4666925",
+              "price": 2.16,
+              "suspended": false,
+              "handicap": "-1.5",
+              "displayName": "{formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOjQyMTc3MTk1MjU0MDk2ODUzOTYsInJlZnVuZCI6MzgzMzgzODMwMDA0ODMyNjMwLCJrZXkiOi03MjQ5MjYwMjQ3MzY2NTM5OTMzfQ=="
+            }
+          ]
+        }
+      ],
+      "displayNameRows": [],
+      "displayNameColumns": [
+        "1",
+        "2"
+      ],
+      "additionalInfo": {
+        "boosted": false,
+        "cashoutable": true,
+        "twoUp": false
+      }
+    },
+    {
+      "marketType": {
+        "id": "4880",
+        "name": "Total Games - Over/Under - 1S",
+        "displayName": "Over/Under | Set 1 Games",
+        "explainer": "Pick how many games there will be meeting the stated criteria. Over is more than that amount, Unders is less.",
+        "priority": 213,
+        "tabs": [
+          "all",
+          "sets",
+          "games"
+        ],
+        "handicapType": "NORMAL",
+        "priceColumnCount": 2,
+        "priceSortingMethod": "PRICE_TYPE_ID"
+      },
+      "row": [
+        {
+          "id": "378017446",
+          "handicap": 42,
+          "formattedHandicap": null,
+          "prices": [
+            {
+              "id": "1461739125",
+              "name": "Over",
+              "typeId": "4881",
+              "price": 2.4,
+              "suspended": false,
+              "handicap": "10.5",
+              "displayName": "Over {formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOi01Nzg0OTA0NjYyNDAzMDk2MTY3LCJyZWZ1bmQiOi04MDQzMzgwNjkzNzgyNjUyNTU1LCJrZXkiOjEwMzMzODUyNDAwNzEyMzQ5MTJ9"
+            },
+            {
+              "id": "1461739126",
+              "name": "Under",
+              "typeId": "4882",
+              "price": 1.46,
+              "suspended": false,
+              "handicap": "10.5",
+              "displayName": "Under {formattedHandicap}",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOjg1MzQ2MDE3NzcxNTkzMjI4NzYsInJlZnVuZCI6NTMwMjExNDMzMzIwMzM0OTM2Niwia2V5IjotMjkwODMwNzkwOTEzODA3MDY4NX0="
+            }
+          ]
+        }
+      ],
+      "displayNameRows": [],
+      "displayNameColumns": [],
+      "additionalInfo": {
+        "boosted": false,
+        "cashoutable": true,
+        "twoUp": false
+      }
+    },
+    {
+      "marketType": {
+        "id": "4770",
+        "name": "Moneyline - 2S",
+        "displayName": "Second Set Winner",
+        "explainer": "Pick who the winner will be over the stated period. Moneyline - FT refers to the overall result.",
+        "priority": 221,
+        "tabs": [
+          "all",
+          "sets"
+        ],
+        "handicapType": "",
+        "priceColumnCount": 2,
+        "priceSortingMethod": "PRICE_TYPE_ID"
+      },
+      "row": [
+        {
+          "id": "377516329",
+          "handicap": null,
+          "formattedHandicap": null,
+          "prices": [
+            {
+              "id": "1460137399",
+              "name": "1",
+              "typeId": "4771",
+              "price": 2.04,
+              "suspended": false,
+              "handicap": null,
+              "displayName": "1",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOi01MjE1MTY3MTE2MTE1OTAxNjg2LCJyZWZ1bmQiOi04NjExOTY4Nzg4NDIxNDAyMjEyLCJrZXkiOjE2MDY0ODA3NDgyNTM5NjE2MDl9"
+            },
+            {
+              "id": "1460137400",
+              "name": "2",
+              "typeId": "4772",
+              "price": 1.64,
+              "suspended": false,
+              "handicap": null,
+              "displayName": "2",
+              "additionalInfo": {
+                "hot": false,
+                "twoUp": false,
+                "anyUp": "NO_UP"
+              },
+              "probability": "eyJ3aW4iOjgxNzc1MTkxMzI1ODQ5MzQ4NDUsInJlZnVuZCI6NTY2NDg0MTM5ODM3NjczMTQwMCwia2V5IjotMzQxMDY0MjcxNDQ2NzM0MDUxNX0="
+            }
+          ]
+        }
+      ],
+      "displayNameRows": [],
+      "displayNameColumns": [],
+      "additionalInfo": {
+        "boosted": false,
+        "cashoutable": true,
+        "twoUp": false
+      }
+    }
+  ],
+  "totalMarketCount": 25,
+  "category": {
+    "id": "452",
+    "name": "Tennis"
+  },
+  "region": {
+    "id": "1",
+    "name": "International"
+  },
+  "competition": {
+    "id": "16124",
+    "name": "ATP Geneva, Switzerland Men Singles"
+  },
+  "additionalInfo": {
+    "live": false
+  },
+  "score": 1.0333904033149255,
+  "neutralVenue": true,
+  "inplayBooked": true,
+  "version": 92
+}
