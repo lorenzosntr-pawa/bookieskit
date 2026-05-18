@@ -2,6 +2,23 @@
 
 All notable changes to this project are documented in this file. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.12.0] — 2026-05-18
+
+Completes basketball coverage to all 7 bookmakers by closing the three gaps deferred from 0.11.0.
+
+### Added
+
+- **`MarketMapping.sport`** field (defaults to `"soccer"`). Lets the registry disambiguate market ids that overlap across sports on the same platform. The 3 basketball mappings added in 0.11.0 now carry `sport="basketball"`; all soccer mappings inherit the default.
+- **Sport-aware registry lookup**: `MarketRegistry.get_by_platform_id(platform, id, sport=None)` accepts an optional `sport=` argument. When provided, lookup uses a new `(platform, sport, id)` index; without it, the flat per-platform index returns the first-registered mapping (pre-0.12.0 behaviour, typically soccer). The flat indexes now use first-wins so existing back-compat assertions keep passing.
+- **`parse_markets(..., sport=None)`** parameter. Wraps the registry in a thin `_SportScopedRegistry` that injects the sport filter on every per-parser lookup — no per-parser changes needed.
+- **Bet9ja basketball support**: parser now accepts `B_*` market-key prefix (basketball) alongside the existing `S_*` (soccer) and `LIVES_*` (live soccer). `_parse_bet9ja_key` preserves the original 2-char prefix so registry lookups match the correct `bet9ja_key`. Tested against a captured Baskets Bonn vs Wurzburg Baskets event — all three markets parse correctly (ML 2 outcomes, O/U 13 lines, handicap 13 lines).
+- **Betika basketball ML + O/U fixture**: captured a multi-market `basketball.json` for Betika (Oklahoma vs San Antonio, sub_type_ids 219 + 225). The parser already accepted those SR-standard codes; the missing piece was just a fixture that exercised them. Handicap is **not offered** by Betika for basketball — pinned with a dedicated test that asserts the canonical_id is absent.
+- **SportPesa basketball end-to-end**: the three mapping rows that were `sportpesa_id=None` in 0.11.0 now carry the real ids (`382` ML, `52` O/U, `51` handicap). The sport-aware registry lookup picks the basketball mapping when `parse_markets(..., sport="basketball")` is called; the bare lookup still returns the football O/U for id `52` (pre-0.12.0 callers unchanged). Fixture-bound tests pin both behaviours.
+
+### Test count
+
+492 → 502 passing (+10 across the SportPesa basketball trio, Bet9ja basketball additions to the parametrize, Betika ML+O/U + the no-handicap regression test).
+
 ## [0.11.0] — 2026-05-18
 
 First non-soccer sport: basketball. Three canonical markets land for the big-three basketball bets across 4 of 7 bookmakers.
