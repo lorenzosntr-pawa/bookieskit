@@ -25,28 +25,57 @@ class MarketRegistry:
         self._by_msport: dict[str, MarketMapping] = {}
         self._by_sportpesa: dict[str, MarketMapping] = {}
         self._by_betika: dict[str, MarketMapping] = {}
+        # Sport-scoped index: (platform, sport, market_id) -> mapping.
+        # Used to disambiguate market ids that are shared across sports
+        # on the same platform (e.g. SportPesa's id "52" is football
+        # Over/Under AND basketball Over/Under).
+        self._by_platform_sport_id: dict[
+            tuple[str, str, str], MarketMapping
+        ] = {}
 
         if load_builtins:
             for mapping in BUILTIN_MAPPINGS:
                 self._register(mapping)
 
     def _register(self, mapping: MarketMapping) -> None:
-        """Register a mapping in all lookup indices."""
+        """Register a mapping in all lookup indices.
+
+        The flat per-platform indexes use first-registered-wins so a
+        bare ``get_by_platform_id(platform, id)`` call returns the
+        same mapping a pre-0.12.0 caller would have got (typically the
+        soccer mapping, since soccer entries are loaded first by
+        :data:`BUILTIN_MAPPINGS`). Sport disambiguation requires the
+        explicit ``sport=`` argument on the lookup method.
+        """
         self._by_canonical[mapping.canonical_id] = mapping
-        if mapping.betpawa_id:
-            self._by_betpawa[mapping.betpawa_id] = mapping
-        if mapping.sportybet_id:
-            self._by_sportybet[mapping.sportybet_id] = mapping
-        if mapping.bet9ja_key:
-            self._by_bet9ja[mapping.bet9ja_key] = mapping
-        if mapping.betway_id:
-            self._by_betway[mapping.betway_id] = mapping
-        if mapping.msport_id:
-            self._by_msport[mapping.msport_id] = mapping
-        if mapping.sportpesa_id:
-            self._by_sportpesa[mapping.sportpesa_id] = mapping
-        if mapping.betika_id:
-            self._by_betika[mapping.betika_id] = mapping
+
+        def _add_to(index: dict[str, MarketMapping], key: str | None) -> None:
+            if key and key not in index:
+                index[key] = mapping
+
+        _add_to(self._by_betpawa, mapping.betpawa_id)
+        _add_to(self._by_sportybet, mapping.sportybet_id)
+        _add_to(self._by_bet9ja, mapping.bet9ja_key)
+        _add_to(self._by_betway, mapping.betway_id)
+        _add_to(self._by_msport, mapping.msport_id)
+        _add_to(self._by_sportpesa, mapping.sportpesa_id)
+        _add_to(self._by_betika, mapping.betika_id)
+
+        # Always populate the sport-scoped index — (platform, sport, id)
+        # is unique so we don't need first-wins guarding.
+        for platform, market_id in (
+            ("betpawa", mapping.betpawa_id),
+            ("sportybet", mapping.sportybet_id),
+            ("bet9ja", mapping.bet9ja_key),
+            ("betway", mapping.betway_id),
+            ("msport", mapping.msport_id),
+            ("sportpesa", mapping.sportpesa_id),
+            ("betika", mapping.betika_id),
+        ):
+            if market_id:
+                self._by_platform_sport_id[
+                    (platform, mapping.sport, market_id)
+                ] = mapping
 
     def add(
         self,
@@ -104,7 +133,10 @@ class MarketRegistry:
         return self._by_canonical.get(canonical_id)
 
     def get_by_platform_id(
-        self, platform: str, platform_id: str
+        self,
+        platform: str,
+        platform_id: str,
+        sport: str | None = None,
     ) -> MarketMapping | None:
         """Return the MarketMapping for a platform-specific ID.
 
@@ -112,10 +144,19 @@ class MarketRegistry:
             platform: One of "betpawa", "sportybet", "bet9ja", "betway",
                 "msport", "sportpesa", or "betika".
             platform_id: Platform-specific market ID or key.
+            sport: Optional sport filter. Pass ``"basketball"`` to
+                disambiguate IDs that overlap across sports (e.g.
+                SportPesa's id ``"52"`` is football O/U AND basketball
+                O/U). Omitting it falls back to the first-registered
+                mapping for that id — typically soccer.
 
         Returns:
             Matching MarketMapping, or None if the platform or ID is unrecognised.
         """
+        if sport is not None:
+            return self._by_platform_sport_id.get(
+                (platform, sport, platform_id)
+            )
         index = {
             "betpawa": self._by_betpawa,
             "sportybet": self._by_sportybet,

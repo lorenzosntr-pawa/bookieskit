@@ -278,8 +278,9 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
         bet9ja_key="B_12",
         betway_id="Winner (Incl. Overtime)",
         msport_id="219",
-        sportpesa_id=None,  # deferred — sport-scoped id collision
+        sportpesa_id="382",  # "2 Way - OT incl." (basketball)
         betika_id="219",
+        sport="basketball",
         outcomes={
             "home": OutcomeMapping(
                 canonical_name="home",
@@ -288,7 +289,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 bet9ja="1",
                 betway="__HOME__",
                 msport="Home",
-                sportpesa="",
+                sportpesa="1",
                 betika="1",
             ),
             "away": OutcomeMapping(
@@ -298,7 +299,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 bet9ja="2",
                 betway="__POS_2__",
                 msport="Away",
-                sportpesa="",
+                sportpesa="2",
                 betika="2",
             ),
         },
@@ -312,8 +313,9 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
         bet9ja_key="B_OUN",
         betway_id="Total (Incl. Overtime)",
         msport_id="225",
-        sportpesa_id=None,  # deferred — sport-scoped id collision (52)
+        sportpesa_id="52",  # collides with soccer O/U; disambiguated by sport field
         betika_id="225",
+        sport="basketball",
         outcomes={
             "over": OutcomeMapping(
                 canonical_name="over",
@@ -322,7 +324,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 bet9ja="O",
                 betway="Over",
                 msport="Over",
-                sportpesa="",
+                sportpesa="OV",
                 betika="Over",
             ),
             "under": OutcomeMapping(
@@ -332,7 +334,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 bet9ja="U",
                 betway="Under",
                 msport="Under",
-                sportpesa="",
+                sportpesa="UN",
                 betika="Under",
             ),
         },
@@ -351,8 +353,9 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
         bet9ja_key="B_H",
         betway_id="Handicap (Incl. Overtime)",
         msport_id="223",
-        sportpesa_id=None,  # deferred — sport-scoped id collision
+        sportpesa_id="51",  # "Handicap - OT incl." (basketball)
         betika_id=None,  # Betika does not currently expose basketball handicap
+        sport="basketball",
         outcomes={
             "home": OutcomeMapping(
                 canonical_name="home",
@@ -361,7 +364,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 bet9ja="1",
                 betway="__HOME__",
                 msport="Home",
-                sportpesa="",
+                sportpesa="1",
                 betika="",
             ),
             "away": OutcomeMapping(
@@ -371,7 +374,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 bet9ja="2",
                 betway="__POS_2__",
                 msport="Away",
-                sportpesa="",
+                sportpesa="2",
                 betika="",
             ),
         },

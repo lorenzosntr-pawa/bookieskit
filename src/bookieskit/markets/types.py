@@ -57,7 +57,16 @@ class OutcomeMapping:
 
 @dataclass(frozen=True)
 class MarketMapping:
-    """Defines how one market maps across platforms."""
+    """Defines how one market maps across platforms.
+
+    The ``sport`` field disambiguates platforms whose market ids are
+    sport-scoped (e.g. SportPesa uses id ``52`` for both football
+    Over/Under and basketball Over/Under). Lookups via
+    :meth:`MarketRegistry.get_by_platform_id` accept an optional
+    ``sport=`` argument to pick the right mapping; omitting it preserves
+    pre-0.12.0 behaviour (returns whichever mapping was registered
+    first, typically soccer).
+    """
 
     canonical_id: str
     name: str
@@ -70,3 +79,4 @@ class MarketMapping:
     betika_id: str | None = None
     outcomes: dict[str, OutcomeMapping] = field(default_factory=dict)
     parameterized: bool = False
+    sport: str = "soccer"
