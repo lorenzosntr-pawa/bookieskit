@@ -6,11 +6,12 @@ from bookieskit.markets.types import OutcomeMapping
 def test_registry_loads_builtins_by_default():
     registry = MarketRegistry()
     markets = registry.list_markets()
-    # 9 soccer markets: 1X2, O/U, BTTS, DC, 1X2 1Up, 1X2 2Up, next_goal_ft,
-    #                   home_over_under_ft, away_over_under_ft
+    # 10 soccer markets: 1X2, O/U, BTTS, DC, 1X2 1Up, 1X2 2Up, next_goal_ft,
+    #                    home_over_under_ft, away_over_under_ft,
+    #                    2way_handicap_ft
     # 3 basketball markets: moneyline, O/U, handicap (basketball_ft suffix)
     # 4 tennis markets: moneyline, O/U games, O/U sets, handicap games
-    assert len(markets) == 16
+    assert len(markets) == 17
 
 
 def test_registry_no_builtins():
@@ -80,8 +81,8 @@ def test_registry_add_custom_mapping():
             ),
         },
     )
-    # 16 builtins (9 soccer + 3 basketball + 4 tennis) + draw_no_bet
-    assert len(registry.list_markets()) == 17
+    # 17 builtins (10 soccer + 3 basketball + 4 tennis) + draw_no_bet
+    assert len(registry.list_markets()) == 18
     mapping = registry.get_by_canonical("draw_no_bet_ft")
     assert mapping is not None
     assert mapping.betpawa_id == "4703"
@@ -334,3 +335,34 @@ def test_registry_has_away_over_under_ft():
 
     assert r.get_by_platform_id("betpawa", "5003") is m
     assert r.get_by_platform_id("sportybet", "20") is m
+
+
+def test_registry_has_2way_handicap_ft():
+    from bookieskit.markets.registry import MarketRegistry
+    r = MarketRegistry()
+    m = r.get_by_canonical("2way_handicap_ft")
+    assert m is not None
+    assert m.name == "2-Way Asian Handicap - Full Time"
+    assert m.parameterized is True
+    assert m.sport == "soccer"
+    assert m.betpawa_id == "3774"
+    assert m.bet9ja_key == "S_AH"
+    assert m.sportybet_id == "16"
+    assert m.msport_id == "16"
+    assert m.betway_id == "[Handicap] [2-Way]"
+    assert m.betika_id is None  # NOT EXPOSED on Betika
+    assert m.sportpesa_id is None  # not probed
+    assert set(m.outcomes.keys()) == {"home", "away"}
+    # Per-bookmaker outcome strings
+    assert m.outcomes["home"].betpawa == "1"
+    assert m.outcomes["home"].bet9ja == "1"
+    assert m.outcomes["home"].sportybet == "Home"
+    assert m.outcomes["home"].betway == "__HOME__"
+    assert m.outcomes["away"].betpawa == "2"
+    assert m.outcomes["away"].bet9ja == "2"
+    assert m.outcomes["away"].betway == "__POS_2__"
+    # Platform-id lookups
+    assert r.get_by_platform_id("betpawa", "3774") is m
+    assert r.get_by_platform_id("bet9ja", "S_AH") is m
+    assert r.get_by_platform_id("sportybet", "16") is m
+    assert r.get_by_platform_id("betway", "[Handicap] [2-Way]") is m

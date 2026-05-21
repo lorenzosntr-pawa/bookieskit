@@ -717,4 +717,64 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
         },
         parameterized=True,
     ),
+    # =================== Soccer — 2-way Asian Handicap ==================
+    # Asian Handicap (2-way, home/away). Signed line from home's
+    # perspective — line=-1.5 means home gives 1.5 goals. Both outcomes
+    # live under a single signed key (same convention as
+    # 2way_handicap_basketball_ft and handicap_games_tennis_match).
+    #
+    # The "2way_" prefix distinguishes this from a hypothetical future
+    # 3way_handicap_ft (the European 1X2 handicap with draw). BetPawa
+    # ships both as separate markets (id=3774 vs id=4724); Bet9ja
+    # similarly ships S_AH (Asian) vs S_1X2HND (European). The 3-way
+    # variant is explicitly out of scope for this release.
+    #
+    # Quarter lines (0.25 / 0.75 steps) work natively — the lines dict
+    # accepts any float key.
+    #
+    # Per-bookmaker coverage notes:
+    #   - Betika does NOT expose 2-way Asian Handicap (only the 3-way
+    #     HANDICAP (1X2) at sub_type_id=14); confirmed via Task 2 probe
+    #     sweep of sub_type_ids 1-200. Stays None.
+    #   - SportPesa: NOT PROBED — Akamai cookie unavailable at probe
+    #     time; same precedent as the 0.14.0 soccer markets.
+    #   - Betway ships the market with a HANDICAP=0 anchor row plus
+    #     children carrying real signed handicap values; existing
+    #     _build_betway_parameterized Case 1 (parent + per-line
+    #     distribution) handles this correctly.
+    MarketMapping(
+        canonical_id="2way_handicap_ft",
+        name="2-Way Asian Handicap - Full Time",
+        betpawa_id="3774",
+        sportybet_id="16",        # probe-confirmed (SR-code mirror)
+        bet9ja_key="S_AH",
+        betway_id="[Handicap] [2-Way]",  # probe-confirmed literal name
+        msport_id="16",           # probe-confirmed (SR-code mirror)
+        sportpesa_id=None,        # NOT PROBED — Akamai cookie unavailable
+        betika_id=None,           # NOT EXPOSED — Betika only ships 3-way handicap
+        sport="soccer",
+        outcomes={
+            "home": OutcomeMapping(
+                canonical_name="home",
+                betpawa="1",
+                sportybet="Home",
+                bet9ja="1",
+                betway="__HOME__",
+                msport="Home",
+                sportpesa="1",
+                betika="",
+            ),
+            "away": OutcomeMapping(
+                canonical_name="away",
+                betpawa="2",
+                sportybet="Away",
+                bet9ja="2",
+                betway="__POS_2__",
+                msport="Away",
+                sportpesa="2",
+                betika="",
+            ),
+        },
+        parameterized=True,
+    ),
 ]
