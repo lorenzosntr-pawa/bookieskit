@@ -130,3 +130,29 @@ def test_parse_betpawa_with_custom_registry():
         BETPAWA_EVENT_RESPONSE, platform="betpawa", registry=registry
     )
     assert len(markets) == 0
+
+
+def test_parse_betpawa_next_goal_ft_from_real_fixture():
+    import json
+    from pathlib import Path
+    from bookieskit.markets.parser import parse_markets
+
+    fixture = Path("tests/fixtures/event_info/betpawa/prematch.json")
+    response = json.loads(fixture.read_text(encoding="utf-8"))
+
+    markets = parse_markets(response, platform="betpawa")
+    ng = next(
+        (m for m in markets if m.canonical_id == "next_goal_ft"),
+        None,
+    )
+    assert ng is not None
+    assert ng.name == "Next Goal - Full Time"
+    assert ng.lines is not None
+    # Prematch always has goal-number 1 (the next-goal-to-be-scored)
+    assert 1.0 in ng.lines
+    line1 = {o.canonical_name: o for o in ng.lines[1.0]}
+    assert set(line1.keys()) == {"home", "none", "away"}
+    # From the fixture: 1=1.94, None=11.04, 2=2.20
+    assert line1["home"].odds == 1.94
+    assert line1["none"].odds == 11.04
+    assert line1["away"].odds == 2.20

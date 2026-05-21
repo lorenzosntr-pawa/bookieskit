@@ -118,3 +118,27 @@ def test_extract_line_from_specifier_recognises_goalnr():
     assert _extract_line_from_specifier("total=2.5|goalnr=3") == 2.5  # total wins (first match)
     # Non-recognised key still returns None
     assert _extract_line_from_specifier("foo=1") is None
+
+
+def test_parse_sportybet_next_goal_ft_from_real_fixture():
+    import json
+    from pathlib import Path
+    from bookieskit.markets.parser import parse_markets
+
+    fixture = Path("tests/fixtures/event_info/sportybet/prematch.json")
+    response = json.loads(fixture.read_text(encoding="utf-8"))
+
+    markets = parse_markets(response, platform="sportybet")
+    ng = next(
+        (m for m in markets if m.canonical_id == "next_goal_ft"),
+        None,
+    )
+    assert ng is not None
+    assert ng.lines is not None
+    assert 1.0 in ng.lines  # 1st Goal — goalnr=1 → line=1.0
+    line1 = {o.canonical_name: o for o in ng.lines[1.0]}
+    assert set(line1.keys()) == {"home", "none", "away"}
+    # From the fixture: Home=1.93, None=11.00, Away=2.20
+    assert line1["home"].odds == 1.93
+    assert line1["none"].odds == 11.00
+    assert line1["away"].odds == 2.20
