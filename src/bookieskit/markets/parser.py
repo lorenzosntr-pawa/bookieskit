@@ -377,12 +377,12 @@ def _extract_line_from_specifier(specifier: str) -> float | None:
     """Extract line value from a specifier string.
 
     Shared by SportyBet and MSport — both use the same pipe-delimited
-    key=value format (e.g., "total=2.5", "hcp=-0.5").
+    key=value format (e.g., "total=2.5", "hcp=-0.5", "goalnr=1").
     """
     for part in specifier.split("|"):
         if "=" in part:
             key, value = part.split("=", 1)
-            if key in ("total", "hcp"):
+            if key in ("total", "hcp", "goalnr"):
                 try:
                     return float(value)
                 except ValueError:

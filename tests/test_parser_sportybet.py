@@ -109,3 +109,12 @@ def test_parse_sportybet_double_chance():
 def test_parse_sportybet_skips_unknown():
     markets = parse_markets(SPORTYBET_EVENT_RESPONSE, platform="sportybet")
     assert len(markets) == 4
+
+
+def test_extract_line_from_specifier_recognises_goalnr():
+    from bookieskit.markets.parser import _extract_line_from_specifier
+    assert _extract_line_from_specifier("goalnr=1") == 1.0
+    assert _extract_line_from_specifier("goalnr=2") == 2.0
+    assert _extract_line_from_specifier("total=2.5|goalnr=3") == 2.5  # total wins (first match)
+    # Non-recognised key still returns None
+    assert _extract_line_from_specifier("foo=1") is None
