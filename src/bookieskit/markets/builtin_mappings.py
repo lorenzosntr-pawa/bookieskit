@@ -547,4 +547,73 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
         },
         parameterized=True,
     ),
+    # =================== Soccer — Next Goal ============================
+    # 1st Goal / Nth Goal: which team scores the next goal. Prematch
+    # always carries goal-number 1 (line=1.0); during live play multiple
+    # goal numbers can be exposed (line=2.0 after the first goal is
+    # scored, etc.). The line value is the GOAL NUMBER, not a goal-count
+    # threshold — distinct semantic from over_under_ft despite reusing
+    # the parameterized lines dict.
+    #
+    # Per-bookmaker line-extraction shapes:
+    #   - SportyBet/MSport: specifier="goalnr=N" — extended
+    #     _extract_line_from_specifier recognises goalnr= alongside
+    #     total= and hcp=.
+    #   - BetPawa: formattedHandicap="N" — already read first by
+    #     _parse_betpawa_parameterized.
+    #   - Bet9ja: line in @-segment of the odds key (S_NG@N_outcome).
+    #   - Betway: per-line entries with handicap=N.
+    #   - SportPesa: specValue=N on the market entry.
+    #   - Betika: special_bet_value="N" or extracted from display.
+    #
+    # IDs for bet9ja/betway/sportpesa/betika are locked-in via the
+    # probe script run as Phase 0 of this implementation.
+    MarketMapping(
+        canonical_id="next_goal_ft",
+        name="Next Goal - Full Time",
+        betpawa_id="28000224",
+        sportybet_id="8",
+        bet9ja_key=None,        # set from probe; None if Bet9ja doesn't expose
+        betway_id=None,         # set from probe
+        msport_id="8",          # tentative SR-code mirror; probe confirms
+        sportpesa_id=None,      # set from probe
+        betika_id=None,         # set from probe
+        sport="soccer",
+        outcomes={
+            "home": OutcomeMapping(
+                canonical_name="home",
+                betpawa="1",
+                sportybet="Home",
+                bet9ja="1",
+                betway="__HOME__",
+                msport="Home",
+                sportpesa="1",
+                betika="1",
+            ),
+            # The none-outcome strings for bet9ja / sportpesa / betika
+            # are tentative best-guesses (SR convention "X" / "None");
+            # probe confirms or replaces.
+            "none": OutcomeMapping(
+                canonical_name="none",
+                betpawa="None",
+                sportybet="None",
+                bet9ja="X",
+                betway="__POS_2__",
+                msport="None",
+                sportpesa="X",
+                betika="None",
+            ),
+            "away": OutcomeMapping(
+                canonical_name="away",
+                betpawa="2",
+                sportybet="Away",
+                bet9ja="2",
+                betway="__POS_2__",
+                msport="Away",
+                sportpesa="2",
+                betika="2",
+            ),
+        },
+        parameterized=True,
+    ),
 ]

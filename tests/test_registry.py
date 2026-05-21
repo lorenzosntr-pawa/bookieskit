@@ -6,10 +6,10 @@ from bookieskit.markets.types import OutcomeMapping
 def test_registry_loads_builtins_by_default():
     registry = MarketRegistry()
     markets = registry.list_markets()
-    # 6 soccer markets: 1X2, O/U, BTTS, DC + 1X2 1Up, 1X2 2Up
+    # 7 soccer markets: 1X2, O/U, BTTS, DC, 1X2 1Up, 1X2 2Up, next_goal_ft
     # 3 basketball markets: moneyline, O/U, handicap (basketball_ft suffix)
     # 4 tennis markets: moneyline, O/U games, O/U sets, handicap games
-    assert len(markets) == 13
+    assert len(markets) == 14
 
 
 def test_registry_no_builtins():
@@ -79,8 +79,8 @@ def test_registry_add_custom_mapping():
             ),
         },
     )
-    # 13 builtins (6 soccer + 3 basketball + 4 tennis) + draw_no_bet
-    assert len(registry.list_markets()) == 14
+    # 14 builtins (7 soccer + 3 basketball + 4 tennis) + draw_no_bet
+    assert len(registry.list_markets()) == 15
     mapping = registry.get_by_canonical("draw_no_bet_ft")
     assert mapping is not None
     assert mapping.betpawa_id == "4703"
@@ -273,3 +273,25 @@ def test_builtin_1up_2up_have_no_betika_mapping():
         assert om.betika == ""
     for om in two_up.outcomes.values():
         assert om.betika == ""
+
+
+def test_registry_has_next_goal_ft():
+    from bookieskit.markets.registry import MarketRegistry
+    r = MarketRegistry()
+    m = r.get_by_canonical("next_goal_ft")
+    assert m is not None
+    assert m.name == "Next Goal - Full Time"
+    assert m.parameterized is True
+    assert m.sport == "soccer"
+    assert m.betpawa_id == "28000224"
+    assert m.sportybet_id == "8"
+    # Outcomes: home, none, away
+    assert set(m.outcomes.keys()) == {"home", "none", "away"}
+    assert m.outcomes["home"].betpawa == "1"
+    assert m.outcomes["none"].betpawa == "None"
+    assert m.outcomes["none"].sportybet == "None"
+    assert m.outcomes["away"].betpawa == "2"
+
+    # Platform-id lookups
+    assert r.get_by_platform_id("betpawa", "28000224") is m
+    assert r.get_by_platform_id("sportybet", "8") is m
