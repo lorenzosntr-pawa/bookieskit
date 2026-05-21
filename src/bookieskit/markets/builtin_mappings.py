@@ -340,14 +340,17 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
         },
         parameterized=True,
     ),
-    # Basketball handicap uses signed lines: home -5.5 means home gives
-    # 5.5 points. The bookmakers ship the home-perspective signed line
-    # (e.g. -5.5); the parser stores the home outcome at key=-5.5 and
-    # the away outcome at key=+5.5 per the spec ("each side ships with
-    # its own signed line"). Callers pair entries by abs().
+    # Basketball handicap (2-way, home/away) uses signed lines: home
+    # -5.5 means home gives 5.5 points. The bookmakers ship the
+    # home-perspective signed line (e.g. -5.5); the parser stores the
+    # home outcome at key=-5.5 and the away outcome at key=+5.5 per
+    # the spec ("each side ships with its own signed line"). Callers
+    # pair entries by abs(). The "2way_" prefix on the canonical_id
+    # disambiguates from a hypothetical future 3way (European 1X2)
+    # handicap variant; see 2way_handicap_ft for the soccer companion.
     MarketMapping(
-        canonical_id="handicap_basketball_ft",
-        name="Handicap - Full Time (incl. OT)",
+        canonical_id="2way_handicap_basketball_ft",
+        name="2-Way Handicap - Full Time (incl. OT)",
         betpawa_id="3777",
         sportybet_id="223",
         bet9ja_key="B_H",

@@ -86,7 +86,7 @@ SPORT_CONFIG = {
         "expected_canonicals": (
             "moneyline_basketball_ft",
             "over_under_basketball_ft",
-            "handicap_basketball_ft",
+            "2way_handicap_basketball_ft",
         ),
     },
     "452": {  # BetPawa tennis
@@ -400,7 +400,7 @@ def _canonical_short(canonical_id: str) -> str:
         "1x2_2up_ft": "2Up",
         "moneyline_basketball_ft": "ML",
         "over_under_basketball_ft": "O/U",
-        "handicap_basketball_ft": "HCAP",
+        "2way_handicap_basketball_ft": "HCAP",
         "moneyline_tennis_match": "ML",
         "over_under_games_tennis_match": "OU-G",
         "over_under_sets_tennis_match": "OU-S",

@@ -178,4 +178,4 @@ def test_tennis_sportpesa_requires_sport_filter():
     tennis = parse_markets(raw, platform="sportpesa", sport="tennis")
     canonical = {m.canonical_id for m in tennis}
     assert "handicap_games_tennis_match" in canonical
-    assert "handicap_basketball_ft" not in canonical
+    assert "2way_handicap_basketball_ft" not in canonical

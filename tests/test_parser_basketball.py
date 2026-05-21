@@ -54,8 +54,8 @@ def test_basketball_parser_recognises_three_markets(platform):
     assert "over_under_basketball_ft" in canonical, (
         f"{platform} missing over_under_basketball_ft"
     )
-    assert "handicap_basketball_ft" in canonical, (
-        f"{platform} missing handicap_basketball_ft"
+    assert "2way_handicap_basketball_ft" in canonical, (
+        f"{platform} missing 2way_handicap_basketball_ft"
     )
 
 
@@ -66,7 +66,7 @@ def test_betika_basketball_ml_and_ou_only_no_handicap():
     canonical = {m.canonical_id for m in result}
     assert "moneyline_basketball_ft" in canonical
     assert "over_under_basketball_ft" in canonical
-    assert "handicap_basketball_ft" not in canonical
+    assert "2way_handicap_basketball_ft" not in canonical
 
 
 @pytest.mark.parametrize("platform", ML_OU_PLATFORMS)
@@ -128,7 +128,7 @@ def test_sportpesa_basketball_requires_sport_filter():
     canonical_bb = {m.canonical_id for m in bb}
     assert "moneyline_basketball_ft" in canonical_bb
     assert "over_under_basketball_ft" in canonical_bb
-    assert "handicap_basketball_ft" in canonical_bb
+    assert "2way_handicap_basketball_ft" in canonical_bb
     assert "over_under_ft" not in canonical_bb
 
 
@@ -145,7 +145,7 @@ def test_sportpesa_basketball_handicap():
     raw = _load("sportpesa", "basketball_markets")
     result = parse_markets(raw, platform="sportpesa", sport="basketball")
     hcap = next(
-        m for m in result if m.canonical_id == "handicap_basketball_ft"
+        m for m in result if m.canonical_id == "2way_handicap_basketball_ft"
     )
     assert hcap.outcomes == []
     assert hcap.lines is not None
@@ -161,7 +161,7 @@ def test_basketball_handicap_signed_lines(platform):
     """
     result = parse_markets(_load(platform), platform=platform)
     hcap = next(
-        m for m in result if m.canonical_id == "handicap_basketball_ft"
+        m for m in result if m.canonical_id == "2way_handicap_basketball_ft"
     )
     assert hcap.outcomes == []
     assert hcap.lines is not None
