@@ -1,0 +1,248 @@
+{
+  "data": [
+    {
+      "home_team": "Wolfsburg",
+      "game_id": "12133",
+      "match_id": "10945916",
+      "away_team": "Paderborn",
+      "start_time": "2026-05-21 21:30:00",
+      "competition_name": "Bundesliga",
+      "category": "Germany",
+      "parent_match_id": "71443804",
+      "side_bets": "82",
+      "home_odd": "1.75",
+      "neutral_odd": "3.90",
+      "away_odd": "4.70",
+      "competition_id": "214",
+      "sport_id": "14",
+      "sport_name": "Soccer",
+      "is_esport": false,
+      "is_srl": false,
+      "odds": [
+        {
+          "sub_type_id": "1",
+          "name": "1X2",
+          "odds": [
+            {
+              "display": "1",
+              "odd_key": "Wolfsburg",
+              "odd_def": "{$competitor1}",
+              "odd_value": "1.75",
+              "special_bet_value": "",
+              "outcome_id": "1",
+              "parsed_special_bet_value": {
+                "": ""
+              }
+            },
+            {
+              "display": "X",
+              "odd_key": "draw",
+              "odd_def": "draw",
+              "odd_value": "3.90",
+              "special_bet_value": "",
+              "outcome_id": "2",
+              "parsed_special_bet_value": {
+                "": ""
+              }
+            },
+            {
+              "display": "2",
+              "odd_key": "Paderborn",
+              "odd_def": "{$competitor2}",
+              "odd_value": "4.70",
+              "special_bet_value": "",
+              "outcome_id": "3",
+              "parsed_special_bet_value": {
+                "": ""
+              }
+            }
+          ]
+        },
+        {
+          "sub_type_id": "8",
+          "name": "1ST GOAL",
+          "odds": [
+            {
+              "display": "NONE",
+              "odd_key": "none",
+              "odd_def": "none",
+              "odd_value": "14.00",
+              "special_bet_value": "goalnr=1",
+              "outcome_id": "7",
+              "parsed_special_bet_value": {
+                "goalnr": "1"
+              }
+            },
+            {
+              "display": "1",
+              "odd_key": "Wolfsburg",
+              "odd_def": "{$competitor1}",
+              "odd_value": "1.57",
+              "special_bet_value": "goalnr=1",
+              "outcome_id": "6",
+              "parsed_special_bet_value": {
+                "goalnr": "1"
+              }
+            },
+            {
+              "display": "2",
+              "odd_key": "Paderborn",
+              "odd_def": "{$competitor2}",
+              "odd_value": "2.75",
+              "special_bet_value": "goalnr=1",
+              "outcome_id": "8",
+              "parsed_special_bet_value": {
+                "goalnr": "1"
+              }
+            }
+          ]
+        },
+        {
+          "sub_type_id": "19",
+          "name": "WOLFSBURG TOTAL",
+          "odds": [
+            {
+              "display": "OVER 0.5",
+              "odd_key": "over 0.5",
+              "odd_def": "over {total}",
+              "odd_value": "1.15",
+              "special_bet_value": "total=0.5",
+              "outcome_id": "12",
+              "parsed_special_bet_value": {
+                "total": "0.5"
+              }
+            },
+            {
+              "display": "OVER 1.5",
+              "odd_key": "over 1.5",
+              "odd_def": "over {total}",
+              "odd_value": "1.71",
+              "special_bet_value": "total=1.5",
+              "outcome_id": "12",
+              "parsed_special_bet_value": {
+                "total": "1.5"
+              }
+            },
+            {
+              "display": "OVER 2.5",
+              "odd_key": "over 2.5",
+              "odd_def": "over {total}",
+              "odd_value": "3.15",
+              "special_bet_value": "total=2.5",
+              "outcome_id": "12",
+              "parsed_special_bet_value": {
+                "total": "2.5"
+              }
+            },
+            {
+              "display": "UNDER 0.5",
+              "odd_key": "under 0.5",
+              "odd_def": "under {total}",
+              "odd_value": "5.00",
+              "special_bet_value": "total=0.5",
+              "outcome_id": "13",
+              "parsed_special_bet_value": {
+                "total": "0.5"
+              }
+            },
+            {
+              "display": "UNDER 1.5",
+              "odd_key": "under 1.5",
+              "odd_def": "under {total}",
+              "odd_value": "2.06",
+              "special_bet_value": "total=1.5",
+              "outcome_id": "13",
+              "parsed_special_bet_value": {
+                "total": "1.5"
+              }
+            },
+            {
+              "display": "UNDER 2.5",
+              "odd_key": "under 2.5",
+              "odd_def": "under {total}",
+              "odd_value": "1.33",
+              "special_bet_value": "total=2.5",
+              "outcome_id": "13",
+              "parsed_special_bet_value": {
+                "total": "2.5"
+              }
+            }
+          ]
+        },
+        {
+          "sub_type_id": "20",
+          "name": "PADERBORN TOTAL",
+          "odds": [
+            {
+              "display": "OVER 0.5",
+              "odd_key": "over 0.5",
+              "odd_def": "over {total}",
+              "odd_value": "1.48",
+              "special_bet_value": "total=0.5",
+              "outcome_id": "12",
+              "parsed_special_bet_value": {
+                "total": "0.5"
+              }
+            },
+            {
+              "display": "OVER 1.5",
+              "odd_key": "over 1.5",
+              "odd_def": "over {total}",
+              "odd_value": "3.25",
+              "special_bet_value": "total=1.5",
+              "outcome_id": "12",
+              "parsed_special_bet_value": {
+                "total": "1.5"
+              }
+            },
+            {
+              "display": "OVER 2.5",
+              "odd_key": "over 2.5",
+              "odd_def": "over {total}",
+              "odd_value": "8.00",
+              "special_bet_value": "total=2.5",
+              "outcome_id": "12",
+              "parsed_special_bet_value": {
+                "total": "2.5"
+              }
+            },
+            {
+              "display": "UNDER 0.5",
+              "odd_key": "under 0.5",
+              "odd_def": "under {total}",
+              "odd_value": "2.55",
+              "special_bet_value": "total=0.5",
+              "outcome_id": "13",
+              "parsed_special_bet_value": {
+                "total": "0.5"
+              }
+            },
+            {
+              "display": "UNDER 1.5",
+              "odd_key": "under 1.5",
+              "odd_def": "under {total}",
+              "odd_value": "1.31",
+              "special_bet_value": "total=1.5",
+              "outcome_id": "13",
+              "parsed_special_bet_value": {
+                "total": "1.5"
+              }
+            },
+            {
+              "display": "UNDER 2.5",
+              "odd_key": "under 2.5",
+              "odd_def": "under {total}",
+              "odd_value": "1.06",
+              "special_bet_value": "total=2.5",
+              "outcome_id": "13",
+              "parsed_special_bet_value": {
+                "total": "2.5"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "meta": {}
+}
