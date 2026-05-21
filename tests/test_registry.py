@@ -6,11 +6,11 @@ from bookieskit.markets.types import OutcomeMapping
 def test_registry_loads_builtins_by_default():
     registry = MarketRegistry()
     markets = registry.list_markets()
-    # 8 soccer markets: 1X2, O/U, BTTS, DC, 1X2 1Up, 1X2 2Up, next_goal_ft,
-    #                   home_over_under_ft
+    # 9 soccer markets: 1X2, O/U, BTTS, DC, 1X2 1Up, 1X2 2Up, next_goal_ft,
+    #                   home_over_under_ft, away_over_under_ft
     # 3 basketball markets: moneyline, O/U, handicap (basketball_ft suffix)
     # 4 tennis markets: moneyline, O/U games, O/U sets, handicap games
-    assert len(markets) == 15
+    assert len(markets) == 16
 
 
 def test_registry_no_builtins():
@@ -80,8 +80,8 @@ def test_registry_add_custom_mapping():
             ),
         },
     )
-    # 15 builtins (8 soccer + 3 basketball + 4 tennis) + draw_no_bet
-    assert len(registry.list_markets()) == 16
+    # 16 builtins (9 soccer + 3 basketball + 4 tennis) + draw_no_bet
+    assert len(registry.list_markets()) == 17
     mapping = registry.get_by_canonical("draw_no_bet_ft")
     assert mapping is not None
     assert mapping.betpawa_id == "4703"
@@ -315,3 +315,22 @@ def test_registry_has_home_over_under_ft():
 
     assert r.get_by_platform_id("betpawa", "5006") is m
     assert r.get_by_platform_id("sportybet", "19") is m
+
+
+def test_registry_has_away_over_under_ft():
+    from bookieskit.markets.registry import MarketRegistry
+    r = MarketRegistry()
+    m = r.get_by_canonical("away_over_under_ft")
+    assert m is not None
+    assert m.name == "Over/Under Away Team - Full Time"
+    assert m.parameterized is True
+    assert m.sport == "soccer"
+    assert m.betpawa_id == "5003"
+    assert m.sportybet_id == "20"
+    # Probe-corrected placeholder: Betway uses "<TeamName> Total"
+    # (no "Goals" suffix), substituted at parse-time.
+    assert m.betway_id == "[Away Team] Total"
+    assert set(m.outcomes.keys()) == {"over", "under"}
+
+    assert r.get_by_platform_id("betpawa", "5003") is m
+    assert r.get_by_platform_id("sportybet", "20") is m

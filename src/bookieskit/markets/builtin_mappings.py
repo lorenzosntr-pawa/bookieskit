@@ -668,4 +668,42 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
         },
         parameterized=True,
     ),
+    # =================== Soccer — Away Team Over/Under =================
+    # Mirror of home_over_under_ft for the away team. Same probe coverage
+    # — Bet9ja still NOT EXPOSED, SportPesa NOT PROBED.
+    MarketMapping(
+        canonical_id="away_over_under_ft",
+        name="Over/Under Away Team - Full Time",
+        betpawa_id="5003",
+        sportybet_id="20",
+        bet9ja_key=None,                       # NOT EXPOSED (see home_over_under_ft)
+        betway_id="[Away Team] Total",         # placeholder substituted at parse-time
+        msport_id="20",                        # locked-in via probe
+        sportpesa_id=None,                     # NOT PROBED
+        betika_id="20",                        # locked-in via probe
+        sport="soccer",
+        outcomes={
+            "over": OutcomeMapping(
+                canonical_name="over",
+                betpawa="Over",
+                sportybet="Over",
+                bet9ja="O",
+                betway="Over",
+                msport="Over",
+                sportpesa="OV",
+                betika="Over",
+            ),
+            "under": OutcomeMapping(
+                canonical_name="under",
+                betpawa="Under",
+                sportybet="Under",
+                bet9ja="U",
+                betway="Under",
+                msport="Under",
+                sportpesa="UN",
+                betika="Under",
+            ),
+        },
+        parameterized=True,
+    ),
 ]
