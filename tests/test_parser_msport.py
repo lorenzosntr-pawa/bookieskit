@@ -151,3 +151,45 @@ def test_parse_msport_next_goal_ft_from_probe_fixture():
     """
     import pytest
     pytest.skip("MSport next_goal_ft not captured in prematch probe fixture")
+
+
+def test_parse_msport_home_over_under_ft_from_probe_fixture():
+    import json
+    from pathlib import Path
+    from bookieskit.markets.parser import parse_markets
+
+    fixture = Path("tests/fixtures/event_info/msport/next_goal_and_team_ou.json")
+    response = json.loads(fixture.read_text(encoding="utf-8"))
+    markets = parse_markets(response, platform="msport")
+    home_ou = next(
+        (m for m in markets if m.canonical_id == "home_over_under_ft"),
+        None,
+    )
+    assert home_ou is not None, "MSport home_over_under_ft (id=19) not found"
+    assert home_ou.lines is not None
+    assert len(home_ou.lines) >= 1
+    # At least one line must have both over+under
+    assert any(
+        {"over", "under"}.issubset({o.canonical_name for o in outs})
+        for outs in home_ou.lines.values()
+    )
+
+
+def test_parse_msport_away_over_under_ft_from_probe_fixture():
+    import json
+    from pathlib import Path
+    from bookieskit.markets.parser import parse_markets
+
+    fixture = Path("tests/fixtures/event_info/msport/next_goal_and_team_ou.json")
+    response = json.loads(fixture.read_text(encoding="utf-8"))
+    markets = parse_markets(response, platform="msport")
+    away_ou = next(
+        (m for m in markets if m.canonical_id == "away_over_under_ft"),
+        None,
+    )
+    assert away_ou is not None, "MSport away_over_under_ft (id=20) not found"
+    assert away_ou.lines is not None
+    assert any(
+        {"over", "under"}.issubset({o.canonical_name for o in outs})
+        for outs in away_ou.lines.values()
+    )

@@ -299,3 +299,43 @@ def test_parse_betika_next_goal_ft_from_probe_fixture():
     else:
         names = {o.canonical_name for o in ng.outcomes}
         assert {"home", "away"}.issubset(names), f"missing home/away: {names}"
+
+
+def test_parse_betika_home_over_under_ft_from_probe_fixture():
+    import json
+    from pathlib import Path
+    from bookieskit.markets.parser import parse_markets
+
+    fixture = Path("tests/fixtures/event_info/betika/next_goal_and_team_ou.json")
+    response = json.loads(fixture.read_text(encoding="utf-8"))
+    markets = parse_markets(response, platform="betika")
+    home_ou = next(
+        (m for m in markets if m.canonical_id == "home_over_under_ft"),
+        None,
+    )
+    assert home_ou is not None, "Betika home_over_under_ft (sub_type_id=19) not found"
+    assert home_ou.lines is not None
+    assert any(
+        {"over", "under"}.issubset({o.canonical_name for o in outs})
+        for outs in home_ou.lines.values()
+    )
+
+
+def test_parse_betika_away_over_under_ft_from_probe_fixture():
+    import json
+    from pathlib import Path
+    from bookieskit.markets.parser import parse_markets
+
+    fixture = Path("tests/fixtures/event_info/betika/next_goal_and_team_ou.json")
+    response = json.loads(fixture.read_text(encoding="utf-8"))
+    markets = parse_markets(response, platform="betika")
+    away_ou = next(
+        (m for m in markets if m.canonical_id == "away_over_under_ft"),
+        None,
+    )
+    assert away_ou is not None, "Betika away_over_under_ft (sub_type_id=20) not found"
+    assert away_ou.lines is not None
+    assert any(
+        {"over", "under"}.issubset({o.canonical_name for o in outs})
+        for outs in away_ou.lines.values()
+    )

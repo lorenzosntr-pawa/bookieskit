@@ -312,3 +312,40 @@ def test_parse_betway_next_goal_ft_from_probe_fixture():
     assert {"home", "away"}.issubset(names), (
         f"missing home/away at line 1.0: {names}"
     )
+
+
+def test_parse_betway_home_over_under_ft_with_placeholder():
+    import json
+    from pathlib import Path
+    from bookieskit.markets.parser import parse_markets
+
+    fixture = Path("tests/fixtures/event_info/betway/next_goal_and_team_ou.json")
+    response = json.loads(fixture.read_text(encoding="utf-8"))
+    markets = parse_markets(response, platform="betway")
+    home_ou = next(
+        (m for m in markets if m.canonical_id == "home_over_under_ft"),
+        None,
+    )
+    assert home_ou is not None, (
+        "Placeholder substitution failed. Check that sportEvent.homeTeam "
+        "in the fixture matches what Betway returned, and that the captured "
+        "market name follows the '<homeTeam> Total' shape (no 'Goals' suffix)."
+    )
+    assert home_ou.lines is not None
+    assert len(home_ou.lines) >= 1
+
+
+def test_parse_betway_away_over_under_ft_with_placeholder():
+    import json
+    from pathlib import Path
+    from bookieskit.markets.parser import parse_markets
+
+    fixture = Path("tests/fixtures/event_info/betway/next_goal_and_team_ou.json")
+    response = json.loads(fixture.read_text(encoding="utf-8"))
+    markets = parse_markets(response, platform="betway")
+    away_ou = next(
+        (m for m in markets if m.canonical_id == "away_over_under_ft"),
+        None,
+    )
+    assert away_ou is not None
+    assert away_ou.lines is not None

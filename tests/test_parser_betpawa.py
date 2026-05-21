@@ -156,3 +156,48 @@ def test_parse_betpawa_next_goal_ft_from_real_fixture():
     assert line1["home"].odds == 1.94
     assert line1["none"].odds == 11.04
     assert line1["away"].odds == 2.20
+
+
+def test_parse_betpawa_home_over_under_ft_from_real_fixture():
+    import json
+    from pathlib import Path
+    from bookieskit.markets.parser import parse_markets
+
+    fixture = Path("tests/fixtures/event_info/betpawa/prematch.json")
+    response = json.loads(fixture.read_text(encoding="utf-8"))
+
+    markets = parse_markets(response, platform="betpawa")
+    home_ou = next(
+        (m for m in markets if m.canonical_id == "home_over_under_ft"),
+        None,
+    )
+    assert home_ou is not None
+    assert home_ou.lines is not None
+    # Fixture has lines 0.5 / 1.5 / 2.5 from rows id=374100486/485/493
+    assert 0.5 in home_ou.lines
+    line05 = {o.canonical_name: o.odds for o in home_ou.lines[0.5]}
+    assert line05 == {"over": 1.23, "under": 3.47}
+
+
+def test_parse_betpawa_away_over_under_ft_from_real_fixture():
+    import json
+    from pathlib import Path
+    from bookieskit.markets.parser import parse_markets
+
+    fixture = Path("tests/fixtures/event_info/betpawa/prematch.json")
+    response = json.loads(fixture.read_text(encoding="utf-8"))
+
+    markets = parse_markets(response, platform="betpawa")
+    away_ou = next(
+        (m for m in markets if m.canonical_id == "away_over_under_ft"),
+        None,
+    )
+    assert away_ou is not None
+    assert away_ou.lines is not None
+    assert len(away_ou.lines) >= 1
+    # At least one line must have both over and under outcomes
+    for line, outs in away_ou.lines.items():
+        names = {o.canonical_name for o in outs}
+        if {"over", "under"}.issubset(names):
+            return
+    raise AssertionError("no away O/U line had both over and under")
