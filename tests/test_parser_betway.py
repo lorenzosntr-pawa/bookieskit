@@ -396,27 +396,6 @@ def test_team_scoped_betway_registry_composes_with_sport_scoped():
 
 
 def test_parse_betway_2way_handicap_ft_from_probe_fixture():
-    """Betway 2-way Asian Handicap fixture-driven test.
-
-    The probe fixture contains the parent ``[Handicap] [2-Way]`` market
-    (handicap=0) with 6 outcomes whose outcomeIds embed
-    ``hcp=<line>``, plus three sibling ``Handicap`` line markers
-    (handicap=-0.5/-1.5/0.5 with empty outcomes) — the same parent +
-    sibling shape ``_build_betway_parameterized`` Case 1 already handles
-    for other parameterized markets.
-
-    Known limitation (logged): the variant-name "Handicap" is also a
-    valid prefix of the basketball mapping ``Handicap (Incl. Overtime)``,
-    so the variant-detection loop in ``_parse_betway`` buckets the line
-    siblings under the basketball parent instead of
-    ``[Handicap] [2-Way]``. As a result, ``2way_handicap_ft`` falls
-    through to Case 3 with only the parent (handicap=0, no own outcomes
-    on the line siblings) and produces nothing.
-
-    Until the variant matcher is sport-aware (or made stricter), this
-    test is allowed to skip when the market doesn't surface — it still
-    guards against regressions if/when the variant-matching fix lands.
-    """
     import json
     from pathlib import Path
     from bookieskit.markets.parser import parse_markets
@@ -431,17 +410,44 @@ def test_parse_betway_2way_handicap_ft_from_probe_fixture():
         (m for m in markets if m.canonical_id == "2way_handicap_ft"),
         None,
     )
-    if ah is None:
-        import pytest
-        pytest.skip(
-            "Betway 2way_handicap_ft not produced from this fixture: "
-            "variant-name 'Handicap' is matched to basketball mapping "
-            "'Handicap (Incl. Overtime)' before '[Handicap] [2-Way]', "
-            "so line siblings are mis-bucketed. Parser variant-matching "
-            "needs sport-awareness or stricter prefix logic to recover."
-        )
+    assert ah is not None, (
+        "Betway 2way_handicap_ft ('[Handicap] [2-Way]') not in fixture"
+    )
     assert ah.lines is not None
     assert any(
         {"home", "away"}.issubset({o.canonical_name for o in outs})
         for outs in ah.lines.values()
     )
+
+
+def test_parse_betway_variant_matching_disambiguates_by_market_id_prefix():
+    """When two registered mappings both have betway_id values matching
+    a child row's name via startswith, the parser should pick the one
+    whose marketId is a prefix of the child's marketId. Reproduces the
+    bug where soccer 2way_handicap_ft (parent '[Handicap] [2-Way]')
+    children were mis-attributed to basketball 2way_handicap_basketball_ft
+    (parent 'Handicap (Incl. Overtime)') because both clean_parent
+    values start with 'Handicap'.
+    """
+    import json
+    from pathlib import Path
+    from bookieskit.markets.parser import parse_markets
+
+    fixture = Path(
+        "tests/fixtures/event_info/betway/2way_handicap_ft.json"
+    )
+    response = json.loads(fixture.read_text(encoding="utf-8"))
+    markets = parse_markets(response, platform="betway")
+    by_canon = {m.canonical_id: m for m in markets}
+    # Soccer 2way_handicap_ft MUST be produced — its parent
+    # [Handicap] [2-Way] is in the fixture with non-zero-handicap
+    # children carrying the actual lines.
+    assert "2way_handicap_ft" in by_canon, (
+        f"soccer 2way_handicap_ft missing from {list(by_canon.keys())}"
+    )
+    ah = by_canon["2way_handicap_ft"]
+    assert ah.lines is not None
+    assert len(ah.lines) >= 1
+    # basketball 2way_handicap_basketball_ft should NOT be produced
+    # from a soccer fixture
+    assert "2way_handicap_basketball_ft" not in by_canon
