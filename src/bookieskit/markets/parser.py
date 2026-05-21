@@ -806,6 +806,30 @@ def _build_betway_simple(
     )
 
 
+_BETWAY_GOALNR_RE = re.compile(r"goalnr=(\d+)")
+
+
+def _extract_betway_line_from_market_id(market_id: str) -> float | None:
+    """Extract the line value from a Betway marketId path segment.
+
+    Betway encodes some parameterized markets' line value in the marketId
+    string rather than the `handicap` field. Currently observed: the
+    `next_goal_ft` market uses `<prefix>goalnr=N~<suffix>` to specify
+    which goal number a market entry covers. The line value is N (1-based).
+
+    Returns None if no recognised marker is present.
+    """
+    if not market_id:
+        return None
+    m = _BETWAY_GOALNR_RE.search(market_id)
+    if m:
+        try:
+            return float(m.group(1))
+        except ValueError:
+            return None
+    return None
+
+
 def _build_betway_parameterized(
     entries: list[tuple[dict, list[dict]]],
     mapping: MarketMapping,
@@ -824,6 +848,7 @@ def _build_betway_parameterized(
     # Collect all outcomes from the parent entry (handicap=0)
     parent_outcomes: list[dict] = []
     line_market_ids: list[tuple[float, str]] = []
+    parent_market_id: str = ""
 
     for market, outcomes_list in entries:
         handicap = market.get("handicap")
@@ -832,10 +857,11 @@ def _build_betway_parameterized(
             continue
         if handicap == 0:
             parent_outcomes = outcomes_list
+            parent_market_id = market_id
         else:
             line_market_ids.append((float(handicap), market_id))
 
-    # If we have parent outcomes, distribute them by line
+    # Case 1: parent + per-line entries — distribute parent outcomes by line
     if parent_outcomes and line_market_ids:
         for line, line_mid in line_market_ids:
             # Filter to the per-line outcomes first, THEN enumerate. The
@@ -866,8 +892,29 @@ def _build_betway_parameterized(
                     )
             if line_outcomes:
                 lines[line] = line_outcomes
+    # Case 2: single parent entry with line encoded in marketId
+    # (e.g. next_goal_ft: "<eventId><typeId>goalnr=1~" with handicap=0).
+    elif parent_outcomes and not line_market_ids:
+        line = _extract_betway_line_from_market_id(parent_market_id)
+        if line is not None:
+            line_outcomes: list[Outcome] = []
+            for i, outcome_data in enumerate(parent_outcomes):
+                name = str(outcome_data.get("name", ""))
+                oid = str(outcome_data.get("outcomeId", ""))
+                odds = price_map.get(oid, 0)
+                canonical = _resolve_outcome_betway(name, i, mapping)
+                if canonical:
+                    line_outcomes.append(
+                        Outcome(
+                            canonical_name=canonical,
+                            odds=odds,
+                            platform_name=name,
+                        )
+                    )
+            if line_outcomes:
+                lines[line] = line_outcomes
     else:
-        # Fallback: outcomes directly on line entries
+        # Case 3 (existing fallback): outcomes directly on line entries.
         for market, outcomes_list in entries:
             handicap = market.get("handicap")
             if handicap is None or handicap == 0:

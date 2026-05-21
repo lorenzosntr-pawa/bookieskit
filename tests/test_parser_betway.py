@@ -259,3 +259,30 @@ def test_parse_betway_resolves_team_name_placeholder():
     assert 2.5 in m.lines
     odds_by_name = {o.canonical_name: o.odds for o in m.lines[2.5]}
     assert odds_by_name == {"over": 1.85, "under": 1.95}
+
+
+def test_parse_betway_extracts_goalnr_from_market_id():
+    """When the only `marketsInGroup` entry has handicap=0 AND its marketId
+    carries `goalnr=N~`, the parser should produce lines={N.0: [outcomes...]}.
+
+    Real-world fixture: Betway's "1st Goal" market on a soccer event ships
+    a single entry per `goalnr` value; the goal number is encoded in the
+    `marketId` path segment (`<eventId><marketTypeId>goalnr=1~`).
+    """
+    import json
+    from pathlib import Path
+    from bookieskit.markets.parser import parse_markets
+
+    fixture = Path("tests/fixtures/event_info/betway/next_goal_and_team_ou.json")
+    response = json.loads(fixture.read_text(encoding="utf-8"))
+
+    markets = parse_markets(response, platform="betway")
+    ng = next(
+        (m for m in markets if m.canonical_id == "next_goal_ft"),
+        None,
+    )
+    assert ng is not None, "Betway next_goal_ft not found in fixture"
+    assert ng.lines is not None, "Expected parameterized output (lines), got simple outcomes"
+    assert 1.0 in ng.lines, f"Expected line 1.0 (goalnr=1), got keys: {list(ng.lines.keys())}"
+    names = {o.canonical_name for o in ng.lines[1.0]}
+    assert {"home", "away"}.issubset(names), f"Missing home/away at line 1.0: {names}"
