@@ -718,6 +718,10 @@ def _parse_betway(
     for market in markets_in_group:
         market_name = str(market.get("name", ""))
         market_id = str(market.get("marketId", ""))
+        if not market_id:
+            # Defensive: an empty marketId would poison Pass 2's prefix
+            # attribution because every non-empty string starts with "".
+            continue
         mapping = registry.get_by_platform_id("betway", market_name)
         if mapping is not None and mapping.parameterized:
             parent_by_market_id[market_id] = mapping
@@ -760,6 +764,9 @@ def _parse_betway(
                 matched_mapping = parent_mapping
                 break
 
+        # Fallback only runs when marketId-prefix attribution found
+        # nothing — registered parents in this group beat the global
+        # name-based heuristic.
         if matched_mapping is None:
             # Fall back to legacy name-based heuristic — picks the first
             # parameterized mapping whose betway_id "starts with"
