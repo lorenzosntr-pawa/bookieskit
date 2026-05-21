@@ -164,10 +164,10 @@ async def test_betika_get_event_detail_live_uses_live_host():
 
 
 @pytest.mark.asyncio
-async def test_betika_get_event_markets_aggregates_four_sub_type_ids():
+async def test_betika_get_event_markets_aggregates_seven_sub_type_ids():
     """``get_event_markets`` should fan out to one call per universal
-    market (sub_type_id 1, 10, 18, 29) and merge their ``odds`` groups
-    into a single match-shaped response."""
+    market (sub_type_id 1, 8, 10, 18, 19, 20, 29) and merge their
+    ``odds`` groups into a single match-shaped response."""
     import respx
     base = "https://api.betika.com"
     with respx.mock(base_url=base) as mock:
@@ -192,18 +192,20 @@ async def test_betika_get_event_markets_aggregates_four_sub_type_ids():
         )
         async with Betika(country="ke") as client:
             result = await client.get_event_markets(event_id="M")
-    # Four calls, one per sub_type_id.
-    assert route.calls.call_count == 4
+    # Seven calls, one per sub_type_id.
+    assert route.calls.call_count == 7
     seen_ids = {
         c.request.url.params.get("sub_type_id") for c in route.calls
     }
-    assert seen_ids == {"1", "10", "18", "29"}
-    # Merged response keeps the match shape and contains four market groups.
+    assert seen_ids == {"1", "8", "10", "18", "19", "20", "29"}
+    # Merged response keeps the match shape and contains seven market groups.
     assert isinstance(result, dict)
     assert "data" in result and isinstance(result["data"], list)
     groups = result["data"][0]["odds"]
-    assert len(groups) == 4
-    assert {g["sub_type_id"] for g in groups} == {"1", "10", "18", "29"}
+    assert len(groups) == 7
+    assert {g["sub_type_id"] for g in groups} == {
+        "1", "8", "10", "18", "19", "20", "29"
+    }
 
 
 @pytest.mark.asyncio
@@ -247,7 +249,7 @@ async def test_betika_get_event_markets_forwards_competition_id_on_every_call():
             await client.get_event_markets(
                 event_id="M", competition_id="26639"
             )
-    assert route.calls.call_count == 4
+    assert route.calls.call_count == 7
     for call in route.calls:
         q = call.request.url.query.decode()
         assert "competition_id=26639" in q

@@ -18,9 +18,12 @@ from bookieskit.base import BaseBookmaker
 from bookieskit.bookmakers.types import PrematchEventStub
 from bookieskit.config import BETIKA_MAX_CONCURRENT, BETIKA_REQUEST_DELAY
 
-# Universal market sub_type_ids — 1X2, Double Chance, Over/Under, BTTS.
-# Match the four canonical markets exposed in `BUILTIN_MAPPINGS`.
-_UNIVERSAL_SUB_TYPE_IDS = ("1", "10", "18", "29")
+# Sub-type ids fanned out by get_event_markets to assemble a complete
+# per-event market set. Order is for readability only — Betika's API
+# doesn't care. Each id maps to one canonical market in the built-in
+# registry: 1=1X2, 8=Next Goal, 10=Double Chance, 18=O/U, 19=Home O/U,
+# 20=Away O/U, 29=BTTS.
+_UNIVERSAL_SUB_TYPE_IDS = ("1", "8", "10", "18", "19", "20", "29")
 
 
 class Betika(BaseBookmaker):
@@ -216,10 +219,11 @@ class Betika(BaseBookmaker):
 
         Betika's ``/v1/uo/matches`` returns a single market group per call
         by default; to fetch a different market you must repeat the call
-        with ``&sub_type_id=N``. This method fans out the four universal
+        with ``&sub_type_id=N``. This method fans out the seven universal
         market ids concurrently and stitches their ``odds`` groups into a
         single match-shaped response — exactly the shape the parser
-        expects.
+        expects. The seven ids are: 1 (1X2), 8 (Next Goal), 10 (Double
+        Chance), 18 (Over/Under), 19 (Home O/U), 20 (Away O/U), 29 (BTTS).
 
         Args:
             event_id: Betika internal ``match_id``.
@@ -234,8 +238,8 @@ class Betika(BaseBookmaker):
         Returns:
             JSON shaped as ``{"data": [<match>], "meta": {...}}`` where
             ``<match>.odds`` contains one entry per universal market id
-            (1, 10, 18, 29). If a particular market is unavailable for
-            the event it is silently skipped.
+            (1, 8, 10, 18, 19, 20, 29). If a particular market is
+            unavailable for the event it is silently skipped.
         """
         async def _fetch_one(sub_type_id: str) -> dict[str, Any]:
             params: dict[str, Any] = {
@@ -287,8 +291,9 @@ class Betika(BaseBookmaker):
     ) -> list:
         """Fetch the universal market set and return normalized markets.
 
-        Overrides the base because Betika requires four calls (one per
-        universal market id) to assemble a complete event payload.
+        Overrides the base because Betika requires seven calls (one per
+        universal market id — 1, 8, 10, 18, 19, 20, 29) to assemble a
+        complete event payload.
         """
         from bookieskit.markets.parser import parse_markets
 
