@@ -141,3 +141,13 @@ def test_parse_msport_outcome_prefix_fallback():
     ou = next(m for m in markets if m.canonical_id == "over_under_ft")
     over = next(o for o in ou.lines[2.5] if o.canonical_name == "over")
     assert over.platform_name == "Over 2.5"
+
+
+def test_parse_msport_next_goal_ft_from_probe_fixture():
+    """Skipped: MSport only exposes Next Goal (id=8) on live events; the
+    captured probe fixture is the prematch Qatar v Sudan which doesn't
+    contain id=8. The shape is verified by the registry smoke test
+    and by the live-probe RESOLVED record entry.
+    """
+    import pytest
+    pytest.skip("MSport next_goal_ft not captured in prematch probe fixture")

@@ -108,3 +108,33 @@ def test_parse_bet9ja_live_keys_with_lives_prefix():
         o for o in by_canon["over_under_ft"].lines[2.5] if o.canonical_name == "over"
     )
     assert over_25.odds == 2.7
+
+
+def test_parse_bet9ja_next_goal_ft_from_probe_fixture():
+    import json
+    from pathlib import Path
+    from bookieskit.markets.parser import parse_markets
+
+    fixture = Path("tests/fixtures/event_info/bet9ja/next_goal_and_team_ou.json")
+    response = json.loads(fixture.read_text(encoding="utf-8"))
+
+    markets = parse_markets(response, platform="bet9ja")
+    ng = next(
+        (m for m in markets if m.canonical_id == "next_goal_ft"),
+        None,
+    )
+    assert ng is not None, "Bet9ja next_goal_ft (S_1STGOAL) not found in fixture"
+    # Bet9ja S_1STGOAL has no @-line specifier — outcomes carry no goal-number
+    # so the parser routes this market through the simple path (outcomes
+    # populated, lines None) even though the canonical is parameterized=True.
+    if ng.lines is not None:
+        for line, outs in ng.lines.items():
+            names = {o.canonical_name for o in outs}
+            if {"home", "away"}.issubset(names):
+                return
+        raise AssertionError(f"no line had both home and away: {ng.lines}")
+    else:
+        names = {o.canonical_name for o in ng.outcomes}
+        assert {"home", "away"}.issubset(names), (
+            f"missing home/away in outcomes: {names}"
+        )

@@ -275,3 +275,27 @@ def test_parse_betika_probability_mode_passes_through():
         for o in one_x_two.outcomes:
             assert o.true_probability is None
             assert o.void_probability is None
+
+
+def test_parse_betika_next_goal_ft_from_probe_fixture():
+    import json
+    from pathlib import Path
+    from bookieskit.markets.parser import parse_markets
+
+    fixture = Path("tests/fixtures/event_info/betika/next_goal_and_team_ou.json")
+    response = json.loads(fixture.read_text(encoding="utf-8"))
+
+    markets = parse_markets(response, platform="betika")
+    ng = next(
+        (m for m in markets if m.canonical_id == "next_goal_ft"),
+        None,
+    )
+    assert ng is not None, "Betika next_goal_ft (sub_type_id=8) not found in fixture"
+    if ng.lines is not None:
+        assert any(
+            {"home", "away"}.issubset({o.canonical_name for o in outs})
+            for outs in ng.lines.values()
+        ), f"no line had both home and away: {ng.lines}"
+    else:
+        names = {o.canonical_name for o in ng.outcomes}
+        assert {"home", "away"}.issubset(names), f"missing home/away: {names}"

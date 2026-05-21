@@ -286,3 +286,29 @@ def test_parse_betway_extracts_goalnr_from_market_id():
     assert 1.0 in ng.lines, f"Expected line 1.0 (goalnr=1), got keys: {list(ng.lines.keys())}"
     names = {o.canonical_name for o in ng.lines[1.0]}
     assert {"home", "away"}.issubset(names), f"Missing home/away at line 1.0: {names}"
+
+
+def test_parse_betway_next_goal_ft_from_probe_fixture():
+    import json
+    from pathlib import Path
+    from bookieskit.markets.parser import parse_markets
+
+    fixture = Path("tests/fixtures/event_info/betway/next_goal_and_team_ou.json")
+    response = json.loads(fixture.read_text(encoding="utf-8"))
+
+    markets = parse_markets(response, platform="betway")
+    ng = next(
+        (m for m in markets if m.canonical_id == "next_goal_ft"),
+        None,
+    )
+    assert ng is not None, "Betway next_goal_ft ('1st Goal') not found in fixture"
+    assert ng.lines is not None, (
+        "Expected parameterized output (lines), got simple outcomes"
+    )
+    # Betway encodes goalnr=1 in the marketId path segment — the parser's
+    # Case 2 fallback (marketId-line extraction) should produce line=1.0.
+    assert 1.0 in ng.lines, f"Expected line 1.0, got keys: {list(ng.lines.keys())}"
+    names = {o.canonical_name for o in ng.lines[1.0]}
+    assert {"home", "away"}.issubset(names), (
+        f"missing home/away at line 1.0: {names}"
+    )
