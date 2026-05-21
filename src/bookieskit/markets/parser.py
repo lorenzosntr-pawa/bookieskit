@@ -654,8 +654,20 @@ def _parse_betway(
     """Parse Betway event markets response.
 
     Betway returns denormalized data: marketsInGroup[], outcomes[], prices[]
-    as separate arrays linked by marketId and outcomeId.
+    as separate arrays linked by marketId and outcomeId. Per-team markets
+    (Home/Away Total Goals) carry the literal team name in the market-name
+    field; we wrap the registry with _TeamScopedBetwayRegistry so the
+    canonical mappings can register the [Home Team] / [Away Team]
+    placeholder form and have it substituted at parse-time.
     """
+    sport_event = response.get("sportEvent", {})
+    home_team = str(sport_event.get("homeTeam", ""))
+    away_team = str(sport_event.get("awayTeam", ""))
+    if home_team and away_team:
+        registry = _TeamScopedBetwayRegistry(
+            registry, home_team, away_team,
+        )  # type: ignore[assignment]
+
     results: list[NormalizedMarket] = []
     markets_in_group = response.get("marketsInGroup", [])
     all_outcomes = response.get("outcomes", [])

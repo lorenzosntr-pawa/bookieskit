@@ -199,3 +199,63 @@ def test_team_scoped_betway_registry_substitutes_placeholders():
 
     # Non-betway platform is a no-op fallback
     assert scoped.get_by_platform_id("sportybet", "x") is None
+
+
+def test_parse_betway_resolves_team_name_placeholder():
+    from bookieskit.markets.parser import parse_markets
+    from bookieskit.markets.registry import MarketRegistry
+    from bookieskit.markets.types import MarketMapping, OutcomeMapping
+
+    registry = MarketRegistry(load_builtins=False)
+    registry.add(
+        canonical_id="home_over_under_ft",
+        name="Over/Under Home Team - Full Time",
+        betway_id="[Home Team] Total Goals",
+        outcomes={
+            "over": OutcomeMapping(
+                canonical_name="over", betpawa="", sportybet="",
+                bet9ja="", betway="Over",
+            ),
+            "under": OutcomeMapping(
+                canonical_name="under", betpawa="", sportybet="",
+                bet9ja="", betway="Under",
+            ),
+        },
+        parameterized=True,
+    )
+
+    response = {
+        "sportEvent": {
+            "homeTeam": "Aston Villa",
+            "awayTeam": "Brighton",
+        },
+        "marketsInGroup": [
+            {
+                "marketId": "m1",
+                "name": "Aston Villa Total Goals",
+                "handicap": 0,
+            },
+            {
+                "marketId": "m2",
+                "name": "Aston Villa Total Goals",
+                "handicap": 2.5,
+            },
+        ],
+        "outcomes": [
+            {"marketId": "m1", "outcomeId": "m2~over", "name": "Over"},
+            {"marketId": "m1", "outcomeId": "m2~under", "name": "Under"},
+        ],
+        "prices": [
+            {"outcomeId": "m2~over", "priceDecimal": 1.85},
+            {"outcomeId": "m2~under", "priceDecimal": 1.95},
+        ],
+    }
+
+    markets = parse_markets(response, platform="betway", registry=registry)
+    assert len(markets) == 1
+    m = markets[0]
+    assert m.canonical_id == "home_over_under_ft"
+    assert m.lines is not None
+    assert 2.5 in m.lines
+    odds_by_name = {o.canonical_name: o.odds for o in m.lines[2.5]}
+    assert odds_by_name == {"over": 1.85, "under": 1.95}
