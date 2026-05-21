@@ -616,4 +616,56 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
         },
         parameterized=True,
     ),
+    # =================== Soccer — Home Team Over/Under =================
+    # Per-team Over/Under: line = total goals scored by the home team
+    # specifically (e.g. line=1.5 means home scores 2+). Every bookmaker
+    # we support ships this as a distinct market id from the away
+    # variant — so we model it as two separate canonicals
+    # (home_over_under_ft + away_over_under_ft) rather than a single
+    # canonical with team encoded in outcome names.
+    #
+    # Betway is the special case: its market name carries the literal
+    # team name (e.g. "Aston Villa Total"). We register the canonical
+    # with the [Home Team] placeholder; the _TeamScopedBetwayRegistry
+    # wrapper substitutes the placeholder against sportEvent.homeTeam
+    # at parse-time. (The "Goals" suffix in the spec was an early
+    # assumption; the probe found Betway actually uses just "<Team> Total".)
+    #
+    # Bet9ja: NOT EXPOSED — Bet9ja has S_GOALSHOME (exact-goals buckets)
+    # and S_HAOU (combined Home+Away O/U) but no per-team goal-line O/U.
+    MarketMapping(
+        canonical_id="home_over_under_ft",
+        name="Over/Under Home Team - Full Time",
+        betpawa_id="5006",
+        sportybet_id="19",
+        bet9ja_key=None,                       # NOT EXPOSED (see comment)
+        betway_id="[Home Team] Total",         # placeholder substituted at parse-time
+        msport_id="19",                        # locked-in via probe
+        sportpesa_id=None,                     # NOT PROBED
+        betika_id="19",                        # locked-in via probe
+        sport="soccer",
+        outcomes={
+            "over": OutcomeMapping(
+                canonical_name="over",
+                betpawa="Over",
+                sportybet="Over",
+                bet9ja="O",
+                betway="Over",
+                msport="Over",
+                sportpesa="OV",
+                betika="Over",
+            ),
+            "under": OutcomeMapping(
+                canonical_name="under",
+                betpawa="Under",
+                sportybet="Under",
+                bet9ja="U",
+                betway="Under",
+                msport="Under",
+                sportpesa="UN",
+                betika="Under",
+            ),
+        },
+        parameterized=True,
+    ),
 ]

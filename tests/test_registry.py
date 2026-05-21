@@ -6,10 +6,11 @@ from bookieskit.markets.types import OutcomeMapping
 def test_registry_loads_builtins_by_default():
     registry = MarketRegistry()
     markets = registry.list_markets()
-    # 7 soccer markets: 1X2, O/U, BTTS, DC, 1X2 1Up, 1X2 2Up, next_goal_ft
+    # 8 soccer markets: 1X2, O/U, BTTS, DC, 1X2 1Up, 1X2 2Up, next_goal_ft,
+    #                   home_over_under_ft
     # 3 basketball markets: moneyline, O/U, handicap (basketball_ft suffix)
     # 4 tennis markets: moneyline, O/U games, O/U sets, handicap games
-    assert len(markets) == 14
+    assert len(markets) == 15
 
 
 def test_registry_no_builtins():
@@ -79,8 +80,8 @@ def test_registry_add_custom_mapping():
             ),
         },
     )
-    # 14 builtins (7 soccer + 3 basketball + 4 tennis) + draw_no_bet
-    assert len(registry.list_markets()) == 15
+    # 15 builtins (8 soccer + 3 basketball + 4 tennis) + draw_no_bet
+    assert len(registry.list_markets()) == 16
     mapping = registry.get_by_canonical("draw_no_bet_ft")
     assert mapping is not None
     assert mapping.betpawa_id == "4703"
@@ -295,3 +296,22 @@ def test_registry_has_next_goal_ft():
     # Platform-id lookups
     assert r.get_by_platform_id("betpawa", "28000224") is m
     assert r.get_by_platform_id("sportybet", "8") is m
+
+
+def test_registry_has_home_over_under_ft():
+    from bookieskit.markets.registry import MarketRegistry
+    r = MarketRegistry()
+    m = r.get_by_canonical("home_over_under_ft")
+    assert m is not None
+    assert m.name == "Over/Under Home Team - Full Time"
+    assert m.parameterized is True
+    assert m.sport == "soccer"
+    assert m.betpawa_id == "5006"
+    assert m.sportybet_id == "19"
+    # Probe-corrected placeholder: Betway uses "<TeamName> Total"
+    # (no "Goals" suffix), substituted at parse-time.
+    assert m.betway_id == "[Home Team] Total"
+    assert set(m.outcomes.keys()) == {"over", "under"}
+
+    assert r.get_by_platform_id("betpawa", "5006") is m
+    assert r.get_by_platform_id("sportybet", "19") is m
