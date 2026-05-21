@@ -573,11 +573,11 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
         name="Next Goal - Full Time",
         betpawa_id="28000224",
         sportybet_id="8",
-        bet9ja_key=None,        # set from probe; None if Bet9ja doesn't expose
-        betway_id=None,         # set from probe
+        bet9ja_key="S_1STGOAL",  # locked-in via probe (none-suffix "X")
+        betway_id="1st Goal",    # locked-in via probe (literal market name)
         msport_id="8",          # tentative SR-code mirror; probe confirms
-        sportpesa_id=None,      # set from probe
-        betika_id=None,         # set from probe
+        sportpesa_id=None,       # NOT PROBED — Akamai cookie unavailable
+        betika_id="8",           # locked-in via probe (sub_type_id; market labelled "1ST GOAL")
         sport="soccer",
         outcomes={
             "home": OutcomeMapping(
