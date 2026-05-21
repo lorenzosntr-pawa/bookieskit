@@ -76,14 +76,14 @@ Prints a per-event coverage table showing which canonical markets each bookmaker
 ## How the lib is structured
 
 - **Clients** — `bookieskit/bookmakers/`. One subclass of `BaseBookmaker` per platform; methods like `get_sports`, `get_events`, `get_event_detail` return raw JSON. The base class provides retry, rate-limiting, async context management, plus the convenience methods `get_markets()` and `get_sportradar_id()`.
-- **Markets** — `bookieskit/markets/`. A `MarketRegistry` holds `MarketMapping` entries indexed by canonical id AND by (sport, platform, platform_id) for cross-sport collision handling. **13 markets ship as builtins** across 3 sports (6 soccer + 3 basketball + 4 tennis). `parse_markets(response, platform, sport=...)` returns `NormalizedMarket` instances. See [docs/markets.md](docs/markets.md).
+- **Markets** — `bookieskit/markets/`. A `MarketRegistry` holds `MarketMapping` entries indexed by canonical id AND by (sport, platform, platform_id) for cross-sport collision handling. **16 markets ship as builtins** across 3 sports (9 soccer + 3 basketball + 4 tennis). `parse_markets(response, platform, sport=...)` returns `NormalizedMarket` instances. See [docs/markets.md](docs/markets.md).
 - **Matching** — `bookieskit/matching/`. Two providers: SportRadar (every bookmaker) and BetGenius / Genius Sports (BetPawa, SportyBet, Bet9ja-live). `extract_event_ids(response, platform)` returns an `EventIds(sportradar, genius)` per platform; `match_events(...)` groups events from multiple bookmakers by **any** shared provider id via union-find. See [docs/matching.md](docs/matching.md).
 
 ## Built-in markets
 
-**13 canonical markets across 3 sports.** Pass `sport=` to `parse_markets` for cross-sport id collisions (e.g. SportPesa's id `52` is both football O/U and basketball O/U; `sport="basketball"` picks the right one). Soccer is the default — existing soccer callers don't need to pass `sport=`.
+**16 canonical markets across 3 sports.** Pass `sport=` to `parse_markets` for cross-sport id collisions (e.g. SportPesa's id `52` is both football O/U and basketball O/U; `sport="basketball"` picks the right one). Soccer is the default — existing soccer callers don't need to pass `sport=`.
 
-### Soccer (6 markets, `sport="soccer"` — the default)
+### Soccer (9 markets, `sport="soccer"` — the default)
 
 | Canonical id | Notes |
 |---|---|
@@ -93,6 +93,9 @@ Prints a per-event coverage table showing which canonical markets each bookmaker
 | `double_chance_ft` | 1X / X2 / 12 |
 | `1x2_1up_ft` | Pays if your team gets a 1-goal lead at any point (SportyBet / Bet9ja / Betway only) |
 | `1x2_2up_ft` | Same but 2-goal lead (SportyBet / Bet9ja / Betway only) |
+| `next_goal_ft` | Parameterized — line = goal number (1=1st goal, 2=2nd goal, ...). Outcomes home / none / away. Covers prematch "1st Goal" and live "Nth Goal" under one canonical. |
+| `home_over_under_ft` | Parameterized — line = goals scored by home team only |
+| `away_over_under_ft` | Parameterized — line = goals scored by away team only |
 
 ### Basketball (3 markets, `sport="basketball"`)
 
@@ -186,6 +189,7 @@ Pass `registry=registry` to `client.get_markets(event_id, registry=registry)` or
 - **Betway event-detail returns only scoreboard.** `Betway.get_event_detail()` does not include markets — use `Betway.get_markets(event_id)` (which calls `get_event_markets` under the hood) or `Betway.get_event_markets(event_id)` for the raw response.
 - **SportyBet/MSport require `live=True` for live markets.** Default `live=False` uses `productId=3`, which returns only player-prop markets for in-play events. Pass `live=True` to use `productId=1` for the full live market book.
 - **Bet9ja basketball/tennis use prefixed market keys.** Soccer uses `S_*` (prematch) and `LIVES_*` (live); basketball uses `B_*`; tennis uses `T_*`. The parser dispatcher handles all four prefixes; the only impact on callers is that custom `MarketMapping`s for non-soccer Bet9ja markets must use the correct prefix in `bet9ja_key`.
+- **Bet9ja does not ship per-team Over/Under for soccer goals.** `home_over_under_ft` / `away_over_under_ft` are unmapped (`bet9ja_key=None`) — Bet9ja exposes exact-goals buckets (`S_GOALSHOME` / `S_GOALSAWAY`) and a combined Home+Away O/U (`S_HAOU`), but no goal-line O/U per team. **SportPesa coverage for the three new soccer markets (`next_goal_ft` / `home_over_under_ft` / `away_over_under_ft`) is not yet locked-in** — the Akamai cookie required for the probe was unavailable at capture time. Mappings stay `None` until the next probe pass.
 
 ### Internal behaviour worth knowing
 

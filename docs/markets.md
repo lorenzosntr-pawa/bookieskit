@@ -22,7 +22,7 @@ The flag is a no-op for bookmakers whose market ids don't overlap across sports 
 
 ## Built-in mappings
 
-13 markets ship in the default `MarketRegistry` — 6 soccer + 3 basketball + 4 tennis.
+16 markets ship in the default `MarketRegistry` — 9 soccer + 3 basketball + 4 tennis.
 
 ### Soccer (full time)
 
@@ -34,8 +34,21 @@ The flag is a no-op for bookmakers whose market ids don't overlap across sports 
 | `double_chance_ft` | Double Chance — Full Time | no | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | `1x2_1up_ft` | 1X2 1Up — Full Time | no | — | ✅ | ✅ | ✅ | — | — | — |
 | `1x2_2up_ft` | 1X2 2Up — Full Time | no | — | ✅ | ✅ | ✅ | — | — | — |
+| `next_goal_ft` | Next Goal — Full Time | yes (line = goal number) | ✅ | ✅ | ✅ | ✅ | ✅ live | ❌ NOT PROBED | ✅ |
+| `home_over_under_ft` | Over/Under — Home Team — Full Time | yes (line = goals) | ✅ | ✅ | ❌ NOT EXPOSED | ✅ | ✅ | ❌ NOT PROBED | ✅ |
+| `away_over_under_ft` | Over/Under — Away Team — Full Time | yes (line = goals) | ✅ | ✅ | ❌ NOT EXPOSED | ✅ | ✅ | ❌ NOT PROBED | ✅ |
 
 The 1Up / 2Up markets pay as a 1X2 if your team gets to a 1- or 2-goal lead at any point. BetPawa, MSport, SportPesa and Betika are intentionally unmapped (BetPawa to be added at production cutover; the others do not expose this market).
+
+The `next_goal_ft` market is parameterized by **goal number**: `line=1.0` is "1st goal", `line=2.0` is "2nd goal", etc. Prematch events always carry `line=1.0` only; live events can carry multiple goal numbers under one `NormalizedMarket` (e.g. after the home team scores the 1st goal, the bookmaker exposes both "2nd goal" and "3rd goal" odds and the parser groups them under the same canonical id). Outcomes are `home` / `none` / `away` — `none` means no further goal in regular time.
+
+Per-bookmaker goal-number specifier shapes:
+- **SportyBet / MSport**: `specifier="goalnr=N"`. `_extract_line_from_specifier` recognises `goalnr=` alongside `total=` and `hcp=`.
+- **BetPawa**: `formattedHandicap="N"` per row in the parameterized payload — handled by the existing `_parse_betpawa_parameterized` flow.
+- **Bet9ja**: keys without an `@`-line segment (e.g. `S_1STGOAL_1` / `S_1STGOAL_X` / `S_1STGOAL_2`) — the parser routes these through the simple-market path (`outcomes` populated, `lines=None`), since Bet9ja's "1st goal" market has no per-N variants.
+- **Betway**: line embedded in the `marketId` path segment (`<eventId><typeId>goalnr=N~`). `_build_betway_parameterized` extracts this via `_extract_betway_line_from_market_id` when a single parent entry is present.
+- **Betika**: `special_bet_value="goalnr=N"` per selection.
+- **SportPesa**: not yet probed (no Akamai cookie at probe time).
 
 ### Tennis (full match)
 
@@ -136,6 +149,14 @@ Use `__HOME__` / `__AWAY__` on 1X2 (clearest intent) and `__POS_N__` for Double 
 `parse_markets(response, platform, registry=None)` looks up `platform` in the dispatcher dict and calls the right `_parse_<platform>` function. Currently registered: `"betpawa"`, `"sportybet"`, `"bet9ja"`, `"betway"`, `"msport"`, `"sportpesa"`, `"betika"`. Returns `[]` if `platform` is unknown.
 
 The Bet9ja parser handles BOTH the prematch `S_*` keys AND the live `LIVES_*` keys. It also unwraps the `{"v": <float>}` odds shape used in live responses (vs bare strings prematch).
+
+## Betway team-name placeholders
+
+Some Betway markets carry the literal team name in the market-name field — e.g. `"Aston Villa Total"` / `"Brighton Total"` for `home_over_under_ft` / `away_over_under_ft`. The canonical mappings register the placeholder form `"[Home Team] Total"` / `"[Away Team] Total"` (literal `[Home Team]` / `[Away Team]` tokens).
+
+At parse-time, `_parse_betway` wraps the supplied registry in `_TeamScopedBetwayRegistry` using `sportEvent.homeTeam` / `awayTeam` from the response. The wrapper substitutes the literal placeholders against the actual team names on every miss; non-team-named markets take the fast direct-lookup path unchanged. Custom mappings can use the same `[Home Team]` / `[Away Team]` tokens in `betway_id` to participate in this mechanism — no code changes needed.
+
+Note: the placeholder string is whatever literal text Betway ships AROUND the team name. The `next_goal_ft` market on Betway is named `"1st Goal"` (no team name) and uses the direct-lookup path. The `home_over_under_ft` / `away_over_under_ft` markets are named `"<TeamName> Total"` (note: NO "Goals" suffix — early designs assumed `"<TeamName> Total Goals"` but the probe showed the actual shape).
 
 ## Custom mappings
 

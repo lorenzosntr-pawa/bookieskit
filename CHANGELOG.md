@@ -2,6 +2,21 @@
 
 All notable changes to this project are documented in this file. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.14.0] - 2026-05-21
+
+### Added
+- Three new canonical soccer markets:
+  - `next_goal_ft` — "next goal scored" (Home / None / Away). Parameterized by **goal number** (`lines[1.0]` is 1st goal prematch; live events can expose `lines[2.0]`, `lines[3.0]`, etc. under one canonical id). Mapped on BetPawa, SportyBet, Bet9ja, Betway, MSport (live-only), and Betika.
+  - `home_over_under_ft` — Over/Under on goals scored by the home team only. Mapped on BetPawa, SportyBet, Betway, MSport, Betika. Bet9ja does not ship this market; SportPesa not yet probed.
+  - `away_over_under_ft` — same shape for the away team, same coverage.
+- `_TeamScopedBetwayRegistry` — wraps a `MarketRegistry` to substitute literal `[Home Team]` / `[Away Team]` placeholders in Betway mapping keys with the actual team names from the event payload. Used internally by `_parse_betway`; custom mappings can use the same placeholders.
+- `_extract_betway_line_from_market_id` — extracts the line value from Betway `marketId` segments containing `goalnr=N~`. Covers `next_goal_ft` prematch where Betway ships a single `handicap=0` entry instead of per-line entries.
+
+### Changed
+- `_extract_line_from_specifier` (SportyBet + MSport) now recognises `goalnr=N` alongside `total=N` and `hcp=N`.
+- `_build_betway_parameterized` restructured into three mutually-exclusive cases: (1) parent-with-per-line distribution; (2) parent-only with line from marketId; (3) per-line entries without a parent.
+- Built-in canonical market count: 13 → 16 (9 soccer + 3 basketball + 4 tennis).
+
 ## [0.13.1] — 2026-05-18
 
 Two bug fixes uncovered by cross-bookmaker validation on an OKC/SAS basketball event and a Svrcina/Den Ouden tennis event.
