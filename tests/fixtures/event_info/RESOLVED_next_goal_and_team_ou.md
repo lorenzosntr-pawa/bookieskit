@@ -43,12 +43,12 @@ Probe-script notes (bugs found, not modified per task constraints):
     full-time. There is also `S_1STGHT` (1st goal in 1st half) and
     `S_1STGHTH` / `S_1STGHTA` (1st goal in half — home/away view) —
     these are NOT what we want for `next_goal_ft`.
-- `home_over_under_ft`: bet9ja_key = `None` — NOT EXPOSED as a per-team
-  O/U market. Bet9ja shows `S_GOALSHOME` (exact home goals: 0/1/2/3+),
-  `S_HAOU` (combined Home/Away O/U single-market with `_OH/_UH/_OA/_UA`
-  suffixes), and `S_OUA` (Asian total — full-match, not team-scoped).
-  None of these are a per-team Over/Under on a goal line.
-- `away_over_under_ft`: bet9ja_key = `None` — same reason as above.
+- `home_over_under_ft`: bet9ja_key = `S_HAOU` (shared with away_over_under_ft).
+  Bet9ja ships per-team O/U as a single combined market with the 4 outcomes
+  per line distinguished by suffix: `_OH`=Over Home, `_UH`=Under Home,
+  `_OA`=Over Away, `_UA`=Under Away. The parser routes outcomes to the
+  right canonical via OutcomeMapping.bet9ja matching.
+- `away_over_under_ft`: bet9ja_key = `S_HAOU` (shared — see above).
 
 ## MSport
 - `next_goal_ft`: msport_id = `8`
@@ -127,10 +127,13 @@ Probe-script notes (bugs found, not modified per task constraints):
    `N`), wrong source for Betway sportEvent (it's on `get_event_detail`
    not `get_event_markets`).
 
-2. **Bet9ja team O/U not exposed** — `home_over_under_ft` and
-   `away_over_under_ft` will stay `bet9ja_key=None` in BUILTIN_MAPPINGS.
-   The closest Bet9ja market `S_GOALSHOME` / `S_GOALSAWAY` is exact-goals
-   buckets (0, 1, 2, 3+), not a goal-line O/U.
+2. **Bet9ja per-team O/U found — earlier probe was wrong.** The Wolfsburg
+   v Paderborn re-probe (2026-05-21) found `S_HAOU` is the combined Home
+   + Away O/U market with team-distinguishing outcome suffixes
+   (`_OH`/`_UH`/`_OA`/`_UA`). The first probe (Qatar v Sudan)
+   mis-classified this as "combined, not per-team". Both
+   `home_over_under_ft` and `away_over_under_ft` now share
+   `bet9ja_key="S_HAOU"` with team-suffixed OutcomeMapping.bet9ja values.
 
 3. **Betway placeholder spec mismatch** — the design doc / plan
    assumes a `[Home Team] Total Goals` placeholder pattern. Observed

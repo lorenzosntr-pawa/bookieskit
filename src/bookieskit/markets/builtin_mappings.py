@@ -632,14 +632,19 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
     # at parse-time. (The "Goals" suffix in the spec was an early
     # assumption; the probe found Betway actually uses just "<Team> Total".)
     #
-    # Bet9ja: NOT EXPOSED — Bet9ja has S_GOALSHOME (exact-goals buckets)
-    # and S_HAOU (combined Home+Away O/U) but no per-team goal-line O/U.
+    # Bet9ja: SHARED KEY — S_HAOU is a combined Home+Away O/U single
+    # market. The 4 outcomes per line distinguish team and side via
+    # suffix: _OH=Over Home, _UH=Under Home, _OA=Over Away, _UA=Under
+    # Away. _parse_bet9ja routes each (S_HAOU, outcome_suffix) tuple to
+    # the right per-team canonical based on whose OutcomeMapping.bet9ja
+    # claims the suffix. (Both home_over_under_ft and away_over_under_ft
+    # register bet9ja_key="S_HAOU".)
     MarketMapping(
         canonical_id="home_over_under_ft",
         name="Over/Under Home Team - Full Time",
         betpawa_id="5006",
         sportybet_id="19",
-        bet9ja_key=None,                       # NOT EXPOSED (see comment)
+        bet9ja_key="S_HAOU",                   # shared with away_over_under_ft (see comment)
         betway_id="[Home Team] Total",         # placeholder substituted at parse-time
         msport_id="19",                        # locked-in via probe
         sportpesa_id=None,                     # NOT PROBED
@@ -650,7 +655,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 canonical_name="over",
                 betpawa="Over",
                 sportybet="Over",
-                bet9ja="O",
+                bet9ja="OH",
                 betway="Over",
                 msport="Over",
                 sportpesa="OV",
@@ -660,7 +665,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 canonical_name="under",
                 betpawa="Under",
                 sportybet="Under",
-                bet9ja="U",
+                bet9ja="UH",
                 betway="Under",
                 msport="Under",
                 sportpesa="UN",
@@ -671,13 +676,15 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
     ),
     # =================== Soccer — Away Team Over/Under =================
     # Mirror of home_over_under_ft for the away team. Same probe coverage
-    # — Bet9ja still NOT EXPOSED, SportPesa NOT PROBED.
+    # — Bet9ja shares the S_HAOU key (see comment on home_over_under_ft;
+    # this canonical's OutcomeMapping.bet9ja claims the _OA / _UA
+    # outcome suffixes), SportPesa NOT PROBED.
     MarketMapping(
         canonical_id="away_over_under_ft",
         name="Over/Under Away Team - Full Time",
         betpawa_id="5003",
         sportybet_id="20",
-        bet9ja_key=None,                       # NOT EXPOSED (see home_over_under_ft)
+        bet9ja_key="S_HAOU",                   # shared with home_over_under_ft (see comment)
         betway_id="[Away Team] Total",         # placeholder substituted at parse-time
         msport_id="20",                        # locked-in via probe
         sportpesa_id=None,                     # NOT PROBED
@@ -688,7 +695,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 canonical_name="over",
                 betpawa="Over",
                 sportybet="Over",
-                bet9ja="O",
+                bet9ja="OA",
                 betway="Over",
                 msport="Over",
                 sportpesa="OV",
@@ -698,7 +705,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 canonical_name="under",
                 betpawa="Under",
                 sportybet="Under",
-                bet9ja="U",
+                bet9ja="UA",
                 betway="Under",
                 msport="Under",
                 sportpesa="UN",

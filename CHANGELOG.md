@@ -16,6 +16,7 @@ All notable changes to this project are documented in this file. The format foll
 - `_extract_line_from_specifier` (SportyBet + MSport) now recognises `goalnr=N` alongside `total=N` and `hcp=N`.
 - `_build_betway_parameterized` restructured into three mutually-exclusive cases: (1) parent-with-per-line distribution; (2) parent-only with line from marketId; (3) per-line entries without a parent.
 - Built-in canonical market count: 13 → 16 (9 soccer + 3 basketball + 4 tennis).
+- Bet9ja parser now supports one wire market splitting into multiple canonicals via outcome-suffix matching. Applied to `S_HAOU` (combined Home+Away O/U) which now produces separate `home_over_under_ft` and `away_over_under_ft` markets. Earlier probe had mis-classified `S_HAOU` as "combined-only".
 
 ## [0.13.1] — 2026-05-18
 

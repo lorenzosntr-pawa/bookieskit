@@ -484,10 +484,14 @@ def _parse_bet9ja(
     if not odds_dict:
         return []
 
-    # Group odds keys by market key
+    # Group odds keys by canonical_id (not market_key) so multiple
+    # canonicals sharing the same Bet9ja key (e.g. S_HAOU →
+    # home_over_under_ft + away_over_under_ft) each get their own
+    # NormalizedMarket.
     # Format: S_{MARKET}_{OUTCOME} or S_{MARKET}@{LINE}_{OUTCOME}
     simple_groups: dict[str, list[tuple[str, float]]] = {}
     parameterized_groups: dict[str, dict[float, list[tuple[str, float]]]] = {}
+    canonical_to_mapping: dict[str, MarketMapping] = {}
 
     for key, value in odds_dict.items():
         # Bet9ja prematch keys are sport-prefixed: "S_" for soccer,
@@ -513,58 +517,65 @@ def _parse_bet9ja(
             continue
 
         market_key, line, outcome_suffix = parsed
-        mapping = registry.get_by_platform_id("bet9ja", market_key)
+
+        # Find the mapping that (a) shares this Bet9ja key and (b)
+        # has an OutcomeMapping claiming this outcome_suffix. This
+        # supports one wire market splitting into multiple canonicals
+        # (e.g. Bet9ja's S_HAOU contains _OH/_UH outcomes for the home
+        # canonical AND _OA/_UA outcomes for the away canonical).
+        mapping: MarketMapping | None = None
+        for m in registry.list_markets():
+            if m.bet9ja_key != market_key:
+                continue
+            if any(
+                om.bet9ja == outcome_suffix for om in m.outcomes.values()
+            ):
+                mapping = m
+                break
         if mapping is None:
             continue
+        canonical_to_mapping[mapping.canonical_id] = mapping
 
         if mapping.parameterized and line is not None:
-            if market_key not in parameterized_groups:
-                parameterized_groups[market_key] = {}
-            if line not in parameterized_groups[market_key]:
-                parameterized_groups[market_key][line] = []
-            parameterized_groups[market_key][line].append(
+            parameterized_groups.setdefault(
+                mapping.canonical_id, {}
+            ).setdefault(line, []).append((outcome_suffix, odds))
+        else:
+            simple_groups.setdefault(mapping.canonical_id, []).append(
                 (outcome_suffix, odds)
             )
-        else:
-            if market_key not in simple_groups:
-                simple_groups[market_key] = []
-            simple_groups[market_key].append((outcome_suffix, odds))
 
-    # Build simple markets
-    for market_key, outcomes_data in simple_groups.items():
-        mapping = registry.get_by_platform_id("bet9ja", market_key)
-        if mapping:
-            outcomes = _build_bet9ja_outcomes(outcomes_data, mapping)
-            if outcomes:
-                results.append(
-                    NormalizedMarket(
-                        canonical_id=mapping.canonical_id,
-                        name=mapping.name,
-                        outcomes=outcomes,
-                        lines=None,
-                    )
+    # Build simple markets — keyed by canonical_id
+    for canonical_id, outcomes_data in simple_groups.items():
+        mapping = canonical_to_mapping[canonical_id]
+        outcomes = _build_bet9ja_outcomes(outcomes_data, mapping)
+        if outcomes:
+            results.append(
+                NormalizedMarket(
+                    canonical_id=mapping.canonical_id,
+                    name=mapping.name,
+                    outcomes=outcomes,
+                    lines=None,
                 )
+            )
 
-    # Build parameterized markets
-    for market_key, lines_data in parameterized_groups.items():
-        mapping = registry.get_by_platform_id("bet9ja", market_key)
-        if mapping:
-            lines: dict[float, list[Outcome]] = {}
-            for line, outcomes_data in lines_data.items():
-                line_outcomes = _build_bet9ja_outcomes(
-                    outcomes_data, mapping
+    # Build parameterized markets — keyed by canonical_id
+    for canonical_id, lines_data in parameterized_groups.items():
+        mapping = canonical_to_mapping[canonical_id]
+        lines: dict[float, list[Outcome]] = {}
+        for line, outcomes_data in lines_data.items():
+            line_outcomes = _build_bet9ja_outcomes(outcomes_data, mapping)
+            if line_outcomes:
+                lines[line] = line_outcomes
+        if lines:
+            results.append(
+                NormalizedMarket(
+                    canonical_id=mapping.canonical_id,
+                    name=mapping.name,
+                    outcomes=[],
+                    lines=lines,
                 )
-                if line_outcomes:
-                    lines[line] = line_outcomes
-            if lines:
-                results.append(
-                    NormalizedMarket(
-                        canonical_id=mapping.canonical_id,
-                        name=mapping.name,
-                        outcomes=[],
-                        lines=lines,
-                    )
-                )
+            )
 
     return results
 

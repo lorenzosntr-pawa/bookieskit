@@ -139,3 +139,47 @@ def test_parse_bet9ja_next_goal_ft_from_probe_fixture():
         assert {"home", "away"}.issubset(names), (
             f"missing home/away in outcomes: {names}"
         )
+
+
+def test_parse_bet9ja_s_haou_splits_into_home_and_away_canonicals():
+    """Bet9ja ships per-team Over/Under under a single S_HAOU key with
+    outcomes distinguished by suffix (_OH/_UH for home, _OA/_UA for
+    away). The parser must route each outcome to the correct canonical
+    based on which OutcomeMapping.bet9ja claims the suffix.
+    """
+    from bookieskit.markets.parser import parse_markets
+
+    response = {
+        "D": {
+            "O": {
+                "S_HAOU@0.5_OH": "1.12",
+                "S_HAOU@0.5_UH": "5.40",
+                "S_HAOU@0.5_OA": "1.42",
+                "S_HAOU@0.5_UA": "2.66",
+                "S_HAOU@1.5_OH": "1.70",
+                "S_HAOU@1.5_UH": "2.03",
+                "S_HAOU@1.5_OA": "3.15",
+                "S_HAOU@1.5_UA": "1.31",
+            }
+        }
+    }
+    markets = parse_markets(response, platform="bet9ja")
+    by_canon = {m.canonical_id: m for m in markets}
+
+    assert "home_over_under_ft" in by_canon
+    home = by_canon["home_over_under_ft"]
+    assert home.lines is not None
+    assert 0.5 in home.lines and 1.5 in home.lines
+    home_05 = {o.canonical_name: o.odds for o in home.lines[0.5]}
+    assert home_05 == {"over": 1.12, "under": 5.40}
+    home_15 = {o.canonical_name: o.odds for o in home.lines[1.5]}
+    assert home_15 == {"over": 1.70, "under": 2.03}
+
+    assert "away_over_under_ft" in by_canon
+    away = by_canon["away_over_under_ft"]
+    assert away.lines is not None
+    assert 0.5 in away.lines and 1.5 in away.lines
+    away_05 = {o.canonical_name: o.odds for o in away.lines[0.5]}
+    assert away_05 == {"over": 1.42, "under": 2.66}
+    away_15 = {o.canonical_name: o.odds for o in away.lines[1.5]}
+    assert away_15 == {"over": 3.15, "under": 1.31}
