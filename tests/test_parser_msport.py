@@ -156,6 +156,7 @@ def test_parse_msport_next_goal_ft_from_probe_fixture():
 def test_parse_msport_home_over_under_ft_from_probe_fixture():
     import json
     from pathlib import Path
+
     from bookieskit.markets.parser import parse_markets
 
     fixture = Path("tests/fixtures/event_info/msport/next_goal_and_team_ou.json")
@@ -178,6 +179,7 @@ def test_parse_msport_home_over_under_ft_from_probe_fixture():
 def test_parse_msport_away_over_under_ft_from_probe_fixture():
     import json
     from pathlib import Path
+
     from bookieskit.markets.parser import parse_markets
 
     fixture = Path("tests/fixtures/event_info/msport/next_goal_and_team_ou.json")

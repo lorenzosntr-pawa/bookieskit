@@ -115,7 +115,8 @@ def test_extract_line_from_specifier_recognises_goalnr():
     from bookieskit.markets.parser import _extract_line_from_specifier
     assert _extract_line_from_specifier("goalnr=1") == 1.0
     assert _extract_line_from_specifier("goalnr=2") == 2.0
-    assert _extract_line_from_specifier("total=2.5|goalnr=3") == 2.5  # total wins (first match)
+    # total wins (first match)
+    assert _extract_line_from_specifier("total=2.5|goalnr=3") == 2.5
     # Non-recognised key still returns None
     assert _extract_line_from_specifier("foo=1") is None
 
@@ -123,6 +124,7 @@ def test_extract_line_from_specifier_recognises_goalnr():
 def test_parse_sportybet_next_goal_ft_from_real_fixture():
     import json
     from pathlib import Path
+
     from bookieskit.markets.parser import parse_markets
 
     fixture = Path("tests/fixtures/event_info/sportybet/prematch.json")
@@ -147,6 +149,7 @@ def test_parse_sportybet_next_goal_ft_from_real_fixture():
 def test_parse_sportybet_home_over_under_ft_from_real_fixture():
     import json
     from pathlib import Path
+
     from bookieskit.markets.parser import parse_markets
 
     fixture = Path("tests/fixtures/event_info/sportybet/prematch.json")
@@ -168,6 +171,7 @@ def test_parse_sportybet_home_over_under_ft_from_real_fixture():
 def test_parse_sportybet_away_over_under_ft_from_real_fixture():
     import json
     from pathlib import Path
+
     from bookieskit.markets.parser import parse_markets
 
     fixture = Path("tests/fixtures/event_info/sportybet/prematch.json")

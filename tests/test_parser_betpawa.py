@@ -135,6 +135,7 @@ def test_parse_betpawa_with_custom_registry():
 def test_parse_betpawa_next_goal_ft_from_real_fixture():
     import json
     from pathlib import Path
+
     from bookieskit.markets.parser import parse_markets
 
     fixture = Path("tests/fixtures/event_info/betpawa/prematch.json")
@@ -161,6 +162,7 @@ def test_parse_betpawa_next_goal_ft_from_real_fixture():
 def test_parse_betpawa_home_over_under_ft_from_real_fixture():
     import json
     from pathlib import Path
+
     from bookieskit.markets.parser import parse_markets
 
     fixture = Path("tests/fixtures/event_info/betpawa/prematch.json")
@@ -182,6 +184,7 @@ def test_parse_betpawa_home_over_under_ft_from_real_fixture():
 def test_parse_betpawa_away_over_under_ft_from_real_fixture():
     import json
     from pathlib import Path
+
     from bookieskit.markets.parser import parse_markets
 
     fixture = Path("tests/fixtures/event_info/betpawa/prematch.json")

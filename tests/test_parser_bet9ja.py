@@ -113,6 +113,7 @@ def test_parse_bet9ja_live_keys_with_lives_prefix():
 def test_parse_bet9ja_next_goal_ft_from_probe_fixture():
     import json
     from pathlib import Path
+
     from bookieskit.markets.parser import parse_markets
 
     fixture = Path("tests/fixtures/event_info/bet9ja/next_goal_and_team_ou.json")

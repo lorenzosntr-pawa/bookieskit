@@ -280,6 +280,7 @@ def test_parse_betika_probability_mode_passes_through():
 def test_parse_betika_next_goal_ft_from_probe_fixture():
     import json
     from pathlib import Path
+
     from bookieskit.markets.parser import parse_markets
 
     fixture = Path("tests/fixtures/event_info/betika/next_goal_and_team_ou.json")
@@ -304,6 +305,7 @@ def test_parse_betika_next_goal_ft_from_probe_fixture():
 def test_parse_betika_home_over_under_ft_from_probe_fixture():
     import json
     from pathlib import Path
+
     from bookieskit.markets.parser import parse_markets
 
     fixture = Path("tests/fixtures/event_info/betika/next_goal_and_team_ou.json")
@@ -324,6 +326,7 @@ def test_parse_betika_home_over_under_ft_from_probe_fixture():
 def test_parse_betika_away_over_under_ft_from_probe_fixture():
     import json
     from pathlib import Path
+
     from bookieskit.markets.parser import parse_markets
 
     fixture = Path("tests/fixtures/event_info/betika/next_goal_and_team_ou.json")

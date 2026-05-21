@@ -149,7 +149,7 @@ def test_parse_betway_skips_unknown():
 def test_team_scoped_betway_registry_substitutes_placeholders():
     from bookieskit.markets.parser import _TeamScopedBetwayRegistry
     from bookieskit.markets.registry import MarketRegistry
-    from bookieskit.markets.types import MarketMapping, OutcomeMapping
+    from bookieskit.markets.types import OutcomeMapping
 
     inner = MarketRegistry(load_builtins=False)
     inner.add(
@@ -204,7 +204,7 @@ def test_team_scoped_betway_registry_substitutes_placeholders():
 def test_parse_betway_resolves_team_name_placeholder():
     from bookieskit.markets.parser import parse_markets
     from bookieskit.markets.registry import MarketRegistry
-    from bookieskit.markets.types import MarketMapping, OutcomeMapping
+    from bookieskit.markets.types import OutcomeMapping
 
     registry = MarketRegistry(load_builtins=False)
     registry.add(
@@ -271,6 +271,7 @@ def test_parse_betway_extracts_goalnr_from_market_id():
     """
     import json
     from pathlib import Path
+
     from bookieskit.markets.parser import parse_markets
 
     fixture = Path("tests/fixtures/event_info/betway/next_goal_and_team_ou.json")
@@ -282,15 +283,22 @@ def test_parse_betway_extracts_goalnr_from_market_id():
         None,
     )
     assert ng is not None, "Betway next_goal_ft not found in fixture"
-    assert ng.lines is not None, "Expected parameterized output (lines), got simple outcomes"
-    assert 1.0 in ng.lines, f"Expected line 1.0 (goalnr=1), got keys: {list(ng.lines.keys())}"
+    assert ng.lines is not None, (
+        "Expected parameterized output (lines), got simple outcomes"
+    )
+    assert 1.0 in ng.lines, (
+        f"Expected line 1.0 (goalnr=1), got keys: {list(ng.lines.keys())}"
+    )
     names = {o.canonical_name for o in ng.lines[1.0]}
-    assert {"home", "away"}.issubset(names), f"Missing home/away at line 1.0: {names}"
+    assert {"home", "away"}.issubset(names), (
+        f"Missing home/away at line 1.0: {names}"
+    )
 
 
 def test_parse_betway_next_goal_ft_from_probe_fixture():
     import json
     from pathlib import Path
+
     from bookieskit.markets.parser import parse_markets
 
     fixture = Path("tests/fixtures/event_info/betway/next_goal_and_team_ou.json")
@@ -317,6 +325,7 @@ def test_parse_betway_next_goal_ft_from_probe_fixture():
 def test_parse_betway_home_over_under_ft_with_placeholder():
     import json
     from pathlib import Path
+
     from bookieskit.markets.parser import parse_markets
 
     fixture = Path("tests/fixtures/event_info/betway/next_goal_and_team_ou.json")
@@ -338,6 +347,7 @@ def test_parse_betway_home_over_under_ft_with_placeholder():
 def test_parse_betway_away_over_under_ft_with_placeholder():
     import json
     from pathlib import Path
+
     from bookieskit.markets.parser import parse_markets
 
     fixture = Path("tests/fixtures/event_info/betway/next_goal_and_team_ou.json")
@@ -349,3 +359,37 @@ def test_parse_betway_away_over_under_ft_with_placeholder():
     )
     assert away_ou is not None
     assert away_ou.lines is not None
+
+
+def test_team_scoped_betway_registry_composes_with_sport_scoped():
+    """_TeamScopedBetwayRegistry wrapping _SportScopedRegistry must not
+    raise TypeError on the registry-lookup path. The team wrapper
+    forwards sport= to whatever it wraps; the sport wrapper must
+    accept (and ideally honor) it.
+    """
+    from bookieskit.markets.parser import (
+        _SportScopedRegistry,
+        _TeamScopedBetwayRegistry,
+    )
+    from bookieskit.markets.registry import MarketRegistry
+
+    inner = MarketRegistry()
+    sport_wrapped = _SportScopedRegistry(inner, sport="soccer")
+    team_wrapped = _TeamScopedBetwayRegistry(
+        sport_wrapped, home_team="Aston Villa", away_team="Brighton",
+    )
+
+    # Direct lookup with no sport — must not raise
+    result = team_wrapped.get_by_platform_id("betpawa", "3743")
+    assert result is not None
+    assert result.canonical_id == "1x2_ft"
+
+    # Direct lookup WITH explicit sport — must not raise
+    result = team_wrapped.get_by_platform_id("betpawa", "3743", sport="soccer")
+    assert result is not None
+    assert result.canonical_id == "1x2_ft"
+
+    # Placeholder substitution path through both wrappers
+    result = team_wrapped.get_by_platform_id("betway", "Aston Villa Total")
+    assert result is not None
+    assert result.canonical_id == "home_over_under_ft"

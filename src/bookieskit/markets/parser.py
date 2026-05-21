@@ -43,10 +43,16 @@ class _SportScopedRegistry:
         self._sport = sport
 
     def get_by_platform_id(
-        self, platform: str, platform_id: str
+        self,
+        platform: str,
+        platform_id: str,
+        sport: str | None = None,
     ) -> MarketMapping | None:
+        # Prefer caller-supplied sport (composes with outer wrappers
+        # like _TeamScopedBetwayRegistry that forward sport=); fall
+        # back to the injected sport when caller doesn't specify.
         return self._inner.get_by_platform_id(
-            platform, platform_id, sport=self._sport
+            platform, platform_id, sport=sport if sport is not None else self._sport
         )
 
     def __getattr__(self, name: str):
