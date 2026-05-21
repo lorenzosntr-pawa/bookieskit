@@ -144,3 +144,58 @@ def test_parse_betway_skips_unknown():
         BETWAY_MARKETS_RESPONSE, platform="betway"
     )
     assert len(markets) == 4
+
+
+def test_team_scoped_betway_registry_substitutes_placeholders():
+    from bookieskit.markets.parser import _TeamScopedBetwayRegistry
+    from bookieskit.markets.registry import MarketRegistry
+    from bookieskit.markets.types import MarketMapping, OutcomeMapping
+
+    inner = MarketRegistry(load_builtins=False)
+    inner.add(
+        canonical_id="home_over_under_ft",
+        name="Over/Under Home Team - Full Time",
+        betway_id="[Home Team] Total Goals",
+        outcomes={
+            "over": OutcomeMapping(
+                canonical_name="over", betpawa="", sportybet="",
+                bet9ja="", betway="Over",
+            ),
+            "under": OutcomeMapping(
+                canonical_name="under", betpawa="", sportybet="",
+                bet9ja="", betway="Under",
+            ),
+        },
+        parameterized=True,
+    )
+
+    scoped = _TeamScopedBetwayRegistry(
+        inner, home_team="Aston Villa", away_team="Brighton",
+    )
+
+    # Substituted form resolves
+    mapping = scoped.get_by_platform_id(
+        "betway", "Aston Villa Total Goals"
+    )
+    assert mapping is not None
+    assert mapping.canonical_id == "home_over_under_ft"
+
+    # Direct (non-placeholder) lookup still works for non-team markets
+    inner.add(
+        canonical_id="1x2_ft",
+        name="1X2", betway_id="[Win/Draw/Win]",
+        outcomes={}, parameterized=False,
+    )
+    scoped = _TeamScopedBetwayRegistry(
+        inner, home_team="Aston Villa", away_team="Brighton",
+    )
+    direct = scoped.get_by_platform_id("betway", "[Win/Draw/Win]")
+    assert direct is not None
+    assert direct.canonical_id == "1x2_ft"
+
+    # Wrong team name returns None
+    miss = scoped.get_by_platform_id("betway", "Nottingham Total Goals")
+    assert miss is None
+
+    # Non-betway platform is a no-op fallback
+    assert scoped.get_by_platform_id("sportybet", "x") is None

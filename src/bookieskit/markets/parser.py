@@ -53,6 +53,64 @@ class _SportScopedRegistry:
         return getattr(self._inner, name)
 
 
+class _TeamScopedBetwayRegistry:
+    """Wraps a MarketRegistry to substitute [Home Team] / [Away Team]
+    placeholders in Betway mapping keys with the actual team names from
+    the current event payload. Used only for the duration of one
+    ``_parse_betway`` call.
+
+    Mirrors :class:`_SportScopedRegistry` — re-scope a view of the
+    registry without mutating the underlying indexes. The direct
+    ``get_by_platform_id`` lookup is unchanged (covers every
+    non-team-named market); placeholder substitution only fires when
+    the direct lookup misses, and only iterates mappings that actually
+    carry a placeholder token.
+    """
+
+    _PLACEHOLDER_HOME = "[Home Team]"
+    _PLACEHOLDER_AWAY = "[Away Team]"
+
+    def __init__(
+        self, inner: MarketRegistry, home_team: str, away_team: str
+    ) -> None:
+        self._inner = inner
+        self._home = home_team
+        self._away = away_team
+
+    def get_by_platform_id(
+        self,
+        platform: str,
+        platform_id: str,
+        sport: str | None = None,
+    ) -> MarketMapping | None:
+        result = self._inner.get_by_platform_id(
+            platform, platform_id, sport=sport
+        )
+        if result is not None:
+            return result
+        if platform != "betway":
+            return None
+        for mapping in self._inner.list_markets():
+            bid = mapping.betway_id
+            if not bid or (
+                self._PLACEHOLDER_HOME not in bid
+                and self._PLACEHOLDER_AWAY not in bid
+            ):
+                continue
+            substituted = bid.replace(
+                self._PLACEHOLDER_HOME, self._home
+            ).replace(self._PLACEHOLDER_AWAY, self._away)
+            if substituted == platform_id:
+                return mapping
+        return None
+
+    def list_markets(self) -> list[MarketMapping]:
+        return self._inner.list_markets()
+
+    def __getattr__(self, name: str):
+        return getattr(self._inner, name)
+
+
 def parse_markets(
     response: dict,
     platform: str,
