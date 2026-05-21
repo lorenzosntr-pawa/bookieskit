@@ -1,3 +1,4 @@
+import httpx
 import pytest
 import respx
 
@@ -164,6 +165,20 @@ async def test_get_event_markets():
 @pytest.mark.asyncio
 @respx.mock
 async def test_get_markets_convenience():
+    # get_markets now also calls get_event_detail to splice sportEvent
+    # into the merged payload — mock both endpoints.
+    respx.get(
+        "https://feeds-roa2.betwayafrica.com/br/_apis/sport/v3/Feeds/Events/EventAndGameState"
+    ).respond(
+        json={
+            "sportEvent": {
+                "homeTeam": "Home",
+                "awayTeam": "Away",
+            }
+        }
+    )
+    # Single page with 1 market — pagination loop should exit after the
+    # first page because len(mig)=1 < take=100.
     respx.get(
         "https://feeds-roa2.betwayafrica.com/br/_apis/sport/v1/MarketGroupings/MarketGroupNamesAndMarketsForEvent"
     ).respond(
@@ -189,6 +204,68 @@ async def test_get_markets_convenience():
         markets = await client.get_markets(event_id="123")
     assert len(markets) == 1
     assert markets[0].canonical_id == "btts_ft"
+
+
+@pytest.mark.asyncio
+@respx.mock
+async def test_get_markets_paginates_until_empty_page():
+    """get_markets must fetch all pages of marketsInGroup before
+    parsing, so markets past index 100 aren't silently dropped.
+    """
+    # Mock get_event_detail (scoreboard call for sportEvent)
+    respx.get(
+        url__regex=r"^https://feeds-roa2.betwayafrica.com/br/_apis/sport/v3/Feeds/Events/EventAndGameState.*"  # noqa: E501
+    ).mock(return_value=httpx.Response(
+        200, json={
+            "sportEvent": {
+                "homeTeam": "Test Home",
+                "awayTeam": "Test Away",
+            },
+        }
+    ))
+
+    # Mock 2 pages of markets — first page returns 100 markets and
+    # forces a second call; second page returns 5 and signals the end.
+    page1_markets = [
+        {
+            "marketId": f"m1_{i}",
+            "name": "[Total Goals]",
+            "handicap": float(i),
+        } for i in range(100)
+    ]
+    page2_markets = [
+        {
+            "marketId": f"m2_{i}",
+            "name": "[Win/Draw/Win]",
+            "handicap": 0,
+        } for i in range(5)
+    ]
+
+    pages = [
+        {"marketsInGroup": page1_markets, "outcomes": [], "prices": []},
+        {"marketsInGroup": page2_markets, "outcomes": [], "prices": []},
+    ]
+
+    call_count = {"n": 0}
+
+    def _markets_side_effect(request):
+        i = call_count["n"]
+        call_count["n"] += 1
+        if i >= len(pages):
+            return httpx.Response(200, json={"marketsInGroup": [], "outcomes": [], "prices": []})
+        return httpx.Response(200, json=pages[i])
+
+    respx.get(
+        url__regex=r"^https://feeds-roa2.betwayafrica.com/br/_apis/sport/v1/MarketGroupings.*"  # noqa: E501
+    ).mock(side_effect=_markets_side_effect)
+
+    async with Betway(country="ng") as bw:
+        await bw.get_markets(event_id="71443804")
+
+    # Must have made AT LEAST 2 calls to the markets endpoint (page 1 + page 2)
+    assert call_count["n"] >= 2, (
+        f"Expected pagination (>=2 calls) but got {call_count['n']}"
+    )
 
 
 @pytest.mark.asyncio

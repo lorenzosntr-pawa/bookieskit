@@ -267,20 +267,63 @@ class Betway(BaseBookmaker):
     async def get_markets(self, event_id: str, registry: Any = None) -> list:
         """Fetch event markets and return normalized markets.
 
-        Overrides base because Betway uses a separate markets endpoint.
+        Auto-paginates Betway's markets endpoint (which returns at most 100
+        markets per call) and merges marketsInGroup / outcomes / prices
+        across pages before parsing. Without this, events with >100
+        markets (large soccer fixtures, big basketball games) would
+        silently drop markets that live past the first page — including
+        the per-team Over/Under and Next Goal markets which often land
+        past index 100 on top fixtures.
 
         Args:
             event_id: Betway event ID (= SportRadar ID)
             registry: MarketRegistry (default: built-in)
 
         Returns:
-            List of NormalizedMarket for recognized markets.
+            List of NormalizedMarket for recognized markets across all pages.
         """
         from bookieskit.markets.parser import parse_markets
 
-        raw = await self.get_event_markets(event_id=event_id)
+        # Also fetch the scoreboard so the parser sees sportEvent.homeTeam
+        # / awayTeam (used by _TeamScopedBetwayRegistry for team-name
+        # placeholder substitution).
+        detail = await self.get_event_detail(event_id=event_id)
+        sport_event = detail.get("sportEvent") or {}
+
+        all_mig: list = []
+        all_outs: list = []
+        all_prices: list = []
+
+        skip = 0
+        take = 100
+        while True:
+            page = await self.get_event_markets(
+                event_id=event_id, skip=skip, take=take
+            )
+            mig = page.get("marketsInGroup") or []
+            if not mig:
+                break
+            all_mig.extend(mig)
+            all_outs.extend(page.get("outcomes") or [])
+            all_prices.extend(page.get("prices") or [])
+            if len(mig) < take:
+                # Last page (fewer than `take` markets returned)
+                break
+            skip += take
+            # Safety cap: don't loop forever if the endpoint pathologically
+            # always returns full pages. Soccer events have <500 markets in
+            # practice; cap at 1000 (10 pages).
+            if skip >= 1000:
+                break
+
+        merged = {
+            "marketsInGroup": all_mig,
+            "outcomes": all_outs,
+            "prices": all_prices,
+            "sportEvent": sport_event,
+        }
         return parse_markets(
-            raw, platform=self.PLATFORM_KEY, registry=registry
+            merged, platform=self.PLATFORM_KEY, registry=registry
         )
 
     async def get_sportradar_id(

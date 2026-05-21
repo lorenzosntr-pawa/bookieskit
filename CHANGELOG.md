@@ -18,6 +18,7 @@ All notable changes to this project are documented in this file. The format foll
 - Built-in canonical market count: 13 → 16 (9 soccer + 3 basketball + 4 tennis).
 - Bet9ja parser now supports one wire market splitting into multiple canonicals via outcome-suffix matching. Applied to `S_HAOU` (combined Home+Away O/U) which now produces separate `home_over_under_ft` and `away_over_under_ft` markets. Earlier probe had mis-classified `S_HAOU` as "combined-only".
 - `Betika.get_event_markets()` / `get_markets()` now fan out 7 sub_type_ids (was 4) to include the new `next_goal_ft` (8), `home_over_under_ft` (19), and `away_over_under_ft` (20) canonicals. Without this, the public Betika helpers would silently drop the new markets even though the parser supports them.
+- `Betway.get_markets()` now auto-paginates the markets endpoint (which returns at most 100 markets per call). Without this, large soccer/basketball events would silently drop markets past index 100 — including the new per-team Over/Under and Next Goal markets which often live past the first page on top fixtures.
 
 ## [0.13.1] — 2026-05-18
 
