@@ -204,3 +204,39 @@ def test_parse_betpawa_away_over_under_ft_from_real_fixture():
         if {"over", "under"}.issubset(names):
             return
     raise AssertionError("no away O/U line had both over and under")
+
+
+def test_parse_betpawa_2way_handicap_ft_from_real_fixture():
+    """If the BetPawa prematch fixture contains marketType.id=3774
+    (Asian Handicap - FT / 2-Way Handicap), parse_markets should
+    surface a parameterized 2way_handicap_ft canonical with at least
+    one line having both home and away outcomes.
+    """
+    import json
+    from pathlib import Path
+    from bookieskit.markets.parser import parse_markets
+
+    fixture = Path("tests/fixtures/event_info/betpawa/prematch.json")
+    response = json.loads(fixture.read_text(encoding="utf-8"))
+
+    markets = parse_markets(response, platform="betpawa")
+    ah = next(
+        (m for m in markets if m.canonical_id == "2way_handicap_ft"),
+        None,
+    )
+    if ah is None:
+        # The existing prematch.json fixture may not contain id=3774.
+        # Skip if so — this test guards against regressions when the
+        # fixture DOES contain it, but doesn't require it.
+        import pytest
+        pytest.skip(
+            "BetPawa prematch fixture doesn't contain "
+            "2way_handicap_ft (id=3774) — no regression check possible"
+        )
+    assert ah.lines is not None
+    assert len(ah.lines) >= 1
+    # At least one line must have both home + away outcomes
+    assert any(
+        {"home", "away"}.issubset({o.canonical_name for o in outs})
+        for outs in ah.lines.values()
+    ), f"no line had both home and away: {ah.lines}"

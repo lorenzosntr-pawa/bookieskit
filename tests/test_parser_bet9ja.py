@@ -183,3 +183,64 @@ def test_parse_bet9ja_s_haou_splits_into_home_and_away_canonicals():
     assert away_05 == {"over": 1.42, "under": 2.66}
     away_15 = {o.canonical_name: o.odds for o in away.lines[1.5]}
     assert away_15 == {"over": 3.15, "under": 1.31}
+
+
+def test_parse_bet9ja_2way_handicap_ft_synthetic():
+    """Bet9ja Asian Handicap (S_AH) — signed line in @-segment of the
+    odds key, outcomes _1 (home) / _2 (away). Each (line, outcome)
+    pair produces an Outcome under the line key.
+    """
+    from bookieskit.markets.parser import parse_markets
+
+    response = {
+        "D": {
+            "O": {
+                "S_AH@-1.5_1": "2.40",
+                "S_AH@-1.5_2": "1.55",
+                "S_AH@-0.5_1": "1.75",
+                "S_AH@-0.5_2": "2.05",
+                "S_AH@0_1": "1.55",
+                "S_AH@0_2": "2.40",
+                "S_AH@0.5_1": "1.35",
+                "S_AH@0.5_2": "3.10",
+            }
+        }
+    }
+    markets = parse_markets(response, platform="bet9ja")
+    ah = next(
+        (m for m in markets if m.canonical_id == "2way_handicap_ft"),
+        None,
+    )
+    assert ah is not None, "2way_handicap_ft not produced from S_AH"
+    assert ah.lines is not None
+    assert set(ah.lines.keys()) == {-1.5, -0.5, 0.0, 0.5}
+    line_n15 = {o.canonical_name: o.odds for o in ah.lines[-1.5]}
+    assert line_n15 == {"home": 2.40, "away": 1.55}
+    line_p05 = {o.canonical_name: o.odds for o in ah.lines[0.5]}
+    assert line_p05 == {"home": 1.35, "away": 3.10}
+
+
+def test_parse_bet9ja_2way_handicap_ft_from_fixture():
+    """Sanity-check against the captured Bet9ja fixture (carries S_AH
+    keys from the 0.14.0 probe run against Qatar v Sudan).
+    """
+    import json
+    from pathlib import Path
+    from bookieskit.markets.parser import parse_markets
+
+    fixture = Path(
+        "tests/fixtures/event_info/bet9ja/next_goal_and_team_ou.json"
+    )
+    response = json.loads(fixture.read_text(encoding="utf-8"))
+    markets = parse_markets(response, platform="bet9ja")
+    ah = next(
+        (m for m in markets if m.canonical_id == "2way_handicap_ft"),
+        None,
+    )
+    assert ah is not None, "Bet9ja 2way_handicap_ft (S_AH) not in fixture"
+    assert ah.lines is not None
+    assert len(ah.lines) >= 1
+    assert any(
+        {"home", "away"}.issubset({o.canonical_name for o in outs})
+        for outs in ah.lines.values()
+    )

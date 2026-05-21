@@ -187,3 +187,26 @@ def test_parse_sportybet_away_over_under_ft_from_real_fixture():
     assert 0.5 in away_ou.lines
     line05 = {o.canonical_name: o.odds for o in away_ou.lines[0.5]}
     assert line05 == {"over": 1.35, "under": 3.00}
+
+
+def test_parse_sportybet_2way_handicap_ft_from_probe_fixture():
+    import json
+    from pathlib import Path
+    from bookieskit.markets.parser import parse_markets
+
+    fixture = Path("tests/fixtures/event_info/sportybet/2way_handicap_ft.json")
+    if not fixture.exists():
+        import pytest
+        pytest.skip("SportyBet probe fixture not captured")
+    response = json.loads(fixture.read_text(encoding="utf-8"))
+    markets = parse_markets(response, platform="sportybet")
+    ah = next(
+        (m for m in markets if m.canonical_id == "2way_handicap_ft"),
+        None,
+    )
+    assert ah is not None, "SportyBet 2way_handicap_ft (id=16) not in fixture"
+    assert ah.lines is not None
+    assert any(
+        {"home", "away"}.issubset({o.canonical_name for o in outs})
+        for outs in ah.lines.values()
+    )
