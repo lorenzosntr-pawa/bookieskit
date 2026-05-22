@@ -1,5 +1,26 @@
 from bookieskit.markets.parser import parse_markets
 
+
+def test_parse_bet9ja_handles_d_is_false():
+    """GetLiveEvent returns {"D": false} when an event was in the live
+    list at lookup time but slipped out by the time we fetched its
+    detail (half-time, brief suspension, stale lookup). Treat as
+    "no markets right now" — don't crash."""
+    response = {"R": "D", "D": False}
+    assert parse_markets(response, platform="bet9ja") == []
+
+
+def test_parse_bet9ja_handles_d_is_none():
+    """Defensive: same shape but with None instead of False."""
+    response = {"R": "D", "D": None}
+    assert parse_markets(response, platform="bet9ja") == []
+
+
+def test_parse_bet9ja_handles_d_missing():
+    """Empty / malformed response — no markets, no exception."""
+    assert parse_markets({}, platform="bet9ja") == []
+
+
 BET9JA_EVENT_RESPONSE = {
     "R": "D",
     "D": {

@@ -478,7 +478,13 @@ def _parse_bet9ja(
 ) -> list[NormalizedMarket]:
     """Parse Bet9ja event detail response."""
     results: list[NormalizedMarket] = []
-    data = response.get("D", {})
+    # GetLiveEvent returns {"D": false} when an event slips out of the
+    # live list between lookup and detail fetch (half-time, brief
+    # suspension, stale find_event_id_by_sr_id). Treat any non-dict
+    # `D` as "no markets right now" rather than crashing on `.get()`.
+    data = response.get("D")
+    if not isinstance(data, dict):
+        return []
     odds_dict = data.get("O", {})
 
     if not odds_dict:
