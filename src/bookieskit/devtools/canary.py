@@ -75,7 +75,10 @@ def _struct_betpawa(payload: dict) -> bool:
 
 def _struct_data_markets(payload: dict) -> bool:
     # sportybet / msport: data.markets is a list.
-    return isinstance((payload.get("data") or {}).get("markets"), list)
+    data = payload.get("data")
+    if not isinstance(data, dict):
+        return False
+    return isinstance(data.get("markets"), list)
 
 
 def _struct_betway(payload: dict) -> bool:
@@ -170,20 +173,21 @@ def check_book(
     else:
         structure_ok = bool(predicate(payload))
 
-    result = verify(payload, platform, sport, canonical_ids=expected)
-    missing = list(result.missing)
-    resolved = [c for c in expected if c not in missing]
-
     if not structure_ok:
         return BookCheck(
             platform=platform,
             status="drift",
             reason="structure predicate failed",
             expected_canonicals=expected,
-            resolved_canonicals=resolved,
-            missing_canonicals=missing,
+            resolved_canonicals=[],
+            missing_canonicals=list(expected),
             structure_ok=False,
         )
+
+    result = verify(payload, platform, sport, canonical_ids=expected)
+    missing = list(result.missing)
+    resolved = [c for c in expected if c not in missing]
+
     if missing:
         return BookCheck(
             platform=platform,
@@ -231,6 +235,8 @@ async def _discover_seed(
         sport_id=sport_id, event_type="UPCOMING"
     )
     events = _list_betpawa_events(payload)
+    # marketsCount is a soft dependency: if BetPawa renames it, all events
+    # sort as 0 and discovery degrades gracefully to insertion order.
     events.sort(key=lambda e: e.get("marketsCount") or 0, reverse=True)
     for event in events[:max_candidates]:
         event_id = event.get("id")
@@ -331,7 +337,8 @@ async def run_canary(
 
     # 4. Reachable books: fetch (with retries) + check_book.
     for book, handle in handles.items():
-        if not expected_core(book, sport, registry):
+        expected = expected_core(book, sport, registry)
+        if not expected:
             checks.append(BookCheck(
                 platform=book, status="skipped",
                 reason="no core markets mapped",
@@ -345,12 +352,21 @@ async def run_canary(
             checks.append(BookCheck(
                 platform=book, status="unreachable",
                 reason=f"fetch failed: {exc!r}",
-                expected_canonicals=expected_core(book, sport, registry),
+                expected_canonicals=expected,
                 resolved_canonicals=[], missing_canonicals=[],
                 structure_ok=False,
             ))
             continue
-        checks.append(check_book(raw, book, sport, registry))
+        try:
+            checks.append(check_book(raw, book, sport, registry))
+        except Exception as exc:
+            checks.append(BookCheck(
+                platform=book, status="drift",
+                reason=f"parse error: {exc!r}",
+                expected_canonicals=expected,
+                resolved_canonicals=[], missing_canonicals=[],
+                structure_ok=False,
+            ))
 
     # 5. Resolver-skipped books (not in the check set) -> skipped.
     for book, reason in resolved.skipped.items():

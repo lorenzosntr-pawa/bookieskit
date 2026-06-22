@@ -295,8 +295,15 @@ async def test_discover_seed_returns_none_on_empty_listing():
     assert await _discover_seed(bp, "2", 3) is None
 
 
+def test_check_book_drift_on_non_dict_data_does_not_raise():
+    # Proves Fix 1: structure predicate catches non-dict `data` and
+    # short-circuits before _parse_sportybet can call .get() and raise.
+    bc = check_book({"data": "error"}, "sportybet", "soccer")
+    assert bc.status == "drift"
+    assert bc.structure_ok is False
+
+
 from bookieskit.devtools.canary import run_canary  # noqa: E402
-from bookieskit.devtools.types import Handle  # noqa: E402, F401
 
 # A SportyBet detail payload resolving all four core canonicals.
 SPORTYBET_OK = {"data": {"markets": [
