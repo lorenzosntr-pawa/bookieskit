@@ -195,6 +195,12 @@ def test_sportpesa_exported_from_top_level():
     assert SP is SP2
 
 
-def test_top_level_version_bumped():
+def test_version_matches_pyproject():
+    import tomllib
+    from pathlib import Path
+
     import bookieskit
-    assert bookieskit.__version__ == "0.14.0"
+
+    pyproject = Path(__file__).resolve().parents[1] / "pyproject.toml"
+    data = tomllib.loads(pyproject.read_text(encoding="utf-8"))
+    assert bookieskit.__version__ == data["project"]["version"]

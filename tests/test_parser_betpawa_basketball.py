@@ -24,7 +24,7 @@ def test_parse_betpawa_basketball_recognises_three_markets():
     canonical_ids = {m.canonical_id for m in result}
     assert "moneyline_basketball_ft" in canonical_ids
     assert "over_under_basketball_ft" in canonical_ids
-    assert "handicap_basketball_ft" in canonical_ids
+    assert "2way_handicap_basketball_ft" in canonical_ids
 
 
 def test_parse_betpawa_basketball_moneyline():
@@ -68,7 +68,7 @@ def test_parse_betpawa_basketball_handicap_uses_home_signed_line():
     """
     result = parse_markets(_load(), platform="betpawa")
     hcap = next(
-        m for m in result if m.canonical_id == "handicap_basketball_ft"
+        m for m in result if m.canonical_id == "2way_handicap_basketball_ft"
     )
     assert hcap.outcomes == []
     assert hcap.lines is not None

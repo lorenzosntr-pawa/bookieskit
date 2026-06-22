@@ -393,3 +393,63 @@ def test_team_scoped_betway_registry_composes_with_sport_scoped():
     result = team_wrapped.get_by_platform_id("betway", "Aston Villa Total")
     assert result is not None
     assert result.canonical_id == "home_over_under_ft"
+
+
+def test_parse_betway_2way_handicap_ft_from_probe_fixture():
+    import json
+    from pathlib import Path
+
+    from bookieskit.markets.parser import parse_markets
+
+    fixture = Path("tests/fixtures/event_info/betway/2way_handicap_ft.json")
+    if not fixture.exists():
+        import pytest
+        pytest.skip("Betway probe fixture not captured")
+    response = json.loads(fixture.read_text(encoding="utf-8"))
+    markets = parse_markets(response, platform="betway")
+    ah = next(
+        (m for m in markets if m.canonical_id == "2way_handicap_ft"),
+        None,
+    )
+    assert ah is not None, (
+        "Betway 2way_handicap_ft ('[Handicap] [2-Way]') not in fixture"
+    )
+    assert ah.lines is not None
+    assert any(
+        {"home", "away"}.issubset({o.canonical_name for o in outs})
+        for outs in ah.lines.values()
+    )
+
+
+def test_parse_betway_variant_matching_disambiguates_by_market_id_prefix():
+    """When two registered mappings both have betway_id values matching
+    a child row's name via startswith, the parser should pick the one
+    whose marketId is a prefix of the child's marketId. Reproduces the
+    bug where soccer 2way_handicap_ft (parent '[Handicap] [2-Way]')
+    children were mis-attributed to basketball 2way_handicap_basketball_ft
+    (parent 'Handicap (Incl. Overtime)') because both clean_parent
+    values start with 'Handicap'.
+    """
+    import json
+    from pathlib import Path
+
+    from bookieskit.markets.parser import parse_markets
+
+    fixture = Path(
+        "tests/fixtures/event_info/betway/2way_handicap_ft.json"
+    )
+    response = json.loads(fixture.read_text(encoding="utf-8"))
+    markets = parse_markets(response, platform="betway")
+    by_canon = {m.canonical_id: m for m in markets}
+    # Soccer 2way_handicap_ft MUST be produced — its parent
+    # [Handicap] [2-Way] is in the fixture with non-zero-handicap
+    # children carrying the actual lines.
+    assert "2way_handicap_ft" in by_canon, (
+        f"soccer 2way_handicap_ft missing from {list(by_canon.keys())}"
+    )
+    ah = by_canon["2way_handicap_ft"]
+    assert ah.lines is not None
+    assert len(ah.lines) >= 1
+    # basketball 2way_handicap_basketball_ft should NOT be produced
+    # from a soccer fixture
+    assert "2way_handicap_basketball_ft" not in by_canon

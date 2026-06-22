@@ -478,7 +478,13 @@ def _parse_bet9ja(
 ) -> list[NormalizedMarket]:
     """Parse Bet9ja event detail response."""
     results: list[NormalizedMarket] = []
-    data = response.get("D", {})
+    # GetLiveEvent returns {"D": false} when an event slips out of the
+    # live list between lookup and detail fetch (half-time, brief
+    # suspension, stale find_event_id_by_sr_id). Treat any non-dict
+    # `D` as "no markets right now" rather than crashing on `.get()`.
+    data = response.get("D")
+    if not isinstance(data, dict):
+        return []
     odds_dict = data.get("O", {})
 
     if not odds_dict:
@@ -711,12 +717,28 @@ def _parse_betway(
     simple_markets: dict[str, tuple[dict, list[dict]]] = {}
     parameterized_markets: dict[str, list[tuple[dict, list[dict]]]] = {}
 
+    # PASS 1: identify all explicit parents. A row is a parent if its
+    # `name` resolves directly via the registry. Record parent_market_id
+    # -> mapping so we can attribute variants by marketId prefix.
+    parent_by_market_id: dict[str, MarketMapping] = {}
+    for market in markets_in_group:
+        market_name = str(market.get("name", ""))
+        market_id = str(market.get("marketId", ""))
+        if not market_id:
+            # Defensive: an empty marketId would poison Pass 2's prefix
+            # attribution because every non-empty string starts with "".
+            continue
+        mapping = registry.get_by_platform_id("betway", market_name)
+        if mapping is not None and mapping.parameterized:
+            parent_by_market_id[market_id] = mapping
+
+    # PASS 2: bucket each row.
     for market in markets_in_group:
         market_name = str(market.get("name", ""))
         market_id = str(market.get("marketId", ""))
         market_outcomes = outcomes_by_market.get(market_id, [])
 
-        # Check if this is a known parent market
+        # Direct parent match — keep using the registry.
         mapping = registry.get_by_platform_id("betway", market_name)
         if mapping is not None:
             if mapping.parameterized:
@@ -732,23 +754,45 @@ def _parse_betway(
                 )
             continue
 
-        # Check if this is a parameterized variant (name="Total")
-        # by checking if any registered parameterized market
-        # has a matching parent
-        for mm in registry.list_markets():
-            if not mm.parameterized or not mm.betway_id:
-                continue
-            # "Total" matches "[Total Goals]" parent
-            parent_name = mm.betway_id
-            if _is_betway_parameterized_variant(
-                market_name, parent_name
+        # Variant — first try marketId-prefix attribution. This is the
+        # robust path: Betway's per-line child rows have a marketId that
+        # starts with the parent's marketId (e.g. parent <eventId>16,
+        # children <eventId>16hcp=-0.5~). When name-based matching has
+        # multiple candidates (e.g. 'Handicap' matches both
+        # '[Handicap] [2-Way]' and 'Handicap (Incl. Overtime)'),
+        # marketId-prefix disambiguates correctly.
+        matched_mapping: MarketMapping | None = None
+        for parent_mid, parent_mapping in parent_by_market_id.items():
+            if (
+                market_id != parent_mid
+                and market_id.startswith(parent_mid)
             ):
-                if parent_name not in parameterized_markets:
-                    parameterized_markets[parent_name] = []
-                parameterized_markets[parent_name].append(
-                    (market, market_outcomes)
-                )
+                matched_mapping = parent_mapping
                 break
+
+        # Fallback only runs when marketId-prefix attribution found
+        # nothing — registered parents in this group beat the global
+        # name-based heuristic.
+        if matched_mapping is None:
+            # Fall back to legacy name-based heuristic — picks the first
+            # parameterized mapping whose betway_id "starts with"
+            # market_name. Kept for backwards-compat with shapes that
+            # don't follow the marketId-prefix convention.
+            for mm in registry.list_markets():
+                if not mm.parameterized or not mm.betway_id:
+                    continue
+                if _is_betway_parameterized_variant(
+                    market_name, mm.betway_id
+                ):
+                    matched_mapping = mm
+                    break
+
+        if matched_mapping is not None:
+            if matched_mapping.betway_id not in parameterized_markets:
+                parameterized_markets[matched_mapping.betway_id] = []
+            parameterized_markets[matched_mapping.betway_id].append(
+                (market, market_outcomes)
+            )
 
     # Build simple markets
     for market_name, (market, outcomes_list) in simple_markets.items():

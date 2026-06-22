@@ -195,3 +195,27 @@ def test_parse_msport_away_over_under_ft_from_probe_fixture():
         {"over", "under"}.issubset({o.canonical_name for o in outs})
         for outs in away_ou.lines.values()
     )
+
+
+def test_parse_msport_2way_handicap_ft_from_probe_fixture():
+    import json
+    from pathlib import Path
+
+    from bookieskit.markets.parser import parse_markets
+
+    fixture = Path("tests/fixtures/event_info/msport/2way_handicap_ft.json")
+    if not fixture.exists():
+        import pytest
+        pytest.skip("MSport probe fixture not captured")
+    response = json.loads(fixture.read_text(encoding="utf-8"))
+    markets = parse_markets(response, platform="msport")
+    ah = next(
+        (m for m in markets if m.canonical_id == "2way_handicap_ft"),
+        None,
+    )
+    assert ah is not None, "MSport 2way_handicap_ft (id=16) not in fixture"
+    assert ah.lines is not None
+    assert any(
+        {"home", "away"}.issubset({o.canonical_name for o in outs})
+        for outs in ah.lines.values()
+    )

@@ -2,6 +2,18 @@
 
 All notable changes to this project are documented in this file. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.15.0] - 2026-05-22
+
+### Renamed
+- `handicap_basketball_ft` → `2way_handicap_basketball_ft`. **Breaking change** for downstream consumers that pinned the old `canonical_id` string. No deprecation alias provided — the version bump signals it. The "2way_" prefix disambiguates from a hypothetical future 3-way (European 1X2) handicap variant; the mapping fields (per-bookmaker ids, outcome strings) are unchanged, only the `canonical_id` and human-readable `name` flip.
+
+### Added
+- New canonical soccer market `2way_handicap_ft` — Asian Handicap (2-way, home/away) with signed lines from home's perspective. Mapped on BetPawa (id=3774, "Asian Handicap - FT"), Bet9ja (`S_AH`), SportyBet (id=16), MSport (id=16), and Betway (`"[Handicap] [2-Way]"`). Betika stays `None` — confirmed via probe sweep (sub_type_ids 1-200) that Betika only ships the 3-way `HANDICAP (1X2)` variant at sub_type_id=14, not a 2-way Asian. SportPesa stays `None` (Akamai cookie unavailable; same precedent as the 0.14.0 markets).
+
+### Changed
+- `_parse_betway` now disambiguates variant rows by `marketId` prefix matching instead of relying solely on the legacy name-based `_is_betway_parameterized_variant` heuristic. Necessary because the heuristic's `clean_parent.startswith(market_name)` matching collides when two mappings share a leading word (e.g. `"[Handicap] [2-Way]"` for soccer 2-way AH and `"Handicap (Incl. Overtime)"` for basketball). The legacy heuristic remains as a fallback for shapes that don't follow the marketId-prefix convention.
+- Built-in canonical market count: 16 → 17 (10 soccer + 3 basketball + 4 tennis).
+
 ## [0.14.0] - 2026-05-21
 
 ### Added

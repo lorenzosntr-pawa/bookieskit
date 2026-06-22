@@ -22,7 +22,7 @@ The flag is a no-op for bookmakers whose market ids don't overlap across sports 
 
 ## Built-in mappings
 
-16 markets ship in the default `MarketRegistry` — 9 soccer + 3 basketball + 4 tennis.
+17 markets ship in the default `MarketRegistry` — 10 soccer + 3 basketball + 4 tennis.
 
 ### Soccer (full time)
 
@@ -37,6 +37,7 @@ The flag is a no-op for bookmakers whose market ids don't overlap across sports 
 | `next_goal_ft` | Next Goal — Full Time | yes (line = goal number) | ✅ | ✅ | ✅ | ✅ | ✅ live | ❌ NOT PROBED | ✅ |
 | `home_over_under_ft` | Over/Under — Home Team — Full Time | yes (line = goals) | ✅ | ✅ | ❌ NOT EXPOSED | ✅ | ✅ | ❌ NOT PROBED | ✅ |
 | `away_over_under_ft` | Over/Under — Away Team — Full Time | yes (line = goals) | ✅ | ✅ | ❌ NOT EXPOSED | ✅ | ✅ | ❌ NOT PROBED | ✅ |
+| `2way_handicap_ft` | 2-Way Asian Handicap — Full Time | yes (signed line=goals) | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ NOT PROBED | — NOT EXPOSED |
 
 The 1Up / 2Up markets pay as a 1X2 if your team gets to a 1- or 2-goal lead at any point. BetPawa, MSport, SportPesa and Betika are intentionally unmapped (BetPawa to be added at production cutover; the others do not expose this market).
 
@@ -75,7 +76,7 @@ Tennis ML is 2-way (no draw possible — match has to end). Game Handicap follow
 |---|---|---|---|---|---|---|---|---|---|
 | `moneyline_basketball_ft` | Moneyline (incl. OT) | no | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | `over_under_basketball_ft` | Over/Under Total Points (incl. OT) | yes (line=points) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| `handicap_basketball_ft` | Handicap (incl. OT) | yes (signed line=points) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | — |
+| `2way_handicap_basketball_ft` | 2-Way Handicap (incl. OT) | yes (signed line=points) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | — |
 
 Working across all 7 bookmakers. Each platform is fixture-bound by `tests/test_parser_basketball.py`. The one gap is **Betika basketball handicap**, which is genuinely not offered by Betika (`sub_type_id=223` returned nothing on captured events) — the canonical row carries `betika_id=None` so the parser produces no market for it.
 
@@ -90,7 +91,7 @@ Cross-sport id collisions to be aware of:
 - Bet9ja: key suffix `_1` / `_2` (ML and handicap) or `_O` / `_U` (O/U).
 - SportPesa: numeric `"1"` / `"2"` (ML and handicap) or `"OV"` / `"UN"` (O/U) — same as soccer.
 
-**Handicap line convention** — handicap uses **signed lines** keyed by the home team's perspective. `line=-5.5` means home is favored by 5.5 points; both outcomes (home and away) live under that single key. The away team's effective `+5.5` line is inferred by negating the key. (The wire-faithful shape — one key per row with both prices — was chosen over the alternative of splitting `{-5.5: [home], +5.5: [away]}`, which would have required parser-side sign-flipping.)
+**Handicap line convention** — handicap uses **signed lines** keyed by the home team's perspective. `line=-5.5` means home is favored by 5.5 points; both outcomes (home and away) live under that single key. The away team's effective `+5.5` line is inferred by negating the key. (The wire-faithful shape — one key per row with both prices — was chosen over the alternative of splitting `{-5.5: [home], +5.5: [away]}`, which would have required parser-side sign-flipping.) The same signed-line convention applies to `2way_handicap_ft` (soccer Asian Handicap) — `line=-1.5` means the home team gives 1.5 goals.
 
 ## Types
 
