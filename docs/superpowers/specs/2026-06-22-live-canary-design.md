@@ -34,7 +34,7 @@
 | Drift action (v1) | Structured report (`--json` + human) + **non-zero exit on drift**; scheduled-workflow failure is the notification |
 | Resolution baseline | **Curated core**: `{1x2_ft, over_under_ft, btts_ft, double_chance_ft}`, intersected per book with what the registry maps for (book, soccer) |
 | Location / invocation | `src/bookieskit/devtools/canary.py` + `python -m bookieskit.devtools canary` |
-| Cadence | **Daily** (cron) + `workflow_dispatch` |
+| Cadence | **Daily**, scheduled by the in-region orchestrator (NOT a GitHub cron — see "Run environment"; bookmakers geo-block US runners) |
 | Sport scope (v1) | **Soccer only** (`run_canary` parameterized over sport for later) |
 | Flakiness | Per-book classify `ok`/`drift`/`unreachable`/`skipped`; **only `drift` fails the run**; fetch retried a couple times before `unreachable` |
 
@@ -112,35 +112,17 @@ async def _discover_seed(bp_client, sport, max_candidates) -> str | None:
 - `--json`: serialized `CanaryReport`.
 - Exit code: `1` if `report.drifted` or seed discovery failed entirely; else `0` (unreachable-only runs exit 0 with warnings printed).
 
-## Scheduled workflow
+## Run environment (REVISED — geo-restriction finding, 2026-06-23)
 
-New `.github/workflows/canary.yml` (separate from `ci.yml`):
+**The canary runs from an in-region environment, NOT GitHub-hosted runners.**
 
-```yaml
-name: Canary
-on:
-  schedule:
-    - cron: "0 6 * * *"     # daily ~06:00 UTC
-  workflow_dispatch:
-concurrency:
-  group: canary
-  cancel-in-progress: false
-jobs:
-  canary:
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.13"
-          cache: pip
-          cache-dependency-path: pyproject.toml
-      - run: pip install -e ".[dev]"
-      - run: python -m bookieskit.devtools canary --json
-```
+A scheduled `.github/workflows/canary.yml` (daily cron on `ubuntu-latest`) was implemented and tried — and the first live run surfaced a hard constraint: the African bookmakers geo-filter their APIs. From GitHub Actions' US-based runner IPs, BetPawa returns `403 Access Restricted` (an HTML WAF page), so canary seed-discovery can't even begin from that network. The library works from an in-region network (where it is developed and run) but not from generic US cloud.
 
-Not triggered on `push`/`pull_request`. A `drift` exit (non-zero) fails the job → GitHub notifies via the Actions UI/email. `unreachable`-only runs pass (no false alarm).
+Decision: the GitHub canary workflow is **removed**. The canary's live execution belongs to the **in-region orchestrator** (sub-project 5), which runs `python -m bookieskit.devtools canary --json` on a schedule from a network that can reach the bookmakers. This generalizes: **every live-bookmaker operation in the agent company — canary, scout, harness live probes, the orchestrator's networked dispatches — must run in-region.** GitHub Actions remains the *gate* (CI: offline tests + lint) and the *publisher* (release build + GitHub Release), neither of which touches bookmaker endpoints.
+
+The canary CLI/logic is unchanged and fully functional locally; only its scheduling host moved. A self-hosted in-region Actions runner remains an option for re-adding a GitHub-native schedule later.
+
+Drift semantics are unchanged: a `drift` exit (non-zero) is the alert (surfaced by the orchestrator / its caller); `unreachable`-only runs exit 0.
 
 ## Error handling / flakiness
 
@@ -162,9 +144,9 @@ Offline unit tests under `tests/devtools/test_canary.py` (respx + injected clien
 ## Success criteria
 
 - `python -m bookieskit.devtools canary --help` works; `--json` emits a `CanaryReport`; exit code is 1 on drift / seed-failure, 0 otherwise.
-- `.github/workflows/canary.yml` exists, is valid YAML, and is schedule/dispatch-only (never PR/push).
 - New `tests/devtools/test_canary.py` passes; full suite + `ruff check .` green in CI.
-- Manual `workflow_dispatch` run (owner-triggered once after merge) completes and reports per-book `ok`/`skipped` against live endpoints (proving the live path works end-to-end).
+- Seed discovery degrades gracefully: a fetch error (e.g. a geo-block 403) yields a clean `seed=None` report and exit 1 — never a traceback (regression-tested).
+- Run **from an in-region environment** (where the bookmakers are reachable): the canary reports per-book `ok`/`skipped` against live endpoints. (No GitHub-hosted canary workflow — see "Run environment".)
 
 ## Reuse hooks for later sub-projects
 

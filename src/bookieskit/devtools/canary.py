@@ -228,12 +228,19 @@ async def _discover_seed(
 
     Lists UPCOMING events for the sport, ranks by marketsCount desc, then
     fetches detail for up to ``max_candidates`` and returns the first whose
-    detail yields a SportRadar id. None if none qualify (a signal that the
-    BetPawa listing itself may have drifted).
+    detail yields a SportRadar id. Returns None if none qualify, the listing
+    is unreachable, or every candidate's detail fetch fails — a clean
+    "no seed" signal, never a crash. (BetPawa is geo-restricted: from a
+    network it does not serve, ``get_events`` returns a 403, which surfaces
+    here as None. Run the canary from an in-region environment.)
     """
-    payload = await bp_client.get_events(
-        sport_id=sport_id, event_type="UPCOMING"
-    )
+    try:
+        payload = await bp_client.get_events(
+            sport_id=sport_id, event_type="UPCOMING"
+        )
+    except Exception:
+        # Listing unreachable/blocked (e.g. geo-restricted 403) -> no seed.
+        return None
     events = _list_betpawa_events(payload)
     # marketsCount is a soft dependency: if BetPawa renames it, all events
     # sort as 0 and discovery degrades gracefully to insertion order.
@@ -243,7 +250,10 @@ async def _discover_seed(
         if event_id is None:
             continue
         event_id = str(event_id)
-        detail = await bp_client.get_event_detail(event_id=event_id)
+        try:
+            detail = await bp_client.get_event_detail(event_id=event_id)
+        except Exception:
+            continue  # this candidate unreachable; try the next
         if extract_sportradar_id(detail, platform="betpawa") is not None:
             return event_id
     return None
