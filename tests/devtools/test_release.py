@@ -160,7 +160,7 @@ from pathlib import Path  # noqa: E402
 from bookieskit.devtools.release import (  # noqa: E402
     GitRunner,
     ReleaseError,
-    ReleasePlan,  # noqa: F401
+    ReleasePlan,
     run_release,
 )
 
@@ -370,3 +370,81 @@ def test_gitrunner_status_porcelain_on_temp_repo(tmp_path):
     (tmp_path / "x.txt").write_text("x\n", encoding="utf-8")
     _git(tmp_path, "add", "x.txt")
     assert git.status_porcelain() != ""  # now dirty
+
+
+import json  # noqa: E402
+
+from bookieskit.devtools import cli  # noqa: E402
+
+
+def test_build_parser_has_release_subcommand():
+    args = cli.build_parser().parse_args(["release"])
+    assert args.cmd == "release"
+    assert args.bump is None
+    assert args.dry_run is False
+    assert args.push is False
+
+
+def test_build_parser_release_accepts_flags():
+    args = cli.build_parser().parse_args(
+        ["release", "--bump", "minor", "--dry-run", "--push", "--json"]
+    )
+    assert args.bump == "minor"
+    assert args.dry_run is True
+    assert args.push is True
+    assert args.as_json is True
+
+
+def test_build_parser_has_release_notes_subcommand():
+    args = cli.build_parser().parse_args(["release-notes", "0.15.0"])
+    assert args.cmd == "release-notes"
+    assert args.version == "0.15.0"
+
+
+def _fake_releaser_ok(**kwargs):
+    return ReleasePlan(
+        current="0.15.1", new="0.16.0", bump="minor", tag="v0.16.0",
+        changelog_section="### Added\n- New.", pushed=False,
+    )
+
+
+def _fake_releaser_dirty(**kwargs):
+    raise ReleaseError("working tree not clean")
+
+
+async def test_release_json_output_and_exit_zero(capsys):
+    args = cli.build_parser().parse_args(["release", "--json"])
+    code = await cli.run(args, releaser=_fake_releaser_ok)
+    assert code == 0
+    out = json.loads(capsys.readouterr().out)
+    assert out["new"] == "0.16.0"
+    assert out["tag"] == "v0.16.0"
+    assert out["pushed"] is False
+
+
+async def test_release_exit_one_on_release_error(capsys):
+    args = cli.build_parser().parse_args(["release"])
+    code = await cli.run(args, releaser=_fake_releaser_dirty)
+    assert code == 1
+
+
+async def test_release_notes_prints_section_and_exits_zero(capsys, tmp_path):
+    # The CLI reads CHANGELOG.md from the repo root; inject root via a fake
+    # notes function so the test stays offline and path-independent.
+    def _notes(version):
+        assert version == "0.15.0"
+        return "### Added\n- Old stuff."
+
+    args = cli.build_parser().parse_args(["release-notes", "0.15.0"])
+    code = await cli.run(args, notes=_notes)
+    assert code == 0
+    assert "Old stuff." in capsys.readouterr().out
+
+
+async def test_release_notes_exit_one_when_section_absent(capsys):
+    def _notes(version):
+        raise ValueError("no section")
+
+    args = cli.build_parser().parse_args(["release-notes", "9.9.9"])
+    code = await cli.run(args, notes=_notes)
+    assert code == 1
