@@ -295,6 +295,59 @@ async def test_discover_seed_returns_none_on_empty_listing():
     assert await _discover_seed(bp, "2", 3) is None
 
 
+class _RaisingBetPawa:
+    """BetPawa stub whose fetches raise — models a geo-blocked 403."""
+
+    def __init__(self, events_payload=None, raise_on_detail=()):
+        self._events_payload = events_payload
+        self._raise_on_detail = set(raise_on_detail)
+        self.detail_calls: list[str] = []
+
+    async def get_events(self, sport_id="2", event_type="UPCOMING", **kw):
+        if self._events_payload is None:
+            raise RuntimeError("403 Access Restricted")
+        return self._events_payload
+
+    async def get_event_detail(self, event_id):
+        self.detail_calls.append(event_id)
+        if event_id in self._raise_on_detail:
+            raise RuntimeError("403 Access Restricted")
+        return _detail_with_sr("777")
+
+
+@pytest.mark.asyncio
+async def test_discover_seed_returns_none_when_get_events_raises():
+    # Geo-blocked listing -> graceful None, never a crash.
+    bp = _RaisingBetPawa(events_payload=None)
+    assert await _discover_seed(bp, "2", 3) is None
+
+
+@pytest.mark.asyncio
+async def test_discover_seed_skips_candidate_when_detail_raises():
+    # First candidate's detail fetch fails; discovery tries the next.
+    bp = _RaisingBetPawa(
+        events_payload=_events(("200", 300), ("300", 120)),
+        raise_on_detail={"200"},
+    )
+    seed = await _discover_seed(bp, "2", 3)
+    assert seed == "300"  # "200" raised -> skipped, "300" has an SR id
+    assert bp.detail_calls == ["200", "300"]
+
+
+@pytest.mark.asyncio
+async def test_run_canary_empty_report_when_discovery_fails():
+    # Discovery raising (geo-block) must yield an empty report, not a crash.
+    async def _events_403(sport_id="2", event_type="UPCOMING", **kw):
+        raise RuntimeError("403 Access Restricted")
+
+    clients = {"betpawa": _CanaryClient(get_events=_events_403)}
+    report = await run_canary("soccer", clients=clients, books=())
+    assert report.seed is None
+    assert report.sr_numeric is None
+    assert report.checks == []
+    assert report.drifted is False
+
+
 def test_check_book_drift_on_non_dict_data_does_not_raise():
     # Proves Fix 1: structure predicate catches non-dict `data` and
     # short-circuits before _parse_sportybet can call .get() and raise.
