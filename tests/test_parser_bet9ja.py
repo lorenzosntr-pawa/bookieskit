@@ -247,6 +247,7 @@ def test_parse_bet9ja_2way_handicap_ft_from_fixture():
     """
     import json
     from pathlib import Path
+
     from bookieskit.markets.parser import parse_markets
 
     fixture = Path(

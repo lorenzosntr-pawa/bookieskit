@@ -398,6 +398,7 @@ def test_team_scoped_betway_registry_composes_with_sport_scoped():
 def test_parse_betway_2way_handicap_ft_from_probe_fixture():
     import json
     from pathlib import Path
+
     from bookieskit.markets.parser import parse_markets
 
     fixture = Path("tests/fixtures/event_info/betway/2way_handicap_ft.json")
@@ -431,6 +432,7 @@ def test_parse_betway_variant_matching_disambiguates_by_market_id_prefix():
     """
     import json
     from pathlib import Path
+
     from bookieskit.markets.parser import parse_markets
 
     fixture = Path(
