@@ -141,6 +141,29 @@ Each example is a self-contained async script in `examples/`.
 
 See [docs/examples.md](docs/examples.md) for more detail.
 
+## Market-add harness (`bookieskit.devtools`)
+
+Dev/agent tooling for the add-a-market loop — resolve an event across all
+bookmakers from one seed, discover candidate markets, capture fixtures, and
+verify canonical resolution. All offline-testable; no network in tests.
+
+```bash
+# Resolve a SportRadar id across every book (JSON for agents)
+python -m bookieskit.devtools resolve sr:match:42 --sport soccer --json
+
+# Discover candidate markets by name/outcome regex
+python -m bookieskit.devtools discover sr:match:42 --term "handi|asian|spread"
+
+# Autonomous discovery: markets a book exposes but the registry doesn't map
+python -m bookieskit.devtools discover sr:match:42 --unmapped
+
+# Capture raw fixtures (tests/fixtures/event_info/<book>/<name>.json)
+python -m bookieskit.devtools capture sr:match:42 --name my_new_market
+
+# Verify which canonicals parse_markets resolves
+python -m bookieskit.devtools verify sr:match:42 --canonical 1x2_ft,over_under_ft
+```
+
 ## Extending
 
 Add custom market mappings via `MarketRegistry.add(...)`:
