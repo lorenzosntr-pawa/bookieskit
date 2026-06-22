@@ -9,11 +9,18 @@ import argparse
 import asyncio
 import json
 from dataclasses import asdict
+from pathlib import Path
 from typing import Any, Awaitable, Callable
 
 from bookieskit.devtools.adapters import ADAPTERS
 from bookieskit.devtools.canary import CanaryReport, run_canary
 from bookieskit.devtools.fixtures import capture as capture_fixture
+from bookieskit.devtools.release import (
+    ReleaseError,
+    ReleasePlan,
+    extract_section,
+    run_release,
+)
 from bookieskit.devtools.resolver import ALL_BOOKS, resolve_event
 from bookieskit.devtools.search import discover, unmapped
 from bookieskit.devtools.types import ResolvedEvent
@@ -21,6 +28,15 @@ from bookieskit.devtools.verify import verify as verify_payload
 
 Resolver = Callable[..., Awaitable[ResolvedEvent]]
 CanaryRunner = Callable[..., Awaitable[CanaryReport]]
+Releaser = Callable[..., ReleasePlan]
+NotesFn = Callable[[str], str]
+
+
+def _default_notes(version: str) -> str:
+    """Read CHANGELOG.md from the repo root and extract a version's section."""
+    root = Path(__file__).resolve().parents[3]
+    text = (root / "CHANGELOG.md").read_text(encoding="utf-8")
+    return extract_section(text, version)
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -65,6 +81,18 @@ def build_parser() -> argparse.ArgumentParser:
     p_canary.add_argument("--seed", default=None)
     p_canary.add_argument("--max-candidates", type=int, default=3,
                           dest="max_candidates")
+
+    p_release = sub.add_parser("release")
+    p_release.add_argument(
+        "--bump", choices=["major", "minor", "patch"], default=None
+    )
+    p_release.add_argument("--dry-run", action="store_true", dest="dry_run")
+    p_release.add_argument("--push", action="store_true")
+    p_release.add_argument("--json", action="store_true", dest="as_json")
+
+    p_notes = sub.add_parser("release-notes")
+    p_notes.add_argument("version")
+    p_notes.add_argument("--json", action="store_true", dest="as_json")
 
     return parser
 
@@ -113,6 +141,8 @@ async def run(
     *,
     resolver: Resolver = resolve_event,
     runner: CanaryRunner = run_canary,
+    releaser: Releaser = run_release,
+    notes: NotesFn = _default_notes,
     clients: dict[str, Any] | None = None,
 ) -> int:
     if args.cmd == "canary":
@@ -132,6 +162,36 @@ async def run(
         )
         if report.drifted or report.seed is None:
             return 1
+        return 0
+
+    if args.cmd == "release":
+        try:
+            plan = releaser(
+                bump=args.bump, dry_run=args.dry_run, push=args.push
+            )
+        except (ReleaseError, ValueError) as exc:
+            print(f"release failed: {exc}")
+            return 1
+        _emit(
+            asdict(plan),
+            args.as_json,
+            [f"release {plan.current} -> {plan.new} "
+             f"tag={plan.tag} pushed={plan.pushed}",
+             plan.changelog_section],
+        )
+        return 0
+
+    if args.cmd == "release-notes":
+        try:
+            body = notes(args.version)
+        except ValueError as exc:
+            print(f"release-notes failed: {exc}")
+            return 1
+        _emit(
+            {"version": args.version, "notes": body},
+            args.as_json,
+            [body],
+        )
         return 0
 
     books = _books_arg(args)
