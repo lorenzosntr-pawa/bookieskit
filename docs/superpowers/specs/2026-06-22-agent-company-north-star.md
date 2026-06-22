@@ -120,6 +120,41 @@ sub-project is built to be **agent-runnable**: non-interactive, machine-readable
 5. **Reuse existing tooling.** korotovsky Slack MCP, pr-review-toolkit, gsd/superpowers
    skills, scheduled cloud agents — compose, don't rebuild.
 
+## Cross-cutting operating standards (apply to every sub-project & agent, from now on)
+
+These are standing requirements, not per-task choices. Every stage of the build —
+including the work happening now — must honor them.
+
+### graphify — the fleet's structural memory
+Two complementary memories: the `memory/` dir holds *decisions & goals* (why/what);
+**graphify holds the *structural map*** (how code + pipeline are wired — god nodes,
+communities, BFS/DFS query). Standing rules:
+- **Agents query the graph before touching code** to understand structure & blast radius.
+- **Refresh cadence: after every merge to `main`, plus a daily scheduled refresh** in the
+  loop. Not per-edit (too costly), not on-demand-only (goes stale). The post-merge refresh
+  hooks into the same CI/release machinery; the daily refresh is an orchestrator task.
+- The graph covers **both the library code and the agentic pipeline itself** (orchestrator,
+  harness, canary, workflows) so the company can reason about its own machinery.
+
+### llm-council — the company's decision board
+Invoked for **genuine decisions with stakes and tradeoffs**: design-approach choices
+(A vs B), ambiguous specs, prioritization conflicts, risky/irreversible changes. Mechanical
+work proceeds solo. Used by the orchestrator (prioritization) and at design/brainstorm
+gates. Not run on every small decision (cost/latency) nor reserved only for stuck agents.
+
+### Karpathy principles — the coding standard, every stage
+All code written from now on follows the `karpathy-guidelines` skill: smallest surgical
+change that works, no overcomplication, surface assumptions explicitly, define verifiable
+success criteria up front. **The reviewer agent enforces this as part of definition-of-done**
+— a PR that overcomplicates or hides assumptions gets sent back.
+
+### Continuous skill/capability review
+The company periodically (orchestrator task) checks what skills / MCPs exist that could
+strengthen the pipeline, and **files a ticket to adopt promising ones** rather than letting
+the toolchain stagnate. Self-improving by design.
+
+These four extend the design principles above; treat them as principles 6–9.
+
 ## Open questions (resolved as we reach each sub-project)
 
 - **Orchestration runtime** (sub-project 5): scheduled cloud agents vs a GitHub Actions
