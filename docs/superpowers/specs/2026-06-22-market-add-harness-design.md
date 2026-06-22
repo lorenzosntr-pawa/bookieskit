@@ -14,6 +14,7 @@ This sub-project replaces that sprawl with one tool. Critically, its **resolver 
 
 - One tool covering the whole loop: **resolve, discover, capture, verify**.
 - Generic over **any search term and any sport** — no code change to investigate a new market/sport/bookmaker.
+- **Autonomous market discovery:** a diff mode that surfaces markets a book exposes but the registry does *not* map yet — no search term needed (the seed of the scout).
 - **Agent-runnable**: non-interactive, `--json` structured output, meaningful exit codes, no prompts.
 - Per-bookmaker failures isolated; cookie-gated books degrade gracefully.
 - All logic unit-tested **offline** (respx); CI-safe.
@@ -25,12 +26,14 @@ This sub-project replaces that sprawl with one tool. Critically, its **resolver 
 - Auto-writing `MarketMapping` entries or test files (the human/agent still authors the mapping after `discover`; the harness informs, it does not edit `builtin_mappings.py`).
 - A GUI or Slack integration (sub-project 5).
 - Shipping a public, stability-guaranteed API — `devtools` is dev/agent tooling.
+- **Non-market discovery axes** — sports (`get_sports`), competitions/tournaments (`get_tournaments`/`get_countries`), matching-widget / id-provider drift (SportRadar / BetGenius), and client features/endpoints (live betting, bet-builder, cashout, new event types). These belong to the **scout** (multi-axis *catalog* diffing, north-star expansion stream), designed at sub-project 5 or as its own sub-project. v1 stays markets-scoped; the adapter core (below) is built so a catalog axis bolts on without rework.
 
 ## Decisions
 
 | Decision | Choice |
 |---|---|
-| Capabilities (v1) | All four: resolve + discover + capture + verify |
+| Capabilities (v1) | resolve + discover (term-driven **and** `--unmapped` diff) + capture + verify |
+| Non-market axes | Deferred to the scout; adapter core built to extend to a catalog axis without rework |
 | Location / invocation | `src/bookieskit/devtools/` subpackage, `python -m bookieskit.devtools <cmd>` CLI |
 | Generality | Generic over an arbitrary search term/regex and a canonical sport |
 | Betway client fix | Extract the existing pagination-merge loop into `get_event_markets_all()` returning the **raw merged** payload; refactor `get_markets()` to use it; the harness adapter consumes it |
@@ -45,7 +48,7 @@ New subpackage `src/bookieskit/devtools/`, decomposed into focused, independentl
 | `sports.py` | Sport registry: canonical sport → per-bookmaker sport id. | `SPORT_IDS: dict[str, dict[str, str \| None]]`; `sport_id(platform, sport) -> str \| None` |
 | `adapters.py` | One adapter per bookmaker; same tiny interface so the resolver, canary, and scout all reuse it. | per platform: `resolve(client, sr_numeric, sport) -> Handle \| None`; `fetch_raw_markets(client, handle) -> dict` |
 | `resolver.py` | Orchestrates the fan-out. Seed (BetPawa event id **or** raw SR id `sr:match:N`/`N`) + sport → `ResolvedEvent`. | `async resolve_event(seed, sport, books=ALL, *, live=False, cookies=None) -> ResolvedEvent` |
-| `search.py` | Regex-search a raw payload for candidate markets. | `discover(payload, platform, term) -> list[Candidate]` |
+| `search.py` | Regex-search a raw payload for candidate markets, **and** diff against the registry. | `discover(payload, platform, term) -> list[Candidate]`; `unmapped(payload, platform, sport, registry=None) -> list[Candidate]` (every candidate whose platform id/key is not in the registry for that sport) |
 | `fixtures.py` | Write per-platform raw fixtures. | `capture(payload, platform, name, *, live=False) -> Path` |
 | `verify.py` | Run `parse_markets` per platform; report which canonicals resolve, with odds. | `verify(payload, platform, sport, canonical_ids=None) -> VerifyResult` |
 | `cli.py` / `__main__.py` | argparse CLI: 4 subcommands, `--json`, `--sport`, `--book`, `--live`, cookie flags. | `python -m bookieskit.devtools <cmd> ...` |
@@ -90,7 +93,9 @@ class VerifyResult:
 All accept a seed plus `--sport <name>` (default `soccer`), `--book <csv>` (default all), `--json`, and cookie flags (`--sportpesa-cookie`, `--betika-cookie`) for the gated books.
 
 1. `resolve <seed>` → the `ResolvedEvent` (SR id, home/away, per-book handles, skip reasons).
-2. `discover <seed> --term "<regex>"` → `Candidate`s per book (read off ids/keys/outcomes for a new mapping).
+2. `discover <seed>` — two modes (mutually exclusive):
+   - `--term "<regex>"` → `Candidate`s matching the term per book (read off ids/keys/outcomes for a known/suspected market).
+   - `--unmapped` → every `Candidate` the book exposes whose id/key the registry does **not** map for the sport. Autonomous discovery; no term needed. (Exactly one of `--term`/`--unmapped` is required.)
 3. `capture <seed> --name <fixture_name> [--live]` → writes `tests/fixtures/event_info/<platform>/<name>.json` per resolved book; prints written paths.
 4. `verify <seed> [--canonical <csv>]` → per-book `VerifyResult`; with no `--canonical`, lists every canonical that parsed.
 
@@ -121,7 +126,7 @@ Refactor `get_markets()` to call `get_event_markets_all()` then `parse_markets` 
   - `sports.py`: registry lookups for each sport/platform.
   - `adapters.py`: each adapter's `fetch_raw_markets` against a mocked response → expected raw shape; `resolve` mapping logic.
   - `resolver.py`: fan-out with a mix of resolving/failing/cookie-missing books → correct `handles`/`skipped`.
-  - `search.py`: `discover` against fixture payloads → expected `Candidate`s for a known term.
+  - `search.py`: `discover` against fixture payloads → expected `Candidate`s for a known term; `unmapped` against a fixture with a deliberately-unmapped market → that market appears and registry-mapped ones do not.
   - `verify.py`: `verify` against fixture payloads → expected resolved canonicals / `missing`.
   - `cli.py`: argument parsing and `--json` serialization (invoking command functions with mocked resolver, not network).
 - **Betway client:** existing tests must stay green after the `get_markets` refactor; add one test that `get_event_markets_all` merges multiple pages and stops on a short page.
@@ -134,7 +139,7 @@ After the harness is verified, delete the superseded scripts: `scripts/probe_2wa
 ## Success criteria
 
 - `python -m bookieskit.devtools {resolve,discover,capture,verify} --help` work; each runs non-interactively and supports `--json`.
-- Against a live seed (manual check): `discover` surfaces the same candidate markets the old `probe_*` scripts did; `verify` reports canonical resolution like the old `smoke_*`; `capture` writes the same fixture files.
+- Against a live seed (manual check): `discover --term` surfaces the same candidate markets the old `probe_*` scripts did; `discover --unmapped` lists markets present on the event but absent from the registry; `verify` reports canonical resolution like the old `smoke_*`; `capture` writes the same fixture files.
 - `get_event_markets_all` returns the full merged payload; `get_markets` behavior unchanged (existing tests green).
 - New offline `tests/devtools/` suite passes; full suite + `ruff check .` green in CI.
 - The 5 scripts are gone and `scripts/` is no longer ruff-excluded.
@@ -142,4 +147,4 @@ After the harness is verified, delete the superseded scripts: `scripts/probe_2wa
 ## Reuse hooks for later sub-projects
 
 - **Canary (sub-proj 3):** imports `resolver` + `adapters.fetch_raw_markets` to fetch live payloads and assert shape; imports `verify` to assert known canonicals still resolve.
-- **Scout (north-star expansion stream):** imports `resolver` + `search.discover` (broad term) to diff a book's live catalog against the registry and file tasks for unmapped markets.
+- **Scout (north-star expansion stream):** imports `resolver` + `search.unmapped` to find markets a book exposes but the registry doesn't map, and files tasks for them. For the **non-market axes** (sports/competitions/widgets/features), the scout adds a *catalog adapter* layer alongside `adapters.py` — each bookmaker's adapter already isolates per-book client calls, so a parallel `catalog_fetch(client) -> catalog` method extends the same pattern without touching the markets path. This is the extensibility the core is designed for.
