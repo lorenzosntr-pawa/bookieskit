@@ -154,6 +154,7 @@ async def run(
                 verify_payload(raw, book, args.sport, canonical_ids=canon)
             )
 
+    exit_code = 0 if per_book else 1
     payload = {
         "seed": ev.seed,
         "sport": ev.sport,

@@ -65,6 +65,67 @@ async def test_resolve_nonzero_exit_when_no_book_resolves(capsys):
 
 
 @pytest.mark.asyncio
+async def test_discover_term_returns_candidates_and_exit_zero(capsys):
+    """discover --term drives the full run() path; matching candidates returned."""
+    sportybet_payload = {
+        "data": {"markets": [
+            {"id": "1", "name": "Asian Handicap FT", "outcomes": [
+                {"desc": "Home -0.5", "odds": 1.8},
+                {"desc": "Away +0.5", "odds": 2.0},
+            ]},
+            {"id": "2", "name": "1X2", "outcomes": [
+                {"desc": "Home", "odds": 1.5},
+                {"desc": "Draw", "odds": 3.2},
+                {"desc": "Away", "odds": 2.1},
+            ]},
+        ]}
+    }
+
+    class _FakeSporty:
+        async def get_event_detail(self, event_id, live=False):
+            return sportybet_payload
+
+    args = cli.build_parser().parse_args(
+        ["discover", "sr:match:42", "--book", "sportybet",
+         "--term", "handicap", "--json"]
+    )
+    code = await cli.run(
+        args,
+        resolver=_fake_resolver_ok,
+        clients={"sportybet": _FakeSporty()},
+    )
+    assert code == 0
+    out = json.loads(capsys.readouterr().out)
+    candidates = out["results"]["sportybet"]
+    assert isinstance(candidates, list)
+    assert len(candidates) == 1
+    assert candidates[0]["name"] == "Asian Handicap FT"
+
+
+@pytest.mark.asyncio
+async def test_discover_all_fetch_failures_returns_exit_one(capsys):
+    """Fix 1: when every per-book fetch raises, run() returns exit code 1."""
+
+    class _BoomSporty:
+        async def get_event_detail(self, event_id, live=False):
+            raise RuntimeError("network error")
+
+    args = cli.build_parser().parse_args(
+        ["discover", "sr:match:42", "--book", "sportybet",
+         "--term", "handicap", "--json"]
+    )
+    code = await cli.run(
+        args,
+        resolver=_fake_resolver_ok,
+        clients={"sportybet": _BoomSporty()},
+    )
+    assert code == 1
+    out = json.loads(capsys.readouterr().out)
+    assert out["results"] == {}
+    assert "sportybet" in out["skipped"]
+
+
+@pytest.mark.asyncio
 async def test_verify_uses_injected_clients_and_fetches_per_book(capsys):
     # Inject a fake fetch via the clients map: the CLI's verify path calls
     # adapter.fetch_raw_markets(client, handle). We stub the client so the

@@ -55,6 +55,43 @@ async def test_resolve_from_sr_id_populates_handles_and_skips():
 
 
 @pytest.mark.asyncio
+async def test_betpawa_seed_resolver():
+    """resolve_event with betpawa_seed=True extracts sr_numeric and participants."""
+    # Minimal BetPawa event-detail payload: the extractor walks widgets[] for
+    # SPORTRADAR id and detail["participants"] for home/away.
+    betpawa_detail = {
+        "id": "33289995",
+        "name": "Team A - Team B",
+        "widgets": [
+            {"id": "68995116", "type": "SPORTRADAR", "retention": "PREMATCH"},
+        ],
+        "participants": [
+            {"id": "1", "name": "Team A", "position": 1},
+            {"id": "2", "name": "Team B", "position": 2},
+        ],
+    }
+
+    async def _get_event_detail(event_id):
+        return betpawa_detail
+
+    bp_client = _FakeClient(get_event_detail=_get_event_detail)
+
+    ev = await resolve_event(
+        "33289995",
+        "soccer",
+        books=("betpawa",),
+        betpawa_seed=True,
+        clients={"betpawa": bp_client},
+    )
+
+    assert ev.sr_numeric == "68995116"
+    assert ev.home == "Team A"
+    assert ev.away == "Team B"
+    # betpawa is always skipped in the per-book loop; handles will be empty.
+    assert ev.handles == {}
+
+
+@pytest.mark.asyncio
 async def test_resolve_isolates_per_book_exceptions():
     async def _boom(sport_id):
         raise RuntimeError("kaboom")

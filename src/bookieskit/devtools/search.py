@@ -1,11 +1,12 @@
 """Discover candidate markets on a raw payload (by regex term) and diff the
 payload against the registry (``unmapped``).
 
-NOTE on Betway: Betway maps markets by NAME, so a candidate's ``market_id``
-here is the raw ``marketId``, not the registry key. ``unmapped`` for Betway
-is therefore a best-effort discovery aid — it can surface false positives
-from per-team placeholder markets (e.g. "<Home Team> Total Goals"). Treat
-Betway unmapped results as hints to investigate, not as ground truth.
+NOTE on Betway: ``unmapped`` does NOT work for Betway — it reports every
+Betway market as unmapped. The registry indexes Betway by market NAME
+(``betway_id`` is a name string), but ``_candidates_betway`` sets
+``market_id`` to the numeric ``marketId`` from the payload, so
+``get_by_platform_id("betway", <numeric>, ...)`` always returns None. Use
+``discover --term`` for Betway instead.
 """
 
 import re
