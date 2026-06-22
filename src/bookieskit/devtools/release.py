@@ -85,3 +85,43 @@ def bump_init(text: str, new: str) -> str:
     return _replace_one(
         _INIT_VERSION_RE, text, f'__version__ = "{new}"', "__version__"
     )
+
+
+_UNRELEASED_HEADER = "## [Unreleased]"
+
+
+def promote_changelog(text: str, version: str, date: str) -> str:
+    """Rename ``## [Unreleased]`` -> ``## [<version>] - <date>`` and insert a
+    fresh empty ``## [Unreleased]`` above it.
+
+    Raises ValueError if there is no ``## [Unreleased]`` section or it has no
+    entries (refuse an empty release).
+    """
+    match = re.search(r"^## \[Unreleased\][^\n]*\n", text, re.MULTILINE)
+    if match is None:
+        raise ValueError("no '## [Unreleased]' section in CHANGELOG")
+    # Body = everything from after the Unreleased header to the next '## ['.
+    rest = text[match.end():]
+    next_header = re.search(r"^## \[", rest, re.MULTILINE)
+    body = rest[: next_header.start()] if next_header else rest
+    if not body.strip():
+        raise ValueError("'## [Unreleased]' section is empty — refusing release")
+    promoted = f"{_UNRELEASED_HEADER}\n\n## [{version}] - {date}\n"
+    return text[: match.start()] + promoted + text[match.end():]
+
+
+def extract_section(text: str, version: str) -> str:
+    """Return the stripped body of the ``## [<version>] ...`` section.
+
+    Body is the text between that header and the next ``## [`` header. Raises
+    ValueError if the version section is not found.
+    """
+    header = re.search(
+        rf"^## \[{re.escape(version)}\][^\n]*\n", text, re.MULTILINE
+    )
+    if header is None:
+        raise ValueError(f"no section for version {version!r} in CHANGELOG")
+    rest = text[header.end():]
+    next_header = re.search(r"^## \[", rest, re.MULTILINE)
+    body = rest[: next_header.start()] if next_header else rest
+    return body.strip()

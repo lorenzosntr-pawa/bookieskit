@@ -84,3 +84,70 @@ def test_bump_init_replaces_dunder_version():
 def test_bump_init_raises_when_absent():
     with pytest.raises(ValueError):
         bump_init('"""doc"""\n', "0.16.0")
+
+
+from bookieskit.devtools.release import (  # noqa: E402
+    extract_section,
+    promote_changelog,
+)
+
+_CHANGELOG = (
+    "# Changelog\n"
+    "\n"
+    "Intro paragraph.\n"
+    "\n"
+    "## [Unreleased]\n"
+    "\n"
+    "### Added\n"
+    "- New market foo.\n"
+    "\n"
+    "## [0.15.0] - 2026-05-22\n"
+    "\n"
+    "### Added\n"
+    "- Old stuff.\n"
+)
+
+
+def test_promote_changelog_renames_unreleased_and_inserts_fresh():
+    out = promote_changelog(_CHANGELOG, "0.16.0", "2026-06-23")
+    assert "## [0.16.0] - 2026-06-23" in out
+    # A fresh empty Unreleased sits above the promoted section.
+    assert "## [Unreleased]" in out
+    assert out.index("## [Unreleased]") < out.index("## [0.16.0] - 2026-06-23")
+    # The promoted section keeps its curated body.
+    assert "- New market foo." in out
+    # The old 0.15.0 section is untouched and still below.
+    assert out.index("## [0.16.0] - 2026-06-23") < out.index(
+        "## [0.15.0] - 2026-05-22"
+    )
+
+
+def test_promote_changelog_raises_when_no_unreleased():
+    text = "# Changelog\n\nIntro.\n\n## [0.15.0] - 2026-05-22\n\n- x.\n"
+    with pytest.raises(ValueError):
+        promote_changelog(text, "0.16.0", "2026-06-23")
+
+
+def test_promote_changelog_raises_when_unreleased_empty():
+    text = (
+        "# Changelog\n\nIntro.\n\n## [Unreleased]\n\n"
+        "## [0.15.0] - 2026-05-22\n\n- x.\n"
+    )
+    with pytest.raises(ValueError):
+        promote_changelog(text, "0.16.0", "2026-06-23")
+
+
+def test_extract_section_returns_stripped_body():
+    body = extract_section(_CHANGELOG, "0.15.0")
+    assert body == "### Added\n- Old stuff."
+
+
+def test_extract_section_middle_section_stops_at_next_header():
+    out = promote_changelog(_CHANGELOG, "0.16.0", "2026-06-23")
+    body = extract_section(out, "0.16.0")
+    assert body == "### Added\n- New market foo."
+
+
+def test_extract_section_raises_when_absent():
+    with pytest.raises(ValueError):
+        extract_section(_CHANGELOG, "9.9.9")
