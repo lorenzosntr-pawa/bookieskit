@@ -460,3 +460,106 @@ async def test_run_canary_discovers_seed_when_not_given():
     assert report.seed == "555"
     by = {c.platform: c for c in report.checks}
     assert by["betpawa"].status == "ok"
+
+
+import json  # noqa: E402
+
+from bookieskit.devtools import cli  # noqa: E402
+
+
+def test_build_parser_has_canary_subcommand():
+    parser = cli.build_parser()
+    args = parser.parse_args(["canary"])
+    assert args.cmd == "canary"
+    assert args.sport == "soccer"  # default
+    assert args.seed is None
+    assert args.max_candidates == 3
+
+
+def test_build_parser_canary_accepts_seed_and_max_candidates():
+    parser = cli.build_parser()
+    args = parser.parse_args(
+        ["canary", "--seed", "555", "--max-candidates", "5", "--json"]
+    )
+    assert args.seed == "555"
+    assert args.max_candidates == 5
+    assert args.as_json is True
+
+
+async def _runner_ok(sport, *, seed=None, max_candidates=3, clients=None):
+    return CanaryReport(
+        sport=sport, seed="555", sr_numeric="777",
+        checks=[BookCheck(
+            platform="betway", status="ok", reason="",
+            expected_canonicals=["1x2_ft"], resolved_canonicals=["1x2_ft"],
+            missing_canonicals=[], structure_ok=True,
+        )],
+        drifted=False,
+    )
+
+
+async def _runner_drift(sport, *, seed=None, max_candidates=3, clients=None):
+    return CanaryReport(
+        sport=sport, seed="555", sr_numeric="777",
+        checks=[BookCheck(
+            platform="betway", status="drift", reason="structure",
+            expected_canonicals=["1x2_ft"], resolved_canonicals=[],
+            missing_canonicals=["1x2_ft"], structure_ok=False,
+        )],
+        drifted=True,
+    )
+
+
+async def _runner_no_seed(sport, *, seed=None, max_candidates=3, clients=None):
+    return CanaryReport(
+        sport=sport, seed=None, sr_numeric=None, checks=[], drifted=False,
+    )
+
+
+async def _runner_unreachable(
+    sport, *, seed=None, max_candidates=3, clients=None
+):
+    return CanaryReport(
+        sport=sport, seed="555", sr_numeric="777",
+        checks=[BookCheck(
+            platform="betway", status="unreachable", reason="fetch failed",
+            expected_canonicals=["1x2_ft"], resolved_canonicals=[],
+            missing_canonicals=[], structure_ok=False,
+        )],
+        drifted=False,
+    )
+
+
+@pytest.mark.asyncio
+async def test_canary_json_output_and_exit_zero_when_ok(capsys):
+    args = cli.build_parser().parse_args(["canary", "--json"])
+    code = await cli.run(args, runner=_runner_ok)
+    assert code == 0
+    out = json.loads(capsys.readouterr().out)
+    assert out["sport"] == "soccer"
+    assert out["seed"] == "555"
+    assert out["checks"][0]["platform"] == "betway"
+    assert out["drifted"] is False
+
+
+@pytest.mark.asyncio
+async def test_canary_exit_one_on_drift(capsys):
+    args = cli.build_parser().parse_args(["canary", "--json"])
+    code = await cli.run(args, runner=_runner_drift)
+    assert code == 1
+
+
+@pytest.mark.asyncio
+async def test_canary_exit_one_on_seed_discovery_failure(capsys):
+    args = cli.build_parser().parse_args(["canary", "--json"])
+    code = await cli.run(args, runner=_runner_no_seed)
+    assert code == 1
+    out = json.loads(capsys.readouterr().out)
+    assert out["seed"] is None
+
+
+@pytest.mark.asyncio
+async def test_canary_exit_zero_when_unreachable_only(capsys):
+    args = cli.build_parser().parse_args(["canary"])
+    code = await cli.run(args, runner=_runner_unreachable)
+    assert code == 0
