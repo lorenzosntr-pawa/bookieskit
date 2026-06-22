@@ -264,29 +264,22 @@ class Betway(BaseBookmaker):
             },
         )
 
-    async def get_markets(self, event_id: str, registry: Any = None) -> list:
-        """Fetch event markets and return normalized markets.
+    async def get_event_markets_all(self, event_id: str) -> dict[str, Any]:
+        """Auto-paginate get_event_markets and return the raw merged payload.
 
-        Auto-paginates Betway's markets endpoint (which returns at most 100
-        markets per call) and merges marketsInGroup / outcomes / prices
-        across pages before parsing. Without this, events with >100
-        markets (large soccer fixtures, big basketball games) would
-        silently drop markets that live past the first page — including
-        the per-team Over/Under and Next Goal markets which often land
-        past index 100 on top fixtures.
+        Betway's markets endpoint returns at most 100 markets per call. This
+        walks every page and merges marketsInGroup / outcomes / prices, then
+        attaches the event scoreboard (sportEvent.homeTeam / awayTeam) which
+        the parser uses for team-name placeholder substitution. Returns the
+        raw merged dict the parser (and the devtools harness) consume —
+        without parsing.
 
         Args:
             event_id: Betway event ID (= SportRadar ID)
-            registry: MarketRegistry (default: built-in)
 
         Returns:
-            List of NormalizedMarket for recognized markets across all pages.
+            dict with marketsInGroup / outcomes / prices / sportEvent.
         """
-        from bookieskit.markets.parser import parse_markets
-
-        # Also fetch the scoreboard so the parser sees sportEvent.homeTeam
-        # / awayTeam (used by _TeamScopedBetwayRegistry for team-name
-        # placeholder substitution).
         detail = await self.get_event_detail(event_id=event_id)
         sport_event = detail.get("sportEvent") or {}
 
@@ -316,12 +309,34 @@ class Betway(BaseBookmaker):
             if skip >= 1000:
                 break
 
-        merged = {
+        return {
             "marketsInGroup": all_mig,
             "outcomes": all_outs,
             "prices": all_prices,
             "sportEvent": sport_event,
         }
+
+    async def get_markets(self, event_id: str, registry: Any = None) -> list:
+        """Fetch event markets and return normalized markets.
+
+        Auto-paginates Betway's markets endpoint (which returns at most 100
+        markets per call) and merges marketsInGroup / outcomes / prices
+        across pages before parsing. Without this, events with >100
+        markets (large soccer fixtures, big basketball games) would
+        silently drop markets that live past the first page — including
+        the per-team Over/Under and Next Goal markets which often land
+        past index 100 on top fixtures.
+
+        Args:
+            event_id: Betway event ID (= SportRadar ID)
+            registry: MarketRegistry (default: built-in)
+
+        Returns:
+            List of NormalizedMarket for recognized markets across all pages.
+        """
+        from bookieskit.markets.parser import parse_markets
+
+        merged = await self.get_event_markets_all(event_id=event_id)
         return parse_markets(
             merged, platform=self.PLATFORM_KEY, registry=registry
         )
