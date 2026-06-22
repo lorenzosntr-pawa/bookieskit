@@ -34,8 +34,8 @@ the class of breakage CI is meant to catch at PR time.
 |---|---|---|
 | Python matrix | 3.11, 3.12, 3.13 | 3.11 is the declared minimum (`requires-python>=3.11`); 3.13 is the dev version; jobs run in parallel so wall-clock cost is flat. |
 | OS | `ubuntu-latest` only | Pure-Python + httpx; platform-independent. Fastest/cheapest. |
-| Version test fix | Assert against installed package metadata | `importlib.metadata.version("bookieskit")` is the single source of truth; the test never goes stale and also catches drift between `pyproject.toml` and the `__init__.py` literal. |
-| Lint scope | `ruff check .` only | Matches current config (`select = ["E","F","I"]`). No formatting gate → no one-time churn. |
+| Version test fix | Assert `__version__` against `pyproject.toml` (parsed with stdlib `tomllib`) | `pyproject.toml` is the real single source of truth and is install-independent. NOTE: `importlib.metadata.version()` was rejected because editable-install metadata goes stale (locally it reports `0.13.0` while pyproject/`__init__` are `0.15.1`), so a metadata-based test fails locally until reinstall. `tomllib` (stdlib, 3.11+) reads the repo file directly — passes locally and in CI, and still catches `__init__`↔pyproject drift. |
+| Lint scope | `ruff check .`, with `scripts/` excluded and `E501` ignored under `tests/**` | `scripts/` holds disposable probe scripts being replaced by the market-add harness (sub-project 2) — gating CI on them is wasted effort (YAGNI). `tests/**` fixture literals legitimately exceed 88 cols. `src/` stays fully clean. |
 
 ## Design
 
@@ -99,33 +99,74 @@ def test_top_level_version_bumped():
     assert bookieskit.__version__ == "0.15.0"
 ```
 
-with an assertion against installed metadata (single source of truth):
+with an assertion against `pyproject.toml` (the real single source of truth, read directly
+so it never depends on a fresh install):
 
 ```python
-def test_version_matches_package_metadata():
-    from importlib.metadata import version
+def test_version_matches_pyproject():
+    import tomllib
+    from pathlib import Path
+
     import bookieskit
-    assert bookieskit.__version__ == version("bookieskit")
+
+    pyproject = Path(__file__).resolve().parents[1] / "pyproject.toml"
+    data = tomllib.loads(pyproject.read_text(encoding="utf-8"))
+    assert bookieskit.__version__ == data["project"]["version"]
 ```
 
-This requires the package to be installed (it is — `pip install -e ".[dev]"` in CI and
-locally). The test is renamed to reflect what it actually verifies. (Optional: this test
-is about packaging, not SportPesa — it could move to `tests/test_types.py` or a new
-`tests/test_packaging.py`, but that is left out of scope to keep the diff minimal.)
+`tomllib` is stdlib in Python 3.11+ (matches `requires-python`). The test is renamed to
+reflect what it verifies. It stays in `tests/test_sportpesa.py` to keep the diff minimal
+(it is arguably misplaced, but relocating it is out of scope).
+
+### 3. Lint debt (make `ruff check .` green)
+
+`ruff check .` currently reports 38 pre-existing errors (this was the implicit assumption
+the original spec got wrong). Resolution:
+
+- **`pyproject.toml` ruff config** — exclude disposable scripts and ignore long fixture
+  lines in tests:
+  ```toml
+  [tool.ruff]
+  target-version = "py311"
+  line-length = 88
+  extend-exclude = ["scripts"]
+
+  [tool.ruff.lint]
+  select = ["E", "F", "I"]
+
+  [tool.ruff.lint.per-file-ignores]
+  "tests/**" = ["E501"]
+  ```
+- **`src/`** — fix the only 2 violations, both over-long inline comments in
+  `src/bookieskit/markets/builtin_mappings.py` (lines 650 and 690): reduce the alignment
+  padding before the `#` so the line fits in 88 cols. `src/` must stay 100% clean.
+- **`tests/`** — auto-fix the 6 import-sort (`I001`) issues with `ruff check tests --fix`;
+  the 7 `E501` fixture lines are covered by the per-file ignore above.
 
 ## Success criteria
 
-- `.github/workflows/ci.yml` exists and is valid YAML.
-- On a pushed branch / opened PR, both `lint` and `test` jobs run and **pass**.
-- `pytest -q` is green locally on 3.13 (0 failures; the prior version-test failure resolved).
-- `ruff check .` reports no errors.
-- A deliberately introduced lint error or test failure causes the corresponding job to go red (manually sanity-checked once, then reverted).
+**Locally verifiable now:**
+- `.github/workflows/ci.yml` exists and parses as valid YAML.
+- `pytest -q` is green locally (0 failures; the prior version-test failure resolved).
+- `ruff check .` reports **no errors**.
+
+**Deferred — requires a GitHub remote (none exists yet):**
+- On a pushed branch / opened PR, both `lint` and `test` jobs run and **pass**, with three
+  `test` jobs (3.11/3.12/3.13) plus one `lint` job.
+- A deliberately introduced lint error or test failure turns the corresponding job red
+  (one-time sanity check, then reverted).
+
+This repo is currently local-only (no `origin`). The workflow file ships and is locally
+validated now; the end-to-end "CI runs green on GitHub" verification happens the first
+time the repo is pushed to a remote. That push is owner-triggered.
 
 ## Testing approach
 
-- Local: run `pytest -q` and `ruff check .` and confirm both clean.
-- Remote: push the branch and confirm the Actions run is green. Verify the matrix shows three `test` jobs (3.11/3.12/3.13) plus one `lint` job.
-- One-time red-path check: temporarily break a test, confirm CI fails, revert.
+- Local: run `pytest -q` and `ruff check .`; confirm both clean. Parse the workflow YAML
+  (PyYAML is not a project dependency, so install it ephemerally just for the check, or
+  rely on GitHub's parse on first push).
+- Remote (deferred): push, confirm the Actions run is green and the matrix is as expected;
+  one-time red-path check, then revert.
 
 ## Out-of-scope follow-ups (later sub-projects)
 
