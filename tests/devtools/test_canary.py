@@ -204,3 +204,92 @@ def test_check_book_skipped_when_no_core_mapped():
     bc = check_book({}, "nonexistent", "soccer")
     assert bc.status == "skipped"
     assert bc.reason == "no core markets mapped"
+
+
+import pytest  # noqa: E402
+
+from bookieskit.devtools.canary import _discover_seed  # noqa: E402
+
+
+class _FakeBetPawa:
+    """Async client stub exposing get_events + get_event_detail."""
+
+    def __init__(self, events_payload, details):
+        self._events_payload = events_payload
+        self._details = details  # event_id -> detail dict
+        self.detail_calls: list[str] = []
+
+    async def get_events(self, sport_id="2", event_type="UPCOMING", **kw):
+        assert event_type == "UPCOMING"
+        return self._events_payload
+
+    async def get_event_detail(self, event_id):
+        self.detail_calls.append(event_id)
+        return self._details[event_id]
+
+
+def _events(*rows):
+    # rows: (id, marketsCount) tuples -> responses[].responses[] structure.
+    return {"responses": [{"responses": [
+        {"id": rid, "name": f"E{rid}", "marketsCount": mc}
+        for rid, mc in rows
+    ]}]}
+
+
+def _detail_with_sr(sr_id):
+    return {"widgets": [
+        {"id": sr_id, "type": "SPORTRADAR", "retention": "PREMATCH"},
+    ]}
+
+
+def _detail_no_sr():
+    return {"widgets": [
+        {"id": "x", "type": "GENIUSSPORTS", "retention": "PREMATCH"},
+    ]}
+
+
+@pytest.mark.asyncio
+async def test_discover_seed_picks_highest_markets_with_sr_widget():
+    payload = _events(("100", 50), ("200", 300), ("300", 120))
+    details = {
+        "200": _detail_with_sr("999"),  # top by marketsCount, has SR
+        "300": _detail_with_sr("888"),
+        "100": _detail_with_sr("777"),
+    }
+    bp = _FakeBetPawa(payload, details)
+    seed = await _discover_seed(bp, "2", 3)
+    assert seed == "200"  # highest marketsCount, SR present
+    assert bp.detail_calls == ["200"]  # stopped at first qualifying
+
+
+@pytest.mark.asyncio
+async def test_discover_seed_skips_candidates_without_sr_widget():
+    payload = _events(("200", 300), ("300", 120))
+    details = {
+        "200": _detail_no_sr(),       # top by markets but no SR -> skip
+        "300": _detail_with_sr("888"),
+    }
+    bp = _FakeBetPawa(payload, details)
+    seed = await _discover_seed(bp, "2", 3)
+    assert seed == "300"
+    assert bp.detail_calls == ["200", "300"]
+
+
+@pytest.mark.asyncio
+async def test_discover_seed_respects_max_candidates():
+    payload = _events(("200", 300), ("300", 120), ("400", 10))
+    details = {
+        "200": _detail_no_sr(),
+        "300": _detail_no_sr(),
+        "400": _detail_with_sr("888"),  # would qualify but is beyond top 2
+    }
+    bp = _FakeBetPawa(payload, details)
+    seed = await _discover_seed(bp, "2", 2)
+    assert seed is None
+    assert bp.detail_calls == ["200", "300"]
+
+
+@pytest.mark.asyncio
+async def test_discover_seed_returns_none_on_empty_listing():
+    bp = _FakeBetPawa({"responses": []}, {})
+    assert await _discover_seed(bp, "2", 3) is None

@@ -15,6 +15,7 @@ from typing import Any, Callable
 
 from bookieskit.devtools.verify import verify
 from bookieskit.markets.registry import MarketRegistry
+from bookieskit.matching import extract_sportradar_id
 
 CORE_CANONICALS: tuple[str, ...] = (
     "1x2_ft",
@@ -198,3 +199,41 @@ def check_book(
         missing_canonicals=[],
         structure_ok=True,
     )
+
+
+def _list_betpawa_events(payload: dict) -> list[dict]:
+    """Flatten BetPawa get_events responses[].responses[] into one list."""
+    out: list[dict] = []
+    for group in payload.get("responses") or []:
+        if not isinstance(group, dict):
+            continue
+        for event in group.get("responses") or []:
+            if isinstance(event, dict):
+                out.append(event)
+    return out
+
+
+async def _discover_seed(
+    bp_client: Any, sport_id: str, max_candidates: int
+) -> str | None:
+    """Return a current top BetPawa event id that carries a SportRadar id.
+
+    Lists UPCOMING events for the sport, ranks by marketsCount desc, then
+    fetches detail for up to ``max_candidates`` and returns the first whose
+    detail yields a SportRadar id. None if none qualify (a signal that the
+    BetPawa listing itself may have drifted).
+    """
+    payload = await bp_client.get_events(
+        sport_id=sport_id, event_type="UPCOMING"
+    )
+    events = _list_betpawa_events(payload)
+    events.sort(key=lambda e: e.get("marketsCount") or 0, reverse=True)
+    for event in events[:max_candidates]:
+        event_id = event.get("id")
+        if event_id is None:
+            continue
+        event_id = str(event_id)
+        detail = await bp_client.get_event_detail(event_id=event_id)
+        if extract_sportradar_id(detail, platform="betpawa") is not None:
+            return event_id
+    return None
