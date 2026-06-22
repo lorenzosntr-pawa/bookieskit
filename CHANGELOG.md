@@ -4,6 +4,8 @@ All notable changes to this project are documented in this file. The format foll
 
 ## [Unreleased]
 
+## [0.16.0] - 2026-06-23
+
 ### Added
 - `bookieskit.devtools` — a dev/agent tooling subpackage with a non-interactive CLI (`python -m bookieskit.devtools`), all subcommands supporting `--json`:
   - **Market-add harness** — `resolve` (fan a SportRadar/BetPawa seed out to all 7 bookmakers), `discover` (candidate markets by name/outcome regex, or `--unmapped` for markets the registry doesn't map yet), `capture` (write raw per-bookmaker fixtures), `verify` (which canonical markets `parse_markets` resolves).
