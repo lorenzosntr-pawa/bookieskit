@@ -13,6 +13,10 @@ the stable contract the orchestrator (sub-project 5) turns into alerts.
 from dataclasses import dataclass
 from typing import Any, Callable
 
+from bookieskit.devtools.adapters import ADAPTERS
+from bookieskit.devtools.resolver import ALL_BOOKS, resolve_event
+from bookieskit.devtools.sports import sport_id as _sport_id
+from bookieskit.devtools.types import Handle
 from bookieskit.devtools.verify import verify
 from bookieskit.markets.registry import MarketRegistry
 from bookieskit.matching import extract_sportradar_id
@@ -237,3 +241,129 @@ async def _discover_seed(
         if extract_sportradar_id(detail, platform="betpawa") is not None:
             return event_id
     return None
+
+
+_FETCH_RETRIES = 2  # 1 try + 2 retries before a book is "unreachable"
+
+
+async def _fetch_with_retries(
+    adapter: Any, client: Any, handle: Handle, *, retries: int = _FETCH_RETRIES
+) -> dict:
+    """Fetch raw markets, retrying transient errors; re-raise on the last."""
+    last: Exception | None = None
+    for _ in range(1 + retries):
+        try:
+            return await adapter.fetch_raw_markets(client, handle, live=False)
+        except Exception as exc:  # transient until proven persistent
+            last = exc
+    assert last is not None
+    raise last
+
+
+async def _fetch_for_book(
+    book: str, handle: Handle, clients: dict[str, Any] | None
+) -> dict:
+    """Resolve the client for ``book`` (injected or constructed) and fetch."""
+    adapter = ADAPTERS[book]
+    injected = (clients or {}).get(book)
+    if injected is not None:
+        return await _fetch_with_retries(adapter, injected, handle)
+    from bookieskit.devtools.resolver import _CLIENT_CLASSES, _COUNTRY
+
+    async with _CLIENT_CLASSES[book](country=_COUNTRY[book]) as client:
+        return await _fetch_with_retries(adapter, client, handle)
+
+
+async def run_canary(
+    sport: str = "soccer",
+    *,
+    seed: str | None = None,
+    max_candidates: int = 3,
+    books: tuple[str, ...] = ALL_BOOKS,
+    clients: dict[str, Any] | None = None,
+) -> CanaryReport:
+    """Discover a seed, resolve across books, check each reachable book.
+
+    Args:
+        sport: Canonical sport (v1 = "soccer").
+        seed: BetPawa internal event id; discovered dynamically when None.
+        max_candidates: Top-N BetPawa events to try during discovery.
+        books: Subset of ALL_BOOKS to fan out to (defaults to all). Narrowed
+            by tests so only books with injected clients are fetched — keeps
+            the suite offline. BetPawa is always checked (added explicitly).
+        clients: Optional pre-entered client instances keyed by platform
+            (test injection). When None, clients are constructed per book.
+
+    Returns:
+        CanaryReport. ``drifted`` is True iff any check is "drift".
+        ``seed`` is None when discovery failed (no checks).
+    """
+    registry = MarketRegistry()
+
+    # 1. Seed discovery.
+    if seed is None:
+        bp_sport_id = _sport_id("betpawa", sport) or "2"
+        bp = (clients or {}).get("betpawa")
+        if bp is not None:
+            seed = await _discover_seed(bp, bp_sport_id, max_candidates)
+        else:
+            from bookieskit import BetPawa
+
+            async with BetPawa(country="ng") as bp_client:
+                seed = await _discover_seed(
+                    bp_client, bp_sport_id, max_candidates
+                )
+    if seed is None:
+        return CanaryReport(
+            sport=sport, seed=None, sr_numeric=None, checks=[], drifted=False
+        )
+
+    # 2. Resolve across books from the BetPawa seed.
+    resolved = await resolve_event(
+        seed, sport, books=books, betpawa_seed=True, clients=clients
+    )
+
+    # 3. Check set = resolved handles + explicit BetPawa handle.
+    handles: dict[str, Handle] = dict(resolved.handles)
+    handles["betpawa"] = Handle(platform="betpawa", event_id=seed)
+
+    checks: list[BookCheck] = []
+
+    # 4. Reachable books: fetch (with retries) + check_book.
+    for book, handle in handles.items():
+        if not expected_core(book, sport, registry):
+            checks.append(BookCheck(
+                platform=book, status="skipped",
+                reason="no core markets mapped",
+                expected_canonicals=[], resolved_canonicals=[],
+                missing_canonicals=[], structure_ok=False,
+            ))
+            continue
+        try:
+            raw = await _fetch_for_book(book, handle, clients)
+        except Exception as exc:
+            checks.append(BookCheck(
+                platform=book, status="unreachable",
+                reason=f"fetch failed: {exc!r}",
+                expected_canonicals=expected_core(book, sport, registry),
+                resolved_canonicals=[], missing_canonicals=[],
+                structure_ok=False,
+            ))
+            continue
+        checks.append(check_book(raw, book, sport, registry))
+
+    # 5. Resolver-skipped books (not in the check set) -> skipped.
+    for book, reason in resolved.skipped.items():
+        if book in handles:
+            continue  # checked via the explicit/resolved handle
+        checks.append(BookCheck(
+            platform=book, status="skipped", reason=reason,
+            expected_canonicals=[], resolved_canonicals=[],
+            missing_canonicals=[], structure_ok=False,
+        ))
+
+    drifted = any(c.status == "drift" for c in checks)
+    return CanaryReport(
+        sport=sport, seed=seed, sr_numeric=resolved.sr_numeric,
+        checks=checks, drifted=drifted,
+    )

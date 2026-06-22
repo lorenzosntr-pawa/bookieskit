@@ -293,3 +293,170 @@ async def test_discover_seed_respects_max_candidates():
 async def test_discover_seed_returns_none_on_empty_listing():
     bp = _FakeBetPawa({"responses": []}, {})
     assert await _discover_seed(bp, "2", 3) is None
+
+
+from bookieskit.devtools.canary import run_canary  # noqa: E402
+from bookieskit.devtools.types import Handle  # noqa: E402, F401
+
+# A SportyBet detail payload resolving all four core canonicals.
+SPORTYBET_OK = {"data": {"markets": [
+    {"id": "1", "name": "1X2", "outcomes": [
+        {"desc": "Home", "odds": "1.5"},
+        {"desc": "Draw", "odds": "3.2"},
+        {"desc": "Away", "odds": "2.1"},
+    ]},
+    {"id": "18", "name": "O/U", "specifier": "total=2.5", "outcomes": [
+        {"desc": "Over 2.5", "odds": "1.8"},
+        {"desc": "Under 2.5", "odds": "2.0"},
+    ]},
+    {"id": "29", "name": "BTTS", "outcomes": [
+        {"desc": "Yes", "odds": "1.7"},
+        {"desc": "No", "odds": "2.0"},
+    ]},
+    {"id": "10", "name": "DC", "outcomes": [
+        {"desc": "Home or Draw", "odds": "1.2"},
+        {"desc": "Draw or Away", "odds": "1.5"},
+        {"desc": "Home or Away", "odds": "1.1"},
+    ]},
+]}}
+
+
+class _CanaryClient:
+    """Async-context client stub with arbitrary coroutine methods."""
+
+    def __init__(self, **methods):
+        self._methods = methods
+
+    async def __aenter__(self):
+        return self
+
+    async def __aexit__(self, *a):
+        return False
+
+    def __getattr__(self, name):
+        if name in self._methods:
+            return self._methods[name]
+        raise AttributeError(name)
+
+
+@pytest.mark.asyncio
+async def test_run_canary_mixed_ok_drift_unreachable_skipped():
+    # Seed given -> no discovery. betpawa OK, sportybet OK,
+    # betway drifts (structure broken), bet9ja unreachable, sportpesa skipped.
+    async def _bp_detail(event_id):
+        # Resolver's betpawa_seed lookup: SR id + participants.
+        return {
+            "widgets": [{"id": "777", "type": "SPORTRADAR"}],
+            "participants": [{"name": "A"}, {"name": "B"}],
+            **BETPAWA_OK,
+        }
+
+    async def _sb_detail(event_id, live=False):
+        return SPORTYBET_OK
+
+    async def _bw_markets_all(event_id):
+        return {"marketz": "broken"}  # structure predicate fails -> drift
+
+    async def _b9_map(sport_id):
+        return {}  # SR not in prematch map -> resolver "not found" skip
+
+    clients = {
+        "betpawa": _CanaryClient(get_event_detail=_bp_detail),
+        "sportybet": _CanaryClient(get_event_detail=_sb_detail),
+        "betway": _CanaryClient(get_event_markets_all=_bw_markets_all),
+        "bet9ja": _CanaryClient(build_prematch_event_map=_b9_map),
+    }
+    # books restricted to the injected fakes (+ betpawa is always checked
+    # explicitly) so no un-injected book touches the network.
+    report = await run_canary(
+        "soccer", seed="33289995",
+        books=("sportybet", "betway", "bet9ja", "sportpesa"),
+        clients=clients,
+    )
+
+    by = {c.platform: c for c in report.checks}
+    assert by["betpawa"].status == "ok"
+    assert by["sportybet"].status == "ok"
+    assert by["betway"].status == "drift"
+    assert by["betway"].structure_ok is False
+    # bet9ja not resolved by the resolver -> skipped with resolver reason.
+    assert by["bet9ja"].status == "skipped"
+    assert by["bet9ja"].reason == "not found"
+    # sportpesa cookie-missing -> skipped.
+    assert by["sportpesa"].status == "skipped"
+    assert report.drifted is True
+    assert report.seed == "33289995"
+    assert report.sr_numeric == "777"
+
+
+@pytest.mark.asyncio
+async def test_run_canary_unreachable_does_not_set_drift():
+    async def _bp_detail(event_id):
+        return {
+            "widgets": [{"id": "777", "type": "SPORTRADAR"}],
+            "participants": [{"name": "A"}, {"name": "B"}],
+            **BETPAWA_OK,
+        }
+
+    call_count = {"n": 0}
+
+    async def _bw_markets_all(event_id):
+        call_count["n"] += 1
+        raise RuntimeError("timeout")
+
+    clients = {
+        "betpawa": _CanaryClient(get_event_detail=_bp_detail),
+        "betway": _CanaryClient(get_event_markets_all=_bw_markets_all),
+    }
+    report = await run_canary(
+        "soccer", seed="33289995",
+        books=("betway",),
+        clients=clients,
+    )
+    by = {c.platform: c for c in report.checks}
+    assert by["betway"].status == "unreachable"
+    assert "timeout" in by["betway"].reason
+    assert call_count["n"] == 3  # 1 try + 2 retries
+    assert report.drifted is False  # unreachable never fails the run
+
+
+@pytest.mark.asyncio
+async def test_run_canary_seed_discovery_failure_returns_empty_report():
+    # No seed + discovery yields None -> empty report, seed None.
+    async def _events(sport_id="2", event_type="UPCOMING", **kw):
+        return {"responses": []}
+
+    clients = {"betpawa": _CanaryClient(get_events=_events)}
+    report = await run_canary("soccer", clients=clients)
+    assert report.seed is None
+    assert report.sr_numeric is None
+    assert report.checks == []
+    assert report.drifted is False
+
+
+@pytest.mark.asyncio
+async def test_run_canary_discovers_seed_when_not_given():
+    async def _events(sport_id="2", event_type="UPCOMING", **kw):
+        return {"responses": [{"responses": [
+            {"id": "555", "marketsCount": 200},
+        ]}]}
+
+    async def _bp_detail(event_id):
+        assert event_id == "555"
+        return {
+            "widgets": [{"id": "777", "type": "SPORTRADAR"}],
+            "participants": [{"name": "A"}, {"name": "B"}],
+            **BETPAWA_OK,
+        }
+
+    clients = {
+        "betpawa": _CanaryClient(
+            get_events=_events, get_event_detail=_bp_detail
+        ),
+    }
+    report = await run_canary(
+        "soccer", clients=clients, max_candidates=1, books=(),
+    )
+    assert report.seed == "555"
+    by = {c.platform: c for c in report.checks}
+    assert by["betpawa"].status == "ok"
