@@ -4,6 +4,13 @@ All notable changes to this project are documented in this file. The format foll
 
 ## [Unreleased]
 
+### Added
+- `bookieskit.devtools` — a dev/agent tooling subpackage with a non-interactive CLI (`python -m bookieskit.devtools`), all subcommands supporting `--json`:
+  - **Market-add harness** — `resolve` (fan a SportRadar/BetPawa seed out to all 7 bookmakers), `discover` (candidate markets by name/outcome regex, or `--unmapped` for markets the registry doesn't map yet), `capture` (write raw per-bookmaker fixtures), `verify` (which canonical markets `parse_markets` resolves).
+  - **Live canary** — `canary` probes real bookmaker payloads, checks per-book structure + core-canonical resolution, and reports drift vs transient unreachability as a `CanaryReport`. Run from an in-region network (bookmakers geo-restrict cloud IPs).
+  - **Release automation** — `release` (infer the SemVer bump from conventional commits, bump both version files, promote this `[Unreleased]` section, commit + tag) and `release-notes` (print a version's changelog body).
+- `Betway.get_event_markets_all()` — returns the raw merged multi-page markets payload (`marketsInGroup`/`outcomes`/`prices`/`sportEvent`); `get_markets()` now delegates to it. Lets callers fetch all pages of a Betway event's markets without re-parsing.
+
 ## [0.15.0] - 2026-05-22
 
 ### Renamed
