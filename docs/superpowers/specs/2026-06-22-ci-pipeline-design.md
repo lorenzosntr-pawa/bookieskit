@@ -2,7 +2,7 @@
 
 **Date:** 2026-06-22
 **Status:** Approved (pending written-spec review)
-**Sub-project:** 1 of 4 in the "project workflow" track (CI → market-add harness → live canary tests → release automation)
+**Sub-project:** 1 of 5 in the "project workflow" track (CI → market-add harness → live canary tests → release automation → orchestration + Slack cockpit). See the umbrella vision: `2026-06-22-agent-company-north-star.md`.
 
 ## Problem
 
