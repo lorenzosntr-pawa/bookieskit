@@ -12,6 +12,7 @@ from dataclasses import asdict
 from typing import Any, Awaitable, Callable
 
 from bookieskit.devtools.adapters import ADAPTERS
+from bookieskit.devtools.canary import CanaryReport, run_canary
 from bookieskit.devtools.fixtures import capture as capture_fixture
 from bookieskit.devtools.resolver import ALL_BOOKS, resolve_event
 from bookieskit.devtools.search import discover, unmapped
@@ -19,6 +20,7 @@ from bookieskit.devtools.types import ResolvedEvent
 from bookieskit.devtools.verify import verify as verify_payload
 
 Resolver = Callable[..., Awaitable[ResolvedEvent]]
+CanaryRunner = Callable[..., Awaitable[CanaryReport]]
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -56,6 +58,13 @@ def build_parser() -> argparse.ArgumentParser:
     p_verify.add_argument(
         "--canonical", default=None, help="CSV of canonical_ids to require"
     )
+
+    p_canary = sub.add_parser("canary")
+    p_canary.add_argument("--sport", default="soccer")
+    p_canary.add_argument("--json", action="store_true", dest="as_json")
+    p_canary.add_argument("--seed", default=None)
+    p_canary.add_argument("--max-candidates", type=int, default=3,
+                          dest="max_candidates")
 
     return parser
 
@@ -103,8 +112,28 @@ async def run(
     args: argparse.Namespace,
     *,
     resolver: Resolver = resolve_event,
+    runner: CanaryRunner = run_canary,
     clients: dict[str, Any] | None = None,
 ) -> int:
+    if args.cmd == "canary":
+        report = await runner(
+            args.sport,
+            seed=args.seed,
+            max_candidates=args.max_candidates,
+            clients=clients,
+        )
+        _emit(
+            asdict(report),
+            args.as_json,
+            [f"canary sport={report.sport} seed={report.seed} "
+             f"sr={report.sr_numeric} drifted={report.drifted}"]
+            + [f"  {c.platform}: {c.status} {c.reason}".rstrip()
+               for c in report.checks],
+        )
+        if report.drifted or report.seed is None:
+            return 1
+        return 0
+
     books = _books_arg(args)
     ev = await resolver(
         args.seed,
