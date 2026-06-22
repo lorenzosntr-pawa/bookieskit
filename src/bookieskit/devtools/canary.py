@@ -11,8 +11,9 @@ the stable contract the orchestrator (sub-project 5) turns into alerts.
 """
 
 from dataclasses import dataclass
-from typing import Callable
+from typing import Any, Callable
 
+from bookieskit.devtools.verify import verify
 from bookieskit.markets.registry import MarketRegistry
 
 CORE_CANONICALS: tuple[str, ...] = (
@@ -130,3 +131,70 @@ def expected_core(
         if getattr(mapping, attr, None) is not None:
             out.append(canonical)
     return out
+
+
+def check_book(
+    payload: dict[str, Any],
+    platform: str,
+    sport: str,
+    registry: MarketRegistry | None = None,
+) -> BookCheck:
+    """Structure predicate + core resolution -> a per-book drift verdict.
+
+    Reachable-but-broken (structure False OR any expected core canonical did
+    not resolve) -> status "drift". All good -> "ok". When the registry maps
+    none of the core for this book -> "skipped".
+    """
+    if registry is None:
+        registry = MarketRegistry()
+    expected = expected_core(platform, sport, registry)
+    if not expected:
+        return BookCheck(
+            platform=platform,
+            status="skipped",
+            reason="no core markets mapped",
+            expected_canonicals=[],
+            resolved_canonicals=[],
+            missing_canonicals=[],
+            structure_ok=False,
+        )
+
+    predicate = STRUCTURE_PREDICATES.get(platform)
+    if predicate is None:
+        structure_ok = False
+    else:
+        structure_ok = bool(predicate(payload))
+
+    result = verify(payload, platform, sport, canonical_ids=expected)
+    missing = list(result.missing)
+    resolved = [c for c in expected if c not in missing]
+
+    if not structure_ok:
+        return BookCheck(
+            platform=platform,
+            status="drift",
+            reason="structure predicate failed",
+            expected_canonicals=expected,
+            resolved_canonicals=resolved,
+            missing_canonicals=missing,
+            structure_ok=False,
+        )
+    if missing:
+        return BookCheck(
+            platform=platform,
+            status="drift",
+            reason=f"missing core canonicals: {', '.join(missing)}",
+            expected_canonicals=expected,
+            resolved_canonicals=resolved,
+            missing_canonicals=missing,
+            structure_ok=True,
+        )
+    return BookCheck(
+        platform=platform,
+        status="ok",
+        reason="",
+        expected_canonicals=expected,
+        resolved_canonicals=resolved,
+        missing_canonicals=[],
+        structure_ok=True,
+    )

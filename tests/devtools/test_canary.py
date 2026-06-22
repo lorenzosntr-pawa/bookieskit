@@ -115,3 +115,92 @@ def test_expected_core_empty_for_unknown_platform():
 def test_expected_core_defaults_to_builtin_registry_when_none():
     # registry arg is required by signature; pass a fresh builtin.
     assert expected_core("betway", "soccer", MarketRegistry())
+
+
+from bookieskit.devtools.canary import check_book  # noqa: E402
+
+# A BetPawa detail payload that resolves all four core canonicals (reuses
+# the shape from tests/test_parser_betpawa.py).
+BETPAWA_OK = {
+    "id": "32299257",
+    "homeTeam": "Manchester City",
+    "awayTeam": "Liverpool",
+    "markets": [
+        {
+            "id": "3743",
+            "name": "1X2 - Full Time",
+            "row": [{"prices": [
+                {"name": "1", "odds": 1.95},
+                {"name": "X", "odds": 3.50},
+                {"name": "2", "odds": 2.10},
+            ]}],
+        },
+        {
+            "id": "5000",
+            "name": "Over/Under",
+            "row": [{"line": 2.5, "prices": [
+                {"name": "Over", "odds": 1.80},
+                {"name": "Under", "odds": 2.00},
+            ]}],
+        },
+        {
+            "id": "3795",
+            "name": "Both Teams To Score",
+            "row": [{"prices": [
+                {"name": "Yes", "odds": 1.75},
+                {"name": "No", "odds": 2.05},
+            ]}],
+        },
+        {
+            "id": "4693",
+            "name": "Double Chance",
+            "row": [{"prices": [
+                {"name": "1X", "odds": 1.25},
+                {"name": "X2", "odds": 1.50},
+                {"name": "12", "odds": 1.10},
+            ]}],
+        },
+    ],
+}
+
+
+def test_check_book_ok_when_structure_and_all_core_resolve():
+    bc = check_book(BETPAWA_OK, "betpawa", "soccer")
+    assert bc.status == "ok"
+    assert bc.reason == ""
+    assert bc.structure_ok is True
+    assert set(bc.expected_canonicals) == set(CORE_CANONICALS)
+    assert set(bc.resolved_canonicals) == set(CORE_CANONICALS)
+    assert bc.missing_canonicals == []
+
+
+def test_check_book_drift_when_core_missing():
+    # Drop BTTS + Double Chance -> two core canonicals fail to resolve.
+    partial = {
+        "id": "1",
+        "markets": [
+            BETPAWA_OK["markets"][0],  # 1X2
+            BETPAWA_OK["markets"][1],  # O/U
+        ],
+    }
+    bc = check_book(partial, "betpawa", "soccer")
+    assert bc.status == "drift"
+    assert bc.structure_ok is True
+    assert set(bc.missing_canonicals) == {"btts_ft", "double_chance_ft"}
+    assert "missing" in bc.reason
+
+
+def test_check_book_drift_when_structure_broken():
+    # markets renamed -> structure predicate False; nothing resolves.
+    broken = {"id": "1", "marketz": []}
+    bc = check_book(broken, "betpawa", "soccer")
+    assert bc.status == "drift"
+    assert bc.structure_ok is False
+    assert "structure" in bc.reason
+
+
+def test_check_book_skipped_when_no_core_mapped():
+    # Unknown platform -> expected_core empty -> skipped.
+    bc = check_book({}, "nonexistent", "soccer")
+    assert bc.status == "skipped"
+    assert bc.reason == "no core markets mapped"
