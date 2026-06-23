@@ -50,7 +50,11 @@ re-check step 3 (`SLACK_MCP_ADD_MESSAGE_TOOL`).
 |---|---|---|
 | `#agent-activity` | orchestrate skill | each cycle: claimed → PR opened → blocked |
 | `#canary-alerts` | orchestrate/maintenance | a `sync-canary` run reports drift |
-| `#releases` | release flow | a release is cut |
+| `#releases` | the agent that cut the release | after `release --push`, manually via `notify release` |
+
+Posting is best-effort and agent-driven, not automatic: the `#releases` note is
+the agent running `notify release ...` and posting after a release — `devtools
+release` itself does not post (it cannot import the `orchestration` notifier).
 
 ## Next slice — ChatOps
 
