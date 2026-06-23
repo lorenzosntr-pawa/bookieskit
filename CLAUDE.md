@@ -14,7 +14,7 @@ Signal → Work → Gate → Ship. Pieces (all on `main`): CI (the gate), `booki
 
 ## Autonomy rules (when running unattended)
 - **Decide-and-document**: there is no human to answer clarifying questions during an autonomous build. Make the most reasonable assumption, proceed, and record every assumption in the PR for the supervised review. Never block on a question.
-- **Supervised gate**: the loop produces PRs and NEVER merge. The owner reviews (CI must be green) and merges; auto-merge for low-risk classes is future work, unlocked only after the supervised loop is proven.
+- **Supervised gate**: the loop produces PRs and NEVER merges. The owner reviews (CI must be green) and merges; auto-merge for low-risk classes is future work, unlocked only after the supervised loop is proven.
 - **Surface, never swallow**: assumptions → the PR; blockers → a comment on the Issue + `status:blocked`.
 
 ## In-region constraint
