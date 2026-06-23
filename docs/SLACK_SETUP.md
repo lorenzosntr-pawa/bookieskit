@@ -5,29 +5,75 @@ The agent company posts a live feed to Slack via the korotovsky
 loop, canary, and release all run normally — Slack simply stays quiet. Complete
 this once to light up the cockpit.
 
-## 1. Workspace + channels
+The one thing you set up is: a Slack token + the `slack-mcp-server` MCP
+registered in Claude Code with **posting enabled**. The agent never talks to
+Slack directly — it formats text (`notify` / `sync-canary --json`) and calls
+the MCP's `conversations_add_message` tool to post. Run it from the same
+in-region session as `/orchestrate`.
 
-1. Use an existing Slack workspace or create one; invite the people who'll use
-   it (owner + teammates).
-2. Create three channels:
-   - `#agent-activity` — cycle progress (claimed → PR opened → blocked).
-   - `#canary-alerts` — canary drift digests.
-   - `#releases` — release announcements.
+## 1. Create the Slack app + bot token (recommended path)
 
-## 2. Slack token
+Use a **Bot token** (`xoxb-`) so the agent posts under its own identity
+("BookiesKit Agent") and you control exactly which channels it can touch.
+(Alternatives the server also supports: a User token `xoxp-` posts as *you*; the
+browser `xoxc`/`xoxd` session tokens work too but expire with your browser
+session — avoid them for an always-on cockpit. Priority if several are set:
+`xoxp` > `xoxb` > `xoxc/xoxd`.)
 
-Obtain a token for the korotovsky MCP per its README
-(<https://github.com/korotovsky/slack-mcp-server>). A user or bot token is
-enough; no workspace-admin rights are required. Add the bot/user to the three
-channels above so it can post.
+1. Go to <https://api.slack.com/apps> → **Create New App → From manifest**,
+   choose your workspace, and paste:
 
-## 3. Register the MCP in Claude Code
+   ```json
+   {
+     "display_information": { "name": "BookiesKit Agent" },
+     "features": { "bot_user": { "display_name": "BookiesKit Agent", "always_online": true } },
+     "oauth_config": {
+       "scopes": {
+         "bot": [
+           "chat:write",
+           "channels:history", "channels:read",
+           "groups:history", "groups:read",
+           "users:read"
+         ]
+       }
+     },
+     "settings": { "org_deploy_enabled": false, "socket_mode_enabled": false, "token_rotation_enabled": false }
+   }
+   ```
 
-Register `slack-mcp-server` as an MCP server (stdio) in Claude Code's MCP
-settings. **Crucially, enable the message-post tool** — it is OFF by default:
-set the `SLACK_MCP_ADD_MESSAGE_TOOL` environment variable (per the server's
-README) so the `post_message`/`conversations_add_message` tool is exposed.
-Without it, the agent can format messages but cannot post them.
+   `chat:write` is posting (covers this slice); the `*:history`/`*:read` scopes
+   let the next (ChatOps) slice read `#tickets` — set once, no rework.
+2. **Install to Workspace** → copy the **Bot User OAuth Token** (`xoxb-…`).
+   Keep it secret; **never commit it.**
+
+## 2. Create the channels and invite the bot
+
+Create `#agent-activity`, `#canary-alerts`, `#releases` (and `#tickets` now if
+you want — free to pre-make for the ChatOps slice). Then in **each** channel run
+`/invite @BookiesKit Agent`. A bot only sees/posts to channels it's invited to.
+
+## 3. Register the MCP in Claude Code (in-region machine)
+
+One command from the repo dir (PowerShell):
+
+```powershell
+claude mcp add slack --scope user `
+  -e SLACK_MCP_XOXB_TOKEN=xoxb-YOUR-TOKEN `
+  -e SLACK_MCP_ADD_MESSAGE_TOOL=true `
+  -- npx -y slack-mcp-server@latest --transport stdio
+```
+
+- `--scope user` → available in every Claude Code session on this machine, and
+  the token stays out of the repo.
+- **`SLACK_MCP_ADD_MESSAGE_TOOL=true` is the critical switch** — posting is OFF
+  by default; without it the agent can format messages but cannot post them.
+  (Tighten later by passing comma-separated channel IDs instead of `true` to
+  restrict posting to just these channels.)
+- If `npx` misbehaves on Windows, use Docker instead: command `docker`, args
+  `run -i --rm -e SLACK_MCP_XOXB_TOKEN ghcr.io/korotovsky/slack-mcp-server --transport stdio`.
+
+Confirm: `claude mcp list` shows `slack`, and the `conversations_add_message`
+tool is available in a session.
 
 ## 4. Verify (in-region)
 
@@ -41,8 +87,9 @@ so verify from an in-region session:
    If it reports drift, confirm the digest lands in `#canary-alerts`. (No drift
    → no post, by design.)
 
-If nothing posts and no error appears, the `post_message` tool is not enabled —
-re-check step 3 (`SLACK_MCP_ADD_MESSAGE_TOOL`).
+If nothing posts **and no error appears**, the `conversations_add_message` tool
+is not enabled — re-check step 3 (`SLACK_MCP_ADD_MESSAGE_TOOL=true`). If you get
+an **auth/permission error**, the bot wasn't invited to that channel (step 2).
 
 ## Channels at a glance
 
