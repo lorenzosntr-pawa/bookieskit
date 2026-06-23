@@ -14,6 +14,7 @@ from typing import Any, Awaitable, Callable
 
 from bookieskit.devtools.adapters import ADAPTERS
 from bookieskit.devtools.canary import CanaryReport, run_canary
+from bookieskit.devtools.coverage import coverage_matrix, render_markdown
 from bookieskit.devtools.fixtures import capture as capture_fixture
 from bookieskit.devtools.release import (
     ReleaseError,
@@ -74,6 +75,9 @@ def build_parser() -> argparse.ArgumentParser:
     p_verify.add_argument(
         "--canonical", default=None, help="CSV of canonical_ids to require"
     )
+
+    p_coverage = sub.add_parser("coverage")
+    p_coverage.add_argument("--json", action="store_true", dest="as_json")
 
     p_canary = sub.add_parser("canary")
     p_canary.add_argument("--sport", default="soccer")
@@ -145,6 +149,14 @@ async def run(
     notes: NotesFn = _default_notes,
     clients: dict[str, Any] | None = None,
 ) -> int:
+    if args.cmd == "coverage":
+        matrix = coverage_matrix()
+        if args.as_json:
+            print(json.dumps(matrix))
+        else:
+            print(render_markdown(matrix))
+        return 0
+
     if args.cmd == "canary":
         report = await runner(
             args.sport,
