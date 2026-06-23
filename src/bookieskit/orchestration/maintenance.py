@@ -81,11 +81,10 @@ def sync_canary(report: CanaryReport, queue: Queue) -> SyncResult:
     result = SyncResult()
     current = canary_signatures(report)
     current_sigs = {sig for sig, _ in current}
-    titles = dict(current)
 
-    # 1. Open or update each current drift.
-    for signature in current_sigs:
-        title = titles[signature]
+    # 1. Open or update each current drift (in canary_signatures' deterministic
+    # order, so result.opened/updated are stable across runs).
+    for signature, title in current:
         item = WorkItem(
             signature=signature,
             stream=_STREAM,
