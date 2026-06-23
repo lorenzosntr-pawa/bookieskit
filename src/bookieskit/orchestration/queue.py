@@ -53,3 +53,27 @@ class Queue:
     def list_open(self, *, stream: str | None = None) -> list[dict]:
         labels = (stream,) if stream else ()
         return self.gh.list_issues(state="open", labels=labels)
+
+    def claim(self, number: int) -> None:
+        """Mark an issue as being worked (adds status:claimed)."""
+        self.gh.edit_issue(number, add_labels=["status:claimed"])
+
+    def mark_in_review(self, number: int, pr_url: str) -> None:
+        """Transition to in-review: add status:in-review, drop status:claimed,
+        and comment the PR link."""
+        self.gh.edit_issue(
+            number,
+            add_labels=["status:in-review"],
+            remove_labels=["status:claimed"],
+        )
+        self.gh.comment_issue(number, f"PR: {pr_url}")
+
+    def mark_blocked(self, number: int, *, reason: str) -> None:
+        """Transition to blocked: add status:blocked, drop status:claimed, and
+        comment the blocker (surfaced for the owner, never silently dropped)."""
+        self.gh.edit_issue(
+            number,
+            add_labels=["status:blocked"],
+            remove_labels=["status:claimed"],
+        )
+        self.gh.comment_issue(number, f"Blocked: {reason}")

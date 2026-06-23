@@ -49,6 +49,17 @@ class _FakeGh:
                 i["state"] = "closed"
         self.closed.append((number, comment))
 
+    def edit_issue(self, number, *, body=None, add_labels=(), remove_labels=()):
+        for issue in self.issues:
+            if issue["number"] == number:
+                names = {lb["name"] for lb in issue.get("labels", [])}
+                names -= set(remove_labels)
+                names |= set(add_labels)
+                issue["labels"] = [{"name": n} for n in names]
+                if body is not None:
+                    issue["body"] = body
+                return
+
 
 def _item(sig="canary:betika:structure"):
     return WorkItem(
@@ -127,3 +138,33 @@ def test_constructor_ensure_true_creates_missing_labels():
     Queue(gh)  # ensure=True by default
     assert "stream:maintenance" in gh._labels
     assert "status:claimed" in gh._labels
+
+
+def test_claim_adds_status_claimed_label():
+    gh = _FakeGh()
+    n = gh.create_issue(title="t", body="b", labels=["stream:directed"])
+    Queue(gh, ensure=False).claim(n)
+    names = {lb["name"] for lb in gh.issues[0]["labels"]}
+    assert "status:claimed" in names
+
+
+def test_mark_in_review_swaps_labels_and_comments_pr():
+    gh = _FakeGh()
+    n = gh.create_issue(
+        title="t", body="b", labels=["stream:directed", "status:claimed"]
+    )
+    Queue(gh, ensure=False).mark_in_review(n, "https://github.com/o/r/pull/9")
+    names = {lb["name"] for lb in gh.issues[0]["labels"]}
+    assert "status:in-review" in names and "status:claimed" not in names
+    assert any("pull/9" in body for _, body in gh.comments)
+
+
+def test_mark_blocked_swaps_labels_and_comments_reason():
+    gh = _FakeGh()
+    n = gh.create_issue(
+        title="t", body="b", labels=["stream:directed", "status:claimed"]
+    )
+    Queue(gh, ensure=False).mark_blocked(n, reason="needs an API key")
+    names = {lb["name"] for lb in gh.issues[0]["labels"]}
+    assert "status:blocked" in names and "status:claimed" not in names
+    assert any("needs an API key" in body for _, body in gh.comments)
