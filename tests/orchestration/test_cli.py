@@ -61,7 +61,7 @@ async def _runner_drift(sport, *, seed=None, max_candidates=3, clients=None):
                 missing_canonicals=["1x2_ft"], structure_ok=False,
             ),
             BookCheck(
-                platform="betika", status="drift", reason="missing",
+                platform="msport", status="drift", reason="missing",
                 expected_canonicals=["1x2_ft"], resolved_canonicals=[],
                 missing_canonicals=["1x2_ft"], structure_ok=True,
             ),
@@ -99,7 +99,7 @@ def test_sync_canary_json_opens_issue_and_exits_zero(capsys):
     assert code == 0
     out = json.loads(capsys.readouterr().out)
     assert "canary:betika:structure" in out["opened"]
-    assert "canary:betika:missing:1x2_ft" in out["opened"]
+    assert "canary:msport:missing:1x2_ft" in out["opened"]
     # The issue was actually filed on the fake.
     assert any(i["title"] for i in gh.issues)
 
