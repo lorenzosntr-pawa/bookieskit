@@ -24,7 +24,7 @@ class _FakeGh:
         self._labels.append(name)
 
     def list_issues(self, *, labels=(), state="open"):
-        out = [i for i in self.issues if i.get("state", "open") == state]
+        out = [i for i in self.issues if state == "all" or i.get("state", "open") == state]
         for label in labels:
             out = [
                 i for i in out
@@ -254,3 +254,34 @@ def test_sync_canary_json_includes_slack_text(capsys):
         payload["opened"], payload["updated"], payload["closed"], "soccer"
     )
     assert payload["slack_text"]  # non-empty: there was drift
+
+
+def test_chatops_intake_opens_then_is_idempotent(capsys):
+    gh = _FakeGh()
+    code = cli.run(
+        cli.build_parser().parse_args([
+            "chatops", "intake", "--author", "U1", "--ts", "1.0001",
+            "--title", "Add Stake", "--summary", "Support Stake", "--json",
+        ]),
+        gh=gh,
+    )
+    assert code == 0
+    out = json.loads(capsys.readouterr().out)
+    assert out["status"] == "opened"
+    first = out["number"]
+    assert "Add Stake" in out["slack_text"]
+
+    # Re-running with the same ts must NOT open a second issue.
+    code = cli.run(
+        cli.build_parser().parse_args([
+            "chatops", "intake", "--author", "U1", "--ts", "1.0001",
+            "--title", "Add Stake", "--summary", "Support Stake", "--json",
+        ]),
+        gh=gh,
+    )
+    assert code == 0
+    out = json.loads(capsys.readouterr().out)
+    assert out["status"] == "duplicate"
+    assert out["number"] == first
+    assert out["slack_text"] == ""
+    assert len(gh.issues) == 1  # no second issue was filed

@@ -14,6 +14,7 @@ from dataclasses import asdict
 from typing import Any, Awaitable, Callable
 
 from bookieskit.devtools.canary import CanaryReport, run_canary
+from bookieskit.orchestration import chatops
 from bookieskit.orchestration import notify as notify_fmt
 from bookieskit.orchestration.gh import GhRunner
 from bookieskit.orchestration.labels import ensure_labels
@@ -61,6 +62,16 @@ def build_parser() -> argparse.ArgumentParser:
     p_blocked.add_argument("number", type=int)
     p_blocked.add_argument("--reason", required=True)
     p_blocked.add_argument("--json", action="store_true", dest="as_json")
+
+    p_chatops = sub.add_parser("chatops")
+    chsub = p_chatops.add_subparsers(dest="chatops_cmd", required=True)
+
+    p_intake = chsub.add_parser("intake")
+    p_intake.add_argument("--author", required=True)
+    p_intake.add_argument("--ts", required=True)
+    p_intake.add_argument("--title", required=True)
+    p_intake.add_argument("--summary", required=True)
+    p_intake.add_argument("--json", action="store_true", dest="as_json")
 
     p_notify = sub.add_parser(
         "notify", help="Format a Slack-cockpit message (prints text to stdout)"
@@ -219,6 +230,32 @@ def _mark_blocked(args: argparse.Namespace, gh: GhRunner) -> int:
     return 0
 
 
+def _chatops_intake(args: argparse.Namespace, gh: GhRunner) -> int:
+    signature = chatops.ticket_signature(args.ts)
+    queue = Queue(gh)
+    existing = queue.find_any_by_signature(signature)  # open OR closed
+    if existing is not None:
+        number = existing["number"]
+        _emit(
+            {"status": "duplicate", "number": number, "slack_text": ""},
+            args.as_json,
+            [f"duplicate #{number}"],
+        )
+        return 0
+    item = chatops.build_ticket(args.author, args.ts, args.title, args.summary)
+    number, _ = queue.open_or_update(item, note="(filed from Slack #tickets)")
+    _emit(
+        {
+            "status": "opened",
+            "number": number,
+            "slack_text": chatops.queued(number, args.title),
+        },
+        args.as_json,
+        [f"opened #{number}", chatops.queued(number, args.title)],
+    )
+    return 0
+
+
 def run(
     args: argparse.Namespace,
     *,
@@ -243,6 +280,8 @@ def run(
         return _mark_in_review(args, gh)
     if args.cmd == "mark-blocked":
         return _mark_blocked(args, gh)
+    if args.cmd == "chatops" and args.chatops_cmd == "intake":
+        return _chatops_intake(args, gh)
     raise SystemExit(f"unknown command {args.cmd!r}")
 
 
