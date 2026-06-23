@@ -103,9 +103,18 @@ Posting is best-effort and agent-driven, not automatic: the `#releases` note is
 the agent running `notify release ...` and posting after a release — `devtools
 release` itself does not post (it cannot import the `orchestration` notifier).
 
-## Next slice — ChatOps
+## ChatOps (`#tickets` write path)
 
-A later sub-project adds a `#tickets` channel where you (or a teammate) type a
-request — "add bookmaker X" — and the loop files it as a `stream:directed`
-issue and builds it, plus `approve`/`status`/`pause` commands. This setup is
-the foundation for it.
+Create a `#tickets` channel and invite the bot (`/invite @BookiesKit Agent`).
+Then edit **`.chatops.json`** in the repo root:
+
+- `approvers` — the Slack **user IDs** allowed to `approve <pr>` (merge from
+  Slack). Find an ID in Slack: click a profile → ⋮ → *Copy member ID* (`U…`).
+- `tickets_channel` — the `#tickets` **channel ID** (channel details → bottom,
+  `C…`).
+
+These are non-secret and committed (so "who can merge" is auditable). Usage:
+- Type a request in `#tickets` (e.g. "add Stake bookmaker") → the next cycle
+  files a `stream:directed` Issue and replies with the queued number.
+- Reply `approve <pr#>` to merge a green loop PR; anyone not in `approvers`, a
+  red-CI PR, or a non-loop PR gets a rejection instead of a merge.

@@ -46,3 +46,13 @@ from `sync-canary --json`) and post via the Slack `post_message` MCP tool — bu
 **only if that MCP tool is available**. With no Slack MCP configured, every
 loop/canary/release runs unchanged and Slack stays quiet. A notification
 failure must never fail a build, block a cycle, or leave an item half-done.
+
+## ChatOps (best-effort write path)
+
+The cockpit is two-way. From `#tickets` the owner (or a teammate) types a work
+request — it becomes a `stream:directed` Issue — and `approve <pr>` merges that
+PR from Slack. Merge authority is the **allowlist** in `.chatops.json` (Slack
+user IDs; non-secret, committed, change via PR) and is gated by three
+guardrails: authorized author, CI green, and the PR closes a `status:in-review`
+Issue. This does NOT relax the supervised gate — `approve` is the human's
+decision, relocated to Slack; the agent never auto-merges.
