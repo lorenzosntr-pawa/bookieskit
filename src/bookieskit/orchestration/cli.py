@@ -73,6 +73,12 @@ def build_parser() -> argparse.ArgumentParser:
     p_intake.add_argument("--summary", required=True)
     p_intake.add_argument("--json", action="store_true", dest="as_json")
 
+    p_approve = chsub.add_parser("approve")
+    p_approve.add_argument("--pr", type=int, required=True)
+    p_approve.add_argument("--author", required=True)
+    p_approve.add_argument("--config", default=".chatops.json")
+    p_approve.add_argument("--json", action="store_true", dest="as_json")
+
     p_notify = sub.add_parser(
         "notify", help="Format a Slack-cockpit message (prints text to stdout)"
     )
@@ -256,6 +262,42 @@ def _chatops_intake(args: argparse.Namespace, gh: GhRunner) -> int:
     return 0
 
 
+def _chatops_reject(args: argparse.Namespace, reason: str) -> int:
+    _emit(
+        {"status": "rejected", "pr": args.pr, "reason": reason,
+         "slack_text": chatops.rejected(args.pr, reason)},
+        args.as_json,
+        [f"rejected PR #{args.pr}: {reason}"],
+    )
+    return 0  # a rejection is a normal handled outcome, not an error
+
+
+def _chatops_approve(args: argparse.Namespace, gh: GhRunner) -> int:
+    config = chatops.load_config(args.config)
+    approvers = tuple(config.get("approvers", []))
+    if not chatops.is_authorized(args.author, approvers):
+        return _chatops_reject(args, "not authorized")
+    view = gh.pr_view(args.pr)
+    if not chatops.checks_pass(view.get("statusCheckRollup") or []):
+        return _chatops_reject(args, "CI not green")
+    closes = chatops.closing_issue_numbers(view)
+    in_review = {
+        i["number"]
+        for i in gh.list_issues(state="open", labels=("status:in-review",))
+    }
+    matched = next((n for n in closes if n in in_review), None)
+    if matched is None:
+        return _chatops_reject(args, "not a loop PR")
+    gh.merge_pr(args.pr, method="squash")
+    _emit(
+        {"status": "merged", "pr": args.pr, "issue": matched,
+         "slack_text": chatops.merged(args.pr, matched)},
+        args.as_json,
+        [f"merged PR #{args.pr} (closes #{matched})"],
+    )
+    return 0
+
+
 def run(
     args: argparse.Namespace,
     *,
@@ -282,6 +324,8 @@ def run(
         return _mark_blocked(args, gh)
     if args.cmd == "chatops" and args.chatops_cmd == "intake":
         return _chatops_intake(args, gh)
+    if args.cmd == "chatops" and args.chatops_cmd == "approve":
+        return _chatops_approve(args, gh)
     raise SystemExit(f"unknown command {args.cmd!r}")
 
 
