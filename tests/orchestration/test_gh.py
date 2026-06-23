@@ -123,3 +123,29 @@ def test_run_raises_on_nonzero_exit(monkeypatch):
     gh = GhRunner()
     with pytest.raises(subprocess.CalledProcessError):
         gh.list_labels()
+
+
+def test_pr_view_requests_the_guardrail_fields(monkeypatch):
+    gh, rec = _gh(
+        monkeypatch,
+        stdout='{"state":"OPEN","body":"Closes #8","statusCheckRollup":'
+        '[{"conclusion":"SUCCESS"}],"closingIssuesReferences":[{"number":8}]}',
+    )
+    view = gh.pr_view(11)
+    assert view["closingIssuesReferences"][0]["number"] == 8
+    argv = rec.calls[0]
+    assert argv[:3] == ["gh", "pr", "view"]
+    assert "11" in argv
+    json_idx = argv.index("--json")
+    fields = argv[json_idx + 1]
+    for field in ("state", "body", "statusCheckRollup", "closingIssuesReferences"):
+        assert field in fields
+
+
+def test_merge_pr_squashes_by_default(monkeypatch):
+    gh, rec = _gh(monkeypatch)
+    gh.merge_pr(11)
+    argv = rec.calls[0]
+    assert argv[:3] == ["gh", "pr", "merge"]
+    assert "11" in argv
+    assert "--squash" in argv
