@@ -14,6 +14,7 @@ from dataclasses import asdict
 from typing import Any, Awaitable, Callable
 
 from bookieskit.devtools.canary import CanaryReport, run_canary
+from bookieskit.orchestration import notify as notify_fmt
 from bookieskit.orchestration.gh import GhRunner
 from bookieskit.orchestration.labels import ensure_labels
 from bookieskit.orchestration.maintenance import sync_canary
@@ -61,6 +62,31 @@ def build_parser() -> argparse.ArgumentParser:
     p_blocked.add_argument("--reason", required=True)
     p_blocked.add_argument("--json", action="store_true", dest="as_json")
 
+    p_notify = sub.add_parser(
+        "notify", help="Format a Slack-cockpit message (prints text to stdout)"
+    )
+    nsub = p_notify.add_subparsers(dest="notify_kind", required=True)
+
+    n_started = nsub.add_parser("cycle-started")
+    n_started.add_argument("--number", type=int, required=True)
+    n_started.add_argument("--title", required=True)
+    n_started.add_argument("--stream", required=True)
+
+    n_pr = nsub.add_parser("cycle-pr")
+    n_pr.add_argument("--number", type=int, required=True)
+    n_pr.add_argument("--title", required=True)
+    n_pr.add_argument("--pr", required=True)
+
+    n_blocked = nsub.add_parser("cycle-blocked")
+    n_blocked.add_argument("--number", type=int, required=True)
+    n_blocked.add_argument("--title", required=True)
+    n_blocked.add_argument("--reason", required=True)
+
+    n_release = nsub.add_parser("release")
+    n_release.add_argument("--tag", required=True)
+    n_release.add_argument("--current", required=True)
+    n_release.add_argument("--new", required=True)
+
     return parser
 
 
@@ -71,6 +97,22 @@ def _emit(obj: Any, as_json: bool, text_lines: list[str]) -> None:
         print("\n".join(text_lines))
 
 
+def _notify(args: argparse.Namespace) -> int:
+    """Pure formatting — no gh/network. Prints the Slack message text."""
+    if args.notify_kind == "cycle-started":
+        text = notify_fmt.cycle_started(args.number, args.title, args.stream)
+    elif args.notify_kind == "cycle-pr":
+        text = notify_fmt.cycle_pr(args.number, args.title, args.pr)
+    elif args.notify_kind == "cycle-blocked":
+        text = notify_fmt.cycle_blocked(args.number, args.title, args.reason)
+    elif args.notify_kind == "release":
+        text = notify_fmt.release_announcement(args.tag, args.current, args.new)
+    else:  # argparse `required=True` makes this unreachable
+        return 2
+    print(text)
+    return 0
+
+
 def _sync_canary(args: argparse.Namespace, runner: CanaryRunner,
                  gh: GhRunner) -> int:
     try:
@@ -79,8 +121,14 @@ def _sync_canary(args: argparse.Namespace, runner: CanaryRunner,
     except Exception as exc:  # canary/gh operational failure -> exit 1
         print(f"sync-canary failed: {exc}")
         return 1
+    payload = {
+        **asdict(result),
+        "slack_text": notify_fmt.canary_digest(
+            result.opened, result.updated, result.closed, args.sport
+        ),
+    }
     _emit(
-        asdict(result),
+        payload,
         args.as_json,
         [f"sync-canary opened={len(result.opened)} "
          f"updated={len(result.updated)} closed={len(result.closed)} "
@@ -177,6 +225,8 @@ def run(
     runner: CanaryRunner = run_canary,
     gh: GhRunner | None = None,
 ) -> int:
+    if args.cmd == "notify":
+        return _notify(args)
     if gh is None:
         gh = GhRunner()
     if args.cmd == "sync-canary":
