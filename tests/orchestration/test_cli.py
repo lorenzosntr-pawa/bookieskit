@@ -44,6 +44,24 @@ class _FakeGh:
     def comment_issue(self, number, body):
         self.comments.append((number, body))
 
+    def edit_issue(
+        self,
+        number,
+        *,
+        body=None,
+        add_labels=(),
+        remove_labels=(),
+    ):
+        for i in self.issues:
+            if i["number"] == number:
+                for lb in add_labels:
+                    if lb not in {lbl["name"] for lbl in i["labels"]}:
+                        i["labels"].append({"name": lb})
+                i["labels"] = [
+                    lbl for lbl in i["labels"]
+                    if lbl["name"] not in remove_labels
+                ]
+
     def close_issue(self, number, *, comment=None):
         for i in self.issues:
             if i["number"] == number:
@@ -165,3 +183,58 @@ def test_sync_canary_maps_canary_error_to_exit_one(capsys):
         runner=_boom, gh=_FakeGh(),
     )
     assert code == 1
+
+
+from bookieskit.orchestration.workitem import WorkItem, render_body  # noqa: E402
+
+
+def test_next_returns_top_item_json(capsys):
+    gh = _FakeGh()
+    gh.create_issue(title="fix betika", body=render_body(WorkItem(
+        signature="canary:betika:structure", stream="stream:maintenance",
+        title="fix betika", summary="s")), labels=["stream:maintenance"])
+    gh.create_issue(title="add stake", body=render_body(WorkItem(
+        signature="directed:add-stake", stream="stream:directed",
+        title="add stake", summary="s")), labels=["stream:directed"])
+    args = cli.build_parser().parse_args(["next", "--json"])
+    code = cli.run(args, gh=gh)
+    assert code == 0
+    out = json.loads(capsys.readouterr().out)
+    assert out["stream"] == "stream:directed"  # directed beats maintenance
+    assert out["title"] == "add stake"
+
+
+def test_next_emits_null_when_queue_empty(capsys):
+    args = cli.build_parser().parse_args(["next", "--json"])
+    code = cli.run(args, gh=_FakeGh())
+    assert code == 0
+    assert json.loads(capsys.readouterr().out) is None
+
+
+def test_claim_adds_label(capsys):
+    gh = _FakeGh()
+    n = gh.create_issue(title="t", body="b", labels=["stream:directed"])
+    code = cli.run(cli.build_parser().parse_args(["claim", str(n)]), gh=gh)
+    assert code == 0
+    assert "status:claimed" in {lb["name"] for lb in gh.issues[0]["labels"]}
+
+
+def test_mark_in_review_requires_pr_and_transitions(capsys):
+    gh = _FakeGh()
+    n = gh.create_issue(
+        title="t", body="b", labels=["stream:directed", "status:claimed"])
+    code = cli.run(cli.build_parser().parse_args(
+        ["mark-in-review", str(n), "--pr", "https://x/pull/3"]), gh=gh)
+    assert code == 0
+    names = {lb["name"] for lb in gh.issues[0]["labels"]}
+    assert "status:in-review" in names and "status:claimed" not in names
+
+
+def test_mark_blocked_requires_reason(capsys):
+    gh = _FakeGh()
+    n = gh.create_issue(
+        title="t", body="b", labels=["stream:directed", "status:claimed"])
+    code = cli.run(cli.build_parser().parse_args(
+        ["mark-blocked", str(n), "--reason", "no key"]), gh=gh)
+    assert code == 0
+    assert "status:blocked" in {lb["name"] for lb in gh.issues[0]["labels"]}

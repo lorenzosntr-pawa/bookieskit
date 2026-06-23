@@ -18,6 +18,7 @@ STREAM_LABELS: dict[str, tuple[str, str]] = {
 STATUS_LABELS: dict[str, tuple[str, str]] = {
     "status:claimed": ("fbca04", "An agent is working this"),
     "status:in-review": ("0052cc", "PR open, awaiting review"),
+    "status:blocked": ("e4e669", "Build blocked — needs owner input"),
 }
 
 ALL_LABELS: dict[str, tuple[str, str]] = {**STREAM_LABELS, **STATUS_LABELS}
