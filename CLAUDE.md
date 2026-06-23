@@ -30,3 +30,19 @@ Live-bookmaker operations (the canary, the scout, harness live probes, any netwo
 - `src/` stays 100% ruff-clean (`ruff check .`). Run tests with `.venv/Scripts/python.exe -m pytest` locally; CI uses bare `pytest`/`ruff` on 3.11/3.12/3.13.
 - Version lives in BOTH `pyproject.toml` and `src/bookieskit/__init__.py` and must stay in sync (CI enforces). Ship with `python -m bookieskit.devtools release` (promotes the CHANGELOG `[Unreleased]` section, bumps both files, tags; `--push` fires the GitHub Release).
 - Library/market-facing changes get a curated `## [Unreleased]` CHANGELOG entry.
+
+## Slack cockpit (best-effort)
+
+The owner watches the company through a Slack workspace (the korotovsky
+`slack-mcp-server` MCP — see `docs/SLACK_SETUP.md`). Three channels:
+
+- `#agent-activity` — cycle progress: claimed → PR opened → blocked.
+- `#canary-alerts` — canary drift digests (only when drift changed).
+- `#releases` — release announcements.
+
+Posting is **best-effort**: format messages with
+`python -m bookieskit.orchestration notify <kind> ...` (or read `slack_text`
+from `sync-canary --json`) and post via the Slack `post_message` MCP tool — but
+**only if that MCP tool is available**. With no Slack MCP configured, every
+loop/canary/release runs unchanged and Slack stays quiet. A notification
+failure must never fail a build, block a cycle, or leave an item half-done.
