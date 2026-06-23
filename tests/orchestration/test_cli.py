@@ -321,6 +321,7 @@ def test_chatops_approve_rejects_unauthorized(capsys, tmp_path):
 def test_chatops_approve_rejects_when_ci_not_green(capsys, tmp_path):
     gh = _FakeGh()
     gh.pr_views = {11: {
+        "state": "OPEN",
         "statusCheckRollup": [{"conclusion": "FAILURE"}],
         "closingIssuesReferences": [{"number": 8}],
     }}
@@ -331,9 +332,24 @@ def test_chatops_approve_rejects_when_ci_not_green(capsys, tmp_path):
     assert gh.merged == []
 
 
+def test_chatops_approve_rejects_pr_not_open(capsys, tmp_path):
+    gh = _FakeGh()  # an already-merged PR -> clean rejection, not a gh error
+    gh.pr_views = {11: {
+        "state": "MERGED",
+        "statusCheckRollup": [{"conclusion": "SUCCESS"}],
+        "closingIssuesReferences": [{"number": 8}],
+    }}
+    code = cli.run(_approve_args(11, "U1", _chatops_config(tmp_path)), gh=gh)
+    assert code == 0
+    out = json.loads(capsys.readouterr().out)
+    assert out["status"] == "rejected" and "not open" in out["reason"]
+    assert gh.merged == []
+
+
 def test_chatops_approve_rejects_non_loop_pr(capsys, tmp_path):
     gh = _FakeGh()  # closes #8, but no in-review issue exists
     gh.pr_views = {11: {
+        "state": "OPEN",
         "statusCheckRollup": [{"conclusion": "SUCCESS"}],
         "closingIssuesReferences": [{"number": 8}],
     }}
@@ -351,6 +367,7 @@ def test_chatops_approve_merges_green_loop_pr(capsys, tmp_path):
         "state": "open",
     }])
     gh.pr_views = {11: {
+        "state": "OPEN",
         "statusCheckRollup": [{"conclusion": "SUCCESS"}],
         "closingIssuesReferences": [{"number": 8}],
     }}

@@ -278,6 +278,8 @@ def _chatops_approve(args: argparse.Namespace, gh: GhRunner) -> int:
     if not chatops.is_authorized(args.author, approvers):
         return _chatops_reject(args, "not authorized")
     view = gh.pr_view(args.pr)
+    if view.get("state") != "OPEN":
+        return _chatops_reject(args, "PR is not open")
     if not chatops.checks_pass(view.get("statusCheckRollup") or []):
         return _chatops_reject(args, "CI not green")
     closes = chatops.closing_issue_numbers(view)
