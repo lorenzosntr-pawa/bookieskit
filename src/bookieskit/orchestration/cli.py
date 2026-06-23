@@ -17,6 +17,7 @@ from bookieskit.devtools.canary import CanaryReport, run_canary
 from bookieskit.orchestration.gh import GhRunner
 from bookieskit.orchestration.labels import ensure_labels
 from bookieskit.orchestration.maintenance import sync_canary
+from bookieskit.orchestration.priority import next_work_item
 from bookieskit.orchestration.queue import Queue
 from bookieskit.orchestration.workitem import parse_meta
 
@@ -42,6 +43,23 @@ def build_parser() -> argparse.ArgumentParser:
     p_list = qsub.add_parser("list")
     p_list.add_argument("--stream", default=None)
     p_list.add_argument("--json", action="store_true", dest="as_json")
+
+    p_next = sub.add_parser("next")
+    p_next.add_argument("--json", action="store_true", dest="as_json")
+
+    p_claim = sub.add_parser("claim")
+    p_claim.add_argument("number", type=int)
+    p_claim.add_argument("--json", action="store_true", dest="as_json")
+
+    p_review = sub.add_parser("mark-in-review")
+    p_review.add_argument("number", type=int)
+    p_review.add_argument("--pr", required=True)
+    p_review.add_argument("--json", action="store_true", dest="as_json")
+
+    p_blocked = sub.add_parser("mark-blocked")
+    p_blocked.add_argument("number", type=int)
+    p_blocked.add_argument("--reason", required=True)
+    p_blocked.add_argument("--json", action="store_true", dest="as_json")
 
     return parser
 
@@ -106,6 +124,53 @@ def _queue_list(args: argparse.Namespace, gh: GhRunner) -> int:
     return 0
 
 
+def _next(args: argparse.Namespace, gh: GhRunner) -> int:
+    issues = Queue(gh, ensure=False).list_open()
+    item = next_work_item(issues)
+    if item is None:
+        _emit(None, args.as_json, ["queue empty"])
+        return 0
+    stream = next(
+        (lb["name"] for lb in item.get("labels", [])
+         if lb["name"].startswith("stream:")),
+        "",
+    )
+    out = {
+        "number": item["number"],
+        "title": item.get("title", ""),
+        "stream": stream,
+        "signature": parse_meta(item.get("body", "")).get("signature", ""),
+    }
+    _emit(out, args.as_json, [f"#{out['number']} [{stream}] {out['title']}"])
+    return 0
+
+
+def _claim(args: argparse.Namespace, gh: GhRunner) -> int:
+    Queue(gh).claim(args.number)
+    _emit({"claimed": args.number}, args.as_json, [f"claimed #{args.number}"])
+    return 0
+
+
+def _mark_in_review(args: argparse.Namespace, gh: GhRunner) -> int:
+    Queue(gh).mark_in_review(args.number, args.pr)
+    _emit(
+        {"in_review": args.number, "pr": args.pr},
+        args.as_json,
+        [f"in-review #{args.number} -> {args.pr}"],
+    )
+    return 0
+
+
+def _mark_blocked(args: argparse.Namespace, gh: GhRunner) -> int:
+    Queue(gh).mark_blocked(args.number, reason=args.reason)
+    _emit(
+        {"blocked": args.number, "reason": args.reason},
+        args.as_json,
+        [f"blocked #{args.number}: {args.reason}"],
+    )
+    return 0
+
+
 def run(
     args: argparse.Namespace,
     *,
@@ -120,6 +185,14 @@ def run(
         return _ensure_labels(args, gh)
     if args.cmd == "queue" and args.queue_cmd == "list":
         return _queue_list(args, gh)
+    if args.cmd == "next":
+        return _next(args, gh)
+    if args.cmd == "claim":
+        return _claim(args, gh)
+    if args.cmd == "mark-in-review":
+        return _mark_in_review(args, gh)
+    if args.cmd == "mark-blocked":
+        return _mark_blocked(args, gh)
     raise SystemExit(f"unknown command {args.cmd!r}")
 
 
