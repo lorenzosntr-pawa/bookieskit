@@ -1,0 +1,4 @@
+{
+  "approvers": ["U-REPLACE-WITH-APPROVER-SLACK-USER-ID"],
+  "tickets_channel": "C-REPLACE-WITH-TICKETS-CHANNEL-ID"
+}

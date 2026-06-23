@@ -14,6 +14,7 @@ from dataclasses import asdict
 from typing import Any, Awaitable, Callable
 
 from bookieskit.devtools.canary import CanaryReport, run_canary
+from bookieskit.orchestration import chatops
 from bookieskit.orchestration import notify as notify_fmt
 from bookieskit.orchestration.gh import GhRunner
 from bookieskit.orchestration.labels import ensure_labels
@@ -61,6 +62,22 @@ def build_parser() -> argparse.ArgumentParser:
     p_blocked.add_argument("number", type=int)
     p_blocked.add_argument("--reason", required=True)
     p_blocked.add_argument("--json", action="store_true", dest="as_json")
+
+    p_chatops = sub.add_parser("chatops")
+    chsub = p_chatops.add_subparsers(dest="chatops_cmd", required=True)
+
+    p_intake = chsub.add_parser("intake")
+    p_intake.add_argument("--author", required=True)
+    p_intake.add_argument("--ts", required=True)
+    p_intake.add_argument("--title", required=True)
+    p_intake.add_argument("--summary", required=True)
+    p_intake.add_argument("--json", action="store_true", dest="as_json")
+
+    p_approve = chsub.add_parser("approve")
+    p_approve.add_argument("--pr", type=int, required=True)
+    p_approve.add_argument("--author", required=True)
+    p_approve.add_argument("--config", default=".chatops.json")
+    p_approve.add_argument("--json", action="store_true", dest="as_json")
 
     p_notify = sub.add_parser(
         "notify", help="Format a Slack-cockpit message (prints text to stdout)"
@@ -219,6 +236,70 @@ def _mark_blocked(args: argparse.Namespace, gh: GhRunner) -> int:
     return 0
 
 
+def _chatops_intake(args: argparse.Namespace, gh: GhRunner) -> int:
+    signature = chatops.ticket_signature(args.ts)
+    queue = Queue(gh)
+    existing = queue.find_any_by_signature(signature)  # open OR closed
+    if existing is not None:
+        number = existing["number"]
+        _emit(
+            {"status": "duplicate", "number": number, "slack_text": ""},
+            args.as_json,
+            [f"duplicate #{number}"],
+        )
+        return 0
+    item = chatops.build_ticket(args.author, args.ts, args.title, args.summary)
+    number, _ = queue.open_or_update(item, note="(filed from Slack #tickets)")
+    _emit(
+        {
+            "status": "opened",
+            "number": number,
+            "slack_text": chatops.queued(number, args.title),
+        },
+        args.as_json,
+        [f"opened #{number}", chatops.queued(number, args.title)],
+    )
+    return 0
+
+
+def _chatops_reject(args: argparse.Namespace, reason: str) -> int:
+    _emit(
+        {"status": "rejected", "pr": args.pr, "reason": reason,
+         "slack_text": chatops.rejected(args.pr, reason)},
+        args.as_json,
+        [f"rejected PR #{args.pr}: {reason}"],
+    )
+    return 0  # a rejection is a normal handled outcome, not an error
+
+
+def _chatops_approve(args: argparse.Namespace, gh: GhRunner) -> int:
+    config = chatops.load_config(args.config)
+    approvers = tuple(config.get("approvers", []))
+    if not chatops.is_authorized(args.author, approvers):
+        return _chatops_reject(args, "not authorized")
+    view = gh.pr_view(args.pr)
+    if view.get("state") != "OPEN":
+        return _chatops_reject(args, "PR is not open")
+    if not chatops.checks_pass(view.get("statusCheckRollup") or []):
+        return _chatops_reject(args, "CI not green")
+    closes = chatops.closing_issue_numbers(view)
+    in_review = {
+        i["number"]
+        for i in gh.list_issues(state="open", labels=("status:in-review",))
+    }
+    matched = next((n for n in closes if n in in_review), None)
+    if matched is None:
+        return _chatops_reject(args, "not a loop PR")
+    gh.merge_pr(args.pr, method="squash")
+    _emit(
+        {"status": "merged", "pr": args.pr, "issue": matched,
+         "slack_text": chatops.merged(args.pr, matched)},
+        args.as_json,
+        [f"merged PR #{args.pr} (closes #{matched})"],
+    )
+    return 0
+
+
 def run(
     args: argparse.Namespace,
     *,
@@ -243,6 +324,10 @@ def run(
         return _mark_in_review(args, gh)
     if args.cmd == "mark-blocked":
         return _mark_blocked(args, gh)
+    if args.cmd == "chatops" and args.chatops_cmd == "intake":
+        return _chatops_intake(args, gh)
+    if args.cmd == "chatops" and args.chatops_cmd == "approve":
+        return _chatops_approve(args, gh)
     raise SystemExit(f"unknown command {args.cmd!r}")
 
 

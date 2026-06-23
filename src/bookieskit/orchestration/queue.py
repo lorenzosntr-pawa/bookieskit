@@ -25,6 +25,14 @@ class Queue:
                 return issue
         return None
 
+    def find_any_by_signature(self, signature: str) -> dict | None:
+        """Like find_open_by_signature but across ALL issue states (open +
+        closed) — so a ticket already built/merged is never re-filed."""
+        for issue in self.gh.list_issues(state="all"):
+            if parse_meta(issue.get("body", "")).get("signature") == signature:
+                return issue
+        return None
+
     def open_or_update(
         self, item: WorkItem, *, note: str
     ) -> tuple[int, str]:

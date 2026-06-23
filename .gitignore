@@ -22,3 +22,4 @@ sp_routes.json
 betika_home.html
 betika_init.js
 .playwright-mcp/
+.mcp.json

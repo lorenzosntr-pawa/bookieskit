@@ -5,9 +5,9 @@ from bookieskit.orchestration.workitem import WorkItem, render_body
 class _FakeGh:
     """In-memory GhRunner fake: tracks open issues + records mutations."""
 
-    def __init__(self):
-        self.issues: list[dict] = []
-        self._next = 1
+    def __init__(self, issues=None):
+        self.issues: list[dict] = list(issues or [])
+        self._next = max((i["number"] for i in self.issues), default=0) + 1
         self.comments: list[tuple[int, str]] = []
         self.closed: list[tuple[int, str | None]] = []
         # Pretend every label already exists so ensure_labels is a no-op.
@@ -23,7 +23,7 @@ class _FakeGh:
         self._labels.append(name)
 
     def list_issues(self, *, labels=(), state="open"):
-        out = [i for i in self.issues if i["state"] == state]
+        out = [i for i in self.issues if state == "all" or i["state"] == state]
         for label in labels:
             out = [
                 i for i in out
@@ -168,3 +168,20 @@ def test_mark_blocked_swaps_labels_and_comments_reason():
     names = {lb["name"] for lb in gh.issues[0]["labels"]}
     assert "status:blocked" in names and "status:claimed" not in names
     assert any("needs an API key" in body for _, body in gh.comments)
+
+
+def test_find_any_by_signature_matches_closed_issues():
+    from bookieskit.orchestration.queue import Queue
+    from bookieskit.orchestration.workitem import WorkItem, render_body
+    # Reuse this module's fake gh; a CLOSED issue with our signature must match.
+    body = render_body(WorkItem(
+        signature="directed:slack:1.0001", stream="stream:directed",
+        title="t", summary="s",
+    ))
+    gh = _FakeGh(issues=[{
+        "number": 3, "title": "t", "body": body,
+        "labels": [{"name": "stream:directed"}], "state": "closed",
+    }])
+    q = Queue(gh, ensure=False)
+    assert q.find_any_by_signature("directed:slack:1.0001")["number"] == 3
+    assert q.find_any_by_signature("directed:slack:9.9999") is None

@@ -11,20 +11,25 @@ Read the operating contract in the repo-root `CLAUDE.md` first — it binds this
 
 ## The cycle
 
-1. **Pick the top item.** Run
+1. **ChatOps intake (best-effort — only if a Slack `post_message`/history MCP tool is available).** Read new `#tickets` messages (the channel id is in `.chatops.json`). For each message:
+   - If it parses as `approve <pr>`: run `.venv/Scripts/python.exe -m bookieskit.orchestration chatops approve --pr <pr> --author <slack-user-id> --json` and post the returned `slack_text` to `#tickets`. (The CLI enforces the allowlist + CI-green + loop-PR guardrails and merges with squash on success; a rejection is reported, never a merge.)
+   - Else if it's a work request: distil a short title + one-paragraph summary, run `.venv/Scripts/python.exe -m bookieskit.orchestration chatops intake --author <slack-user-id> --ts <message-ts> --title "<title>" --summary "<summary>" --json`, and post the returned `slack_text` to `#tickets` **only when `status` is `opened`** (skip `duplicate`).
+   - Else (chatter): ignore.
+   If no Slack MCP is available, skip this entire step and proceed. ChatOps is never on the critical path.
+2. **Pick the top item.** Run
    `.venv/Scripts/python.exe -m bookieskit.orchestration next --json`
    - If the output is `null` → report "queue empty — nothing to do" and END the cycle.
    - Otherwise parse `{number, title, stream, signature}`.
-2. **Claim it.** `.venv/Scripts/python.exe -m bookieskit.orchestration claim <number>`. This sets `status:claimed` so no other cycle double-works it. Then (best-effort, see Notifications) post `cycle-started` to `#agent-activity`.
-3. **Build it — autonomously — per stream:**
+3. **Claim it.** `.venv/Scripts/python.exe -m bookieskit.orchestration claim <number>`. This sets `status:claimed` so no other cycle double-works it. Then (best-effort, see Notifications) post `cycle-started` to `#agent-activity`.
+4. **Build it — autonomously — per stream:**
    - `stream:directed` (owner asked for a bookmaker / market / feature): `superpowers:brainstorming` → `writing-plans` → `subagent-driven-development` → `requesting-code-review`. There is NO human to answer clarifying questions: **decide-and-document** — make the most reasonable assumption, proceed, and record every assumption in the PR body. Use `llm-council` for genuine stakes/tradeoffs.
    - `stream:maintenance` (canary drift): `superpowers:systematic-debugging` → fix → TDD tests → `requesting-code-review`.
    - `stream:expansion` / `stream:capability`: spec → plan → `subagent-driven-development`.
    - Always: query `graphify` for the structural map before touching code; apply Karpathy principles; keep `src/` ruff-clean; TDD.
    - Work on a **per-Issue branch** (subagent-driven isolates work). NEVER commit to `main`.
-4. **Open the PR** against `main`, body starting with `Closes #<number>`, summarizing what you built and listing every assumption you made for the supervised review. Then (best-effort, see Notifications) post `cycle-pr` to `#agent-activity`.
-5. **Mark in-review.** `.venv/Scripts/python.exe -m bookieskit.orchestration mark-in-review <number> --pr <pr-url>`.
-6. **Report** the outcome (item, branch, PR url, key assumptions) and STOP. The PR awaits the owner's approval; you do NOT merge.
+5. **Open the PR** against `main`, body starting with `Closes #<number>`, summarizing what you built and listing every assumption you made for the supervised review. Then (best-effort, see Notifications) post `cycle-pr` to `#agent-activity`.
+6. **Mark in-review.** `.venv/Scripts/python.exe -m bookieskit.orchestration mark-in-review <number> --pr <pr-url>`.
+7. **Report** the outcome (item, branch, PR url, key assumptions) and STOP. The PR awaits the owner's approval; you do NOT merge.
 
 ## If you hit a genuine blocker
 
@@ -60,3 +65,13 @@ When the MCP is available, post at these checkpoints (format the text with the
 If a post fails (MCP error mid-cycle), record it in the cycle report and
 continue — a notification failure must never fail the build or leave an item
 half-processed.
+
+## ChatOps (best-effort write path)
+
+`#tickets` is the owner's inbox: typed work requests become `stream:directed`
+Issues (attributed to the Slack author, deduped by message ts), and
+`approve <pr>` merges a PR — **but only** when the author is in the
+`.chatops.json` allowlist, the PR's CI is green, and the PR closes a
+`status:in-review` Issue (a loop PR). The agent NEVER merges on its own; an
+`approve` from Slack is the owner's decision. All of it is best-effort: with no
+Slack MCP, the ChatOps step is skipped and the loop runs unchanged.

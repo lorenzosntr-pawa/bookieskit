@@ -94,3 +94,16 @@ class GhRunner:
             "--description",
             description,
         )
+
+    def pr_view(self, pr: int) -> dict:
+        out = self._run(
+            "pr",
+            "view",
+            str(pr),
+            "--json",
+            "state,body,statusCheckRollup,closingIssuesReferences",
+        )
+        return json.loads(out)
+
+    def merge_pr(self, pr: int, *, method: str = "squash") -> None:
+        self._run("pr", "merge", str(pr), f"--{method}")

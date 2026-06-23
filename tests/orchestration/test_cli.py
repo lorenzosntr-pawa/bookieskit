@@ -16,6 +16,8 @@ class _FakeGh:
             "stream:maintenance", "stream:expansion", "stream:directed",
             "stream:capability", "status:claimed", "status:in-review",
         ]
+        self.pr_views = {}
+        self.merged = []
 
     def list_labels(self):
         return list(self._labels)
@@ -24,7 +26,7 @@ class _FakeGh:
         self._labels.append(name)
 
     def list_issues(self, *, labels=(), state="open"):
-        out = [i for i in self.issues if i.get("state", "open") == state]
+        out = [i for i in self.issues if state == "all" or i.get("state", "open") == state]
         for label in labels:
             out = [
                 i for i in out
@@ -67,6 +69,12 @@ class _FakeGh:
             if i["number"] == number:
                 i["state"] = "closed"
         self.closed.append((number, comment))
+
+    def pr_view(self, pr):
+        return self.pr_views[pr]
+
+    def merge_pr(self, pr, *, method="squash"):
+        self.merged.append((pr, method))
 
 
 async def _runner_drift(sport, *, seed=None, max_candidates=3, clients=None):
@@ -254,3 +262,118 @@ def test_sync_canary_json_includes_slack_text(capsys):
         payload["opened"], payload["updated"], payload["closed"], "soccer"
     )
     assert payload["slack_text"]  # non-empty: there was drift
+
+
+def test_chatops_intake_opens_then_is_idempotent(capsys):
+    gh = _FakeGh()
+    code = cli.run(
+        cli.build_parser().parse_args([
+            "chatops", "intake", "--author", "U1", "--ts", "1.0001",
+            "--title", "Add Stake", "--summary", "Support Stake", "--json",
+        ]),
+        gh=gh,
+    )
+    assert code == 0
+    out = json.loads(capsys.readouterr().out)
+    assert out["status"] == "opened"
+    first = out["number"]
+    assert "Add Stake" in out["slack_text"]
+
+    # Re-running with the same ts must NOT open a second issue.
+    code = cli.run(
+        cli.build_parser().parse_args([
+            "chatops", "intake", "--author", "U1", "--ts", "1.0001",
+            "--title", "Add Stake", "--summary", "Support Stake", "--json",
+        ]),
+        gh=gh,
+    )
+    assert code == 0
+    out = json.loads(capsys.readouterr().out)
+    assert out["status"] == "duplicate"
+    assert out["number"] == first
+    assert out["slack_text"] == ""
+    assert len(gh.issues) == 1  # no second issue was filed
+
+
+def _approve_args(pr, author, config):
+    return cli.build_parser().parse_args([
+        "chatops", "approve", "--pr", str(pr), "--author", author,
+        "--config", str(config), "--json",
+    ])
+
+
+def _chatops_config(tmp_path, approvers=("U1",)):
+    import json as _json
+    p = tmp_path / ".chatops.json"
+    p.write_text(_json.dumps({"approvers": list(approvers), "tickets_channel": "C1"}))
+    return p
+
+
+def test_chatops_approve_rejects_unauthorized(capsys, tmp_path):
+    gh = _FakeGh()  # no pr_view/merge needed; auth fails first
+    code = cli.run(_approve_args(11, "U999", _chatops_config(tmp_path)), gh=gh)
+    assert code == 0
+    out = json.loads(capsys.readouterr().out)
+    assert out["status"] == "rejected" and "authorized" in out["reason"]
+    assert gh.merged == []  # never merged
+
+
+def test_chatops_approve_rejects_when_ci_not_green(capsys, tmp_path):
+    gh = _FakeGh()
+    gh.pr_views = {11: {
+        "state": "OPEN",
+        "statusCheckRollup": [{"conclusion": "FAILURE"}],
+        "closingIssuesReferences": [{"number": 8}],
+    }}
+    code = cli.run(_approve_args(11, "U1", _chatops_config(tmp_path)), gh=gh)
+    assert code == 0
+    out = json.loads(capsys.readouterr().out)
+    assert out["status"] == "rejected" and "CI" in out["reason"]
+    assert gh.merged == []
+
+
+def test_chatops_approve_rejects_pr_not_open(capsys, tmp_path):
+    gh = _FakeGh()  # an already-merged PR -> clean rejection, not a gh error
+    gh.pr_views = {11: {
+        "state": "MERGED",
+        "statusCheckRollup": [{"conclusion": "SUCCESS"}],
+        "closingIssuesReferences": [{"number": 8}],
+    }}
+    code = cli.run(_approve_args(11, "U1", _chatops_config(tmp_path)), gh=gh)
+    assert code == 0
+    out = json.loads(capsys.readouterr().out)
+    assert out["status"] == "rejected" and "not open" in out["reason"]
+    assert gh.merged == []
+
+
+def test_chatops_approve_rejects_non_loop_pr(capsys, tmp_path):
+    gh = _FakeGh()  # closes #8, but no in-review issue exists
+    gh.pr_views = {11: {
+        "state": "OPEN",
+        "statusCheckRollup": [{"conclusion": "SUCCESS"}],
+        "closingIssuesReferences": [{"number": 8}],
+    }}
+    code = cli.run(_approve_args(11, "U1", _chatops_config(tmp_path)), gh=gh)
+    assert code == 0
+    out = json.loads(capsys.readouterr().out)
+    assert out["status"] == "rejected" and "loop" in out["reason"]
+    assert gh.merged == []
+
+
+def test_chatops_approve_merges_green_loop_pr(capsys, tmp_path):
+    gh = _FakeGh(issues=[{
+        "number": 8, "title": "Add Stake", "body": "b",
+        "labels": [{"name": "stream:directed"}, {"name": "status:in-review"}],
+        "state": "open",
+    }])
+    gh.pr_views = {11: {
+        "state": "OPEN",
+        "statusCheckRollup": [{"conclusion": "SUCCESS"}],
+        "closingIssuesReferences": [{"number": 8}],
+    }}
+    code = cli.run(_approve_args(11, "U1", _chatops_config(tmp_path)), gh=gh)
+    assert code == 0
+    out = json.loads(capsys.readouterr().out)
+    assert out["status"] == "merged" and out["issue"] == 8
+    assert gh.merged == [(11, "squash")]  # merged once, squash
+    assert "#11" in out["slack_text"]
