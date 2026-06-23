@@ -238,3 +238,19 @@ def test_mark_blocked_requires_reason(capsys):
         ["mark-blocked", str(n), "--reason", "no key"]), gh=gh)
     assert code == 0
     assert "status:blocked" in {lb["name"] for lb in gh.issues[0]["labels"]}
+
+
+def test_sync_canary_json_includes_slack_text(capsys):
+    from bookieskit.orchestration.notify import canary_digest
+    gh = _FakeGh()
+    code = cli.run(
+        cli.build_parser().parse_args(["sync-canary", "--sport", "soccer", "--json"]),
+        runner=_runner_drift, gh=gh,
+    )
+    assert code == 0
+    payload = json.loads(capsys.readouterr().out)
+    assert "slack_text" in payload
+    assert payload["slack_text"] == canary_digest(
+        payload["opened"], payload["updated"], payload["closed"], "soccer"
+    )
+    assert payload["slack_text"]  # non-empty: there was drift

@@ -1,3 +1,4 @@
+from bookieskit.orchestration.cli import main
 from bookieskit.orchestration.notify import (
     canary_digest,
     cycle_blocked,
@@ -64,3 +65,49 @@ def test_release_announcement_shows_tag_and_transition():
     assert "0.16.0" in msg
     assert "0.17.0" in msg
     assert "*Released" in msg
+
+
+# --- CLI tests ---
+
+
+def test_cli_notify_cycle_started(capsys):
+    rc = main([
+        "notify", "cycle-started",
+        "--number", "42", "--title", "add Stake", "--stream", "stream:directed",
+    ])
+    out = capsys.readouterr().out.strip()
+    assert rc == 0
+    assert "#42" in out and "directed" in out and "add Stake" in out
+    assert "stream:" not in out
+
+
+def test_cli_notify_cycle_pr(capsys):
+    rc = main([
+        "notify", "cycle-pr",
+        "--number", "42", "--title", "add Stake",
+        "--pr", "https://github.com/o/r/pull/12",
+    ])
+    out = capsys.readouterr().out.strip()
+    assert rc == 0
+    assert "https://github.com/o/r/pull/12" in out
+    assert "awaiting review" in out.lower()
+
+
+def test_cli_notify_cycle_blocked(capsys):
+    rc = main([
+        "notify", "cycle-blocked",
+        "--number", "42", "--title", "add Stake", "--reason", "no creds",
+    ])
+    out = capsys.readouterr().out.strip()
+    assert rc == 0
+    assert "blocked" in out.lower() and "no creds" in out
+
+
+def test_cli_notify_release(capsys):
+    rc = main([
+        "notify", "release",
+        "--tag", "v0.17.0", "--current", "0.16.0", "--new", "0.17.0",
+    ])
+    out = capsys.readouterr().out.strip()
+    assert rc == 0
+    assert "v0.17.0" in out and "0.16.0" in out and "0.17.0" in out
