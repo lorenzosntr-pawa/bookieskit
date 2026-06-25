@@ -12,6 +12,7 @@ import datetime
 import json
 import os
 import subprocess
+import sys
 import time
 import urllib.parse
 import urllib.request
@@ -19,7 +20,7 @@ from dataclasses import asdict
 from typing import Any, Awaitable, Callable
 
 from bookieskit.devtools.canary import CanaryReport, run_canary
-from bookieskit.orchestration import chatops, control
+from bookieskit.orchestration import appauth, chatops, control
 from bookieskit.orchestration import notify as notify_fmt
 from bookieskit.orchestration import runner as tick_runner
 from bookieskit.orchestration import status as status_mod
@@ -145,6 +146,11 @@ def build_parser() -> argparse.ArgumentParser:
     p_gate.add_argument("--config", default=".chatops.json")
     p_gate.add_argument("--watermark", default=".orchestrator/slack-watermark")
     p_gate.add_argument("--json", action="store_true", dest="as_json")
+
+    p_token = sub.add_parser("token")
+    p_token.add_argument("--identity", default=".orchestrator/identity.json")
+    p_token.add_argument("--key", default=".orchestrator/app.pem")
+    p_token.add_argument("--cache", default=".orchestrator/app-token.json")
 
     p_notify = sub.add_parser(
         "notify", help="Format a Slack-cockpit message (prints text to stdout)"
@@ -377,7 +383,11 @@ def _chatops_approve(args: argparse.Namespace, gh: GhRunner) -> int:
     matched = next((n for n in closes if n in in_review), None)
     if matched is None:
         return _chatops_reject(args, "not a loop PR")
-    gh.merge_pr(args.pr, method="squash")
+    owner = _read_owner_token()
+    if owner is None:
+        return _chatops_reject(args, "no owner token configured")
+    gh.review_approve(args.pr, token=owner)
+    gh.merge_pr(args.pr, method="squash", token=owner)
     _emit(
         {"status": "merged", "pr": args.pr, "issue": matched,
          "slack_text": chatops.merged(args.pr, matched)},
@@ -551,6 +561,51 @@ def _read_token() -> str | None:
         return None
 
 
+def _read_owner_token(path: str = ".orchestrator/owner-token") -> str | None:
+    try:
+        with open(path, encoding="utf-8") as handle:
+            return handle.read().strip() or None
+    except OSError:
+        return None
+
+
+def _token(args: argparse.Namespace) -> int:
+    """Print a GitHub App installation token, reusing a cached one while it has
+    > 2 min of life left (avoids minting on every 1-min tick)."""
+    try:
+        with open(args.cache, encoding="utf-8") as f:
+            cached = json.load(f)
+        if appauth.token_is_fresh(cached, now=time.time()):
+            print(cached["token"])
+            return 0
+    except (OSError, ValueError):
+        pass
+    try:
+        with open(args.identity, encoding="utf-8") as f:
+            ident = json.load(f)
+        with open(args.key, encoding="utf-8") as f:
+            pem = f.read()
+        app_id = ident["app_id"]
+        installation_id = ident["installation_id"]
+    except (OSError, ValueError, KeyError) as exc:
+        # missing/unreadable files OR malformed identity.json are all
+        # "unprovisioned" — report cleanly, never a traceback (the tick falls
+        # back to the ambient gh login on a non-zero exit).
+        print(f"token: not provisioned ({exc})", file=sys.stderr)
+        return 1
+    res = appauth.mint_installation_token(
+        app_id=app_id,
+        private_key_pem=pem,
+        installation_id=installation_id,
+        now=int(time.time()),
+    )
+    os.makedirs(os.path.dirname(args.cache) or ".", exist_ok=True)
+    with open(args.cache, "w", encoding="utf-8") as f:
+        json.dump(res, f)
+    print(res["token"])
+    return 0
+
+
 def _gate(args: argparse.Namespace, gh: GhRunner) -> int:
     from bookieskit.orchestration import gate
     # 1) queue actionable?
@@ -619,6 +674,8 @@ def run(
         return _notify(args)
     if args.cmd == "lock":
         return _lock(args)
+    if args.cmd == "token":
+        return _token(args)
     if gh is None:
         gh = GhRunner()
     if args.cmd == "gate":

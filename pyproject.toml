@@ -18,6 +18,9 @@ dev = [
     "respx>=0.21",
     "ruff>=0.5",
 ]
+orchestration = [
+    "pyjwt[crypto]>=2.8",
+]
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
