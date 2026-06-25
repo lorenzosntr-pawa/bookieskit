@@ -6,13 +6,14 @@ from bookieskit.markets.types import OutcomeMapping
 def test_registry_loads_builtins_by_default():
     registry = MarketRegistry()
     markets = registry.list_markets()
-    # 12 soccer markets: 1X2, O/U, BTTS, DC, 1X2 1Up, 1X2 2Up, next_goal_ft,
+    # 14 soccer markets: 1X2, O/U, BTTS, DC, 1X2 1Up, 1X2 2Up, next_goal_ft,
     #                    home_over_under_ft, away_over_under_ft,
     #                    2way_handicap_ft, 1x2_corners_ft,
-    #                    over_under_corners_ft
+    #                    over_under_corners_ft, 1x2_bookings_ft,
+    #                    over_under_bookings_ft
     # 3 basketball markets: moneyline, O/U, handicap (basketball_ft suffix)
     # 4 tennis markets: moneyline, O/U games, O/U sets, handicap games
-    assert len(markets) == 19
+    assert len(markets) == 21
 
 
 def test_registry_no_builtins():
@@ -82,8 +83,8 @@ def test_registry_add_custom_mapping():
             ),
         },
     )
-    # 19 builtins (12 soccer + 3 basketball + 4 tennis) + draw_no_bet
-    assert len(registry.list_markets()) == 20
+    # 21 builtins (14 soccer + 3 basketball + 4 tennis) + draw_no_bet
+    assert len(registry.list_markets()) == 22
     mapping = registry.get_by_canonical("draw_no_bet_ft")
     assert mapping is not None
     assert mapping.betpawa_id == "4703"
@@ -349,9 +350,11 @@ def test_registry_has_1x2_corners_ft():
     assert m.betpawa_id == "1096787"
     assert m.sportybet_id == "162"
     assert m.msport_id == "162"
-    # Not exposed in captured fixtures — left None pending a live probe.
-    assert m.bet9ja_key is None
-    assert m.betway_id is None
+    # Bet9ja S_TEAMCORNER ("Corners - 1X2", most corners FT) + Betway
+    # "Corner 1X2" mapped from captured fixtures in #22.
+    assert m.bet9ja_key == "S_TEAMCORNER"
+    assert m.betway_id == "Corner 1X2"
+    # Still not exposed in captured fixtures — None pending a live probe.
     assert m.sportpesa_id is None
     assert m.betika_id is None
     assert set(m.outcomes.keys()) == {"home", "draw", "away"}
@@ -360,10 +363,17 @@ def test_registry_has_1x2_corners_ft():
     assert m.outcomes["away"].betpawa == "2"
     assert m.outcomes["home"].sportybet == "Home"
     assert m.outcomes["home"].msport == "Home"
+    assert m.outcomes["home"].bet9ja == "1"
+    assert m.outcomes["draw"].bet9ja == "X"
+    assert m.outcomes["away"].bet9ja == "2"
+    assert m.outcomes["home"].betway == "__HOME__"
+    assert m.outcomes["away"].betway == "__AWAY__"
     # Platform-id lookups
     assert r.get_by_platform_id("betpawa", "1096787") is m
     assert r.get_by_platform_id("sportybet", "162") is m
     assert r.get_by_platform_id("msport", "162") is m
+    assert r.get_by_platform_id("bet9ja", "S_TEAMCORNER") is m
+    assert r.get_by_platform_id("betway", "Corner 1X2") is m
 
 
 def test_registry_has_over_under_corners_ft():
@@ -380,7 +390,10 @@ def test_registry_has_over_under_corners_ft():
     assert m.bet9ja_key == "S_OUCORNERS"
     assert m.outcomes["over"].bet9ja == "O"
     assert m.outcomes["under"].bet9ja == "U"
-    assert m.betway_id is None
+    # Betway "Total Corners" mapped from captured fixture in #22.
+    assert m.betway_id == "Total Corners"
+    assert m.outcomes["over"].betway == "Over"
+    assert m.outcomes["under"].betway == "Under"
     assert m.sportpesa_id is None
     assert m.betika_id is None
     assert set(m.outcomes.keys()) == {"over", "under"}
@@ -390,6 +403,53 @@ def test_registry_has_over_under_corners_ft():
     assert r.get_by_platform_id("betpawa", "1096783") is m
     assert r.get_by_platform_id("sportybet", "166") is m
     assert r.get_by_platform_id("msport", "166") is m
+    assert r.get_by_platform_id("betway", "Total Corners") is m
+
+
+def test_registry_has_1x2_bookings_ft():
+    from bookieskit.markets.registry import MarketRegistry
+    r = MarketRegistry()
+    m = r.get_by_canonical("1x2_bookings_ft")
+    assert m is not None
+    assert m.name == "1X2 Bookings - Full Time"
+    assert m.parameterized is False
+    assert m.sport == "soccer"
+    # Only Betway is offline-mineable (#22); the rest need an in-region
+    # live capture (increment 2b) and stay None rather than being guessed.
+    assert m.betway_id == "Booking 1X2"
+    assert m.betpawa_id is None
+    assert m.sportybet_id is None
+    assert m.bet9ja_key is None
+    assert m.msport_id is None
+    assert m.sportpesa_id is None
+    assert m.betika_id is None
+    assert set(m.outcomes.keys()) == {"home", "draw", "away"}
+    assert m.outcomes["home"].betway == "__HOME__"
+    assert m.outcomes["draw"].betway == "Draw"
+    assert m.outcomes["away"].betway == "__AWAY__"
+    assert r.get_by_platform_id("betway", "Booking 1X2") is m
+
+
+def test_registry_has_over_under_bookings_ft():
+    from bookieskit.markets.registry import MarketRegistry
+    r = MarketRegistry()
+    m = r.get_by_canonical("over_under_bookings_ft")
+    assert m is not None
+    assert m.name == "Over/Under Bookings - Full Time"
+    assert m.parameterized is True
+    assert m.sport == "soccer"
+    # "Total Bookings" = O/U on card count (not "Total Booking Points").
+    assert m.betway_id == "Total Bookings"
+    assert m.betpawa_id is None
+    assert m.sportybet_id is None
+    assert m.bet9ja_key is None
+    assert m.msport_id is None
+    assert m.sportpesa_id is None
+    assert m.betika_id is None
+    assert set(m.outcomes.keys()) == {"over", "under"}
+    assert m.outcomes["over"].betway == "Over"
+    assert m.outcomes["under"].betway == "Under"
+    assert r.get_by_platform_id("betway", "Total Bookings") is m
 
 
 def test_registry_has_2way_handicap_ft():
