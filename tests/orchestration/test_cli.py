@@ -535,3 +535,33 @@ def test_design_ok_unauthorized_no_change(capsys, tmp_path):
     assert json.loads(capsys.readouterr().out)["status"] == "rejected"
     labels = {lb["name"] for lb in gh.issues[0]["labels"]}
     assert "status:designing" in labels  # unchanged
+
+
+def test_chatops_status_emits_snapshot(capsys):
+    gh = _FakeGh(issues=[{"number": 21, "title": "cards", "state": "open",
+        "labels": [{"name": "stream:directed"}, {"name": "status:ready"}]}])
+    code = cli.run(cli.build_parser().parse_args(["chatops", "status", "--json"]), gh=gh)
+    assert code == 0
+    out = json.loads(capsys.readouterr().out)
+    assert "#21" in out["slack_text"] and "ready" in out["slack_text"]
+
+
+def test_status_board_posts_then_updates(tmp_path, capsys, monkeypatch):
+    gh = _FakeGh()
+    calls = []
+    def fake_post(method, **kw):
+        calls.append(method)
+        return {"ok": True, "ts": "111.0", "channel": "C_STATUS"}
+    monkeypatch.setattr(cli, "_read_token", lambda: "xoxb-test")
+    monkeypatch.setattr(cli, "_slack_post", fake_post)
+    cfg = tmp_path / "c.json"
+    cfg.write_text(json.dumps({"approvers": ["U1"], "tickets_channel": "C1",
+                               "status_channel": "C_STATUS"}))
+    sf = tmp_path / "board.json"
+    args = ["status", "board", "--config", str(cfg), "--state-file", str(sf)]
+    # first run -> postMessage (no stored id)
+    assert cli.run(cli.build_parser().parse_args(args), gh=gh) == 0
+    assert calls == ["chat.postMessage"]
+    # second run -> chat.update (id now stored)
+    assert cli.run(cli.build_parser().parse_args(args), gh=gh) == 0
+    assert calls[-1] == "chat.update"

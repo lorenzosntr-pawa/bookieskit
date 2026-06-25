@@ -1,4 +1,5 @@
 {
   "approvers": ["U0BCB59NC83"],
-  "tickets_channel": "C0BCMUJE11A"
+  "tickets_channel": "C0BCMUJE11A",
+  "status_channel": "C-REPLACE-WITH-STATUS-CHANNEL-ID"
 }

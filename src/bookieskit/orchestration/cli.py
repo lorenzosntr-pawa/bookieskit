@@ -8,6 +8,7 @@ the canary, ``gh`` for the GhRunner) keep every test offline.
 
 import argparse
 import asyncio
+import datetime
 import json
 import os
 import subprocess
@@ -21,6 +22,7 @@ from bookieskit.devtools.canary import CanaryReport, run_canary
 from bookieskit.orchestration import chatops, control
 from bookieskit.orchestration import notify as notify_fmt
 from bookieskit.orchestration import runner as tick_runner
+from bookieskit.orchestration import status as status_mod
 from bookieskit.orchestration.gh import GhRunner
 from bookieskit.orchestration.labels import ensure_labels
 from bookieskit.orchestration.maintenance import sync_canary
@@ -67,6 +69,15 @@ def build_parser() -> argparse.ArgumentParser:
     p_blocked.add_argument("number", type=int)
     p_blocked.add_argument("--reason", required=True)
     p_blocked.add_argument("--json", action="store_true", dest="as_json")
+
+    p_status = sub.add_parser("status")
+    ssub = p_status.add_subparsers(dest="status_cmd", required=True)
+    p_board = ssub.add_parser("board")
+    p_board.add_argument("--config", default=".chatops.json")
+    p_board.add_argument(
+        "--state-file", default=".orchestrator/status-board.json", dest="state_file"
+    )
+    p_board.add_argument("--json", action="store_true", dest="as_json")
 
     p_chatops = sub.add_parser("chatops")
     chsub = p_chatops.add_subparsers(dest="chatops_cmd", required=True)
@@ -116,6 +127,9 @@ def build_parser() -> argparse.ArgumentParser:
     p_council.add_argument("--author", required=True)
     p_council.add_argument("--config", default=".chatops.json")
     p_council.add_argument("--json", action="store_true", dest="as_json")
+
+    p_cstatus = chsub.add_parser("status")
+    p_cstatus.add_argument("--json", action="store_true", dest="as_json")
 
     p_lock = sub.add_parser("lock")
     lsub = p_lock.add_subparsers(dest="lock_cmd", required=True)
@@ -459,9 +473,71 @@ def _chatops_council(args: argparse.Namespace, gh: GhRunner) -> int:
     return 0
 
 
+def _status_board(args: argparse.Namespace, gh: GhRunner) -> int:
+    try:
+        cfg = chatops.load_config(args.config)
+    except Exception:
+        cfg = {}
+    channel = cfg.get("status_channel")
+    token = _read_token()
+    if not (channel and token):
+        _emit({"posted": False, "reason": "no status_channel/token"}, args.as_json,
+              ["status board skipped"])
+        return 0
+    try:
+        st = status_mod.gather_state(gh, paused=control.is_paused(gh))
+        now = datetime.datetime.now().strftime("%H:%M")
+        text = status_mod.render_board(st, now=now)
+        board = {}
+        try:
+            with open(args.state_file, encoding="utf-8") as f:
+                board = json.load(f)
+        except (OSError, ValueError):
+            board = {}
+        if board.get("ts"):
+            r = _slack_post("chat.update", token=token, channel=board["channel"],
+                            ts=board["ts"], text=text)
+            if not r.get("ok"):  # message gone -> repost
+                r = _slack_post(
+                    "chat.postMessage", token=token, channel=channel, text=text
+                )
+        else:
+            r = _slack_post("chat.postMessage", token=token, channel=channel, text=text)
+        if r.get("ok") and r.get("ts"):
+            os.makedirs(os.path.dirname(args.state_file) or ".", exist_ok=True)
+            with open(args.state_file, "w", encoding="utf-8") as f:
+                json.dump({"channel": r.get("channel", channel), "ts": r["ts"]}, f)
+        _emit({"posted": bool(r.get("ok"))}, args.as_json, ["status board updated"])
+    except Exception as exc:  # best-effort: never break the tick
+        _emit(
+            {"posted": False, "error": str(exc)},
+            args.as_json,
+            [f"status board error: {exc}"],
+        )
+    return 0
+
+
+def _chatops_status(args: argparse.Namespace, gh: GhRunner) -> int:
+    now = datetime.datetime.now().strftime("%H:%M")
+    st = status_mod.gather_state(gh, paused=control.is_paused(gh))
+    text = status_mod.render_board(st, now=now)
+    _emit({"slack_text": text}, args.as_json, [text])
+    return 0
+
+
 def _slack_get(method: str, *, token: str, **params) -> dict:
     url = "https://slack.com/api/" + method + "?" + urllib.parse.urlencode(params)
     req = urllib.request.Request(url, headers={"Authorization": "Bearer " + token})
+    with urllib.request.urlopen(req) as r:
+        return json.load(r)
+
+
+def _slack_post(method: str, *, token: str, **params) -> dict:
+    data = urllib.parse.urlencode(params).encode()
+    req = urllib.request.Request(
+        "https://slack.com/api/" + method, data=data,
+        headers={"Authorization": "Bearer " + token},
+    )
     with urllib.request.urlopen(req) as r:
         return json.load(r)
 
@@ -547,6 +623,8 @@ def run(
         gh = GhRunner()
     if args.cmd == "gate":
         return _gate(args, gh)
+    if args.cmd == "status":
+        return _status_board(args, gh)
     if args.cmd == "sync-canary":
         return _sync_canary(args, runner, gh)
     if args.cmd == "ensure-labels":
@@ -577,6 +655,8 @@ def run(
         return _chatops_design_no(args, gh)
     if args.cmd == "chatops" and args.chatops_cmd == "council":
         return _chatops_council(args, gh)
+    if args.cmd == "chatops" and args.chatops_cmd == "status":
+        return _chatops_status(args, gh)
     raise SystemExit(f"unknown command {args.cmd!r}")
 
 

@@ -18,6 +18,7 @@ Read the operating contract in the repo-root `CLAUDE.md` first — it binds this
    - If it parses as `design ok <n>`: run `.venv/Scripts/python.exe -m bookieskit.orchestration chatops design-ok --issue <n> --author <slack-user-id> --json` and post the returned `slack_text` to `#tickets`.
    - If it parses as `design no <n> <notes>`: run `.venv/Scripts/python.exe -m bookieskit.orchestration chatops design-no --issue <n> --author <slack-user-id> --notes "<notes>" --json` and post the returned `slack_text` to `#tickets`.
    - If it parses as `council <n>`: run `.venv/Scripts/python.exe -m bookieskit.orchestration chatops council --issue <n> --author <slack-user-id> --json` and post the returned `slack_text` to `#tickets`.
+   - If it parses as `status`: run `.venv/Scripts/python.exe -m bookieskit.orchestration chatops status --json` and post the returned `slack_text` to `#tickets`.
    - Else if it's a work request: distil a short title + one-paragraph summary, run `.venv/Scripts/python.exe -m bookieskit.orchestration chatops intake --author <slack-user-id> --ts <message-ts> --title "<title>" --summary "<summary>" --json`, and post the returned `slack_text` to `#tickets` **only when `status` is `opened`** (skip `duplicate`). The intake CLI files directed work-requests with `status:designing` automatically (so they are NOT buildable until the owner's `design ok`) — no separate labeling step is needed.
    - Else (chatter): ignore.
    If no Slack MCP is available, skip this entire step and proceed. ChatOps is never on the critical path.
@@ -68,6 +69,11 @@ Post cycle progress to Slack **only if** a Slack `post_message` MCP tool is
 available this session. If it is not, skip posting, note "Slack not configured
 — skipping notification," and proceed — posting is NEVER on the critical path
 and must never fail or delay the cycle.
+
+**Concise events only:** Post ONLY the concise formatted `slack_text` one-liners
+to `#agent-activity` (claimed / PR opened / blocked / merged). Never paste the
+cycle report, raw CLI output, or your reasoning into Slack — that goes to the
+tick log only. One short line per event, nothing more.
 
 When the MCP is available, post at these checkpoints (format the text with the
 `notify` CLI, then call the Slack `post_message` tool):

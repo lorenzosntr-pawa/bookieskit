@@ -11,15 +11,17 @@ $logDir = Join-Path $lockDir "logs"
 New-Item -ItemType Directory -Force -Path $logDir | Out-Null
 $log = Join-Path $logDir ("tick-" + (Get-Date -Format "yyyyMMdd") + ".log")
 function Log($m) { "$(Get-Date -Format o) $m" | Add-Content -Encoding utf8 $log }
+# Refresh the live #status board (cheap; keeps it current every tick).
+function Board { & $py -m bookieskit.orchestration status board | Out-Null }
 
 # Cheap gate: only wake the agent when there's something to do.
 $gateOut = & $py -m bookieskit.orchestration gate --json
 $run = $false
 try { $run = ([bool]((ConvertFrom-Json $gateOut).run)) } catch { $run = $true }  # parse fail -> run (fail open)
-if (-not $run) { Log "gate: idle - skipping"; exit 0 }
+if (-not $run) { Log "gate: idle - skipping"; Board; exit 0 }
 
 & $py -m bookieskit.orchestration lock acquire --path $lock | Out-Null
-if ($LASTEXITCODE -ne 0) { Log "busy - previous cycle still running; skipping tick"; exit 0 }
+if ($LASTEXITCODE -ne 0) { Log "busy - previous cycle still running; skipping tick"; Board; exit 0 }
 try {
     Log "tick start (gate: run)"
     & claude -p "/orchestrate" --settings (Join-Path $repo ".claude\orchestrator-settings.json") 2>&1 | Add-Content -Encoding utf8 $log
@@ -34,4 +36,5 @@ try {
 finally {
     & $py -m bookieskit.orchestration lock release --path $lock | Out-Null
     Log "lock released"
+    Board
 }
