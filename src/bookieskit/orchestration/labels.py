@@ -25,10 +25,16 @@ CONTROL_LABELS: dict[str, tuple[str, str]] = {
     "control:paused": ("b60205", "Orchestrator paused — autonomous building halted"),
 }
 
+DESIGN_LABELS: dict[str, tuple[str, str]] = {
+    "status:designing": ("c5def5", "Design in progress with owner in Slack"),
+    "status:ready": ("0e8a16", "Design approved — ready to build"),
+}
+
 ALL_LABELS: dict[str, tuple[str, str]] = {
     **STREAM_LABELS,
     **STATUS_LABELS,
     **CONTROL_LABELS,
+    **DESIGN_LABELS,
 }
 
 
