@@ -19,6 +19,10 @@ class _FakeGh:
         self.pr_views = {}
         self.reviewed = []
         self.merged = []
+        self._open_prs = []
+        self._pr_comments = {}
+        self._pr_reviews = {}
+        self.pr_comments_posted = []
 
     def list_labels(self):
         return list(self._labels)
@@ -79,6 +83,18 @@ class _FakeGh:
 
     def merge_pr(self, pr, *, method="squash", token=None):
         self.merged.append((pr, method, token))
+
+    def list_open_prs(self):
+        return list(self._open_prs)
+
+    def pr_comments(self, pr):
+        return list(self._pr_comments.get(pr, []))
+
+    def pr_reviews(self, pr):
+        return list(self._pr_reviews.get(pr, []))
+
+    def comment_pr(self, pr, body):
+        self.pr_comments_posted.append((pr, body))
 
 
 async def _runner_drift(sport, *, seed=None, max_candidates=3, clients=None):
@@ -684,3 +700,58 @@ def test_approve_rejects_when_no_owner_token(monkeypatch):
     args = argparse.Namespace(pr=11, author="U", config="x", as_json=True)
     rc = cli._chatops_approve(args, FakeGh())
     assert rc == 0  # a rejection is a handled outcome
+
+
+# ---------------------------------------------------------------------------
+# Task 3: pr-review pending + gate pr_awaiting
+# ---------------------------------------------------------------------------
+
+def _in_review_issue(n):
+    from bookieskit.orchestration.workitem import WorkItem, render_body
+    return {"number": n, "title": "t",
+            "body": render_body(WorkItem(signature="directed:x",
+                stream="stream:directed", title="t", summary="s")),
+            "labels": [{"name": "stream:directed"}, {"name": "status:in-review"}],
+            "state": "open"}
+
+
+def test_pr_review_pending_returns_pr_with_human_comment(capsys):
+    gh = _FakeGh(issues=[_in_review_issue(8)])
+    gh._open_prs = [{"number": 11, "headRefName": "feat/x",
+                     "closingIssuesReferences": [{"number": 8}]}]
+    gh._pr_comments = {11: [{"created_at": "2026-06-25T10:00:00Z",
+                             "user": {"type": "User"}, "body": "why?"}]}
+    code = cli.run(cli.build_parser().parse_args(["pr-review", "pending", "--json"]), gh=gh)
+    assert code == 0
+    out = json.loads(capsys.readouterr().out)
+    assert out["pr"] == 11 and out["issue"] == 8 and out["head"] == "feat/x"
+
+
+def test_pr_review_pending_null_when_newest_is_bot(capsys):
+    gh = _FakeGh(issues=[_in_review_issue(8)])
+    gh._open_prs = [{"number": 11, "headRefName": "feat/x",
+                     "closingIssuesReferences": [{"number": 8}]}]
+    gh._pr_comments = {11: [{"created_at": "2026-06-25T10:00:00Z",
+                             "user": {"type": "Bot"}, "body": "done"}]}
+    code = cli.run(cli.build_parser().parse_args(["pr-review", "pending", "--json"]), gh=gh)
+    out = json.loads(capsys.readouterr().out)
+    assert out is None
+
+
+def test_gate_reports_pr_reply(monkeypatch, capsys, tmp_path):
+    gh = _FakeGh(issues=[_in_review_issue(8)])
+    gh._open_prs = [{"number": 11, "headRefName": "feat/x",
+                     "closingIssuesReferences": [{"number": 8}]}]
+    gh._pr_comments = {11: [{"created_at": "2026-06-25T10:00:00Z",
+                             "user": {"type": "User"}, "body": "why?"}]}
+    # No Slack token -> new_ticket/designing skipped; queue has only an in-review
+    # item (not actionable). Point --config/--watermark at empty tmp paths.
+    args = cli.build_parser().parse_args(
+        ["gate", "--json", "--config", str(tmp_path / "c.json"),
+         "--watermark", str(tmp_path / "wm")])
+    code = cli.run(args, gh=gh)
+    assert code == 0
+    out = json.loads(capsys.readouterr().out)
+    assert out["run"] is True
+    assert out["reason"] == "pr-reply"
+    assert out["pr_awaiting"] == 11

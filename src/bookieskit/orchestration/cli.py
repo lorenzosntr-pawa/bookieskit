@@ -147,6 +147,11 @@ def build_parser() -> argparse.ArgumentParser:
     p_gate.add_argument("--watermark", default=".orchestrator/slack-watermark")
     p_gate.add_argument("--json", action="store_true", dest="as_json")
 
+    p_prr = sub.add_parser("pr-review")
+    prsub = p_prr.add_subparsers(dest="pr_review_cmd", required=True)
+    p_prpend = prsub.add_parser("pending")
+    p_prpend.add_argument("--json", action="store_true", dest="as_json")
+
     p_token = sub.add_parser("token")
     p_token.add_argument("--identity", default=".orchestrator/identity.json")
     p_token.add_argument("--key", default=".orchestrator/app.pem")
@@ -606,6 +611,39 @@ def _token(args: argparse.Namespace) -> int:
     return 0
 
 
+def _pr_awaiting_reply(gh: GhRunner) -> dict | None:
+    """The lowest-numbered open PR that closes a status:in-review Issue and whose
+    newest actionable event is human, with its thread. None if no PR owes a reply."""
+    from bookieskit.orchestration import gate
+    in_review = {
+        i["number"]
+        for i in Queue(gh, ensure=False).list_open()
+        if "status:in-review" in {lb["name"] for lb in i.get("labels", [])}
+    }
+    if not in_review:
+        return None
+    for pr in sorted(gh.list_open_prs(), key=lambda p: p["number"]):
+        closes = {r.get("number") for r in pr.get("closingIssuesReferences", [])}
+        match = next((n for n in closes if n in in_review), None)
+        if match is None:
+            continue
+        comments = gh.pr_comments(pr["number"])
+        reviews = gh.pr_reviews(pr["number"])
+        if gate.pr_reply_waiting(comments, reviews):
+            return {"pr": pr["number"], "issue": match,
+                    "head": pr.get("headRefName", ""),
+                    "comments": comments, "reviews": reviews}
+    return None
+
+
+def _pr_review_pending(args: argparse.Namespace, gh: GhRunner) -> int:
+    chosen = _pr_awaiting_reply(gh)
+    _emit(chosen, args.as_json,
+          [f"PR #{chosen['pr']} awaits reply (closes #{chosen['issue']})"
+           if chosen else "no PR awaiting reply"])
+    return 0
+
+
 def _gate(args: argparse.Namespace, gh: GhRunner) -> int:
     from bookieskit.orchestration import gate
     # 1) queue actionable?
@@ -654,12 +692,23 @@ def _gate(args: argparse.Namespace, gh: GhRunner) -> int:
                     break
         except Exception:
             pass  # Slack unreachable -> degrade to queue-only
+    # 4) an in-review PR with a human comment awaiting our reply?
+    pr_awaiting = None
+    try:
+        owed = _pr_awaiting_reply(gh)
+        pr_awaiting = owed["pr"] if owed else None
+    except Exception:
+        pr_awaiting = None
+    pr_reply = pr_awaiting is not None
+
     run = gate.should_run(queue_actionable=actionable, new_ticket=new_ticket,
-                          designing_reply=designing_reply)
-    reason = ("actionable-queue" if actionable else
+                          designing_reply=designing_reply, pr_reply=pr_reply)
+    reason = ("pr-reply" if pr_reply else
+              "actionable-queue" if actionable else
               "new-ticket" if new_ticket else
               "design-reply" if designing_reply else "idle")
-    _emit({"run": run, "reason": reason, "newest_ts": newest_ts}, args.as_json,
+    _emit({"run": run, "reason": reason, "newest_ts": newest_ts,
+           "pr_awaiting": pr_awaiting}, args.as_json,
           [f"run={run} ({reason})"])
     return 0
 
@@ -680,6 +729,8 @@ def run(
         gh = GhRunner()
     if args.cmd == "gate":
         return _gate(args, gh)
+    if args.cmd == "pr-review":
+        return _pr_review_pending(args, gh)
     if args.cmd == "status":
         return _status_board(args, gh)
     if args.cmd == "sync-canary":
