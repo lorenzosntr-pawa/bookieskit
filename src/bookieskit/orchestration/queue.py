@@ -34,7 +34,8 @@ class Queue:
         return None
 
     def open_or_update(
-        self, item: WorkItem, *, note: str
+        self, item: WorkItem, *, note: str,
+        extra_labels: tuple[str, ...] = (),
     ) -> tuple[int, str]:
         existing = self.find_open_by_signature(item.signature)
         if existing is not None:
@@ -44,7 +45,7 @@ class Queue:
         number = self.gh.create_issue(
             title=item.title,
             body=render_body(item),
-            labels=(item.stream,),
+            labels=(item.stream, *extra_labels),
         )
         return number, "opened"
 

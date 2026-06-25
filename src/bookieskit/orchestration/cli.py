@@ -316,7 +316,13 @@ def _chatops_intake(args: argparse.Namespace, gh: GhRunner) -> int:
         )
         return 0
     item = chatops.build_ticket(args.author, args.ts, args.title, args.summary)
-    number, _ = queue.open_or_update(item, note="(filed from Slack #tickets)")
+    # File directed tickets as status:designing so they are NOT buildable until
+    # the owner's `design ok` — the buildability gate is enforced here in code,
+    # not by a follow-up prose step.
+    number, _ = queue.open_or_update(
+        item, note="(filed from Slack #tickets)",
+        extra_labels=("status:designing",),
+    )
     _emit(
         {
             "status": "opened",
@@ -470,7 +476,7 @@ def _read_token() -> str | None:
 
 
 def _gate(args: argparse.Namespace, gh: GhRunner) -> int:
-    from bookieskit.orchestration import chatops, gate
+    from bookieskit.orchestration import gate
     # 1) queue actionable?
     try:
         actionable = next_work_item(Queue(gh, ensure=False).list_open()) is not None

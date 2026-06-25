@@ -278,6 +278,9 @@ def test_chatops_intake_opens_then_is_idempotent(capsys):
     assert out["status"] == "opened"
     first = out["number"]
     assert "Add Stake" in out["slack_text"]
+    # Filed as status:designing so it is NOT buildable until `design ok`.
+    labels = {lb["name"] for lb in gh.issues[0]["labels"]}
+    assert "stream:directed" in labels and "status:designing" in labels
 
     # Re-running with the same ts must NOT open a second issue.
     code = cli.run(

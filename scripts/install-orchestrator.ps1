@@ -1,4 +1,4 @@
-# Register (or refresh) the every-15-minutes orchestrator tick in Task Scheduler.
+# Register (or refresh) the every-1-minute orchestrator tick in Task Scheduler.
 $ErrorActionPreference = "Stop"
 $repo = Split-Path -Parent $PSScriptRoot
 $tick = Join-Path $repo "scripts\orchestrator-tick.ps1"

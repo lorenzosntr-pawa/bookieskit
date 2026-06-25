@@ -1,5 +1,6 @@
 # One unattended orchestrator tick: lock -> headless cycle -> release -> log.
-# Registered to run every 15 min by install-orchestrator.ps1.
+# Registered to run every 1 min by install-orchestrator.ps1; the cheap gate
+# decides whether to actually wake the agent (claude) this tick.
 $ErrorActionPreference = "Stop"
 $repo = Split-Path -Parent $PSScriptRoot
 Set-Location $repo
