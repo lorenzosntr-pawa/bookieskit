@@ -4,6 +4,13 @@ All notable changes to this project are documented in this file. The format foll
 
 ## [Unreleased]
 
+### Added
+- Two new canonical soccer **corner** markets (increment 1 of corner & booking mapping, #19):
+  - `1x2_corners_ft` — 1X2 on full-time corner count (home = more corners / draw = equal / away). Mapped on BetPawa (id=1096787, "Corner Count 1X2 - FT"), SportyBet (id=162, "Corners 1X2"), MSport (id=162, "Corner 1x2"). Ids and outcome labels taken from the real captured `prematch.json` fixtures, never guessed.
+  - `over_under_corners_ft` — Over/Under on full-time corner count (parameterized by line). Mapped on BetPawa (id=1096783, "Total Corners Over/Under - FT"), SportyBet (id=166, "Corners - Over/Under"), MSport (id=166, "Corners O/U"), and Bet9ja (key `S_OUCORNERS`, outcomes `O`/`U`).
+  - Coverage gaps awaiting a dedicated in-region live probe (increment 2): `1x2_corners_ft` on Bet9ja — its fixture has 1/X/2-shaped corner keys (`S_TEAMCORNER`, `S_HALFCORNER`, `S_CORNERHTFT`) but none can be confidently disambiguated to "full-time most-corners 1X2", so it stays `None` rather than guessing an id; both corner markets on Betway, SportPesa and Betika, whose fixtures contain no corner data at all; and the booking/card markets, which appear in none of the current fixtures.
+- Built-in canonical market count: 17 → 19 (12 soccer + 3 basketball + 4 tennis).
+
 ## [0.16.0] - 2026-06-23
 
 ### Added
