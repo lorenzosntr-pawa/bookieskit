@@ -38,6 +38,15 @@ EXPECTED_MATRIX: dict[str, dict[str, bool]] = {
         "sportpesa": False,
         "betika": False,
     },
+    "1x2_corners_ft": {
+        "betpawa": True,
+        "sportybet": True,
+        "bet9ja": False,
+        "betway": False,
+        "msport": True,
+        "sportpesa": False,
+        "betika": False,
+    },
     "1x2_ft": {
         "betpawa": True,
         "sportybet": True,
@@ -137,6 +146,15 @@ EXPECTED_MATRIX: dict[str, dict[str, bool]] = {
         "sportpesa": False,
         "betika": True,
     },
+    "over_under_corners_ft": {
+        "betpawa": True,
+        "sportybet": True,
+        "bet9ja": True,
+        "betway": False,
+        "msport": True,
+        "sportpesa": False,
+        "betika": False,
+    },
     "over_under_basketball_ft": {
         "betpawa": True,
         "sportybet": True,
@@ -177,16 +195,16 @@ EXPECTED_MATRIX: dict[str, dict[str, bool]] = {
 
 
 def test_coverage_matrix_golden_snapshot():
-    """coverage_matrix() must equal the frozen expected dict (all 17 markets)."""
+    """coverage_matrix() must equal the frozen expected dict (all 19 markets)."""
     matrix = coverage_matrix()
     assert matrix == EXPECTED_MATRIX, (
         "Registry changed — update EXPECTED_MATRIX if intentional."
     )
 
 
-def test_coverage_matrix_has_17_markets():
+def test_coverage_matrix_has_19_markets():
     matrix = coverage_matrix()
-    assert len(matrix) == 17
+    assert len(matrix) == 19
 
 
 def test_coverage_matrix_has_all_platforms():
@@ -265,6 +283,24 @@ _FIXTURE_ROOT = Path(__file__).parents[1] / "fixtures" / "event_info"
             "soccer",
             "sportybet/prematch.json",
             {"1x2_ft", "over_under_ft", "btts_ft", "double_chance_ft"},
+        ),
+        (
+            "betpawa",
+            "soccer",
+            "betpawa/prematch.json",
+            {"1x2_corners_ft", "over_under_corners_ft"},
+        ),
+        (
+            "msport",
+            "soccer",
+            "msport/prematch.json",
+            {"1x2_corners_ft", "over_under_corners_ft"},
+        ),
+        (
+            "bet9ja",
+            "soccer",
+            "bet9ja/prematch.json",
+            {"over_under_corners_ft"},
         ),
     ],
 )
