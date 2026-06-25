@@ -106,6 +106,37 @@ Posting is best-effort and agent-driven, not automatic: the `#releases` note is
 the agent running `notify release ...` and posting after a release — `devtools
 release` itself does not post (it cannot import the `orchestration` notifier).
 
+## `#status` board (live queue snapshot)
+
+The orchestrator tick refreshes a single pinned message in `#status` on every
+run — no flood of posts, just one message edited in place with the current queue
+state (open items, claimed, in-review, paused flag).
+
+**Setup (one-time):**
+
+1. Create a `#status` channel in your workspace.
+2. Invite the bot: `/invite @BookiesKit Agent`.
+3. Find the channel ID (channel details → bottom, `C…`) and add it to
+   **`.chatops.json`** as `status_channel`:
+
+   ```json
+   {
+     "approvers": ["U…"],
+     "tickets_channel": "C…",
+     "status_channel": "C…"
+   }
+   ```
+
+4. Commit the change (the value is non-secret).
+
+**Behaviour:** if `status_channel` is absent or set to the placeholder
+`C-REPLACE-WITH-STATUS-CHANNEL-ID`, the board refresh is silently skipped —
+everything else (gate, cycle, ChatOps, canary, releases) continues normally.
+The board is strictly best-effort and never on the critical path.
+
+You can also request a manual snapshot at any time by typing `status` in
+`#tickets` — the agent replies with the same formatted text.
+
 ## ChatOps (`#tickets` write path)
 
 Create a `#tickets` channel and invite the bot (`/invite @BookiesKit Agent`).
