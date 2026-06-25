@@ -224,3 +224,47 @@ never). Rotate it periodically:
 The App private key (`.orchestrator/app.pem`) does not expire automatically,
 but you can rotate it at any time from the App's **Private keys** settings page
 (generate a new one, update the file, then delete the old key from GitHub).
+
+---
+
+## Security model & operational requirements
+
+Read this before you trust the loop to run unattended.
+
+**The structural guarantee is conditional on two things being true:**
+
+1. **The ruleset is flipped** (Step 7 — `required_approving_review_count: 1`).
+   Until you do this, a PR with green CI merges with **no approval**, so the
+   App identity *can* merge. The separation of identity buys you nothing until
+   the ruleset requires a review the App cannot give itself. **Do Steps 7–8
+   before relying on the structural claim.**
+
+2. **Token minting succeeds every tick.** The tick mints a fresh App token and
+   exports it as the cycle's `git`/`gh` identity. **If minting fails** — the App
+   is not provisioned yet, the `.pem` is wrong/expired, or GitHub is briefly
+   unreachable — the tick **falls back to the ambient `gh` login, which is your
+   owner account** (`repo` scope, merge-capable). In that window the loop is
+   back to today's non-structural posture (never-merge then rests only on the
+   `deny` rules in `.claude/orchestrator-settings.json` + skill behaviour).
+   - This fallback exists so a provisioning gap never halts the company — but a
+     **persistent** mint failure silently degrades protection. After completing
+     this runbook, confirm `... orchestration token` prints a `ghs_...` token,
+     and watch `.orchestrator/logs/` for the line
+     `App token unavailable - falling back to ambient gh login` — if you see it
+     repeatedly, the loop is running **unprotected** and you must fix minting.
+   - *Fast-follow (not yet built):* upgrade that fallback log line to a loud
+     `#agent-activity` Slack alert so a degraded posture can't go unnoticed.
+
+**Why `gh api` breadth is safe (once the ruleset is flipped).** The
+orchestrator's permission profile still allows `Bash(gh api:*)`, so the loop
+could in principle call `gh api --method PUT .../merge`. Run as the **App**,
+that call still cannot satisfy the 1-approving-review ruleset, so it is blocked
+— the structural gate, not the allow-list, is what stops it. This is **only**
+true after Step 7; before the flip, the broad `gh api` allow combined with the
+owner-identity fallback (point 2) is a real merge path. Another reason to flip
+the ruleset first.
+
+**The guarantee also leans on GitHub forbidding an App from approving its own
+PR** (true today). The manual proof in Step 8 is how you verify the whole chain
+end to end — re-run it after any change to the ruleset or the App's
+permissions.
