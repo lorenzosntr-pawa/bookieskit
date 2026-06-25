@@ -56,3 +56,15 @@ user IDs; non-secret, committed, change via PR) and is gated by three
 guardrails: authorized author, CI green, and the PR closes a `status:in-review`
 Issue. This does NOT relax the supervised gate — `approve` is the human's
 decision, relocated to Slack; the agent never auto-merges.
+
+## Always-on orchestrator (unattended)
+
+The loop can run unattended via Windows Task Scheduler (`scripts/orchestrator-tick.ps1`,
+every 15 min) — see `docs/ORCHESTRATOR_SETUP.md`. Each tick takes a lockfile
+(`.orchestrator/tick.lock`; a mid-build tick skips, a stale lock is reclaimed) and
+runs one headless `/orchestrate` cycle under a constrained permission profile
+(`.claude/orchestrator-settings.json`: no direct `gh pr merge`, no push to `main`).
+A `pause`/`resume` Slack command (allowlist-gated, a `control:paused` marker Issue)
+is the kill-switch; the cycle skips building while paused. The never-merge gate is
+unchanged — merge happens only via the human-gated `chatops approve`. Recommend
+GitHub branch protection on `main` as the structural backstop.
