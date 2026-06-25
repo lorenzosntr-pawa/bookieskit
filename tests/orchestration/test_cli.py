@@ -565,3 +565,46 @@ def test_status_board_posts_then_updates(tmp_path, capsys, monkeypatch):
     # second run -> chat.update (id now stored)
     assert cli.run(cli.build_parser().parse_args(args), gh=gh) == 0
     assert calls[-1] == "chat.update"
+
+
+def test_token_reuses_fresh_cache(tmp_path, monkeypatch, capsys):
+    cache = tmp_path / "app-token.json"
+    cache.write_text(
+        json.dumps({"token": "ghs_fresh", "expires_at": "2999-01-01T00:00:00Z"}),
+        encoding="utf-8",
+    )
+    ident = tmp_path / "identity.json"
+    ident.write_text(json.dumps({"app_id": 1, "installation_id": 2}), encoding="utf-8")
+
+    def boom(**kwargs):  # mint must NOT be called when cache is fresh
+        raise AssertionError("should not mint")
+
+    monkeypatch.setattr(cli.appauth, "mint_installation_token", boom)
+    rc = cli.main(["token", "--identity", str(ident), "--cache", str(cache)])
+    assert rc == 0
+    assert capsys.readouterr().out.strip() == "ghs_fresh"
+
+
+def test_token_mints_when_cache_stale(tmp_path, monkeypatch, capsys):
+    cache = tmp_path / "app-token.json"  # absent -> stale
+    ident = tmp_path / "identity.json"
+    ident.write_text(json.dumps({"app_id": 1, "installation_id": 2}), encoding="utf-8")
+    pem = tmp_path / "app.pem"
+    pem.write_text("KEY", encoding="utf-8")
+
+    monkeypatch.setattr(
+        cli.appauth, "mint_installation_token",
+        lambda **kw: {"token": "ghs_new", "expires_at": "2999-01-01T00:00:00Z"},
+    )
+    rc = cli.main(
+        ["token", "--identity", str(ident), "--cache", str(cache), "--key", str(pem)]
+    )
+    assert rc == 0
+    assert capsys.readouterr().out.strip() == "ghs_new"
+    assert json.loads(cache.read_text())["token"] == "ghs_new"
+
+
+def test_token_exit1_when_unprovisioned(tmp_path, capsys):
+    rc = cli.main(["token", "--identity", str(tmp_path / "missing.json")])
+    assert rc == 1
+    assert "not provisioned" in capsys.readouterr().err
