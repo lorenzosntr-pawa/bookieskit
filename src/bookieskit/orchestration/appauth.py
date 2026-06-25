@@ -32,7 +32,7 @@ def _http_post(url: str, *, bearer: str) -> dict:
             "X-GitHub-Api-Version": "2022-11-28",
         },
     )
-    with urllib.request.urlopen(req) as r:
+    with urllib.request.urlopen(req, timeout=30) as r:  # never hang the tick
         return json.load(r)
 
 
