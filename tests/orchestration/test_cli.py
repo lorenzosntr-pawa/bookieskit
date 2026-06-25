@@ -454,3 +454,54 @@ def test_chatops_resume_unauthorized_does_nothing(capsys, tmp_path):
     out = json.loads(capsys.readouterr().out)
     assert out["status"] == "rejected"
     assert control.is_paused(gh) is True  # marker NOT cleared by a non-approver
+
+
+def test_gate_runs_when_queue_actionable(tmp_path, capsys, monkeypatch):
+    # A ready directed issue -> actionable -> run=true even with no Slack signal.
+    gh = _FakeGh(issues=[{"number": 5, "title": "t",
+        "body": "```yaml\nsignature: s\nstream: stream:directed\n```",
+        "labels": [{"name": "stream:directed"}, {"name": "status:ready"}],
+        "state": "open"}])
+    # Fake the Slack reader so no network happens.
+    monkeypatch.setattr(cli, "_slack_get", lambda method, **kw: {"messages": [], "ok": True})
+    code = cli.run(cli.build_parser().parse_args(
+        ["gate", "--watermark", str(tmp_path / "wm"), "--json"]), gh=gh)
+    assert code == 0
+    out = json.loads(capsys.readouterr().out)
+    assert out["run"] is True
+
+
+def test_gate_quiet_when_nothing_to_do(tmp_path, capsys, monkeypatch):
+    gh = _FakeGh()  # empty queue
+    monkeypatch.setattr(cli, "_slack_get", lambda method, **kw: {"messages": [], "ok": True})
+    code = cli.run(cli.build_parser().parse_args(
+        ["gate", "--watermark", str(tmp_path / "wm"), "--json"]), gh=gh)
+    assert code == 0
+    assert json.loads(capsys.readouterr().out)["run"] is False
+
+
+def test_gate_runs_on_designing_thread_reply(tmp_path, capsys, monkeypatch):
+    # A status:designing directed issue whose thread's last message is human
+    # -> the agent owes a reply -> gate runs (reason: design-reply).
+    from bookieskit.orchestration.workitem import WorkItem, render_body
+    body = render_body(WorkItem(
+        signature="directed:slack:1.0", stream="stream:directed",
+        title="add X", summary="s", meta={"slack_ts": "1.0"}))
+    gh = _FakeGh(issues=[{"number": 9, "title": "add X", "body": body,
+        "labels": [{"name": "stream:directed"}, {"name": "status:designing"}],
+        "state": "open"}])
+
+    def fake_slack(method, **kw):
+        if method == "conversations.replies":
+            return {"messages": [{"type": "message"}]}  # last is human -> waiting
+        return {"messages": []}  # history: no new top-level ticket
+
+    monkeypatch.setattr(cli, "_read_token", lambda: "xoxb-test")  # CI has no .mcp.json
+    monkeypatch.setattr(cli, "_slack_get", fake_slack)
+    code = cli.run(cli.build_parser().parse_args(
+        ["gate", "--config", str(_chatops_config(tmp_path)),
+         "--watermark", str(tmp_path / "wm"), "--json"]), gh=gh)
+    assert code == 0
+    out = json.loads(capsys.readouterr().out)
+    assert out["run"] is True
+    assert out["reason"] == "design-reply"  # not actionable-queue / new-ticket

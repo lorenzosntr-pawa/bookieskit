@@ -12,6 +12,8 @@ import json
 import os
 import subprocess
 import time
+import urllib.parse
+import urllib.request
 from dataclasses import asdict
 from typing import Any, Awaitable, Callable
 
@@ -105,6 +107,11 @@ def build_parser() -> argparse.ArgumentParser:
     p_lrel = lsub.add_parser("release")
     p_lrel.add_argument("--path", required=True)
     p_lrel.add_argument("--json", action="store_true", dest="as_json")
+
+    p_gate = sub.add_parser("gate")
+    p_gate.add_argument("--config", default=".chatops.json")
+    p_gate.add_argument("--watermark", default=".orchestrator/slack-watermark")
+    p_gate.add_argument("--json", action="store_true", dest="as_json")
 
     p_notify = sub.add_parser(
         "notify", help="Format a Slack-cockpit message (prints text to stdout)"
@@ -374,6 +381,80 @@ def _chatops_paused(args: argparse.Namespace, gh: GhRunner) -> int:
     return 0
 
 
+def _slack_get(method: str, *, token: str, **params) -> dict:
+    url = "https://slack.com/api/" + method + "?" + urllib.parse.urlencode(params)
+    req = urllib.request.Request(url, headers={"Authorization": "Bearer " + token})
+    with urllib.request.urlopen(req) as r:
+        return json.load(r)
+
+
+def _read_token() -> str | None:
+    try:
+        with open(".mcp.json", encoding="utf-8") as handle:
+            data = json.load(handle)
+        return data["mcpServers"]["slack"]["env"]["SLACK_MCP_XOXB_TOKEN"]
+    except (OSError, KeyError, ValueError):
+        return None
+
+
+def _gate(args: argparse.Namespace, gh: GhRunner) -> int:
+    from bookieskit.orchestration import chatops, gate
+    # 1) queue actionable?
+    try:
+        actionable = next_work_item(Queue(gh, ensure=False).list_open()) is not None
+    except Exception:
+        actionable = False
+    # 2) new #tickets human message? + 3) a designing thread awaiting our reply?
+    new_ticket = designing_reply = False
+    newest_ts = None
+    token = _read_token()
+    cfg = {}
+    try:
+        cfg = chatops.load_config(args.config)
+    except Exception:
+        cfg = {}
+    channel = cfg.get("tickets_channel")
+    if token and channel:
+        try:
+            hist = _slack_get(
+                "conversations.history", token=token, channel=channel, limit=20
+            )
+            humans = [m for m in hist.get("messages", [])
+                      if m.get("type") == "message" and not m.get("bot_id")]
+            newest_ts = humans[0]["ts"] if humans else None  # history is newest-first
+            wm = None
+            try:
+                with open(args.watermark, encoding="utf-8") as handle:
+                    wm = handle.read().strip() or None
+            except OSError:
+                wm = None
+            new_ticket = gate.new_ticket_waiting(newest_ts, wm)
+            # designing items: any thread whose last message is human?
+            for issue in Queue(gh, ensure=False).list_open(stream="stream:directed"):
+                labels = {lb["name"] for lb in issue.get("labels", [])}
+                if "status:designing" not in labels:
+                    continue
+                thread_ts = parse_meta(issue.get("body", "")).get("slack_ts")
+                if not thread_ts:
+                    continue
+                rep = _slack_get(
+                    "conversations.replies", token=token, channel=channel, ts=thread_ts
+                )
+                if gate.thread_reply_waiting(rep.get("messages", [])):
+                    designing_reply = True
+                    break
+        except Exception:
+            pass  # Slack unreachable -> degrade to queue-only
+    run = gate.should_run(queue_actionable=actionable, new_ticket=new_ticket,
+                          designing_reply=designing_reply)
+    reason = ("actionable-queue" if actionable else
+              "new-ticket" if new_ticket else
+              "design-reply" if designing_reply else "idle")
+    _emit({"run": run, "reason": reason, "newest_ts": newest_ts}, args.as_json,
+          [f"run={run} ({reason})"])
+    return 0
+
+
 def run(
     args: argparse.Namespace,
     *,
@@ -386,6 +467,8 @@ def run(
         return _lock(args)
     if gh is None:
         gh = GhRunner()
+    if args.cmd == "gate":
+        return _gate(args, gh)
     if args.cmd == "sync-canary":
         return _sync_canary(args, runner, gh)
     if args.cmd == "ensure-labels":
