@@ -121,11 +121,7 @@ def test_parse_council():
 
 
 def test_design_commands_dont_collide_with_others():
-    from bookieskit.orchestration.chatops import (
-        ApproveCommand,
-        DesignChangesCommand,
-        DesignOkCommand,
-    )
+    from bookieskit.orchestration.chatops import ApproveCommand
 
     assert parse_command("approve 14") == ApproveCommand(pr=14)
     assert parse_command("designing something later") is None

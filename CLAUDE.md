@@ -57,13 +57,29 @@ guardrails: authorized author, CI green, and the PR closes a `status:in-review`
 Issue. This does NOT relax the supervised gate — `approve` is the human's
 decision, relocated to Slack; the agent never auto-merges.
 
+## Directed design in Slack
+
+Directed (`#tickets`) features are *designed with the owner before they're built*.
+A request becomes a `status:designing` Issue; each cycle the orchestrator runs one
+brainstorm step in the Issue's `#tickets` thread (one question at a time, llm-council
+on genuine tradeoffs), converging on a design written into the Issue body. The owner
+approves with `design ok <issue#>` (allowlisted) → `status:ready`; only then does a
+cycle build it (using that agreed design as the spec) → PR → `approve`. `design no
+<issue#> <notes>` requests changes; `council <issue#>` forces a council pass.
+Maintenance/canary stay decide-and-document. The loop runs on a cheap-gate continuous
+tick (`gate` decides whether to wake the agent; ~1-min cadence).
+
 ## Always-on orchestrator (unattended)
 
 The loop can run unattended via Windows Task Scheduler (`scripts/orchestrator-tick.ps1`,
-every 15 min) — see `docs/ORCHESTRATOR_SETUP.md`. Each tick takes a lockfile
-(`.orchestrator/tick.lock`; a mid-build tick skips, a stale lock is reclaimed) and
-runs one headless `/orchestrate` cycle under a constrained permission profile
-(`.claude/orchestrator-settings.json`: no direct `gh pr merge`, no push to `main`).
+every 1 min) — see `docs/ORCHESTRATOR_SETUP.md`. Each tick runs the `gate` CLI first;
+if the gate reports nothing to do (no new Slack messages, no actionable queue items),
+the tick exits cheaply without waking the agent. Only when the gate returns `run: true`
+does the tick take the lockfile (`.orchestrator/tick.lock`; a mid-build tick skips, a
+stale lock is reclaimed) and run one headless `/orchestrate` cycle under a constrained
+permission profile (`.claude/orchestrator-settings.json`: no direct `gh pr merge`, no
+push to `main`). After a cycle the tick writes the gate's `newest_ts` to
+`.orchestrator/slack-watermark` so already-processed messages are not re-fired.
 A `pause`/`resume` Slack command (allowlist-gated, a `control:paused` marker Issue)
 is the kill-switch; the cycle skips building while paused. The never-merge gate is
 unchanged — merge happens only via the human-gated `chatops approve`. Recommend
