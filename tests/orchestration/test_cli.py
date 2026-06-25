@@ -626,7 +626,10 @@ def test_token_mints_when_cache_stale(tmp_path, monkeypatch, capsys):
 
 
 def test_token_exit1_when_unprovisioned(tmp_path, capsys):
-    rc = cli.main(["token", "--identity", str(tmp_path / "missing.json")])
+    # Point --cache at a tmp path so the test never reads a real, freshly-minted
+    # .orchestrator/app-token.json on the dev machine (hermetic isolation).
+    rc = cli.main(["token", "--identity", str(tmp_path / "missing.json"),
+                   "--cache", str(tmp_path / "c.json")])
     assert rc == 1
     assert "not provisioned" in capsys.readouterr().err
 
@@ -734,6 +737,7 @@ def test_pr_review_pending_null_when_newest_is_bot(capsys):
     gh._pr_comments = {11: [{"created_at": "2026-06-25T10:00:00Z",
                              "user": {"type": "Bot"}, "body": "done"}]}
     code = cli.run(cli.build_parser().parse_args(["pr-review", "pending", "--json"]), gh=gh)
+    assert code == 0
     out = json.loads(capsys.readouterr().out)
     assert out is None
 
