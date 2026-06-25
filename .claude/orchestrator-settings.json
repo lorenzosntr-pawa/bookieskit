@@ -1,19 +1,31 @@
 {
   "permissions": {
     "allow": [
-      "Bash(.venv/Scripts/python.exe -m bookieskit.orchestration:*)",
-      "Bash(.venv/Scripts/python.exe -m bookieskit.devtools:*)",
+      "Bash(.venv/Scripts/python.exe:*)",
+      "Bash(python:*)",
+      "Bash(python3:*)",
+      "Bash(pytest:*)",
+      "Bash(ruff:*)",
+      "Bash(npx:*)",
+      "Bash(node:*)",
       "Bash(gh issue:*)",
       "Bash(gh pr create:*)",
       "Bash(gh pr view:*)",
       "Bash(gh pr checks:*)",
       "Bash(gh pr comment:*)",
       "Bash(gh pr edit:*)",
+      "Bash(gh pr list:*)",
       "Bash(gh label:*)",
+      "Bash(gh api:*)",
       "Bash(git add:*)",
       "Bash(git commit:*)",
       "Bash(git checkout:*)",
       "Bash(git switch:*)",
+      "Bash(git branch:*)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git restore:*)",
       "Bash(git push --set-upstream origin feat/*)",
       "Bash(git push origin feat/*)",
       "Read",
@@ -22,15 +34,19 @@
       "Glob",
       "Grep",
       "Agent",
+      "WebFetch",
+      "WebSearch",
       "mcp__slack__conversations_history",
       "mcp__slack__conversations_replies",
       "mcp__slack__conversations_add_message",
-      "mcp__slack__channels_list"
+      "mcp__slack__channels_list",
+      "mcp__plugin_playwright_playwright"
     ],
     "deny": [
       "Bash(gh pr merge:*)",
       "Bash(git push origin main:*)",
-      "Bash(git push:* main)"
+      "Bash(git push:* main)",
+      "Bash(git push --force:*)"
     ]
   }
 }
