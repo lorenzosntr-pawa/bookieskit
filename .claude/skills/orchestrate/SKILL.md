@@ -11,6 +11,26 @@ Read the operating contract in the repo-root `CLAUDE.md` first — it binds this
 
 ## The cycle
 
+0. **PR review-response (preempts new work).** Run
+   `.venv/Scripts/python.exe -m bookieskit.orchestration pr-review pending --json`.
+   - If it returns `null` → proceed to ChatOps intake / the queue as normal.
+   - Otherwise it returns `{pr, issue, head, comments, reviews}` — the owner is
+     waiting on an open PR, which **outranks new queue work**. Handle it THIS
+     cycle and then STOP:
+     1. Read `comments` + `reviews`. Identify each human comment/review not yet
+        addressed by a later bot reply.
+     2. For a **question**: post an answer with
+        `gh pr comment <pr> --body "<answer>"`.
+     3. For a **change request**: `git switch <head>` (or check it out), make the
+        change with the subagent-driven / TDD pipeline, run the suite, push to
+        `<head>` (you are the App — pushing to a `feat/*` branch is allowed;
+        **never merge**), let CI re-run, then `gh pr comment <pr>` a summary of
+        the commit.
+     4. Finish with one consolidated reply so the newest event is the loop's
+        (this clears the gate signal). Best-effort post a `pr-reply` note to
+        `#agent-activity`.
+   - This is one cycle's work (one item per cycle). Do NOT also pick a queue item.
+
 1. **ChatOps intake (best-effort — only if a Slack `post_message`/history MCP tool is available).** Read new `#tickets` messages (the channel id is in `.chatops.json`). For each message:
    - If it parses as `approve <pr>`: run `.venv/Scripts/python.exe -m bookieskit.orchestration chatops approve --pr <pr> --author <slack-user-id> --json` and post the returned `slack_text` to `#tickets`. (The CLI enforces the allowlist + CI-green + loop-PR guardrails and merges with squash on success; a rejection is reported, never a merge.)
    - If it parses as `pause [reason]`: run `.venv/Scripts/python.exe -m bookieskit.orchestration chatops pause --author <slack-user-id> --reason "<reason>" --json` and post the `slack_text` to `#tickets`.
