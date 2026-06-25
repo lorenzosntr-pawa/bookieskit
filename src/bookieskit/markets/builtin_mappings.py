@@ -1,8 +1,8 @@
 """Built-in market mappings.
 
 Soccer: 1X2, O/U, BTTS, DC, 1X2 1Up, 1X2 2Up, next-goal, home/away O/U,
-2-way handicap, and corner 1X2 + corner O/U. Plus basketball and tennis
-market groups.
+2-way handicap, corner 1X2 + corner O/U, and booking (cards) 1X2 +
+booking O/U. Plus basketball and tennis market groups.
 """
 
 from bookieskit.markets.types import MarketMapping, OutcomeMapping
@@ -259,28 +259,34 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
     ),
     # =================== Corner markets (football) =====================
     # 1X2 + Over/Under on full-time corner count. Market ids and outcome
-    # labels were lifted from the real captured prematch.json fixtures,
-    # never guessed. Outcome conventions mirror the soccer 1X2 / O/U
-    # markets:
+    # labels were lifted from the real captured fixtures, never guessed.
+    # Outcome conventions mirror the soccer 1X2 / O/U markets:
     #   - BetPawa: numeric "1"/"X"/"2" and "Over"/"Under"
     #   - SportyBet, MSport: word labels "Home"/"Draw"/"Away", "Over"/"Under"
-    #   - Bet9ja: key suffixes "O"/"U" (O/U only)
+    #   - Bet9ja: key suffixes "1"/"X"/"2" (1X2) and "O"/"U" (O/U)
+    #   - Betway: team-name 1X2 outcomes via __HOME__/__AWAY__ sentinels;
+    #     "Over"/"Under" for O/U (whitespace-stripped at parse-time).
     # Coverage notes (— in the coverage matrix means a dedicated in-region
     # live probe is still needed):
-    #   - Betway, SportPesa, Betika fixtures contain NO corner data at all.
-    #   - Bet9ja DOES expose corner markets: it has an unambiguous FT O/U
-    #     corners key (S_OUCORNERS, mapped below) but NO unambiguous FT
-    #     corner-1X2 key — the 1/X/2-shaped corner keys (S_TEAMCORNER,
-    #     S_HALFCORNER, S_CORNERHTFT) can't be confidently disambiguated to
-    #     "full-time most-corners 1X2" from the fixture alone, so 1X2 stays
-    #     None pending a labelled live probe rather than guessing the id.
+    #   - SportPesa, Betika fixtures contain NO corner data at all.
+    #   - Bet9ja corner-1X2 (#22): the captured event's market metadata
+    #     (D.MK / D.TRANS) labels key S_TEAMCORNER "Corners - 1X2" with
+    #     MDESC "Which team will get the most corners during the game in
+    #     normal play?" — an unambiguous full-time most-corners 1X2, with
+    #     real 1/X/2 odds present. PR #20 left this None out of caution; the
+    #     fixture metadata resolves the ambiguity, so it is mapped here.
+    #     (The 1st-half variant S_TEAMCORNER1T is a distinct key, not
+    #     grouped with the FT market.)
+    #   - Betway corner 1X2 + O/U (#22): present in the captured
+    #     2way_handicap_ft.json as markets "Corner 1X2" and "Total Corners"
+    #     (betway markets are keyed by the market `name` field).
     MarketMapping(
         canonical_id="1x2_corners_ft",
         name="1X2 Corners - Full Time",
         betpawa_id="1096787",  # "Corner Count 1X2 - FT"
         sportybet_id="162",  # "Corners 1X2"
-        bet9ja_key=None,  # corner data exists but no unambiguous FT 1X2 key
-        betway_id=None,  # no corner data in captured fixture — needs probe
+        bet9ja_key="S_TEAMCORNER",  # "Corners - 1X2" (most corners, FT)
+        betway_id="Corner 1X2",  # market name in captured fixture
         msport_id="162",  # "Corner 1x2"
         sportpesa_id=None,  # no corner data in captured fixture — needs probe
         betika_id=None,  # no corner data in captured fixture — needs probe
@@ -289,8 +295,8 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 canonical_name="home",
                 betpawa="1",
                 sportybet="Home",
-                bet9ja="",
-                betway="",
+                bet9ja="1",
+                betway="__HOME__",
                 msport="Home",
                 sportpesa="",
                 betika="",
@@ -299,8 +305,8 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 canonical_name="draw",
                 betpawa="X",
                 sportybet="Draw",
-                bet9ja="",
-                betway="",
+                bet9ja="X",
+                betway="Draw",
                 msport="Draw",
                 sportpesa="",
                 betika="",
@@ -309,8 +315,8 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 canonical_name="away",
                 betpawa="2",
                 sportybet="Away",
-                bet9ja="",
-                betway="",
+                bet9ja="2",
+                betway="__AWAY__",
                 msport="Away",
                 sportpesa="",
                 betika="",
@@ -324,7 +330,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
         betpawa_id="1096783",  # "Total Corners Over/Under - FT"
         sportybet_id="166",  # "Corners - Over/Under"
         bet9ja_key="S_OUCORNERS",  # "S_OUCORNERS@<line>_O/_U"
-        betway_id=None,  # no corner data in captured fixture — needs probe
+        betway_id="Total Corners",  # market name in captured fixture
         msport_id="166",  # "Corners O/U"
         sportpesa_id=None,  # no corner data in captured fixture — needs probe
         betika_id=None,  # no corner data in captured fixture — needs probe
@@ -334,7 +340,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 betpawa="Over",
                 sportybet="Over",
                 bet9ja="O",
-                betway="",
+                betway="Over",
                 msport="Over",
                 sportpesa="",
                 betika="",
@@ -344,8 +350,106 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 betpawa="Under",
                 sportybet="Under",
                 bet9ja="U",
-                betway="",
+                betway="Under",
                 msport="Under",
+                sportpesa="",
+                betika="",
+            ),
+        },
+        parameterized=True,
+    ),
+    # =================== Booking (cards) markets (football) =============
+    # 1X2 + Over/Under on full-time booking/card count. Increment 2 of #19
+    # (#22). Market ids/labels lifted from real captures, never guessed.
+    #
+    # Offline-mineable now: only Betway, whose captured 2way_handicap_ft.json
+    # carries "Booking 1X2" (team-name 1X2) and "Total Bookings" (O/U on
+    # card count; distinct from "Total Booking Points", the points-scoring
+    # variant we deliberately do NOT map here). Betway markets are keyed by
+    # the market `name` field; outcome conventions match the 1X2 / O/U
+    # markets (team-name sentinels; whitespace-stripped "Over"/"Under").
+    #
+    # Genuinely absent from current captures → deferred to an in-region
+    # live capture (increment 2b), NOT guessed:
+    #   - Bet9ja: keys S_1X2BOOK / S_OUBOOK appear in the global D.TRANS
+    #     translation table ("Cards - 1X2" / "Cards - Over/Under") but the
+    #     captured event carries NO booking odds and NO D.MK entry, so they
+    #     cannot be mined offline. Left None pending a live capture.
+    #   - SportyBet: no card/booking market in the captured prematch.json.
+    #   - BetPawa, MSport, Betika: no booking data captured.
+    #   - SportPesa: owner-confirmed it does not offer corner/booking → —.
+    MarketMapping(
+        canonical_id="1x2_bookings_ft",
+        name="1X2 Bookings - Full Time",
+        betpawa_id=None,  # not in captured fixture — needs probe
+        sportybet_id=None,  # no booking market in captured fixture
+        bet9ja_key=None,  # S_1X2BOOK in TRANS only, no odds — needs capture
+        betway_id="Booking 1X2",  # market name in captured fixture
+        msport_id=None,  # not in captured fixture — needs probe
+        sportpesa_id=None,  # owner-confirmed: not offered → —
+        betika_id=None,  # not in captured fixture — needs probe
+        outcomes={
+            "home": OutcomeMapping(
+                canonical_name="home",
+                betpawa="",
+                sportybet="",
+                bet9ja="",
+                betway="__HOME__",
+                msport="",
+                sportpesa="",
+                betika="",
+            ),
+            "draw": OutcomeMapping(
+                canonical_name="draw",
+                betpawa="",
+                sportybet="",
+                bet9ja="",
+                betway="Draw",
+                msport="",
+                sportpesa="",
+                betika="",
+            ),
+            "away": OutcomeMapping(
+                canonical_name="away",
+                betpawa="",
+                sportybet="",
+                bet9ja="",
+                betway="__AWAY__",
+                msport="",
+                sportpesa="",
+                betika="",
+            ),
+        },
+        parameterized=False,
+    ),
+    MarketMapping(
+        canonical_id="over_under_bookings_ft",
+        name="Over/Under Bookings - Full Time",
+        betpawa_id=None,  # not in captured fixture — needs probe
+        sportybet_id=None,  # no booking market in captured fixture
+        bet9ja_key=None,  # S_OUBOOK in TRANS only, no odds — needs capture
+        betway_id="Total Bookings",  # market name (card count, not points)
+        msport_id=None,  # not in captured fixture — needs probe
+        sportpesa_id=None,  # owner-confirmed: not offered → —
+        betika_id=None,  # not in captured fixture — needs probe
+        outcomes={
+            "over": OutcomeMapping(
+                canonical_name="over",
+                betpawa="",
+                sportybet="",
+                bet9ja="",
+                betway="Over",
+                msport="",
+                sportpesa="",
+                betika="",
+            ),
+            "under": OutcomeMapping(
+                canonical_name="under",
+                betpawa="",
+                sportybet="",
+                bet9ja="",
+                betway="Under",
+                msport="",
                 sportpesa="",
                 betika="",
             ),

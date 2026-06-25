@@ -38,11 +38,20 @@ EXPECTED_MATRIX: dict[str, dict[str, bool]] = {
         "sportpesa": False,
         "betika": False,
     },
+    "1x2_bookings_ft": {
+        "betpawa": False,
+        "sportybet": False,
+        "bet9ja": False,
+        "betway": True,
+        "msport": False,
+        "sportpesa": False,
+        "betika": False,
+    },
     "1x2_corners_ft": {
         "betpawa": True,
         "sportybet": True,
-        "bet9ja": False,
-        "betway": False,
+        "bet9ja": True,
+        "betway": True,
         "msport": True,
         "sportpesa": False,
         "betika": False,
@@ -146,11 +155,20 @@ EXPECTED_MATRIX: dict[str, dict[str, bool]] = {
         "sportpesa": False,
         "betika": True,
     },
+    "over_under_bookings_ft": {
+        "betpawa": False,
+        "sportybet": False,
+        "bet9ja": False,
+        "betway": True,
+        "msport": False,
+        "sportpesa": False,
+        "betika": False,
+    },
     "over_under_corners_ft": {
         "betpawa": True,
         "sportybet": True,
         "bet9ja": True,
-        "betway": False,
+        "betway": True,
         "msport": True,
         "sportpesa": False,
         "betika": False,
@@ -195,16 +213,16 @@ EXPECTED_MATRIX: dict[str, dict[str, bool]] = {
 
 
 def test_coverage_matrix_golden_snapshot():
-    """coverage_matrix() must equal the frozen expected dict (all 19 markets)."""
+    """coverage_matrix() must equal the frozen expected dict (all 21 markets)."""
     matrix = coverage_matrix()
     assert matrix == EXPECTED_MATRIX, (
         "Registry changed — update EXPECTED_MATRIX if intentional."
     )
 
 
-def test_coverage_matrix_has_19_markets():
+def test_coverage_matrix_has_21_markets():
     matrix = coverage_matrix()
-    assert len(matrix) == 19
+    assert len(matrix) == 21
 
 
 def test_coverage_matrix_has_all_platforms():
@@ -300,7 +318,18 @@ _FIXTURE_ROOT = Path(__file__).parents[1] / "fixtures" / "event_info"
             "bet9ja",
             "soccer",
             "bet9ja/prematch.json",
-            {"over_under_corners_ft"},
+            {"over_under_corners_ft", "1x2_corners_ft"},
+        ),
+        (
+            "betway",
+            "soccer",
+            "betway/2way_handicap_ft.json",
+            {
+                "1x2_corners_ft",
+                "over_under_corners_ft",
+                "1x2_bookings_ft",
+                "over_under_bookings_ft",
+            },
         ),
     ],
 )
