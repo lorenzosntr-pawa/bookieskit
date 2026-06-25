@@ -2,6 +2,8 @@ import json
 
 from bookieskit.orchestration.chatops import (
     ApproveCommand,
+    PauseCommand,
+    ResumeCommand,
     build_ticket,
     checks_pass,
     closing_issue_numbers,
@@ -9,8 +11,10 @@ from bookieskit.orchestration.chatops import (
     load_config,
     merged,
     parse_command,
+    paused,
     queued,
     rejected,
+    resumed,
     ticket_signature,
 )
 
@@ -72,3 +76,25 @@ def test_reply_formatters():
     assert "#5" in queued(5, "Add Stake") and "Add Stake" in queued(5, "Add Stake")
     assert "#12" in merged(12, 8) and "#8" in merged(12, 8)
     assert "#12" in rejected(12, "CI not green") and "CI not green" in rejected(12, "CI not green")
+
+
+def test_parse_command_recognizes_pause_with_optional_reason():
+    assert parse_command("pause") == PauseCommand(reason="")
+    assert parse_command("Pause canary too noisy") == PauseCommand(reason="canary too noisy")
+
+
+def test_parse_command_recognizes_resume():
+    assert parse_command("resume") == ResumeCommand()
+    assert parse_command("  RESUME ") == ResumeCommand()
+
+
+def test_parse_command_still_handles_approve_and_chatter():
+    assert parse_command("approve 12") == ApproveCommand(pr=12)
+    assert parse_command("add Stake bookmaker") is None
+    assert parse_command("pausing the project tomorrow") is None  # not a bare 'pause'
+
+
+def test_pause_resume_reply_formatters():
+    assert "pause" in paused("noisy").lower()
+    assert "noisy" in paused("noisy")
+    assert "resum" in resumed().lower()

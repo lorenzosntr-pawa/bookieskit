@@ -377,3 +377,80 @@ def test_chatops_approve_merges_green_loop_pr(capsys, tmp_path):
     assert out["status"] == "merged" and out["issue"] == 8
     assert gh.merged == [(11, "squash")]  # merged once, squash
     assert "#11" in out["slack_text"]
+
+
+def test_chatops_pause_authorized_sets_marker(capsys, tmp_path):
+    gh = _FakeGh()
+    code = cli.run(cli.build_parser().parse_args(
+        ["chatops", "pause", "--author", "U1", "--reason", "noisy",
+         "--config", str(_chatops_config(tmp_path)), "--json"]), gh=gh)
+    assert code == 0
+    out = json.loads(capsys.readouterr().out)
+    assert out["status"] == "paused"
+    from bookieskit.orchestration import control
+    assert control.is_paused(gh) is True
+
+
+def test_chatops_pause_unauthorized_does_nothing(capsys, tmp_path):
+    gh = _FakeGh()
+    code = cli.run(cli.build_parser().parse_args(
+        ["chatops", "pause", "--author", "U999",
+         "--config", str(_chatops_config(tmp_path)), "--json"]), gh=gh)
+    assert code == 0
+    out = json.loads(capsys.readouterr().out)
+    assert out["status"] == "rejected"
+    from bookieskit.orchestration import control
+    assert control.is_paused(gh) is False  # not paused by a non-approver
+
+
+def test_chatops_resume_clears_marker(capsys, tmp_path):
+    from bookieskit.orchestration import control
+    gh = _FakeGh()
+    control.set_paused(gh, reason="x", author="U1")
+    code = cli.run(cli.build_parser().parse_args(
+        ["chatops", "resume", "--author", "U1",
+         "--config", str(_chatops_config(tmp_path)), "--json"]), gh=gh)
+    assert code == 0
+    assert json.loads(capsys.readouterr().out)["status"] == "resumed"
+    assert control.is_paused(gh) is False
+
+
+def test_chatops_paused_reports_state(capsys):
+    from bookieskit.orchestration import control
+    gh = _FakeGh()
+    control.set_paused(gh, reason="x", author="U1")
+    code = cli.run(cli.build_parser().parse_args(["chatops", "paused", "--json"]), gh=gh)
+    assert code == 0
+    assert json.loads(capsys.readouterr().out)["paused"] is True
+
+
+def test_lock_acquire_then_busy_then_release(tmp_path, capsys):
+    p = str(tmp_path / "tick.lock")
+    assert cli.run(cli.build_parser().parse_args(
+        ["lock", "acquire", "--path", p, "--json"])) == 0
+    capsys.readouterr()
+    # second acquire while held -> exit 3 (busy)
+    assert cli.run(cli.build_parser().parse_args(
+        ["lock", "acquire", "--path", p, "--json"])) == 3
+    capsys.readouterr()
+    # release, then acquire succeeds again
+    assert cli.run(cli.build_parser().parse_args(
+        ["lock", "release", "--path", p, "--json"])) == 0
+    capsys.readouterr()
+    assert cli.run(cli.build_parser().parse_args(
+        ["lock", "acquire", "--path", p, "--json"])) == 0
+
+
+def test_chatops_resume_unauthorized_does_nothing(capsys, tmp_path):
+    # Symmetric to the pause guard: a non-approver must NOT be able to resume
+    # (clear the pause marker) — the kill-switch authz protects both directions.
+    from bookieskit.orchestration import control
+    gh = _FakeGh()
+    control.set_paused(gh, reason="x", author="U1")  # paused by an approver
+    code = cli.run(cli.build_parser().parse_args(
+        ["chatops", "resume", "--author", "U999",
+         "--config", str(_chatops_config(tmp_path)), "--json"]), gh=gh)
+    assert code == 0
+    out = json.loads(capsys.readouterr().out)
+    assert out["status"] == "rejected"
+    assert control.is_paused(gh) is True  # marker NOT cleared by a non-approver

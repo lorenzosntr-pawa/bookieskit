@@ -13,6 +13,8 @@ from dataclasses import dataclass
 from bookieskit.orchestration.workitem import WorkItem
 
 _APPROVE_RE = re.compile(r"^\s*approve\s+#?(\d+)\s*$", re.IGNORECASE)
+_PAUSE_RE = re.compile(r"^\s*pause(?:\s+(.*\S))?\s*$", re.IGNORECASE)
+_RESUME_RE = re.compile(r"^\s*resume\s*$", re.IGNORECASE)
 _OK_CHECK_STATES = {"SUCCESS", "NEUTRAL", "SKIPPED"}
 
 
@@ -21,6 +23,20 @@ class ApproveCommand:
     """A parsed ``approve <pr>`` command."""
 
     pr: int
+
+
+@dataclass
+class PauseCommand:
+    """A parsed ``pause [reason]`` command."""
+
+    reason: str = ""
+
+
+@dataclass
+class ResumeCommand:
+    """A parsed ``resume`` command."""
+
+    pass
 
 
 def ticket_signature(ts: str) -> str:
@@ -44,10 +60,18 @@ def build_ticket(author: str, ts: str, title: str, summary: str) -> WorkItem:
     )
 
 
-def parse_command(text: str) -> ApproveCommand | None:
-    """Recognize ``approve <pr>`` (optional ``#``). Anything else -> None."""
-    match = _APPROVE_RE.match(text)
-    return ApproveCommand(pr=int(match.group(1))) if match else None
+def parse_command(text: str):
+    """Recognize an ``approve <pr>``, ``pause [reason]``, or ``resume`` command.
+    Returns the matching command object, or None for anything else."""
+    m = _APPROVE_RE.match(text)
+    if m:
+        return ApproveCommand(pr=int(m.group(1)))
+    m = _PAUSE_RE.match(text)
+    if m:
+        return PauseCommand(reason=(m.group(1) or "").strip())
+    if _RESUME_RE.match(text):
+        return ResumeCommand()
+    return None
 
 
 def is_authorized(author: str, approvers: tuple[str, ...]) -> bool:
@@ -92,3 +116,15 @@ def merged(pr: int, number: int) -> str:
 
 def rejected(pr: int, reason: str) -> str:
     return f":no_entry: Can't merge PR #{pr} — {reason}."
+
+
+def paused(reason: str) -> str:
+    """Reply for a pause command."""
+    tail = f" — {reason}" if reason else ""
+    msg = ":double_vertical_bar: Orchestrator *paused*" + tail
+    return f"{msg}. Autonomous building halted until `resume`."
+
+
+def resumed() -> str:
+    """Reply for a resume command."""
+    return ":arrow_forward: Orchestrator *resumed*. Back to work next cycle."

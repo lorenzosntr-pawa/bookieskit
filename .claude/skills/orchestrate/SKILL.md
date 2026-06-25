@@ -13,9 +13,14 @@ Read the operating contract in the repo-root `CLAUDE.md` first — it binds this
 
 1. **ChatOps intake (best-effort — only if a Slack `post_message`/history MCP tool is available).** Read new `#tickets` messages (the channel id is in `.chatops.json`). For each message:
    - If it parses as `approve <pr>`: run `.venv/Scripts/python.exe -m bookieskit.orchestration chatops approve --pr <pr> --author <slack-user-id> --json` and post the returned `slack_text` to `#tickets`. (The CLI enforces the allowlist + CI-green + loop-PR guardrails and merges with squash on success; a rejection is reported, never a merge.)
+   - If it parses as `pause [reason]`: run `.venv/Scripts/python.exe -m bookieskit.orchestration chatops pause --author <slack-user-id> --reason "<reason>" --json` and post the `slack_text` to `#tickets`.
+   - If it parses as `resume`: run `.venv/Scripts/python.exe -m bookieskit.orchestration chatops resume --author <slack-user-id> --json` and post the `slack_text` to `#tickets`.
    - Else if it's a work request: distil a short title + one-paragraph summary, run `.venv/Scripts/python.exe -m bookieskit.orchestration chatops intake --author <slack-user-id> --ts <message-ts> --title "<title>" --summary "<summary>" --json`, and post the returned `slack_text` to `#tickets` **only when `status` is `opened`** (skip `duplicate`).
    - Else (chatter): ignore.
    If no Slack MCP is available, skip this entire step and proceed. ChatOps is never on the critical path.
+
+1b. **Pause gate.** Run `.venv/Scripts/python.exe -m bookieskit.orchestration chatops paused --json`. If `paused` is true → report "paused — skipping build this cycle" and END the cycle (do NOT claim or build). Intake + `approve` + `resume` above still ran; only building is gated.
+
 2. **Pick the top item.** Run
    `.venv/Scripts/python.exe -m bookieskit.orchestration next --json`
    - If the output is `null` → report "queue empty — nothing to do" and END the cycle.
