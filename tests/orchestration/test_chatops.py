@@ -98,3 +98,42 @@ def test_pause_resume_reply_formatters():
     assert "pause" in paused("noisy").lower()
     assert "noisy" in paused("noisy")
     assert "resum" in resumed().lower()
+
+
+def test_parse_design_ok():
+    from bookieskit.orchestration.chatops import DesignOkCommand
+
+    assert parse_command("design ok 42") == DesignOkCommand(issue=42)
+    assert parse_command("Design OK #42") == DesignOkCommand(issue=42)
+
+
+def test_parse_design_no_with_notes():
+    from bookieskit.orchestration.chatops import DesignChangesCommand
+
+    cmd = parse_command("design no 42 use a parameterized mapping instead")
+    assert cmd == DesignChangesCommand(issue=42, notes="use a parameterized mapping instead")
+
+
+def test_parse_council():
+    from bookieskit.orchestration.chatops import CouncilCommand
+
+    assert parse_command("council 42") == CouncilCommand(issue=42)
+
+
+def test_design_commands_dont_collide_with_others():
+    from bookieskit.orchestration.chatops import (
+        ApproveCommand,
+        DesignChangesCommand,
+        DesignOkCommand,
+    )
+
+    assert parse_command("approve 14") == ApproveCommand(pr=14)
+    assert parse_command("designing something later") is None
+    assert parse_command("design 42") is None  # needs ok/no
+
+
+def test_design_reply_formatters():
+    from bookieskit.orchestration.chatops import design_changes_ack, design_ready
+
+    assert "#42" in design_ready(42) and "ready" in design_ready(42).lower()
+    assert "#42" in design_changes_ack(42)

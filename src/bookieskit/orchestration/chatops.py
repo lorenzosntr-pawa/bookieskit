@@ -12,6 +12,9 @@ from dataclasses import dataclass
 
 from bookieskit.orchestration.workitem import WorkItem
 
+_DESIGN_OK_RE = re.compile(r"^\s*design\s+ok\s+#?(\d+)\s*$", re.IGNORECASE)
+_DESIGN_NO_RE = re.compile(r"^\s*design\s+no\s+#?(\d+)\s+(.*\S)\s*$", re.IGNORECASE)
+_COUNCIL_RE = re.compile(r"^\s*council\s+#?(\d+)\s*$", re.IGNORECASE)
 _APPROVE_RE = re.compile(r"^\s*approve\s+#?(\d+)\s*$", re.IGNORECASE)
 _PAUSE_RE = re.compile(r"^\s*pause(?:\s+(.*\S))?\s*$", re.IGNORECASE)
 _RESUME_RE = re.compile(r"^\s*resume\s*$", re.IGNORECASE)
@@ -39,6 +42,22 @@ class ResumeCommand:
     pass
 
 
+@dataclass
+class DesignOkCommand:
+    issue: int
+
+
+@dataclass
+class DesignChangesCommand:
+    issue: int
+    notes: str
+
+
+@dataclass
+class CouncilCommand:
+    issue: int
+
+
 def ticket_signature(ts: str) -> str:
     """Dedup key for a Slack-filed ticket (one per source message ts)."""
     return f"directed:slack:{ts}"
@@ -63,6 +82,15 @@ def build_ticket(author: str, ts: str, title: str, summary: str) -> WorkItem:
 def parse_command(text: str):
     """Recognize an ``approve <pr>``, ``pause [reason]``, or ``resume`` command.
     Returns the matching command object, or None for anything else."""
+    m = _DESIGN_OK_RE.match(text)
+    if m:
+        return DesignOkCommand(issue=int(m.group(1)))
+    m = _DESIGN_NO_RE.match(text)
+    if m:
+        return DesignChangesCommand(issue=int(m.group(1)), notes=m.group(2).strip())
+    m = _COUNCIL_RE.match(text)
+    if m:
+        return CouncilCommand(issue=int(m.group(1)))
     m = _APPROVE_RE.match(text)
     if m:
         return ApproveCommand(pr=int(m.group(1)))
@@ -128,3 +156,14 @@ def paused(reason: str) -> str:
 def resumed() -> str:
     """Reply for a resume command."""
     return ":arrow_forward: Orchestrator *resumed*. Back to work next cycle."
+
+
+def design_ready(issue: int) -> str:
+    return (
+        f":white_check_mark: Design for *#{issue}* approved — marked *ready to "
+        "build*. I'll build it next cycle."
+    )
+
+
+def design_changes_ack(issue: int) -> str:
+    return f":pencil: Got it — revising the design for *#{issue}*. I'll repost shortly."
