@@ -16,6 +16,12 @@ All notable changes to this project are documented in this file. The format foll
   - Coverage gaps awaiting a dedicated in-region live capture (increment 2b): booking markets on Bet9ja (keys `S_1X2BOOK`/`S_OUBOOK` appear in the global translation table but the captured event carries no booking odds), SportyBet, BetPawa, MSport and Betika; corner markets on SportPesa and Betika (no corner data captured). SportPesa is owner-confirmed not to offer corner or booking markets (`—`).
 - Built-in canonical market count: 17 → 21 (14 soccer + 3 basketball + 4 tennis).
 
+### Changed
+- Orchestrator now runs under a dedicated **GitHub App identity** that cannot
+  merge to `main`; the Slack `approve` path uses a separate owner token to
+  submit the approving review + merge. Never-merge is now structural for all
+  build operations. See `docs/AGENT_IDENTITY_SETUP.md`.
+
 ## [0.16.0] - 2026-06-23
 
 ### Added
