@@ -156,27 +156,46 @@ Expected output: a single line beginning with `ghs_`. If you see
 
 ## Step 7 — Harden the ruleset (require 1 approving review)
 
-Run this **once** from the repo root. It bumps the `main` branch ruleset
-(`id 18116963`) so every PR requires at least one approving review before it
-can merge. The App cannot approve its own PRs, so only the owner (via the
-Slack `approve` path) can satisfy the gate.
+Run this **once** from the repo root. It does two things to the `main` branch
+ruleset (`id 18116963`):
+
+1. Bumps `required_approving_review_count` to **1**, so every PR needs an
+   approving review before it can merge. The App cannot approve its own PRs, so
+   it can never satisfy the gate.
+2. Adds **Repository admin** (`actor_id: 5`) as a bypass actor — that is *you*
+   (the human owner), so you can still merge your own hand-authored PRs. The
+   GitHub App is **not** given the admin role (it has only Contents/PR/Issues/
+   Checks/Metadata permissions), so it does **not** match this bypass and stays
+   blocked.
+
+> Without the admin bypass, requiring 1 approval would lock *you* out too — you
+> cannot approve your own PR, and there would be no other reviewer. The bypass
+> restores your ability to merge while keeping the App blocked.
 
 ```bash
-# Strip read-only fields, bump required_approving_review_count to 1, PUT back.
+# Bump required approvals to 1 AND let repo admins (you) bypass; PUT back.
 gh api repos/:owner/:repo/rulesets/18116963 \
-  | python -c "import sys,json; d=json.load(sys.stdin); [r['parameters'].__setitem__('required_approving_review_count',1) for r in d['rules'] if r['type']=='pull_request']; body={k:d[k] for k in ('name','target','enforcement','conditions','rules','bypass_actors')}; print(json.dumps(body))" \
+  | python -c "import sys,json; d=json.load(sys.stdin); [r['parameters'].__setitem__('required_approving_review_count',1) for r in d['rules'] if r['type']=='pull_request']; d['bypass_actors']=[{'actor_id':5,'actor_type':'RepositoryRole','bypass_mode':'always'}]; body={k:d[k] for k in ('name','target','enforcement','conditions','rules','bypass_actors')}; print(json.dumps(body))" \
   > /tmp/ruleset.json
 gh api --method PUT repos/:owner/:repo/rulesets/18116963 --input /tmp/ruleset.json
 ```
 
-Confirm the change took effect:
+Confirm both changes took effect:
 
 ```bash
 gh api repos/:owner/:repo/rulesets/18116963 \
-  --jq '.rules[]|select(.type=="pull_request").parameters.required_approving_review_count'
+  --jq '{approvals: (.rules[]|select(.type=="pull_request").parameters.required_approving_review_count), bypass: [.bypass_actors[].actor_type]}'
 ```
 
-Expected output: `1`.
+Expected output: `{"approvals":1,"bypass":["RepositoryRole"]}`.
+
+> **Note on the owner-identity fallback:** because repo admins bypass, the
+> mint-failure fallback (you, the admin, via the ambient `gh` login — see the
+> security-model section) *could* bypass the ruleset and merge. The
+> `.claude/orchestrator-settings.json` `deny` of `gh pr merge` is the backstop
+> there. This is the documented trade for keeping the owner able to merge; if
+> you prefer maximum strictness, use a dedicated non-admin reviewer account
+> instead of admin bypass.
 
 ---
 
