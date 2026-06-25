@@ -9,13 +9,16 @@ the canary, ``gh`` for the GhRunner) keep every test offline.
 import argparse
 import asyncio
 import json
+import os
 import subprocess
+import time
 from dataclasses import asdict
 from typing import Any, Awaitable, Callable
 
 from bookieskit.devtools.canary import CanaryReport, run_canary
 from bookieskit.orchestration import chatops, control
 from bookieskit.orchestration import notify as notify_fmt
+from bookieskit.orchestration import runner as tick_runner
 from bookieskit.orchestration.gh import GhRunner
 from bookieskit.orchestration.labels import ensure_labels
 from bookieskit.orchestration.maintenance import sync_canary
@@ -93,6 +96,16 @@ def build_parser() -> argparse.ArgumentParser:
     p_paused = chsub.add_parser("paused")
     p_paused.add_argument("--json", action="store_true", dest="as_json")
 
+    p_lock = sub.add_parser("lock")
+    lsub = p_lock.add_subparsers(dest="lock_cmd", required=True)
+    p_lacq = lsub.add_parser("acquire")
+    p_lacq.add_argument("--path", required=True)
+    p_lacq.add_argument("--stale-after", type=float, default=7200.0, dest="stale_after")
+    p_lacq.add_argument("--json", action="store_true", dest="as_json")
+    p_lrel = lsub.add_parser("release")
+    p_lrel.add_argument("--path", required=True)
+    p_lrel.add_argument("--json", action="store_true", dest="as_json")
+
     p_notify = sub.add_parser(
         "notify", help="Format a Slack-cockpit message (prints text to stdout)"
     )
@@ -126,6 +139,20 @@ def _emit(obj: Any, as_json: bool, text_lines: list[str]) -> None:
         print(json.dumps(obj, default=str))
     else:
         print("\n".join(text_lines))
+
+
+def _lock(args: argparse.Namespace) -> int:
+    if args.lock_cmd == "acquire":
+        ok = tick_runner.acquire_lock(
+            args.path, stale_after_s=args.stale_after,
+            now=time.time(), pid=os.getpid(),
+        )
+        _emit({"acquired": ok}, args.as_json,
+              ["acquired" if ok else "busy"])
+        return 0 if ok else 3
+    tick_runner.release_lock(args.path)
+    _emit({"released": True}, args.as_json, ["released"])
+    return 0
 
 
 def _notify(args: argparse.Namespace) -> int:
@@ -355,6 +382,8 @@ def run(
 ) -> int:
     if args.cmd == "notify":
         return _notify(args)
+    if args.cmd == "lock":
+        return _lock(args)
     if gh is None:
         gh = GhRunner()
     if args.cmd == "sync-canary":

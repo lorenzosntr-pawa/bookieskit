@@ -422,3 +422,20 @@ def test_chatops_paused_reports_state(capsys):
     code = cli.run(cli.build_parser().parse_args(["chatops", "paused", "--json"]), gh=gh)
     assert code == 0
     assert json.loads(capsys.readouterr().out)["paused"] is True
+
+
+def test_lock_acquire_then_busy_then_release(tmp_path, capsys):
+    p = str(tmp_path / "tick.lock")
+    assert cli.run(cli.build_parser().parse_args(
+        ["lock", "acquire", "--path", p, "--json"])) == 0
+    capsys.readouterr()
+    # second acquire while held -> exit 3 (busy)
+    assert cli.run(cli.build_parser().parse_args(
+        ["lock", "acquire", "--path", p, "--json"])) == 3
+    capsys.readouterr()
+    # release, then acquire succeeds again
+    assert cli.run(cli.build_parser().parse_args(
+        ["lock", "release", "--path", p, "--json"])) == 0
+    capsys.readouterr()
+    assert cli.run(cli.build_parser().parse_args(
+        ["lock", "acquire", "--path", p, "--json"])) == 0
