@@ -742,6 +742,16 @@ def test_pr_review_pending_null_when_newest_is_bot(capsys):
     assert out is None
 
 
+def test_pr_review_reply_posts_marked_comment(capsys):
+    gh = _FakeGh()
+    code = cli.run(
+        cli.build_parser().parse_args(
+            ["pr-review", "reply", "--pr", "11", "--body", "here you go"]),
+        gh=gh)
+    assert code == 0
+    assert gh.pr_comments_posted == [(11, "here you go")]
+
+
 def test_gate_reports_pr_reply(monkeypatch, capsys, tmp_path):
     gh = _FakeGh(issues=[_in_review_issue(8)])
     gh._open_prs = [{"number": 11, "headRefName": "feat/x",

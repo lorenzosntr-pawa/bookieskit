@@ -27,8 +27,23 @@ def thread_reply_waiting(thread_messages: list[dict]) -> bool:
     return not msgs[-1].get("bot_id")
 
 
+# Hidden footer the loop appends to every PR reply it posts. This is what makes
+# self-resolution identity-INDEPENDENT: if App-minting ever fails and the cycle
+# falls back to the owner's login, its reply is authored by a User — but the
+# marker still identifies it as the loop's, so the gate won't treat it as a
+# human comment and re-fire forever. Kept out of the rendered text via HTML
+# comment syntax.
+LOOP_REPLY_MARKER = "<!-- bookieskit-loop-reply -->"
+
+
 def _is_bot(user: dict | None) -> bool:
     return bool(user and user.get("type") == "Bot")
+
+
+def _is_loop(user: dict | None, body: str | None) -> bool:
+    """An event is the loop's own (not a human owed a reply) if it was authored
+    by a Bot OR carries the loop reply marker (the fallback-identity guard)."""
+    return _is_bot(user) or LOOP_REPLY_MARKER in (body or "")
 
 
 def pr_reply_waiting(comments: list[dict], reviews: list[dict]) -> bool:
@@ -36,17 +51,22 @@ def pr_reply_waiting(comments: list[dict], reviews: list[dict]) -> bool:
     owes a response). Actionable = any conversation comment, or a review that
     requested changes or carries a non-empty body. A bare APPROVED/COMMENTED
     review with no text is ignored, so a plain approval never triggers a reply.
-    Stateless: the App's own reply is authored by a Bot and becomes the newest
-    event, flipping the state off — no watermark needed.
+    Stateless: the loop's own reply (a Bot, or any comment carrying
+    LOOP_REPLY_MARKER) becomes the newest event, flipping the state off — no
+    watermark needed.
     ``comments`` carry ``created_at``; ``reviews`` carry ``submitted_at``. Both
     timestamps are ISO-8601 UTC (lexically sortable)."""
     events: list[tuple[str, bool]] = []
     for c in comments:
-        events.append((c.get("created_at", ""), _is_bot(c.get("user"))))
+        events.append(
+            (c.get("created_at", ""), _is_loop(c.get("user"), c.get("body")))
+        )
     for r in reviews:
         body = (r.get("body") or "").strip()
         if r.get("state") == "CHANGES_REQUESTED" or body:
-            events.append((r.get("submitted_at", ""), _is_bot(r.get("user"))))
+            events.append(
+                (r.get("submitted_at", ""), _is_loop(r.get("user"), r.get("body")))
+            )
     if not events:
         return False
     events.sort(key=lambda e: e[0])

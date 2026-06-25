@@ -9,6 +9,8 @@ import os
 import re
 import subprocess
 
+from bookieskit.orchestration.gate import LOOP_REPLY_MARKER
+
 _ISSUE_NUMBER_RE = re.compile(r"/(\d+)\s*$")
 
 
@@ -132,7 +134,9 @@ class GhRunner:
         return json.loads(out)
 
     def comment_pr(self, pr: int, body: str) -> None:
-        self._run("pr", "comment", str(pr), "--body", body)
+        # Append the loop marker so the gate recognises this reply as the loop's
+        # own even if it was posted under the owner's fallback login (not a Bot).
+        self._run("pr", "comment", str(pr), "--body", f"{body}\n\n{LOOP_REPLY_MARKER}")
 
     def review_approve(self, pr: int, *, token: str) -> None:
         self._run("pr", "review", str(pr), "--approve", token=token)

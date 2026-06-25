@@ -75,6 +75,18 @@ def test_pr_reply_waiting_false_when_empty():
     assert gate.pr_reply_waiting([], []) is False
 
 
+def test_pr_reply_waiting_treats_marked_reply_as_loop_even_if_user():
+    # fallback identity: the loop posted under the owner's User login, but the
+    # marker identifies it as the loop's -> must NOT keep owing a reply.
+    comments = [
+        {"created_at": "2026-06-25T10:00:00Z", "user": {"type": "User"},
+         "body": "why?"},
+        {"created_at": "2026-06-25T11:00:00Z", "user": {"type": "User"},
+         "body": "Done.\n\n" + gate.LOOP_REPLY_MARKER},
+    ]
+    assert gate.pr_reply_waiting(comments, []) is False
+
+
 def test_should_run_includes_pr_reply():
     assert gate.should_run(queue_actionable=False, new_ticket=False,
                            designing_reply=False, pr_reply=True) is True

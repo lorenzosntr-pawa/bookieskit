@@ -214,10 +214,13 @@ def test_pr_reviews_hits_pulls_reviews_endpoint(monkeypatch):
     assert "repos/:owner/:repo/pulls/11/reviews" in argv
 
 
-def test_comment_pr_builds_gh_pr_comment(monkeypatch):
+def test_comment_pr_builds_gh_pr_comment_with_loop_marker(monkeypatch):
+    from bookieskit.orchestration.gate import LOOP_REPLY_MARKER
     gh, rec = _gh(monkeypatch)
     gh.comment_pr(11, "answering your question")
     argv = rec.calls[0]
     assert argv[:3] == ["gh", "pr", "comment"]
     assert "11" in argv
-    assert "--body" in argv and "answering your question" in argv
+    body = argv[argv.index("--body") + 1]
+    assert "answering your question" in body
+    assert LOOP_REPLY_MARKER in body  # so the gate sees the reply as the loop's

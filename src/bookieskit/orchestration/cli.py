@@ -151,6 +151,10 @@ def build_parser() -> argparse.ArgumentParser:
     prsub = p_prr.add_subparsers(dest="pr_review_cmd", required=True)
     p_prpend = prsub.add_parser("pending")
     p_prpend.add_argument("--json", action="store_true", dest="as_json")
+    p_prreply = prsub.add_parser("reply")
+    p_prreply.add_argument("--pr", type=int, required=True)
+    p_prreply.add_argument("--body", required=True)
+    p_prreply.add_argument("--json", action="store_true", dest="as_json")
 
     p_token = sub.add_parser("token")
     p_token.add_argument("--identity", default=".orchestrator/identity.json")
@@ -644,6 +648,15 @@ def _pr_review_pending(args: argparse.Namespace, gh: GhRunner) -> int:
     return 0
 
 
+def _pr_review_reply(args: argparse.Namespace, gh: GhRunner) -> int:
+    """Post a reply on a PR. Routes through comment_pr so the loop marker is
+    appended — use this (not raw `gh pr comment`) so the gate recognises the
+    reply as the loop's own even under the owner-identity fallback."""
+    gh.comment_pr(args.pr, args.body)
+    _emit({"replied": args.pr}, args.as_json, [f"replied to PR #{args.pr}"])
+    return 0
+
+
 def _gate(args: argparse.Namespace, gh: GhRunner) -> int:
     from bookieskit.orchestration import gate
     # 1) queue actionable?
@@ -730,6 +743,8 @@ def run(
     if args.cmd == "gate":
         return _gate(args, gh)
     if args.cmd == "pr-review":
+        if args.pr_review_cmd == "reply":
+            return _pr_review_reply(args, gh)
         return _pr_review_pending(args, gh)
     if args.cmd == "status":
         return _status_board(args, gh)
