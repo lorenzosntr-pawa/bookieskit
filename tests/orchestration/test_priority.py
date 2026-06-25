@@ -58,3 +58,14 @@ def test_unknown_stream_sorts_last():
 def test_none_when_empty_or_all_claimed():
     assert next_work_item([]) is None
     assert next_work_item([_issue(1, "stream:directed", "status:claimed")]) is None
+
+
+def test_designing_items_are_not_built():
+    issues = [_issue(1, "stream:directed", "status:designing"),
+              _issue(2, "stream:maintenance")]
+    assert next_work_item(issues)["number"] == 2  # designing skipped
+
+
+def test_ready_items_are_buildable():
+    issues = [_issue(5, "stream:directed", "status:ready")]
+    assert next_work_item(issues)["number"] == 5  # ready is actionable

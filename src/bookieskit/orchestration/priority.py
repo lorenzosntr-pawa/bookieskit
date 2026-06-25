@@ -12,11 +12,12 @@ STREAM_ORDER: tuple[str, ...] = (
     "stream:expansion",
     "stream:capability",
 )
-# Statuses that mean an issue is NOT actionable this cycle: already being
-# worked (claimed), awaiting owner review (in-review), or parked (blocked).
-# Skipping all three stops the loop re-picking an item it has already handled.
+# Statuses that mean an issue is NOT actionable for building this cycle:
+# already being worked (claimed), awaiting owner review (in-review), parked
+# (blocked), or still being designed with the owner (designing — not yet
+# approved to build; status:ready is the buildable directed state).
 _INACTIVE_STATUSES = frozenset(
-    {"status:claimed", "status:in-review", "status:blocked"}
+    {"status:claimed", "status:in-review", "status:blocked", "status:designing"}
 )
 
 

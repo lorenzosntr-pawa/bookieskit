@@ -15,11 +15,23 @@ Read the operating contract in the repo-root `CLAUDE.md` first — it binds this
    - If it parses as `approve <pr>`: run `.venv/Scripts/python.exe -m bookieskit.orchestration chatops approve --pr <pr> --author <slack-user-id> --json` and post the returned `slack_text` to `#tickets`. (The CLI enforces the allowlist + CI-green + loop-PR guardrails and merges with squash on success; a rejection is reported, never a merge.)
    - If it parses as `pause [reason]`: run `.venv/Scripts/python.exe -m bookieskit.orchestration chatops pause --author <slack-user-id> --reason "<reason>" --json` and post the `slack_text` to `#tickets`.
    - If it parses as `resume`: run `.venv/Scripts/python.exe -m bookieskit.orchestration chatops resume --author <slack-user-id> --json` and post the `slack_text` to `#tickets`.
-   - Else if it's a work request: distil a short title + one-paragraph summary, run `.venv/Scripts/python.exe -m bookieskit.orchestration chatops intake --author <slack-user-id> --ts <message-ts> --title "<title>" --summary "<summary>" --json`, and post the returned `slack_text` to `#tickets` **only when `status` is `opened`** (skip `duplicate`).
+   - If it parses as `design ok <n>`: run `.venv/Scripts/python.exe -m bookieskit.orchestration chatops design-ok --issue <n> --author <slack-user-id> --json` and post the returned `slack_text` to `#tickets`.
+   - If it parses as `design no <n> <notes>`: run `.venv/Scripts/python.exe -m bookieskit.orchestration chatops design-no --issue <n> --author <slack-user-id> --notes "<notes>" --json` and post the returned `slack_text` to `#tickets`.
+   - If it parses as `council <n>`: run `.venv/Scripts/python.exe -m bookieskit.orchestration chatops council --issue <n> --author <slack-user-id> --json` and post the returned `slack_text` to `#tickets`.
+   - Else if it's a work request: distil a short title + one-paragraph summary, run `.venv/Scripts/python.exe -m bookieskit.orchestration chatops intake --author <slack-user-id> --ts <message-ts> --title "<title>" --summary "<summary>" --json`, and post the returned `slack_text` to `#tickets` **only when `status` is `opened`** (skip `duplicate`). The intake CLI files directed work-requests with `status:designing` automatically (so they are NOT buildable until the owner's `design ok`) — no separate labeling step is needed.
    - Else (chatter): ignore.
    If no Slack MCP is available, skip this entire step and proceed. ChatOps is never on the critical path.
 
 1b. **Pause gate.** Run `.venv/Scripts/python.exe -m bookieskit.orchestration chatops paused --json`. If `paused` is true → report "paused — skipping build this cycle" and END the cycle (do NOT claim or build). Intake + `approve` + `resume` above still ran; only building is gated.
+
+1c. **Design step (directed Issues only).** Query `gh issue list --label status:designing --label stream:directed --state open --json number,title,body` to find open `status:designing` directed Issues. For the top one whose `#tickets` thread's last message is the owner's (i.e. the agent owes a reply):
+   - Read the Issue's `#tickets` thread via Slack MCP (`thread_ts` = the Issue's `slack_ts` meta field in the Issue body yaml block) and the relevant codebase context.
+   - Do **ONE** brainstorm step: post the next clarifying question, OR (when you have enough to converge) the complete proposed design. Reply in the Issue's thread using the Slack MCP `post_message` tool with `thread_ts` = the Issue's `slack_ts`.
+   - If the design involves a genuine stakes/tradeoff (architectural choice, irreversible API decision, performance vs. simplicity), run `llm-council` first and post its recommendation as part of your reply.
+   - Write the current design (or the latest question + context) into the Issue body (append/update the design section below the yaml meta block).
+   - **END the cycle** immediately after this step — one design step per cycle, no building.
+   - If no `status:designing` Issue needs a reply (queue empty, or last message is the agent's), skip to step 2.
+   - Maintenance/canary Issues (`stream:maintenance`, `stream:expansion`, `stream:capability`) are **never** routed through the design phase — they stay decide-and-document.
 
 2. **Pick the top item.** Run
    `.venv/Scripts/python.exe -m bookieskit.orchestration next --json`
@@ -27,9 +39,10 @@ Read the operating contract in the repo-root `CLAUDE.md` first — it binds this
    - Otherwise parse `{number, title, stream, signature}`.
 3. **Claim it.** `.venv/Scripts/python.exe -m bookieskit.orchestration claim <number>`. This sets `status:claimed` so no other cycle double-works it. Then (best-effort, see Notifications) post `cycle-started` to `#agent-activity`.
 4. **Build it — autonomously — per stream:**
-   - `stream:directed` (owner asked for a bookmaker / market / feature): `superpowers:brainstorming` → `writing-plans` → `subagent-driven-development` → `requesting-code-review`. There is NO human to answer clarifying questions: **decide-and-document** — make the most reasonable assumption, proceed, and record every assumption in the PR body. Use `llm-council` for genuine stakes/tradeoffs.
-   - `stream:maintenance` (canary drift): `superpowers:systematic-debugging` → fix → TDD tests → `requesting-code-review`.
-   - `stream:expansion` / `stream:capability`: spec → plan → `subagent-driven-development`.
+   - `stream:directed` with `status:ready` (design approved by owner): use the **agreed design written in the Issue body** as the spec — feed it directly to `writing-plans` instead of decide-and-document. Then `subagent-driven-development` → `requesting-code-review`. The design phase already resolved ambiguities; assumptions in the PR body should be minimal and reference the agreed design.
+   - `stream:directed` without `status:ready` (should not reach here — `next` skips `status:designing` Issues): treat as blocked, `mark-blocked`, and END.
+   - `stream:maintenance` (canary drift): `superpowers:systematic-debugging` → fix → TDD tests → `requesting-code-review`. Decide-and-document applies; no design phase.
+   - `stream:expansion` / `stream:capability`: spec → plan → `subagent-driven-development`. Decide-and-document applies; no design phase.
    - Always: query `graphify` for the structural map before touching code; apply Karpathy principles; keep `src/` ruff-clean; TDD.
    - Work on a **per-Issue branch** (subagent-driven isolates work). NEVER commit to `main`.
 5. **Open the PR** against `main`, body starting with `Closes #<number>`, summarizing what you built and listing every assumption you made for the supervised review. Then (best-effort, see Notifications) post `cycle-pr` to `#agent-activity`.

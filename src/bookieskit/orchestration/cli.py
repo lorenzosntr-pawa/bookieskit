@@ -12,6 +12,8 @@ import json
 import os
 import subprocess
 import time
+import urllib.parse
+import urllib.request
 from dataclasses import asdict
 from typing import Any, Awaitable, Callable
 
@@ -96,6 +98,25 @@ def build_parser() -> argparse.ArgumentParser:
     p_paused = chsub.add_parser("paused")
     p_paused.add_argument("--json", action="store_true", dest="as_json")
 
+    p_dok = chsub.add_parser("design-ok")
+    p_dok.add_argument("--issue", type=int, required=True)
+    p_dok.add_argument("--author", required=True)
+    p_dok.add_argument("--config", default=".chatops.json")
+    p_dok.add_argument("--json", action="store_true", dest="as_json")
+
+    p_dno = chsub.add_parser("design-no")
+    p_dno.add_argument("--issue", type=int, required=True)
+    p_dno.add_argument("--author", required=True)
+    p_dno.add_argument("--notes", required=True)
+    p_dno.add_argument("--config", default=".chatops.json")
+    p_dno.add_argument("--json", action="store_true", dest="as_json")
+
+    p_council = chsub.add_parser("council")
+    p_council.add_argument("--issue", type=int, required=True)
+    p_council.add_argument("--author", required=True)
+    p_council.add_argument("--config", default=".chatops.json")
+    p_council.add_argument("--json", action="store_true", dest="as_json")
+
     p_lock = sub.add_parser("lock")
     lsub = p_lock.add_subparsers(dest="lock_cmd", required=True)
     p_lacq = lsub.add_parser("acquire")
@@ -105,6 +126,11 @@ def build_parser() -> argparse.ArgumentParser:
     p_lrel = lsub.add_parser("release")
     p_lrel.add_argument("--path", required=True)
     p_lrel.add_argument("--json", action="store_true", dest="as_json")
+
+    p_gate = sub.add_parser("gate")
+    p_gate.add_argument("--config", default=".chatops.json")
+    p_gate.add_argument("--watermark", default=".orchestrator/slack-watermark")
+    p_gate.add_argument("--json", action="store_true", dest="as_json")
 
     p_notify = sub.add_parser(
         "notify", help="Format a Slack-cockpit message (prints text to stdout)"
@@ -290,7 +316,13 @@ def _chatops_intake(args: argparse.Namespace, gh: GhRunner) -> int:
         )
         return 0
     item = chatops.build_ticket(args.author, args.ts, args.title, args.summary)
-    number, _ = queue.open_or_update(item, note="(filed from Slack #tickets)")
+    # File directed tickets as status:designing so they are NOT buildable until
+    # the owner's `design ok` — the buildability gate is enforced here in code,
+    # not by a follow-up prose step.
+    number, _ = queue.open_or_update(
+        item, note="(filed from Slack #tickets)",
+        extra_labels=("status:designing",),
+    )
     _emit(
         {
             "status": "opened",
@@ -374,6 +406,133 @@ def _chatops_paused(args: argparse.Namespace, gh: GhRunner) -> int:
     return 0
 
 
+def _chatops_design_ok(args: argparse.Namespace, gh: GhRunner) -> int:
+    approvers = tuple(chatops.load_config(args.config).get("approvers", []))
+    if not chatops.is_authorized(args.author, approvers):
+        slack_text = chatops.rejected(
+            args.issue, "not authorized to approve a design"
+        )
+        _emit({"status": "rejected", "reason": "not authorized",
+               "slack_text": slack_text},
+              args.as_json, [f"rejected design-ok #{args.issue}"])
+        return 0
+    gh.edit_issue(
+        args.issue,
+        add_labels=["status:ready"],
+        remove_labels=["status:designing"],
+    )
+    gh.comment_issue(args.issue, f"Design approved by {args.author} -> status:ready.")
+    _emit(
+        {"status": "ready", "issue": args.issue,
+         "slack_text": chatops.design_ready(args.issue)},
+        args.as_json, [f"design-ok #{args.issue} -> ready"],
+    )
+    return 0
+
+
+def _chatops_design_no(args: argparse.Namespace, gh: GhRunner) -> int:
+    approvers = tuple(chatops.load_config(args.config).get("approvers", []))
+    if not chatops.is_authorized(args.author, approvers):
+        _emit({"status": "rejected", "reason": "not authorized",
+               "slack_text": chatops.rejected(args.issue, "not authorized")},
+              args.as_json, [f"rejected design-no #{args.issue}"])
+        return 0
+    gh.comment_issue(
+        args.issue, f"Design change requested by {args.author}: {args.notes}"
+    )
+    _emit({"status": "changes", "issue": args.issue,
+           "slack_text": chatops.design_changes_ack(args.issue)},
+          args.as_json, [f"design-no #{args.issue}: {args.notes}"])
+    return 0
+
+
+def _chatops_council(args: argparse.Namespace, gh: GhRunner) -> int:
+    approvers = tuple(chatops.load_config(args.config).get("approvers", []))
+    if not chatops.is_authorized(args.author, approvers):
+        _emit({"status": "rejected", "reason": "not authorized",
+               "slack_text": chatops.rejected(args.issue, "not authorized")},
+              args.as_json, [f"rejected council #{args.issue}"])
+        return 0
+    gh.comment_issue(args.issue, f"llm-council pass requested by {args.author}.")
+    _emit({"status": "council-requested", "issue": args.issue}, args.as_json,
+          [f"council requested #{args.issue}"])
+    return 0
+
+
+def _slack_get(method: str, *, token: str, **params) -> dict:
+    url = "https://slack.com/api/" + method + "?" + urllib.parse.urlencode(params)
+    req = urllib.request.Request(url, headers={"Authorization": "Bearer " + token})
+    with urllib.request.urlopen(req) as r:
+        return json.load(r)
+
+
+def _read_token() -> str | None:
+    try:
+        with open(".mcp.json", encoding="utf-8") as handle:
+            data = json.load(handle)
+        return data["mcpServers"]["slack"]["env"]["SLACK_MCP_XOXB_TOKEN"]
+    except (OSError, KeyError, ValueError):
+        return None
+
+
+def _gate(args: argparse.Namespace, gh: GhRunner) -> int:
+    from bookieskit.orchestration import gate
+    # 1) queue actionable?
+    try:
+        actionable = next_work_item(Queue(gh, ensure=False).list_open()) is not None
+    except Exception:
+        actionable = False
+    # 2) new #tickets human message? + 3) a designing thread awaiting our reply?
+    new_ticket = designing_reply = False
+    newest_ts = None
+    token = _read_token()
+    cfg = {}
+    try:
+        cfg = chatops.load_config(args.config)
+    except Exception:
+        cfg = {}
+    channel = cfg.get("tickets_channel")
+    if token and channel:
+        try:
+            hist = _slack_get(
+                "conversations.history", token=token, channel=channel, limit=20
+            )
+            humans = [m for m in hist.get("messages", [])
+                      if m.get("type") == "message" and not m.get("bot_id")]
+            newest_ts = humans[0]["ts"] if humans else None  # history is newest-first
+            wm = None
+            try:
+                with open(args.watermark, encoding="utf-8") as handle:
+                    wm = handle.read().strip() or None
+            except OSError:
+                wm = None
+            new_ticket = gate.new_ticket_waiting(newest_ts, wm)
+            # designing items: any thread whose last message is human?
+            for issue in Queue(gh, ensure=False).list_open(stream="stream:directed"):
+                labels = {lb["name"] for lb in issue.get("labels", [])}
+                if "status:designing" not in labels:
+                    continue
+                thread_ts = parse_meta(issue.get("body", "")).get("slack_ts")
+                if not thread_ts:
+                    continue
+                rep = _slack_get(
+                    "conversations.replies", token=token, channel=channel, ts=thread_ts
+                )
+                if gate.thread_reply_waiting(rep.get("messages", [])):
+                    designing_reply = True
+                    break
+        except Exception:
+            pass  # Slack unreachable -> degrade to queue-only
+    run = gate.should_run(queue_actionable=actionable, new_ticket=new_ticket,
+                          designing_reply=designing_reply)
+    reason = ("actionable-queue" if actionable else
+              "new-ticket" if new_ticket else
+              "design-reply" if designing_reply else "idle")
+    _emit({"run": run, "reason": reason, "newest_ts": newest_ts}, args.as_json,
+          [f"run={run} ({reason})"])
+    return 0
+
+
 def run(
     args: argparse.Namespace,
     *,
@@ -386,6 +545,8 @@ def run(
         return _lock(args)
     if gh is None:
         gh = GhRunner()
+    if args.cmd == "gate":
+        return _gate(args, gh)
     if args.cmd == "sync-canary":
         return _sync_canary(args, runner, gh)
     if args.cmd == "ensure-labels":
@@ -410,6 +571,12 @@ def run(
         return _chatops_resume(args, gh)
     if args.cmd == "chatops" and args.chatops_cmd == "paused":
         return _chatops_paused(args, gh)
+    if args.cmd == "chatops" and args.chatops_cmd == "design-ok":
+        return _chatops_design_ok(args, gh)
+    if args.cmd == "chatops" and args.chatops_cmd == "design-no":
+        return _chatops_design_no(args, gh)
+    if args.cmd == "chatops" and args.chatops_cmd == "council":
+        return _chatops_council(args, gh)
     raise SystemExit(f"unknown command {args.cmd!r}")
 
 
