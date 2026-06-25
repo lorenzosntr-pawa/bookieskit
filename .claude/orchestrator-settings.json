@@ -21,7 +21,11 @@
       "Edit",
       "Glob",
       "Grep",
-      "Agent"
+      "Agent",
+      "mcp__slack__conversations_history",
+      "mcp__slack__conversations_replies",
+      "mcp__slack__conversations_add_message",
+      "mcp__slack__channels_list"
     ],
     "deny": [
       "Bash(gh pr merge:*)",

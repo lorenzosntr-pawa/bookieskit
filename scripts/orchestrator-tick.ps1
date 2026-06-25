@@ -13,13 +13,13 @@ function Log($m) { "$(Get-Date -Format o) $m" | Add-Content -Encoding utf8 $log 
 
 # Acquire the tick lock; skip cleanly if a previous cycle is still running.
 & $py -m bookieskit.orchestration lock acquire --path $lock | Out-Null
-if ($LASTEXITCODE -ne 0) { Log "busy — previous cycle still running; skipping tick"; exit 0 }
+if ($LASTEXITCODE -ne 0) { Log "busy - previous cycle still running; skipping tick"; exit 0 }
 
 try {
     Log "tick start"
     # Headless one cycle under the constrained permission profile.
     & claude -p "/orchestrate" --settings (Join-Path $repo ".claude\orchestrator-settings.json") 2>&1 | Add-Content -Encoding utf8 $log
-    $claudeExit = $LASTEXITCODE  # capture claude's native exit immediately (defensive — before any later command)
+    $claudeExit = $LASTEXITCODE  # capture claude's native exit immediately (defensive, before any later command)
     Log "tick done (claude exit $claudeExit)"
 }
 finally {
