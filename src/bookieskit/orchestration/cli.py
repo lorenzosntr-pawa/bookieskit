@@ -98,6 +98,25 @@ def build_parser() -> argparse.ArgumentParser:
     p_paused = chsub.add_parser("paused")
     p_paused.add_argument("--json", action="store_true", dest="as_json")
 
+    p_dok = chsub.add_parser("design-ok")
+    p_dok.add_argument("--issue", type=int, required=True)
+    p_dok.add_argument("--author", required=True)
+    p_dok.add_argument("--config", default=".chatops.json")
+    p_dok.add_argument("--json", action="store_true", dest="as_json")
+
+    p_dno = chsub.add_parser("design-no")
+    p_dno.add_argument("--issue", type=int, required=True)
+    p_dno.add_argument("--author", required=True)
+    p_dno.add_argument("--notes", required=True)
+    p_dno.add_argument("--config", default=".chatops.json")
+    p_dno.add_argument("--json", action="store_true", dest="as_json")
+
+    p_council = chsub.add_parser("council")
+    p_council.add_argument("--issue", type=int, required=True)
+    p_council.add_argument("--author", required=True)
+    p_council.add_argument("--config", default=".chatops.json")
+    p_council.add_argument("--json", action="store_true", dest="as_json")
+
     p_lock = sub.add_parser("lock")
     lsub = p_lock.add_subparsers(dest="lock_cmd", required=True)
     p_lacq = lsub.add_parser("acquire")
@@ -381,6 +400,59 @@ def _chatops_paused(args: argparse.Namespace, gh: GhRunner) -> int:
     return 0
 
 
+def _chatops_design_ok(args: argparse.Namespace, gh: GhRunner) -> int:
+    approvers = tuple(chatops.load_config(args.config).get("approvers", []))
+    if not chatops.is_authorized(args.author, approvers):
+        slack_text = chatops.rejected(
+            args.issue, "not authorized to approve a design"
+        )
+        _emit({"status": "rejected", "reason": "not authorized",
+               "slack_text": slack_text},
+              args.as_json, [f"rejected design-ok #{args.issue}"])
+        return 0
+    gh.edit_issue(
+        args.issue,
+        add_labels=["status:ready"],
+        remove_labels=["status:designing"],
+    )
+    gh.comment_issue(args.issue, f"Design approved by {args.author} -> status:ready.")
+    _emit(
+        {"status": "ready", "issue": args.issue,
+         "slack_text": chatops.design_ready(args.issue)},
+        args.as_json, [f"design-ok #{args.issue} -> ready"],
+    )
+    return 0
+
+
+def _chatops_design_no(args: argparse.Namespace, gh: GhRunner) -> int:
+    approvers = tuple(chatops.load_config(args.config).get("approvers", []))
+    if not chatops.is_authorized(args.author, approvers):
+        _emit({"status": "rejected", "reason": "not authorized",
+               "slack_text": chatops.rejected(args.issue, "not authorized")},
+              args.as_json, [f"rejected design-no #{args.issue}"])
+        return 0
+    gh.comment_issue(
+        args.issue, f"Design change requested by {args.author}: {args.notes}"
+    )
+    _emit({"status": "changes", "issue": args.issue,
+           "slack_text": chatops.design_changes_ack(args.issue)},
+          args.as_json, [f"design-no #{args.issue}: {args.notes}"])
+    return 0
+
+
+def _chatops_council(args: argparse.Namespace, gh: GhRunner) -> int:
+    approvers = tuple(chatops.load_config(args.config).get("approvers", []))
+    if not chatops.is_authorized(args.author, approvers):
+        _emit({"status": "rejected", "reason": "not authorized",
+               "slack_text": chatops.rejected(args.issue, "not authorized")},
+              args.as_json, [f"rejected council #{args.issue}"])
+        return 0
+    gh.comment_issue(args.issue, f"llm-council pass requested by {args.author}.")
+    _emit({"status": "council-requested", "issue": args.issue}, args.as_json,
+          [f"council requested #{args.issue}"])
+    return 0
+
+
 def _slack_get(method: str, *, token: str, **params) -> dict:
     url = "https://slack.com/api/" + method + "?" + urllib.parse.urlencode(params)
     req = urllib.request.Request(url, headers={"Authorization": "Bearer " + token})
@@ -493,6 +565,12 @@ def run(
         return _chatops_resume(args, gh)
     if args.cmd == "chatops" and args.chatops_cmd == "paused":
         return _chatops_paused(args, gh)
+    if args.cmd == "chatops" and args.chatops_cmd == "design-ok":
+        return _chatops_design_ok(args, gh)
+    if args.cmd == "chatops" and args.chatops_cmd == "design-no":
+        return _chatops_design_no(args, gh)
+    if args.cmd == "chatops" and args.chatops_cmd == "council":
+        return _chatops_council(args, gh)
     raise SystemExit(f"unknown command {args.cmd!r}")
 
 

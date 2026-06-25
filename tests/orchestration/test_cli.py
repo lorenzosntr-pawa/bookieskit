@@ -505,3 +505,30 @@ def test_gate_runs_on_designing_thread_reply(tmp_path, capsys, monkeypatch):
     out = json.loads(capsys.readouterr().out)
     assert out["run"] is True
     assert out["reason"] == "design-reply"  # not actionable-queue / new-ticket
+
+
+def test_design_ok_flips_designing_to_ready(capsys, tmp_path):
+    gh = _FakeGh(issues=[{"number": 7, "title": "t", "body": "b",
+        "labels": [{"name": "stream:directed"}, {"name": "status:designing"}],
+        "state": "open"}])
+    code = cli.run(cli.build_parser().parse_args(
+        ["chatops", "design-ok", "--issue", "7", "--author", "U1",
+         "--config", str(_chatops_config(tmp_path)), "--json"]), gh=gh)
+    assert code == 0
+    out = json.loads(capsys.readouterr().out)
+    assert out["status"] == "ready"
+    labels = {lb["name"] for lb in gh.issues[0]["labels"]}
+    assert "status:ready" in labels and "status:designing" not in labels
+
+
+def test_design_ok_unauthorized_no_change(capsys, tmp_path):
+    gh = _FakeGh(issues=[{"number": 7, "title": "t", "body": "b",
+        "labels": [{"name": "stream:directed"}, {"name": "status:designing"}],
+        "state": "open"}])
+    code = cli.run(cli.build_parser().parse_args(
+        ["chatops", "design-ok", "--issue", "7", "--author", "U999",
+         "--config", str(_chatops_config(tmp_path)), "--json"]), gh=gh)
+    assert code == 0
+    assert json.loads(capsys.readouterr().out)["status"] == "rejected"
+    labels = {lb["name"] for lb in gh.issues[0]["labels"]}
+    assert "status:designing" in labels  # unchanged
