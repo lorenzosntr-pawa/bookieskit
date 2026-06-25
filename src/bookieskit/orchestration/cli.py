@@ -14,7 +14,7 @@ from dataclasses import asdict
 from typing import Any, Awaitable, Callable
 
 from bookieskit.devtools.canary import CanaryReport, run_canary
-from bookieskit.orchestration import chatops
+from bookieskit.orchestration import chatops, control
 from bookieskit.orchestration import notify as notify_fmt
 from bookieskit.orchestration.gh import GhRunner
 from bookieskit.orchestration.labels import ensure_labels
@@ -78,6 +78,20 @@ def build_parser() -> argparse.ArgumentParser:
     p_approve.add_argument("--author", required=True)
     p_approve.add_argument("--config", default=".chatops.json")
     p_approve.add_argument("--json", action="store_true", dest="as_json")
+
+    p_pause = chsub.add_parser("pause")
+    p_pause.add_argument("--author", required=True)
+    p_pause.add_argument("--reason", default="")
+    p_pause.add_argument("--config", default=".chatops.json")
+    p_pause.add_argument("--json", action="store_true", dest="as_json")
+
+    p_resume = chsub.add_parser("resume")
+    p_resume.add_argument("--author", required=True)
+    p_resume.add_argument("--config", default=".chatops.json")
+    p_resume.add_argument("--json", action="store_true", dest="as_json")
+
+    p_paused = chsub.add_parser("paused")
+    p_paused.add_argument("--json", action="store_true", dest="as_json")
 
     p_notify = sub.add_parser(
         "notify", help="Format a Slack-cockpit message (prints text to stdout)"
@@ -300,6 +314,39 @@ def _chatops_approve(args: argparse.Namespace, gh: GhRunner) -> int:
     return 0
 
 
+def _chatops_pause(args: argparse.Namespace, gh: GhRunner) -> int:
+    approvers = tuple(chatops.load_config(args.config).get("approvers", []))
+    if not chatops.is_authorized(args.author, approvers):
+        _emit({"status": "rejected", "reason": "not authorized",
+               "slack_text": chatops.rejected(0, "not authorized to pause")},
+              args.as_json, [f"rejected pause by {args.author}: not authorized"])
+        return 0
+    control.set_paused(gh, reason=args.reason, author=args.author)
+    _emit({"status": "paused", "reason": args.reason,
+           "slack_text": chatops.paused(args.reason)},
+          args.as_json, [f"paused: {args.reason}"])
+    return 0
+
+
+def _chatops_resume(args: argparse.Namespace, gh: GhRunner) -> int:
+    approvers = tuple(chatops.load_config(args.config).get("approvers", []))
+    if not chatops.is_authorized(args.author, approvers):
+        _emit({"status": "rejected", "reason": "not authorized",
+               "slack_text": chatops.rejected(0, "not authorized to resume")},
+              args.as_json, [f"rejected resume by {args.author}: not authorized"])
+        return 0
+    control.clear_paused(gh, author=args.author)
+    _emit({"status": "resumed", "slack_text": chatops.resumed()},
+          args.as_json, ["resumed"])
+    return 0
+
+
+def _chatops_paused(args: argparse.Namespace, gh: GhRunner) -> int:
+    _emit({"paused": control.is_paused(gh)}, args.as_json,
+          [f"paused={control.is_paused(gh)}"])
+    return 0
+
+
 def run(
     args: argparse.Namespace,
     *,
@@ -328,6 +375,12 @@ def run(
         return _chatops_intake(args, gh)
     if args.cmd == "chatops" and args.chatops_cmd == "approve":
         return _chatops_approve(args, gh)
+    if args.cmd == "chatops" and args.chatops_cmd == "pause":
+        return _chatops_pause(args, gh)
+    if args.cmd == "chatops" and args.chatops_cmd == "resume":
+        return _chatops_resume(args, gh)
+    if args.cmd == "chatops" and args.chatops_cmd == "paused":
+        return _chatops_paused(args, gh)
     raise SystemExit(f"unknown command {args.cmd!r}")
 
 

@@ -377,3 +377,48 @@ def test_chatops_approve_merges_green_loop_pr(capsys, tmp_path):
     assert out["status"] == "merged" and out["issue"] == 8
     assert gh.merged == [(11, "squash")]  # merged once, squash
     assert "#11" in out["slack_text"]
+
+
+def test_chatops_pause_authorized_sets_marker(capsys, tmp_path):
+    gh = _FakeGh()
+    code = cli.run(cli.build_parser().parse_args(
+        ["chatops", "pause", "--author", "U1", "--reason", "noisy",
+         "--config", str(_chatops_config(tmp_path)), "--json"]), gh=gh)
+    assert code == 0
+    out = json.loads(capsys.readouterr().out)
+    assert out["status"] == "paused"
+    from bookieskit.orchestration import control
+    assert control.is_paused(gh) is True
+
+
+def test_chatops_pause_unauthorized_does_nothing(capsys, tmp_path):
+    gh = _FakeGh()
+    code = cli.run(cli.build_parser().parse_args(
+        ["chatops", "pause", "--author", "U999",
+         "--config", str(_chatops_config(tmp_path)), "--json"]), gh=gh)
+    assert code == 0
+    out = json.loads(capsys.readouterr().out)
+    assert out["status"] == "rejected"
+    from bookieskit.orchestration import control
+    assert control.is_paused(gh) is False  # not paused by a non-approver
+
+
+def test_chatops_resume_clears_marker(capsys, tmp_path):
+    from bookieskit.orchestration import control
+    gh = _FakeGh()
+    control.set_paused(gh, reason="x", author="U1")
+    code = cli.run(cli.build_parser().parse_args(
+        ["chatops", "resume", "--author", "U1",
+         "--config", str(_chatops_config(tmp_path)), "--json"]), gh=gh)
+    assert code == 0
+    assert json.loads(capsys.readouterr().out)["status"] == "resumed"
+    assert control.is_paused(gh) is False
+
+
+def test_chatops_paused_reports_state(capsys):
+    from bookieskit.orchestration import control
+    gh = _FakeGh()
+    control.set_paused(gh, reason="x", author="U1")
+    code = cli.run(cli.build_parser().parse_args(["chatops", "paused", "--json"]), gh=gh)
+    assert code == 0
+    assert json.loads(capsys.readouterr().out)["paused"] is True
