@@ -439,3 +439,18 @@ def test_lock_acquire_then_busy_then_release(tmp_path, capsys):
     capsys.readouterr()
     assert cli.run(cli.build_parser().parse_args(
         ["lock", "acquire", "--path", p, "--json"])) == 0
+
+
+def test_chatops_resume_unauthorized_does_nothing(capsys, tmp_path):
+    # Symmetric to the pause guard: a non-approver must NOT be able to resume
+    # (clear the pause marker) — the kill-switch authz protects both directions.
+    from bookieskit.orchestration import control
+    gh = _FakeGh()
+    control.set_paused(gh, reason="x", author="U1")  # paused by an approver
+    code = cli.run(cli.build_parser().parse_args(
+        ["chatops", "resume", "--author", "U999",
+         "--config", str(_chatops_config(tmp_path)), "--json"]), gh=gh)
+    assert code == 0
+    out = json.loads(capsys.readouterr().out)
+    assert out["status"] == "rejected"
+    assert control.is_paused(gh) is True  # marker NOT cleared by a non-approver
