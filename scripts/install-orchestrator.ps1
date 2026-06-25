@@ -10,6 +10,6 @@ $trigger = New-ScheduledTaskTrigger -Once -At (Get-Date) `
 $settings = New-ScheduledTaskSettingsSet -StartWhenAvailable `
     -DontStopOnIdleEnd -MultipleInstances IgnoreNew
 Register-ScheduledTask -TaskName $taskName -Action $action -Trigger $trigger `
-    -Settings $settings -Description "bookieskit agent company — 15-min orchestrate tick" `
+    -Settings $settings -Description "bookieskit agent company - 15-min orchestrate tick" `
     -Force
 Write-Host "Registered task '$taskName' (every 15 min). Remove with: Unregister-ScheduledTask -TaskName $taskName -Confirm:`$false"

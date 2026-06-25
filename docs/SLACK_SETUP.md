@@ -33,6 +33,7 @@ session — avoid them for an always-on cockpit. Priority if several are set:
            "chat:write",
            "channels:history", "channels:read",
            "groups:history", "groups:read",
+           "im:read", "mpim:read",
            "users:read"
          ]
        }
@@ -41,8 +42,10 @@ session — avoid them for an always-on cockpit. Priority if several are set:
    }
    ```
 
-   `chat:write` is posting (covers this slice); the `*:history`/`*:read` scopes
-   let the next (ChatOps) slice read `#tickets` — set once, no rework.
+   `chat:write` is posting; the `*:history`/`*:read` scopes let the bot read
+   `#tickets`. `im:read`+`mpim:read` are REQUIRED — without them the
+   slack-mcp-server crashes on boot fetching the channel list (`missing_scope`)
+   and registers no tools. Set once, no rework.
 2. **Install to Workspace** → copy the **Bot User OAuth Token** (`xoxb-…`).
    Keep it secret; **never commit it.**
 
