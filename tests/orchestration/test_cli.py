@@ -608,3 +608,17 @@ def test_token_exit1_when_unprovisioned(tmp_path, capsys):
     rc = cli.main(["token", "--identity", str(tmp_path / "missing.json")])
     assert rc == 1
     assert "not provisioned" in capsys.readouterr().err
+
+
+def test_token_exit1_when_identity_malformed(tmp_path, capsys):
+    # present but missing required keys -> still "unprovisioned", not a traceback
+    ident = tmp_path / "identity.json"
+    ident.write_text('{"app_id": 1}', encoding="utf-8")  # no installation_id
+    key = tmp_path / "app.pem"
+    key.write_text("KEY", encoding="utf-8")
+    rc = cli.main(
+        ["token", "--identity", str(ident), "--key", str(key),
+         "--cache", str(tmp_path / "c.json")]
+    )
+    assert rc == 1
+    assert "not provisioned" in capsys.readouterr().err

@@ -573,13 +573,18 @@ def _token(args: argparse.Namespace) -> int:
             ident = json.load(f)
         with open(args.key, encoding="utf-8") as f:
             pem = f.read()
-    except OSError as exc:
+        app_id = ident["app_id"]
+        installation_id = ident["installation_id"]
+    except (OSError, ValueError, KeyError) as exc:
+        # missing/unreadable files OR malformed identity.json are all
+        # "unprovisioned" — report cleanly, never a traceback (the tick falls
+        # back to the ambient gh login on a non-zero exit).
         print(f"token: not provisioned ({exc})", file=sys.stderr)
         return 1
     res = appauth.mint_installation_token(
-        app_id=ident["app_id"],
+        app_id=app_id,
         private_key_pem=pem,
-        installation_id=ident["installation_id"],
+        installation_id=installation_id,
         now=int(time.time()),
     )
     os.makedirs(os.path.dirname(args.cache) or ".", exist_ok=True)
