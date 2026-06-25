@@ -22,6 +22,7 @@ class _RecordingRun:
         # issue bodies and silently blinded the loop).
         assert kwargs.get("encoding") == "utf-8"
         assert kwargs.get("errors") == "replace"
+        self.env = kwargs.get("env")
         return subprocess.CompletedProcess(argv, 0, self.stdout, "")
 
 
@@ -154,3 +155,25 @@ def test_merge_pr_squashes_by_default(monkeypatch):
     assert argv[:3] == ["gh", "pr", "merge"]
     assert "11" in argv
     assert "--squash" in argv
+
+
+def test_run_injects_gh_token_env_when_token_given(monkeypatch):
+    gh, rec = _gh(monkeypatch)
+    gh.merge_pr(11, token="ghp_owner")
+    assert rec.env is not None
+    assert rec.env["GH_TOKEN"] == "ghp_owner"
+
+
+def test_run_uses_ambient_env_when_no_token(monkeypatch):
+    gh, rec = _gh(monkeypatch, stdout="[]")
+    gh.list_labels()
+    assert rec.env is None  # inherit ambient (the App token the tick exported)
+
+
+def test_review_approve_builds_argv_with_token(monkeypatch):
+    gh, rec = _gh(monkeypatch)
+    gh.review_approve(11, token="ghp_owner")
+    argv = rec.calls[0]
+    assert argv[:3] == ["gh", "pr", "review"]
+    assert "11" in argv and "--approve" in argv
+    assert rec.env["GH_TOKEN"] == "ghp_owner"
