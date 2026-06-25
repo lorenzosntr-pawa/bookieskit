@@ -177,3 +177,47 @@ def test_review_approve_builds_argv_with_token(monkeypatch):
     assert argv[:3] == ["gh", "pr", "review"]
     assert "11" in argv and "--approve" in argv
     assert rec.env["GH_TOKEN"] == "ghp_owner"
+
+
+def test_list_open_prs_requests_closing_issue_fields(monkeypatch):
+    gh, rec = _gh(
+        monkeypatch,
+        stdout='[{"number":11,"closingIssuesReferences":[{"number":8}],'
+        '"headRefName":"feat/x"}]',
+    )
+    out = gh.list_open_prs()
+    assert out[0]["closingIssuesReferences"][0]["number"] == 8
+    argv = rec.calls[0]
+    assert argv[:3] == ["gh", "pr", "list"]
+    assert "--state" in argv and "open" in argv
+    json_idx = argv.index("--json")
+    fields = argv[json_idx + 1]
+    for field in ("number", "closingIssuesReferences", "headRefName"):
+        assert field in fields
+
+
+def test_pr_comments_hits_issue_comments_endpoint(monkeypatch):
+    gh, rec = _gh(monkeypatch, stdout='[{"body":"hi","user":{"type":"User"}}]')
+    out = gh.pr_comments(11)
+    assert out[0]["body"] == "hi"
+    argv = rec.calls[0]
+    assert argv[:2] == ["gh", "api"]
+    assert "repos/:owner/:repo/issues/11/comments" in argv
+
+
+def test_pr_reviews_hits_pulls_reviews_endpoint(monkeypatch):
+    gh, rec = _gh(monkeypatch, stdout='[{"state":"CHANGES_REQUESTED","body":"x"}]')
+    out = gh.pr_reviews(11)
+    assert out[0]["state"] == "CHANGES_REQUESTED"
+    argv = rec.calls[0]
+    assert argv[:2] == ["gh", "api"]
+    assert "repos/:owner/:repo/pulls/11/reviews" in argv
+
+
+def test_comment_pr_builds_gh_pr_comment(monkeypatch):
+    gh, rec = _gh(monkeypatch)
+    gh.comment_pr(11, "answering your question")
+    argv = rec.calls[0]
+    assert argv[:3] == ["gh", "pr", "comment"]
+    assert "11" in argv
+    assert "--body" in argv and "answering your question" in argv

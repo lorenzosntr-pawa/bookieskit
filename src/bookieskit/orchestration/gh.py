@@ -116,6 +116,24 @@ class GhRunner:
         )
         return json.loads(out)
 
+    def list_open_prs(self) -> list[dict]:
+        out = self._run(
+            "pr", "list", "--state", "open",
+            "--json", "number,closingIssuesReferences,headRefName",
+        )
+        return json.loads(out)
+
+    def pr_comments(self, pr: int) -> list[dict]:
+        out = self._run("api", f"repos/:owner/:repo/issues/{pr}/comments")
+        return json.loads(out)
+
+    def pr_reviews(self, pr: int) -> list[dict]:
+        out = self._run("api", f"repos/:owner/:repo/pulls/{pr}/reviews")
+        return json.loads(out)
+
+    def comment_pr(self, pr: int, body: str) -> None:
+        self._run("pr", "comment", str(pr), "--body", body)
+
     def review_approve(self, pr: int, *, token: str) -> None:
         self._run("pr", "review", str(pr), "--approve", token=token)
 
