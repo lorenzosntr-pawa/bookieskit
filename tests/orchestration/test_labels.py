@@ -1,4 +1,6 @@
 from bookieskit.orchestration.labels import (
+    ALL_LABELS,
+    CONTROL_LABELS,
     STATUS_LABELS,
     STREAM_LABELS,
     ensure_labels,
@@ -30,13 +32,16 @@ def test_taxonomy_has_the_four_streams_and_three_statuses():
     assert set(STATUS_LABELS) == {
         "status:claimed", "status:in-review", "status:blocked",
     }
+    assert set(CONTROL_LABELS) == {"control:paused"}
+    assert "control:paused" in ALL_LABELS
+    assert len(ALL_LABELS) == 8  # 4 stream + 3 status + 1 control
 
 
 def test_ensure_labels_creates_all_when_none_exist():
     gh = _FakeGh(existing=[])
     created = ensure_labels(gh)
-    assert set(created) == set(STREAM_LABELS) | set(STATUS_LABELS)
-    assert len(gh.created) == 7  # 4 streams + 3 statuses
+    assert set(created) == set(STREAM_LABELS) | set(STATUS_LABELS) | set(CONTROL_LABELS)
+    assert len(gh.created) == 8  # 4 streams + 3 statuses + 1 control
     # Color + description are passed through from the taxonomy.
     by_name = {c[0]: c for c in gh.created}
     name, color, desc = by_name["stream:maintenance"]
@@ -52,11 +57,11 @@ def test_ensure_labels_creates_only_missing():
     assert "stream:expansion" in created
     assert "status:in-review" in created
     assert "status:blocked" in created
-    assert len(created) == 5  # 3 streams + in-review + blocked
+    assert len(created) == 6  # 3 streams + in-review + blocked + control:paused
 
 
 def test_ensure_labels_is_idempotent_second_run_is_noop():
-    existing = list(STREAM_LABELS) + list(STATUS_LABELS)
+    existing = list(STREAM_LABELS) + list(STATUS_LABELS) + list(CONTROL_LABELS)
     gh = _FakeGh(existing=existing)
     assert ensure_labels(gh) == []
     assert gh.created == []

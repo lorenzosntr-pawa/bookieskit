@@ -21,7 +21,15 @@ STATUS_LABELS: dict[str, tuple[str, str]] = {
     "status:blocked": ("e4e669", "Build blocked — needs owner input"),
 }
 
-ALL_LABELS: dict[str, tuple[str, str]] = {**STREAM_LABELS, **STATUS_LABELS}
+CONTROL_LABELS: dict[str, tuple[str, str]] = {
+    "control:paused": ("b60205", "Orchestrator paused — autonomous building halted"),
+}
+
+ALL_LABELS: dict[str, tuple[str, str]] = {
+    **STREAM_LABELS,
+    **STATUS_LABELS,
+    **CONTROL_LABELS,
+}
 
 
 def ensure_labels(gh: GhRunner) -> list[str]:
