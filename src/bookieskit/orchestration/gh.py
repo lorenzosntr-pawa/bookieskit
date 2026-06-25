@@ -15,11 +15,17 @@ class GhRunner:
     """Injectable wrapper over the ``gh`` subprocess calls the queue needs."""
 
     def _run(self, *args: str) -> str:
+        # Force UTF-8 decoding: gh emits UTF-8 (issue bodies/titles carry em-dashes,
+        # arrows, emoji), but text=True defaults to the platform locale codec
+        # (cp1252 on Windows) which raises UnicodeDecodeError on those bytes and
+        # silently blinds the loop. errors="replace" keeps a stray byte non-fatal.
         result = subprocess.run(
             ["gh", *args],
             check=True,
             capture_output=True,
             text=True,
+            encoding="utf-8",
+            errors="replace",
         )
         return result.stdout
 

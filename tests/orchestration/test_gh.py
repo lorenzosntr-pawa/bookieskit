@@ -17,6 +17,11 @@ class _RecordingRun:
         assert kwargs.get("check") is True
         assert kwargs.get("capture_output") is True
         assert kwargs.get("text") is True
+        # Regression: gh output must be decoded as UTF-8, not the platform locale
+        # codec (cp1252 on Windows raised UnicodeDecodeError on em-dash/emoji in
+        # issue bodies and silently blinded the loop).
+        assert kwargs.get("encoding") == "utf-8"
+        assert kwargs.get("errors") == "replace"
         return subprocess.CompletedProcess(argv, 0, self.stdout, "")
 
 
