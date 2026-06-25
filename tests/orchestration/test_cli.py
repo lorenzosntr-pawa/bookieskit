@@ -17,6 +17,7 @@ class _FakeGh:
             "stream:capability", "status:claimed", "status:in-review",
         ]
         self.pr_views = {}
+        self.reviewed = []
         self.merged = []
 
     def list_labels(self):
@@ -73,8 +74,11 @@ class _FakeGh:
     def pr_view(self, pr):
         return self.pr_views[pr]
 
-    def merge_pr(self, pr, *, method="squash"):
-        self.merged.append((pr, method))
+    def review_approve(self, pr, *, token):
+        self.reviewed.append((pr, token))
+
+    def merge_pr(self, pr, *, method="squash", token=None):
+        self.merged.append((pr, method, token))
 
 
 async def _runner_drift(sport, *, seed=None, max_candidates=3, clients=None):
@@ -363,7 +367,8 @@ def test_chatops_approve_rejects_non_loop_pr(capsys, tmp_path):
     assert gh.merged == []
 
 
-def test_chatops_approve_merges_green_loop_pr(capsys, tmp_path):
+def test_chatops_approve_merges_green_loop_pr(capsys, tmp_path, monkeypatch):
+    monkeypatch.setattr(cli, "_read_owner_token", lambda: "ghp_owner")
     gh = _FakeGh(issues=[{
         "number": 8, "title": "Add Stake", "body": "b",
         "labels": [{"name": "stream:directed"}, {"name": "status:in-review"}],
@@ -378,7 +383,7 @@ def test_chatops_approve_merges_green_loop_pr(capsys, tmp_path):
     assert code == 0
     out = json.loads(capsys.readouterr().out)
     assert out["status"] == "merged" and out["issue"] == 8
-    assert gh.merged == [(11, "squash")]  # merged once, squash
+    assert gh.merged == [(11, "squash", "ghp_owner")]  # merged once, squash, with owner token
     assert "#11" in out["slack_text"]
 
 
@@ -622,3 +627,60 @@ def test_token_exit1_when_identity_malformed(tmp_path, capsys):
     )
     assert rc == 1
     assert "not provisioned" in capsys.readouterr().err
+
+
+def test_approve_uses_owner_token_for_review_and_merge(tmp_path, monkeypatch):
+    # owner token on disk
+    monkeypatch.setattr(cli, "_read_owner_token", lambda: "ghp_owner")
+
+    class FakeGh:
+        def __init__(self):
+            self.review = None
+            self.merge = None
+
+        def pr_view(self, pr):
+            return {"state": "OPEN", "statusCheckRollup": [],
+                    "closingIssuesReferences": [{"number": 8}]}
+
+        def list_issues(self, *, state, labels=()):
+            return [{"number": 8}]
+
+        def review_approve(self, pr, *, token):
+            self.review = (pr, token)
+
+        def merge_pr(self, pr, *, method="squash", token=None):
+            self.merge = (pr, method, token)
+
+    fake = FakeGh()
+    monkeypatch.setattr(cli.chatops, "checks_pass", lambda rollup: True)
+    monkeypatch.setattr(cli.chatops, "is_authorized", lambda a, allow: True)
+    monkeypatch.setattr(cli.chatops, "load_config", lambda cfg: {"approvers": ["U"]})
+    monkeypatch.setattr(cli.chatops, "closing_issue_numbers", lambda v: [8])
+
+    import argparse
+    args = argparse.Namespace(pr=11, author="U", config="x", as_json=True)
+    rc = cli._chatops_approve(args, fake)
+    assert rc == 0
+    assert fake.review == (11, "ghp_owner")
+    assert fake.merge == (11, "squash", "ghp_owner")
+
+
+def test_approve_rejects_when_no_owner_token(monkeypatch):
+    monkeypatch.setattr(cli, "_read_owner_token", lambda: None)
+    monkeypatch.setattr(cli.chatops, "is_authorized", lambda a, allow: True)
+    monkeypatch.setattr(cli.chatops, "load_config", lambda cfg: {"approvers": ["U"]})
+
+    class FakeGh:
+        def pr_view(self, pr):
+            return {"state": "OPEN", "statusCheckRollup": [],
+                    "closingIssuesReferences": [{"number": 8}]}
+
+        def list_issues(self, *, state, labels=()):
+            return [{"number": 8}]
+
+    import argparse
+    monkeypatch.setattr(cli.chatops, "checks_pass", lambda rollup: True)
+    monkeypatch.setattr(cli.chatops, "closing_issue_numbers", lambda v: [8])
+    args = argparse.Namespace(pr=11, author="U", config="x", as_json=True)
+    rc = cli._chatops_approve(args, FakeGh())
+    assert rc == 0  # a rejection is a handled outcome

@@ -383,7 +383,11 @@ def _chatops_approve(args: argparse.Namespace, gh: GhRunner) -> int:
     matched = next((n for n in closes if n in in_review), None)
     if matched is None:
         return _chatops_reject(args, "not a loop PR")
-    gh.merge_pr(args.pr, method="squash")
+    owner = _read_owner_token()
+    if owner is None:
+        return _chatops_reject(args, "no owner token configured")
+    gh.review_approve(args.pr, token=owner)
+    gh.merge_pr(args.pr, method="squash", token=owner)
     _emit(
         {"status": "merged", "pr": args.pr, "issue": matched,
          "slack_text": chatops.merged(args.pr, matched)},
@@ -554,6 +558,14 @@ def _read_token() -> str | None:
             data = json.load(handle)
         return data["mcpServers"]["slack"]["env"]["SLACK_MCP_XOXB_TOKEN"]
     except (OSError, KeyError, ValueError):
+        return None
+
+
+def _read_owner_token(path: str = ".orchestrator/owner-token") -> str | None:
+    try:
+        with open(path, encoding="utf-8") as handle:
+            return handle.read().strip() or None
+    except OSError:
         return None
 
 
