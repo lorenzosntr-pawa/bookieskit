@@ -24,6 +24,20 @@ if (-not $run) { Log "gate: idle - skipping"; Board; exit 0 }
 if ($LASTEXITCODE -ne 0) { Log "busy - previous cycle still running; skipping tick"; Board; exit 0 }
 try {
     Log "tick start (gate: run)"
+    # Mint/refresh the GitHub App installation token so the cycle's git/gh act
+    # as the App (an identity the main ruleset bars from merging), not as the
+    # owner. If the App is not provisioned yet, fall back to the ambient login.
+    $appToken = & $py -m bookieskit.orchestration token 2>$null
+    if ($LASTEXITCODE -eq 0 -and $appToken) {
+        $appToken = $appToken.Trim()
+        $env:GH_TOKEN = $appToken
+        $env:GITHUB_TOKEN = $appToken
+        $basic = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes("x-access-token:" + $appToken))
+        & git config --local "http.https://github.com/.extraheader" ("AUTHORIZATION: basic " + $basic)
+        Log "using GitHub App identity for this cycle"
+    } else {
+        Log "App token unavailable - falling back to ambient gh login"
+    }
     & claude -p "/orchestrate" --settings (Join-Path $repo ".claude\orchestrator-settings.json") 2>&1 | Add-Content -Encoding utf8 $log
     $claudeExit = $LASTEXITCODE
     Log "tick done (claude exit $claudeExit)"
@@ -35,6 +49,8 @@ try {
 }
 finally {
     & $py -m bookieskit.orchestration lock release --path $lock | Out-Null
+    # Drop the per-cycle App auth header so it never leaks into other git use.
+    & git config --local --unset "http.https://github.com/.extraheader" 2>$null
     Log "lock released"
     Board
 }
