@@ -18,6 +18,7 @@ _COUNCIL_RE = re.compile(r"^\s*council\s+#?(\d+)\s*$", re.IGNORECASE)
 _APPROVE_RE = re.compile(r"^\s*approve\s+#?(\d+)\s*$", re.IGNORECASE)
 _PAUSE_RE = re.compile(r"^\s*pause(?:\s+(.*\S))?\s*$", re.IGNORECASE)
 _RESUME_RE = re.compile(r"^\s*resume\s*$", re.IGNORECASE)
+_STATUS_RE = re.compile(r"^\s*status\s*$", re.IGNORECASE)
 _OK_CHECK_STATES = {"SUCCESS", "NEUTRAL", "SKIPPED"}
 
 
@@ -58,6 +59,11 @@ class CouncilCommand:
     issue: int
 
 
+@dataclass
+class StatusCommand:
+    pass
+
+
 def ticket_signature(ts: str) -> str:
     """Dedup key for a Slack-filed ticket (one per source message ts)."""
     return f"directed:slack:{ts}"
@@ -91,6 +97,8 @@ def parse_command(text: str):
     m = _COUNCIL_RE.match(text)
     if m:
         return CouncilCommand(issue=int(m.group(1)))
+    if _STATUS_RE.match(text):
+        return StatusCommand()
     m = _APPROVE_RE.match(text)
     if m:
         return ApproveCommand(pr=int(m.group(1)))

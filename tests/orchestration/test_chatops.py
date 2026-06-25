@@ -133,3 +133,11 @@ def test_design_reply_formatters():
 
     assert "#42" in design_ready(42) and "ready" in design_ready(42).lower()
     assert "#42" in design_changes_ack(42)
+
+
+def test_parse_status_command():
+    from bookieskit.orchestration.chatops import StatusCommand
+
+    assert parse_command("status") == StatusCommand()
+    assert parse_command("  STATUS ") == StatusCommand()
+    assert parse_command("status of the build") is None  # bare word only
