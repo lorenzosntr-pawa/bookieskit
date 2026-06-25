@@ -1,4 +1,9 @@
-"""Built-in market mappings (6 markets: 1X2, O/U, BTTS, DC, 1X2 1Up, 1X2 2Up)."""
+"""Built-in market mappings.
+
+Soccer: 1X2, O/U, BTTS, DC, 1X2 1Up, 1X2 2Up, next-goal, home/away O/U,
+2-way handicap, and corner 1X2 + corner O/U. Plus basketball and tennis
+market groups.
+"""
 
 from bookieskit.markets.types import MarketMapping, OutcomeMapping
 
@@ -251,6 +256,101 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
             ),
         },
         parameterized=False,
+    ),
+    # =================== Corner markets (football) =====================
+    # 1X2 + Over/Under on full-time corner count. Market ids and outcome
+    # labels were lifted from the real captured prematch.json fixtures,
+    # never guessed. Outcome conventions mirror the soccer 1X2 / O/U
+    # markets:
+    #   - BetPawa: numeric "1"/"X"/"2" and "Over"/"Under"
+    #   - SportyBet, MSport: word labels "Home"/"Draw"/"Away", "Over"/"Under"
+    #   - Bet9ja: key suffixes "O"/"U" (O/U only)
+    # Coverage notes (— in the coverage matrix means a dedicated in-region
+    # live probe is still needed):
+    #   - Betway, SportPesa, Betika fixtures contain NO corner data at all.
+    #   - Bet9ja DOES expose corner markets: it has an unambiguous FT O/U
+    #     corners key (S_OUCORNERS, mapped below) but NO unambiguous FT
+    #     corner-1X2 key — the 1/X/2-shaped corner keys (S_TEAMCORNER,
+    #     S_HALFCORNER, S_CORNERHTFT) can't be confidently disambiguated to
+    #     "full-time most-corners 1X2" from the fixture alone, so 1X2 stays
+    #     None pending a labelled live probe rather than guessing the id.
+    MarketMapping(
+        canonical_id="1x2_corners_ft",
+        name="1X2 Corners - Full Time",
+        betpawa_id="1096787",  # "Corner Count 1X2 - FT"
+        sportybet_id="162",  # "Corners 1X2"
+        bet9ja_key=None,  # corner data exists but no unambiguous FT 1X2 key
+        betway_id=None,  # no corner data in captured fixture — needs probe
+        msport_id="162",  # "Corner 1x2"
+        sportpesa_id=None,  # no corner data in captured fixture — needs probe
+        betika_id=None,  # no corner data in captured fixture — needs probe
+        outcomes={
+            "home": OutcomeMapping(
+                canonical_name="home",
+                betpawa="1",
+                sportybet="Home",
+                bet9ja="",
+                betway="",
+                msport="Home",
+                sportpesa="",
+                betika="",
+            ),
+            "draw": OutcomeMapping(
+                canonical_name="draw",
+                betpawa="X",
+                sportybet="Draw",
+                bet9ja="",
+                betway="",
+                msport="Draw",
+                sportpesa="",
+                betika="",
+            ),
+            "away": OutcomeMapping(
+                canonical_name="away",
+                betpawa="2",
+                sportybet="Away",
+                bet9ja="",
+                betway="",
+                msport="Away",
+                sportpesa="",
+                betika="",
+            ),
+        },
+        parameterized=False,
+    ),
+    MarketMapping(
+        canonical_id="over_under_corners_ft",
+        name="Over/Under Corners - Full Time",
+        betpawa_id="1096783",  # "Total Corners Over/Under - FT"
+        sportybet_id="166",  # "Corners - Over/Under"
+        bet9ja_key="S_OUCORNERS",  # "S_OUCORNERS@<line>_O/_U"
+        betway_id=None,  # no corner data in captured fixture — needs probe
+        msport_id="166",  # "Corners O/U"
+        sportpesa_id=None,  # no corner data in captured fixture — needs probe
+        betika_id=None,  # no corner data in captured fixture — needs probe
+        outcomes={
+            "over": OutcomeMapping(
+                canonical_name="over",
+                betpawa="Over",
+                sportybet="Over",
+                bet9ja="O",
+                betway="",
+                msport="Over",
+                sportpesa="",
+                betika="",
+            ),
+            "under": OutcomeMapping(
+                canonical_name="under",
+                betpawa="Under",
+                sportybet="Under",
+                bet9ja="U",
+                betway="",
+                msport="Under",
+                sportpesa="",
+                betika="",
+            ),
+        },
+        parameterized=True,
     ),
     # =================== Basketball =====================================
     # Basketball market ids for 6 of 7 bookmakers, discovered by probing
