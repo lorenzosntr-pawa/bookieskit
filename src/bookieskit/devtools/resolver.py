@@ -105,8 +105,13 @@ async def resolve_event(
 
     for book in books:
         if book == "betpawa":
-            # BetPawa has no SR->internal reverse lookup.
-            skipped["betpawa"] = "no SR reverse lookup (use --betpawa-seed)"
+            # BetPawa has no SR->internal reverse lookup. But when the seed IS
+            # a BetPawa internal id (betpawa_seed), probe the home book directly
+            # so it is audited alongside the others instead of always skipped.
+            if betpawa_seed:
+                handles["betpawa"] = Handle(platform="betpawa", event_id=seed)
+            else:
+                skipped["betpawa"] = "no SR reverse lookup (use --betpawa-seed)"
             continue
         if book in _COOKIE_GATED and sportpesa_cookie is None:
             skipped[book] = "cookie missing"

@@ -87,8 +87,24 @@ async def test_betpawa_seed_resolver():
     assert ev.sr_numeric == "68995116"
     assert ev.home == "Team A"
     assert ev.away == "Team B"
-    # betpawa is always skipped in the per-book loop; handles will be empty.
+    # With a betpawa seed, the home book IS probed: the seed is its internal
+    # event id, so a betpawa handle is built directly (no SR reverse lookup
+    # needed) and the book can be audited like the others.
+    assert ev.handles["betpawa"] == Handle("betpawa", "33289995")
+    assert "betpawa" not in ev.skipped
+
+
+@pytest.mark.asyncio
+async def test_betpawa_skipped_without_seed():
+    """Without betpawa_seed, betpawa is still skipped (no SR reverse lookup)."""
+    ev = await resolve_event(
+        "sr:match:42",
+        "soccer",
+        books=("betpawa",),
+        clients={"betpawa": _FakeClient()},
+    )
     assert ev.handles == {}
+    assert ev.skipped["betpawa"] == "no SR reverse lookup (use --betpawa-seed)"
 
 
 @pytest.mark.asyncio

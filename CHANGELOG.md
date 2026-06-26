@@ -15,7 +15,11 @@ All notable changes to this project are documented in this file. The format foll
   market groups a book sent that the registry doesn't map — the only signal
   worth filing an Issue over; genuinely-absent markets are reported, never
   filed). Classification/report logic is offline-tested; the live probe is
-  in-region only. See `docs/audits/README.md`.
+  in-region only. See `docs/audits/README.md`. The audit now probes **BetPawa
+  itself** (the home book) whenever the seed is a BetPawa internal id
+  (`--betpawa-seed` / live discovery): previously the resolver always skipped
+  BetPawa, leaving the home book unaudited in both modes. First in-region runs
+  are committed under `docs/audits/2026-06-26-wc-{live,prematch}-audit.md`.
 - **Docs-sync gate (#41)** — documentation is now kept in step with the library.
   Any PR that changes `src/bookieskit/**` must also update a doc surface
   (`docs/**`, `README.md` or `CHANGELOG.md`) in the same PR, enforced by a new
