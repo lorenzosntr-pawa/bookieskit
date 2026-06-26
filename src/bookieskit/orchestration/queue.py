@@ -64,16 +64,23 @@ class Queue:
         return self.gh.list_issues(state="open", labels=labels)
 
     def claim(self, number: int) -> None:
-        """Mark an issue as being worked (adds status:claimed)."""
-        self.gh.edit_issue(number, add_labels=["status:claimed"])
+        """Mark an issue as being worked: add status:claimed and CONSUME the
+        buildable status:ready (a directed item is status:ready when picked).
+        Leaving status:ready on a claimed/in-review item left it in an
+        inconsistent dual-state that mis-rendered the status board."""
+        self.gh.edit_issue(
+            number,
+            add_labels=["status:claimed"],
+            remove_labels=["status:ready"],
+        )
 
     def mark_in_review(self, number: int, pr_url: str) -> None:
-        """Transition to in-review: add status:in-review, drop status:claimed,
-        and comment the PR link."""
+        """Transition to in-review: add status:in-review, drop status:claimed
+        (and any stale status:ready), and comment the PR link."""
         self.gh.edit_issue(
             number,
             add_labels=["status:in-review"],
-            remove_labels=["status:claimed"],
+            remove_labels=["status:claimed", "status:ready"],
         )
         self.gh.comment_issue(number, f"PR: {pr_url}")
 
