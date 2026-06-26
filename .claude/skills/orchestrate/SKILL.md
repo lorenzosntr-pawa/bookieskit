@@ -67,7 +67,7 @@ Read the operating contract in the repo-root `CLAUDE.md` first — it binds this
    - `stream:directed` without `status:ready` (should not reach here — `next` skips `status:designing` Issues): treat as blocked, `mark-blocked`, and END.
    - `stream:maintenance` (canary drift): `superpowers:systematic-debugging` → fix → TDD tests → `requesting-code-review`. Decide-and-document applies; no design phase.
    - `stream:expansion` / `stream:capability`: spec → plan → `subagent-driven-development`. Decide-and-document applies; no design phase.
-   - Always: query `graphify` for the structural map before touching code; apply Karpathy principles; keep `src/` ruff-clean; TDD.
+   - Always: **query the committed structural graph for blast radius before editing** — `graphify query "what depends on <symbol> / where is <thing> wired" --graph src/graphify-out/graph.json` (BFS over the committed graph; no LLM/key needed). Use the returned nodes + `file:line` locations to find all call sites and scope the smallest surgical change (Karpathy). If the change adds/renames structure, refresh with `graphify update src` and commit the updated `src/graphify-out/graph.json` + `GRAPH_REPORT.md`. Keep `src/` ruff-clean; TDD.
    - Work on a **per-Issue branch** (subagent-driven isolates work). NEVER commit to `main`.
 5. **Open the PR** against `main`, body starting with `Closes #<number>`, summarizing what you built and listing every assumption you made for the supervised review. Then (best-effort, see Notifications) post `cycle-pr` to `#agent-activity`.
 6. **Mark in-review.** `.venv/Scripts/python.exe -m bookieskit.orchestration mark-in-review <number> --pr <pr-url>`.

@@ -5,6 +5,11 @@ All notable changes to this project are documented in this file. The format foll
 ## [Unreleased]
 
 ### Added
+- Committed a graphify **structural graph** of `src/` (`src/graphify-out/graph.json`
+  + `GRAPH_REPORT.md`, 917 nodes / 2259 edges) as fleet structural memory; the
+  orchestrator build step now queries it (`graphify query ... --graph
+  src/graphify-out/graph.json`, BFS, no LLM/key) before editing to scope changes.
+  Refresh on demand with `graphify update src`. See `docs/GRAPHIFY.md`.
 - The orchestrator now **responds to comments on its open PRs**: a human comment
   or change-request on a `status:in-review` PR wakes the loop (gate signal
   `pr-reply`), which answers questions and implements requested changes on the PR

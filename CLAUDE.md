@@ -7,7 +7,7 @@ Signal → Work → Gate → Ship. Pieces (all on `main`): CI (the gate), `booki
 
 ## Cross-cutting standards (binding on all work)
 - **superpowers discipline**: brainstorming before creative work → writing-plans → subagent-driven-development → systematic-debugging for bugs → verification-before-completion → requesting-code-review before merge.
-- **graphify**: query the structural graph before touching code; it is the fleet's structural memory (the `memory/` dir holds decisions/goals).
+- **graphify**: query the committed structural graph before touching code — `graphify query "what depends on <symbol>" --graph src/graphify-out/graph.json` (BFS, no LLM/key); refresh on demand with `graphify update src` and commit `src/graphify-out/{graph.json,GRAPH_REPORT.md}`. It is the fleet's structural memory of `src/` (the `memory/` dir holds decisions/goals). See `docs/GRAPHIFY.md`.
 - **llm-council**: for genuine stakes/tradeoffs (design A-vs-B, risky/irreversible changes) — not mechanical work.
 - **Karpathy principles**: smallest surgical change, no overcomplication, surface assumptions, verifiable success criteria. Reviewer-enforced.
 - **Continuous capability review**: file `stream:capability` Issues to adopt skills/MCPs that strengthen the pipeline.
