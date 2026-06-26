@@ -148,6 +148,32 @@ def test_claim_adds_status_claimed_label():
     assert "status:claimed" in names
 
 
+def test_claim_consumes_status_ready():
+    # A directed item is status:ready when claimed; claiming must REMOVE ready so
+    # the item never carries both ready + claimed/in-review (which mis-rendered
+    # the status board and left the item looking buildable forever).
+    gh = _FakeGh()
+    n = gh.create_issue(
+        title="t", body="b", labels=["stream:directed", "status:ready"]
+    )
+    Queue(gh, ensure=False).claim(n)
+    names = {lb["name"] for lb in gh.issues[0]["labels"]}
+    assert "status:claimed" in names and "status:ready" not in names
+
+
+def test_mark_in_review_also_drops_stale_status_ready():
+    # Defensive: if status:ready somehow survived to in-review, drop it.
+    gh = _FakeGh()
+    n = gh.create_issue(
+        title="t", body="b",
+        labels=["stream:directed", "status:claimed", "status:ready"],
+    )
+    Queue(gh, ensure=False).mark_in_review(n, "https://github.com/o/r/pull/9")
+    names = {lb["name"] for lb in gh.issues[0]["labels"]}
+    assert "status:in-review" in names
+    assert "status:ready" not in names and "status:claimed" not in names
+
+
 def test_mark_in_review_swaps_labels_and_comments_pr():
     gh = _FakeGh()
     n = gh.create_issue(
