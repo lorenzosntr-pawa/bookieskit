@@ -24,3 +24,9 @@ betika_init.js
 .playwright-mcp/
 .mcp.json
 .orchestrator/
+
+# graphify structural graph (slice C): commit only the reviewable artifacts;
+# the HTML/cache/labels/root marker are large or local-path-bearing -> ignore.
+src/graphify-out/*
+!src/graphify-out/graph.json
+!src/graphify-out/GRAPH_REPORT.md
