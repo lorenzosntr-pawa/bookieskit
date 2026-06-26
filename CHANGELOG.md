@@ -5,6 +5,17 @@ All notable changes to this project are documented in this file. The format foll
 ## [Unreleased]
 
 ### Added
+- **Live odds audit harness (#43)** — a reusable
+  `python -m bookieskit.devtools audit` command that probes every mapped
+  football market across all seven bookmakers on a set of fixtures and emits a
+  markdown odds matrix + JSON sidecar under `docs/audits/`. Two modes:
+  `--prematch <seeds…>` (given upcoming fixtures, prematch path) and `--live`
+  (auto-discovers in-play events, live feed). Each market×book is classified
+  MAPPED+PRICED / NOT OFFERED, with a per-book MIS-MAP review surface (raw
+  market groups a book sent that the registry doesn't map — the only signal
+  worth filing an Issue over; genuinely-absent markets are reported, never
+  filed). Classification/report logic is offline-tested; the live probe is
+  in-region only. See `docs/audits/README.md`.
 - **Docs-sync gate (#41)** — documentation is now kept in step with the library.
   Any PR that changes `src/bookieskit/**` must also update a doc surface
   (`docs/**`, `README.md` or `CHANGELOG.md`) in the same PR, enforced by a new
