@@ -5,6 +5,10 @@ All notable changes to this project are documented in this file. The format foll
 ## [Unreleased]
 
 ### Added
+- The orchestrator now **responds to comments on its open PRs**: a human comment
+  or change-request on a `status:in-review` PR wakes the loop (gate signal
+  `pr-reply`), which answers questions and implements requested changes on the PR
+  branch (pushed as the App, never merged) before picking new queue work.
 - Two new canonical soccer **corner** markets (increment 1 of corner & booking mapping, #19):
   - `1x2_corners_ft` — 1X2 on full-time corner count (home = more corners / draw = equal / away). Mapped on BetPawa (id=1096787, "Corner Count 1X2 - FT"), SportyBet (id=162, "Corners 1X2"), MSport (id=162, "Corner 1x2"). Ids and outcome labels taken from the real captured `prematch.json` fixtures, never guessed.
   - `over_under_corners_ft` — Over/Under on full-time corner count (parameterized by line). Mapped on BetPawa (id=1096783, "Total Corners Over/Under - FT"), SportyBet (id=166, "Corners - Over/Under"), MSport (id=166, "Corners O/U"), and Bet9ja (key `S_OUCORNERS`, outcomes `O`/`U`).
