@@ -32,8 +32,16 @@ try {
         $appToken = $appToken.Trim()
         $env:GH_TOKEN = $appToken
         $env:GITHUB_TOKEN = $appToken
+        # Authenticate the cycle's git-over-https as the App via PROCESS-SCOPED
+        # env, NOT `git config --local`: GIT_CONFIG_COUNT/KEY/VALUE inject the
+        # auth header for git in this tick process and the claude child only.
+        # The shared .git/config is never touched, so a concurrent owner
+        # `git push` is never hijacked by the App's (short-lived) token, and a
+        # crashed cycle leaves no residue. The env dies with this tick process.
         $basic = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes("x-access-token:" + $appToken))
-        & git config --local "http.https://github.com/.extraheader" ("AUTHORIZATION: basic " + $basic)
+        $env:GIT_CONFIG_COUNT = "1"
+        $env:GIT_CONFIG_KEY_0 = "http.https://github.com/.extraheader"
+        $env:GIT_CONFIG_VALUE_0 = "AUTHORIZATION: basic " + $basic
         Log "using GitHub App identity for this cycle"
     } else {
         Log "App token unavailable - falling back to ambient gh login"
@@ -49,7 +57,9 @@ try {
 }
 finally {
     & $py -m bookieskit.orchestration lock release --path $lock | Out-Null
-    # Drop the per-cycle App auth header so it never leaks into other git use.
+    # Janitor: scrub any legacy App auth header that an OLD tick wrote into the
+    # shared .git/config (this version uses process-scoped env instead and never
+    # writes it). Harmless once none remain; migrates existing machines cleanly.
     & git config --local --unset "http.https://github.com/.extraheader" 2>$null
     Log "lock released"
     Board
