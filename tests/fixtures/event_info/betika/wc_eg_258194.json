@@ -1,0 +1,657 @@
+{
+  "data": [
+    {
+      "match_id": 4894974,
+      "game_id": 0,
+      "competition_id": 43170,
+      "sport_name": "Soccer",
+      "category_id": 2057,
+      "category": "Morocco",
+      "priority": "99",
+      "match_priority": "99",
+      "match_country_bet_channel_priority": null,
+      "sport_id": 14,
+      "streamble": {
+        "String": "0",
+        "Valid": true
+      },
+      "competition_name": "Botola Pro D1",
+      "competition": "Botola Pro D1",
+      "competition_priority": "0",
+      "live_match_status": 1,
+      "is_esport": 0,
+      "is_srl": 0,
+      "home_team": "Marrakesh",
+      "away_team": "FUS Rabat",
+      "start_time": "2026-06-25 20:00:00",
+      "parent_match_id": 72188094,
+      "side_bets": 25,
+      "will_go_live": 1,
+      "will_stream": 0,
+      "bet_closure": "2026-06-25 20:00:00",
+      "bet_status": "STARTED",
+      "result": "null",
+      "sub_type_id": 90,
+      "match_time": "0:00",
+      "home_red_card": 0,
+      "away_red_card": 0,
+      "home_yellow_card": 0,
+      "away_yellow_card": 0,
+      "home_corners": 0,
+      "away_corners": 0,
+      "current_score": "0:0",
+      "active": 1,
+      "sequence_no": 1782406834886,
+      "event_status": "1st half",
+      "betradar_timestamp": "2026-06-25 20:00:34",
+      "match_status": "ACTIVE",
+      "bet_stop_reason": "",
+      "ht_score": "-:-",
+      "ft_score": "-:-",
+      "set_score": [
+        {
+          "score": "0:0",
+          "set": "1"
+        }
+      ],
+      "odd_active": 0,
+      "sys_modified": 1782406834886,
+      "home_odd": "0.00",
+      "away_odd": "0.00",
+      "neutral_odd": "0.00",
+      "home_odd_key": "",
+      "away_odd_key": "",
+      "neutral_odd_key": "",
+      "home_odd_outcome_id": "",
+      "neutral_odd_outcome_id": "",
+      "away_odd_outcome_id": "",
+      "home_seq": 1782406834886,
+      "neutral_seq": 1782406834886,
+      "away_seq": 1782406834886,
+      "market_active": 0,
+      "current_timestamp": "2026-06-25 20:00:35",
+      "timestamp": "2026-06-25 20:00:35",
+      "NOW": "2026-06-25 20:00:35",
+      "diff": 168,
+      "provider": "sr",
+      "now": "2026-06-25 20:00:35",
+      "status": 0,
+      "streamable": null,
+      "odds": [
+        {
+          "sub_type_id": 10,
+          "name": "DOUBLE CHANCE",
+          "market_active": 1,
+          "odds": [
+            {
+              "display": "1/X",
+              "odd_key": "Marrakesh or draw",
+              "odd_def": "{$competitor1} or draw",
+              "odd_value": "1.42",
+              "special_bet_value": "",
+              "odd_active": 1,
+              "market_active": 1,
+              "sequence_no": 1782406834886,
+              "diff": 168,
+              "outcome_id": "9",
+              "parsed_special_bet_value": {
+                "": ""
+              },
+              "event_odd_id": null,
+              "sport_id": 14
+            },
+            {
+              "display": "1/2",
+              "odd_key": "Marrakesh or FUS Rabat",
+              "odd_def": "{$competitor1} or {$competitor2}",
+              "odd_value": "1.37",
+              "special_bet_value": "",
+              "odd_active": 1,
+              "market_active": 1,
+              "sequence_no": 1782406834886,
+              "diff": 168,
+              "outcome_id": "10",
+              "parsed_special_bet_value": {
+                "": ""
+              },
+              "event_odd_id": null,
+              "sport_id": 14
+            },
+            {
+              "display": "X/2",
+              "odd_key": "draw or FUS Rabat",
+              "odd_def": "draw or {$competitor2}",
+              "odd_value": "1.30",
+              "special_bet_value": "",
+              "odd_active": 1,
+              "market_active": 1,
+              "sequence_no": 1782406834886,
+              "diff": 168,
+              "outcome_id": "11",
+              "parsed_special_bet_value": {
+                "": ""
+              },
+              "event_odd_id": null,
+              "sport_id": 14
+            }
+          ]
+        },
+        {
+          "sub_type_id": 18,
+          "name": "TOTAL",
+          "market_active": 1,
+          "odds": [
+            {
+              "display": "OVER 0.5",
+              "odd_key": "over 0.5",
+              "odd_def": "over {total}",
+              "odd_value": "1.12",
+              "special_bet_value": "total=0.5",
+              "odd_active": 1,
+              "market_active": 1,
+              "sequence_no": 1782406834886,
+              "diff": 168,
+              "outcome_id": "12",
+              "parsed_special_bet_value": {
+                "total": "0.5"
+              },
+              "event_odd_id": null,
+              "sport_id": 14
+            },
+            {
+              "display": "UNDER 0.5",
+              "odd_key": "under 0.5",
+              "odd_def": "under {total}",
+              "odd_value": "4.80",
+              "special_bet_value": "total=0.5",
+              "odd_active": 1,
+              "market_active": 1,
+              "sequence_no": 1782406834886,
+              "diff": 168,
+              "outcome_id": "13",
+              "parsed_special_bet_value": {
+                "total": "0.5"
+              },
+              "event_odd_id": null,
+              "sport_id": 14
+            },
+            {
+              "display": "OVER 1.5",
+              "odd_key": "over 1.5",
+              "odd_def": "over {total}",
+              "odd_value": "1.57",
+              "special_bet_value": "total=1.5",
+              "odd_active": 1,
+              "market_active": 1,
+              "sequence_no": 1782406834886,
+              "diff": 168,
+              "outcome_id": "12",
+              "parsed_special_bet_value": {
+                "total": "1.5"
+              },
+              "event_odd_id": null,
+              "sport_id": 14
+            },
+            {
+              "display": "UNDER 1.5",
+              "odd_key": "under 1.5",
+              "odd_def": "under {total}",
+              "odd_value": "2.15",
+              "special_bet_value": "total=1.5",
+              "odd_active": 1,
+              "market_active": 1,
+              "sequence_no": 1782406834886,
+              "diff": 168,
+              "outcome_id": "13",
+              "parsed_special_bet_value": {
+                "total": "1.5"
+              },
+              "event_odd_id": null,
+              "sport_id": 14
+            },
+            {
+              "display": "OVER 2.5",
+              "odd_key": "over 2.5",
+              "odd_def": "over {total}",
+              "odd_value": "2.80",
+              "special_bet_value": "total=2.5",
+              "odd_active": 1,
+              "market_active": 1,
+              "sequence_no": 1782406834886,
+              "diff": 168,
+              "outcome_id": "12",
+              "parsed_special_bet_value": {
+                "total": "2.5"
+              },
+              "event_odd_id": null,
+              "sport_id": 14
+            },
+            {
+              "display": "UNDER 2.5",
+              "odd_key": "under 2.5",
+              "odd_def": "under {total}",
+              "odd_value": "1.35",
+              "special_bet_value": "total=2.5",
+              "odd_active": 1,
+              "market_active": 1,
+              "sequence_no": 1782406834886,
+              "diff": 168,
+              "outcome_id": "13",
+              "parsed_special_bet_value": {
+                "total": "2.5"
+              },
+              "event_odd_id": null,
+              "sport_id": 14
+            }
+          ]
+        },
+        {
+          "sub_type_id": 19,
+          "name": "MARRAKESH TOTAL",
+          "market_active": 1,
+          "odds": [
+            {
+              "display": "UNDER 2.5",
+              "odd_key": "under 2.5",
+              "odd_def": "under {total}",
+              "odd_value": "1.03",
+              "special_bet_value": "total=2.5",
+              "odd_active": 1,
+              "market_active": 1,
+              "sequence_no": 1782406834886,
+              "diff": 168,
+              "outcome_id": "13",
+              "parsed_special_bet_value": {
+                "total": "2.5"
+              },
+              "event_odd_id": null,
+              "sport_id": 14
+            },
+            {
+              "display": "OVER 2.5",
+              "odd_key": "over 2.5",
+              "odd_def": "over {total}",
+              "odd_value": "7.25",
+              "special_bet_value": "total=2.5",
+              "odd_active": 1,
+              "market_active": 1,
+              "sequence_no": 1782406834886,
+              "diff": 168,
+              "outcome_id": "12",
+              "parsed_special_bet_value": {
+                "total": "2.5"
+              },
+              "event_odd_id": null,
+              "sport_id": 14
+            },
+            {
+              "display": "UNDER 1.5",
+              "odd_key": "under 1.5",
+              "odd_def": "under {total}",
+              "odd_value": "1.22",
+              "special_bet_value": "total=1.5",
+              "odd_active": 1,
+              "market_active": 1,
+              "sequence_no": 1782406834886,
+              "diff": 168,
+              "outcome_id": "13",
+              "parsed_special_bet_value": {
+                "total": "1.5"
+              },
+              "event_odd_id": null,
+              "sport_id": 14
+            },
+            {
+              "display": "OVER 1.5",
+              "odd_key": "over 1.5",
+              "odd_def": "over {total}",
+              "odd_value": "3.45",
+              "special_bet_value": "total=1.5",
+              "odd_active": 1,
+              "market_active": 1,
+              "sequence_no": 1782406834886,
+              "diff": 168,
+              "outcome_id": "12",
+              "parsed_special_bet_value": {
+                "total": "1.5"
+              },
+              "event_odd_id": null,
+              "sport_id": 14
+            },
+            {
+              "display": "UNDER 0.5",
+              "odd_key": "under 0.5",
+              "odd_def": "under {total}",
+              "odd_value": "2.20",
+              "special_bet_value": "total=0.5",
+              "odd_active": 1,
+              "market_active": 1,
+              "sequence_no": 1782406834886,
+              "diff": 168,
+              "outcome_id": "13",
+              "parsed_special_bet_value": {
+                "total": "0.5"
+              },
+              "event_odd_id": null,
+              "sport_id": 14
+            },
+            {
+              "display": "OVER 0.5",
+              "odd_key": "over 0.5",
+              "odd_def": "over {total}",
+              "odd_value": "1.55",
+              "special_bet_value": "total=0.5",
+              "odd_active": 1,
+              "market_active": 1,
+              "sequence_no": 1782406834886,
+              "diff": 168,
+              "outcome_id": "12",
+              "parsed_special_bet_value": {
+                "total": "0.5"
+              },
+              "event_odd_id": null,
+              "sport_id": 14
+            }
+          ]
+        },
+        {
+          "sub_type_id": 20,
+          "name": "FUS RABAT TOTAL",
+          "market_active": 1,
+          "odds": [
+            {
+              "display": "UNDER 0.5",
+              "odd_key": "under 0.5",
+              "odd_def": "under {total}",
+              "odd_value": "2.45",
+              "special_bet_value": "total=0.5",
+              "odd_active": 1,
+              "market_active": 1,
+              "sequence_no": 1782406834886,
+              "diff": 168,
+              "outcome_id": "13",
+              "parsed_special_bet_value": {
+                "total": "0.5"
+              },
+              "event_odd_id": null,
+              "sport_id": 14
+            },
+            {
+              "display": "OVER 0.5",
+              "odd_key": "over 0.5",
+              "odd_def": "over {total}",
+              "odd_value": "1.45",
+              "special_bet_value": "total=0.5",
+              "odd_active": 1,
+              "market_active": 1,
+              "sequence_no": 1782406834886,
+              "diff": 168,
+              "outcome_id": "12",
+              "parsed_special_bet_value": {
+                "total": "0.5"
+              },
+              "event_odd_id": null,
+              "sport_id": 14
+            },
+            {
+              "display": "UNDER 2.5",
+              "odd_key": "under 2.5",
+              "odd_def": "under {total}",
+              "odd_value": "1.05",
+              "special_bet_value": "total=2.5",
+              "odd_active": 1,
+              "market_active": 1,
+              "sequence_no": 1782406834886,
+              "diff": 168,
+              "outcome_id": "13",
+              "parsed_special_bet_value": {
+                "total": "2.5"
+              },
+              "event_odd_id": null,
+              "sport_id": 14
+            },
+            {
+              "display": "OVER 2.5",
+              "odd_key": "over 2.5",
+              "odd_def": "over {total}",
+              "odd_value": "6.50",
+              "special_bet_value": "total=2.5",
+              "odd_active": 1,
+              "market_active": 1,
+              "sequence_no": 1782406834886,
+              "diff": 168,
+              "outcome_id": "12",
+              "parsed_special_bet_value": {
+                "total": "2.5"
+              },
+              "event_odd_id": null,
+              "sport_id": 14
+            },
+            {
+              "display": "UNDER 1.5",
+              "odd_key": "under 1.5",
+              "odd_def": "under {total}",
+              "odd_value": "1.30",
+              "special_bet_value": "total=1.5",
+              "odd_active": 1,
+              "market_active": 1,
+              "sequence_no": 1782406834886,
+              "diff": 168,
+              "outcome_id": "13",
+              "parsed_special_bet_value": {
+                "total": "1.5"
+              },
+              "event_odd_id": null,
+              "sport_id": 14
+            },
+            {
+              "display": "OVER 1.5",
+              "odd_key": "over 1.5",
+              "odd_def": "over {total}",
+              "odd_value": "3.00",
+              "special_bet_value": "total=1.5",
+              "odd_active": 1,
+              "market_active": 1,
+              "sequence_no": 1782406834886,
+              "diff": 168,
+              "outcome_id": "12",
+              "parsed_special_bet_value": {
+                "total": "1.5"
+              },
+              "event_odd_id": null,
+              "sport_id": 14
+            }
+          ]
+        },
+        {
+          "sub_type_id": 29,
+          "name": "BOTH TEAMS TO SCORE (GG/NG)",
+          "market_active": 1,
+          "odds": [
+            {
+              "display": "YES",
+              "odd_key": "yes",
+              "odd_def": "yes",
+              "odd_value": "2.25",
+              "special_bet_value": "",
+              "odd_active": 1,
+              "market_active": 1,
+              "sequence_no": 1782406834886,
+              "diff": 168,
+              "outcome_id": "74",
+              "parsed_special_bet_value": {
+                "": ""
+              },
+              "event_odd_id": null,
+              "sport_id": 14
+            },
+            {
+              "display": "NO",
+              "odd_key": "no",
+              "odd_def": "no",
+              "odd_value": "1.52",
+              "special_bet_value": "",
+              "odd_active": 1,
+              "market_active": 1,
+              "sequence_no": 1782406834886,
+              "diff": 168,
+              "outcome_id": "76",
+              "parsed_special_bet_value": {
+                "": ""
+              },
+              "event_odd_id": null,
+              "sport_id": 14
+            }
+          ]
+        }
+      ],
+      "total": 185
+    }
+  ],
+  "meta": {
+    "filters": [
+      {
+        "name": "1x2 / Winner",
+        "sub_type_id": "1,186,340,113",
+        "sport_ids": [
+          "14",
+          "28",
+          "29",
+          "30",
+          "33",
+          "35",
+          "37",
+          "39",
+          "41",
+          "44",
+          "56"
+        ],
+        "odd_keys": [
+          "1",
+          "X",
+          "2"
+        ]
+      },
+      {
+        "name": "Double Chance",
+        "sub_type_id": "10",
+        "sport_ids": [
+          "14",
+          "29",
+          "33",
+          "41",
+          "56"
+        ],
+        "odd_keys": [
+          "1X",
+          "12",
+          "X2"
+        ]
+      },
+      {
+        "name": "Which team will score next?",
+        "sub_type_id": "8",
+        "sport_ids": [
+          "14",
+          "28",
+          "29",
+          "30",
+          "33",
+          "35",
+          "37",
+          "39",
+          "41",
+          "44",
+          "56"
+        ],
+        "odd_keys": [
+          "1",
+          "None",
+          "2"
+        ]
+      },
+      {
+        "name": "1st Half 1x2",
+        "sub_type_id": "60,119",
+        "sport_ids": [
+          "14",
+          "30"
+        ],
+        "odd_keys": [
+          "1",
+          "X",
+          "2"
+        ]
+      },
+      {
+        "name": "Both Teams To Score",
+        "sub_type_id": "29",
+        "sport_ids": [
+          "14"
+        ],
+        "odd_keys": [
+          "Yes",
+          "No"
+        ]
+      },
+      {
+        "name": "1st Set Winner",
+        "sub_type_id": "202",
+        "sport_ids": [
+          "28"
+        ],
+        "odd_keys": [
+          "1",
+          "2"
+        ]
+      },
+      {
+        "name": "Which team wins the rest of the match?",
+        "sub_type_id": "7",
+        "sport_ids": [
+          "14",
+          "28",
+          "29",
+          "30",
+          "33",
+          "35",
+          "37",
+          "39",
+          "41",
+          "44",
+          "56"
+        ],
+        "odd_keys": [
+          "1",
+          "X",
+          "2"
+        ]
+      }
+    ],
+    "sort_filters": [
+      {
+        "id": 1,
+        "name": "Top leagues"
+      },
+      {
+        "id": 2,
+        "name": "Ending soon"
+      },
+      {
+        "id": 3,
+        "name": "Just started"
+      }
+    ],
+    "sports": [
+      {
+        "sport_name": "Soccer",
+        "count": 1,
+        "sport_id": 14
+      }
+    ],
+    "limit": "1",
+    "total": 185,
+    "current_page": 1,
+    "took": 0.01204514503479
+  }
+}

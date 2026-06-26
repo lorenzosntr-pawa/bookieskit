@@ -1,0 +1,736 @@
+{
+  "data": [
+    {
+      "match_id": 4890808,
+      "game_id": 0,
+      "competition_id": 1039,
+      "sport_name": "Soccer",
+      "category_id": 98,
+      "category": "International Clubs",
+      "priority": "98",
+      "match_priority": "98",
+      "match_country_bet_channel_priority": null,
+      "sport_id": 14,
+      "streamble": {
+        "String": "0",
+        "Valid": true
+      },
+      "competition_name": "Club Friendly Games",
+      "competition": "Club Friendly Games",
+      "competition_priority": "1200",
+      "live_match_status": 1,
+      "is_esport": 0,
+      "is_srl": 0,
+      "home_team": "Crvena Zvezda",
+      "away_team": "SKU Amstetten",
+      "start_time": "2026-06-25 18:30:00",
+      "parent_match_id": 71927024,
+      "side_bets": 15,
+      "will_go_live": 1,
+      "will_stream": 0,
+      "bet_closure": "2026-06-25 18:30:00",
+      "bet_status": "STARTED",
+      "result": "null",
+      "sub_type_id": 20,
+      "match_time": "61:02",
+      "home_red_card": 0,
+      "away_red_card": 0,
+      "home_yellow_card": 0,
+      "away_yellow_card": 1,
+      "home_corners": 5,
+      "away_corners": 5,
+      "current_score": "1:1",
+      "active": 1,
+      "sequence_no": 1782406127062,
+      "event_status": "2nd half",
+      "betradar_timestamp": "2026-06-25 19:48:47",
+      "match_status": "ACTIVE",
+      "bet_stop_reason": "",
+      "ht_score": "-:-",
+      "ft_score": "-:-",
+      "set_score": [
+        {
+          "score": "1:0",
+          "set": "1"
+        },
+        {
+          "score": "0:1",
+          "set": "2"
+        }
+      ],
+      "odd_active": 1,
+      "sys_modified": 1782406127062,
+      "home_odd": "1.85",
+      "away_odd": "7.25",
+      "neutral_odd": "2.40",
+      "home_odd_key": "Crvena Zvezda",
+      "away_odd_key": "SKU Amstetten",
+      "neutral_odd_key": "draw",
+      "home_odd_outcome_id": "1",
+      "neutral_odd_outcome_id": "2",
+      "away_odd_outcome_id": "3",
+      "home_seq": 1782406127062,
+      "neutral_seq": 1782406127062,
+      "away_seq": 1782406127062,
+      "market_active": 1,
+      "current_timestamp": "2026-06-25 19:48:47",
+      "timestamp": "2026-06-25 19:48:47",
+      "NOW": "2026-06-25 19:48:47",
+      "diff": 105,
+      "provider": "sr",
+      "now": "2026-06-25 19:48:47",
+      "status": 0,
+      "streamable": null,
+      "odds": [
+        {
+          "sub_type_id": 1,
+          "name": "1X2",
+          "market_active": 1,
+          "odds": [
+            {
+              "display": "1",
+              "odd_key": "Crvena Zvezda",
+              "odd_def": "{$competitor1}",
+              "odd_value": "1.85",
+              "special_bet_value": "",
+              "odd_active": 1,
+              "market_active": 1,
+              "sequence_no": 1782406127062,
+              "diff": 105,
+              "outcome_id": "1",
+              "parsed_special_bet_value": {
+                "": ""
+              },
+              "event_odd_id": null,
+              "sport_id": 14
+            },
+            {
+              "display": "X",
+              "odd_key": "draw",
+              "odd_def": "draw",
+              "odd_value": "2.40",
+              "special_bet_value": "",
+              "odd_active": 1,
+              "market_active": 1,
+              "sequence_no": 1782406127062,
+              "diff": 105,
+              "outcome_id": "2",
+              "parsed_special_bet_value": {
+                "": ""
+              },
+              "event_odd_id": null,
+              "sport_id": 14
+            },
+            {
+              "display": "2",
+              "odd_key": "SKU Amstetten",
+              "odd_def": "{$competitor2}",
+              "odd_value": "7.25",
+              "special_bet_value": "",
+              "odd_active": 1,
+              "market_active": 1,
+              "sequence_no": 1782406127062,
+              "diff": 105,
+              "outcome_id": "3",
+              "parsed_special_bet_value": {
+                "": ""
+              },
+              "event_odd_id": null,
+              "sport_id": 14
+            }
+          ]
+        },
+        {
+          "sub_type_id": 8,
+          "name": "WHO WILL SCORE 3RD GOAL",
+          "market_active": 1,
+          "odds": [
+            {
+              "display": "1",
+              "odd_key": "Crvena Zvezda",
+              "odd_def": "{$competitor1}",
+              "odd_value": "1.75",
+              "special_bet_value": "goalnr=3",
+              "odd_active": 1,
+              "market_active": 1,
+              "sequence_no": 1782406127062,
+              "diff": 105,
+              "outcome_id": "6",
+              "parsed_special_bet_value": {
+                "goalnr": "3"
+              },
+              "event_odd_id": null,
+              "sport_id": 14
+            },
+            {
+              "display": "NONE",
+              "odd_key": "none",
+              "odd_def": "none",
+              "odd_value": "3.10",
+              "special_bet_value": "goalnr=3",
+              "odd_active": 1,
+              "market_active": 1,
+              "sequence_no": 1782406127062,
+              "diff": 105,
+              "outcome_id": "7",
+              "parsed_special_bet_value": {
+                "goalnr": "3"
+              },
+              "event_odd_id": null,
+              "sport_id": 14
+            },
+            {
+              "display": "2",
+              "odd_key": "SKU Amstetten",
+              "odd_def": "{$competitor2}",
+              "odd_value": "5.00",
+              "special_bet_value": "goalnr=3",
+              "odd_active": 1,
+              "market_active": 1,
+              "sequence_no": 1782406127062,
+              "diff": 105,
+              "outcome_id": "8",
+              "parsed_special_bet_value": {
+                "goalnr": "3"
+              },
+              "event_odd_id": null,
+              "sport_id": 14
+            }
+          ]
+        },
+        {
+          "sub_type_id": 10,
+          "name": "DOUBLE CHANCE",
+          "market_active": 1,
+          "odds": [
+            {
+              "display": "1/X",
+              "odd_key": "Crvena Zvezda or draw",
+              "odd_def": "{$competitor1} or draw",
+              "odd_value": "1.04",
+              "special_bet_value": "",
+              "odd_active": 1,
+              "market_active": 1,
+              "sequence_no": 1782406127062,
+              "diff": 105,
+              "outcome_id": "9",
+              "parsed_special_bet_value": {
+                "": ""
+              },
+              "event_odd_id": null,
+              "sport_id": 14
+            },
+            {
+              "display": "1/2",
+              "odd_key": "Crvena Zvezda or SKU Amstetten",
+              "odd_def": "{$competitor1} or {$competitor2}",
+              "odd_value": "1.47",
+              "special_bet_value": "",
+              "odd_active": 1,
+              "market_active": 1,
+              "sequence_no": 1782406127062,
+              "diff": 105,
+              "outcome_id": "10",
+              "parsed_special_bet_value": {
+                "": ""
+              },
+              "event_odd_id": null,
+              "sport_id": 14
+            },
+            {
+              "display": "X/2",
+              "odd_key": "draw or SKU Amstetten",
+              "odd_def": "draw or {$competitor2}",
+              "odd_value": "1.80",
+              "special_bet_value": "",
+              "odd_active": 1,
+              "market_active": 1,
+              "sequence_no": 1782406127062,
+              "diff": 105,
+              "outcome_id": "11",
+              "parsed_special_bet_value": {
+                "": ""
+              },
+              "event_odd_id": null,
+              "sport_id": 14
+            }
+          ]
+        },
+        {
+          "sub_type_id": 18,
+          "name": "TOTAL",
+          "market_active": 1,
+          "odds": [
+            {
+              "display": "OVER 3.5",
+              "odd_key": "over 3.5",
+              "odd_def": "over {total}",
+              "odd_value": "2.45",
+              "special_bet_value": "total=3.5",
+              "odd_active": 1,
+              "market_active": 1,
+              "sequence_no": 1782406127062,
+              "diff": 105,
+              "outcome_id": "12",
+              "parsed_special_bet_value": {
+                "total": "3.5"
+              },
+              "event_odd_id": null,
+              "sport_id": 14
+            },
+            {
+              "display": "UNDER 3.5",
+              "odd_key": "under 3.5",
+              "odd_def": "under {total}",
+              "odd_value": "1.45",
+              "special_bet_value": "total=3.5",
+              "odd_active": 1,
+              "market_active": 1,
+              "sequence_no": 1782406127062,
+              "diff": 105,
+              "outcome_id": "13",
+              "parsed_special_bet_value": {
+                "total": "3.5"
+              },
+              "event_odd_id": null,
+              "sport_id": 14
+            },
+            {
+              "display": "OVER 4.5",
+              "odd_key": "over 4.5",
+              "odd_def": "over {total}",
+              "odd_value": "5.30",
+              "special_bet_value": "total=4.5",
+              "odd_active": 1,
+              "market_active": 1,
+              "sequence_no": 1782406127062,
+              "diff": 105,
+              "outcome_id": "12",
+              "parsed_special_bet_value": {
+                "total": "4.5"
+              },
+              "event_odd_id": null,
+              "sport_id": 14
+            },
+            {
+              "display": "UNDER 4.5",
+              "odd_key": "under 4.5",
+              "odd_def": "under {total}",
+              "odd_value": "1.10",
+              "special_bet_value": "total=4.5",
+              "odd_active": 1,
+              "market_active": 1,
+              "sequence_no": 1782406127062,
+              "diff": 105,
+              "outcome_id": "13",
+              "parsed_special_bet_value": {
+                "total": "4.5"
+              },
+              "event_odd_id": null,
+              "sport_id": 14
+            },
+            {
+              "display": "OVER 2.5",
+              "odd_key": "over 2.5",
+              "odd_def": "over {total}",
+              "odd_value": "1.32",
+              "special_bet_value": "total=2.5",
+              "odd_active": 1,
+              "market_active": 1,
+              "sequence_no": 1782406127062,
+              "diff": 105,
+              "outcome_id": "12",
+              "parsed_special_bet_value": {
+                "total": "2.5"
+              },
+              "event_odd_id": null,
+              "sport_id": 14
+            },
+            {
+              "display": "UNDER 2.5",
+              "odd_key": "under 2.5",
+              "odd_def": "under {total}",
+              "odd_value": "2.95",
+              "special_bet_value": "total=2.5",
+              "odd_active": 1,
+              "market_active": 1,
+              "sequence_no": 1782406127062,
+              "diff": 105,
+              "outcome_id": "13",
+              "parsed_special_bet_value": {
+                "total": "2.5"
+              },
+              "event_odd_id": null,
+              "sport_id": 14
+            }
+          ]
+        },
+        {
+          "sub_type_id": 19,
+          "name": "CRVENA ZVEZDA TOTAL",
+          "market_active": 1,
+          "odds": [
+            {
+              "display": "UNDER 2.5",
+              "odd_key": "under 2.5",
+              "odd_def": "under {total}",
+              "odd_value": "1.25",
+              "special_bet_value": "total=2.5",
+              "odd_active": 1,
+              "market_active": 1,
+              "sequence_no": 1782406127062,
+              "diff": 105,
+              "outcome_id": "13",
+              "parsed_special_bet_value": {
+                "total": "2.5"
+              },
+              "event_odd_id": null,
+              "sport_id": 14
+            },
+            {
+              "display": "OVER 2.5",
+              "odd_key": "over 2.5",
+              "odd_def": "over {total}",
+              "odd_value": "3.35",
+              "special_bet_value": "total=2.5",
+              "odd_active": 1,
+              "market_active": 1,
+              "sequence_no": 1782406127062,
+              "diff": 105,
+              "outcome_id": "12",
+              "parsed_special_bet_value": {
+                "total": "2.5"
+              },
+              "event_odd_id": null,
+              "sport_id": 14
+            },
+            {
+              "display": "UNDER 1.5",
+              "odd_key": "under 1.5",
+              "odd_def": "under {total}",
+              "odd_value": "2.25",
+              "special_bet_value": "total=1.5",
+              "odd_active": 1,
+              "market_active": 1,
+              "sequence_no": 1782406127062,
+              "diff": 105,
+              "outcome_id": "13",
+              "parsed_special_bet_value": {
+                "total": "1.5"
+              },
+              "event_odd_id": null,
+              "sport_id": 14
+            },
+            {
+              "display": "OVER 1.5",
+              "odd_key": "over 1.5",
+              "odd_def": "over {total}",
+              "odd_value": "1.52",
+              "special_bet_value": "total=1.5",
+              "odd_active": 1,
+              "market_active": 1,
+              "sequence_no": 1782406127062,
+              "diff": 105,
+              "outcome_id": "12",
+              "parsed_special_bet_value": {
+                "total": "1.5"
+              },
+              "event_odd_id": null,
+              "sport_id": 14
+            },
+            {
+              "display": "UNDER 3.5",
+              "odd_key": "under 3.5",
+              "odd_def": "under {total}",
+              "odd_value": "1.03",
+              "special_bet_value": "total=3.5",
+              "odd_active": 1,
+              "market_active": 1,
+              "sequence_no": 1782406127062,
+              "diff": 105,
+              "outcome_id": "13",
+              "parsed_special_bet_value": {
+                "total": "3.5"
+              },
+              "event_odd_id": null,
+              "sport_id": 14
+            },
+            {
+              "display": "OVER 3.5",
+              "odd_key": "over 3.5",
+              "odd_def": "over {total}",
+              "odd_value": "7.00",
+              "special_bet_value": "total=3.5",
+              "odd_active": 1,
+              "market_active": 1,
+              "sequence_no": 1782406127062,
+              "diff": 105,
+              "outcome_id": "12",
+              "parsed_special_bet_value": {
+                "total": "3.5"
+              },
+              "event_odd_id": null,
+              "sport_id": 14
+            }
+          ]
+        },
+        {
+          "sub_type_id": 20,
+          "name": "SKU AMSTETTEN TOTAL",
+          "market_active": 1,
+          "odds": [
+            {
+              "display": "UNDER 3.5",
+              "odd_key": "under 3.5",
+              "odd_def": "under {total}",
+              "odd_value": "0.00",
+              "special_bet_value": "total=3.5",
+              "odd_active": 0,
+              "market_active": 1,
+              "sequence_no": 1782406127062,
+              "diff": 105,
+              "outcome_id": "13",
+              "parsed_special_bet_value": {
+                "total": "3.5"
+              },
+              "event_odd_id": null,
+              "sport_id": 14
+            },
+            {
+              "display": "OVER 3.5",
+              "odd_key": "over 3.5",
+              "odd_def": "over {total}",
+              "odd_value": "9.00",
+              "special_bet_value": "total=3.5",
+              "odd_active": 0,
+              "market_active": 1,
+              "sequence_no": 1782406127062,
+              "diff": 105,
+              "outcome_id": "12",
+              "parsed_special_bet_value": {
+                "total": "3.5"
+              },
+              "event_odd_id": null,
+              "sport_id": 14
+            },
+            {
+              "display": "UNDER 2.5",
+              "odd_key": "under 2.5",
+              "odd_def": "under {total}",
+              "odd_value": "1.01",
+              "special_bet_value": "total=2.5",
+              "odd_active": 1,
+              "market_active": 1,
+              "sequence_no": 1782406127062,
+              "diff": 105,
+              "outcome_id": "13",
+              "parsed_special_bet_value": {
+                "total": "2.5"
+              },
+              "event_odd_id": null,
+              "sport_id": 14
+            },
+            {
+              "display": "OVER 2.5",
+              "odd_key": "over 2.5",
+              "odd_def": "over {total}",
+              "odd_value": "8.25",
+              "special_bet_value": "total=2.5",
+              "odd_active": 1,
+              "market_active": 1,
+              "sequence_no": 1782406127062,
+              "diff": 105,
+              "outcome_id": "12",
+              "parsed_special_bet_value": {
+                "total": "2.5"
+              },
+              "event_odd_id": null,
+              "sport_id": 14
+            },
+            {
+              "display": "UNDER 1.5",
+              "odd_key": "under 1.5",
+              "odd_def": "under {total}",
+              "odd_value": "1.27",
+              "special_bet_value": "total=1.5",
+              "odd_active": 1,
+              "market_active": 1,
+              "sequence_no": 1782406127062,
+              "diff": 105,
+              "outcome_id": "13",
+              "parsed_special_bet_value": {
+                "total": "1.5"
+              },
+              "event_odd_id": null,
+              "sport_id": 14
+            },
+            {
+              "display": "OVER 1.5",
+              "odd_key": "over 1.5",
+              "odd_def": "over {total}",
+              "odd_value": "3.10",
+              "special_bet_value": "total=1.5",
+              "odd_active": 1,
+              "market_active": 1,
+              "sequence_no": 1782406127062,
+              "diff": 105,
+              "outcome_id": "12",
+              "parsed_special_bet_value": {
+                "total": "1.5"
+              },
+              "event_odd_id": null,
+              "sport_id": 14
+            }
+          ]
+        }
+      ],
+      "total": 189
+    }
+  ],
+  "meta": {
+    "filters": [
+      {
+        "name": "1x2 / Winner",
+        "sub_type_id": "1,186,340,113",
+        "sport_ids": [
+          "14",
+          "28",
+          "29",
+          "30",
+          "33",
+          "35",
+          "37",
+          "39",
+          "41",
+          "44",
+          "56"
+        ],
+        "odd_keys": [
+          "1",
+          "X",
+          "2"
+        ]
+      },
+      {
+        "name": "Double Chance",
+        "sub_type_id": "10",
+        "sport_ids": [
+          "14",
+          "29",
+          "33",
+          "41",
+          "56"
+        ],
+        "odd_keys": [
+          "1X",
+          "12",
+          "X2"
+        ]
+      },
+      {
+        "name": "Which team will score next?",
+        "sub_type_id": "8",
+        "sport_ids": [
+          "14",
+          "28",
+          "29",
+          "30",
+          "33",
+          "35",
+          "37",
+          "39",
+          "41",
+          "44",
+          "56"
+        ],
+        "odd_keys": [
+          "1",
+          "None",
+          "2"
+        ]
+      },
+      {
+        "name": "1st Half 1x2",
+        "sub_type_id": "60,119",
+        "sport_ids": [
+          "14",
+          "30"
+        ],
+        "odd_keys": [
+          "1",
+          "X",
+          "2"
+        ]
+      },
+      {
+        "name": "Both Teams To Score",
+        "sub_type_id": "29",
+        "sport_ids": [
+          "14"
+        ],
+        "odd_keys": [
+          "Yes",
+          "No"
+        ]
+      },
+      {
+        "name": "1st Set Winner",
+        "sub_type_id": "202",
+        "sport_ids": [
+          "28"
+        ],
+        "odd_keys": [
+          "1",
+          "2"
+        ]
+      },
+      {
+        "name": "Which team wins the rest of the match?",
+        "sub_type_id": "7",
+        "sport_ids": [
+          "14",
+          "28",
+          "29",
+          "30",
+          "33",
+          "35",
+          "37",
+          "39",
+          "41",
+          "44",
+          "56"
+        ],
+        "odd_keys": [
+          "1",
+          "X",
+          "2"
+        ]
+      }
+    ],
+    "sort_filters": [
+      {
+        "id": 1,
+        "name": "Top leagues"
+      },
+      {
+        "id": 2,
+        "name": "Ending soon"
+      },
+      {
+        "id": 3,
+        "name": "Just started"
+      }
+    ],
+    "sports": [
+      {
+        "sport_name": "Soccer",
+        "count": 1,
+        "sport_id": 14
+      }
+    ],
+    "limit": "1",
+    "total": 190,
+    "current_page": 1,
+    "took": 0.012694835662842
+  }
+}
