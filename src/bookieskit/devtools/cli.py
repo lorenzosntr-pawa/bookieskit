@@ -13,6 +13,8 @@ from pathlib import Path
 from typing import Any, Awaitable, Callable
 
 from bookieskit.devtools.adapters import ADAPTERS
+from bookieskit.devtools.audit import render_markdown as render_audit_markdown
+from bookieskit.devtools.audit import run_audit
 from bookieskit.devtools.canary import CanaryReport, run_canary
 from bookieskit.devtools.coverage import coverage_matrix, render_markdown
 from bookieskit.devtools.docssync import (
@@ -121,7 +123,38 @@ def build_parser() -> argparse.ArgumentParser:
     )
     p_check.add_argument("--json", action="store_true", dest="as_json")
 
+    p_audit = sub.add_parser("audit")
+    amode = p_audit.add_mutually_exclusive_group(required=True)
+    amode.add_argument("--prematch", action="store_true")
+    amode.add_argument("--live", action="store_true")
+    p_audit.add_argument(
+        "seeds", nargs="*", help="prematch seeds (SR or BetPawa ids)"
+    )
+    p_audit.add_argument("--sport", default="soccer")
+    p_audit.add_argument("--max-live", type=int, default=4, dest="max_live")
+    p_audit.add_argument(
+        "--betpawa-seed", action="store_true", dest="betpawa_seed"
+    )
+    p_audit.add_argument(
+        "--sportpesa-cookie", default=None, dest="sportpesa_cookie"
+    )
+    p_audit.add_argument("--betika-cookie", default=None, dest="betika_cookie")
+    p_audit.add_argument(
+        "--out", default=None, help="report path (default docs/audits/<date>-…)"
+    )
+    p_audit.add_argument("--json", action="store_true", dest="as_json")
+
     return parser
+
+
+def _audit_out_path(out: str | None, mode: str) -> Path:
+    """Resolve the audit report path (default: dated docs/audits/ file)."""
+    if out is not None:
+        return Path(out)
+    from datetime import date
+
+    stamp = date.today().isoformat()
+    return Path("docs/audits") / f"{stamp}-wc-{mode}-audit.md"
 
 
 def _books_arg(args: argparse.Namespace) -> tuple[str, ...]:
@@ -195,6 +228,37 @@ async def run(
             [("OK" if result.ok else "FAIL") + ": " + result.reason],
         )
         return 0 if result.ok else 1
+
+    if args.cmd == "audit":
+        mode = "live" if args.live else "prematch"
+        try:
+            report = await run_audit(
+                mode,
+                seeds=args.seeds or None,
+                sport=args.sport,
+                max_live=args.max_live,
+                betpawa_seed=args.betpawa_seed,
+                sportpesa_cookie=args.sportpesa_cookie,
+                betika_cookie=args.betika_cookie,
+            )
+        except ValueError as exc:
+            print(f"audit failed: {exc}")
+            return 1
+        out_path = _audit_out_path(args.out, mode)
+        out_path.parent.mkdir(parents=True, exist_ok=True)
+        out_path.write_text(render_audit_markdown(report), encoding="utf-8")
+        out_path.with_suffix(".json").write_text(
+            json.dumps(asdict(report), default=str, indent=2),
+            encoding="utf-8",
+        )
+        if args.as_json:
+            print(json.dumps(asdict(report), default=str))
+        else:
+            print(
+                f"audit ({mode}): {len(report.fixtures)} fixture(s) -> "
+                f"{out_path}"
+            )
+        return 0 if report.fixtures else 1
 
     if args.cmd == "canary":
         report = await runner(

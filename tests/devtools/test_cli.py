@@ -205,3 +205,90 @@ async def test_verify_uses_injected_clients_and_fetches_per_book(capsys):
     sb = out["results"]["sportybet"]
     assert "1x2_ft" in sb["resolved"]
     assert sb["missing"] == ["btts_ft"]
+
+
+# ---- audit subcommand -----------------------------------------------------
+
+
+def test_audit_requires_a_mode():
+    parser = cli.build_parser()
+    with pytest.raises(SystemExit):
+        parser.parse_args(["audit", "123"])  # neither --prematch nor --live
+
+
+def test_audit_prematch_and_live_are_mutually_exclusive():
+    parser = cli.build_parser()
+    with pytest.raises(SystemExit):
+        parser.parse_args(["audit", "--prematch", "--live"])
+
+
+@pytest.mark.asyncio
+async def test_audit_prematch_writes_report_and_sidecar(tmp_path, monkeypatch):
+    from bookieskit.devtools.audit import (
+        AuditReport,
+        BookAudit,
+        FixtureAudit,
+        MarketAudit,
+    )
+
+    async def fake_run_audit(mode, **kw):
+        assert mode == "prematch"
+        assert kw["seeds"] == ["123"]
+        fa = FixtureAudit(
+            "Arsenal vs Atletico",
+            "68995116",
+            [
+                BookAudit(
+                    "betway",
+                    "ok",
+                    "",
+                    [
+                        MarketAudit(
+                            "1x2_ft", "mapped_priced",
+                            {"outcomes": {"home": 1.63}},
+                        )
+                    ],
+                    [],
+                )
+            ],
+        )
+        return AuditReport(
+            "soccer", mode, [fa], {"mapped_priced": 1, "not_offered": 0}
+        )
+
+    monkeypatch.setattr(cli, "run_audit", fake_run_audit)
+    out = tmp_path / "audit.md"
+    parser = cli.build_parser()
+    args = parser.parse_args(["audit", "--prematch", "123", "--out", str(out)])
+    code = await cli.run(args)
+    assert code == 0
+    assert out.exists()
+    assert "Arsenal vs Atletico" in out.read_text(encoding="utf-8")
+    sidecar = out.with_suffix(".json")
+    assert sidecar.exists()
+    data = json.loads(sidecar.read_text(encoding="utf-8"))
+    assert data["mode"] == "prematch"
+
+
+@pytest.mark.asyncio
+async def test_audit_prematch_no_seeds_exits_clean(capsys):
+    parser = cli.build_parser()
+    args = parser.parse_args(["audit", "--prematch"])  # no seeds
+    code = await cli.run(args)
+    assert code == 1
+    assert "audit failed" in capsys.readouterr().out
+
+
+@pytest.mark.asyncio
+async def test_audit_nonzero_exit_when_no_fixtures(tmp_path, monkeypatch):
+    from bookieskit.devtools.audit import AuditReport
+
+    async def fake_run_audit(mode, **kw):
+        return AuditReport("soccer", mode, [], {})
+
+    monkeypatch.setattr(cli, "run_audit", fake_run_audit)
+    out = tmp_path / "empty.md"
+    parser = cli.build_parser()
+    args = parser.parse_args(["audit", "--live", "--out", str(out)])
+    code = await cli.run(args)
+    assert code == 1

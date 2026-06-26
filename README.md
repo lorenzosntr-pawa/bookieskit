@@ -165,7 +165,26 @@ python -m bookieskit.devtools verify sr:match:42 --canonical 1x2_ft,over_under_f
 
 # Check docs are in sync with library changes (the CI docs-sync gate)
 python -m bookieskit.devtools check-docs-sync --base origin/main
+
+# Live odds audit — every mapped football market across all books on given
+# upcoming fixtures (prematch path); writes docs/audits/<date>-wc-prematch-audit.md
+python -m bookieskit.devtools audit --prematch sr:match:42 sr:match:99
+
+# Live odds audit — auto-discover in-play events and probe the live feed
+python -m bookieskit.devtools audit --live --max-live 4
 ```
+
+### Live odds audit
+
+`audit` probes every mapped football market across all seven bookmakers on a set
+of fixtures and emits an odds matrix (markdown + JSON sidecar under
+`docs/audits/`). Two modes: `--prematch <seeds…>` for given upcoming fixtures
+(prematch path) and `--live` (auto-discovers in-play events, live feed). Each
+market×book is classified MAPPED+PRICED or NOT OFFERED, with a per-book MIS-MAP
+review surface (raw market groups a book sent that the registry doesn't map — the
+only signal worth filing an Issue over; genuinely-absent markets are reported,
+never filed). The classification logic is offline-tested; **run the live probe
+in-region** (bookmakers geo-block US/cloud IPs).
 
 ### Docs-sync gate
 
