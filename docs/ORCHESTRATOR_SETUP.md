@@ -17,7 +17,17 @@ console. Merge still requires your Slack `approve` (the gate never relaxes).
 ```powershell
 powershell -ExecutionPolicy Bypass -File scripts\install-orchestrator.ps1
 ```
-This registers a Task Scheduler job `BookieskitOrchestrator` firing every 15 min.
+This registers a Task Scheduler job `BookieskitOrchestrator` firing every 1 min.
+The action runs PowerShell with `-WindowStyle Hidden -NonInteractive`, so the
+tick does **not** pop a console window each cycle.
+
+> **Zero-window / headless (recommended for an always-on mini PC).**
+> `-WindowStyle Hidden` suppresses the window while you are logged on. For a
+> dedicated host, run the task in **session 0** so no window can ever appear AND
+> it keeps firing when you are logged off: Task Scheduler → the task →
+> Properties → General → **"Run whether user is logged on or not"** (stores your
+> password once). The install script prints the equivalent `New-ScheduledTaskPrincipal`
+> one-liner.
 
 ## Operate (from Slack `#tickets`)
 - Post work requests → filed as `stream:directed` Issues and built.
