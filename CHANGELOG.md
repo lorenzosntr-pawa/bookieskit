@@ -23,6 +23,11 @@ All notable changes to this project are documented in this file. The format foll
   - `1x2_bookings_ft` — 1X2 on full-time booking/card count. Mapped on **Betway** only (market name "Booking 1X2").
   - `over_under_bookings_ft` — Over/Under on full-time booking/card count (parameterized by line). Mapped on **Betway** only (market name "Total Bookings" — the card-count market, deliberately distinct from "Total Booking Points", the points-scoring variant).
   - Coverage gaps awaiting a dedicated in-region live capture (increment 2b): booking markets on Bet9ja (keys `S_1X2BOOK`/`S_OUBOOK` appear in the global translation table but the captured event carries no booking odds), SportyBet, BetPawa, MSport and Betika; corner markets on SportPesa and Betika (no corner data captured). SportPesa is owner-confirmed not to offer corner or booking markets (`—`).
+- Extended **booking (cards)** coverage to every book that offers it (increment 2b of corner & booking mapping, #28). From one in-region prematch capture of the tournament-258194 World Cup fixture *Norway–France* (saved per book as `wc_nf.json`), `1x2_bookings_ft` and `over_under_bookings_ft` are now also mapped — ids/labels taken from the real payloads, never guessed — on:
+  - **BetPawa** (`1096774` "Team With Most Bookings 3 Way - FT" / `1096764` "Total Bookings Over/Under - FT"),
+  - **SportyBet** and **MSport** (id `136` "Booking(s) 1X2" / id `139` "Bookings - Over/Under" — the card-count O/U, deliberately distinct from SportyBet's id `138` "Total Booking Points"),
+  - **Bet9ja** (`S_1X2BOOK` "Cards - 1X2" / `S_OUBOOK` "Cards - Over/Under", full-time variants only — the 1st-half and team-specific keys are left unmapped).
+  - Booking coverage now equals corner coverage: all of BetPawa, SportyBet, Bet9ja, Betway and MSport. Remaining gaps: **SportPesa** (cookie-gated probe; owner-flagged not offered → `—`) and **Betika** (no-cookie market-list fetch is truncated, tracked by #31).
 - Built-in canonical market count: 17 → 21 (14 soccer + 3 basketball + 4 tennis).
 
 ### Changed

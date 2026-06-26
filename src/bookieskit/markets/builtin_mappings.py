@@ -359,63 +359,71 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
         parameterized=True,
     ),
     # =================== Booking (cards) markets (football) =============
-    # 1X2 + Over/Under on full-time booking/card count. Increment 2 of #19
-    # (#22). Market ids/labels lifted from real captures, never guessed.
+    # 1X2 + Over/Under on full-time booking/card count. Increment 2 of #19:
+    # #22 mapped Betway; #28 extends to BetPawa, SportyBet, MSport and Bet9ja
+    # from one in-region prematch capture of the tournament-258194 World Cup
+    # fixture Norway-France (saved per book as wc_nf.json). Market ids/labels
+    # lifted from those real payloads, never guessed.
     #
-    # Offline-mineable now: only Betway, whose captured 2way_handicap_ft.json
-    # carries "Booking 1X2" (team-name 1X2) and "Total Bookings" (O/U on
-    # card count; distinct from "Total Booking Points", the points-scoring
-    # variant we deliberately do NOT map here). Betway markets are keyed by
-    # the market `name` field; outcome conventions match the 1X2 / O/U
-    # markets (team-name sentinels; whitespace-stripped "Over"/"Under").
+    #   - BetPawa: id 1096774 "Team With Most Bookings 3 Way - FT" (outcomes
+    #     1/X/2) and id 1096764 "Total Bookings Over/Under - FT" (raw handicap
+    #     /4 = line; "Over"/"Under"). The 1H variants (1096775/1096765) and the
+    #     team-specific Home/Away totals are distinct ids, left unmapped.
+    #   - SportyBet / MSport: id 136 "Booking(s) 1X2" (Home/Draw/Away) and id
+    #     139 "Bookings - Over/Under" -- the card-COUNT O/U, distinct from
+    #     SportyBet's id 138 "Total Booking Points" (points-scoring variant,
+    #     NOT mapped). Both books share the SportRadar-backed type ids (as
+    #     they do for corners: 162/166).
+    #   - Bet9ja: S_1X2BOOK "Cards - 1X2" ("most bookings ... regular time",
+    #     outcomes 1/X/2) and S_OUBOOK "Cards - Over/Under" ("Total number of
+    #     bookings ... (FT)", outcomes O/U). The 1st-half (S_*1T) and
+    #     team-specific (S_OUBOOKHOME/AWAY) keys are distinct, left unmapped.
+    #   - Betway: "Booking 1X2" (team-name 1X2) and "Total Bookings" (card
+    #     count, distinct from "Total Booking Points"); keyed by market name.
     #
-    # Genuinely absent from current captures → deferred to an in-region
-    # live capture (increment 2b), NOT guessed:
-    #   - Bet9ja: keys S_1X2BOOK / S_OUBOOK appear in the global D.TRANS
-    #     translation table ("Cards - 1X2" / "Cards - Over/Under") but the
-    #     captured event carries NO booking odds and NO D.MK entry, so they
-    #     cannot be mined offline. Left None pending a live capture.
-    #   - SportyBet: no card/booking market in the captured prematch.json.
-    #   - BetPawa, MSport, Betika: no booking data captured.
-    #   - SportPesa: owner-confirmed it does not offer corner/booking → —.
+    # Still unmapped -- deferred, NOT guessed:
+    #   - SportPesa: booking odds need a session cookie the harness can't
+    #     supply offline; owner previously flagged it as not offered.
+    #   - Betika: the no-cookie market-list fetch is truncated (tracked by
+    #     #31); the booking column lands once #31 restores the full fetch.
     MarketMapping(
         canonical_id="1x2_bookings_ft",
         name="1X2 Bookings - Full Time",
-        betpawa_id=None,  # not in captured fixture — needs probe
-        sportybet_id=None,  # no booking market in captured fixture
-        bet9ja_key=None,  # S_1X2BOOK in TRANS only, no odds — needs capture
+        betpawa_id="1096774",  # "Team With Most Bookings 3 Way - FT"
+        sportybet_id="136",  # "Bookings 1X2"
+        bet9ja_key="S_1X2BOOK",  # "Cards - 1X2" (most bookings, FT)
         betway_id="Booking 1X2",  # market name in captured fixture
-        msport_id=None,  # not in captured fixture — needs probe
-        sportpesa_id=None,  # owner-confirmed: not offered → —
-        betika_id=None,  # not in captured fixture — needs probe
+        msport_id="136",  # "Booking 1x2"
+        sportpesa_id=None,  # cookie-gated probe; owner-flagged not offered
+        betika_id=None,  # truncated no-cookie fetch -- tracked by #31
         outcomes={
             "home": OutcomeMapping(
                 canonical_name="home",
-                betpawa="",
-                sportybet="",
-                bet9ja="",
+                betpawa="1",
+                sportybet="Home",
+                bet9ja="1",
                 betway="__HOME__",
-                msport="",
+                msport="Home",
                 sportpesa="",
                 betika="",
             ),
             "draw": OutcomeMapping(
                 canonical_name="draw",
-                betpawa="",
-                sportybet="",
-                bet9ja="",
+                betpawa="X",
+                sportybet="Draw",
+                bet9ja="X",
                 betway="Draw",
-                msport="",
+                msport="Draw",
                 sportpesa="",
                 betika="",
             ),
             "away": OutcomeMapping(
                 canonical_name="away",
-                betpawa="",
-                sportybet="",
-                bet9ja="",
+                betpawa="2",
+                sportybet="Away",
+                bet9ja="2",
                 betway="__AWAY__",
-                msport="",
+                msport="Away",
                 sportpesa="",
                 betika="",
             ),
@@ -425,31 +433,31 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
     MarketMapping(
         canonical_id="over_under_bookings_ft",
         name="Over/Under Bookings - Full Time",
-        betpawa_id=None,  # not in captured fixture — needs probe
-        sportybet_id=None,  # no booking market in captured fixture
-        bet9ja_key=None,  # S_OUBOOK in TRANS only, no odds — needs capture
+        betpawa_id="1096764",  # "Total Bookings Over/Under - FT"
+        sportybet_id="139",  # "Bookings - Over/Under" (count, not id 138 pts)
+        bet9ja_key="S_OUBOOK",  # "Cards - Over/Under" (total bookings, FT)
         betway_id="Total Bookings",  # market name (card count, not points)
-        msport_id=None,  # not in captured fixture — needs probe
-        sportpesa_id=None,  # owner-confirmed: not offered → —
-        betika_id=None,  # not in captured fixture — needs probe
+        msport_id="139",  # "Bookings O/U"
+        sportpesa_id=None,  # cookie-gated probe; owner-flagged not offered
+        betika_id=None,  # truncated no-cookie fetch -- tracked by #31
         outcomes={
             "over": OutcomeMapping(
                 canonical_name="over",
-                betpawa="",
-                sportybet="",
-                bet9ja="",
+                betpawa="Over",
+                sportybet="Over",
+                bet9ja="O",
                 betway="Over",
-                msport="",
+                msport="Over",
                 sportpesa="",
                 betika="",
             ),
             "under": OutcomeMapping(
                 canonical_name="under",
-                betpawa="",
-                sportybet="",
-                bet9ja="",
+                betpawa="Under",
+                sportybet="Under",
+                bet9ja="U",
                 betway="Under",
-                msport="",
+                msport="Under",
                 sportpesa="",
                 betika="",
             ),
