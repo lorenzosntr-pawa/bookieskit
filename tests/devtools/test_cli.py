@@ -126,6 +126,53 @@ async def test_discover_all_fetch_failures_returns_exit_one(capsys):
 
 
 @pytest.mark.asyncio
+async def test_check_docs_sync_fails_on_src_without_docs(capsys):
+    args = cli.build_parser().parse_args(
+        ["check-docs-sync", "--changed", "src/bookieskit/foo.py", "--json"]
+    )
+    code = await cli.run(args)
+    assert code == 1
+    out = json.loads(capsys.readouterr().out)
+    assert out["ok"] is False
+    assert out["src_changed"] == ["src/bookieskit/foo.py"]
+
+
+@pytest.mark.asyncio
+async def test_check_docs_sync_passes_with_docs(capsys):
+    args = cli.build_parser().parse_args(
+        ["check-docs-sync", "--changed",
+         "src/bookieskit/foo.py,docs/markets.md", "--json"]
+    )
+    code = await cli.run(args)
+    assert code == 0
+    out = json.loads(capsys.readouterr().out)
+    assert out["ok"] is True
+
+
+@pytest.mark.asyncio
+async def test_check_docs_sync_docs_na_body_token_exempts(capsys):
+    args = cli.build_parser().parse_args(
+        ["check-docs-sync", "--changed", "src/bookieskit/foo.py",
+         "--pr-body", "internal refactor only\ndocs:n/a", "--json"]
+    )
+    code = await cli.run(args)
+    assert code == 0
+    out = json.loads(capsys.readouterr().out)
+    assert out["ok"] is True
+    assert out["docs_na"] is True
+
+
+@pytest.mark.asyncio
+async def test_check_docs_sync_label_exempts(capsys):
+    args = cli.build_parser().parse_args(
+        ["check-docs-sync", "--changed", "src/bookieskit/foo.py",
+         "--labels", "bug,docs:n/a", "--json"]
+    )
+    code = await cli.run(args)
+    assert code == 0
+
+
+@pytest.mark.asyncio
 async def test_verify_uses_injected_clients_and_fetches_per_book(capsys):
     # Inject a fake fetch via the clients map: the CLI's verify path calls
     # adapter.fetch_raw_markets(client, handle). We stub the client so the

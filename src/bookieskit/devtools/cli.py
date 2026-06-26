@@ -15,6 +15,11 @@ from typing import Any, Awaitable, Callable
 from bookieskit.devtools.adapters import ADAPTERS
 from bookieskit.devtools.canary import CanaryReport, run_canary
 from bookieskit.devtools.coverage import coverage_matrix, render_markdown
+from bookieskit.devtools.docssync import (
+    changed_files_from_git,
+    check_docs_sync,
+    docs_na_from,
+)
 from bookieskit.devtools.fixtures import capture as capture_fixture
 from bookieskit.devtools.release import (
     ReleaseError,
@@ -98,6 +103,24 @@ def build_parser() -> argparse.ArgumentParser:
     p_notes.add_argument("version")
     p_notes.add_argument("--json", action="store_true", dest="as_json")
 
+    p_check = sub.add_parser("check-docs-sync")
+    p_check.add_argument(
+        "--base", default="origin/main",
+        help="git ref to diff HEAD against (three-dot, like CI)",
+    )
+    p_check.add_argument(
+        "--changed", default=None,
+        help="CSV of changed paths (overrides git diff; for CI/tests)",
+    )
+    p_check.add_argument(
+        "--pr-body", default="", dest="pr_body",
+        help="PR body text; scanned for the docs:n/a escape-hatch token",
+    )
+    p_check.add_argument(
+        "--labels", default="", help="CSV of PR label names (docs:n/a hatch)",
+    )
+    p_check.add_argument("--json", action="store_true", dest="as_json")
+
     return parser
 
 
@@ -156,6 +179,22 @@ async def run(
         else:
             print(render_markdown(matrix))
         return 0
+
+    if args.cmd == "check-docs-sync":
+        if args.changed is not None:
+            changed = [c.strip() for c in args.changed.split(",") if c.strip()]
+        else:
+            changed = changed_files_from_git(args.base)
+        labels = [x.strip() for x in args.labels.split(",") if x.strip()]
+        result = check_docs_sync(
+            changed, docs_na=docs_na_from(args.pr_body, labels)
+        )
+        _emit(
+            asdict(result),
+            args.as_json,
+            [("OK" if result.ok else "FAIL") + ": " + result.reason],
+        )
+        return 0 if result.ok else 1
 
     if args.cmd == "canary":
         report = await runner(
