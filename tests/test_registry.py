@@ -414,20 +414,33 @@ def test_registry_has_1x2_bookings_ft():
     assert m.name == "1X2 Bookings - Full Time"
     assert m.parameterized is False
     assert m.sport == "soccer"
-    # Only Betway is offline-mineable (#22); the rest need an in-region
-    # live capture (increment 2b) and stay None rather than being guessed.
+    # BetPawa (1096774) + Betway (#22) + SportyBet/MSport (id 136) + Bet9ja
+    # (S_1X2BOOK) mapped from one real capture (#28). SportPesa needs a cookie
+    # the harness can't supply (not offered) and Betika is gated on #31 — both
+    # stay None.
+    assert m.betpawa_id == "1096774"
     assert m.betway_id == "Booking 1X2"
-    assert m.betpawa_id is None
-    assert m.sportybet_id is None
-    assert m.bet9ja_key is None
-    assert m.msport_id is None
+    assert m.sportybet_id == "136"
+    assert m.bet9ja_key == "S_1X2BOOK"
+    assert m.msport_id == "136"
     assert m.sportpesa_id is None
     assert m.betika_id is None
     assert set(m.outcomes.keys()) == {"home", "draw", "away"}
     assert m.outcomes["home"].betway == "__HOME__"
     assert m.outcomes["draw"].betway == "Draw"
     assert m.outcomes["away"].betway == "__AWAY__"
+    assert m.outcomes["home"].betpawa == "1"
+    assert m.outcomes["draw"].betpawa == "X"
+    assert m.outcomes["away"].betpawa == "2"
+    assert m.outcomes["home"].sportybet == "Home"
+    assert m.outcomes["home"].msport == "Home"
+    assert m.outcomes["home"].bet9ja == "1"
+    assert m.outcomes["draw"].bet9ja == "X"
+    assert m.outcomes["away"].bet9ja == "2"
+    assert r.get_by_platform_id("betpawa", "1096774") is m
     assert r.get_by_platform_id("betway", "Booking 1X2") is m
+    assert r.get_by_platform_id("sportybet", "136") is m
+    assert r.get_by_platform_id("msport", "136") is m
 
 
 def test_registry_has_over_under_bookings_ft():
@@ -439,17 +452,30 @@ def test_registry_has_over_under_bookings_ft():
     assert m.parameterized is True
     assert m.sport == "soccer"
     # "Total Bookings" = O/U on card count (not "Total Booking Points").
+    # BetPawa id 1096764 = "Total Bookings Over/Under - FT". SportyBet/MSport
+    # id 139 = "Bookings - Over/Under" (card count, NOT id 138 points). Bet9ja
+    # S_OUBOOK = "Cards - Over/Under" (FT total). SportPesa not offered (cookie
+    # gap); Betika gated on #31 — both None.
+    assert m.betpawa_id == "1096764"
     assert m.betway_id == "Total Bookings"
-    assert m.betpawa_id is None
-    assert m.sportybet_id is None
-    assert m.bet9ja_key is None
-    assert m.msport_id is None
+    assert m.sportybet_id == "139"
+    assert m.bet9ja_key == "S_OUBOOK"
+    assert m.msport_id == "139"
     assert m.sportpesa_id is None
     assert m.betika_id is None
     assert set(m.outcomes.keys()) == {"over", "under"}
     assert m.outcomes["over"].betway == "Over"
     assert m.outcomes["under"].betway == "Under"
+    assert m.outcomes["over"].betpawa == "Over"
+    assert m.outcomes["under"].betpawa == "Under"
+    assert m.outcomes["over"].sportybet == "Over"
+    assert m.outcomes["over"].msport == "Over"
+    assert m.outcomes["over"].bet9ja == "O"
+    assert m.outcomes["under"].bet9ja == "U"
+    assert r.get_by_platform_id("betpawa", "1096764") is m
     assert r.get_by_platform_id("betway", "Total Bookings") is m
+    assert r.get_by_platform_id("sportybet", "139") is m
+    assert r.get_by_platform_id("msport", "139") is m
 
 
 def test_registry_has_2way_handicap_ft():
