@@ -162,7 +162,19 @@ python -m bookieskit.devtools capture sr:match:42 --name my_new_market
 
 # Verify which canonicals parse_markets resolves
 python -m bookieskit.devtools verify sr:match:42 --canonical 1x2_ft,over_under_ft
+
+# Check docs are in sync with library changes (the CI docs-sync gate)
+python -m bookieskit.devtools check-docs-sync --base origin/main
 ```
+
+### Docs-sync gate
+
+Documentation is kept in step with the library: any PR that changes
+`src/bookieskit/**` must also update the affected docs (`README.md`,
+`CHANGELOG.md`, or `docs/**`) in the same PR. A CI `docs-sync` job enforces
+this, with a `docs:n/a` escape hatch (a `docs:n/a` label, or a bare
+`docs:n/a` line in the PR body) for internal-only changes. See
+[docs/docs-sync.md](docs/docs-sync.md).
 
 ## Extending
 

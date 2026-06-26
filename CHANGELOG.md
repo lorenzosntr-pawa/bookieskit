@@ -5,6 +5,15 @@ All notable changes to this project are documented in this file. The format foll
 ## [Unreleased]
 
 ### Added
+- **Docs-sync gate (#41)** — documentation is now kept in step with the library.
+  Any PR that changes `src/bookieskit/**` must also update a doc surface
+  (`docs/**`, `README.md` or `CHANGELOG.md`) in the same PR, enforced by a new
+  CI `docs-sync` job. A `docs:n/a` escape hatch (a token in the PR body or a
+  `docs:n/a` label) exempts genuinely internal-only changes. The rule is a
+  `bookieskit.devtools check-docs-sync` subcommand so authors can self-check
+  before pushing (the CI job invokes the same checker); a
+  `.github/pull_request_template.md` carries the matching "docs in sync?"
+  checklist item. See `docs/docs-sync.md`.
 - Committed a graphify **structural graph** of `src/` (`src/graphify-out/graph.json`
   + `GRAPH_REPORT.md`, 917 nodes / 2259 edges) as fleet structural memory; the
   orchestrator build step now queries it (`graphify query ... --graph
