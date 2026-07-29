@@ -53,7 +53,7 @@ def test_betpawa_new_countries_resolve_domain_and_brand(
 @pytest.mark.asyncio
 @respx.mock
 async def test_get_sports():
-    respx.get("https://www.betpawa.ng/api/sportsbook/v3/categories/list/all").respond(
+    respx.get("https://www.betpawa.ng/api/sportsbook/v4/categories/list/all").respond(
         json={
             "categories": [
                 {"id": "2", "name": "Football"},
@@ -69,7 +69,7 @@ async def test_get_sports():
 @pytest.mark.asyncio
 @respx.mock
 async def test_get_countries():
-    respx.get("https://www.betpawa.ng/api/sportsbook/v3/categories/list/2").respond(
+    respx.get("https://www.betpawa.ng/api/sportsbook/v4/categories/list/2").respond(
         json={
             "id": "2",
             "name": "Football",
@@ -86,7 +86,7 @@ async def test_get_countries():
 @pytest.mark.asyncio
 @respx.mock
 async def test_get_tournaments():
-    respx.get("https://www.betpawa.ng/api/sportsbook/v3/categories/list/2").respond(
+    respx.get("https://www.betpawa.ng/api/sportsbook/v4/categories/list/2").respond(
         json={
             "id": "2",
             "name": "Football",
@@ -109,7 +109,7 @@ async def test_get_tournaments():
 @pytest.mark.asyncio
 @respx.mock
 async def test_get_events():
-    respx.get("https://www.betpawa.ng/api/sportsbook/v3/events/lists/by-queries").respond(
+    respx.get("https://www.betpawa.ng/api/sportsbook/v4/events/lists/by-queries").respond(
         json={
             "responses": [
                 {
@@ -132,7 +132,7 @@ async def test_get_events():
 @pytest.mark.asyncio
 @respx.mock
 async def test_get_events_with_sport_id():
-    respx.get("https://www.betpawa.ng/api/sportsbook/v3/events/lists/by-queries").respond(
+    respx.get("https://www.betpawa.ng/api/sportsbook/v4/events/lists/by-queries").respond(
         json={"responses": [{"responses": []}]}
     )
     async with BetPawa(country="ng") as client:
@@ -143,7 +143,7 @@ async def test_get_events_with_sport_id():
 @pytest.mark.asyncio
 @respx.mock
 async def test_get_event_detail():
-    respx.get("https://www.betpawa.ng/api/sportsbook/v3/events/32299257").respond(
+    respx.get("https://www.betpawa.ng/api/sportsbook/v4/events/32299257").respond(
         json={
             "id": "32299257",
             "homeTeam": "Manchester City",
@@ -164,9 +164,23 @@ async def test_get_event_detail():
 @pytest.mark.asyncio
 @respx.mock
 async def test_betpawa_headers_include_brand():
-    route = respx.get("https://www.betpawa.ng/api/sportsbook/v3/categories/list/all").respond(
+    route = respx.get("https://www.betpawa.ng/api/sportsbook/v4/categories/list/all").respond(
         json={"categories": []}
     )
     async with BetPawa(country="ng") as client:
         await client.get_sports()
     assert route.calls[0].request.headers["x-pawa-brand"] == "betpawa-nigeria"
+
+
+@pytest.mark.asyncio
+@respx.mock
+async def test_betpawa_requests_json_not_protobuf():
+    """The v4 API serves application/x-protobuf for `accept: */*` on
+    /events/lists/by-queries, which httpx cannot decode. The accept header
+    must stay explicit, or every event fetch comes back as binary garbage."""
+    route = respx.get(
+        "https://www.betpawa.ng/api/sportsbook/v4/events/lists/by-queries"
+    ).respond(json={"responses": [{}]})
+    async with BetPawa(country="ng") as client:
+        await client.get_events(tournament_id="12541")
+    assert route.calls[0].request.headers["accept"] == "application/json"

@@ -10,7 +10,7 @@ from bookieskit.bookmakers.sportybet import SportyBet
 @respx.mock
 async def test_betpawa_get_markets():
     respx.get(
-        "https://www.betpawa.ng/api/sportsbook/v3/events/123"
+        "https://www.betpawa.ng/api/sportsbook/v4/events/123"
     ).respond(
         json={
             "id": "123",
@@ -41,7 +41,7 @@ async def test_betpawa_get_markets():
 @respx.mock
 async def test_betpawa_get_sportradar_id():
     respx.get(
-        "https://www.betpawa.ng/api/sportsbook/v3/events/123"
+        "https://www.betpawa.ng/api/sportsbook/v4/events/123"
     ).respond(
         json={
             "id": "123",
@@ -101,7 +101,7 @@ async def test_bet9ja_get_sportradar_id():
 @respx.mock
 def test_sync_get_markets():
     respx.get(
-        "https://www.betpawa.ng/api/sportsbook/v3/events/123"
+        "https://www.betpawa.ng/api/sportsbook/v4/events/123"
     ).respond(
         json={
             "id": "123",
