@@ -25,6 +25,15 @@ _BRAND_MAP = {
     "ls": "betpawa-lesotho",
     "mw": "betpawa-malawi",
     "mz": "betpawa-mozambique",
+    # Verified live 2026-08-21 (v4 categories/list/all returned JSON with
+    # `onlyMeta`, 4 sports) -- absent from the earlier landing-page sweep.
+    "ao": "betpawa-angola",
+    "bw": "betpawa-botswana",
+    "lr": "betpawa-liberia",
+    "ml": "betpawa-mali",
+    "ss": "betpawa-southsudan",
+    "tg": "betpawa-togo",
+    "zw": "betpawa-zimbabwe",
 }
 
 
@@ -60,18 +69,30 @@ class BetPawa(BaseBookmaker):
         "ng": "https://www.betpawa.ng",
         "gh": "https://www.betpawa.com.gh",
         "ke": "https://www.betpawa.co.ke",
-        "ug": "https://www.betpawa.co.ug",
+        "ug": "https://www.betpawa.ug",   # .co.ug 308s here (fixed 2026-08-21)
         "tz": "https://www.betpawa.co.tz",
         "zm": "https://www.betpawa.co.zm",
         "rw": "https://www.betpawa.rw",
         "cm": "https://www.betpawa.cm",
-        "sl": "https://www.betpawa.sl",
+        "sl": "https://sl.betpawa.com",   # www.betpawa.sl 308s here (fixed 2026-08-21)
         "bj": "https://www.betpawa.bj",
         "cg": "https://cg.betpawa.com",
         "cd": "https://www.betpawa.cd",
         "ls": "https://ls.betpawa.com",
         "mw": "https://www.betpawa.mw",
         "mz": "https://www.betpawa.co.mz",
+        # Added 2026-08-21. Each entry is the form that answers the v4 API
+        # WITHOUT a redirect -- the client does not follow redirects, so a
+        # ccTLD host that 308s to the subdomain is unusable here even though
+        # a redirect-following probe reports it as live. Six of these seven
+        # resolve to `<cc>.betpawa.com`; only Angola serves its ccTLD direct.
+        "ao": "https://www.betpawa.ao",
+        "bw": "https://bw.betpawa.com",   # www.betpawa.co.bw 308s here
+        "lr": "https://lr.betpawa.com",   # no ccTLD site exists
+        "ml": "https://ml.betpawa.com",   # www.betpawa.ml 308s here
+        "ss": "https://ss.betpawa.com",   # no ccTLD site exists
+        "tg": "https://tg.betpawa.com",   # www.betpawa.tg 301s here
+        "zw": "https://zw.betpawa.com",   # www.betpawa.co.zw 308s here
     }
     DEFAULT_HEADERS = {
         # Must be explicit: on the v4 API, `*/*` makes

@@ -27,7 +27,9 @@ def test_betpawa_unsupported_country():
         # Added in 0.8.0
         ("rw", "https://www.betpawa.rw", "betpawa-rwanda"),
         ("cm", "https://www.betpawa.cm", "betpawa-cameroon"),
-        ("sl", "https://www.betpawa.sl", "betpawa-sierraleone"),
+        # sl moved to the subdomain form in the 2026-08-21 sweep: the
+        # ccTLD host 308-redirects, which the client cannot follow.
+        ("sl", "https://sl.betpawa.com", "betpawa-sierraleone"),
         # Added in 0.10.0 — completes the full 15-country BetPawa footprint
         # advertised on the landing-page country selector. URLs and brand
         # headers verified against the live sportsbook API.
@@ -184,3 +186,50 @@ async def test_betpawa_requests_json_not_protobuf():
     async with BetPawa(country="ng") as client:
         await client.get_events(tournament_id="12541")
     assert route.calls[0].request.headers["accept"] == "application/json"
+
+
+def test_betpawa_supports_all_22_live_jurisdictions():
+    """Jurisdiction sweep of 2026-08-21.
+
+    Every candidate domain was probed against
+    ``/api/sportsbook/v4/categories/list/all`` and accepted only when the
+    response was JSON carrying ``onlyMeta`` — a status-200 check alone is
+    not enough, because some ccTLD hosts answer 200 with the marketing
+    site's HTML shell (www.betpawa.tg and www.betpawa.tz both did).
+    """
+    from bookieskit.bookmakers.betpawa import _BRAND_MAP
+
+    expected = {
+        "ng", "gh", "ke", "ug", "tz", "zm", "rw", "cm", "sl", "bj", "cg",
+        "cd", "ls", "mw", "mz",           # the original 15
+        "ao", "bw", "lr", "ml", "ss", "tg", "zw",   # added 2026-08-21
+    }
+    assert set(BetPawa.DOMAINS) == expected
+    # A country is unusable without its brand header, so the two maps must
+    # never drift apart.
+    assert set(_BRAND_MAP) == set(BetPawa.DOMAINS)
+    for cc, url in BetPawa.DOMAINS.items():
+        assert url.startswith("https://"), cc
+        assert not url.endswith("/"), cc
+
+
+def test_betpawa_new_jurisdictions_use_the_form_that_served_the_api():
+    # lr/ss/tg have no working ccTLD site at all — only the subdomain form.
+    assert BetPawa.DOMAINS["lr"] == "https://lr.betpawa.com"
+    assert BetPawa.DOMAINS["ss"] == "https://ss.betpawa.com"
+    assert BetPawa.DOMAINS["tg"] == "https://tg.betpawa.com"
+    assert BetPawa.DOMAINS["bw"] == "https://bw.betpawa.com"
+    assert BetPawa.DOMAINS["ml"] == "https://ml.betpawa.com"
+    assert BetPawa.DOMAINS["zw"] == "https://zw.betpawa.com"
+
+
+def test_betpawa_domains_are_redirect_free_forms():
+    """The client does not follow redirects, so every domain must answer direct.
+
+    `sl` and `ug` were misconfigured to ccTLD hosts that 308 to another host,
+    which made every call to those two jurisdictions raise ResponseError 308.
+    Fixed in the 2026-08-21 sweep; pinned here so a redirect-following probe
+    cannot reintroduce a redirecting host.
+    """
+    assert BetPawa.DOMAINS["sl"] == "https://sl.betpawa.com"
+    assert BetPawa.DOMAINS["ug"] == "https://www.betpawa.ug"

@@ -14,14 +14,20 @@ from bookieskit.config import (  # noqa: E501
 )
 
 # Country code mapping (lowercase -> API format)
+# Verified live 2026-08-21 against config.betwayafrica.com/cron/sports/{CC}
+# and the Highlights feed. Live countries return a ~28KB sports config; ke and
+# ug returned a ZERO-byte config and no events on any sport, so Betway appears
+# to have exited those markets -- they are removed rather than left to fail
+# silently with empty result sets.
 _COUNTRY_CODES = {
     "ng": "NG",
     "gh": "GH",
-    "ke": "KE",
     "tz": "TZ",
-    "ug": "UG",
     "zm": "ZM",
     "za": "ZA",
+    "bw": "BW",
+    "mw": "MW",
+    "mz": "MZ",
 }
 
 # Config domain (sports list only)
@@ -39,7 +45,7 @@ class Betway(BaseBookmaker):
     Event IDs are SportRadar IDs natively.
 
     Args:
-        country: Country code (ng, gh, ke, tz, ug, zm)
+        country: Country code (ng, gh, tz, zm, za, bw, mw, mz)
         timeout: Request timeout in seconds (default: 30)
         max_retries: Max retry attempts (default: 3)
         backoff_factor: Exponential backoff base (default: 1.0)
@@ -48,13 +54,7 @@ class Betway(BaseBookmaker):
     """
 
     DOMAINS = {
-        "ng": "https://feeds-roa2.betwayafrica.com",
-        "gh": "https://feeds-roa2.betwayafrica.com",
-        "ke": "https://feeds-roa2.betwayafrica.com",
-        "tz": "https://feeds-roa2.betwayafrica.com",
-        "ug": "https://feeds-roa2.betwayafrica.com",
-        "zm": "https://feeds-roa2.betwayafrica.com",
-        "za": "https://feeds-roa2.betwayafrica.com",
+        cc: "https://feeds-roa2.betwayafrica.com" for cc in _COUNTRY_CODES
     }
     DEFAULT_HEADERS = {
         "accept": "application/json",
