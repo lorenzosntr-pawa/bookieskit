@@ -2,8 +2,8 @@
 
 | canonical | betpawa | sportybet | bet9ja | betway | msport | sportpesa | betika |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1x2_1up_ft | ✓ | ✓ | ✓ | ✓ | — | — | — |
-| 1x2_2up_ft | — | ✓ | ✓ | ✓ | — | — | — |
+| 1x2_1up_ft | ✓ | ✓ | ✓ | ✓ | ✓ | — | — |
+| 1x2_2up_ft | — | ✓ | ✓ | ✓ | ✓ | — | — |
 | 1x2_bookings_ft | ✓ | ✓ | ✓ | ✓ | ✓ | — | — |
 | 1x2_corners_ft | ✓ | ✓ | ✓ | ✓ | ✓ | — | — |
 | 1x2_ft | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |

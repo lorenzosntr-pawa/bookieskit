@@ -32,8 +32,8 @@ The flag is a no-op for bookmakers whose market ids don't overlap across sports 
 | `over_under_ft` | Over/Under — Full Time | yes (line=goals) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | `btts_ft` | Both Teams To Score — Full Time | no | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | `double_chance_ft` | Double Chance — Full Time | no | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| `1x2_1up_ft` | 1X2 1Up — Full Time | no | ✅ | ✅ | ✅ | ✅ | — | — | — |
-| `1x2_2up_ft` | 1X2 2Up — Full Time | no | — | ✅ | ✅ | ✅ | — | — | — |
+| `1x2_1up_ft` | 1X2 1Up — Full Time | no | ✅ | ✅ | ✅ | ✅ | ✅ | — | — |
+| `1x2_2up_ft` | 1X2 2Up — Full Time | no | — | ✅ | ✅ | ✅ | ✅ | — | — |
 | `next_goal_ft` | Next Goal — Full Time | yes (line = goal number) | ✅ | ✅ | ✅ | ✅ | ✅ live | ❌ NOT PROBED | ✅ |
 | `home_over_under_ft` | Over/Under — Home Team — Full Time | yes (line = goals) | ✅ | ✅ | ❌ NOT EXPOSED | ✅ | ✅ | ❌ NOT PROBED | ✅ |
 | `away_over_under_ft` | Over/Under — Away Team — Full Time | yes (line = goals) | ✅ | ✅ | ❌ NOT EXPOSED | ✅ | ✅ | ❌ NOT PROBED | ✅ |
@@ -45,8 +45,9 @@ The flag is a no-op for bookmakers whose market ids don't overlap across sports 
 | `over_under_bookings_ft` | Bookings Over/Under — Full Time | yes (line=cards) | ✅ | ✅ | ✅ | ✅ | ✅ | — NOT OFFERED | ❌ #31 |
 
 The 1Up / 2Up markets pay as a 1X2 if your team gets to a 1- or 2-goal lead at any
-point. BetPawa offers 1Up (id `28000810`) but not 2Up; MSport, SportPesa and Betika
-expose neither.
+point. BetPawa offers 1Up (id `28000810`) but not 2Up. MSport offers both
+(`5000002` / `5000001`) — note it sends market ids as ints, which the parser
+stringifies. SportPesa and Betika expose neither.
 
 `double_chance_1up_ft` applies the same early-payout rule to the double-chance
 selections (1X / X2 / 12). Only BetPawa (id `80000`) and SportyBet (id `60110`)

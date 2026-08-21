@@ -67,6 +67,12 @@ All notable changes to this project are documented in this file. The format foll
   4 tennis).
 
 ### Fixed
+- **MSport now maps `1x2_1up_ft` and `1x2_2up_ft`** (ids `5000002` / `5000001`).
+  Both markets are present on every captured MSport fixture and were simply
+  never mapped — the registry comment asserted MSport "doesn't expose this
+  market", which was wrong. MSport sends market ids as ints; the parser
+  already stringifies them, and the outcomes carry the usual
+  `Home`/`Draw`/`Away` descriptions, so no parser change was needed.
 - Documentation caught up with the registry. `README.md` and `docs/markets.md`
   still advertised **17 markets (10 soccer)** — the corner and booking markets
   added by #19/#22/#28 were never documented — and `docs/markets.md` listed

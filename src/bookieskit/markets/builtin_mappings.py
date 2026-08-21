@@ -165,13 +165,10 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
         parameterized=False,
     ),
     # 1X2 1Up — pays as 1X2 if your team gets to a 1-goal lead at any point.
-    # Mapped for BetPawa / SportyBet / Bet9ja / Betway.
-    # MSport DOES offer it (live-probed: market id 5000002, "1x2 - 1UP") but
-    # is left unmapped here on purpose: unlike every other MSport market in
-    # this table its outcomes arrive with a null `desc`, identified only by
-    # outcome id (500000201/02/03), which the desc-based outcome matcher
-    # cannot bind. Mapping it needs an id-based outcome path — its own
-    # increment, not a one-line id addition.
+    # Offered by BetPawa / SportyBet / Bet9ja / Betway / MSport. MSport sends
+    # its market id as an int (5000002); the parser stringifies it, and the
+    # outcomes carry the usual "Home"/"Draw"/"Away" descriptions.
+    # SportPesa and Betika do not expose it.
     MarketMapping(
         canonical_id="1x2_1up_ft",
         name="1X2 1Up - Full Time",
@@ -179,7 +176,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
         sportybet_id="60200",
         bet9ja_key="S_1X21",
         betway_id="1X2 (1Up)",
-        msport_id=None,
+        msport_id="5000002",
         sportpesa_id=None,
         betika_id=None,
         outcomes={
@@ -189,7 +186,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 sportybet="Home",
                 bet9ja="11",
                 betway="__HOME__",
-                msport="",
+                msport="Home",
                 sportpesa="",
                 betika="",
             ),
@@ -199,7 +196,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 sportybet="Draw",
                 bet9ja="X1",
                 betway="Draw",
-                msport="",
+                msport="Draw",
                 sportpesa="",
                 betika="",
             ),
@@ -209,7 +206,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 sportybet="Away",
                 bet9ja="21",
                 betway="__AWAY__",
-                msport="",
+                msport="Away",
                 sportpesa="",
                 betika="",
             ),
@@ -225,7 +222,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
         sportybet_id="60100",
         bet9ja_key="S_1X22",
         betway_id="1X2 (2Up)",
-        msport_id=None,
+        msport_id="5000001",
         sportpesa_id=None,
         betika_id=None,
         outcomes={
@@ -235,7 +232,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 sportybet="Home",
                 bet9ja="12",
                 betway="__HOME__",
-                msport="",
+                msport="Home",
                 sportpesa="",
                 betika="",
             ),
@@ -245,7 +242,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 sportybet="Draw",
                 bet9ja="X2",
                 betway="Draw",
-                msport="",
+                msport="Draw",
                 sportpesa="",
                 betika="",
             ),
@@ -255,7 +252,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 sportybet="Away",
                 bet9ja="22",
                 betway="__AWAY__",
-                msport="",
+                msport="Away",
                 sportpesa="",
                 betika="",
             ),
