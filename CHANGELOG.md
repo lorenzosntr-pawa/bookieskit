@@ -30,7 +30,7 @@ All notable changes to this project are documented in this file. The format foll
   `.github/pull_request_template.md` carries the matching "docs in sync?"
   checklist item. See `docs/docs-sync.md`.
 - Committed a graphify **structural graph** of `src/` (`src/graphify-out/graph.json`
-  + `GRAPH_REPORT.md`, 917 nodes / 2259 edges) as fleet structural memory; the
+  + `GRAPH_REPORT.md`, 992 nodes / 2434 edges) as fleet structural memory; the
   orchestrator build step now queries it (`graphify query ... --graph
   src/graphify-out/graph.json`, BFS, no LLM/key) before editing to scope changes.
   Refresh on demand with `graphify update src`. See `docs/GRAPHIFY.md`.
@@ -53,6 +53,55 @@ All notable changes to this project are documented in this file. The format foll
   - **Bet9ja** (`S_1X2BOOK` "Cards - 1X2" / `S_OUBOOK` "Cards - Over/Under", full-time variants only — the 1st-half and team-specific keys are left unmapped).
   - Booking coverage now equals corner coverage: all of BetPawa, SportyBet, Bet9ja, Betway and MSport. Remaining gaps: **SportPesa** (cookie-gated probe; owner-flagged not offered → `—`) and **Betika** (no-cookie market-list fetch is truncated, tracked by #31).
 - Built-in canonical market count: 17 → 21 (14 soccer + 3 basketball + 4 tennis).
+
+- **`double_chance_1up_ft`** — Double Chance 1Up (Full Time), the 1Up
+  early-payout rule applied to the `1X` / `X2` / `12` selections rather than a
+  straight 1X2. Mapped for **BetPawa** (marketType `80000`, outcomes
+  `1X`/`X2`/`12`) and **SportyBet** (id `60110`, outcomes `Home or Draw` /
+  `Home or Away` / `Draw or Away`); both reuse their plain Double Chance
+  outcome vocabulary. MSport, Betway and Betika were probed live in-region and
+  expose a 1X2 1Up but no double-chance variant; Bet9ja's full captures show
+  the same; SportPesa was not probed (Akamai cookie). New in-region capture
+  committed as `tests/fixtures/event_info/betpawa/double_chance_1up_ft.json`.
+  Built-in canonical market count: 21 → 22 (15 soccer + 3 basketball +
+  4 tennis).
+
+### Fixed
+- **MSport now maps `1x2_1up_ft` and `1x2_2up_ft`** (ids `5000002` / `5000001`).
+  Both markets are present on every captured MSport fixture and were simply
+  never mapped — the registry comment asserted MSport "doesn't expose this
+  market", which was wrong. MSport sends market ids as ints; the parser
+  already stringifies them, and the outcomes carry the usual
+  `Home`/`Draw`/`Away` descriptions, so no parser change was needed.
+- Three further doc claims corrected after auditing every per-book cell in
+  `docs/markets.md` against the registry programmatically: `README.md` and
+  `docs/markets.md` both said Bet9ja does **not** ship per-team goal-line O/U
+  (`bet9ja_key=None`) when both canonicals have mapped to `S_HAOU` — one
+  combined market the parser splits by outcome suffix — for some time; and
+  `docs/betpawa.md` still described BetPawa coverage as "4 of the 6 builtins"
+  with "1Up/2Up not yet wired", when 21 of 22 are mapped. `docs/msport.md`
+  gains the int-market-id and 5-million-id-range quirks. The structural
+  graphify graph was refreshed (917 → 992 nodes, 2434 edges).
+- Documentation caught up with the registry. `README.md` and `docs/markets.md`
+  still advertised **17 markets (10 soccer)** — the corner and booking markets
+  added by #19/#22/#28 were never documented — and `docs/markets.md` listed
+  BetPawa as *not* offering `1x2_1up_ft` when it has been mapped (`28000810`)
+  all along. Both now match the registry, and `docs/coverage.md` is
+  regenerated.
+- `bookieskit.bookmakers` now re-exports **all seven** clients. `Betika` and
+  `SportPesa` were missing from that package's `__init__`, so
+  `from bookieskit.bookmakers import Betika` raised `ImportError` even though
+  the top-level `from bookieskit import Betika` worked.
+- The **docs-sync gate is now actually enforced in CI**. #41 shipped the
+  `check-docs-sync` checker and the PR-template checklist, and the changelog
+  entry claimed a CI `docs-sync` job — but that job was never added to
+  `.github/workflows/ci.yml`, leaving the gate inert. The job now runs on every
+  PR (`fetch-depth: 0` so the merge-base exists), passing the PR body/labels
+  through env vars rather than `${{ }}` interpolation.
+- Corrected the `devtools/canary.py` docstring, which pointed at a
+  `.github/workflows/canary.yml` that does not (and should not) exist: a
+  hosted-runner canary would be geo-blocked by the African books and report
+  blocks as drift. The live probe is in-region via the orchestrator tick.
 
 ### Changed
 - Orchestrator now runs under a dedicated **GitHub App identity** that cannot

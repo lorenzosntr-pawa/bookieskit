@@ -1,16 +1,16 @@
-# Graph Report - src  (2026-06-26)
+# Graph Report - src  (2026-08-21)
 
 ## Corpus Check
-- 53 files · ~34,776 words
+- 45 files · ~36,604 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 917 nodes · 2259 edges · 33 communities (28 shown, 5 thin omitted)
-- Extraction: 90% EXTRACTED · 10% INFERRED · 0% AMBIGUOUS · INFERRED: 228 edges (avg confidence: 0.5)
+- 992 nodes · 2434 edges · 28 communities (23 shown, 5 thin omitted)
+- Extraction: 90% EXTRACTED · 10% INFERRED · 0% AMBIGUOUS · INFERRED: 244 edges (avg confidence: 0.5)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `71479d0b`
+- Built from commit: `8c6251d3`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -31,15 +31,10 @@
 - [[_COMMUNITY_Community 13|Community 13]]
 - [[_COMMUNITY_Community 14|Community 14]]
 - [[_COMMUNITY_Community 15|Community 15]]
-- [[_COMMUNITY_Community 16|Community 16]]
 - [[_COMMUNITY_Community 17|Community 17]]
-- [[_COMMUNITY_Community 18|Community 18]]
-- [[_COMMUNITY_Community 19|Community 19]]
 - [[_COMMUNITY_Community 20|Community 20]]
 - [[_COMMUNITY_Community 21|Community 21]]
 - [[_COMMUNITY_Community 22|Community 22]]
-- [[_COMMUNITY_Community 23|Community 23]]
-- [[_COMMUNITY_Community 24|Community 24]]
 - [[_COMMUNITY_Community 25|Community 25]]
 - [[_COMMUNITY_Community 26|Community 26]]
 - [[_COMMUNITY_Community 27|Community 27]]
@@ -50,13 +45,13 @@
 - [[_COMMUNITY_Community 32|Community 32]]
 
 ## God Nodes (most connected - your core abstractions)
-1. `BaseBookmaker` - 60 edges
-2. `MarketRegistry` - 52 edges
+1. `MarketRegistry` - 68 edges
+2. `BaseBookmaker` - 60 edges
 3. `GhRunner` - 42 edges
 4. `str` - 38 edges
 5. `Queue` - 37 edges
-6. `PrematchEventStub` - 31 edges
-7. `CanaryReport` - 30 edges
+6. `CanaryReport` - 32 edges
+7. `PrematchEventStub` - 31 edges
 8. `run()` - 30 edges
 9. `WorkItem` - 30 edges
 10. `int` - 29 edges
@@ -64,32 +59,32 @@
 ## Surprising Connections (you probably didn't know these)
 - `int` --uses--> `BaseBookmaker`  [INFERRED]
   bookieskit/bookmakers/betpawa.py → bookieskit/base.py
-- `MarketRegistry` --uses--> `MarketRegistry`  [INFERRED]
-  bookieskit/devtools/search.py → bookieskit/markets/registry.py
+- `bool` --uses--> `MarketRegistry`  [INFERRED]
+  bookieskit/markets/parser.py → bookieskit/markets/registry.py
+- `int` --uses--> `MarketRegistry`  [INFERRED]
+  bookieskit/markets/parser.py → bookieskit/markets/registry.py
 - `Bet9ja` --uses--> `BaseBookmaker`  [INFERRED]
   bookieskit/bookmakers/bet9ja.py → bookieskit/base.py
 - `Betika` --uses--> `BaseBookmaker`  [INFERRED]
   bookieskit/bookmakers/betika.py → bookieskit/base.py
-- `BetPawa` --uses--> `BaseBookmaker`  [INFERRED]
-  bookieskit/bookmakers/betpawa.py → bookieskit/base.py
 
-## Communities (33 total, 5 thin omitted)
+## Communities (28 total, 5 thin omitted)
 
 ### Community 0 - "Community 0"
-Cohesion: 0.06
-Nodes (97): float, MarketMapping, MarketRegistry, object, str, decode_betpawa_probability(), Decode a BetPawa price.probability base64 blob to (win, refund).      Returns, Built-in market mappings.  Soccer: 1X2, O/U, BTTS, DC, 1X2 1Up, 1X2 2Up, next- (+89 more)
+Cohesion: 0.05
+Nodes (99): bool, float, int, MarketMapping, MarketRegistry, object, str, decode_betpawa_probability() (+91 more)
 
 ### Community 1 - "Community 1"
 Cohesion: 0.07
-Nodes (73): Any, ArgumentParser, bool, CanaryRunner, GhRunner, int, Namespace, str (+65 more)
+Nodes (75): Any, ArgumentParser, bool, CanaryRunner, GhRunner, int, Namespace, str (+67 more)
 
 ### Community 2 - "Community 2"
-Cohesion: 0.06
-Nodes (40): Any, bool, int, PrematchEventStub, str, Any, bool, int (+32 more)
+Cohesion: 0.07
+Nodes (39): Any, bool, int, PrematchEventStub, str, Any, bool, int (+31 more)
 
 ### Community 3 - "Community 3"
-Cohesion: 0.07
-Nodes (56): BookCheck, bool, int, str, WorkItem, str, CanaryReport, ApproveCommand (+48 more)
+Cohesion: 0.06
+Nodes (59): BookCheck, bool, int, str, WorkItem, str, CanaryReport, BookCheck (+51 more)
 
 ### Community 4 - "Community 4"
 Cohesion: 0.09
@@ -100,8 +95,8 @@ Cohesion: 0.09
 Nodes (34): AbstractEventLoop, BaseBookmaker, Any, float, int, str, Base bookmaker client with shared HTTP, retry, and rate-limiting logic., Set or replace the ``Cookie:`` header for subsequent requests.          Works (+26 more)
 
 ### Community 6 - "Community 6"
-Cohesion: 0.09
-Nodes (43): Any, ArgumentParser, bool, CanaryRunner, int, Namespace, str, bool (+35 more)
+Cohesion: 0.06
+Nodes (66): Any, ArgumentParser, bool, CanaryRunner, int, Namespace, Path, str (+58 more)
 
 ### Community 7 - "Community 7"
 Cohesion: 0.09
@@ -116,44 +111,32 @@ Cohesion: 0.13
 Nodes (24): bool, int, Path, str, bump_init(), bump_pyproject(), extract_section(), GitRunner (+16 more)
 
 ### Community 10 - "Community 10"
-Cohesion: 0.11
-Nodes (17): Any, str, Bet9ja, Bet9ja client — supports ng only., Build a SR-id -> Bet9ja internal-id map for ALL prematch events         under a, HTTP client for Bet9ja sportsbook API.      Bet9ja has stricter rate limits (1, Look up Bet9ja's internal event ID for a given SportRadar ID.          Bet9ja', Get list of sports that currently have live events.          Returns: (+9 more)
+Cohesion: 0.05
+Nodes (41): Any, str, Any, int, str, Any, bool, str (+33 more)
 
 ### Community 11 - "Community 11"
 Cohesion: 0.20
 Nodes (27): Any, bool, Handle, str, str, Adapter, _bet9ja_fetch(), _bet9ja_resolve() (+19 more)
 
 ### Community 12 - "Community 12"
-Cohesion: 0.14
-Nodes (17): Any, int, PrematchEventStub, str, Betway, Get regions/countries and leagues for a sport.          Args:             spo, Get tournaments (same as get_countries — leagues are tournaments).          Ar, Get events for a league.          Args:             region_id: Region slug (e (+9 more)
+Cohesion: 0.12
+Nodes (18): Any, int, PrematchEventStub, str, Betway, Betway client — supports ng, gh, ke, tz, ug, zm., Get regions/countries and leagues for a sport.          Args:             spo, Get tournaments (same as get_countries — leagues are tournaments).          Ar (+10 more)
 
 ### Community 13 - "Community 13"
 Cohesion: 0.12
 Nodes (18): Any, bool, int, PrematchEventStub, str, SportPesa client — supports ke, tz., Fetch markets and return normalized markets.          Overrides the base because, HTTP client for SportPesa sportsbook API.      SportPesa uses country-specific s (+10 more)
 
 ### Community 14 - "Community 14"
-Cohesion: 0.26
-Nodes (20): Any, MarketRegistry, str, Candidate, _candidates_bet9ja(), _candidates_betika(), _candidates_betpawa(), _candidates_betway() (+12 more)
+Cohesion: 0.06
+Nodes (71): Any, bool, Handle, int, MarketRegistry, str, Any, MarketRegistry (+63 more)
 
 ### Community 15 - "Community 15"
 Cohesion: 0.19
 Nodes (13): Any, bool, str, _api_prefix(), SportyBet client — supports ng, gh, ke, tz, za, cm, zm.  SportyBet also operat, Get tournaments for a sport (nested under categories).          Returns the sa, Get events for a tournament.          Args:             tournament_id: SportR, Get full event details including all markets.          Args:             even (+5 more)
 
-### Community 16 - "Community 16"
-Cohesion: 0.15
-Nodes (14): bool, int, bool, MarketMapping, str, MarketRegistry, Return the MarketMapping for a canonical ID, or None if not registered., Return the MarketMapping for a platform-specific ID.          Args: (+6 more)
-
 ### Community 17 - "Community 17"
-Cohesion: 0.20
-Nodes (19): Any, Handle, int, MarketRegistry, str, BookCheck, check_book(), _discover_seed() (+11 more)
-
-### Community 18 - "Community 18"
-Cohesion: 0.20
-Nodes (10): Any, int, str, BetPawa, Get countries/regions for a sport (with competitions).          Args:, Get tournaments/competitions for a sport.          Returns the same payload as, Get events for a tournament/competition, or all events for a sport.          A, Get full event details including all markets and odds.          Args: (+2 more)
-
-### Community 19 - "Community 19"
-Cohesion: 0.21
-Nodes (13): Any, bool, str, _betpawa_seed_lookup(), _normalize_sr(), Cross-bookmaker fan-out: seed + sport -> ResolvedEvent.  Each book is resolved, Fetch a BetPawa event by internal id; return (sr_numeric, home, away)., Return the bare numeric SR id from a seed (strips sr:match: prefix). (+5 more)
+Cohesion: 0.07
+Nodes (45): Any, bool, Handle, int, MarketRegistry, str, Any, str (+37 more)
 
 ### Community 20 - "Community 20"
 Cohesion: 0.23
@@ -166,14 +149,6 @@ Nodes (12): int, str, canary_digest(), cycle_blocked(), cycle_empty(), cycle_pr(
 ### Community 22 - "Community 22"
 Cohesion: 0.24
 Nodes (12): float, object, str, _decimal_string_to_hex64(), _decode_one(), _hex64_to_float64(), _hex_xor64(), BetPawa probability deobfuscation.  BetPawa hides the per-outcome probability (+4 more)
-
-### Community 23 - "Community 23"
-Cohesion: 0.21
-Nodes (11): Any, str, Dataclasses for the market-add harness., Per-platform parse_markets result., VerifyResult, _market_to_odds(), Run parse_markets on a raw payload and report which canonicals resolve., Serialize one NormalizedMarket's odds into a plain dict. (+3 more)
-
-### Community 24 - "Community 24"
-Cohesion: 0.27
-Nodes (10): bool, _list_betpawa_events(), Live canary: probe real bookmaker payloads on a schedule and detect drift.  Dr, Flatten BetPawa get_events responses[].responses[] into one list., _struct_bet9ja(), _struct_betika(), _struct_betpawa(), _struct_betway() (+2 more)
 
 ### Community 25 - "Community 25"
 Cohesion: 0.33
@@ -188,23 +163,23 @@ Cohesion: 0.38
 Nodes (6): bool, str, gather_state(), Render the live #status board + gather the loop's current state.  Pure render, render_board(), _status_of()
 
 ## Knowledge Gaps
-- **21 isolated node(s):** `object`, `object`, `Any`, `str`, `Path` (+16 more)
+- **21 isolated node(s):** `Any`, `str`, `Path`, `Pattern`, `bool` (+16 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **5 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `MarketRegistry` connect `Community 16` to `Community 0`, `Community 5`, `Community 6`, `Community 14`, `Community 17`, `Community 24`?**
-  _High betweenness centrality (0.311) - this node is a cross-community bridge._
-- **Why does `BaseBookmaker` connect `Community 5` to `Community 2`, `Community 10`, `Community 12`, `Community 13`, `Community 15`, `Community 16`, `Community 18`?**
-  _High betweenness centrality (0.182) - this node is a cross-community bridge._
-- **Why does `CanaryReport` connect `Community 6` to `Community 1`, `Community 3`, `Community 16`, `Community 17`, `Community 24`?**
+- **Why does `MarketRegistry` connect `Community 14` to `Community 0`, `Community 3`, `Community 5`, `Community 6`, `Community 17`?**
+  _High betweenness centrality (0.336) - this node is a cross-community bridge._
+- **Why does `CanaryReport` connect `Community 6` to `Community 17`, `Community 3`, `Community 1`, `Community 14`?**
   _High betweenness centrality (0.178) - this node is a cross-community bridge._
+- **Why does `BaseBookmaker` connect `Community 5` to `Community 2`, `Community 10`, `Community 12`, `Community 13`, `Community 14`, `Community 15`?**
+  _High betweenness centrality (0.173) - this node is a cross-community bridge._
+- **Are the 44 inferred relationships involving `MarketRegistry` (e.g. with `BaseBookmaker` and `str`) actually correct?**
+  _`MarketRegistry` has 44 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 40 inferred relationships involving `BaseBookmaker` (e.g. with `Bet9ja` and `Betika`) actually correct?**
   _`BaseBookmaker` has 40 INFERRED edges - model-reasoned connections that need verification._
-- **Are the 33 inferred relationships involving `MarketRegistry` (e.g. with `BaseBookmaker` and `str`) actually correct?**
-  _`MarketRegistry` has 33 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 20 inferred relationships involving `GhRunner` (e.g. with `ArgumentParser` and `Any`) actually correct?**
   _`GhRunner` has 20 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 15 inferred relationships involving `Queue` (e.g. with `ArgumentParser` and `Any`) actually correct?**

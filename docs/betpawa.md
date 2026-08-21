@@ -79,7 +79,7 @@ Full event payload, including `markets[]` and `widgets[]`. The SR id lives in th
 
 ### Inherited: `get_markets(event_id, registry=None) -> list[NormalizedMarket]`
 
-Calls `get_event_detail`, then `parse_markets(response, platform="betpawa", registry=registry)`. Returns the normalized markets — only those whose `betpawa_id` is registered (4 of the 6 builtins by default; the 1Up/2Up variants are not yet wired for BetPawa).
+Calls `get_event_detail`, then `parse_markets(response, platform="betpawa", registry=registry)`. Returns the normalized markets — only those whose `betpawa_id` is registered: **21 of the 22 builtins**, the sole exception being `1x2_2up_ft` (BetPawa offers 1Up but not 2Up). Note that a market being registered does not mean every event carries it — `double_chance_1up_ft` (id `80000`), for instance, appears on only a minority of fixtures.
 
 ### Inherited: `get_sportradar_id(event_id) -> str | None`
 

@@ -37,3 +37,32 @@ jobs:
           cache-dependency-path: pyproject.toml
       - run: pip install -e ".[dev,orchestration]"
       - run: pytest -q
+
+  docs-sync:
+    # Documentation must move with the library (#41). PR-only: the rule is a
+    # diff against the target branch, which has no meaning for a push to main.
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # check-docs-sync diffs base...HEAD, so the merge-base must exist.
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: pyproject.toml
+      - run: pip install -e .
+      # PR body and labels carry the `docs:n/a` escape hatch. They are
+      # attacker-controlled text, so they go through env vars rather than
+      # `${{ }}` interpolation inside the run script (shell-injection safety).
+      - env:
+          PR_BODY: ${{ github.event.pull_request.body }}
+          PR_LABELS: ${{ join(github.event.pull_request.labels.*.name, ',') }}
+          BASE_REF: ${{ github.base_ref }}
+        run: |
+          python -m bookieskit.devtools check-docs-sync \
+            --base "origin/$BASE_REF" \
+            --pr-body "$PR_BODY" \
+            --labels "$PR_LABELS"

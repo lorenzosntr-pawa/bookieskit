@@ -219,3 +219,49 @@ def test_parse_msport_2way_handicap_ft_from_probe_fixture():
         {"home", "away"}.issubset({o.canonical_name for o in outs})
         for outs in ah.lines.values()
     )
+
+
+def test_msport_1x2_1up_and_2up_from_fixture():
+    """MSport exposes both 1Up and 2Up (ids 5000002 / 5000001).
+
+    Corrects an earlier assumption recorded in ``builtin_mappings.py`` that
+    MSport "doesn't expose this market". It does, on every captured fixture,
+    with the same ``Home``/``Draw``/``Away`` outcome vocabulary as its plain
+    1X2 — the id simply arrives as an int, which the parser stringifies.
+    """
+    import json
+    from pathlib import Path
+
+    from bookieskit.markets.parser import parse_markets
+
+    fixture = Path("tests/fixtures/event_info/msport/prematch.json")
+    if not fixture.exists():
+        import pytest
+        pytest.skip("MSport prematch fixture not captured")
+    response = json.loads(fixture.read_text(encoding="utf-8"))
+    markets = parse_markets(response, platform="msport")
+
+    one_up = next(
+        (m for m in markets if m.canonical_id == "1x2_1up_ft"), None
+    )
+    assert one_up is not None, "MSport 1x2_1up_ft (id=5000002) not resolved"
+    assert one_up.lines is None
+    names = {o.canonical_name: o for o in one_up.outcomes}
+    assert set(names) == {"home", "draw", "away"}
+    # From the fixture: Home=1.69, Draw=3.25, Away=1.96.
+    assert names["home"].odds == 1.69
+    assert names["draw"].odds == 3.25
+    assert names["away"].odds == 1.96
+
+    two_up = next(
+        (m for m in markets if m.canonical_id == "1x2_2up_ft"), None
+    )
+    assert two_up is not None, "MSport 1x2_2up_ft (id=5000001) not resolved"
+    two_names = {o.canonical_name: o for o in two_up.outcomes}
+    assert set(two_names) == {"home", "draw", "away"}
+    # From the fixture: Home=2.34, Draw=3.25, Away=2.80.
+    assert two_names["home"].odds == 2.34
+    assert two_names["away"].odds == 2.80
+    # 1Up settles earlier than 2Up, so it is the shorter price on the
+    # favourite. Guards against the two adjacent ids being swapped.
+    assert names["home"].odds < two_names["home"].odds

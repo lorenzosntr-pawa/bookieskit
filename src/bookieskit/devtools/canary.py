@@ -6,8 +6,12 @@ transient unreachability (network blip -> soft warning). Reuses the harness
 core: resolve_event (fan-out), ADAPTERS (fetch), verify (resolution check).
 
 All checker logic is offline-unit-testable; the only networked path is the
-scheduled workflow (.github/workflows/canary.yml). The CanaryReport JSON is
-the stable contract the orchestrator (sub-project 5) turns into alerts.
+live probe itself. That probe runs **in-region**, driven by the orchestrator
+tick (`python -m bookieskit.orchestration sync-canary`) — deliberately not a
+GitHub Actions schedule, because the African bookmakers geo-block cloud IPs
+(BetPawa answers 403), so a hosted-runner canary would report drift that is
+really just a block. The CanaryReport JSON is the stable contract the
+orchestrator (sub-project 5) turns into alerts.
 """
 
 from dataclasses import dataclass

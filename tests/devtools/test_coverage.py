@@ -25,7 +25,7 @@ EXPECTED_MATRIX: dict[str, dict[str, bool]] = {
         "sportybet": True,
         "bet9ja": True,
         "betway": True,
-        "msport": False,
+        "msport": True,
         "sportpesa": False,
         "betika": False,
     },
@@ -34,7 +34,7 @@ EXPECTED_MATRIX: dict[str, dict[str, bool]] = {
         "sportybet": True,
         "bet9ja": True,
         "betway": True,
-        "msport": False,
+        "msport": True,
         "sportpesa": False,
         "betika": False,
     },
@@ -209,20 +209,29 @@ EXPECTED_MATRIX: dict[str, dict[str, bool]] = {
         "sportpesa": False,
         "betika": False,
     },
+    "double_chance_1up_ft": {
+        "betpawa": True,
+        "sportybet": True,
+        "bet9ja": False,
+        "betway": False,
+        "msport": False,
+        "sportpesa": False,
+        "betika": False,
+    },
 }
 
 
 def test_coverage_matrix_golden_snapshot():
-    """coverage_matrix() must equal the frozen expected dict (all 21 markets)."""
+    """coverage_matrix() must equal the frozen expected dict (all 22 markets)."""
     matrix = coverage_matrix()
     assert matrix == EXPECTED_MATRIX, (
         "Registry changed — update EXPECTED_MATRIX if intentional."
     )
 
 
-def test_coverage_matrix_has_21_markets():
+def test_coverage_matrix_has_22_markets():
     matrix = coverage_matrix()
-    assert len(matrix) == 21
+    assert len(matrix) == 22
 
 
 def test_coverage_matrix_has_all_platforms():
