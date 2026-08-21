@@ -54,6 +54,22 @@ All notable changes to this project are documented in this file. The format foll
   - Booking coverage now equals corner coverage: all of BetPawa, SportyBet, Bet9ja, Betway and MSport. Remaining gaps: **SportPesa** (cookie-gated probe; owner-flagged not offered → `—`) and **Betika** (no-cookie market-list fetch is truncated, tracked by #31).
 - Built-in canonical market count: 17 → 21 (14 soccer + 3 basketball + 4 tennis).
 
+### Fixed
+- `bookieskit.bookmakers` now re-exports **all seven** clients. `Betika` and
+  `SportPesa` were missing from that package's `__init__`, so
+  `from bookieskit.bookmakers import Betika` raised `ImportError` even though
+  the top-level `from bookieskit import Betika` worked.
+- The **docs-sync gate is now actually enforced in CI**. #41 shipped the
+  `check-docs-sync` checker and the PR-template checklist, and the changelog
+  entry claimed a CI `docs-sync` job — but that job was never added to
+  `.github/workflows/ci.yml`, leaving the gate inert. The job now runs on every
+  PR (`fetch-depth: 0` so the merge-base exists), passing the PR body/labels
+  through env vars rather than `${{ }}` interpolation.
+- Corrected the `devtools/canary.py` docstring, which pointed at a
+  `.github/workflows/canary.yml` that does not (and should not) exist: a
+  hosted-runner canary would be geo-blocked by the African books and report
+  blocks as drift. The live probe is in-region via the orchestrator tick.
+
 ### Changed
 - Orchestrator now runs under a dedicated **GitHub App identity** that cannot
   merge to `main`; the Slack `approve` path uses a separate owner token to

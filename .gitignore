@@ -30,3 +30,10 @@ betika_init.js
 src/graphify-out/*
 !src/graphify-out/graph.json
 !src/graphify-out/GRAPH_REPORT.md
+
+# one-shot scratch scripts and raw audit/monitor dumps (see docs/audits/README.md:
+# only the rendered .md reports are committed)
+/_*.py
+/_*.json
+docs/audits/*.json
+scripts/*.sqlite
