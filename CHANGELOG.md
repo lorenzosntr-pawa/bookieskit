@@ -30,7 +30,7 @@ All notable changes to this project are documented in this file. The format foll
   `.github/pull_request_template.md` carries the matching "docs in sync?"
   checklist item. See `docs/docs-sync.md`.
 - Committed a graphify **structural graph** of `src/` (`src/graphify-out/graph.json`
-  + `GRAPH_REPORT.md`, 917 nodes / 2259 edges) as fleet structural memory; the
+  + `GRAPH_REPORT.md`, 992 nodes / 2434 edges) as fleet structural memory; the
   orchestrator build step now queries it (`graphify query ... --graph
   src/graphify-out/graph.json`, BFS, no LLM/key) before editing to scope changes.
   Refresh on demand with `graphify update src`. See `docs/GRAPHIFY.md`.
