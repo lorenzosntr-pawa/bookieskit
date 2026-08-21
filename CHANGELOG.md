@@ -73,6 +73,15 @@ All notable changes to this project are documented in this file. The format foll
   market", which was wrong. MSport sends market ids as ints; the parser
   already stringifies them, and the outcomes carry the usual
   `Home`/`Draw`/`Away` descriptions, so no parser change was needed.
+- Three further doc claims corrected after auditing every per-book cell in
+  `docs/markets.md` against the registry programmatically: `README.md` and
+  `docs/markets.md` both said Bet9ja does **not** ship per-team goal-line O/U
+  (`bet9ja_key=None`) when both canonicals have mapped to `S_HAOU` — one
+  combined market the parser splits by outcome suffix — for some time; and
+  `docs/betpawa.md` still described BetPawa coverage as "4 of the 6 builtins"
+  with "1Up/2Up not yet wired", when 21 of 22 are mapped. `docs/msport.md`
+  gains the int-market-id and 5-million-id-range quirks. The structural
+  graphify graph was refreshed (917 → 992 nodes, 2434 edges).
 - Documentation caught up with the registry. `README.md` and `docs/markets.md`
   still advertised **17 markets (10 soccer)** — the corner and booking markets
   added by #19/#22/#28 were never documented — and `docs/markets.md` listed

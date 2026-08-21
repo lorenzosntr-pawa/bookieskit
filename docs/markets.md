@@ -35,8 +35,8 @@ The flag is a no-op for bookmakers whose market ids don't overlap across sports 
 | `1x2_1up_ft` | 1X2 1Up — Full Time | no | ✅ | ✅ | ✅ | ✅ | ✅ | — | — |
 | `1x2_2up_ft` | 1X2 2Up — Full Time | no | — | ✅ | ✅ | ✅ | ✅ | — | — |
 | `next_goal_ft` | Next Goal — Full Time | yes (line = goal number) | ✅ | ✅ | ✅ | ✅ | ✅ live | ❌ NOT PROBED | ✅ |
-| `home_over_under_ft` | Over/Under — Home Team — Full Time | yes (line = goals) | ✅ | ✅ | ❌ NOT EXPOSED | ✅ | ✅ | ❌ NOT PROBED | ✅ |
-| `away_over_under_ft` | Over/Under — Away Team — Full Time | yes (line = goals) | ✅ | ✅ | ❌ NOT EXPOSED | ✅ | ✅ | ❌ NOT PROBED | ✅ |
+| `home_over_under_ft` | Over/Under — Home Team — Full Time | yes (line = goals) | ✅ | ✅ | ✅ combined | ✅ | ✅ | ❌ NOT PROBED | ✅ |
+| `away_over_under_ft` | Over/Under — Away Team — Full Time | yes (line = goals) | ✅ | ✅ | ✅ combined | ✅ | ✅ | ❌ NOT PROBED | ✅ |
 | `2way_handicap_ft` | 2-Way Asian Handicap — Full Time | yes (signed line=goals) | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ NOT PROBED | — NOT EXPOSED |
 | `double_chance_1up_ft` | Double Chance 1Up — Full Time | no | ✅ | ✅ | — NOT EXPOSED | — NOT EXPOSED | — NOT EXPOSED | ❌ NOT PROBED | — NOT EXPOSED |
 | `1x2_corners_ft` | Corners 1X2 — Full Time | no | ✅ | ✅ | ✅ | ✅ | ✅ | — NOT OFFERED | ❌ #31 |
@@ -57,6 +57,10 @@ double-chance variant.
 Corner and booking (card) markets carry the full-time corner/card count rather than
 goals. SportPesa does not offer them; Betika's are blocked behind the truncated
 no-cookie market fetch tracked by issue #31.
+
+Bet9ja sends home and away goal-line O/U as a *single* combined market
+(`S_HAOU`); the parser splits it by outcome suffix (`OH`/`UH` -> home,
+`OA`/`UA` -> away), which is why both canonicals share one `bet9ja_key`.
 
 The `next_goal_ft` market is parameterized by **goal number**: `line=1.0` is "1st goal", `line=2.0` is "2nd goal", etc. Prematch events always carry `line=1.0` only; live events can carry multiple goal numbers under one `NormalizedMarket` (e.g. after the home team scores the 1st goal, the bookmaker exposes both "2nd goal" and "3rd goal" odds and the parser groups them under the same canonical id). Outcomes are `home` / `none` / `away` — `none` means no further goal in regular time.
 

@@ -75,6 +75,8 @@ Both call `get_event_detail(live=False)`. For LIVE markets, fetch via `get_event
 - **`live=True` switches `productId`** the same way as SportyBet (3 → 1) for full live market book.
 - **Headers identical to SportyBet**: `operid: 2`, `clientid: web`, `platform: web`. The two APIs share infrastructure.
 - **Double Chance outcome strings**: live and prematch responses both use compact `"1 X"` / `"X 2"` / `"1 2"` notation. The builtin mapping matches.
+- **Market ids arrive as JSON ints, not strings** (all 188 markets in the `prematch.json` capture). `msport_id` in a `MarketMapping` is still a **string** — the parser calls `str()` on the incoming id before the registry lookup. Write `msport_id="5000002"`, never `5000002`.
+- **Early-payout markets live in the 5-million id range**: `1x2 - 1UP` is `5000002` and `1x2 - 2UP` is `5000001` — note the ids run *backwards* relative to the names. Both carry ordinary `Home`/`Draw`/`Away` outcome descriptions. MSport does **not** offer a Double Chance 1Up (verified by live probe over a pool of upcoming fixtures).
 
 ## Recipes
 
