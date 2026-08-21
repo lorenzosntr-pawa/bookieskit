@@ -263,10 +263,22 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
     # double-chance selections (1X / X2 / 12) instead of a straight 1X2.
     # Offered by BetPawa and SportyBet; both reuse the outcome vocabulary of
     # their plain Double Chance, so only the market id differs.
-    # Live-probed in-region: MSport, Betway and Betika all expose a 1X2 1Up
-    # but no double-chance variant; Bet9ja's full captures likewise carry
-    # only 1X2 1Up and team-win 1Up/2Up. SportPesa was not probed (its
-    # market list needs an Akamai cookie the harness cannot supply).
+    # Evidence for the other five books, graded by how much the scan
+    # actually saw (a book that returns no 1Up market *of any kind* proves
+    # nothing about the double-chance variant):
+    #   - MSport  — NOT OFFERED. Live: 10 events / 7,749 market strings,
+    #     "1x2 - 1UP" present, no double-chance variant.
+    #   - Betway  — NOT OFFERED. Live: 10 events / 34,605 strings,
+    #     "1X2 (1Up)" present, no double-chance variant.
+    #   - Bet9ja  — NOT OFFERED. Fixtures: 2,788 strings across 6 captures
+    #     with seven distinct 1UP markets ("1X2 1UP", "Home/Away to Win
+    #     1UP/2UP"), none of them double-chance.
+    #   - Betika  — UNKNOWN, not "absent". Its scans surface no 1Up market
+    #     at all (live: 10 events / 210 strings), which is the signature of
+    #     the truncated no-cookie market fetch tracked by #31, not evidence
+    #     of absence. Re-probe once #31 is fixed.
+    #   - SportPesa — UNKNOWN. Not probed; its market list needs an Akamai
+    #     cookie the harness cannot supply.
     MarketMapping(
         canonical_id="double_chance_1up_ft",
         name="Double Chance 1Up - Full Time",

@@ -51,8 +51,11 @@ stringifies. SportPesa and Betika expose neither.
 
 `double_chance_1up_ft` applies the same early-payout rule to the double-chance
 selections (1X / X2 / 12). Only BetPawa (id `80000`) and SportyBet (id `60110`)
-offer it — MSport, Betway and Betika were probed live and expose a 1X2 1Up but no
-double-chance variant.
+offer it. MSport and Betway were probed live and Bet9ja checked across its full
+captures: all three clearly expose their own 1X2 1Up while showing no
+double-chance variant, so that absence is meaningful. Betika and SportPesa are
+**unknown rather than absent** — Betika's market fetch is truncated (#31) and
+surfaces no 1Up market at all, and SportPesa was never probed (Akamai cookie).
 
 Corner and booking (card) markets carry the full-time corner/card count rather than
 goals. SportPesa does not offer them; Betika's are blocked behind the truncated

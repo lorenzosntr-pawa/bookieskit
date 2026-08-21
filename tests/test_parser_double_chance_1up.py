@@ -18,16 +18,25 @@ lifted from a real captured payload — never guessed:
     labels as its plain Double Chance (id 10). Present in the existing
     ``sportybet/wc_nf.json`` World Cup capture.
 
-Deliberately left unmapped, each with live evidence rather than assumption:
+Left unmapped for the other five books — but the evidence is **not** equally
+strong, and the difference matters. A scan that surfaces no 1UP market of any
+kind proves nothing about the double-chance variant; only a scan that clearly
+sees the book's own 1UP markets can be read as "the DC variant is absent":
 
-  - MSport, Betway, Betika: probed live in-region over a pool of upcoming
-    football events. All three expose a plain 1X2 1UP but **no** Double
-    Chance 1UP.
-  - Bet9ja: its full ``wc_nf.json`` / ``prematch.json`` captures carry
-    ``1X2 1UP`` and team-win ``1UP/2UP`` markets but no double-chance
-    variant.
-  - SportPesa: not probed — the market list needs an Akamai session cookie
-    the offline harness cannot supply, consistent with its other ``—`` rows.
+  - MSport — **not offered**. Live probe: 10 events, 7,749 distinct market
+    strings, ``1x2 - 1UP`` present, no double-chance variant.
+  - Betway — **not offered**. Live probe: 10 events, 34,605 strings,
+    ``1X2 (1Up)`` present, no double-chance variant.
+  - Bet9ja — **not offered**. Fixtures: 2,788 strings across six captures
+    carrying seven distinct 1UP markets (``1X2 1UP``, ``Home``/``Away to Win
+    1UP/2UP``), none of them a double-chance variant.
+  - Betika — **unknown**, not absent. Its scans show no 1UP market at all
+    (live: 10 events but only 210 distinct strings), which is the signature
+    of the truncated no-cookie market fetch tracked by #31 rather than
+    evidence of absence. Re-probe once #31 lands.
+  - SportPesa — **unknown**. Not probed; the market list needs an Akamai
+    session cookie the offline harness cannot supply, consistent with its
+    other ``—`` rows.
 """
 
 import json

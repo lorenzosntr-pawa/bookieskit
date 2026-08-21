@@ -59,9 +59,13 @@ All notable changes to this project are documented in this file. The format foll
   straight 1X2. Mapped for **BetPawa** (marketType `80000`, outcomes
   `1X`/`X2`/`12`) and **SportyBet** (id `60110`, outcomes `Home or Draw` /
   `Home or Away` / `Draw or Away`); both reuse their plain Double Chance
-  outcome vocabulary. MSport, Betway and Betika were probed live in-region and
-  expose a 1X2 1Up but no double-chance variant; Bet9ja's full captures show
-  the same; SportPesa was not probed (Akamai cookie). New in-region capture
+  outcome vocabulary. **Not offered** by MSport (live: 10 events / 7,749 market
+  strings), Betway (10 / 34,605) or Bet9ja (fixtures: 2,788 strings, seven
+  distinct 1UP markets) — each scan clearly saw that book's own 1UP markets,
+  so the absence is meaningful. **Unknown** for Betika and SportPesa: Betika's
+  scans surface no 1UP market at all (10 events / 210 strings), the signature
+  of the truncated fetch tracked by #31, and SportPesa needs an Akamai cookie.
+  Neither is evidence of absence. New in-region capture
   committed as `tests/fixtures/event_info/betpawa/double_chance_1up_ft.json`.
   Built-in canonical market count: 21 → 22 (15 soccer + 3 basketball +
   4 tennis).
