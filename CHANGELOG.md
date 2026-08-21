@@ -106,6 +106,18 @@ All notable changes to this project are documented in this file. The format foll
     Both are left as-is pending a probe that can actually distinguish them.
 
 ### Fixed
+- **`double_chance_1up_ft` now maps Bet9ja** (`S_DC1X21`, "DC 1X2 1UP").
+  It was previously recorded as not offered — wrong on two counts: the call was
+  made from June fixtures whose `D.O` carried no such odds, and the key-scan
+  that backed it never inspected `D.TRANS`, where catalogue entries are
+  `M#`-prefixed and so invisible to a regex looking for bare `"S_..."` keys.
+  Bet9ja's outcome suffixes are counter-intuitive and were transcribed verbatim
+  rather than inferred: `11` = 1X, **`X1` = X2**, `121` = 12 — deriving them by
+  analogy would silently swap two selections. The market is declared in Bet9ja's
+  catalogue but was priced on **none of 160 events** sampled on 2026-08-21 (120
+  prematch + 40 in-play), so the mapping is key-verified, not price-verified;
+  the catalogue evidence is committed as
+  `tests/fixtures/event_info/bet9ja/dc_1x2_1up_catalogue.json`.
 - **MSport now maps `1x2_1up_ft` and `1x2_2up_ft`** (ids `5000002` / `5000001`).
   Both markets are present on every captured MSport fixture and were simply
   never mapped — the registry comment asserted MSport "doesn't expose this

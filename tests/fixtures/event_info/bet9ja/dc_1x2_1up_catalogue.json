@@ -1,0 +1,318 @@
+{
+ "R": "OK",
+ "D": {
+  "ST": 1,
+  "SID": 1,
+  "TRANS": {
+   "M#S_DCP": {
+    "NAME": "DC Plus",
+    "DESC": "You have to predict the outcome of the entire match, including any woodwork (post or crossbar)"
+   },
+   "M#S_DCP_12P": "12 Plus",
+   "M#S_DCP_1P": "1X Plus",
+   "M#S_DCP_XP": "X2 Plus",
+   "M#S_DC1X21": {
+    "NAME": "DC 1X2 1UP",
+    "DESC": "The selection is settled as a winner if the home team wins or draws the match, or if the home team leads by at least one goal at any time during the match."
+   },
+   "M#S_DC1X21_11": "1X - 1UP",
+   "M#S_DC1X21_121": "12 - 1UP",
+   "M#S_DC1X21_X1": "X2 - 1UP",
+   "M#S_1X22": {
+    "NAME": "1X2 2UP",
+    "DESC": "You have to predict the outcome of the match in 90 minutes. If the team you selected takes a two-goal lead at any point during the match, your selection will be settled as a winner."
+   },
+   "M#S_1X22_12": "1",
+   "M#S_1X22_22": "2",
+   "M#S_1X22_X2": "X",
+   "M#S_1X21": {
+    "NAME": "1X2 1UP",
+    "DESC": "You have to predict the outcome of the match within 90minutes. If the team you selected takes a one-goal lead at any point during the match, your selection will be settled as a winner."
+   },
+   "M#S_1X21_11": "1",
+   "M#S_1X21_21": "2",
+   "M#S_1X21_X1": "X",
+   "M#S_1X21X21X2": {
+    "NAME": "1X2&1x2Corner&1x2Card",
+    "DESC": "1X2 Final result, 1X2 Corner and 1X2 Cards . The selection will be declared as winner if all the theree markets are winning."
+   },
+   "M#S_1X21X21X2_111": "1&1Co&1Ca",
+   "M#S_1X21X21X2_112": "1&1Co&2Ca",
+   "M#S_1X21X21X2_11X": "1&1Co&XCa",
+   "M#S_1X21X21X2_121": "1&2Co&1Ca",
+   "M#S_1X21X21X2_122": "1&2Co&2Ca",
+   "M#S_1X21X21X2_12X": "1&2Co&XCa",
+   "M#S_1X21X21X2_1X1": "1&Xco&1Ca",
+   "M#S_1X21X21X2_1X2": "1&XCo&2Ca",
+   "M#S_1X21X21X2_1XX": "1&XCo&XCa",
+   "M#S_1X21X21X2_211": "2&1Co&1Ca",
+   "M#S_1X21X21X2_212": "2&1Co&2Ca",
+   "M#S_1X21X21X2_21X": "2&1Co&XCa",
+   "M#S_1X21X21X2_221": "2&2Co&1Ca",
+   "M#S_1X21X21X2_222": "2&2Co&2Ca",
+   "M#S_1X21X21X2_22X": "2&2Co&XCa",
+   "M#S_1X21X21X2_2X1": "2&XCo&1Ca",
+   "M#S_1X21X21X2_2X2": "2&XCo&2Ca",
+   "M#S_1X21X21X2_2XX": "2&XCo&XCa",
+   "M#S_1X21X21X2_X11": "X&1Co&1Ca",
+   "M#S_1X21X21X2_X12": "X&1Co&2Ca",
+   "M#S_1X21X21X2_X1X": "X&1Co&XCa",
+   "M#S_1X21X21X2_X21": "X&2Co&1Ca",
+   "M#S_1X21X21X2_X22": "X&2Co&2Ca",
+   "M#S_1X21X21X2_X2X": "X&2Co&XCa",
+   "M#S_1X21X21X2_XX1": "X&XCo&1Ca",
+   "M#S_1X21X21X2_XX2": "X&XCo&2Ca",
+   "M#S_1X21X21X2_XXX": "X&XCo&XCa",
+   "M#S_DCMULTI1-2": {
+    "NAME": "DC & Multi Goal 1-2",
+    "DESC": "You have to predict the combination of the double chance plus if the range of total goals scored during the match will be between 1-2"
+   },
+   "M#S_DCMULTI1-2_X2": "X2",
+   "M#S_DCMULTI1-2_12": "12",
+   "M#S_DCMULTI1-2_1X": "1X",
+   "M#S_DCMULTI1-3": {
+    "NAME": "DC & Multi Goal 1-3",
+    "DESC": "You have to predict the combination of the double chance plus if the range of total goals scored during the match will be between 1-3"
+   },
+   "M#S_DCMULTI1-3_X2": "X2",
+   "M#S_DCMULTI1-3_12": "12",
+   "M#S_DCMULTI1-3_1X": "1X",
+   "M#S_DCMULTI1-4": {
+    "NAME": "DC & Multi Goal 1-4",
+    "DESC": "You have to predict the combination of the double chance plus if the range of total goals scored during the match will be between 1-4"
+   },
+   "M#S_DCMULTI1-4_X2": "X2",
+   "M#S_DCMULTI1-4_12": "12",
+   "M#S_DCMULTI1-4_1X": "1X",
+   "M#S_DCMULTI1-5": {
+    "NAME": "DC & Multi Goal 1-5",
+    "DESC": "You have to predict the combination of the double chance plus if the range of total goals scored during the match will be between 1-5"
+   },
+   "M#S_DCMULTI1-5_X2": "X2",
+   "M#S_DCMULTI1-5_12": "12",
+   "M#S_DCMULTI1-5_1X": "1X",
+   "M#S_DCMULTI2-3": {
+    "NAME": "DC & Multi Goal 2-3",
+    "DESC": "You have to predict the combination of the double chance plus if the range of total goals scored during the match will be between 2-3"
+   },
+   "M#S_DCMULTI2-3_X2": "X2",
+   "M#S_DCMULTI2-3_12": "12",
+   "M#S_DCMULTI2-3_1X": "1X",
+   "M#S_DCMULTI2-4": {
+    "NAME": "DC & Multi Goal 2-4",
+    "DESC": "You have to predict the combination of the double chance plus if the range of total goals scored during the match will be between 2-4"
+   },
+   "M#S_DCMULTI2-4_X2": "X2",
+   "M#S_DCMULTI2-4_12": "12",
+   "M#S_DCMULTI2-4_1X": "1X",
+   "M#S_DCMULTI2-5": {
+    "NAME": "DC & Multi Goal 2-5",
+    "DESC": "You have to predict the combination of the double chance plus if the range of total goals scored during the match will be between 2-5"
+   },
+   "M#S_DCMULTI2-5_X2": "X2",
+   "M#S_DCMULTI2-5_12": "12",
+   "M#S_DCMULTI2-5_1X": "1X",
+   "M#S_DCMULTI3-4": {
+    "NAME": "DC & Multi Goal 3-4",
+    "DESC": "You have to predict the combination of the double chance plus if the range of total goals scored during the match will be between 3-4"
+   },
+   "M#S_DCMULTI3-4_X2": "X2",
+   "M#S_DCMULTI3-4_12": "12",
+   "M#S_DCMULTI3-4_1X": "1X",
+   "M#S_DCMULTI3-5": {
+    "NAME": "DC & Multi Goal 3-5",
+    "DESC": "You have to predict the combination of the double chance plus if the range of total goals scored during the match will be between 3-5"
+   },
+   "M#S_DCMULTI3-5_X2": "X2",
+   "M#S_DCMULTI3-5_12": "12",
+   "M#S_DCMULTI3-5_1X": "1X",
+   "M#S_DCMULTI4-5": {
+    "NAME": "DC & Multi Goal 4-5",
+    "DESC": "You have to predict the combination of the double chance plus if the range of total goals scored during the match will be between 4-5"
+   },
+   "M#S_DCMULTI4-5_X2": "X2",
+   "M#S_DCMULTI4-5_12": "12",
+   "M#S_DCMULTI4-5_1X": "1X",
+   "M#S_1X21X2C": {
+    "NAME": "1X2 + 1X2 Cards",
+    "DESC": "You have to predict the combination of the final result and the result of the Cards\n"
+   },
+   "M#S_1X21X2C_11": "1+1",
+   "M#S_1X21X2C_12": "1+2",
+   "M#S_1X21X2C_1X": "1+X",
+   "M#S_1X21X2C_21": "2+1",
+   "M#S_1X21X2C_22": "2+2",
+   "M#S_1X21X2C_2X": "2+X",
+   "M#S_1X21X2C_X1": "X+1",
+   "M#S_1X21X2C_X2": "X+2",
+   "M#S_1X21X2C_XX": "X+X",
+   "M#S_1X21X2C1": {
+    "NAME": "1X2 + 1X2 Corner",
+    "DESC": "The combination of the final result and the result of the corners should be predicted"
+   },
+   "M#S_1X21X2C1_11": "1+1",
+   "M#S_1X21X2C1_12": "1+2",
+   "M#S_1X21X2C1_1X": "1+X",
+   "M#S_1X21X2C1_21": "2+1",
+   "M#S_1X21X2C1_22": "2+2",
+   "M#S_1X21X2C1_2X": "2+X",
+   "M#S_1X21X2C1_X1": "X+1",
+   "M#S_1X21X2C1_X2": "X+2",
+   "M#S_1X21X2C1_XX": "X+X",
+   "M#S_DC1T": {
+    "NAME": "1st Half - Double Chance",
+    "DESC": "You have to predict the outcome of the first half time of the match: 1X, X2, 12"
+   },
+   "M#S_DC1T_12": "12",
+   "M#S_1X21ST10MIN": {
+    "NAME": "1X2 - 10 Minutes",
+    "DESC": "Which team will win the first ten minutes of the match?"
+   },
+   "M#S_1X21ST10MIN_1": "1",
+   "M#S_1X21ST10MIN_X": "X",
+   "M#S_DC2T": {
+    "NAME": "2nd Half - Double Chance",
+    "DESC": "You have to predict the outcome of the second half time of the match, without considering the score achieved during the first halftime (1X, 12, X2)"
+   },
+   "M#S_DC2T_12": "12",
+   "M#S_1X21T": {
+    "NAME": "1st Half - 1X2",
+    "DESC": "What will the result be at Half time (HT)?"
+   },
+   "M#S_1X21T_X": "X",
+   "M#S_1X21ST5MIN": {
+    "NAME": "1X2 - 5 Minutes",
+    "DESC": "Which team will win the first five minutes of the match?"
+   },
+   "M#S_1X21ST5MIN_X": "X",
+   "M#S_1X21ST15MIN": {
+    "NAME": "1X2 - 15 Minutes",
+    "DESC": "Which team will win the first fifteen minutes of the match?"
+   },
+   "M#S_1X21ST15MIN_1": "1",
+   "M#S_1X21ST15MIN_2": "2",
+   "M#S_1X21ST20MIN": {
+    "NAME": "1X2 - 20 Minutes",
+    "DESC": "Which team will win the first twenty minutes of the match?"
+   },
+   "M#S_1X21ST20MIN_1": "1",
+   "M#S_DCOU": {
+    "NAME": "Double Chance + Over/Under",
+    "DESC": "You have to predict the outcome of the match and whether the total goals scored in 90mins will be over or under the spread indicated"
+   },
+   "M#S_DCOU_1XU": "1X & Under",
+   "M#S_DCGGNG": {
+    "NAME": "Double Chance + Goal/No Goal",
+    "DESC": "You have to predict the outcome of the match & whether both teams will score in 90mins or not. 1X & GG = Home win or draw and both teams score 12 & GG = Home or away win and both teams score X2 & GG = Draw or away win and both teams score 1X & NG = Home win or draw and only one or neither teams score 12 & NG = Home or away win and only one or neither teams score X2 & NG = Draw or away win and only one or neither teams score"
+   },
+   "M#S_DCGGNG_12GG": "12 & GG",
+   "M#S_DCGGNG_12NG": "12 & NG",
+   "M#S_DCGGNGHT": {
+    "NAME": "1st Half - Double Chance + Goal/No Goal",
+    "DESC": "You have to predict the outcome of the first half and whether both teams will score or not in the first half only. 1X & GG = Home win or draw and both teams score 12 & GG = Home or away win and both teams score X2 & GG = Draw or away win and both teams score 1X & NG = Home win or draw and only one or neither teams score 12 & NG = Home or away win and only one or neither teams score X2 & NG = Draw or away win and only one or neither teams score"
+   },
+   "M#S_DCGGNGHT_1XNGHT": "1X & NG",
+   "M#S_DCGGNGHT_X2NGHT": "X2 & NG",
+   "M#S_DCGGNG2T": {
+    "NAME": "2nd Half - Double Chance + Goal/No Goal",
+    "DESC": "You have to predict the outcome of the second half and whether both teams will score or not in the second half only. 1X & GG = Home win or draw and both teams score 12 & GG = Home or away win and both teams score X2 & GG = Draw or away win and both teams score 1X & NG = Home win or draw and only one or neither teams score 12 & NG = Home or away win and only one or neither teams score X2 & NG = Draw or away win and only one or neither teams score"
+   },
+   "M#S_DCGGNG2T_1XNG2T": "1X & NG",
+   "M#S_1X22TOU": {
+    "NAME": "2nd Half - 1X2 + Over/Under",
+    "DESC": "You have to predict the combination of the second half time result and whether the total number of goals scored in the second half will be over or under the spread indicated."
+   },
+   "M#S_1X22TOU_2O2T": "2 & Over",
+   "M#S_1X22TOU_2U2T": "2 & Under",
+   "M#S_1X21ST30MIN": {
+    "NAME": "1X2 - 30 Minutes",
+    "DESC": "1X2-30min You have to predict the outcome of the first ten (30) minutes. There are three possible outcomes: 1 (the home team wins), X (the teams draw), 2 (the away team wins)."
+   },
+   "M#S_1X21ST30MIN_1": "1",
+   "M#S_1X21ST30MIN_2": "2",
+   "M#S_1X21ST60MIN": {
+    "NAME": "1X2 - 60 Minutes",
+    "DESC": "1X2-60min You have to predict the outcome of the first ten (60) minutes. There are three possible outcomes: 1 (the home team wins), X (the teams draw), 2 (the away team wins)."
+   },
+   "M#S_1X21ST60MIN_2": "2",
+   "M#S_DCHTFT": {
+    "NAME": "Double Chance Half Time/Full Time ",
+    "DESC": "Bet on the double chance result of both the 1st half and second half."
+   },
+   "M#S_DCHTFT_1212": "12/12",
+   "M#S_DCHTFT_1X12": "1X/12",
+   "M#S_DCHTFT_X2X2": "X2/X2",
+   "M#S_DC1T_1X": "1X",
+   "M#S_DC1T_X2": "X2",
+   "M#S_1X21ST10MIN_2": "2",
+   "M#S_DC2T_1X": "1X",
+   "M#S_DC2T_X2": "X2",
+   "M#S_1X21T_1": "1",
+   "M#S_1X21T_2": "2",
+   "M#S_DC": {
+    "NAME": "Double Chance",
+    "DESC": "You have to predict the outcome of the match. There are 3 possible outcomes: 1X (at the end of the match the home team wins or draws), X2 (at the end of the match the away team wins or draws), 12 (at the end of the match the home team wins or the away team wins)."
+   },
+   "M#S_DC_1X": "1X",
+   "M#S_DC_12": "12",
+   "M#S_DC_X2": "X2",
+   "M#S_1X22T": {
+    "NAME": "2nd Half - 1X2",
+    "DESC": "You have to predict the outcome of the second half time of the match, without considering the score achieved during the first halftime"
+   },
+   "M#S_1X22T_1": "1",
+   "M#S_1X22T_X": "X",
+   "M#S_1X22T_2": "2",
+   "M#S_1X21ST5MIN_1": "1",
+   "M#S_1X21ST5MIN_2": "2",
+   "M#S_1X21ST15MIN_X": "X",
+   "M#S_1X21ST20MIN_X": "X",
+   "M#S_DCOU_1XO": "1X & Over",
+   "M#S_DCOU_X2O": "X2 & Over",
+   "M#S_DCOU_X2U": "X2 & Under",
+   "M#S_DCGGNG_1XGG": "1X & GG",
+   "M#S_DCGGNG_1XNG": "1X & NG",
+   "M#S_DCGGNGHT_1XGGHT": "1X & GG",
+   "M#S_DCGGNGHT_12GGHT": "12 & GG",
+   "M#S_DCGGNGHT_12NGHT": "12 & NG",
+   "M#S_DCGGNG2T_12GG2T": "12 & GG",
+   "M#S_DCGGNG2T_X2GG2T": "X2 & GG",
+   "M#S_DCGGNG2T_X2NG2T": "X2 & NG",
+   "M#S_1X22TOU_XO2T": "X & Over",
+   "M#S_1X22TOU_1U2T": "1 & Under",
+   "M#S_1X22TOU_XU2T": "X & Under",
+   "M#S_1X21ST30MIN_X": "X",
+   "M#S_1X21ST60MIN_1": "1",
+   "M#S_1X21ST60MIN_X": "X",
+   "M#S_1X21ST20MIN_2": "2",
+   "M#S_DCHTFT_121X": "12/1X",
+   "M#S_DCHTFT_12X2": "12/X2",
+   "M#S_DCHTFT_1X1X": "1X/1X",
+   "M#S_DCHTFT_1XX2": "1X/X2",
+   "M#S_DCHTFT_X21X": "X2/1X",
+   "M#S_DCHTFT_X212": "X2/12",
+   "M#S_DCOU_12O": "12 & Over",
+   "M#S_DCOU_12U": "12 & Under",
+   "M#S_DCGGNG_X2GG": "X2 & GG",
+   "M#S_DCGGNG_X2NG": "X2 & NG",
+   "M#S_DCGGNGHT_X2GGHT": "X2 & GG",
+   "M#S_DCGGNG2T_1XGG2T": "1X & GG",
+   "M#S_DCGGNG2T_12NG2T": "12 & NG",
+   "M#S_1X22TOU_1O2T": "1 & Over",
+   "M#S_DCH1X2FT": {
+    "NAME": "Double Chance Half Time/1X2 Full Time",
+    "DESC": "You have to predict the outcome of the match with 3 possible double chance outcomes (1X, 12 & X2) at the halftime together with the outcome of the match (extra time excluded)."
+   },
+   "M#S_DCH1X2FT_1X1": "1X/1",
+   "M#S_DCH1X2FT_1XX": "1X/X",
+   "M#S_DCH1X2FT_1X2": "1X/2",
+   "M#S_DCH1X2FT_121": "12/1",
+   "M#S_DCH1X2FT_12X": "12/X",
+   "M#S_DCH1X2FT_122": "12/2",
+   "M#S_DCH1X2FT_X21": "X2/1",
+   "M#S_DCH1X2FT_X2X": "X2/X",
+   "M#S_DCH1X2FT_X22": "X2/2"
+  },
+  "O": {}
+ }
+}

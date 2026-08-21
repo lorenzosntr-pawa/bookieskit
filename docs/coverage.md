@@ -11,7 +11,7 @@
 | 2way_handicap_ft | ✓ | ✓ | ✓ | ✓ | ✓ | — | — |
 | away_over_under_ft | ✓ | ✓ | ✓ | ✓ | ✓ | — | ✓ |
 | btts_ft | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| double_chance_1up_ft | ✓ | ✓ | — | — | — | — | — |
+| double_chance_1up_ft | ✓ | ✓ | ✓ | — | — | — | — |
 | double_chance_ft | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | handicap_games_tennis_match | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | home_over_under_ft | ✓ | ✓ | ✓ | ✓ | ✓ | — | ✓ |
