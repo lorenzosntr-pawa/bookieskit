@@ -7,7 +7,7 @@ from bookieskit.bookmakers.sportybet import SportyBet
 
 @respx.mock
 def test_betpawa_sync_get_sports():
-    respx.get("https://www.betpawa.ng/api/sportsbook/v3/categories/list/all").respond(
+    respx.get("https://www.betpawa.ng/api/sportsbook/v4/categories/list/all").respond(
         json={"categories": [{"id": "2", "name": "Football"}]}
     )
     with BetPawa(country="ng") as client:
@@ -17,7 +17,7 @@ def test_betpawa_sync_get_sports():
 
 @respx.mock
 def test_betpawa_sync_get_event_detail():
-    respx.get("https://www.betpawa.ng/api/sportsbook/v3/events/32299257").respond(
+    respx.get("https://www.betpawa.ng/api/sportsbook/v4/events/32299257").respond(
         json={"id": "32299257", "markets": []}
     )
     with BetPawa(country="ng") as client:

@@ -288,7 +288,7 @@ def fetch_event(country, event_id, timeout=30):
         raise ValueError(
             f"unknown country code: {country!r} (one of {sorted(DOMAINS)})"
         )
-    url = f"{domain}/api/sportsbook/v3/events/{event_id}"
+    url = f"{domain}/api/sportsbook/v4/events/{event_id}"
     headers = {
         "accept": "*/*",
         "accept-language": "en-GB,en-US;q=0.9,en;q=0.8",
