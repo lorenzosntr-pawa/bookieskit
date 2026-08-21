@@ -74,7 +74,10 @@ class BetPawa(BaseBookmaker):
         "mz": "https://www.betpawa.co.mz",
     }
     DEFAULT_HEADERS = {
-        "accept": "*/*",
+        # Must be explicit: on the v4 API, `*/*` makes
+        # /events/lists/by-queries answer with application/x-protobuf, which
+        # httpx cannot decode. The categories endpoints return JSON either way.
+        "accept": "application/json",
         "accept-language": "en-GB,en-US;q=0.9,en;q=0.8",
         "devicetype": "web",
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",  # noqa: E501
@@ -97,7 +100,7 @@ class BetPawa(BaseBookmaker):
         Returns:
             Raw JSON with categories list.
         """
-        return await self._request("GET", "/api/sportsbook/v3/categories/list/all")
+        return await self._request("GET", "/api/sportsbook/v4/categories/list/all")
 
     async def get_countries(self, sport_id: str) -> dict[str, Any]:
         """Get countries/regions for a sport (with competitions).
@@ -110,7 +113,7 @@ class BetPawa(BaseBookmaker):
         """
         return await self._request(
             "GET",
-            f"/api/sportsbook/v3/categories/list/{sport_id}",
+            f"/api/sportsbook/v4/categories/list/{sport_id}",
             params={"includeRegions": "true"},
         )
 
@@ -129,7 +132,7 @@ class BetPawa(BaseBookmaker):
         """
         return await self._request(
             "GET",
-            f"/api/sportsbook/v3/categories/list/{sport_id}",
+            f"/api/sportsbook/v4/categories/list/{sport_id}",
             params={"includeRegions": "true"},
         )
 
@@ -174,7 +177,7 @@ class BetPawa(BaseBookmaker):
         }
         q_param = quote(json.dumps(query_payload, separators=(",", ":")))
         return await self._request(
-            "GET", "/api/sportsbook/v3/events/lists/by-queries", params={"q": q_param}
+            "GET", "/api/sportsbook/v4/events/lists/by-queries", params={"q": q_param}
         )
 
     async def get_event_detail(self, event_id: str) -> dict[str, Any]:
@@ -186,4 +189,4 @@ class BetPawa(BaseBookmaker):
         Returns:
             Raw JSON with event info, markets, and odds.
         """
-        return await self._request("GET", f"/api/sportsbook/v3/events/{event_id}")
+        return await self._request("GET", f"/api/sportsbook/v4/events/{event_id}")

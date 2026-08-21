@@ -45,8 +45,8 @@ There is **no** reverse search (provider id → BetPawa internal id) yet — sta
 
 | Method | HTTP | Path | When to use |
 |--------|------|------|-------------|
-| `get_sports()` | GET | `/api/sportsbook/v3/categories/list/all` | Top-level sport list with prematch/live counts. |
-| `get_countries(sport_id)` | GET | `/api/sportsbook/v3/categories/list/{sport_id}?includeRegions=true` | Regions + competitions under a sport. |
+| `get_sports()` | GET | `/api/sportsbook/v4/categories/list/all` | Top-level sport list with prematch/live counts. |
+| `get_countries(sport_id)` | GET | `/api/sportsbook/v4/categories/list/{sport_id}?includeRegions=true` | Regions + competitions under a sport. |
 | `get_tournaments(sport_id)` | GET | (same as get_countries) | Alias — same data as `get_countries`, kept for naming symmetry. |
 | `get_events(...)` | POST | (varies by params) | Events for a tournament or sport, prematch or live. |
 | `get_event_detail(event_id)` | GET | event detail with markets and widgets | Full event data; SR id lives in `widgets[]`. |
