@@ -1,0 +1,7496 @@
+{
+ "id": "36552873",
+ "name": "Sydney FC Youth - Rockdale Ilinden FC",
+ "widgets": [
+  {
+   "id": "67691078",
+   "type": "SPORTRADAR",
+   "retention": "PREMATCH"
+  },
+  {
+   "id": "13395068",
+   "type": "GENIUSSPORTS"
+  },
+  {
+   "id": "67691078",
+   "type": "SPORTRADAR",
+   "retention": "INPLAY"
+  }
+ ],
+ "participants": [
+  {
+   "id": "664028",
+   "name": "Sydney FC Youth",
+   "position": 1
+  },
+  {
+   "id": "664022",
+   "name": "Rockdale Ilinden FC",
+   "position": 2
+  }
+ ],
+ "startTime": "2026-08-21T09:30:00Z",
+ "markets": [
+  {
+   "marketType": {
+    "id": "3743",
+    "name": "1X2 - FT",
+    "displayName": "1X2 | Full Time",
+    "explainer": "Pick 1 (home team), X (draw), or 2 (away team). Result is based on regular playing time only - Extra time and Overtime don't count.",
+    "priority": 1,
+    "tabs": [
+     "all",
+     "popular"
+    ]
+   },
+   "row": [
+    {
+     "id": "397613548",
+     "prices": [
+      {
+       "id": "1525195179",
+       "name": "1",
+       "typeId": "3744",
+       "odds": 4.59,
+       "displayName": "1",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.200702,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525195180",
+       "name": "X",
+       "typeId": "3745",
+       "odds": 3.9,
+       "displayName": "X",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.236001,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525195181",
+       "name": "2",
+       "typeId": "3746",
+       "odds": 1.68,
+       "displayName": "2",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.563291,
+        "refund": 0.0
+       }
+      }
+     ]
+    }
+   ],
+   "additionalInfo": {
+    "cashoutable": true
+   }
+  },
+  {
+   "marketType": {
+    "id": "28000810",
+    "name": "1X2 1UP - FT",
+    "displayName": "1X2 1UP | Full Time",
+    "explainer": "1UP means that if your team goes a goal ahead at any point before Full Time, we'll pay you early. Draw is settled at full-time as usual.",
+    "priority": 2,
+    "tabs": [
+     "all",
+     "popular"
+    ]
+   },
+   "row": [
+    {
+     "id": "397613549",
+     "prices": [
+      {
+       "id": "1525195182",
+       "name": "1",
+       "typeId": "28000811",
+       "odds": 2.28,
+       "displayName": "1",
+       "additionalInfo": {
+        "anyUp": "ONE_UP"
+       },
+       "probability": {
+        "win": 0.40310784737170074,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525195183",
+       "name": "X",
+       "typeId": "28000812",
+       "odds": 4.0,
+       "displayName": "X",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.236001,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525195184",
+       "name": "2",
+       "typeId": "28000813",
+       "odds": 1.35,
+       "displayName": "2",
+       "additionalInfo": {
+        "anyUp": "ONE_UP"
+       },
+       "probability": {
+        "win": 0.7129046341329572,
+        "refund": 0.0
+       }
+      }
+     ]
+    }
+   ],
+   "additionalInfo": {
+    "cashoutable": true
+   }
+  },
+  {
+   "marketType": {
+    "id": "28000850",
+    "name": "1X2 2UP - FT",
+    "displayName": "1X2 2UP | Full Time",
+    "explainer": "2UP means that if your team goes 2 goals ahead at any point before Full Time, we'll pay you early. Draw is settled at full-time as usual.",
+    "priority": 3,
+    "tabs": [
+     "all",
+     "popular"
+    ]
+   },
+   "row": [
+    {
+     "id": "397613546",
+     "prices": [
+      {
+       "id": "1525195173",
+       "name": "1",
+       "typeId": "28000851",
+       "odds": 4.44,
+       "displayName": "1",
+       "additionalInfo": {
+        "anyUp": "TWO_UP"
+       },
+       "probability": {
+        "win": 0.21359270903089525,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525195174",
+       "name": "X",
+       "typeId": "28000852",
+       "odds": 4.0,
+       "displayName": "X",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.236001,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525195175",
+       "name": "2",
+       "typeId": "28000853",
+       "odds": 1.64,
+       "displayName": "2",
+       "additionalInfo": {
+        "anyUp": "TWO_UP"
+       },
+       "probability": {
+        "win": 0.579162881701706,
+        "refund": 0.0
+       }
+      }
+     ]
+    }
+   ],
+   "additionalInfo": {
+    "cashoutable": true
+   }
+  },
+  {
+   "marketType": {
+    "id": "4693",
+    "name": "Double Chance - FT",
+    "displayName": "Double Chance | Full Time",
+    "explainer": "One bet covering two results: 1X (home win or draw), X2 (draw or away win) or 12 (home or away win). Based on normal time only.",
+    "priority": 20,
+    "tabs": [
+     "all",
+     "popular"
+    ]
+   },
+   "row": [
+    {
+     "id": "397613545",
+     "prices": [
+      {
+       "id": "1525195170",
+       "name": "1X",
+       "typeId": "4694",
+       "odds": 1.98,
+       "displayName": "1X",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.4382871973056746,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525195172",
+       "name": "X2",
+       "typeId": "4695",
+       "odds": 1.19,
+       "displayName": "X2",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.8001920990001655,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525195171",
+       "name": "12",
+       "typeId": "4696",
+       "odds": 1.24,
+       "displayName": "12",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.7615220775499275,
+        "refund": 0.0
+       }
+      }
+     ]
+    }
+   ],
+   "additionalInfo": {
+    "cashoutable": true
+   }
+  },
+  {
+   "marketType": {
+    "id": "80000",
+    "name": "Double Chance 1UP - FT",
+    "displayName": "Double Chance 1UP  | Full Time",
+    "explainer": "1UP means that if a team in your selection goes a goal ahead at any point before Full Time, we'll pay you early.",
+    "priority": 21,
+    "tabs": [
+     "all"
+    ]
+   },
+   "row": [
+    {
+     "id": "397613547",
+     "prices": [
+      {
+       "id": "1525195176",
+       "name": "1X",
+       "typeId": "80001",
+       "odds": 1.68,
+       "displayName": "1X",
+       "additionalInfo": {
+        "anyUp": "ONE_UP"
+       },
+       "probability": {
+        "win": 0.5288252843315897,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525195177",
+       "name": "X2",
+       "typeId": "80002",
+       "odds": 1.16,
+       "displayName": "X2",
+       "additionalInfo": {
+        "anyUp": "ONE_UP"
+       },
+       "probability": {
+        "win": 0.8387702323811338,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525195178",
+       "name": "12",
+       "typeId": "80003",
+       "odds": 1.01,
+       "displayName": "12",
+       "additionalInfo": {
+        "anyUp": "ONE_UP"
+       },
+       "probability": {
+        "win": 0.9489956353162374,
+        "refund": 0.0
+       }
+      }
+     ]
+    }
+   ],
+   "additionalInfo": {
+    "cashoutable": true
+   }
+  },
+  {
+   "marketType": {
+    "id": "3795",
+    "name": "Both Teams To Score - FT",
+    "displayName": "Both Teams To Score | Full Time",
+    "explainer": "Will both teams score at least one goal? Pick Yes or No. Based on normal time only.",
+    "priority": 30,
+    "tabs": [
+     "all",
+     "popular",
+     "goals"
+    ]
+   },
+   "row": [
+    {
+     "id": "397582653",
+     "prices": [
+      {
+       "id": "1525225477",
+       "name": "Yes",
+       "typeId": "3796",
+       "odds": 1.61,
+       "displayName": "Yes",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.58634,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225478",
+       "name": "No",
+       "typeId": "3797",
+       "odds": 2.23,
+       "displayName": "No",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.41366,
+        "refund": 0.0
+       }
+      }
+     ]
+    }
+   ],
+   "additionalInfo": {
+    "cashoutable": true
+   }
+  },
+  {
+   "marketType": {
+    "id": "5000",
+    "name": "Total Score Over/Under - FT",
+    "displayName": "Over/Under | Full Time",
+    "explainer": "Pick how many goals will be scored during the stated period. Over is more than that amount, Under is less.",
+    "priority": 40,
+    "tabs": [
+     "all",
+     "popular",
+     "goals"
+    ],
+    "handicapType": "NORMAL"
+   },
+   "row": [
+    {
+     "id": "397582643",
+     "handicap": 2,
+     "prices": [
+      {
+       "id": "1525225442",
+       "name": "Over",
+       "typeId": "5001",
+       "odds": 1.02,
+       "handicap": "0.5",
+       "displayName": "Over {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.9489956353162374,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225443",
+       "name": "Under",
+       "typeId": "5002",
+       "odds": 10.92,
+       "handicap": "0.5",
+       "displayName": "Under {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.051004951685426556,
+        "refund": 0.0
+       }
+      }
+     ],
+     "specifier": {
+      "total": "0.5"
+     }
+    },
+    {
+     "id": "397582696",
+     "handicap": 6,
+     "prices": [
+      {
+       "id": "1525225671",
+       "name": "Over",
+       "typeId": "5001",
+       "odds": 1.18,
+       "handicap": "1.5",
+       "displayName": "Over {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.8151687366292618,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225672",
+       "name": "Under",
+       "typeId": "5002",
+       "odds": 4.55,
+       "handicap": "1.5",
+       "displayName": "Under {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.18483978431928955,
+        "refund": 0.0
+       }
+      }
+     ],
+     "specifier": {
+      "total": "1.5"
+     }
+    },
+    {
+     "id": "397582709",
+     "handicap": 10,
+     "prices": [
+      {
+       "id": "1525225711",
+       "name": "Over",
+       "typeId": "5001",
+       "odds": 1.59,
+       "handicap": "2.5",
+       "displayName": "Over {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.5943897012014384,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225712",
+       "name": "Under",
+       "typeId": "5002",
+       "odds": 2.27,
+       "handicap": "2.5",
+       "displayName": "Under {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.4056102996162594,
+        "refund": 0.0
+       }
+      }
+     ],
+     "specifier": {
+      "total": "2.5"
+     }
+    },
+    {
+     "id": "397582664",
+     "handicap": 14,
+     "prices": [
+      {
+       "id": "1525225509",
+       "name": "Over",
+       "typeId": "5001",
+       "odds": 2.43,
+       "handicap": "3.5",
+       "displayName": "Over {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.377719,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225510",
+       "name": "Under",
+       "typeId": "5002",
+       "odds": 1.52,
+       "handicap": "3.5",
+       "displayName": "Under {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.622281,
+        "refund": 0.0
+       }
+      }
+     ],
+     "specifier": {
+      "total": "3.5"
+     }
+    },
+    {
+     "id": "397582710",
+     "handicap": 18,
+     "prices": [
+      {
+       "id": "1525225713",
+       "name": "Over",
+       "typeId": "5001",
+       "odds": 4.26,
+       "handicap": "4.5",
+       "displayName": "Over {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.201394,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225714",
+       "name": "Under",
+       "typeId": "5002",
+       "odds": 1.2,
+       "handicap": "4.5",
+       "displayName": "Under {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.798606,
+        "refund": 0.0
+       }
+      }
+     ],
+     "specifier": {
+      "total": "4.5"
+     }
+    },
+    {
+     "id": "397582644",
+     "handicap": 22,
+     "prices": [
+      {
+       "id": "1525225444",
+       "name": "Over",
+       "typeId": "5001",
+       "odds": 7.51,
+       "handicap": "5.5",
+       "displayName": "Over {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0958334,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225445",
+       "name": "Under",
+       "typeId": "5002",
+       "odds": 1.07,
+       "handicap": "5.5",
+       "displayName": "Under {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.904167,
+        "refund": 0.0
+       }
+      }
+     ],
+     "specifier": {
+      "total": "5.5"
+     }
+    }
+   ],
+   "additionalInfo": {
+    "cashoutable": true
+   }
+  },
+  {
+   "marketType": {
+    "id": "5006",
+    "name": "Total Score Over/Under - FT - Home Team",
+    "displayName": "Over/Under | {home} | Full Time",
+    "explainer": "Pick how many goals will be scored by home team during the stated period. Over is more than that amount, Under is less.",
+    "priority": 50,
+    "tabs": [
+     "all",
+     "popular",
+     "goals"
+    ],
+    "handicapType": "NORMAL"
+   },
+   "row": [
+    {
+     "id": "397634580",
+     "handicap": 2,
+     "prices": [
+      {
+       "id": "1525388269",
+       "name": "Over",
+       "typeId": "5007",
+       "odds": 1.4,
+       "handicap": "0.5",
+       "displayName": "Over {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.673991,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525388270",
+       "name": "Under",
+       "typeId": "5008",
+       "odds": 2.7,
+       "handicap": "0.5",
+       "displayName": "Under {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.326009,
+        "refund": 0.0
+       }
+      }
+     ],
+     "specifier": {
+      "total": "0.5"
+     }
+    },
+    {
+     "id": "397582661",
+     "handicap": 6,
+     "prices": [
+      {
+       "id": "1525225502",
+       "name": "Over",
+       "typeId": "5007",
+       "odds": 2.85,
+       "handicap": "1.5",
+       "displayName": "Over {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.30659967368036706,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225503",
+       "name": "Under",
+       "typeId": "5008",
+       "odds": 1.37,
+       "handicap": "1.5",
+       "displayName": "Under {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.6934003518648744,
+        "refund": 0.0
+       }
+      }
+     ],
+     "specifier": {
+      "total": "1.5"
+     }
+    },
+    {
+     "id": "397582831",
+     "handicap": 10,
+     "prices": [
+      {
+       "id": "1525226131",
+       "name": "Over",
+       "typeId": "5007",
+       "odds": 6.8,
+       "handicap": "2.5",
+       "displayName": "Over {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.10202986158837456,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525226132",
+       "name": "Under",
+       "typeId": "5008",
+       "odds": 1.07,
+       "handicap": "2.5",
+       "displayName": "Under {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.897971249693661,
+        "refund": 0.0
+       }
+      }
+     ],
+     "specifier": {
+      "total": "2.5"
+     }
+    }
+   ],
+   "additionalInfo": {
+    "cashoutable": true
+   }
+  },
+  {
+   "marketType": {
+    "id": "5003",
+    "name": "Total Score Over/Under - FT - Away Team",
+    "displayName": "Over/Under | {away} | Full Time",
+    "explainer": "Pick how many goals will be scored by away team during the stated period. Over is more than that amount, Under is less.",
+    "priority": 60,
+    "tabs": [
+     "all",
+     "popular",
+     "goals"
+    ],
+    "handicapType": "NORMAL"
+   },
+   "row": [
+    {
+     "id": "397582826",
+     "handicap": 2,
+     "prices": [
+      {
+       "id": "1525226117",
+       "name": "Over",
+       "typeId": "5004",
+       "odds": 1.12,
+       "handicap": "0.5",
+       "displayName": "Over {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.860882003539977,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525226118",
+       "name": "Under",
+       "typeId": "5005",
+       "odds": 5.39,
+       "handicap": "0.5",
+       "displayName": "Under {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.13911801421219092,
+        "refund": 0.0
+       }
+      }
+     ],
+     "specifier": {
+      "total": "0.5"
+     }
+    },
+    {
+     "id": "397582734",
+     "handicap": 6,
+     "prices": [
+      {
+       "id": "1525225848",
+       "name": "Over",
+       "typeId": "5004",
+       "odds": 1.6,
+       "handicap": "1.5",
+       "displayName": "Over {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.586524,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225849",
+       "name": "Under",
+       "typeId": "5005",
+       "odds": 2.2,
+       "handicap": "1.5",
+       "displayName": "Under {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.413476,
+        "refund": 0.0
+       }
+      }
+     ],
+     "specifier": {
+      "total": "1.5"
+     }
+    },
+    {
+     "id": "397596219",
+     "handicap": 10,
+     "prices": [
+      {
+       "id": "1525301001",
+       "name": "Over",
+       "typeId": "5004",
+       "odds": 2.79,
+       "handicap": "2.5",
+       "displayName": "Over {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.316974,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525301002",
+       "name": "Under",
+       "typeId": "5005",
+       "odds": 1.39,
+       "handicap": "2.5",
+       "displayName": "Under {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.683026,
+        "refund": 0.0
+       }
+      }
+     ],
+     "specifier": {
+      "total": "2.5"
+     }
+    }
+   ],
+   "additionalInfo": {
+    "cashoutable": true
+   }
+  },
+  {
+   "marketType": {
+    "id": "4706",
+    "name": "HT / FT",
+    "displayName": "Half Time/Full Time",
+    "explainer": "Pick the result at half time and at the end of the match. For example, 1/X means the home team leads at half time and the match ends level.",
+    "priority": 64,
+    "tabs": [
+     "all",
+     "halves",
+     "popular"
+    ]
+   },
+   "row": [
+    {
+     "prices": [
+      {
+       "id": "1525225691",
+       "name": "1/1",
+       "typeId": "4707",
+       "odds": 7.38,
+       "displayName": "1/1",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.105453,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225694",
+       "name": "1/X",
+       "typeId": "4708",
+       "odds": 14.95,
+       "displayName": "1/X",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0506291,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225697",
+       "name": "1/2",
+       "typeId": "4709",
+       "odds": 21.93,
+       "displayName": "1/2",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.034981,
+        "refund": 0.0
+       }
+      }
+     ]
+    },
+    {
+     "prices": [
+      {
+       "id": "1525225692",
+       "name": "X/1",
+       "typeId": "4710",
+       "odds": 9.97,
+       "displayName": "X/1",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0763827,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225695",
+       "name": "X/X",
+       "typeId": "4711",
+       "odds": 5.98,
+       "displayName": "X/X",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.131496,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225698",
+       "name": "X/2",
+       "typeId": "4712",
+       "odds": 4.78,
+       "displayName": "X/2",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.166598,
+        "refund": 0.0
+       }
+      }
+     ]
+    },
+    {
+     "prices": [
+      {
+       "id": "1525225693",
+       "name": "2/1",
+       "typeId": "4713",
+       "odds": 39.87,
+       "displayName": "2/1",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0183168,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225696",
+       "name": "2/X",
+       "typeId": "4714",
+       "odds": 13.96,
+       "displayName": "2/X",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.056052,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225699",
+       "name": "2/2",
+       "typeId": "4715",
+       "odds": 2.33,
+       "displayName": "2/2",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.360091,
+        "refund": 0.0
+       }
+      }
+     ]
+    }
+   ],
+   "additionalInfo": {
+    "cashoutable": true
+   }
+  },
+  {
+   "marketType": {
+    "id": "4724",
+    "name": "Handicap 1X2 - FT",
+    "displayName": "3-Way Handicap | Full Time",
+    "explainer": "The handicap you pick is added to or taken off that team's score before the bet is settled. Pick 1 (home team), X (level) or 2 (away team) on the adjusted score. Based on normal time only.",
+    "priority": 65,
+    "tabs": [
+     "all",
+     "popular"
+    ],
+    "handicapType": "EUROPEAN"
+   },
+   "row": [
+    {
+     "id": "397582717",
+     "handicap": -4,
+     "prices": [
+      {
+       "id": "1525225775",
+       "name": "1",
+       "typeId": "4725",
+       "odds": 9.92,
+       "handicap": "Home -1",
+       "displayName": "{formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.07502068904388765,
+        "refund": 0.0
+       },
+       "specifier": {
+        "hcp": "Home -1"
+       }
+      },
+      {
+       "id": "1525225776",
+       "name": "X",
+       "typeId": "4726",
+       "odds": 6.15,
+       "handicap": "Home -1",
+       "displayName": "{formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.12496939489842028,
+        "refund": 0.0
+       },
+       "specifier": {
+        "hcp": "Home -1"
+       }
+      },
+      {
+       "id": "1525225777",
+       "name": "2",
+       "typeId": "4727",
+       "odds": 1.18,
+       "handicap": "Away +1",
+       "displayName": "{formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.8000180058313886,
+        "refund": 0.0
+       },
+       "specifier": {
+        "hcp": "Away +1"
+       }
+      }
+     ],
+     "specifier": {
+      "hcp": "-1"
+     }
+    },
+    {
+     "id": "397582660",
+     "handicap": 4,
+     "prices": [
+      {
+       "id": "1525225499",
+       "name": "1",
+       "typeId": "4725",
+       "odds": 2.08,
+       "handicap": "Home +1",
+       "displayName": "{formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.43833,
+        "refund": 0.0
+       },
+       "specifier": {
+        "hcp": "Home +1"
+       }
+      },
+      {
+       "id": "1525225500",
+       "name": "X",
+       "typeId": "4726",
+       "odds": 3.91,
+       "handicap": "Away -1",
+       "displayName": "{formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.224783,
+        "refund": 0.0
+       },
+       "specifier": {
+        "hcp": "Away -1"
+       }
+      },
+      {
+       "id": "1525225501",
+       "name": "2",
+       "typeId": "4727",
+       "odds": 2.68,
+       "handicap": "Away -1",
+       "displayName": "{formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.336887,
+        "refund": 0.0
+       },
+       "specifier": {
+        "hcp": "Away -1"
+       }
+      }
+     ],
+     "specifier": {
+      "hcp": "1"
+     }
+    },
+    {
+     "id": "397582708",
+     "handicap": 8,
+     "prices": [
+      {
+       "id": "1525225708",
+       "name": "1",
+       "typeId": "4725",
+       "odds": 1.4,
+       "handicap": "Home +2",
+       "displayName": "{formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.6632355176903892,
+        "refund": 0.0
+       },
+       "specifier": {
+        "hcp": "Home +2"
+       }
+      },
+      {
+       "id": "1525225709",
+       "name": "X",
+       "typeId": "4726",
+       "odds": 4.94,
+       "handicap": "Away -2",
+       "displayName": "{formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.1708396306501583,
+        "refund": 0.0
+       },
+       "specifier": {
+        "hcp": "Away -2"
+       }
+      },
+      {
+       "id": "1525225710",
+       "name": "2",
+       "typeId": "4727",
+       "odds": 5.14,
+       "handicap": "Away -2",
+       "displayName": "{formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.16592486536041126,
+        "refund": 0.0
+       },
+       "specifier": {
+        "hcp": "Away -2"
+       }
+      }
+     ],
+     "specifier": {
+      "hcp": "2"
+     }
+    }
+   ],
+   "displayNameColumns": [
+    "1",
+    "X",
+    "2"
+   ],
+   "additionalInfo": {
+    "cashoutable": true
+   }
+  },
+  {
+   "marketType": {
+    "id": "3668",
+    "name": "1X2 - 1H",
+    "displayName": "1X2 | First Half",
+    "explainer": "Pick 1 (home team), X (draw), or 2 (away team). Only the score in the first half counts.",
+    "priority": 75,
+    "tabs": [
+     "all",
+     "halves",
+     "popular"
+    ]
+   },
+   "row": [
+    {
+     "id": "397582684",
+     "prices": [
+      {
+       "id": "1525225633",
+       "name": "1",
+       "typeId": "3669",
+       "odds": 4.6,
+       "displayName": "1",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.191063,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225634",
+       "name": "X",
+       "typeId": "3670",
+       "odds": 2.43,
+       "displayName": "X",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.374477,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225635",
+       "name": "2",
+       "typeId": "3671",
+       "odds": 2.12,
+       "displayName": "2",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.434459,
+        "refund": 0.0
+       }
+      }
+     ]
+    }
+   ],
+   "additionalInfo": {
+    "cashoutable": true
+   }
+  },
+  {
+   "marketType": {
+    "id": "3685",
+    "name": "1X2 - 2H",
+    "displayName": "1X2 | Second Half",
+    "explainer": "Pick what the result will be for the stated period: 1 (home win), X (draw), 2 (away win).",
+    "priority": 76,
+    "tabs": [
+     "all",
+     "halves"
+    ]
+   },
+   "row": [
+    {
+     "id": "397582647",
+     "prices": [
+      {
+       "id": "1525225458",
+       "name": "1",
+       "typeId": "3686",
+       "odds": 4.19,
+       "displayName": "1",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.21474,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225459",
+       "name": "X",
+       "typeId": "3687",
+       "odds": 2.78,
+       "displayName": "X",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.325031,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225460",
+       "name": "2",
+       "typeId": "3688",
+       "odds": 2.0,
+       "displayName": "2",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.460229,
+        "refund": 0.0
+       }
+      }
+     ]
+    }
+   ],
+   "additionalInfo": {
+    "cashoutable": true
+   }
+  },
+  {
+   "marketType": {
+    "id": "4958",
+    "name": "Total Score Over/Under - 1H",
+    "displayName": "Over/Under | First Half",
+    "explainer": "Pick how many goals will be scored during the stated period. Over is more than that amount, Under is less.",
+    "priority": 80,
+    "tabs": [
+     "all",
+     "halves",
+     "popular",
+     "goals"
+    ],
+    "handicapType": "NORMAL"
+   },
+   "row": [
+    {
+     "id": "397678615",
+     "handicap": 2,
+     "prices": [
+      {
+       "id": "1525436605",
+       "name": "Over",
+       "typeId": "4959",
+       "odds": 1.27,
+       "handicap": "0.5",
+       "displayName": "Over {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.7477538633887879,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525436606",
+       "name": "Under",
+       "typeId": "4960",
+       "odds": 3.34,
+       "handicap": "0.5",
+       "displayName": "Under {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.2522464334778928,
+        "refund": 0.0
+       }
+      }
+     ],
+     "specifier": {
+      "total": "0.5"
+     }
+    },
+    {
+     "id": "397582727",
+     "handicap": 6,
+     "prices": [
+      {
+       "id": "1525225833",
+       "name": "Over",
+       "typeId": "4959",
+       "odds": 2.22,
+       "handicap": "1.5",
+       "displayName": "Over {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.4043188934511235,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225834",
+       "name": "Under",
+       "typeId": "4960",
+       "odds": 1.56,
+       "handicap": "1.5",
+       "displayName": "Under {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.5956811073940899,
+        "refund": 0.0
+       }
+      }
+     ],
+     "specifier": {
+      "total": "1.5"
+     }
+    },
+    {
+     "id": "397669375",
+     "handicap": 10,
+     "prices": [
+      {
+       "id": "1525374514",
+       "name": "Over",
+       "typeId": "4959",
+       "odds": 4.7,
+       "handicap": "2.5",
+       "displayName": "Over {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.16441106763382285,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525374515",
+       "name": "Under",
+       "typeId": "4960",
+       "odds": 1.14,
+       "handicap": "2.5",
+       "displayName": "Under {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.835588933463948,
+        "refund": 0.0
+       }
+      }
+     ],
+     "specifier": {
+      "total": "2.5"
+     }
+    }
+   ],
+   "additionalInfo": {
+    "cashoutable": true
+   }
+  },
+  {
+   "marketType": {
+    "id": "4976",
+    "name": "Total Score Over/Under - 2H",
+    "displayName": "Over/Under | Second Half",
+    "explainer": "Pick how many goals will be scored during the stated period. Over is more than that amount, Under is less.",
+    "priority": 81,
+    "tabs": [
+     "all",
+     "halves",
+     "goals"
+    ],
+    "handicapType": "NORMAL"
+   },
+   "row": [
+    {
+     "id": "397988596",
+     "handicap": 2,
+     "prices": [
+      {
+       "id": "1526516310",
+       "name": "Over",
+       "typeId": "4977",
+       "odds": 1.16,
+       "handicap": "0.5",
+       "displayName": "Over {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.818189,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1526516311",
+       "name": "Under",
+       "typeId": "4978",
+       "odds": 4.3,
+       "handicap": "0.5",
+       "displayName": "Under {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.181811,
+        "refund": 0.0
+       }
+      }
+     ],
+     "specifier": {
+      "total": "0.5"
+     }
+    },
+    {
+     "id": "397582697",
+     "handicap": 6,
+     "prices": [
+      {
+       "id": "1525225673",
+       "name": "Over",
+       "typeId": "4977",
+       "odds": 1.8,
+       "handicap": "1.5",
+       "displayName": "Over {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.510935,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225674",
+       "name": "Under",
+       "typeId": "4978",
+       "odds": 1.87,
+       "handicap": "1.5",
+       "displayName": "Under {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.489065,
+        "refund": 0.0
+       }
+      }
+     ],
+     "specifier": {
+      "total": "1.5"
+     }
+    },
+    {
+     "id": "397988597",
+     "handicap": 10,
+     "prices": [
+      {
+       "id": "1526516312",
+       "name": "Over",
+       "typeId": "4977",
+       "odds": 3.4,
+       "handicap": "2.5",
+       "displayName": "Over {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.24425778732952572,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1526516313",
+       "name": "Under",
+       "typeId": "4978",
+       "odds": 1.25,
+       "handicap": "2.5",
+       "displayName": "Under {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.7557426480250715,
+        "refund": 0.0
+       }
+      }
+     ],
+     "specifier": {
+      "total": "2.5"
+     }
+    }
+   ],
+   "additionalInfo": {
+    "cashoutable": true
+   }
+  },
+  {
+   "marketType": {
+    "id": "4716",
+    "name": "Handicap 1X2 - 1H",
+    "displayName": "3-Way Handicap | First Half",
+    "explainer": "Bet on the result with a handicap applied in the stated period. 1 (Home -1) means the Home team starts with 1-goal disadvantage. In order for the bet to be successful, Home team must win the game by at least 2 goals or more. X (Home -1) means if the Home team wins by exactly 1 goal, the result will be a draw and bet wins. 2 (Away +1) means the Away team starts with 1-goal advantage. In order for this bet to be successful, Away team must win or draw.",
+    "priority": 90,
+    "tabs": [
+     "all",
+     "halves"
+    ],
+    "handicapType": "EUROPEAN"
+   },
+   "row": [
+    {
+     "id": "397582830",
+     "handicap": -4,
+     "prices": [
+      {
+       "id": "1525226128",
+       "name": "1",
+       "typeId": "4717",
+       "odds": 18.0,
+       "handicap": "Home -1",
+       "displayName": "{formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0407721,
+        "refund": 0.0
+       },
+       "specifier": {
+        "hcp": "Home -1"
+       }
+      },
+      {
+       "id": "1525226130",
+       "name": "X",
+       "typeId": "4718",
+       "odds": 5.0,
+       "handicap": "Home -1",
+       "displayName": "{formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.150291,
+        "refund": 0.0
+       },
+       "specifier": {
+        "hcp": "Home -1"
+       }
+      },
+      {
+       "id": "1525226129",
+       "name": "2",
+       "typeId": "4719",
+       "odds": 1.17,
+       "handicap": "Away +1",
+       "displayName": "{formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.808937,
+        "refund": 0.0
+       },
+       "specifier": {
+        "hcp": "Away +1"
+       }
+      }
+     ],
+     "specifier": {
+      "hcp": "-1"
+     }
+    },
+    {
+     "id": "397582666",
+     "handicap": 4,
+     "prices": [
+      {
+       "id": "1525225514",
+       "name": "1",
+       "typeId": "4717",
+       "odds": 1.64,
+       "handicap": "Home +1",
+       "displayName": "{formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.565541,
+        "refund": 0.0
+       },
+       "specifier": {
+        "hcp": "Home +1"
+       }
+      },
+      {
+       "id": "1525225515",
+       "name": "X",
+       "typeId": "4718",
+       "odds": 3.19,
+       "handicap": "Away -1",
+       "displayName": "{formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.275539,
+        "refund": 0.0
+       },
+       "specifier": {
+        "hcp": "Away -1"
+       }
+      },
+      {
+       "id": "1525225516",
+       "name": "2",
+       "typeId": "4719",
+       "odds": 5.39,
+       "handicap": "Away -1",
+       "displayName": "{formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.15892,
+        "refund": 0.0
+       },
+       "specifier": {
+        "hcp": "Away -1"
+       }
+      }
+     ],
+     "specifier": {
+      "hcp": "1"
+     }
+    },
+    {
+     "id": "397582829",
+     "handicap": 8,
+     "prices": [
+      {
+       "id": "1525226125",
+       "name": "1",
+       "typeId": "4717",
+       "odds": 1.13,
+       "handicap": "Home +2",
+       "displayName": "{formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.8412848359570695,
+        "refund": 0.0
+       },
+       "specifier": {
+        "hcp": "Home +2"
+       }
+      },
+      {
+       "id": "1525226127",
+       "name": "X",
+       "typeId": "4718",
+       "odds": 6.19,
+       "handicap": "Away -2",
+       "displayName": "{formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.1160288923871205,
+        "refund": 0.0
+       },
+       "specifier": {
+        "hcp": "Away -2"
+       }
+      },
+      {
+       "id": "1525226126",
+       "name": "2",
+       "typeId": "4719",
+       "odds": 15.98,
+       "handicap": "Away -2",
+       "displayName": "{formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0426862878089921,
+        "refund": 0.0
+       },
+       "specifier": {
+        "hcp": "Away -2"
+       }
+      }
+     ],
+     "specifier": {
+      "hcp": "2"
+     }
+    },
+    {
+     "id": "398092421",
+     "handicap": 12,
+     "prices": [
+      {
+       "id": "1526848082",
+       "name": "1",
+       "typeId": "4717",
+       "odds": 1.01,
+       "handicap": "Home +3",
+       "displayName": "{formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.956552045259539,
+        "refund": 0.0
+       },
+       "specifier": {
+        "hcp": "Home +3"
+       }
+      },
+      {
+       "id": "1526848083",
+       "name": "X",
+       "typeId": "4718",
+       "odds": 10.0,
+       "handicap": "Away -3",
+       "displayName": "{formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.034320555782651,
+        "refund": 0.0
+       },
+       "specifier": {
+        "hcp": "Away -3"
+       }
+      },
+      {
+       "id": "1526848084",
+       "name": "2",
+       "typeId": "4719",
+       "odds": 35.0,
+       "handicap": "Away -3",
+       "displayName": "{formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.009127399751110876,
+        "refund": 0.0
+       },
+       "specifier": {
+        "hcp": "Away -3"
+       }
+      }
+     ],
+     "specifier": {
+      "hcp": "3"
+     }
+    }
+   ],
+   "displayNameColumns": [
+    "1",
+    "X",
+    "2"
+   ],
+   "additionalInfo": {
+    "cashoutable": true
+   }
+  },
+  {
+   "marketType": {
+    "id": "4720",
+    "name": "Handicap 1X2 - 2H",
+    "displayName": "3-Way Handicap | Second Half",
+    "explainer": "Bet on the result with a handicap applied in the stated period. 1 (Home -1) means the Home team starts with 1-goal disadvantage. In order for the bet to be successful, Home team must win the game by at least 2 goals or more. X (Home -1) means if the Home team wins by exactly 1 goal, the result will be a draw and bet wins. 2 (Away +1) means the Away team starts with 1-goal advantage. In order for this bet to be successful, Away team must win or draw.",
+    "priority": 91,
+    "tabs": [
+     "all",
+     "halves"
+    ],
+    "handicapType": "EUROPEAN"
+   },
+   "row": [
+    {
+     "id": "397582821",
+     "handicap": -4,
+     "prices": [
+      {
+       "id": "1525226047",
+       "name": "1",
+       "typeId": "4721",
+       "odds": 13.0,
+       "handicap": "Home -1",
+       "displayName": "{formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0570294,
+        "refund": 0.0
+       },
+       "specifier": {
+        "hcp": "Home -1"
+       }
+      },
+      {
+       "id": "1525226049",
+       "name": "X",
+       "typeId": "4722",
+       "odds": 4.8,
+       "handicap": "Home -1",
+       "displayName": "{formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.157711,
+        "refund": 0.0
+       },
+       "specifier": {
+        "hcp": "Home -1"
+       }
+      },
+      {
+       "id": "1525226048",
+       "name": "2",
+       "typeId": "4723",
+       "odds": 1.2,
+       "handicap": "Away +1",
+       "displayName": "{formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.785259,
+        "refund": 0.0
+       },
+       "specifier": {
+        "hcp": "Away +1"
+       }
+      }
+     ],
+     "specifier": {
+      "hcp": "-1"
+     }
+    },
+    {
+     "id": "397582662",
+     "handicap": 4,
+     "prices": [
+      {
+       "id": "1525225504",
+       "name": "1",
+       "typeId": "4721",
+       "odds": 1.7,
+       "handicap": "Home +1",
+       "displayName": "{formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.539771,
+        "refund": 0.0
+       },
+       "specifier": {
+        "hcp": "Home +1"
+       }
+      },
+      {
+       "id": "1525225505",
+       "name": "X",
+       "typeId": "4722",
+       "odds": 3.3,
+       "handicap": "Away -1",
+       "displayName": "{formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.264311,
+        "refund": 0.0
+       },
+       "specifier": {
+        "hcp": "Away -1"
+       }
+      },
+      {
+       "id": "1525225506",
+       "name": "2",
+       "typeId": "4723",
+       "odds": 4.4,
+       "handicap": "Away -1",
+       "displayName": "{formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.195917,
+        "refund": 0.0
+       },
+       "specifier": {
+        "hcp": "Away -1"
+       }
+      }
+     ],
+     "specifier": {
+      "hcp": "1"
+     }
+    },
+    {
+     "id": "397582828",
+     "handicap": 8,
+     "prices": [
+      {
+       "id": "1525226122",
+       "name": "1",
+       "typeId": "4721",
+       "odds": 1.17,
+       "handicap": "Home +2",
+       "displayName": "{formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.8042084765332744,
+        "refund": 0.0
+       },
+       "specifier": {
+        "hcp": "Home +2"
+       }
+      },
+      {
+       "id": "1525226124",
+       "name": "X",
+       "typeId": "4722",
+       "odds": 5.6,
+       "handicap": "Away -2",
+       "displayName": "{formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.1329397898993351,
+        "refund": 0.0
+       },
+       "specifier": {
+        "hcp": "Away -2"
+       }
+      },
+      {
+       "id": "1525226123",
+       "name": "2",
+       "typeId": "4723",
+       "odds": 11.0,
+       "handicap": "Away -2",
+       "displayName": "{formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.06285173382251774,
+        "refund": 0.0
+       },
+       "specifier": {
+        "hcp": "Away -2"
+       }
+      }
+     ],
+     "specifier": {
+      "hcp": "2"
+     }
+    }
+   ],
+   "displayNameColumns": [
+    "1",
+    "X",
+    "2"
+   ],
+   "additionalInfo": {
+    "cashoutable": true
+   }
+  },
+  {
+   "marketType": {
+    "id": "3774",
+    "name": "Asian Handicap - FT",
+    "displayName": "2-Way Handicap | Full Time",
+    "explainer": "The handicap you pick is added to or taken off that team's score before the bet is settled. Pick 1 (home team) or 2 (away team) to be ahead on the adjusted score. Based on normal time only.",
+    "priority": 105,
+    "tabs": [
+     "all",
+     "specials"
+    ],
+    "handicapType": "ASIAN"
+   },
+   "row": [
+    {
+     "id": "397582738",
+     "handicap": -2,
+     "prices": [
+      {
+       "id": "1525225861",
+       "name": "1",
+       "typeId": "3775",
+       "odds": 4.3,
+       "handicap": "-0.5",
+       "displayName": "{formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.200152,
+        "refund": 0.0
+       },
+       "specifier": {
+        "hcp": "-0.5"
+       }
+      },
+      {
+       "id": "1525225862",
+       "name": "2",
+       "typeId": "3776",
+       "odds": 1.21,
+       "handicap": "+0.5",
+       "displayName": "{formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.799848,
+        "refund": 0.0
+       },
+       "specifier": {
+        "hcp": "+0.5"
+       }
+      }
+     ],
+     "specifier": {
+      "hcp": "-0.5"
+     }
+    },
+    {
+     "id": "397582712",
+     "handicap": 2,
+     "prices": [
+      {
+       "id": "1525225732",
+       "name": "1",
+       "typeId": "3775",
+       "odds": 2.13,
+       "handicap": "+0.5",
+       "displayName": "{formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.43833,
+        "refund": 0.0
+       },
+       "specifier": {
+        "hcp": "+0.5"
+       }
+      },
+      {
+       "id": "1525225733",
+       "name": "2",
+       "typeId": "3776",
+       "odds": 1.69,
+       "handicap": "-0.5",
+       "displayName": "{formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.56167,
+        "refund": 0.0
+       },
+       "specifier": {
+        "hcp": "-0.5"
+       }
+      }
+     ],
+     "specifier": {
+      "hcp": "0.5"
+     }
+    },
+    {
+     "id": "397582667",
+     "handicap": 6,
+     "prices": [
+      {
+       "id": "1525225517",
+       "name": "1",
+       "typeId": "3775",
+       "odds": 1.44,
+       "handicap": "+1.5",
+       "displayName": "{formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.663002503336112,
+        "refund": 0.0
+       },
+       "specifier": {
+        "hcp": "+1.5"
+       }
+      },
+      {
+       "id": "1525225518",
+       "name": "2",
+       "typeId": "3776",
+       "odds": 2.7,
+       "handicap": "-1.5",
+       "displayName": "{formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.3369975041641762,
+        "refund": 0.0
+       },
+       "specifier": {
+        "hcp": "-1.5"
+       }
+      }
+     ],
+     "specifier": {
+      "hcp": "1.5"
+     }
+    },
+    {
+     "id": "397582824",
+     "handicap": 10,
+     "prices": [
+      {
+       "id": "1525226089",
+       "name": "1",
+       "typeId": "3775",
+       "odds": 1.16,
+       "handicap": "+2.5",
+       "displayName": "{formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.834016,
+        "refund": 0.0
+       },
+       "specifier": {
+        "hcp": "+2.5"
+       }
+      },
+      {
+       "id": "1525226090",
+       "name": "2",
+       "typeId": "3776",
+       "odds": 5.0,
+       "handicap": "-2.5",
+       "displayName": "{formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.165984,
+        "refund": 0.0
+       },
+       "specifier": {
+        "hcp": "-2.5"
+       }
+      }
+     ],
+     "specifier": {
+      "hcp": "2.5"
+     }
+    }
+   ],
+   "displayNameColumns": [
+    "1",
+    "2"
+   ],
+   "additionalInfo": {
+    "cashoutable": true
+   }
+  },
+  {
+   "marketType": {
+    "id": "4728",
+    "name": "Half More Goals - Total",
+    "displayName": "Half With More Goals",
+    "explainer": "Pick which half has more goals in total: 'First Half', 'Second Half' or 'Equal'.",
+    "priority": 108,
+    "tabs": [
+     "all",
+     "goals"
+    ]
+   },
+   "row": [
+    {
+     "id": "397582668",
+     "prices": [
+      {
+       "id": "1525225519",
+       "name": "First Half",
+       "typeId": "4729",
+       "odds": 2.85,
+       "displayName": "First Half",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.3054,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225520",
+       "name": "Second Half",
+       "typeId": "4730",
+       "odds": 1.99,
+       "displayName": "Second Half",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.447543,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225521",
+       "name": "Equal",
+       "typeId": "4731",
+       "odds": 3.49,
+       "displayName": "Equal",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.247056,
+        "refund": 0.0
+       }
+      }
+     ]
+    }
+   ],
+   "additionalInfo": {
+    "cashoutable": true
+   }
+  },
+  {
+   "marketType": {
+    "id": "1096755",
+    "name": "1X2 and Totals - FT",
+    "displayName": "1X2 and Over/Under | Full Time",
+    "explainer": "Pick the match result and whether total goals are over or under the number shown. Both parts must be right for the bet to win. Based on normal time only.",
+    "priority": 110,
+    "tabs": [
+     "combos",
+     "all",
+     "popular"
+    ],
+    "handicapType": "NORMAL"
+   },
+   "row": [
+    {
+     "handicap": 6,
+     "prices": [
+      {
+       "id": "1525225464",
+       "name": "1 - Over",
+       "typeId": "1099337",
+       "odds": 5.35,
+       "handicap": "1.5",
+       "displayName": "Over {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.152503,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225465",
+       "name": "X - Over",
+       "typeId": "1099338",
+       "odds": 4.39,
+       "handicap": "1.5",
+       "displayName": "Over {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.186833,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225466",
+       "name": "2 - Over",
+       "typeId": "1099339",
+       "odds": 1.81,
+       "handicap": "1.5",
+       "displayName": "Over {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.476033,
+        "refund": 0.0
+       }
+      }
+     ],
+     "specifier": {
+      "total": "1.5"
+     }
+    },
+    {
+     "handicap": 6,
+     "prices": [
+      {
+       "id": "1525225461",
+       "name": "1 - Under",
+       "typeId": "1099340",
+       "odds": 16.23,
+       "handicap": "1.5",
+       "displayName": "Under {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0476498,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225462",
+       "name": "X - Under",
+       "typeId": "1099341",
+       "odds": 15.28,
+       "handicap": "1.5",
+       "displayName": "Under {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0513441,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225463",
+       "name": "2 - Under",
+       "typeId": "1099342",
+       "odds": 9.36,
+       "handicap": "1.5",
+       "displayName": "Under {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.085637,
+        "refund": 0.0
+       }
+      }
+     ],
+     "specifier": {
+      "total": "1.5"
+     }
+    },
+    {
+     "handicap": 10,
+     "prices": [
+      {
+       "id": "1525381240",
+       "name": "1 - Over",
+       "typeId": "1099337",
+       "odds": 6.51,
+       "handicap": "2.5",
+       "displayName": "Over {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.125909,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525381241",
+       "name": "X - Over",
+       "typeId": "1099338",
+       "odds": 10.53,
+       "handicap": "2.5",
+       "displayName": "Over {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0782369,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525381242",
+       "name": "2 - Over",
+       "typeId": "1099339",
+       "odds": 2.2,
+       "handicap": "2.5",
+       "displayName": "Over {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.390136,
+        "refund": 0.0
+       }
+      }
+     ],
+     "specifier": {
+      "total": "2.5"
+     }
+    },
+    {
+     "handicap": 10,
+     "prices": [
+      {
+       "id": "1525381237",
+       "name": "1 - Under",
+       "typeId": "1099340",
+       "odds": 10.53,
+       "handicap": "2.5",
+       "displayName": "Under {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0742435,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525381238",
+       "name": "X - Under",
+       "typeId": "1099341",
+       "odds": 5.17,
+       "handicap": "2.5",
+       "displayName": "Under {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.159941,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525381239",
+       "name": "2 - Under",
+       "typeId": "1099342",
+       "odds": 4.79,
+       "handicap": "2.5",
+       "displayName": "Under {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.171534,
+        "refund": 0.0
+       }
+      }
+     ],
+     "specifier": {
+      "total": "2.5"
+     }
+    },
+    {
+     "handicap": 14,
+     "prices": [
+      {
+       "id": "1525226111",
+       "name": "1 - Over",
+       "typeId": "1099337",
+       "odds": 12.44,
+       "handicap": "3.5",
+       "displayName": "Over {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.062665,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525226113",
+       "name": "X - Over",
+       "typeId": "1099338",
+       "odds": 10.53,
+       "handicap": "3.5",
+       "displayName": "Over {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0782369,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525226115",
+       "name": "2 - Over",
+       "typeId": "1099339",
+       "odds": 3.54,
+       "handicap": "3.5",
+       "displayName": "Over {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.236817,
+        "refund": 0.0
+       }
+      }
+     ],
+     "specifier": {
+      "total": "3.5"
+     }
+    },
+    {
+     "handicap": 14,
+     "prices": [
+      {
+       "id": "1525226112",
+       "name": "1 - Under",
+       "typeId": "1099340",
+       "odds": 5.93,
+       "handicap": "3.5",
+       "displayName": "Under {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.137487,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525226114",
+       "name": "X - Under",
+       "typeId": "1099341",
+       "odds": 5.17,
+       "handicap": "3.5",
+       "displayName": "Under {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.159941,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525226116",
+       "name": "2 - Under",
+       "typeId": "1099342",
+       "odds": 2.63,
+       "handicap": "3.5",
+       "displayName": "Under {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.324853,
+        "refund": 0.0
+       }
+      }
+     ],
+     "specifier": {
+      "total": "3.5"
+     }
+    }
+   ],
+   "displayNameColumns": [
+    "1",
+    "X",
+    "2"
+   ],
+   "additionalInfo": {
+    "cashoutable": true
+   }
+  },
+  {
+   "marketType": {
+    "id": "4703",
+    "name": "Draw No Bet - FT",
+    "displayName": "Draw No Bet | Full Time",
+    "explainer": "Bet on either the home team (1) or away team (2). If it’s a draw, you get your stake refunded.",
+    "priority": 111,
+    "tabs": [
+     "all",
+     "specials"
+    ]
+   },
+   "row": [
+    {
+     "id": "397613550",
+     "prices": [
+      {
+       "id": "1525195185",
+       "name": "1",
+       "typeId": "4704",
+       "odds": 3.33,
+       "displayName": "1",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.200702,
+        "refund": 0.236001
+       }
+      },
+      {
+       "id": "1525195186",
+       "name": "2",
+       "typeId": "4705",
+       "odds": 1.28,
+       "displayName": "2",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.563291,
+        "refund": 0.236001
+       }
+      }
+     ]
+    }
+   ],
+   "additionalInfo": {
+    "cashoutable": true
+   }
+  },
+  {
+   "marketType": {
+    "id": "4697",
+    "name": "Draw No Bet - 1H",
+    "displayName": "Draw No Bet | First Half",
+    "explainer": "Pick what the result will be for the stated period: 1 (home win) or 2 (away win). Draw = stake refunded.",
+    "priority": 112,
+    "tabs": [
+     "all",
+     "halves"
+    ]
+   },
+   "row": [
+    {
+     "id": "397582682",
+     "prices": [
+      {
+       "id": "1525225626",
+       "name": "1",
+       "typeId": "4698",
+       "odds": 2.7,
+       "displayName": "1",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.191063,
+        "refund": 0.374477
+       }
+      },
+      {
+       "id": "1525225627",
+       "name": "2",
+       "typeId": "4699",
+       "odds": 1.33,
+       "displayName": "2",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.434459,
+        "refund": 0.374477
+       }
+      }
+     ]
+    }
+   ],
+   "additionalInfo": {
+    "cashoutable": true
+   }
+  },
+  {
+   "marketType": {
+    "id": "4700",
+    "name": "Draw No Bet - 2H",
+    "displayName": "Draw No Bet | Second Half",
+    "explainer": "Bet on either the home team (1) or away team (2). If it’s a draw, you get your stake refunded.",
+    "priority": 113,
+    "tabs": [
+     "all",
+     "halves"
+    ]
+   },
+   "row": [
+    {
+     "id": "397582649",
+     "prices": [
+      {
+       "id": "1525225467",
+       "name": "1",
+       "typeId": "4701",
+       "odds": 2.6,
+       "displayName": "1",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.21474,
+        "refund": 0.325031
+       }
+      },
+      {
+       "id": "1525225468",
+       "name": "2",
+       "typeId": "4702",
+       "odds": 1.35,
+       "displayName": "2",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.460229,
+        "refund": 0.325031
+       }
+      }
+     ]
+    }
+   ],
+   "additionalInfo": {
+    "cashoutable": true
+   }
+  },
+  {
+   "marketType": {
+    "id": "28000869",
+    "name": "Correct Score (26 Outcomes)",
+    "displayName": "Correct Score | Full Time",
+    "explainer": "Pick what the scoreline will be for the stated period. Other covers every scoreline that isn’t listed.",
+    "priority": 120,
+    "tabs": [
+     "all",
+     "popular",
+     "goals"
+    ]
+   },
+   "row": [
+    {
+     "prices": [
+      {
+       "id": "1525225758",
+       "name": "0-0",
+       "typeId": "28000870",
+       "odds": 11.2,
+       "displayName": "0-0",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0513441,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225749",
+       "name": "1-0",
+       "typeId": "28000871",
+       "odds": 12.0,
+       "displayName": "1-0",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0476498,
+        "refund": 0.0
+       }
+      }
+     ]
+    },
+    {
+     "prices": [
+      {
+       "id": "1525225750",
+       "name": "2-0",
+       "typeId": "28000872",
+       "odds": 20.8,
+       "displayName": "2-0",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0265937,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225752",
+       "name": "3-0",
+       "typeId": "28000873",
+       "odds": 56.0,
+       "displayName": "3-0",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.00989477,
+        "refund": 0.0
+       }
+      }
+     ]
+    },
+    {
+     "prices": [
+      {
+       "id": "1525225755",
+       "name": "4-0",
+       "typeId": "28000874",
+       "odds": 80.8,
+       "displayName": "4-0",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.00276117,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225762",
+       "name": "0-1",
+       "typeId": "28000875",
+       "odds": 6.72,
+       "displayName": "0-1",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.085637,
+        "refund": 0.0
+       }
+      }
+     ]
+    },
+    {
+     "prices": [
+      {
+       "id": "1525225759",
+       "name": "1-1",
+       "typeId": "28000876",
+       "odds": 5.44,
+       "displayName": "1-1",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.108596,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225751",
+       "name": "2-1",
+       "typeId": "28000877",
+       "odds": 10.4,
+       "displayName": "2-1",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0533491,
+        "refund": 0.0
+       }
+      }
+     ]
+    },
+    {
+     "prices": [
+      {
+       "id": "1525225753",
+       "name": "3-1",
+       "typeId": "28000878",
+       "odds": 28.0,
+       "displayName": "3-1",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0198497,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225756",
+       "name": "4-1",
+       "typeId": "28000879",
+       "odds": 80.8,
+       "displayName": "4-1",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.00553913,
+        "refund": 0.0
+       }
+      }
+     ]
+    },
+    {
+     "prices": [
+      {
+       "id": "1525225763",
+       "name": "0-2",
+       "typeId": "28000880",
+       "odds": 6.72,
+       "displayName": "0-2",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0858974,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225764",
+       "name": "1-2",
+       "typeId": "28000881",
+       "odds": 6.08,
+       "displayName": "1-2",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0958799,
+        "refund": 0.0
+       }
+      }
+     ]
+    },
+    {
+     "prices": [
+      {
+       "id": "1525225760",
+       "name": "2-2",
+       "typeId": "28000882",
+       "odds": 9.6,
+       "displayName": "2-2",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0607927,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225754",
+       "name": "3-2",
+       "typeId": "28000883",
+       "odds": 28.0,
+       "displayName": "3-2",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.01991,
+        "refund": 0.0
+       }
+      }
+     ]
+    },
+    {
+     "prices": [
+      {
+       "id": "1525225757",
+       "name": "4-2",
+       "typeId": "28000884",
+       "odds": 80.8,
+       "displayName": "4-2",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.00555597,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225765",
+       "name": "0-3",
+       "typeId": "28000885",
+       "odds": 9.6,
+       "displayName": "0-3",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.057439,
+        "refund": 0.0
+       }
+      }
+     ]
+    },
+    {
+     "prices": [
+      {
+       "id": "1525225766",
+       "name": "1-3",
+       "typeId": "28000886",
+       "odds": 8.8,
+       "displayName": "1-3",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0641143,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225767",
+       "name": "2-3",
+       "typeId": "28000887",
+       "odds": 16.0,
+       "displayName": "2-3",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0357827,
+        "refund": 0.0
+       }
+      }
+     ]
+    },
+    {
+     "prices": [
+      {
+       "id": "1525225761",
+       "name": "3-3",
+       "typeId": "28000888",
+       "odds": 36.0,
+       "displayName": "3-3",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0151254,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225772",
+       "name": "4-3",
+       "typeId": "28000889",
+       "odds": 80.8,
+       "displayName": "4-3",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.00371524,
+        "refund": 0.0
+       }
+      }
+     ]
+    },
+    {
+     "prices": [
+      {
+       "id": "1525225768",
+       "name": "0-4",
+       "typeId": "28000890",
+       "odds": 19.2,
+       "displayName": "0-4",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0288068,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225769",
+       "name": "1-4",
+       "typeId": "28000891",
+       "odds": 17.6,
+       "displayName": "1-4",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0321546,
+        "refund": 0.0
+       }
+      }
+     ]
+    },
+    {
+     "prices": [
+      {
+       "id": "1525225770",
+       "name": "2-4",
+       "typeId": "28000892",
+       "odds": 32.0,
+       "displayName": "2-4",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0179457,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225771",
+       "name": "3-4",
+       "typeId": "28000893",
+       "odds": 80.8,
+       "displayName": "3-4",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0066771,
+        "refund": 0.0
+       }
+      }
+     ]
+    },
+    {
+     "prices": [
+      {
+       "id": "1525225773",
+       "name": "4-4",
+       "typeId": "28000894",
+       "odds": 80.8,
+       "displayName": "4-4",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.00211681,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225774",
+       "name": "Other",
+       "typeId": "28000895",
+       "odds": 10.4,
+       "displayName": "Other",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0568714,
+        "refund": 0.0
+       }
+      }
+     ]
+    }
+   ],
+   "additionalInfo": {
+    "cashoutable": true
+   }
+  },
+  {
+   "marketType": {
+    "id": "3819",
+    "name": "Correct Score - 1H",
+    "displayName": "Correct Score | First Half",
+    "explainer": "Pick the exact scoreline at half time, always shown home-away. 'Other' covers every scoreline that isn't listed.",
+    "priority": 121,
+    "tabs": [
+     "all",
+     "halves",
+     "goals"
+    ]
+   },
+   "row": [
+    {
+     "prices": [
+      {
+       "id": "1525225448",
+       "name": "Other",
+       "typeId": "1126333",
+       "odds": 8.0,
+       "displayName": "Other",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0759209,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225452",
+       "name": "0-0",
+       "typeId": "3820",
+       "odds": 2.6,
+       "displayName": "0-0",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.252121,
+        "refund": 0.0
+       }
+      }
+     ]
+    },
+    {
+     "prices": [
+      {
+       "id": "1525225455",
+       "name": "0-1",
+       "typeId": "3821",
+       "odds": 2.92,
+       "displayName": "0-1",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.222233,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225456",
+       "name": "0-2",
+       "typeId": "3822",
+       "odds": 6.24,
+       "displayName": "0-2",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.100412,
+        "refund": 0.0
+       }
+      }
+     ]
+    },
+    {
+     "prices": [
+      {
+       "id": "1525225449",
+       "name": "1-0",
+       "typeId": "3831",
+       "odds": 5.28,
+       "displayName": "1-0",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.121215,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225453",
+       "name": "1-1",
+       "typeId": "3832",
+       "odds": 5.76,
+       "displayName": "1-1",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.109538,
+        "refund": 0.0
+       }
+      }
+     ]
+    },
+    {
+     "prices": [
+      {
+       "id": "1525225457",
+       "name": "1-2",
+       "typeId": "3833",
+       "odds": 12.8,
+       "displayName": "1-2",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.049493,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225450",
+       "name": "2-0",
+       "typeId": "3842",
+       "odds": 20.8,
+       "displayName": "2-0",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0298735,
+        "refund": 0.0
+       }
+      }
+     ]
+    },
+    {
+     "prices": [
+      {
+       "id": "1525225451",
+       "name": "2-1",
+       "typeId": "3843",
+       "odds": 22.4,
+       "displayName": "2-1",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0269957,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225454",
+       "name": "2-2",
+       "typeId": "3844",
+       "odds": 48.0,
+       "displayName": "2-2",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0121975,
+        "refund": 0.0
+       }
+      }
+     ]
+    }
+   ],
+   "additionalInfo": {
+    "cashoutable": true
+   }
+  },
+  {
+   "marketType": {
+    "id": "4063",
+    "name": "Correct Score - 2H",
+    "displayName": "Correct Score | Second Half",
+    "explainer": "Pick what the scoreline will be for the stated period. Other covers every scoreline that isn’t listed.",
+    "priority": 122,
+    "tabs": [
+     "all",
+     "halves",
+     "goals"
+    ]
+   },
+   "row": [
+    {
+     "prices": [
+      {
+       "id": "1525225490",
+       "name": "Other",
+       "typeId": "1126334",
+       "odds": 4.64,
+       "displayName": "Other",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.121366,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225484",
+       "name": "0-0",
+       "typeId": "4064",
+       "odds": 3.2,
+       "displayName": "0-0",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.181811,
+        "refund": 0.0
+       }
+      }
+     ]
+    },
+    {
+     "prices": [
+      {
+       "id": "1525225487",
+       "name": "0-1",
+       "typeId": "4065",
+       "odds": 3.04,
+       "displayName": "0-1",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.192189,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225488",
+       "name": "0-2",
+       "typeId": "4066",
+       "odds": 5.28,
+       "displayName": "0-2",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.107507,
+        "refund": 0.0
+       }
+      }
+     ]
+    },
+    {
+     "prices": [
+      {
+       "id": "1525225481",
+       "name": "1-0",
+       "typeId": "4075",
+       "odds": 4.96,
+       "displayName": "1-0",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.115065,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225485",
+       "name": "1-1",
+       "typeId": "4076",
+       "odds": 4.64,
+       "displayName": "1-1",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.121632,
+        "refund": 0.0
+       }
+      }
+     ]
+    },
+    {
+     "prices": [
+      {
+       "id": "1525225489",
+       "name": "1-2",
+       "typeId": "4077",
+       "odds": 8.8,
+       "displayName": "1-2",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0646735,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225482",
+       "name": "2-0",
+       "typeId": "4086",
+       "odds": 14.4,
+       "displayName": "2-0",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0373909,
+        "refund": 0.0
+       }
+      }
+     ]
+    },
+    {
+     "prices": [
+      {
+       "id": "1525225483",
+       "name": "2-1",
+       "typeId": "4087",
+       "odds": 14.4,
+       "displayName": "2-1",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0382832,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225486",
+       "name": "2-2",
+       "typeId": "4088",
+       "odds": 28.0,
+       "displayName": "2-2",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0200824,
+        "refund": 0.0
+       }
+      }
+     ]
+    }
+   ],
+   "additionalInfo": {
+    "cashoutable": true
+   }
+  },
+  {
+   "marketType": {
+    "id": "28000014",
+    "name": "Double Chance and Both Teams To Score - FT",
+    "displayName": "Double Chance and Both Teams To Score | Full Time ",
+    "explainer": "Predict two of three possible outcomes of the stated period and whether both teams score in the match or not.",
+    "priority": 123,
+    "tabs": [
+     "combos",
+     "all"
+    ]
+   },
+   "row": [
+    {
+     "prices": [
+      {
+       "id": "1525225618",
+       "name": "1X - Yes",
+       "typeId": "28000015",
+       "odds": 2.85,
+       "displayName": "1X",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.299334,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225619",
+       "name": "1X - No",
+       "typeId": "28000016",
+       "odds": 6.0,
+       "displayName": "1X",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.138996,
+        "refund": 0.0
+       }
+      }
+     ]
+    },
+    {
+     "prices": [
+      {
+       "id": "1525225620",
+       "name": "12 - Yes",
+       "typeId": "28000017",
+       "odds": 2.2,
+       "displayName": "12",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.399506,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225621",
+       "name": "12 - No",
+       "typeId": "28000018",
+       "odds": 2.4,
+       "displayName": "12",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.362316,
+        "refund": 0.0
+       }
+      }
+     ]
+    },
+    {
+     "prices": [
+      {
+       "id": "1525225622",
+       "name": "X2 - Yes",
+       "typeId": "28000019",
+       "odds": 1.88,
+       "displayName": "X2",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.473839,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225623",
+       "name": "X2 - No",
+       "typeId": "28000020",
+       "odds": 2.65,
+       "displayName": "X2",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.326009,
+        "refund": 0.0
+       }
+      }
+     ]
+    }
+   ],
+   "displayNameColumns": [
+    "Yes",
+    "No"
+   ],
+   "additionalInfo": {
+    "cashoutable": true
+   }
+  },
+  {
+   "marketType": {
+    "id": "28000035",
+    "name": "Multiscores - FT",
+    "displayName": "Multiscores | Full Time",
+    "explainer": "Pick a group of scorelines in one bet - for example 1-0, 2-0 or 3-0. 'Other Home Win' and 'Other Away Win' cover any winning score not listed. Based on normal time only.",
+    "priority": 126,
+    "tabs": [
+     "all",
+     "goals",
+     "specials"
+    ]
+   },
+   "row": [
+    {
+     "prices": [
+      {
+       "id": "1525225737",
+       "name": "1:0, 2:0 or 3:0",
+       "typeId": "28000036",
+       "odds": 9.69,
+       "displayName": "1:0, 2:0 or 3:0",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0841383,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225738",
+       "name": "0:1, 0:2 or 0:3",
+       "typeId": "28000037",
+       "odds": 3.73,
+       "displayName": "0:1, 0:2 or 0:3",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.228973,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225739",
+       "name": "4:0, 5:0 or 6:0",
+       "typeId": "28000038",
+       "odds": 97.9,
+       "displayName": "4:0, 5:0 or 6:0",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.00349226,
+        "refund": 0.0
+       }
+      }
+     ]
+    },
+    {
+     "prices": [
+      {
+       "id": "1525225740",
+       "name": "0:4, 0:5 or 0:6",
+       "typeId": "28000039",
+       "odds": 18.42,
+       "displayName": "0:4, 0:5 or 0:6",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0442289,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225741",
+       "name": "2:1, 3:1 or 4:1",
+       "typeId": "28000040",
+       "odds": 10.66,
+       "displayName": "2:1, 3:1 or 4:1",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.078738,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225742",
+       "name": "1:2, 1:3 or 1:4",
+       "typeId": "28000041",
+       "odds": 4.36,
+       "displayName": "1:2, 1:3 or 1:4",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.192149,
+        "refund": 0.0
+       }
+      }
+     ]
+    },
+    {
+     "prices": [
+      {
+       "id": "1525225743",
+       "name": "3:2, 4:2, 4:3 or 5:1",
+       "typeId": "28000042",
+       "odds": 27.14,
+       "displayName": "3:2, 4:2, 4:3 or 5:1",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0304178,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225744",
+       "name": "2:3, 2:4, 3:4 or 1:5",
+       "typeId": "28000043",
+       "odds": 11.63,
+       "displayName": "2:3, 2:4, 3:4 or 1:5",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0733064,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225745",
+       "name": "Other Home Win",
+       "typeId": "28000044",
+       "odds": 97.9,
+       "displayName": "Other Home Win",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.00336612,
+        "refund": 0.0
+       }
+      }
+     ]
+    },
+    {
+     "prices": [
+      {
+       "id": "1525225746",
+       "name": "Other Away Win",
+       "typeId": "28000045",
+       "odds": 33.93,
+       "displayName": "Other Away Win",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0230126,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225736",
+       "name": "Draw",
+       "typeId": "28000046",
+       "odds": 3.59,
+       "displayName": "Draw",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.238177,
+        "refund": 0.0
+       }
+      }
+     ]
+    }
+   ],
+   "additionalInfo": {
+    "cashoutable": true
+   }
+  },
+  {
+   "marketType": {
+    "id": "3816",
+    "name": "Clean Sheet Home Team - FT",
+    "displayName": "Clean Sheet | {home} | Full Time",
+    "explainer": "Pick whether the named team will successfully avoid conceding any goals during the stated period.",
+    "priority": 130,
+    "tabs": [
+     "all",
+     "goals"
+    ]
+   },
+   "row": [
+    {
+     "id": "397582726",
+     "prices": [
+      {
+       "id": "1525225831",
+       "name": "Yes",
+       "typeId": "3817",
+       "odds": 5.17,
+       "displayName": "Yes",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.13919644950873467,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225832",
+       "name": "No",
+       "typeId": "3818",
+       "odds": 1.1,
+       "displayName": "No",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.8608035680897546,
+        "refund": 0.0
+       }
+      }
+     ]
+    }
+   ],
+   "additionalInfo": {
+    "cashoutable": true
+   }
+  },
+  {
+   "marketType": {
+    "id": "3807",
+    "name": "Clean Sheet Away Team - FT",
+    "displayName": "Clean Sheet | {away} | Full Time",
+    "explainer": "Will the away team stop the home team scoring? Pick Yes or No. Based on 90 min + injury time - a 0-0 draw counts as Yes.",
+    "priority": 140,
+    "tabs": [
+     "all",
+     "goals"
+    ]
+   },
+   "row": [
+    {
+     "id": "397582656",
+     "prices": [
+      {
+       "id": "1525225491",
+       "name": "Yes",
+       "typeId": "3808",
+       "odds": 2.67,
+       "displayName": "Yes",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.326009,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225492",
+       "name": "No",
+       "typeId": "3809",
+       "odds": 1.38,
+       "displayName": "No",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.673991,
+        "refund": 0.0
+       }
+      }
+     ]
+    }
+   ],
+   "additionalInfo": {
+    "cashoutable": true
+   }
+  },
+  {
+   "marketType": {
+    "id": "4926",
+    "name": "Total Goals Exact - FT",
+    "displayName": "Total Goals Exact | Full Time",
+    "explainer": "Pick exactly how many goals will be scored during the stated period. Betting on 2 covers 2-0, 1-1 and 0-2.",
+    "priority": 150,
+    "tabs": [
+     "all",
+     "goals"
+    ]
+   },
+   "row": [
+    {
+     "prices": [
+      {
+       "id": "1525225856",
+       "name": "6+",
+       "typeId": "1096818",
+       "odds": 7.83,
+       "displayName": "6+",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0958334,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225850",
+       "name": "0",
+       "typeId": "4927",
+       "odds": 14.78,
+       "displayName": "0",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0513441,
+        "refund": 0.0
+       }
+      }
+     ]
+    },
+    {
+     "prices": [
+      {
+       "id": "1525225851",
+       "name": "1",
+       "typeId": "4928",
+       "odds": 5.74,
+       "displayName": "1",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.133287,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225852",
+       "name": "2",
+       "typeId": "4929",
+       "odds": 3.48,
+       "displayName": "2",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.221088,
+        "refund": 0.0
+       }
+      }
+     ]
+    },
+    {
+     "prices": [
+      {
+       "id": "1525225853",
+       "name": "3",
+       "typeId": "4930",
+       "odds": 3.57,
+       "displayName": "3",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.216563,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225854",
+       "name": "4",
+       "typeId": "4931",
+       "odds": 4.35,
+       "displayName": "4",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.176325,
+        "refund": 0.0
+       }
+      }
+     ]
+    },
+    {
+     "prices": [
+      {
+       "id": "1525225855",
+       "name": "5",
+       "typeId": "4932",
+       "odds": 7.13,
+       "displayName": "5",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.105561,
+        "refund": 0.0
+       }
+      }
+     ]
+    }
+   ],
+   "additionalInfo": {
+    "cashoutable": true
+   }
+  },
+  {
+   "marketType": {
+    "id": "4833",
+    "name": "Odd / Even - FT",
+    "displayName": "Odd/Even | Full Time",
+    "explainer": "Will the total goals scored in the match be an odd or even number? 0 counts as even. Based on normal time only.",
+    "priority": 180,
+    "tabs": [
+     "all",
+     "specials"
+    ]
+   },
+   "row": [
+    {
+     "id": "397582731",
+     "prices": [
+      {
+       "id": "1525225842",
+       "name": "Odd",
+       "typeId": "4834",
+       "odds": 1.91,
+       "displayName": "Odd",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.4834323275268448,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225843",
+       "name": "Even",
+       "typeId": "4835",
+       "odds": 1.79,
+       "displayName": "Even",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.5165676727155933,
+        "refund": 0.0
+       }
+      }
+     ]
+    }
+   ],
+   "additionalInfo": {
+    "cashoutable": true
+   }
+  },
+  {
+   "marketType": {
+    "id": "4794",
+    "name": "Odd / Even - 1H",
+    "displayName": "Odd/Even | First Half",
+    "explainer": "Pick whether the total points scored during the stated period will be Odd or Even. 0 is considered Even.",
+    "priority": 181,
+    "tabs": [
+     "all",
+     "halves"
+    ]
+   },
+   "row": [
+    {
+     "id": "397582691",
+     "prices": [
+      {
+       "id": "1525225649",
+       "name": "Odd",
+       "typeId": "4795",
+       "odds": 1.97,
+       "displayName": "Odd",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.466468,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225650",
+       "name": "Even",
+       "typeId": "4796",
+       "odds": 1.74,
+       "displayName": "Even",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.533532,
+        "refund": 0.0
+       }
+      }
+     ]
+    }
+   ],
+   "additionalInfo": {
+    "cashoutable": true
+   }
+  },
+  {
+   "marketType": {
+    "id": "4809",
+    "name": "Odd / Even - 2H",
+    "displayName": "Odd/Even | Second Half",
+    "explainer": "Pick whether the total points scored during the stated period will be Odd or Even. 0 is considered Even.",
+    "priority": 182,
+    "tabs": [
+     "all",
+     "halves"
+    ]
+   },
+   "row": [
+    {
+     "id": "397582721",
+     "prices": [
+      {
+       "id": "1525225801",
+       "name": "Odd",
+       "typeId": "4810",
+       "odds": 1.92,
+       "displayName": "Odd",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.481167,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225802",
+       "name": "Even",
+       "typeId": "4811",
+       "odds": 1.79,
+       "displayName": "Even",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.518833,
+        "refund": 0.0
+       }
+      }
+     ]
+    }
+   ],
+   "additionalInfo": {
+    "cashoutable": true
+   }
+  },
+  {
+   "marketType": {
+    "id": "4842",
+    "name": "Odd / Even - FT- Home Team",
+    "displayName": "Odd/Even | {home} | Full Time",
+    "explainer": "Pick whether the number of goals scored during the stated period will be Odd or Even. 0 is considered Even.",
+    "priority": 183,
+    "tabs": [
+     "all",
+     "specials"
+    ]
+   },
+   "row": [
+    {
+     "id": "397582657",
+     "prices": [
+      {
+       "id": "1525225493",
+       "name": "Odd",
+       "typeId": "4843",
+       "odds": 2.05,
+       "displayName": "Odd",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.447356,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225494",
+       "name": "Even",
+       "typeId": "4844",
+       "odds": 1.69,
+       "displayName": "Even",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.552644,
+        "refund": 0.0
+       }
+      }
+     ]
+    }
+   ],
+   "additionalInfo": {
+    "cashoutable": true
+   }
+  },
+  {
+   "marketType": {
+    "id": "4836",
+    "name": "Odd / Even - FT - Away Team",
+    "displayName": "Odd/Even | {away} | Full Time",
+    "explainer": "Pick whether the number of goals scored during the stated period will be Odd or Even. 0 is considered Even.",
+    "priority": 184,
+    "tabs": [
+     "all",
+     "specials"
+    ]
+   },
+   "row": [
+    {
+     "id": "397582702",
+     "prices": [
+      {
+       "id": "1525225689",
+       "name": "Odd",
+       "typeId": "4837",
+       "odds": 1.88,
+       "displayName": "Odd",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.490558,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225690",
+       "name": "Even",
+       "typeId": "4838",
+       "odds": 1.82,
+       "displayName": "Even",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.509441,
+        "refund": 0.0
+       }
+      }
+     ]
+    }
+   ],
+   "additionalInfo": {
+    "cashoutable": true
+   }
+  },
+  {
+   "marketType": {
+    "id": "1096782",
+    "name": "Team To Score (4 way) - FT",
+    "displayName": "Team To Score (4-Way) | Full Time",
+    "explainer": "Which teams, if any, will score during the match? Pick No Goal, Home, Away or Both.",
+    "priority": 190,
+    "tabs": [
+     "all",
+     "goals",
+     "specials"
+    ]
+   },
+   "row": [
+    {
+     "prices": [
+      {
+       "id": "1525225471",
+       "name": "No Goal",
+       "typeId": "1099356",
+       "odds": 15.77,
+       "displayName": "No Goal",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0513441,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225472",
+       "name": "Home",
+       "typeId": "1099360",
+       "odds": 9.26,
+       "displayName": "Home",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0876517,
+        "refund": 0.0
+       }
+      }
+     ]
+    },
+    {
+     "prices": [
+      {
+       "id": "1525225473",
+       "name": "Away",
+       "typeId": "1099361",
+       "odds": 3.1,
+       "displayName": "Away",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.274664,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225474",
+       "name": "Both",
+       "typeId": "1099362",
+       "odds": 1.55,
+       "displayName": "Both",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.58634,
+        "refund": 0.0
+       }
+      }
+     ]
+    }
+   ],
+   "additionalInfo": {
+    "cashoutable": true
+   }
+  },
+  {
+   "marketType": {
+    "id": "4673",
+    "name": "Double Chance - 1H",
+    "displayName": "Double Chance | First Half",
+    "explainer": "Pick 2 results in 1 bet: 1X (home win or draw), X2 (draw or away win) or 12 (home or away win).",
+    "priority": 300,
+    "tabs": [
+     "all",
+     "halves"
+    ]
+   },
+   "row": [
+    {
+     "id": "397582671",
+     "prices": [
+      {
+       "id": "1525225570",
+       "name": "1X",
+       "typeId": "4674",
+       "odds": 1.46,
+       "displayName": "1X",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.5654162113184368,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225572",
+       "name": "X2",
+       "typeId": "4675",
+       "odds": 1.14,
+       "displayName": "X2",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.8090769771792062,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225571",
+       "name": "12",
+       "typeId": "4676",
+       "odds": 1.36,
+       "displayName": "12",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.6255060022013196,
+        "refund": 0.0
+       }
+      }
+     ]
+    }
+   ],
+   "additionalInfo": {
+    "cashoutable": true
+   }
+  },
+  {
+   "marketType": {
+    "id": "4681",
+    "name": "Double Chance - 2H",
+    "displayName": "Double Chance | Second Half",
+    "explainer": "Pick 2 results in 1 bet: 1X (home win or draw), X2 (draw or away win) or 12 (home or away win).",
+    "priority": 310,
+    "tabs": [
+     "all",
+     "halves"
+    ]
+   },
+   "row": [
+    {
+     "id": "397582674",
+     "prices": [
+      {
+       "id": "1525225585",
+       "name": "1X",
+       "typeId": "4682",
+       "odds": 1.51,
+       "displayName": "1X",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.5398830826033191,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225587",
+       "name": "X2",
+       "typeId": "4683",
+       "odds": 1.16,
+       "displayName": "X2",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.7853526527678891,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225586",
+       "name": "12",
+       "typeId": "4684",
+       "odds": 1.29,
+       "displayName": "12",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.6747634481223627,
+        "refund": 0.0
+       }
+      }
+     ]
+    }
+   ],
+   "additionalInfo": {
+    "cashoutable": true
+   }
+  },
+  {
+   "marketType": {
+    "id": "3789",
+    "name": "Both Teams To Score - 1H",
+    "displayName": "Both Teams To Score | First Half",
+    "explainer": "Will both teams score at least 1 goal during the stated period? Pick either Yes or No.",
+    "priority": 320,
+    "tabs": [
+     "all",
+     "halves",
+     "goals"
+    ]
+   },
+   "row": [
+    {
+     "id": "397582713",
+     "prices": [
+      {
+       "id": "1525225734",
+       "name": "Yes",
+       "typeId": "3790",
+       "odds": 3.43,
+       "displayName": "Yes",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.2299578352963464,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225735",
+       "name": "No",
+       "typeId": "3791",
+       "odds": 1.21,
+       "displayName": "No",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.7700430386965805,
+        "refund": 0.0
+       }
+      }
+     ]
+    }
+   ],
+   "additionalInfo": {
+    "cashoutable": true
+   }
+  },
+  {
+   "marketType": {
+    "id": "3792",
+    "name": "Both Teams To Score - 2H",
+    "displayName": "Both Teams To Score | Second Half",
+    "explainer": "Will both teams score at least 1 goal during the stated period? Pick either Yes or No.",
+    "priority": 330,
+    "tabs": [
+     "all",
+     "halves",
+     "goals"
+    ]
+   },
+   "row": [
+    {
+     "id": "397582730",
+     "prices": [
+      {
+       "id": "1525225840",
+       "name": "Yes",
+       "typeId": "3793",
+       "odds": 2.76,
+       "displayName": "Yes",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.302377,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225841",
+       "name": "No",
+       "typeId": "3794",
+       "odds": 1.32,
+       "displayName": "No",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.697623,
+        "refund": 0.0
+       }
+      }
+     ]
+    }
+   ],
+   "additionalInfo": {
+    "cashoutable": true
+   }
+  },
+  {
+   "marketType": {
+    "id": "1096806",
+    "name": "Either half win Home - FT",
+    "displayName": "Win Either Half | {home}",
+    "explainer": "Will the team score more goals than their opponent in either First Half or Second Half.",
+    "priority": 340,
+    "tabs": [
+     "all"
+    ]
+   },
+   "row": [
+    {
+     "id": "397582663",
+     "prices": [
+      {
+       "id": "1525225507",
+       "name": "Yes",
+       "typeId": "1099445",
+       "odds": 2.34,
+       "displayName": "Yes",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.368711,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225508",
+       "name": "No",
+       "typeId": "1099446",
+       "odds": 1.44,
+       "displayName": "No",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.631289,
+        "refund": 0.0
+       }
+      }
+     ]
+    }
+   ],
+   "additionalInfo": {
+    "cashoutable": true
+   }
+  },
+  {
+   "marketType": {
+    "id": "1096809",
+    "name": "Either half win Away - FT",
+    "displayName": "Win Either Half | {away}",
+    "explainer": "Will the team score more goals than their opponent in either First Half or Second Half.",
+    "priority": 350,
+    "tabs": [
+     "all"
+    ]
+   },
+   "row": [
+    {
+     "id": "397582737",
+     "prices": [
+      {
+       "id": "1525225859",
+       "name": "Yes",
+       "typeId": "1099451",
+       "odds": 1.32,
+       "displayName": "Yes",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.698216,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225860",
+       "name": "No",
+       "typeId": "1099452",
+       "odds": 2.76,
+       "displayName": "No",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.301784,
+        "refund": 0.0
+       }
+      }
+     ]
+    }
+   ],
+   "additionalInfo": {
+    "cashoutable": true
+   }
+  },
+  {
+   "marketType": {
+    "id": "1096807",
+    "name": "Score in both halves Home - FT",
+    "displayName": "Score In Both Halves | {home}",
+    "explainer": "Will the team score in both the First Half and the Second Half.",
+    "priority": 380,
+    "tabs": [
+     "all",
+     "goals"
+    ]
+   },
+   "row": [
+    {
+     "id": "397582688",
+     "prices": [
+      {
+       "id": "1525225642",
+       "name": "Yes",
+       "typeId": "1099447",
+       "odds": 4.23,
+       "displayName": "Yes",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.17712875418492333,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225643",
+       "name": "No",
+       "typeId": "1099448",
+       "odds": 1.13,
+       "displayName": "No",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.8228712460911146,
+        "refund": 0.0
+       }
+      }
+     ]
+    }
+   ],
+   "additionalInfo": {
+    "cashoutable": true
+   }
+  },
+  {
+   "marketType": {
+    "id": "1096814",
+    "name": "Score in both halves Away - FT",
+    "displayName": "Score In Both Halves | {away}",
+    "explainer": "Will the team score in both the First Half and the Second Half.",
+    "priority": 390,
+    "tabs": [
+     "all",
+     "goals"
+    ]
+   },
+   "row": [
+    {
+     "id": "397582669",
+     "prices": [
+      {
+       "id": "1525225522",
+       "name": "Yes",
+       "typeId": "1099453",
+       "odds": 2.24,
+       "displayName": "Yes",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.386523,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225523",
+       "name": "No",
+       "typeId": "1099454",
+       "odds": 1.48,
+       "displayName": "No",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.613477,
+        "refund": 0.0
+       }
+      }
+     ]
+    }
+   ],
+   "additionalInfo": {
+    "cashoutable": true
+   }
+  },
+  {
+   "marketType": {
+    "id": "1096808",
+    "name": "Both halves win Away - FT",
+    "displayName": "Win Both Halves | {away}",
+    "explainer": "Will the team score more goals than their opponent in both First Half and Second Half.",
+    "priority": 410,
+    "tabs": [
+     "all",
+     "goals"
+    ]
+   },
+   "row": [
+    {
+     "id": "397582715",
+     "prices": [
+      {
+       "id": "1525225747",
+       "name": "Yes",
+       "typeId": "1099449",
+       "odds": 3.92,
+       "displayName": "Yes",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.196472,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225748",
+       "name": "No",
+       "typeId": "1099450",
+       "odds": 1.16,
+       "displayName": "No",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.803528,
+        "refund": 0.0
+       }
+      }
+     ]
+    }
+   ],
+   "additionalInfo": {
+    "cashoutable": true
+   }
+  },
+  {
+   "marketType": {
+    "id": "3591790",
+    "name": "1X2 and Both Teams To Score - FT",
+    "displayName": "1X2 and Both Teams To Score | Full Time",
+    "explainer": "Pick the result for the stated period (1X2) and whether both teams will score in that timeframe (Yes/No).",
+    "priority": 510,
+    "tabs": [
+     "combos",
+     "all",
+     "popular"
+    ]
+   },
+   "row": [
+    {
+     "prices": [
+      {
+       "id": "1525225590",
+       "name": "1 - Yes",
+       "typeId": "3591791",
+       "odds": 6.64,
+       "displayName": "1",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.112501,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225591",
+       "name": "1 - No",
+       "typeId": "3591792",
+       "odds": 8.48,
+       "displayName": "1",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0876517,
+        "refund": 0.0
+       }
+      }
+     ]
+    },
+    {
+     "prices": [
+      {
+       "id": "1525225594",
+       "name": "2 - Yes",
+       "typeId": "3591793",
+       "odds": 2.72,
+       "displayName": "2",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.287006,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225595",
+       "name": "2 - No",
+       "typeId": "3591794",
+       "odds": 2.86,
+       "displayName": "2",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.274664,
+        "refund": 0.0
+       }
+      }
+     ]
+    },
+    {
+     "prices": [
+      {
+       "id": "1525225592",
+       "name": "X - Yes",
+       "typeId": "3591795",
+       "odds": 4.06,
+       "displayName": "X",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.186833,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225593",
+       "name": "X - No",
+       "typeId": "3591796",
+       "odds": 14.76,
+       "displayName": "X",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0513441,
+        "refund": 0.0
+       }
+      }
+     ]
+    }
+   ],
+   "displayNameColumns": [
+    "Yes",
+    "No"
+   ],
+   "additionalInfo": {
+    "cashoutable": true
+   }
+  },
+  {
+   "marketType": {
+    "id": "28000089",
+    "name": "Double Chance and Totals - FT",
+    "displayName": "Double Chance and Over/Under | Full Time",
+    "explainer": "Pick a Double Chance result and whether total goals are over or under the number shown. Both parts must be right for the bet to win. Based on normal time only.",
+    "priority": 513,
+    "tabs": [
+     "combos",
+     "all",
+     "popular"
+    ],
+    "handicapType": "NORMAL"
+   },
+   "row": [
+    {
+     "handicap": 6,
+     "prices": [
+      {
+       "id": "1525225681",
+       "name": "1X - Under",
+       "typeId": "28000090",
+       "odds": 8.2,
+       "handicap": "1.5",
+       "displayName": "Under {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.09900209305863701,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225682",
+       "name": "12 - Under",
+       "typeId": "28000091",
+       "odds": 6.25,
+       "handicap": "1.5",
+       "displayName": "Under {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.1332980363336659,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225683",
+       "name": "X2 - Under",
+       "typeId": "28000092",
+       "odds": 6.05,
+       "handicap": "1.5",
+       "displayName": "Under {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.13698848147099713,
+        "refund": 0.0
+       }
+      }
+     ],
+     "specifier": {
+      "total": "1.5"
+     }
+    },
+    {
+     "handicap": 6,
+     "prices": [
+      {
+       "id": "1525225684",
+       "name": "1X - Over",
+       "typeId": "28000093",
+       "odds": 2.54,
+       "handicap": "1.5",
+       "displayName": "Over {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.3393709524361869,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225685",
+       "name": "12 - Over",
+       "typeId": "28000094",
+       "odds": 1.45,
+       "handicap": "1.5",
+       "displayName": "Over {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.6283665576054245,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225686",
+       "name": "X2 - Over",
+       "typeId": "28000095",
+       "odds": 1.39,
+       "handicap": "1.5",
+       "displayName": "Over {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.6629738490091237,
+        "refund": 0.0
+       }
+      }
+     ],
+     "specifier": {
+      "total": "1.5"
+     }
+    },
+    {
+     "handicap": 10,
+     "prices": [
+      {
+       "id": "1525225659",
+       "name": "1X - Under",
+       "typeId": "28000090",
+       "odds": 3.73,
+       "handicap": "2.5",
+       "displayName": "Under {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.234184,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225660",
+       "name": "12 - Under",
+       "typeId": "28000091",
+       "odds": 3.53,
+       "handicap": "2.5",
+       "displayName": "Under {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.245778,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225661",
+       "name": "X2 - Under",
+       "typeId": "28000092",
+       "odds": 2.65,
+       "handicap": "2.5",
+       "displayName": "Under {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.331475,
+        "refund": 0.0
+       }
+      }
+     ],
+     "specifier": {
+      "total": "2.5"
+     }
+    },
+    {
+     "handicap": 10,
+     "prices": [
+      {
+       "id": "1525225662",
+       "name": "1X - Over",
+       "typeId": "28000093",
+       "odds": 4.22,
+       "handicap": "2.5",
+       "displayName": "Over {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.204146,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225663",
+       "name": "12 - Over",
+       "typeId": "28000094",
+       "odds": 1.77,
+       "handicap": "2.5",
+       "displayName": "Over {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.516045,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225664",
+       "name": "X2 - Over",
+       "typeId": "28000095",
+       "odds": 1.93,
+       "handicap": "2.5",
+       "displayName": "Over {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.468373,
+        "refund": 0.0
+       }
+      }
+     ],
+     "specifier": {
+      "total": "2.5"
+     }
+    },
+    {
+     "handicap": 14,
+     "prices": [
+      {
+       "id": "1525225436",
+       "name": "1X - Under",
+       "typeId": "28000090",
+       "odds": 2.94,
+       "handicap": "3.5",
+       "displayName": "Under {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.297428,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225437",
+       "name": "12 - Under",
+       "typeId": "28000091",
+       "odds": 1.95,
+       "handicap": "3.5",
+       "displayName": "Under {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.462341,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225438",
+       "name": "X2 - Under",
+       "typeId": "28000092",
+       "odds": 1.87,
+       "handicap": "3.5",
+       "displayName": "Under {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.484794,
+        "refund": 0.0
+       }
+      }
+     ],
+     "specifier": {
+      "total": "3.5"
+     }
+    },
+    {
+     "handicap": 14,
+     "prices": [
+      {
+       "id": "1525225439",
+       "name": "1X - Over",
+       "typeId": "28000093",
+       "odds": 6.08,
+       "handicap": "3.5",
+       "displayName": "Over {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.140902,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225440",
+       "name": "12 - Over",
+       "typeId": "28000094",
+       "odds": 2.94,
+       "handicap": "3.5",
+       "displayName": "Over {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.299482,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225441",
+       "name": "X2 - Over",
+       "typeId": "28000095",
+       "odds": 2.79,
+       "handicap": "3.5",
+       "displayName": "Over {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.315054,
+        "refund": 0.0
+       }
+      }
+     ],
+     "specifier": {
+      "total": "3.5"
+     }
+    },
+    {
+     "handicap": 18,
+     "prices": [
+      {
+       "id": "1525225665",
+       "name": "1X - Under",
+       "typeId": "28000090",
+       "odds": 2.29,
+       "handicap": "4.5",
+       "displayName": "Under {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.3808293916011024,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225666",
+       "name": "12 - Under",
+       "typeId": "28000091",
+       "odds": 1.57,
+       "handicap": "4.5",
+       "displayName": "Under {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.5780438846990696,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225667",
+       "name": "X2 - Under",
+       "typeId": "28000092",
+       "odds": 1.43,
+       "handicap": "4.5",
+       "displayName": "Under {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.6383545991241745,
+        "refund": 0.0
+       }
+      }
+     ],
+     "specifier": {
+      "total": "4.5"
+     }
+    },
+    {
+     "handicap": 18,
+     "prices": [
+      {
+       "id": "1525225668",
+       "name": "1X - Over",
+       "typeId": "28000093",
+       "odds": 14.61,
+       "handicap": "4.5",
+       "displayName": "Over {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.05749222075572072,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225669",
+       "name": "12 - Over",
+       "typeId": "28000094",
+       "odds": 4.58,
+       "handicap": "4.5",
+       "displayName": "Over {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.18394645564850515,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225670",
+       "name": "X2 - Over",
+       "typeId": "28000095",
+       "odds": 5.26,
+       "handicap": "4.5",
+       "displayName": "Over {formattedHandicap}",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.16133485319871352,
+        "refund": 0.0
+       }
+      }
+     ],
+     "specifier": {
+      "total": "4.5"
+     }
+    }
+   ],
+   "displayNameColumns": [
+    "1X",
+    "12",
+    "X2"
+   ],
+   "additionalInfo": {
+    "cashoutable": true
+   }
+  },
+  {
+   "marketType": {
+    "id": "5051",
+    "name": "Win to Nil Home Team - FT",
+    "displayName": "Win To Nil | {home} | Full Time",
+    "explainer": "Will a team win during the stated period without conceding any goals? Pick either Yes or No.",
+    "priority": 670,
+    "tabs": [
+     "all",
+     "goals",
+     "specials"
+    ]
+   },
+   "row": [
+    {
+     "id": "397582707",
+     "prices": [
+      {
+       "id": "1525225706",
+       "name": "Yes",
+       "typeId": "5052",
+       "odds": 6.51,
+       "displayName": "Yes",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.08782058303506654,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225707",
+       "name": "No",
+       "typeId": "5053",
+       "odds": 1.03,
+       "displayName": "No",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.9121845535671604,
+        "refund": 0.0
+       }
+      }
+     ]
+    }
+   ],
+   "additionalInfo": {
+    "cashoutable": true
+   }
+  },
+  {
+   "marketType": {
+    "id": "5042",
+    "name": "Win to Nil Away Team - FT",
+    "displayName": "Win To Nil | {away} | Full Time",
+    "explainer": "Will a team win during the stated period without conceding any goals? Pick either Yes or No.",
+    "priority": 671,
+    "tabs": [
+     "all",
+     "goals",
+     "specials"
+    ]
+   },
+   "row": [
+    {
+     "id": "397582690",
+     "prices": [
+      {
+       "id": "1525225647",
+       "name": "Yes",
+       "typeId": "5043",
+       "odds": 3.0,
+       "displayName": "Yes",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.274664,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225648",
+       "name": "No",
+       "typeId": "5044",
+       "odds": 1.27,
+       "displayName": "No",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.725336,
+        "refund": 0.0
+       }
+      }
+     ]
+    }
+   ],
+   "additionalInfo": {
+    "cashoutable": true
+   }
+  },
+  {
+   "marketType": {
+    "id": "4942",
+    "name": "Total Goals Exact - FT - Home Team",
+    "displayName": "Total Goals Exact | Full Time | {home}",
+    "explainer": "Pick exactly how many goals will be scored by the specified team during the stated period.",
+    "priority": 690,
+    "tabs": [
+     "all",
+     "goals",
+     "specials"
+    ]
+   },
+   "row": [
+    {
+     "prices": [
+      {
+       "id": "1525225657",
+       "name": "2",
+       "typeId": "1080454",
+       "odds": 3.59,
+       "displayName": "2",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.204982,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225658",
+       "name": "3+",
+       "typeId": "1080455",
+       "odds": 7.01,
+       "displayName": "3+",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.101768,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225655",
+       "name": "0",
+       "typeId": "4943",
+       "odds": 2.31,
+       "displayName": "0",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.326009,
+        "refund": 0.0
+       }
+      }
+     ]
+    },
+    {
+     "prices": [
+      {
+       "id": "1525225656",
+       "name": "1",
+       "typeId": "4944",
+       "odds": 2.06,
+       "displayName": "1",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.367241,
+        "refund": 0.0
+       }
+      }
+     ]
+    }
+   ],
+   "additionalInfo": {
+    "cashoutable": true
+   }
+  },
+  {
+   "marketType": {
+    "id": "4938",
+    "name": "Total Goals Exact - FT - Away Team",
+    "displayName": "Total Goals Exact | Full Time  | {away}",
+    "explainer": "Pick exactly how many goals will be scored by the specified team during the stated period.",
+    "priority": 691,
+    "tabs": [
+     "all",
+     "goals",
+     "specials"
+    ]
+   },
+   "row": [
+    {
+     "prices": [
+      {
+       "id": "1525225653",
+       "name": "2",
+       "typeId": "1080456",
+       "odds": 2.78,
+       "displayName": "2",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.26955,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225654",
+       "name": "3+",
+       "typeId": "1080457",
+       "odds": 2.35,
+       "displayName": "3+",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.316974,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225651",
+       "name": "0",
+       "typeId": "4939",
+       "odds": 5.13,
+       "displayName": "0",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.138996,
+        "refund": 0.0
+       }
+      }
+     ]
+    },
+    {
+     "prices": [
+      {
+       "id": "1525225652",
+       "name": "1",
+       "typeId": "4940",
+       "odds": 2.69,
+       "displayName": "1",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.274481,
+        "refund": 0.0
+       }
+      }
+     ]
+    }
+   ],
+   "additionalInfo": {
+    "cashoutable": true
+   }
+  },
+  {
+   "marketType": {
+    "id": "4736",
+    "name": "Half More Goals - Home Team",
+    "displayName": "More Goals | {home}",
+    "explainer": "Half-related markets include picking which half will have more goals, or whether a team will score in/win both halves.",
+    "priority": 900,
+    "tabs": [
+     "all",
+     "goals"
+    ]
+   },
+   "row": [
+    {
+     "id": "397582718",
+     "prices": [
+      {
+       "id": "1525225778",
+       "name": "First Half",
+       "typeId": "4737",
+       "odds": 3.63,
+       "displayName": "First Half",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.240339,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225779",
+       "name": "Second Half",
+       "typeId": "4738",
+       "odds": 2.68,
+       "displayName": "Second Half",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.326909,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225780",
+       "name": "Equal",
+       "typeId": "4739",
+       "odds": 2.08,
+       "displayName": "Equal",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.432752,
+        "refund": 0.0
+       }
+      }
+     ]
+    }
+   ],
+   "additionalInfo": {
+    "cashoutable": true
+   }
+  },
+  {
+   "marketType": {
+    "id": "4732",
+    "name": "Half More Goals - Away Team",
+    "displayName": "More Goals | {away}",
+    "explainer": "Half-related markets include picking which half will have more goals, or whether a team will score in/win both halves.",
+    "priority": 901,
+    "tabs": [
+     "all",
+     "halves",
+     "goals"
+    ]
+   },
+   "row": [
+    {
+     "id": "397582665",
+     "prices": [
+      {
+       "id": "1525225511",
+       "name": "First Half",
+       "typeId": "4733",
+       "odds": 2.92,
+       "displayName": "First Half",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.301415,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225512",
+       "name": "Second Half",
+       "typeId": "4734",
+       "odds": 2.28,
+       "displayName": "Second Half",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.391534,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225513",
+       "name": "Equal",
+       "typeId": "4735",
+       "odds": 2.87,
+       "displayName": "Equal",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.307051,
+        "refund": 0.0
+       }
+      }
+     ]
+    }
+   ],
+   "additionalInfo": {
+    "cashoutable": true
+   }
+  },
+  {
+   "marketType": {
+    "id": "28000209",
+    "name": "Winning Margin - FT",
+    "displayName": "Winning Margin",
+    "explainer": "Predict how many goals the winning team will win by.",
+    "priority": 915,
+    "tabs": [
+     "all",
+     "specials"
+    ]
+   },
+   "row": [
+    {
+     "prices": [
+      {
+       "id": "1525225581",
+       "name": "Home by 1",
+       "typeId": "28000210",
+       "odds": 5.28,
+       "displayName": "Home by 1",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.125073,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225580",
+       "name": "Home by 2",
+       "typeId": "28000211",
+       "odds": 12.0,
+       "displayName": "Home by 2",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0529114,
+        "refund": 0.0
+       }
+      }
+     ]
+    },
+    {
+     "prices": [
+      {
+       "id": "1525225579",
+       "name": "Home by 3+",
+       "typeId": "28000212",
+       "odds": 28.0,
+       "displayName": "Home by 3+",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0221681,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225582",
+       "name": "Away by 1",
+       "typeId": "28000213",
+       "odds": 3.0,
+       "displayName": "Away by 1",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.224783,
+        "refund": 0.0
+       }
+      }
+     ]
+    },
+    {
+     "prices": [
+      {
+       "id": "1525225583",
+       "name": "Away by 2",
+       "typeId": "28000214",
+       "odds": 3.92,
+       "displayName": "Away by 2",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.170903,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225584",
+       "name": "Away by 3+",
+       "typeId": "28000215",
+       "odds": 4.0,
+       "displayName": "Away by 3+",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.165984,
+        "refund": 0.0
+       }
+      }
+     ]
+    },
+    {
+     "prices": [
+      {
+       "id": "1525225578",
+       "name": "Draw",
+       "typeId": "28000216",
+       "odds": 2.84,
+       "displayName": "Draw",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.238177,
+        "refund": 0.0
+       }
+      }
+     ]
+    }
+   ],
+   "additionalInfo": {
+    "cashoutable": true
+   }
+  },
+  {
+   "marketType": {
+    "id": "28000228",
+    "name": "HT/FT Correct Score - FT",
+    "displayName": "Half Time/Full Time | Correct Score",
+    "explainer": "Predict correct score of the first half and final result at the end of regular time.",
+    "priority": 925,
+    "tabs": [
+     "all",
+     "specials"
+    ]
+   },
+   "row": [
+    {
+     "prices": [
+      {
+       "id": "1525225524",
+       "name": "0-0/0-0",
+       "typeId": "28000229",
+       "odds": 11.54,
+       "displayName": "0-0/0-0",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0513441,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225526",
+       "name": "0-0/0-1",
+       "typeId": "28000230",
+       "odds": 12.5,
+       "displayName": "0-0/0-1",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0466477,
+        "refund": 0.0
+       }
+      }
+     ]
+    },
+    {
+     "prices": [
+      {
+       "id": "1525225529",
+       "name": "0-0/0-2",
+       "typeId": "28000231",
+       "odds": 21.15,
+       "displayName": "0-0/0-2",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.026573,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225533",
+       "name": "0-0/0-3",
+       "typeId": "28000232",
+       "odds": 57.68,
+       "displayName": "0-0/0-3",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0100599,
+        "refund": 0.0
+       }
+      }
+     ]
+    },
+    {
+     "prices": [
+      {
+       "id": "1525225525",
+       "name": "0-0/1-0",
+       "typeId": "28000233",
+       "odds": 20.19,
+       "displayName": "0-0/1-0",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0279719,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225528",
+       "name": "0-0/1-1",
+       "typeId": "28000234",
+       "odds": 17.3,
+       "displayName": "0-0/1-1",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.032196,
+        "refund": 0.0
+       }
+      }
+     ]
+    },
+    {
+     "prices": [
+      {
+       "id": "1525225532",
+       "name": "0-0/1-2",
+       "typeId": "28000235",
+       "odds": 38.45,
+       "displayName": "0-0/1-2",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0151397,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225527",
+       "name": "0-0/2-0",
+       "typeId": "28000236",
+       "odds": 57.68,
+       "displayName": "0-0/2-0",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.00916776,
+        "refund": 0.0
+       }
+      }
+     ]
+    },
+    {
+     "prices": [
+      {
+       "id": "1525225531",
+       "name": "0-0/2-1",
+       "typeId": "28000237",
+       "odds": 67.29,
+       "displayName": "0-0/2-1",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.00885664,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225530",
+       "name": "0-0/3-0",
+       "typeId": "28000238",
+       "odds": 97.09,
+       "displayName": "0-0/3-0",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.00196778,
+        "refund": 0.0
+       }
+      }
+     ]
+    },
+    {
+     "prices": [
+      {
+       "id": "1525225534",
+       "name": "0-0/4+",
+       "typeId": "28000239",
+       "odds": 24.99,
+       "displayName": "0-0/4+",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0221965,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225542",
+       "name": "0-1/0-1",
+       "typeId": "28000240",
+       "odds": 14.42,
+       "displayName": "0-1/0-1",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0389893,
+        "refund": 0.0
+       }
+      }
+     ]
+    },
+    {
+     "prices": [
+      {
+       "id": "1525225544",
+       "name": "0-1/0-2",
+       "typeId": "28000241",
+       "odds": 13.46,
+       "displayName": "0-1/0-2",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.042448,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225547",
+       "name": "0-1/0-3",
+       "typeId": "28000242",
+       "odds": 24.03,
+       "displayName": "0-1/0-3",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0233232,
+        "refund": 0.0
+       }
+      }
+     ]
+    },
+    {
+     "prices": [
+      {
+       "id": "1525225543",
+       "name": "0-1/1-1",
+       "typeId": "28000243",
+       "odds": 19.23,
+       "displayName": "0-1/1-1",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0291347,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225546",
+       "name": "0-1/1-2",
+       "typeId": "28000244",
+       "odds": 21.15,
+       "displayName": "0-1/1-2",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0260867,
+        "refund": 0.0
+       }
+      }
+     ]
+    },
+    {
+     "prices": [
+      {
+       "id": "1525225545",
+       "name": "0-1/2-1",
+       "typeId": "28000245",
+       "odds": 57.68,
+       "displayName": "0-1/2-1",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.00891826,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225548",
+       "name": "0-1/4+",
+       "typeId": "28000246",
+       "odds": 10.57,
+       "displayName": "0-1/4+",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0533325,
+        "refund": 0.0
+       }
+      }
+     ]
+    },
+    {
+     "prices": [
+      {
+       "id": "1525225557",
+       "name": "0-2/0-2",
+       "typeId": "28000247",
+       "odds": 33.65,
+       "displayName": "0-2/0-2",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0168763,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225559",
+       "name": "0-2/0-3",
+       "typeId": "28000248",
+       "odds": 28.84,
+       "displayName": "0-2/0-3",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0190892,
+        "refund": 0.0
+       }
+      }
+     ]
+    },
+    {
+     "prices": [
+      {
+       "id": "1525225558",
+       "name": "0-2/1-2",
+       "typeId": "28000249",
+       "odds": 48.06,
+       "displayName": "0-2/1-2",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0111186,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225560",
+       "name": "0-2/4+",
+       "typeId": "28000250",
+       "odds": 10.57,
+       "displayName": "0-2/4+",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0533278,
+        "refund": 0.0
+       }
+      }
+     ]
+    },
+    {
+     "prices": [
+      {
+       "id": "1525225567",
+       "name": "0-3/0-3",
+       "typeId": "28000251",
+       "odds": 97.09,
+       "displayName": "0-3/0-3",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.00496667,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225568",
+       "name": "0-3/4+",
+       "typeId": "28000252",
+       "odds": 22.11,
+       "displayName": "0-3/4+",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0252796,
+        "refund": 0.0
+       }
+      }
+     ]
+    },
+    {
+     "prices": [
+      {
+       "id": "1525225535",
+       "name": "1-0/1-0",
+       "typeId": "28000253",
+       "odds": 28.84,
+       "displayName": "1-0/1-0",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0196779,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225537",
+       "name": "1-0/1-1",
+       "typeId": "28000254",
+       "odds": 22.11,
+       "displayName": "1-0/1-1",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0259315,
+        "refund": 0.0
+       }
+      }
+     ]
+    },
+    {
+     "prices": [
+      {
+       "id": "1525225540",
+       "name": "1-0/1-2",
+       "typeId": "28000255",
+       "odds": 38.45,
+       "displayName": "1-0/1-2",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0139169,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225536",
+       "name": "1-0/2-0",
+       "typeId": "28000256",
+       "odds": 43.26,
+       "displayName": "1-0/2-0",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0126148,
+        "refund": 0.0
+       }
+      }
+     ]
+    },
+    {
+     "prices": [
+      {
+       "id": "1525225539",
+       "name": "1-0/2-1",
+       "typeId": "28000257",
+       "odds": 43.26,
+       "displayName": "1-0/2-1",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0135981,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225538",
+       "name": "1-0/3-0",
+       "typeId": "28000258",
+       "odds": 97.09,
+       "displayName": "1-0/3-0",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.00403159,
+        "refund": 0.0
+       }
+      }
+     ]
+    },
+    {
+     "prices": [
+      {
+       "id": "1525225541",
+       "name": "1-0/4+",
+       "typeId": "28000259",
+       "odds": 18.26,
+       "displayName": "1-0/4+",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0314445,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225553",
+       "name": "1-1/1-1",
+       "typeId": "28000260",
+       "odds": 25.95,
+       "displayName": "1-1/1-1",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0213342,
+        "refund": 0.0
+       }
+      }
+     ]
+    },
+    {
+     "prices": [
+      {
+       "id": "1525225555",
+       "name": "1-1/1-2",
+       "typeId": "28000261",
+       "odds": 26.92,
+       "displayName": "1-1/1-2",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.020514,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225554",
+       "name": "1-1/2-1",
+       "typeId": "28000262",
+       "odds": 48.06,
+       "displayName": "1-1/2-1",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0120005,
+        "refund": 0.0
+       }
+      }
+     ]
+    },
+    {
+     "prices": [
+      {
+       "id": "1525225556",
+       "name": "1-1/4+",
+       "typeId": "28000263",
+       "odds": 10.57,
+       "displayName": "1-1/4+",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0556895,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225565",
+       "name": "1-2/1-2",
+       "typeId": "28000264",
+       "odds": 57.68,
+       "displayName": "1-2/1-2",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.00910397,
+        "refund": 0.0
+       }
+      }
+     ]
+    },
+    {
+     "prices": [
+      {
+       "id": "1525225566",
+       "name": "1-2/4+",
+       "typeId": "28000265",
+       "odds": 14.42,
+       "displayName": "1-2/4+",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.040389,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225549",
+       "name": "2-0/2-0",
+       "typeId": "28000266",
+       "odds": 97.09,
+       "displayName": "2-0/2-0",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.00481111,
+        "refund": 0.0
+       }
+      }
+     ]
+    },
+    {
+     "prices": [
+      {
+       "id": "1525225551",
+       "name": "2-0/2-1",
+       "typeId": "28000267",
+       "odds": 97.09,
+       "displayName": "2-0/2-1",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.00545379,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225550",
+       "name": "2-0/3-0",
+       "typeId": "28000268",
+       "odds": 97.09,
+       "displayName": "2-0/3-0",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.00317461,
+        "refund": 0.0
+       }
+      }
+     ]
+    },
+    {
+     "prices": [
+      {
+       "id": "1525225552",
+       "name": "2-0/4+",
+       "typeId": "28000269",
+       "odds": 33.65,
+       "displayName": "2-0/4+",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.016434,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225563",
+       "name": "2-1/2-1",
+       "typeId": "28000270",
+       "odds": 97.09,
+       "displayName": "2-1/2-1",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.00452173,
+        "refund": 0.0
+       }
+      }
+     ]
+    },
+    {
+     "prices": [
+      {
+       "id": "1525225564",
+       "name": "2-1/4+",
+       "typeId": "28000271",
+       "odds": 24.99,
+       "displayName": "2-1/4+",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0224739,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225561",
+       "name": "3-0/3-0",
+       "typeId": "28000272",
+       "odds": 97.09,
+       "displayName": "3-0/3-0",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.000720785,
+        "refund": 0.0
+       }
+      }
+     ]
+    },
+    {
+     "prices": [
+      {
+       "id": "1525225562",
+       "name": "3-0/4+",
+       "typeId": "28000273",
+       "odds": 97.09,
+       "displayName": "3-0/4+",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.00418743,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225569",
+       "name": "4+/4+",
+       "typeId": "28000274",
+       "odds": 10.57,
+       "displayName": "4+/4+",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0529638,
+        "refund": 0.0
+       }
+      }
+     ]
+    }
+   ],
+   "additionalInfo": {
+    "cashoutable": true
+   }
+  },
+  {
+   "marketType": {
+    "id": "28000047",
+    "name": "Multigoals - FT",
+    "displayName": "Multigoals | Full Time",
+    "explainer": "Predict range of goals will be scored in regular time.",
+    "priority": 999,
+    "tabs": [
+     "all",
+     "goals",
+     "specials"
+    ]
+   },
+   "row": [
+    {
+     "prices": [
+      {
+       "id": "1525225716",
+       "name": "1-2",
+       "typeId": "28000048",
+       "odds": 1.9,
+       "displayName": "1-2",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.3543146274083031,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225717",
+       "name": "1-3",
+       "typeId": "28000049",
+       "odds": 1.28,
+       "displayName": "1-3",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.5708613765410386,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225718",
+       "name": "1-4",
+       "typeId": "28000050",
+       "odds": 1.05,
+       "displayName": "1-4",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.7468825376383613,
+        "refund": 0.0
+       }
+      }
+     ]
+    },
+    {
+     "prices": [
+      {
+       "id": "1525225719",
+       "name": "1-5",
+       "typeId": "28000051",
+       "odds": 0.0,
+       "suspended": true,
+       "displayName": "1-5",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.8528564925705181,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225720",
+       "name": "1-6",
+       "typeId": "28000052",
+       "odds": 0.0,
+       "suspended": true,
+       "displayName": "1-6",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.9089841958798698,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225721",
+       "name": "2-3",
+       "typeId": "28000053",
+       "odds": 1.59,
+       "displayName": "2-3",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.4376877392176657,
+        "refund": 0.0
+       }
+      }
+     ]
+    },
+    {
+     "prices": [
+      {
+       "id": "1525225722",
+       "name": "2-4",
+       "typeId": "28000054",
+       "odds": 1.21,
+       "displayName": "2-4",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.6140609275524821,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225723",
+       "name": "2-5",
+       "typeId": "28000055",
+       "odds": 1.08,
+       "displayName": "2-5",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.7195624639071323,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225724",
+       "name": "2-6",
+       "typeId": "28000056",
+       "odds": 1.02,
+       "displayName": "2-6",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.7763590422362127,
+        "refund": 0.0
+       }
+      }
+     ]
+    },
+    {
+     "prices": [
+      {
+       "id": "1525225725",
+       "name": "3-4",
+       "typeId": "28000057",
+       "odds": 1.74,
+       "displayName": "3-4",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.3929165593657633,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225726",
+       "name": "3-5",
+       "typeId": "28000058",
+       "odds": 1.43,
+       "displayName": "3-5",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.49852617559035717,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225727",
+       "name": "3-6",
+       "typeId": "28000059",
+       "odds": 1.31,
+       "displayName": "3-6",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.555236878843941,
+        "refund": 0.0
+       }
+      }
+     ]
+    },
+    {
+     "prices": [
+      {
+       "id": "1525225728",
+       "name": "4-5",
+       "typeId": "28000060",
+       "odds": 2.31,
+       "displayName": "4-5",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.2818567575932121,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225729",
+       "name": "4-6",
+       "typeId": "28000061",
+       "odds": 1.97,
+       "displayName": "4-6",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.3386056011061007,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225730",
+       "name": "5-6",
+       "typeId": "28000062",
+       "odds": 3.76,
+       "displayName": "5-6",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.16232444092965229,
+        "refund": 0.0
+       }
+      }
+     ]
+    },
+    {
+     "prices": [
+      {
+       "id": "1525225731",
+       "name": "7+",
+       "typeId": "28000063",
+       "odds": 14.53,
+       "displayName": "7+",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0390939695123782,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225715",
+       "name": "No goal",
+       "typeId": "28000064",
+       "odds": 11.11,
+       "displayName": "No goal",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.05134894655207992,
+        "refund": 0.0
+       }
+      }
+     ]
+    }
+   ],
+   "additionalInfo": {
+    "cashoutable": true
+   }
+  },
+  {
+   "marketType": {
+    "id": "28000077",
+    "name": "Multigoals - FT - Home Team",
+    "displayName": "Multigoals | {home} | Full Time",
+    "explainer": "Predict range of goals will be scored by home team in regular time.",
+    "priority": 1002,
+    "tabs": [
+     "all",
+     "goals",
+     "specials"
+    ]
+   },
+   "row": [
+    {
+     "prices": [
+      {
+       "id": "1525225804",
+       "name": "1-2",
+       "typeId": "28000078",
+       "odds": 1.27,
+       "displayName": "1-2",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.572397211628069,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225805",
+       "name": "1-3",
+       "typeId": "28000079",
+       "odds": 1.15,
+       "displayName": "1-3",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.6473323170721734,
+        "refund": 0.0
+       }
+      }
+     ]
+    },
+    {
+     "prices": [
+      {
+       "id": "1525225806",
+       "name": "2-3",
+       "typeId": "28000080",
+       "odds": 2.33,
+       "displayName": "2-3",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.280334177695433,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225807",
+       "name": "4+",
+       "typeId": "28000081",
+       "odds": 22.5,
+       "displayName": "4+",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.0263981673895624,
+        "refund": 0.0
+       }
+      }
+     ]
+    },
+    {
+     "prices": [
+      {
+       "id": "1525225803",
+       "name": "No goal",
+       "typeId": "28000082",
+       "odds": 2.03,
+       "displayName": "No goal",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.3259697086786383,
+        "refund": 0.0
+       }
+      }
+     ]
+    }
+   ],
+   "additionalInfo": {
+    "cashoutable": true
+   }
+  },
+  {
+   "marketType": {
+    "id": "28000083",
+    "name": "Multigoals - FT - Away Team",
+    "displayName": "Multigoals | {away} | Full Time",
+    "explainer": "Predict range of goals will be scored by away team in regular time.",
+    "priority": 1003,
+    "tabs": [
+     "all",
+     "goals",
+     "specials"
+    ]
+   },
+   "row": [
+    {
+     "prices": [
+      {
+       "id": "1525225574",
+       "name": "1-2",
+       "typeId": "28000084",
+       "odds": 1.31,
+       "displayName": "1-2",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.5439342351124317,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225575",
+       "name": "1-3",
+       "typeId": "28000085",
+       "odds": 1.05,
+       "displayName": "1-3",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.7213267066108032,
+        "refund": 0.0
+       }
+      }
+     ]
+    },
+    {
+     "prices": [
+      {
+       "id": "1525225576",
+       "name": "2-3",
+       "typeId": "28000086",
+       "odds": 1.54,
+       "displayName": "2-3",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.4466699462659042,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1525225577",
+       "name": "4+",
+       "typeId": "28000087",
+       "odds": 4.33,
+       "displayName": "4+",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.13979455261322007,
+        "refund": 0.0
+       }
+      }
+     ]
+    },
+    {
+     "prices": [
+      {
+       "id": "1525225573",
+       "name": "No goal",
+       "typeId": "28000088",
+       "odds": 4.33,
+       "displayName": "No goal",
+       "additionalInfo": {
+        "anyUp": "NO_UP"
+       },
+       "probability": {
+        "win": 0.13900573748911216,
+        "refund": 0.0
+       }
+      }
+     ]
+    }
+   ],
+   "additionalInfo": {
+    "cashoutable": true
+   }
+  }
+ ],
+ "totalMarketCount": "87",
+ "category": {
+  "id": "2",
+  "name": "Football"
+ },
+ "region": {
+  "id": "248",
+  "name": "Australia"
+ },
+ "competition": {
+  "id": "12647",
+  "name": "NSW NPL 1"
+ },
+ "additionalInfo": {
+  "inplayBooked": true,
+  "inplayBookedActual": true
+ },
+ "version": "64",
+ "marketCounters": {
+  "totalMarketGroupCount": "59",
+  "marketGroupCountByTab": {
+   "halves": "18",
+   "all": "59",
+   "specials": "16",
+   "combos": "4",
+   "popular": "16",
+   "goals": "29"
+  }
+ }
+}

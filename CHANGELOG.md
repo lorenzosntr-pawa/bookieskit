@@ -54,7 +54,25 @@ All notable changes to this project are documented in this file. The format foll
   - Booking coverage now equals corner coverage: all of BetPawa, SportyBet, Bet9ja, Betway and MSport. Remaining gaps: **SportPesa** (cookie-gated probe; owner-flagged not offered → `—`) and **Betika** (no-cookie market-list fetch is truncated, tracked by #31).
 - Built-in canonical market count: 17 → 21 (14 soccer + 3 basketball + 4 tennis).
 
+- **`double_chance_1up_ft`** — Double Chance 1Up (Full Time), the 1Up
+  early-payout rule applied to the `1X` / `X2` / `12` selections rather than a
+  straight 1X2. Mapped for **BetPawa** (marketType `80000`, outcomes
+  `1X`/`X2`/`12`) and **SportyBet** (id `60110`, outcomes `Home or Draw` /
+  `Home or Away` / `Draw or Away`); both reuse their plain Double Chance
+  outcome vocabulary. MSport, Betway and Betika were probed live in-region and
+  expose a 1X2 1Up but no double-chance variant; Bet9ja's full captures show
+  the same; SportPesa was not probed (Akamai cookie). New in-region capture
+  committed as `tests/fixtures/event_info/betpawa/double_chance_1up_ft.json`.
+  Built-in canonical market count: 21 → 22 (15 soccer + 3 basketball +
+  4 tennis).
+
 ### Fixed
+- Documentation caught up with the registry. `README.md` and `docs/markets.md`
+  still advertised **17 markets (10 soccer)** — the corner and booking markets
+  added by #19/#22/#28 were never documented — and `docs/markets.md` listed
+  BetPawa as *not* offering `1x2_1up_ft` when it has been mapped (`28000810`)
+  all along. Both now match the registry, and `docs/coverage.md` is
+  regenerated.
 - `bookieskit.bookmakers` now re-exports **all seven** clients. `Betika` and
   `SportPesa` were missing from that package's `__init__`, so
   `from bookieskit.bookmakers import Betika` raised `ImportError` even though

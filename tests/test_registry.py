@@ -10,10 +10,10 @@ def test_registry_loads_builtins_by_default():
     #                    home_over_under_ft, away_over_under_ft,
     #                    2way_handicap_ft, 1x2_corners_ft,
     #                    over_under_corners_ft, 1x2_bookings_ft,
-    #                    over_under_bookings_ft
+    #                    over_under_bookings_ft, double_chance_1up_ft
     # 3 basketball markets: moneyline, O/U, handicap (basketball_ft suffix)
     # 4 tennis markets: moneyline, O/U games, O/U sets, handicap games
-    assert len(markets) == 21
+    assert len(markets) == 22
 
 
 def test_registry_no_builtins():
@@ -83,8 +83,8 @@ def test_registry_add_custom_mapping():
             ),
         },
     )
-    # 21 builtins (14 soccer + 3 basketball + 4 tennis) + draw_no_bet
-    assert len(registry.list_markets()) == 22
+    # 22 builtins (15 soccer + 3 basketball + 4 tennis) + draw_no_bet
+    assert len(registry.list_markets()) == 23
     mapping = registry.get_by_canonical("draw_no_bet_ft")
     assert mapping is not None
     assert mapping.betpawa_id == "4703"

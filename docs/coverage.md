@@ -4,11 +4,14 @@
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | 1x2_1up_ft | ✓ | ✓ | ✓ | ✓ | — | — | — |
 | 1x2_2up_ft | — | ✓ | ✓ | ✓ | — | — | — |
+| 1x2_bookings_ft | ✓ | ✓ | ✓ | ✓ | ✓ | — | — |
+| 1x2_corners_ft | ✓ | ✓ | ✓ | ✓ | ✓ | — | — |
 | 1x2_ft | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | 2way_handicap_basketball_ft | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | — |
 | 2way_handicap_ft | ✓ | ✓ | ✓ | ✓ | ✓ | — | — |
 | away_over_under_ft | ✓ | ✓ | ✓ | ✓ | ✓ | — | ✓ |
 | btts_ft | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| double_chance_1up_ft | ✓ | ✓ | — | — | — | — | — |
 | double_chance_ft | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | handicap_games_tennis_match | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | home_over_under_ft | ✓ | ✓ | ✓ | ✓ | ✓ | — | ✓ |
@@ -16,6 +19,8 @@
 | moneyline_tennis_match | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | next_goal_ft | ✓ | ✓ | ✓ | ✓ | ✓ | — | ✓ |
 | over_under_basketball_ft | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| over_under_bookings_ft | ✓ | ✓ | ✓ | ✓ | ✓ | — | — |
+| over_under_corners_ft | ✓ | ✓ | ✓ | ✓ | ✓ | — | — |
 | over_under_ft | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | over_under_games_tennis_match | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | over_under_sets_tennis_match | ✓ | ✓ | ✓ | ✓ | — | — | — |

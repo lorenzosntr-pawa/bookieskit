@@ -76,14 +76,14 @@ Prints a per-event coverage table showing which canonical markets each bookmaker
 ## How the lib is structured
 
 - **Clients** — `bookieskit/bookmakers/`. One subclass of `BaseBookmaker` per platform; methods like `get_sports`, `get_events`, `get_event_detail` return raw JSON. The base class provides retry, rate-limiting, async context management, plus the convenience methods `get_markets()` and `get_sportradar_id()`.
-- **Markets** — `bookieskit/markets/`. A `MarketRegistry` holds `MarketMapping` entries indexed by canonical id AND by (sport, platform, platform_id) for cross-sport collision handling. **17 markets ship as builtins** across 3 sports (10 soccer + 3 basketball + 4 tennis). `parse_markets(response, platform, sport=...)` returns `NormalizedMarket` instances. See [docs/markets.md](docs/markets.md).
+- **Markets** — `bookieskit/markets/`. A `MarketRegistry` holds `MarketMapping` entries indexed by canonical id AND by (sport, platform, platform_id) for cross-sport collision handling. **22 markets ship as builtins** across 3 sports (15 soccer + 3 basketball + 4 tennis). `parse_markets(response, platform, sport=...)` returns `NormalizedMarket` instances. See [docs/markets.md](docs/markets.md).
 - **Matching** — `bookieskit/matching/`. Two providers: SportRadar (every bookmaker) and BetGenius / Genius Sports (BetPawa, SportyBet, Bet9ja-live). `extract_event_ids(response, platform)` returns an `EventIds(sportradar, genius)` per platform; `match_events(...)` groups events from multiple bookmakers by **any** shared provider id via union-find. See [docs/matching.md](docs/matching.md).
 
 ## Built-in markets
 
-**17 canonical markets across 3 sports.** Pass `sport=` to `parse_markets` for cross-sport id collisions (e.g. SportPesa's id `52` is both football O/U and basketball O/U; `sport="basketball"` picks the right one). Soccer is the default — existing soccer callers don't need to pass `sport=`.
+**22 canonical markets across 3 sports.** Pass `sport=` to `parse_markets` for cross-sport id collisions (e.g. SportPesa's id `52` is both football O/U and basketball O/U; `sport="basketball"` picks the right one). Soccer is the default — existing soccer callers don't need to pass `sport=`.
 
-### Soccer (10 markets, `sport="soccer"` — the default)
+### Soccer (15 markets, `sport="soccer"` — the default)
 
 | Canonical id | Notes |
 |---|---|
@@ -91,12 +91,17 @@ Prints a per-event coverage table showing which canonical markets each bookmaker
 | `over_under_ft` | Parameterized — line = total goals |
 | `btts_ft` | Both Teams To Score (Yes / No) |
 | `double_chance_ft` | 1X / X2 / 12 |
-| `1x2_1up_ft` | Pays if your team gets a 1-goal lead at any point (SportyBet / Bet9ja / Betway only) |
+| `1x2_1up_ft` | Pays if your team gets a 1-goal lead at any point (BetPawa / SportyBet / Bet9ja / Betway) |
 | `1x2_2up_ft` | Same but 2-goal lead (SportyBet / Bet9ja / Betway only) |
+| `double_chance_1up_ft` | 1Up early payout applied to 1X / X2 / 12 (BetPawa / SportyBet only) |
 | `next_goal_ft` | Parameterized — line = goal number (1=1st goal, 2=2nd goal, ...). Outcomes home / none / away. Covers prematch "1st Goal" and live "Nth Goal" under one canonical. |
 | `home_over_under_ft` | Parameterized — line = goals scored by home team only |
 | `away_over_under_ft` | Parameterized — line = goals scored by away team only |
 | `2way_handicap_ft` | Parameterized — **signed** line (home's perspective); both outcomes under one signed key. Asian Handicap (no draw). |
+| `1x2_corners_ft` | Most full-time corners: home / draw / away (not offered by SportPesa; Betika blocked by #31) |
+| `over_under_corners_ft` | Parameterized — line = total full-time corners |
+| `1x2_bookings_ft` | Most full-time bookings (cards): home / draw / away |
+| `over_under_bookings_ft` | Parameterized — line = total full-time bookings (cards) |
 
 ### Basketball (3 markets, `sport="basketball"`)
 

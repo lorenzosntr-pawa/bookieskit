@@ -165,8 +165,13 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
         parameterized=False,
     ),
     # 1X2 1Up — pays as 1X2 if your team gets to a 1-goal lead at any point.
-    # Available on BetPawa / SportyBet / Bet9ja / Betway. MSport doesn't
-    # expose this market.
+    # Mapped for BetPawa / SportyBet / Bet9ja / Betway.
+    # MSport DOES offer it (live-probed: market id 5000002, "1x2 - 1UP") but
+    # is left unmapped here on purpose: unlike every other MSport market in
+    # this table its outcomes arrive with a null `desc`, identified only by
+    # outcome id (500000201/02/03), which the desc-based outcome matcher
+    # cannot bind. Mapping it needs an id-based outcome path — its own
+    # increment, not a one-line id addition.
     MarketMapping(
         canonical_id="1x2_1up_ft",
         name="1X2 1Up - Full Time",
@@ -250,6 +255,58 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 sportybet="Away",
                 bet9ja="22",
                 betway="__AWAY__",
+                msport="",
+                sportpesa="",
+                betika="",
+            ),
+        },
+        parameterized=False,
+    ),
+    # Double Chance 1Up — the 1Up early-payout rule applied to the three
+    # double-chance selections (1X / X2 / 12) instead of a straight 1X2.
+    # Offered by BetPawa and SportyBet; both reuse the outcome vocabulary of
+    # their plain Double Chance, so only the market id differs.
+    # Live-probed in-region: MSport, Betway and Betika all expose a 1X2 1Up
+    # but no double-chance variant; Bet9ja's full captures likewise carry
+    # only 1X2 1Up and team-win 1Up/2Up. SportPesa was not probed (its
+    # market list needs an Akamai cookie the harness cannot supply).
+    MarketMapping(
+        canonical_id="double_chance_1up_ft",
+        name="Double Chance 1Up - Full Time",
+        betpawa_id="80000",
+        sportybet_id="60110",
+        bet9ja_key=None,
+        betway_id=None,
+        msport_id=None,
+        sportpesa_id=None,
+        betika_id=None,
+        outcomes={
+            "home_draw": OutcomeMapping(
+                canonical_name="home_draw",
+                betpawa="1X",
+                sportybet="Home or Draw",
+                bet9ja="",
+                betway="",
+                msport="",
+                sportpesa="",
+                betika="",
+            ),
+            "draw_away": OutcomeMapping(
+                canonical_name="draw_away",
+                betpawa="X2",
+                sportybet="Draw or Away",
+                bet9ja="",
+                betway="",
+                msport="",
+                sportpesa="",
+                betika="",
+            ),
+            "home_away": OutcomeMapping(
+                canonical_name="home_away",
+                betpawa="12",
+                sportybet="Home or Away",
+                bet9ja="",
+                betway="",
                 msport="",
                 sportpesa="",
                 betika="",
