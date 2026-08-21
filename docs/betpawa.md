@@ -7,24 +7,33 @@
 | `ng` | Nigeria | https://www.betpawa.ng | `betpawa-nigeria` |
 | `gh` | Ghana | https://www.betpawa.com.gh | `betpawa-ghana` |
 | `ke` | Kenya | https://www.betpawa.co.ke | `betpawa-kenya` |
-| `ug` | Uganda | https://www.betpawa.co.ug | `betpawa-uganda` |
+| `ug` | Uganda | https://www.betpawa.ug | `betpawa-uganda` |
 | `tz` | Tanzania | https://www.betpawa.co.tz | `betpawa-tanzania` |
 | `zm` | Zambia | https://www.betpawa.co.zm | `betpawa-zambia` |
 | `rw` | Rwanda | https://www.betpawa.rw | `betpawa-rwanda` |
 | `cm` | Cameroon | https://www.betpawa.cm | `betpawa-cameroon` |
-| `sl` | Sierra Leone | https://www.betpawa.sl | `betpawa-sierraleone` |
+| `sl` | Sierra Leone | https://sl.betpawa.com | `betpawa-sierraleone` |
 | `bj` | Benin | https://www.betpawa.bj | `betpawa-benin` |
 | `cg` | Congo - Brazzaville | https://cg.betpawa.com | `betpawa-congobrazzaville` |
 | `cd` | DR Congo | https://www.betpawa.cd | `betpawa-drc` |
 | `ls` | Lesotho | https://ls.betpawa.com | `betpawa-lesotho` |
 | `mw` | Malawi | https://www.betpawa.mw | `betpawa-malawi` |
 | `mz` | Mozambique | https://www.betpawa.co.mz | `betpawa-mozambique` |
+| `ao` | Angola | https://www.betpawa.ao | `betpawa-angola` |
+| `bw` | Botswana | https://bw.betpawa.com | `betpawa-botswana` |
+| `lr` | Liberia | https://lr.betpawa.com | `betpawa-liberia` |
+| `ml` | Mali | https://ml.betpawa.com | `betpawa-mali` |
+| `ss` | South Sudan | https://ss.betpawa.com | `betpawa-southsudan` |
+| `tg` | Togo | https://tg.betpawa.com | `betpawa-togo` |
+| `zw` | Zimbabwe | https://zw.betpawa.com | `betpawa-zimbabwe` |
 
-All 15 country codes that BetPawa exposes on its [country selector landing page](https://www.betpawa.com/) are supported. Each pairs a canonical sportsbook URL with a brand header — both move together in `DOMAINS` and `_BRAND_MAP` in `bookmakers/betpawa.py`. Three URL patterns appear:
+All 22 country codes BetPawa serves are supported. The list is maintained by probing every candidate domain against `/api/sportsbook/v4/categories/list/all` and keeping only those that return JSON containing `onlyMeta` — a bare status-200 check is not sufficient, because some ccTLD hosts answer 200 with the marketing site's HTML shell (`www.betpawa.tg` and `www.betpawa.tz` both do). Last swept **2026-08-21**, which added `ao`, `bw`, `lr`, `ml`, `ss`, `tg` and `zw`. Each pairs a canonical sportsbook URL with a brand header — both move together in `DOMAINS` and `_BRAND_MAP` in `bookmakers/betpawa.py`. Three URL patterns appear:
 
-- **`www.betpawa.<cc>`** — single-letter ccTLD: `ng`, `sl`, `rw`, `cm`, `bj`, `cd`, `mw`.
-- **`www.betpawa.<co\|com>.<cc>`** — second-level domain: `gh`, `ke`, `ug`, `tz`, `zm`, `mz`.
-- **`<cc>.betpawa.com`** — country subdomain on the `.com` root: `cg`, `ls`. The `www.betpawa.<cc>` form 308-redirects to this; the client binds to the direct form to avoid a redirect on every request.
+- **`www.betpawa.<cc>`** — ccTLD: `ng`, `ug`, `rw`, `cm`, `bj`, `cd`, `mw`, `ao`.
+- **`www.betpawa.<co\|com>.<cc>`** — second-level domain: `gh`, `ke`, `tz`, `zm`, `mz`.
+- **`<cc>.betpawa.com`** — country subdomain on the `.com` root: `cg`, `ls`, `sl`, `bw`, `lr`, `ml`, `ss`, `tg`, `zw`. For `lr`, `ss` and `tg` no ccTLD site exists at all.
+
+**The client does not follow redirects**, so each entry must be the host that answers *directly*. A ccTLD that 308s to its subdomain is unusable here even though a redirect-following probe reports it live — this is how `sl` and `ug` came to be misconfigured (both raised `ResponseError 308` on every call until the 2026-08-21 sweep re-checked them without redirects). The `www.betpawa.<cc>` form 308-redirects to this; the client binds to the direct form to avoid a redirect on every request.
 
 The 6 additions in 0.10.0 (`bj`, `cg`, `cd`, `ls`, `mw`, `mz`) were verified against the live `/api/sportsbook/v2/categories/list/by-sport` endpoint with the discovered brand header. The 3 additions in 0.8.0 (`rw`, `cm`, `sl`) were verified the same way.
 

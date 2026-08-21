@@ -5,9 +5,10 @@
 | Code | Country |
 |------|---------|
 | `ke` | Kenya |
-| `tz` | Tanzania |
 
-Country is honoured via subdomain (`www.ke.sportpesa.com`, `www.tz.sportpesa.com`) and the `x-app-timezone` request header (`Africa/Nairobi` for `ke`, `Africa/Dar_es_Salaam` for `tz`). The client only supports `ke` and `tz` — any other code raises `UnsupportedCountryError`.
+Country is honoured via subdomain (`www.ke.sportpesa.com`) and the `x-app-timezone` request header (`Africa/Nairobi`). **Kenya is the only supported jurisdiction** — any other code raises `UnsupportedCountryError`.
+
+`tz` was removed on 2026-08-21: `www.tz.sportpesa.com` no longer resolves (NXDOMAIN) and the bare `tz.sportpesa.com` serves an nginx 404 behind an invalid certificate.
 
 ## SportRadar id
 

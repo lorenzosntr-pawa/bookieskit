@@ -9,9 +9,16 @@ def test_sportpesa_country_ke_resolves_domain():
     assert client.base_url == "https://www.ke.sportpesa.com"
 
 
-def test_sportpesa_country_tz_resolves_domain():
-    client = SportPesa(country="tz")
-    assert client.base_url == "https://www.tz.sportpesa.com"
+def test_sportpesa_tz_no_longer_supported():
+    """Tanzania was removed after its subdomain stopped resolving.
+
+    Verified 2026-08-21: www.tz.sportpesa.com is NXDOMAIN and the bare
+    tz.sportpesa.com serves an nginx 404 behind an invalid certificate.
+    Failing loudly here beats silently returning empty result sets.
+    """
+    from bookieskit.exceptions import UnsupportedCountryError
+    with pytest.raises(UnsupportedCountryError):
+        SportPesa(country="tz")
 
 
 def test_sportpesa_unsupported_country():
@@ -26,10 +33,10 @@ def test_sportpesa_ke_timezone_header():
     assert headers["x-app-timezone"] == "Africa/Nairobi"
 
 
-def test_sportpesa_tz_timezone_header():
-    client = SportPesa(country="tz")
-    headers = client._build_headers()
-    assert headers["x-app-timezone"] == "Africa/Dar_es_Salaam"
+def test_sportpesa_timezone_header_defaults_for_unknown_country():
+    # The header falls back to Nairobi rather than omitting the field.
+    client = SportPesa(country="ke")
+    assert client._build_headers()["x-app-timezone"] == "Africa/Nairobi"
 
 
 @pytest.mark.asyncio

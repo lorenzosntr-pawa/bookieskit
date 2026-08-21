@@ -70,6 +70,41 @@ All notable changes to this project are documented in this file. The format foll
   Built-in canonical market count: 21 → 22 (15 soccer + 3 basketball +
   4 tennis).
 
+### Changed
+- **Jurisdiction re-sweep across all seven bookmakers (2026-08-21).** Every
+  candidate country was probed live and accepted only on a *validated*
+  response — a bare 200 is not enough, since some hosts answer 200 with a
+  marketing HTML shell (BetPawa) or a zero-byte body (Betway).
+  - **BetPawa: 15 → 22 countries.** Added `ao` (Angola), `bw` (Botswana),
+    `lr` (Liberia), `ml` (Mali), `ss` (South Sudan), `tg` (Togo) and `zw`
+    (Zimbabwe), each verified to return JSON containing `onlyMeta` on
+    `/api/sportsbook/v4/categories/list/all`. `lr`, `ss` and `tg` have no
+    working ccTLD site — only the `<cc>.betpawa.com` subdomain.
+  - **Betway: 7 → 8 countries.** Added `bw`, `mw` and `mz` (live, previously
+    unmapped). **Removed `ke` and `ug`** — both return a zero-byte sports
+    config and zero events on every sport probed, so Betway appears to have
+    exited those markets. `Betway("ke")` now raises `UnsupportedCountryError`
+    instead of silently yielding empty result sets.
+  - **SportPesa: 2 → 1 country.** **Removed `tz`** —
+    `www.tz.sportpesa.com` no longer resolves (NXDOMAIN) and the bare
+    `tz.sportpesa.com` serves an nginx 404 behind an invalid certificate.
+  - **MSport and Bet9ja unchanged**, both re-verified: MSport serves exactly
+    `ng`/`gh`/`ke`/`ug`/`zm` (operIds 1-5, no sixth), and Bet9ja is Nigeria
+    only — no `bet9ja.gh` or `bet9ja.ke` host exists.
+  - **Two pre-existing BetPawa jurisdictions were broken and are now fixed.**
+    `sl` pointed at `www.betpawa.sl` and `ug` at `www.betpawa.co.ug`; both
+    308-redirect, and the client does not follow redirects, so *every* call
+    for Sierra Leone and Uganda raised `ResponseError 308`. They now use the
+    hosts that answer directly (`sl.betpawa.com`, `www.betpawa.ug`). The
+    sweep only caught this because the candidate list was re-verified through
+    the real client rather than through a redirect-following probe — all 22
+    jurisdictions are now confirmed live and redirect-free.
+  - **SportyBet and Betika could not be verified.** SportyBet is blocked from
+    in-region (HTTP 202, empty body — issue #52), and Betika routes every
+    country through one shared `api.betika.com` host whose per-country pages
+    all return an identical SPA shell, so neither list is evidence-backed.
+    Both are left as-is pending a probe that can actually distinguish them.
+
 ### Fixed
 - **MSport now maps `1x2_1up_ft` and `1x2_2up_ft`** (ids `5000002` / `5000001`).
   Both markets are present on every captured MSport fixture and were simply

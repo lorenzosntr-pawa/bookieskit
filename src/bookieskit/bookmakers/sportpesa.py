@@ -11,9 +11,9 @@ from bookieskit.config import SPORTPESA_MAX_CONCURRENT, SPORTPESA_REQUEST_DELAY
 class SportPesa(BaseBookmaker):
     """HTTP client for SportPesa sportsbook API.
 
-    SportPesa uses country-specific subdomains (www.ke.sportpesa.com,
-    www.tz.sportpesa.com). Country also drives the `x-app-timezone`
-    request header.
+    SportPesa uses country-specific subdomains. Only Kenya
+    (www.ke.sportpesa.com) is live as of 2026-08-21 — the Tanzania subdomain
+    stopped resolving. Country also drives the `x-app-timezone` header.
 
     The API is gated by Akamai Bot Manager. This client does NOT solve the
     challenge — callers must supply warmed cookies (e.g. by injecting
@@ -32,9 +32,12 @@ class SportPesa(BaseBookmaker):
         request_delay: Delay between requests in seconds (default: 0.05)
     """
 
+    # Kenya only as of 2026-08-21: www.tz.sportpesa.com no longer resolves
+    # (NXDOMAIN), and the bare tz.sportpesa.com serves an nginx 404 behind an
+    # invalid certificate. The tz entry was removed rather than left pointing
+    # at a dead host.
     DOMAINS = {
         "ke": "https://www.ke.sportpesa.com",
-        "tz": "https://www.tz.sportpesa.com",
     }
     DEFAULT_HEADERS = {
         "accept": "application/json, text/plain, */*",
@@ -50,9 +53,10 @@ class SportPesa(BaseBookmaker):
     NAME = "SportPesa"
     PLATFORM_KEY = "sportpesa"
 
+    # Keyed by country code; kept as a mapping (rather than a constant) so a
+    # jurisdiction coming back only needs its row restored here and in DOMAINS.
     _TIMEZONE_PER_COUNTRY = {
         "ke": "Africa/Nairobi",
-        "tz": "Africa/Dar_es_Salaam",
     }
 
     def _build_headers(self) -> dict[str, str]:

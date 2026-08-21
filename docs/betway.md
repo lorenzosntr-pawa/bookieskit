@@ -6,13 +6,16 @@
 |------|---------|---------------------|
 | `ng` | Nigeria | `NG` |
 | `gh` | Ghana | `GH` |
-| `ke` | Kenya | `KE` |
 | `tz` | Tanzania | `TZ` |
-| `ug` | Uganda | `UG` |
 | `zm` | Zambia | `ZM` |
 | `za` | South Africa | `ZA` |
+| `bw` | Botswana | `BW` |
+| `mw` | Malawi | `MW` |
+| `mz` | Mozambique | `MZ` |
 
 All countries share the same data domain (`https://feeds-roa2.betwayafrica.com`); the country is passed via the `countryCode` query parameter on every request. The sports list comes from a separate config domain (`https://config.betwayafrica.com`). `za` was added in 0.8.0 after probing `https://config.betwayafrica.com/cron/sports/ZA/en-US` and getting a populated 200 response.
+
+**Jurisdiction sweep, 2026-08-21.** The same probe was re-run across every candidate country. A live country returns a ~28KB sports config; a dead one returns **200 with a zero-byte body**, so the status code alone tells you nothing. `bw`, `mw` and `mz` were live and previously unmapped, and were added. `ke` and `ug` returned an empty config *and* zero events on every sport probed via the Highlights feed — Betway appears to have exited those markets, and both were **removed**: `Betway("ke")` now raises `UnsupportedCountryError` rather than silently yielding empty result sets.
 
 ## SportRadar id
 

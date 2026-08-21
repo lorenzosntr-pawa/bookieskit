@@ -274,3 +274,26 @@ async def test_get_sportradar_id_no_api_call():
     client = Betway(country="ng")
     sr_id = await client.get_sportradar_id(event_id="69339436")
     assert sr_id == "69339436"
+
+
+def test_betway_jurisdictions_match_the_live_sweep():
+    """Jurisdiction sweep of 2026-08-21.
+
+    Live countries return a ~28KB sports config from
+    config.betwayafrica.com; ``ke`` and ``ug`` returned a ZERO-byte config
+    and zero events on every sport probed, so they were removed. Botswana,
+    Malawi and Mozambique were live and previously unmapped.
+    """
+    assert set(Betway.DOMAINS) == {
+        "ng", "gh", "tz", "zm", "za", "bw", "mw", "mz",
+    }
+    assert "ke" not in Betway.DOMAINS
+    assert "ug" not in Betway.DOMAINS
+
+
+def test_betway_country_code_map_covers_every_domain():
+    from bookieskit.bookmakers.betway import _COUNTRY_CODES
+
+    assert set(_COUNTRY_CODES) == set(Betway.DOMAINS)
+    for cc, code in _COUNTRY_CODES.items():
+        assert code == cc.upper()

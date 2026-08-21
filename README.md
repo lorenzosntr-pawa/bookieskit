@@ -65,12 +65,12 @@ Prints a per-event coverage table showing which canonical markets each bookmaker
 
 | Bookmaker | Countries | Doc |
 |-----------|-----------|------|
-| BetPawa   | ng, gh, ke, ug, tz, zm, rw, cm, sl, bj, cg, cd, ls, mw, mz | [docs/betpawa.md](docs/betpawa.md) |
+| BetPawa   | ng, gh, ke, ug, tz, zm, rw, cm, sl, bj, cg, cd, ls, mw, mz, ao, bw, lr, ml, ss, tg, zw | [docs/betpawa.md](docs/betpawa.md) |
 | SportyBet | ng, gh, ke, tz, za, cm, zm | [docs/sportybet.md](docs/sportybet.md) |
 | Bet9ja    | ng | [docs/bet9ja.md](docs/bet9ja.md) |
-| Betway    | ng, gh, ke, tz, ug, zm, za | [docs/betway.md](docs/betway.md) |
+| Betway    | ng, gh, tz, zm, za, bw, mw, mz | [docs/betway.md](docs/betway.md) |
 | MSport    | ng, gh, ke, ug, zm | [docs/msport.md](docs/msport.md) |
-| SportPesa | ke, tz | [docs/sportpesa.md](docs/sportpesa.md) |
+| SportPesa | ke | [docs/sportpesa.md](docs/sportpesa.md) |
 | Betika    | ke, ug, tz, mw, gh | [docs/betika.md](docs/betika.md) |
 
 ## How the lib is structured
