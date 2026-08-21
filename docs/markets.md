@@ -38,7 +38,7 @@ The flag is a no-op for bookmakers whose market ids don't overlap across sports 
 | `home_over_under_ft` | Over/Under — Home Team — Full Time | yes (line = goals) | ✅ | ✅ | ✅ combined | ✅ | ✅ | ❌ NOT PROBED | ✅ |
 | `away_over_under_ft` | Over/Under — Away Team — Full Time | yes (line = goals) | ✅ | ✅ | ✅ combined | ✅ | ✅ | ❌ NOT PROBED | ✅ |
 | `2way_handicap_ft` | 2-Way Asian Handicap — Full Time | yes (signed line=goals) | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ NOT PROBED | — NOT EXPOSED |
-| `double_chance_1up_ft` | Double Chance 1Up — Full Time | no | ✅ | ✅ | — NOT EXPOSED | — NOT EXPOSED | — NOT EXPOSED | ❌ NOT PROBED | — NOT EXPOSED |
+| `double_chance_1up_ft` | Double Chance 1Up — Full Time | no | ✅ | ✅ | ✅ | — NOT EXPOSED | — NOT EXPOSED | ❌ NOT PROBED | ❌ #31 |
 | `1x2_corners_ft` | Corners 1X2 — Full Time | no | ✅ | ✅ | ✅ | ✅ | ✅ | — NOT OFFERED | ❌ #31 |
 | `over_under_corners_ft` | Corners Over/Under — Full Time | yes (line=corners) | ✅ | ✅ | ✅ | ✅ | ✅ | — NOT OFFERED | ❌ #31 |
 | `1x2_bookings_ft` | Bookings 1X2 — Full Time | no | ✅ | ✅ | ✅ | ✅ | ✅ | — NOT OFFERED | ❌ #31 |
@@ -51,11 +51,17 @@ stringifies. SportPesa and Betika expose neither.
 
 `double_chance_1up_ft` applies the same early-payout rule to the double-chance
 selections (1X / X2 / 12). Only BetPawa (id `80000`) and SportyBet (id `60110`)
-offer it. MSport and Betway were probed live and Bet9ja checked across its full
-captures: all three clearly expose their own 1X2 1Up while showing no
-double-chance variant, so that absence is meaningful. Betika and SportPesa are
-**unknown rather than absent** — Betika's market fetch is truncated (#31) and
-surfaces no 1Up market at all, and SportPesa was never probed (Akamai cookie).
+offer it, alongside **Bet9ja** (`S_DC1X21`, "DC 1X2 1UP"). Bet9ja's outcome
+suffixes are counter-intuitive — `11` = 1X, **`X1` = X2**, `121` = 12 — and were
+read from its `D.TRANS` catalogue rather than inferred; deriving them by analogy
+would swap two selections. The market is declared in Bet9ja's catalogue but was
+priced on none of the 160 events sampled on 2026-08-21, so the mapping is
+key-verified rather than price-verified.
+
+MSport and Betway were probed live and clearly expose their own 1X2 1Up while
+showing no double-chance variant, so that absence is meaningful. Betika and
+SportPesa are **unknown rather than absent** — Betika's market fetch is truncated
+(#31) and surfaces no 1Up market at all, and SportPesa was never probed.
 
 Corner and booking (card) markets carry the full-time corner/card count rather than
 goals. SportPesa does not offer them; Betika's are blocked behind the truncated

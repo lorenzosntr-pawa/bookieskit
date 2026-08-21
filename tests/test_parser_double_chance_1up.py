@@ -27,9 +27,12 @@ sees the book's own 1UP markets can be read as "the DC variant is absent":
     strings, ``1x2 - 1UP`` present, no double-chance variant.
   - Betway — **not offered**. Live probe: 10 events, 34,605 strings,
     ``1X2 (1Up)`` present, no double-chance variant.
-  - Bet9ja — **not offered**. Fixtures: 2,788 strings across six captures
-    carrying seven distinct 1UP markets (``1X2 1UP``, ``Home``/``Away to Win
-    1UP/2UP``), none of them a double-chance variant.
+  - Bet9ja — **offered**, key ``S_DC1X21`` ("DC 1X2 1UP"). Its outcome
+    suffixes are counter-intuitive and were taken verbatim from Bet9ja's own
+    ``D.TRANS`` catalogue (``bet9ja/dc_1x2_1up_catalogue.json``):
+    ``11`` = "1X - 1UP", ``X1`` = "X2 - 1UP", ``121`` = "12 - 1UP".
+    **``X1`` means X2, not 1X** — transcribing these by analogy rather than
+    from the payload would silently swap two selections.
   - Betika — **unknown**, not absent. Its scans show no 1UP market at all
     (live: 10 events but only 210 distinct strings), which is the signature
     of the truncated no-cookie market fetch tracked by #31 rather than
@@ -144,3 +147,64 @@ def test_books_without_double_chance_1up_do_not_emit_it():
         assert not [
             m for m in markets if m.canonical_id == "double_chance_1up_ft"
         ], f"{book} unexpectedly resolved double_chance_1up_ft"
+
+
+# --- Bet9ja ----------------------------------------------------------------
+
+
+def _bet9ja_catalogue():
+    return json.loads(
+        (_FIXTURES / "bet9ja" / "dc_1x2_1up_catalogue.json").read_text(
+            encoding="utf-8"
+        )
+    )
+
+
+def test_bet9ja_declares_dc_1x2_1up_in_its_catalogue():
+    """Bet9ja's D.TRANS catalogue is the authority for key + labels.
+
+    The market was missed on the first pass because D.TRANS entries are
+    ``M#``-prefixed, so a regex scanning for bare quoted ``"S_..."`` keys
+    never saw it.
+    """
+    trans = _bet9ja_catalogue()["D"]["TRANS"]
+    assert trans["M#S_DC1X21"]["NAME"] == "DC 1X2 1UP"
+    assert trans["M#S_DC1X21_11"] == "1X - 1UP"
+    assert trans["M#S_DC1X21_X1"] == "X2 - 1UP"
+    assert trans["M#S_DC1X21_121"] == "12 - 1UP"
+
+
+def test_bet9ja_dc_1up_outcome_suffixes_are_not_the_obvious_ones():
+    """Guard the swap hazard: X1 is X2 (draw_away), NOT 1X (home_draw)."""
+    from bookieskit.markets.registry import MarketRegistry
+
+    m = MarketRegistry().get_by_canonical("double_chance_1up_ft")
+    assert m.bet9ja_key == "S_DC1X21"
+    assert m.outcomes["home_draw"].bet9ja == "11"
+    assert m.outcomes["draw_away"].bet9ja == "X1"
+    assert m.outcomes["home_away"].bet9ja == "121"
+
+
+def test_bet9ja_dc_1up_parses_from_odds_keys():
+    """End-to-end parse using Bet9ja's real key format.
+
+    The odds values are synthetic: S_DC1X21 is declared in Bet9ja's
+    catalogue but was priced on 0 of 160 live events sampled on
+    2026-08-21, so no capture carries real prices for it yet. The KEYS are
+    real, which is what this test pins -- that ``S_DC1X21_<suffix>``
+    resolves to the right canonical outcome.
+    """
+    payload = {
+        "R": "OK",
+        "D": {
+            "O": {
+                "S_DC1X21_11": 1.22,
+                "S_DC1X21_X1": 1.55,
+                "S_DC1X21_121": 1.08,
+            }
+        },
+    }
+    markets = parse_markets(payload, platform="bet9ja")
+    m = next(m for m in markets if m.canonical_id == "double_chance_1up_ft")
+    names = {o.canonical_name: o.odds for o in m.outcomes}
+    assert names == {"home_draw": 1.22, "draw_away": 1.55, "home_away": 1.08}

@@ -212,7 +212,7 @@ EXPECTED_MATRIX: dict[str, dict[str, bool]] = {
     "double_chance_1up_ft": {
         "betpawa": True,
         "sportybet": True,
-        "bet9ja": False,
+        "bet9ja": True,
         "betway": False,
         "msport": False,
         "sportpesa": False,

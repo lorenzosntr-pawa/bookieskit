@@ -93,7 +93,7 @@ Prints a per-event coverage table showing which canonical markets each bookmaker
 | `double_chance_ft` | 1X / X2 / 12 |
 | `1x2_1up_ft` | Pays if your team gets a 1-goal lead at any point (all but SportPesa / Betika) |
 | `1x2_2up_ft` | Same but 2-goal lead (as above, minus BetPawa) |
-| `double_chance_1up_ft` | 1Up early payout applied to 1X / X2 / 12 (BetPawa / SportyBet only) |
+| `double_chance_1up_ft` | 1Up early payout applied to 1X / X2 / 12 (BetPawa / SportyBet / Bet9ja) |
 | `next_goal_ft` | Parameterized — line = goal number (1=1st goal, 2=2nd goal, ...). Outcomes home / none / away. Covers prematch "1st Goal" and live "Nth Goal" under one canonical. |
 | `home_over_under_ft` | Parameterized — line = goals scored by home team only |
 | `away_over_under_ft` | Parameterized — line = goals scored by away team only |

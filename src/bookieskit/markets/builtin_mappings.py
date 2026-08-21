@@ -270,9 +270,14 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
     #     "1x2 - 1UP" present, no double-chance variant.
     #   - Betway  — NOT OFFERED. Live: 10 events / 34,605 strings,
     #     "1X2 (1Up)" present, no double-chance variant.
-    #   - Bet9ja  — NOT OFFERED. Fixtures: 2,788 strings across 6 captures
-    #     with seven distinct 1UP markets ("1X2 1UP", "Home/Away to Win
-    #     1UP/2UP"), none of them double-chance.
+    #   - Bet9ja  — OFFERED, key S_DC1X21 "DC 1X2 1UP". Outcome suffixes are
+    #     NOT the 1X/X2/12 you would expect: they are 11 ("1X - 1UP"), X1
+    #     ("X2 - 1UP") and 121 ("12 - 1UP"), taken verbatim from Bet9ja's
+    #     own D.TRANS catalogue. Note X1 means X2, not 1X -- transcribing
+    #     these by analogy instead of from the payload would silently swap
+    #     two selections. The earlier "not offered" call was wrong: it was
+    #     made from June fixtures whose D.O carried no such odds, and a
+    #     key-regex that skipped D.TRANS because entries are M#-prefixed.
     #   - Betika  — UNKNOWN, not "absent". Its scans surface no 1Up market
     #     at all (live: 10 events / 210 strings), which is the signature of
     #     the truncated no-cookie market fetch tracked by #31, not evidence
@@ -284,7 +289,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
         name="Double Chance 1Up - Full Time",
         betpawa_id="80000",
         sportybet_id="60110",
-        bet9ja_key=None,
+        bet9ja_key="S_DC1X21",
         betway_id=None,
         msport_id=None,
         sportpesa_id=None,
@@ -294,7 +299,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 canonical_name="home_draw",
                 betpawa="1X",
                 sportybet="Home or Draw",
-                bet9ja="",
+                bet9ja="11",
                 betway="",
                 msport="",
                 sportpesa="",
@@ -304,7 +309,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 canonical_name="draw_away",
                 betpawa="X2",
                 sportybet="Draw or Away",
-                bet9ja="",
+                bet9ja="X1",
                 betway="",
                 msport="",
                 sportpesa="",
@@ -314,7 +319,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 canonical_name="home_away",
                 betpawa="12",
                 sportybet="Home or Away",
-                bet9ja="",
+                bet9ja="121",
                 betway="",
                 msport="",
                 sportpesa="",
