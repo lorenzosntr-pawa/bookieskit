@@ -24,8 +24,14 @@ def test_unknown_sport_or_platform_returns_none():
     assert sport_id("nonexistent", "soccer") is None
 
 
-def test_table_covers_all_seven_platforms_for_soccer():
+def test_table_covers_all_eight_platforms_for_soccer():
     assert set(SPORT_IDS["soccer"].keys()) == {
         "betpawa", "sportybet", "msport", "bet9ja",
-        "betway", "betika", "sportpesa",
+        "betway", "betika", "sportpesa", "elephantbet",
     }
+
+
+def test_elephantbet_soccer_id_only():
+    assert sport_id("elephantbet", "soccer") == "1"
+    assert sport_id("elephantbet", "basketball") is None
+    assert sport_id("elephantbet", "tennis") is None

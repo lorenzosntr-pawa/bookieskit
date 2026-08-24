@@ -83,8 +83,9 @@ def extract_event_ids(response, platform: str) -> EventIds:
     Args:
         response: Raw JSON returned by the bookmaker's event-detail call.
         platform: One of ``"betpawa"``, ``"sportybet"``, ``"bet9ja"``,
-            ``"betway"``, ``"msport"``, ``"sportpesa"``, ``"betika"``.
-            Unknown platforms return an empty :class:`EventIds`.
+            ``"betway"``, ``"msport"``, ``"sportpesa"``, ``"betika"``,
+            ``"elephantbet"``. Unknown platforms return an empty
+            :class:`EventIds`.
 
     Returns:
         :class:`EventIds` with whichever provider ids the platform
@@ -98,6 +99,7 @@ def extract_event_ids(response, platform: str) -> EventIds:
         "msport": _extract_event_ids_msport,
         "sportpesa": _extract_event_ids_sportpesa,
         "betika": _extract_event_ids_betika,
+        "elephantbet": _extract_event_ids_elephantbet,
     }
     fn = extractors.get(platform)
     if fn is None:
@@ -299,3 +301,21 @@ def _extract_event_ids_betika(response) -> EventIds:
     if sr in (None, 0, "0", ""):
         return EventIds()
     return EventIds(sportradar=_strip_sr_prefix(str(sr)))
+
+
+# ---- ElephantBet ------------------------------------------------------------
+
+
+def _extract_event_ids_elephantbet(response) -> EventIds:
+    """ElephantBet's ``brid`` is the SportRadar id (bare, no prefix).
+
+    Verified against Betway event ``72221172`` (same fixture: "Fulham FC
+    vs. Chelsea FC") and MSport ``sr:match:72221172``. No Genius Sports id
+    is exposed.
+    """
+    if not isinstance(response, dict):
+        return EventIds()
+    brid = response.get("brid")
+    if brid in (None, 0, "0", ""):
+        return EventIds()
+    return EventIds(sportradar=_strip_sr_prefix(str(brid)))

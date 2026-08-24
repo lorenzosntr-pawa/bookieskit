@@ -518,6 +518,51 @@ def test_extract_sportradar_id_betika_missing_returns_none():
     ) is None
 
 
+# ---- ElephantBet ------------------------------------------------------------
+
+
+def test_extract_event_ids_elephantbet():
+    """`brid` is the SportRadar id — verified against Betway event 72221172,
+    which resolves to the same fixture ("Fulham FC vs. Chelsea FC")."""
+    from bookieskit.matching import extract_event_ids
+
+    match = {
+        "mid": 5998731, "brid": "72221172", "ht": "Fulham FC",
+        "at": "Chelsea FC", "d": "2026-08-24 19:00",
+    }
+    ids = extract_event_ids(match, platform="elephantbet")
+    assert ids.sportradar == "72221172"
+    assert ids.genius is None
+
+
+def test_extract_sportradar_id_elephantbet_missing_returns_none():
+    from bookieskit.matching.extractor import extract_sportradar_id
+    assert extract_sportradar_id({}, platform="elephantbet") is None
+    assert extract_sportradar_id({"brid": None}, platform="elephantbet") is None
+    assert extract_sportradar_id({"brid": ""}, platform="elephantbet") is None
+    assert extract_sportradar_id([], platform="elephantbet") is None
+
+
+def test_extract_sportradar_id_elephantbet_from_fixture():
+    # `brid` lives on the match object nested in the GetGroupedMatches
+    # listing shape ([0]["t"][0]["m"][0]) — the MatchOdds event-detail
+    # fixture (prematch.json) carries null match-metadata fields since it
+    # is focused on markets/odds, not team/kickoff info.
+    import json
+    from pathlib import Path
+
+    from bookieskit.matching.extractor import extract_sportradar_id
+
+    fixture = (
+        Path(__file__).parent
+        / "fixtures" / "event_info" / "elephantbet" / "events.json"
+    )
+    response = json.loads(fixture.read_text(encoding="utf-8"))
+    match = response[0]["t"][0]["m"][0]
+    sr = extract_sportradar_id(match, platform="elephantbet")
+    assert sr is not None and sr.isdigit()
+
+
 def test_extract_sportradar_id_betika_from_fixture():
     import json
     from pathlib import Path

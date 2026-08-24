@@ -91,6 +91,7 @@ class MarketRegistry:
         msport_id: str | None = None,
         sportpesa_id: str | None = None,
         betika_id: str | None = None,
+        elephantbet_id: str | None = None,
         outcomes: dict[str, OutcomeMapping] | None = None,
         parameterized: bool = False,
     ) -> None:
@@ -106,6 +107,7 @@ class MarketRegistry:
             msport_id: MSport market ID (or None)
             sportpesa_id: SportPesa market ID (or None)
             betika_id: Betika sub_type_id (or None)
+            elephantbet_id: ElephantBet market ID (or None)
             outcomes: Dict of canonical_name -> OutcomeMapping
             parameterized: True if market has lines (O/U, handicaps)
         """
@@ -119,6 +121,7 @@ class MarketRegistry:
             msport_id=msport_id,
             sportpesa_id=sportpesa_id,
             betika_id=betika_id,
+            elephantbet_id=elephantbet_id,
             outcomes=outcomes or {},
             parameterized=parameterized,
         )

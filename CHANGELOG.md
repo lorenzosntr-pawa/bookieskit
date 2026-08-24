@@ -5,6 +5,19 @@ All notable changes to this project are documented in this file. The format foll
 ## [Unreleased]
 
 ### Added
+- **ElephantBet — eighth bookmaker (Mozambique)** — a new `ElephantBet` client
+  for the BtoBet `Sb.WebApi` platform (`sports-core.elephantbet.com`),
+  covering the four core soccer markets (`1x2_ft`, `over_under_ft`,
+  `btts_ft`, `double_chance_ft`) through the existing `MarketRegistry` and
+  parser dispatch. `brid` is a genuine SportRadar id (verified against
+  Betway and MSport for the same fixture), so ElephantBet participates as a
+  first-class platform in `extract_event_ids` / cross-book matching, not as
+  a standalone fallback. Wired into the coverage matrix and the audit
+  harness (`devtools/{adapters,resolver,sports}.py`); no reverse SR→internal
+  lookup yet, so the resolver records a skip on `resolve`. Only Mozambique
+  is supported — the Angola/Sierra Leone/Malawi brand sites exist but their
+  API hosts return `403` to non-browser clients and are unverified. See
+  `docs/elephantbet.md`.
 - **Live odds audit harness (#43)** — a reusable
   `python -m bookieskit.devtools audit` command that probes every mapped
   football market across all seven bookmakers on a set of fixtures and emits a

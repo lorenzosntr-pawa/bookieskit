@@ -1,6 +1,6 @@
 # bookieskit
 
-Async HTTP clients for 7 African sportsbooks (BetPawa, SportyBet, Bet9ja, Betway, MSport, SportPesa, Betika) covering **soccer, basketball, and tennis**, with normalized markets and cross-bookmaker matching by SportRadar **or** BetGenius id.
+Async HTTP clients for 8 African sportsbooks (BetPawa, SportyBet, Bet9ja, Betway, MSport, SportPesa, Betika, ElephantBet) covering **soccer, basketball, and tennis**, with normalized markets and cross-bookmaker matching by SportRadar **or** BetGenius id.
 
 ## Installation
 
@@ -72,6 +72,7 @@ Prints a per-event coverage table showing which canonical markets each bookmaker
 | MSport    | ng, gh, ke, ug, zm | [docs/msport.md](docs/msport.md) |
 | SportPesa | ke | [docs/sportpesa.md](docs/sportpesa.md) |
 | Betika    | ke, ug, tz, mw, gh | [docs/betika.md](docs/betika.md) |
+| ElephantBet | mz | [docs/elephantbet.md](docs/elephantbet.md) |
 
 ## How the lib is structured
 

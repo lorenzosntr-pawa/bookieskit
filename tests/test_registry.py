@@ -90,6 +90,35 @@ def test_registry_add_custom_mapping():
     assert mapping.betpawa_id == "4703"
 
 
+def test_registry_add_custom_mapping_with_elephantbet_id():
+    registry = MarketRegistry()
+    registry.add(
+        canonical_id="draw_no_bet_ft",
+        name="Draw No Bet - Full Time",
+        elephantbet_id="99",
+        outcomes={
+            "home": OutcomeMapping(
+                canonical_name="home",
+                betpawa="",
+                sportybet="",
+                bet9ja="",
+                elephantbet="1",
+            ),
+            "away": OutcomeMapping(
+                canonical_name="away",
+                betpawa="",
+                sportybet="",
+                bet9ja="",
+                elephantbet="2",
+            ),
+        },
+    )
+    mapping = registry.get_by_canonical("draw_no_bet_ft")
+    assert mapping is not None
+    assert mapping.elephantbet_id == "99"
+    assert registry.get_by_platform_id("elephantbet", "99") is mapping
+
+
 def test_registry_add_parameterized():
     registry = MarketRegistry(load_builtins=False)
     registry.add(

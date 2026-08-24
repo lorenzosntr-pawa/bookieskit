@@ -18,6 +18,7 @@ SPORT_IDS: dict[str, dict[str, str | None]] = {
         "betway": "soccer",
         "betika": "14",
         "sportpesa": "1",
+        "elephantbet": "1",
     },
     "basketball": {
         "betpawa": "3",
@@ -27,6 +28,7 @@ SPORT_IDS: dict[str, dict[str, str | None]] = {
         "betway": "basketball",
         "betika": "30",
         "sportpesa": "2",
+        "elephantbet": None,
     },
     "tennis": {
         "betpawa": "452",
@@ -36,6 +38,7 @@ SPORT_IDS: dict[str, dict[str, str | None]] = {
         "betway": "tennis",
         "betika": "28",
         "sportpesa": "5",
+        "elephantbet": None,
     },
 }
 

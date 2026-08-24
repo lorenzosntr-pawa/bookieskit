@@ -172,6 +172,25 @@ async def _sportpesa_fetch(
     return await client.get_event_markets(event_id=handle.event_id)
 
 
+# ---- ElephantBet ------------------------------------------------------------
+
+
+async def _elephantbet_resolve(
+    client: Any, sr_numeric: str, sport: str, *, live: bool = False
+) -> Handle | None:
+    # ElephantBet has no SR->internal reverse lookup — its match id (mid) is
+    # distinct from the SR id (brid). No index has been built yet, so the
+    # resolver records a skip; fetch_raw_markets still works when a mid is
+    # supplied directly (e.g. via a captured events listing).
+    return None
+
+
+async def _elephantbet_fetch(
+    client: Any, handle: Handle, *, live: bool = False
+) -> dict:
+    return await client.get_event_detail(event_id=handle.event_id)
+
+
 ADAPTERS: dict[str, Adapter] = {
     "betpawa": Adapter("betpawa", _betpawa_resolve, _betpawa_fetch),
     "sportybet": Adapter("sportybet", _sportybet_resolve, _sportybet_fetch),
@@ -180,4 +199,5 @@ ADAPTERS: dict[str, Adapter] = {
     "betway": Adapter("betway", _betway_resolve, _betway_fetch),
     "betika": Adapter("betika", _betika_resolve, _betika_fetch),
     "sportpesa": Adapter("sportpesa", _sportpesa_resolve, _sportpesa_fetch),
+    "elephantbet": Adapter("elephantbet", _elephantbet_resolve, _elephantbet_fetch),
 }

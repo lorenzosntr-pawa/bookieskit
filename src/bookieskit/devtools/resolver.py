@@ -11,6 +11,7 @@ from bookieskit import (
     Betika,
     BetPawa,
     Betway,
+    ElephantBet,
     MSport,
     SportPesa,
     SportyBet,
@@ -21,7 +22,7 @@ from bookieskit.matching import extract_sportradar_id
 
 ALL_BOOKS: tuple[str, ...] = (
     "betpawa", "sportybet", "msport", "bet9ja",
-    "betway", "betika", "sportpesa",
+    "betway", "betika", "sportpesa", "elephantbet",
 )
 
 # Cookie-gated books: resolution is skipped when no cookie is supplied.
@@ -35,6 +36,7 @@ _CLIENT_CLASSES: dict[str, type] = {
     "betway": Betway,
     "betika": Betika,
     "sportpesa": SportPesa,
+    "elephantbet": ElephantBet,
 }
 
 # Country variant per book (ng where it operates, ke proxy for ke-only books).
@@ -46,6 +48,7 @@ _COUNTRY: dict[str, str] = {
     "betway": "ng",
     "betika": "ke",
     "sportpesa": "ke",
+    "elephantbet": "mz",
 }
 
 
