@@ -507,3 +507,23 @@ def test_registry_has_2way_handicap_ft():
     assert r.get_by_platform_id("bet9ja", "S_AH") is m
     assert r.get_by_platform_id("sportybet", "16") is m
     assert r.get_by_platform_id("betway", "[Handicap] [2-Way]") is m
+
+
+def test_elephantbet_core_soccer_mappings():
+    """Ids and labels lifted from the captured prematch fixture."""
+    from bookieskit.markets.registry import MarketRegistry
+
+    r = MarketRegistry()
+    assert r.get_by_canonical("1x2_ft").elephantbet_id == "3"
+    assert r.get_by_canonical("over_under_ft").elephantbet_id == "29"
+    assert r.get_by_canonical("btts_ft").elephantbet_id == "7"
+    assert r.get_by_canonical("double_chance_ft").elephantbet_id == "17"
+
+    dc = r.get_by_canonical("double_chance_ft").outcomes
+    assert dc["home_draw"].elephantbet == "1X"
+    assert dc["home_away"].elephantbet == "12"
+    assert dc["draw_away"].elephantbet == "X2"
+
+    btts = r.get_by_canonical("btts_ft").outcomes
+    assert btts["yes"].elephantbet == "Sim"
+    assert btts["no"].elephantbet == "Não"
