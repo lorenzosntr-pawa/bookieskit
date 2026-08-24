@@ -1,0 +1,8149 @@
+{
+ "s": null,
+ "t": [
+  {
+   "id": 19,
+   "or": 0,
+   "n": "Principal",
+   "is": 0,
+   "o": [
+    {
+     "id": 3,
+     "n": "1X2",
+     "c": 1,
+     "ca": true,
+     "oti": "1",
+     "m": [
+      {
+       "id": 615,
+       "n": "1",
+       "eon": "{{HomeTeam}}",
+       "otoi": "1",
+       "o": "3.96",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 616,
+       "n": "X",
+       "eon": null,
+       "otoi": "x",
+       "o": "3.76",
+       "su": false,
+       "ord": 2,
+       "col": 2
+      },
+      {
+       "id": 617,
+       "n": "2",
+       "eon": "{{AwayTeam}}",
+       "otoi": "2",
+       "o": "1.88",
+       "su": false,
+       "ord": 3,
+       "col": 3
+      }
+     ]
+    },
+    {
+     "id": 17,
+     "n": "HIPÓTESE DUPLA",
+     "c": 1,
+     "ca": true,
+     "oti": "1X",
+     "m": [
+      {
+       "id": 662,
+       "n": "1X",
+       "eon": "{{HomeTeam}} ou Empate",
+       "otoi": "1X",
+       "o": "1.90",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 663,
+       "n": "12",
+       "eon": "{{HomeTeam}} ou {{AwayTeam}}",
+       "otoi": "12",
+       "o": "1.25",
+       "su": false,
+       "ord": 2,
+       "col": 2
+      },
+      {
+       "id": 664,
+       "n": "X2",
+       "eon": "Empate ou {{AwayTeam}}\t",
+       "otoi": "X2",
+       "o": "1.22",
+       "su": false,
+       "ord": 3,
+       "col": 3
+      }
+     ]
+    },
+    {
+     "id": 7,
+     "n": "Ambas as equipas a marcar",
+     "c": 1,
+     "ca": true,
+     "oti": "104",
+     "m": [
+      {
+       "id": 626,
+       "n": "Sim",
+       "eon": null,
+       "otoi": "y",
+       "o": "1.65",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 627,
+       "n": "Não",
+       "eon": null,
+       "otoi": "n",
+       "o": "2.15",
+       "su": false,
+       "ord": 2,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 35,
+     "n": "Parte mais produtiva",
+     "c": 1,
+     "ca": true,
+     "oti": "62",
+     "m": [
+      {
+       "id": 821,
+       "n": "1ª",
+       "eon": null,
+       "otoi": "hsh1",
+       "o": "3.03",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 822,
+       "n": "2ª",
+       "eon": null,
+       "otoi": "hsh2",
+       "o": "2.07",
+       "su": false,
+       "ord": 2,
+       "col": 2
+      },
+      {
+       "id": 823,
+       "n": "Igual",
+       "eon": null,
+       "otoi": "hshx",
+       "o": "3.74",
+       "su": false,
+       "ord": 3,
+       "col": 3
+      }
+     ]
+    },
+    {
+     "id": 5,
+     "n": "Primeira equipa a marcar",
+     "c": 1,
+     "oti": "140",
+     "m": [
+      {
+       "id": 620,
+       "n": "1",
+       "eon": null,
+       "otoi": "f1",
+       "o": "2.50",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 621,
+       "n": "2",
+       "eon": null,
+       "otoi": "f2",
+       "o": "1.65",
+       "su": false,
+       "ord": 2,
+       "col": 2
+      },
+      {
+       "id": 622,
+       "n": "Nenhum",
+       "eon": null,
+       "otoi": "f0",
+       "o": "11.00",
+       "su": false,
+       "ord": 3,
+       "col": 3
+      }
+     ]
+    },
+    {
+     "id": 125,
+     "n": "Última equipa a marcar",
+     "c": 1,
+     "oti": "141",
+     "m": [
+      {
+       "id": 1198,
+       "n": "1",
+       "eon": null,
+       "otoi": "l1",
+       "o": "2.55",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 1199,
+       "n": "2",
+       "eon": null,
+       "otoi": "l2",
+       "o": "1.65",
+       "su": false,
+       "ord": 2,
+       "col": 2
+      },
+      {
+       "id": 1200,
+       "n": "Nenhum",
+       "eon": null,
+       "otoi": "l0",
+       "o": "11.00",
+       "su": false,
+       "ord": 3,
+       "col": 3
+      }
+     ]
+    },
+    {
+     "id": 11736,
+     "n": "EQUIPA DE CASA IRÁ MARCAR NO JOGO?",
+     "c": 1,
+     "oti": "11736",
+     "m": [
+      {
+       "id": 328929,
+       "n": "Sim",
+       "eon": null,
+       "o": "1.40",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 328593,
+       "n": "Não",
+       "eon": null,
+       "o": "2.80",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 11737,
+     "n": "EQUIPA DE Fora IRÁ MARCAR NO JOGO?",
+     "c": 1,
+     "ca": true,
+     "oti": "11737",
+     "m": [
+      {
+       "id": 329328,
+       "n": "Sim",
+       "eon": null,
+       "o": "1.14",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 329220,
+       "n": "Não",
+       "eon": null,
+       "o": "5.00",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 464,
+     "n": "RESULTADO EXACTO",
+     "c": 1,
+     "m": [
+      {
+       "id": 44941,
+       "n": "1:0",
+       "eon": null,
+       "otoi": "1-0",
+       "o": "12.00",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 44936,
+       "n": "0",
+       "eon": null,
+       "otoi": "0-0",
+       "o": "11.00",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      },
+      {
+       "id": 44937,
+       "n": "0:1",
+       "eon": null,
+       "otoi": "0-1",
+       "o": "7.50",
+       "su": false,
+       "ord": 1,
+       "col": 3
+      },
+      {
+       "id": 44946,
+       "n": "2:0",
+       "eon": null,
+       "otoi": "2-0",
+       "o": "23.00",
+       "su": false,
+       "ord": 2,
+       "col": 1
+      },
+      {
+       "id": 44942,
+       "n": "1:1",
+       "eon": null,
+       "otoi": "1-1",
+       "o": "7.00",
+       "su": false,
+       "ord": 2,
+       "col": 2
+      },
+      {
+       "id": 44938,
+       "n": "0:2",
+       "eon": null,
+       "otoi": "0-2",
+       "o": "10.00",
+       "su": false,
+       "ord": 2,
+       "col": 3
+      },
+      {
+       "id": 44947,
+       "n": "2:1",
+       "eon": null,
+       "otoi": "2-1",
+       "o": "13.00",
+       "su": false,
+       "ord": 3,
+       "col": 1
+      },
+      {
+       "id": 44948,
+       "n": "2:2",
+       "eon": null,
+       "otoi": "2-2",
+       "o": "13.00",
+       "su": false,
+       "ord": 3,
+       "col": 2
+      },
+      {
+       "id": 44939,
+       "n": "0:3",
+       "eon": null,
+       "otoi": "0-3",
+       "o": "17.00",
+       "su": false,
+       "ord": 3,
+       "col": 3
+      },
+      {
+       "id": 44951,
+       "n": "3:0",
+       "eon": null,
+       "otoi": "3-0",
+       "o": "51.00",
+       "su": false,
+       "ord": 4,
+       "col": 1
+      },
+      {
+       "id": 44954,
+       "n": "3:3",
+       "eon": null,
+       "otoi": "3-3",
+       "o": "41.00",
+       "su": false,
+       "ord": 4,
+       "col": 2
+      },
+      {
+       "id": 44940,
+       "n": "0:4",
+       "eon": null,
+       "otoi": "0-4",
+       "o": "34.00",
+       "su": false,
+       "ord": 4,
+       "col": 3
+      },
+      {
+       "id": 44952,
+       "n": "3:1",
+       "eon": null,
+       "otoi": "3-1",
+       "o": "29.00",
+       "su": false,
+       "ord": 5,
+       "col": 1
+      },
+      {
+       "id": 44960,
+       "n": "4:4",
+       "eon": null,
+       "otoi": "4-4",
+       "o": "101.00",
+       "su": false,
+       "ord": 5,
+       "col": 2
+      },
+      {
+       "id": 44943,
+       "n": "1:2",
+       "eon": null,
+       "otoi": "1-2",
+       "o": "8.00",
+       "su": false,
+       "ord": 5,
+       "col": 3
+      },
+      {
+       "id": 44953,
+       "n": "3:2",
+       "eon": null,
+       "otoi": "3-2",
+       "o": "29.00",
+       "su": false,
+       "ord": 6,
+       "col": 1
+      },
+      {
+       "id": 44961,
+       "n": "Outro",
+       "eon": null,
+       "otoi": "*-*",
+       "o": "19.00",
+       "su": false,
+       "ord": 6,
+       "col": 2
+      },
+      {
+       "id": 44944,
+       "n": "1:3",
+       "eon": null,
+       "otoi": "1-3",
+       "o": "13.00",
+       "su": false,
+       "ord": 6,
+       "col": 3
+      },
+      {
+       "id": 44956,
+       "n": "4:0",
+       "eon": null,
+       "otoi": "4-0",
+       "o": "81.00",
+       "su": false,
+       "ord": 7,
+       "col": 1
+      },
+      {
+       "id": 44945,
+       "n": "1:4",
+       "eon": null,
+       "otoi": "1-4",
+       "o": "29.00",
+       "su": false,
+       "ord": 7,
+       "col": 3
+      },
+      {
+       "id": 44957,
+       "n": "4:1",
+       "eon": null,
+       "otoi": "4-1",
+       "o": "67.00",
+       "su": false,
+       "ord": 8,
+       "col": 1
+      },
+      {
+       "id": 44949,
+       "n": "2:3",
+       "eon": null,
+       "otoi": "2-3",
+       "o": "21.00",
+       "su": false,
+       "ord": 8,
+       "col": 3
+      },
+      {
+       "id": 44958,
+       "n": "4:2",
+       "eon": null,
+       "otoi": "4-2",
+       "o": "67.00",
+       "su": false,
+       "ord": 9,
+       "col": 1
+      },
+      {
+       "id": 44950,
+       "n": "2:4",
+       "eon": null,
+       "otoi": "2-4",
+       "o": "41.00",
+       "su": false,
+       "ord": 9,
+       "col": 3
+      },
+      {
+       "id": 44959,
+       "n": "4:3",
+       "eon": null,
+       "otoi": "4-3",
+       "o": "81.00",
+       "su": false,
+       "ord": 10,
+       "col": 1
+      },
+      {
+       "id": 44955,
+       "n": "3:4",
+       "eon": null,
+       "otoi": "3-4",
+       "o": "67.00",
+       "su": false,
+       "ord": 10,
+       "col": 3
+      }
+     ]
+    },
+    {
+     "id": 18,
+     "n": "Empate Sem Apostas",
+     "c": 1,
+     "oti": "d1",
+     "m": [
+      {
+       "id": 665,
+       "n": "1",
+       "eon": "{{HomeTeam}}",
+       "otoi": "d1",
+       "o": "2.93",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 666,
+       "n": "2",
+       "eon": "{{AwayTeam}}",
+       "otoi": "d2",
+       "o": "1.41",
+       "su": false,
+       "ord": 2,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 15,
+     "n": "INTERVALO / FINAL DO JOGO",
+     "c": 1,
+     "ca": true,
+     "oti": "1/1",
+     "m": [
+      {
+       "id": 651,
+       "n": "1/1",
+       "eon": "{{HomeTeam}}/{{HomeTeam}}",
+       "otoi": "1/1",
+       "o": "6.50",
+       "su": false,
+       "ord": 0,
+       "col": 1
+      },
+      {
+       "id": 652,
+       "n": "1/X",
+       "eon": "{{HomeTeam}}/Empate",
+       "otoi": "1/X",
+       "o": "15.00",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 653,
+       "n": "1/2",
+       "eon": "{{HomeTeam}}/{{AwayTeam}}",
+       "otoi": "1/2",
+       "o": "23.00",
+       "su": false,
+       "ord": 2,
+       "col": 1
+      },
+      {
+       "id": 654,
+       "n": "X/1",
+       "eon": "Empate/{{HomeTeam}}",
+       "otoi": "X/1",
+       "o": "9.00",
+       "su": false,
+       "ord": 3,
+       "col": 2
+      },
+      {
+       "id": 655,
+       "n": "X/X",
+       "eon": "Empate/Empate",
+       "otoi": "X/X",
+       "o": "5.75",
+       "su": false,
+       "ord": 4,
+       "col": 2
+      },
+      {
+       "id": 656,
+       "n": "X/2",
+       "eon": "Empate/{{AwayTeam}}",
+       "otoi": "X/2",
+       "o": "5.00",
+       "su": false,
+       "ord": 5,
+       "col": 2
+      },
+      {
+       "id": 657,
+       "n": "2/1",
+       "eon": "{{AwayTeam}}/{{HomeTeam}}",
+       "otoi": "2/1",
+       "o": "34.00",
+       "su": false,
+       "ord": 6,
+       "col": 3
+      },
+      {
+       "id": 658,
+       "n": "2/X",
+       "eon": "{{AwayTeam}}/Empate",
+       "otoi": "2/X",
+       "o": "15.00",
+       "su": false,
+       "ord": 7,
+       "col": 3
+      },
+      {
+       "id": 659,
+       "n": "2/2",
+       "eon": "{{AwayTeam}}/{{AwayTeam}}",
+       "otoi": "2/2",
+       "o": "2.85",
+       "su": false,
+       "ord": 8,
+       "col": 3
+      }
+     ]
+    },
+    {
+     "id": 16,
+     "n": "GOLOS IMPAR/PAR",
+     "c": 5,
+     "oti": "7",
+     "m": [
+      {
+       "id": 660,
+       "n": "IMPAR",
+       "eon": null,
+       "otoi": "o",
+       "o": "1.90",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 661,
+       "n": "PAR",
+       "eon": null,
+       "otoi": "e",
+       "o": "1.90",
+       "su": false,
+       "ord": 2,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 27,
+     "n": "Handicap",
+     "c": 1,
+     "ca": true,
+     "oti": "1*0:1",
+     "m": [
+      {
+       "id": 327993,
+       "n": "1",
+       "eon": "{{HomeTeam}} ({{SV}})",
+       "sbv": "-1",
+       "otoi": "1*-1",
+       "o": "10.00",
+       "su": false,
+       "ord": 14,
+       "col": 1
+      },
+      {
+       "id": 328008,
+       "n": "X",
+       "eon": "Empate ({{SV}})",
+       "sbv": "-1",
+       "otoi": "X*-1",
+       "o": "5.00",
+       "su": false,
+       "ord": 14,
+       "col": 2
+      },
+      {
+       "id": 327989,
+       "n": "2",
+       "eon": null,
+       "sbv": "1",
+       "otoi": "2*1",
+       "o": "1.22",
+       "su": false,
+       "ord": 14,
+       "col": 3
+      },
+      {
+       "id": 327992,
+       "n": "1",
+       "eon": "{{HomeTeam}} ({{SV}})",
+       "sbv": "1",
+       "otoi": "1*1",
+       "o": "1.90",
+       "su": false,
+       "ord": 15,
+       "col": 1
+      },
+      {
+       "id": 328007,
+       "n": "X",
+       "eon": "Empate ({{SV}})",
+       "sbv": "1",
+       "otoi": "X*1",
+       "o": "3.70",
+       "su": false,
+       "ord": 15,
+       "col": 2
+      },
+      {
+       "id": 327990,
+       "n": "2",
+       "eon": null,
+       "sbv": "-1",
+       "otoi": "2*-1",
+       "o": "3.40",
+       "su": false,
+       "ord": 15,
+       "col": 3
+      },
+      {
+       "id": 328003,
+       "n": "1",
+       "eon": "{{HomeTeam}} ({{SV}})",
+       "sbv": "2",
+       "otoi": "1*2",
+       "o": "1.28",
+       "su": false,
+       "ord": 16,
+       "col": 1
+      },
+      {
+       "id": 327998,
+       "n": "X",
+       "eon": "Empate ({{SV}})",
+       "sbv": "2",
+       "otoi": "X*2",
+       "o": "5.25",
+       "su": false,
+       "ord": 16,
+       "col": 2
+      },
+      {
+       "id": 327995,
+       "n": "2",
+       "eon": null,
+       "sbv": "-2",
+       "otoi": "2*-2",
+       "o": "7.50",
+       "su": false,
+       "ord": 16,
+       "col": 3
+      },
+      {
+       "id": 328138,
+       "n": "1",
+       "eon": "{{HomeTeam}} ({{SV}})",
+       "sbv": "3",
+       "otoi": "1*3",
+       "o": "1.05",
+       "su": false,
+       "ord": 17,
+       "col": 1
+      },
+      {
+       "id": 328136,
+       "n": "X",
+       "eon": "Empate ({{SV}})",
+       "sbv": "3",
+       "otoi": "X*3",
+       "o": "9.00",
+       "su": false,
+       "ord": 17,
+       "col": 2
+      },
+      {
+       "id": 328006,
+       "n": "2",
+       "eon": null,
+       "sbv": "-3",
+       "otoi": "2*-3",
+       "o": "15.00",
+       "su": false,
+       "ord": 17,
+       "col": 3
+      }
+     ]
+    },
+    {
+     "id": 52,
+     "n": "MARGENS COM QUE SE VENCEU (HT=CASA / AT=FORA)",
+     "c": 1,
+     "oti": "100",
+     "m": [
+      {
+       "id": 874,
+       "n": "HT 1",
+       "eon": null,
+       "otoi": "m1.1",
+       "o": "5.00",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 22826,
+       "n": "X",
+       "eon": null,
+       "otoi": "mx.0",
+       "o": "3.70",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      },
+      {
+       "id": 875,
+       "n": "AT 1",
+       "eon": null,
+       "otoi": "m2.1",
+       "o": "3.70",
+       "su": false,
+       "ord": 1,
+       "col": 3
+      },
+      {
+       "id": 873,
+       "n": "HT 2",
+       "eon": null,
+       "otoi": "m1.2",
+       "o": "12.00",
+       "su": false,
+       "ord": 2,
+       "col": 1
+      },
+      {
+       "id": 876,
+       "n": "AT 2",
+       "eon": null,
+       "otoi": "m2.2",
+       "o": "5.25",
+       "su": false,
+       "ord": 2,
+       "col": 3
+      },
+      {
+       "id": 872,
+       "n": "HT > 2",
+       "eon": null,
+       "otoi": "m1.2+",
+       "o": "23.00",
+       "su": false,
+       "ord": 3,
+       "col": 1
+      },
+      {
+       "id": 877,
+       "n": "AT > 2",
+       "eon": null,
+       "otoi": "m2.2+",
+       "o": "7.50",
+       "su": false,
+       "ord": 3,
+       "col": 3
+      }
+     ]
+    }
+   ],
+   "ou": []
+  },
+  {
+   "id": 246,
+   "or": 0,
+   "n": "Mais / Menos",
+   "is": 0,
+   "o": [
+    {
+     "id": 29,
+     "n": "Acima / Abaixo",
+     "c": 1,
+     "ca": true,
+     "oti": "3",
+     "m": [
+      {
+       "id": 43818,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "2.5",
+       "otoi": "+2.5",
+       "o": "1.75",
+       "su": false,
+       "ord": 3,
+       "col": 1
+      },
+      {
+       "id": 43819,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "2.5",
+       "otoi": "-2.5",
+       "o": "2.00",
+       "su": false,
+       "ord": 3,
+       "col": 2
+      },
+      {
+       "id": 47016,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "1.5",
+       "otoi": "+1.5",
+       "o": "1.24",
+       "su": false,
+       "ord": 2,
+       "col": 1
+      },
+      {
+       "id": 47017,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "1.5",
+       "otoi": "-1.5",
+       "o": "3.77",
+       "su": false,
+       "ord": 2,
+       "col": 2
+      },
+      {
+       "id": 31186,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "3.5",
+       "otoi": "+3.5",
+       "o": "2.86",
+       "su": false,
+       "ord": 4,
+       "col": 1
+      },
+      {
+       "id": 31187,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "3.5",
+       "otoi": "-3.5",
+       "o": "1.39",
+       "su": false,
+       "ord": 4,
+       "col": 2
+      },
+      {
+       "id": 30869,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "4.5",
+       "otoi": "+4.5",
+       "o": "5.11",
+       "su": false,
+       "ord": 5,
+       "col": 1
+      },
+      {
+       "id": 30870,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "4.5",
+       "otoi": "-4.5",
+       "o": "1.14",
+       "su": false,
+       "ord": 5,
+       "col": 2
+      },
+      {
+       "id": 30842,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "5.5",
+       "otoi": "+5.5",
+       "o": "10.10",
+       "su": false,
+       "ord": 6,
+       "col": 1
+      },
+      {
+       "id": 30838,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "5.5",
+       "otoi": "-5.5",
+       "o": "1.03",
+       "su": false,
+       "ord": 6,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 353,
+     "n": "Totais Equipa da casa",
+     "c": 1,
+     "oti": "109",
+     "m": [
+      {
+       "id": 41847,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "0.5",
+       "otoi": "1+0.5",
+       "o": "1.40",
+       "su": false,
+       "ord": 7,
+       "col": 1
+      },
+      {
+       "id": 41848,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "0.5",
+       "otoi": "1-0.5",
+       "o": "2.80",
+       "su": false,
+       "ord": 7,
+       "col": 2
+      },
+      {
+       "id": 41816,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "1.5",
+       "otoi": "1+1.5",
+       "o": "2.95",
+       "su": false,
+       "ord": 8,
+       "col": 1
+      },
+      {
+       "id": 41821,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "1.5",
+       "otoi": "1-1.5",
+       "o": "1.34",
+       "su": false,
+       "ord": 8,
+       "col": 2
+      },
+      {
+       "id": 41860,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "2.5",
+       "otoi": "1+2.5",
+       "o": "8.00",
+       "su": false,
+       "ord": 9,
+       "col": 1
+      },
+      {
+       "id": 41864,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "2.5",
+       "otoi": "1-2.5",
+       "o": "1.04",
+       "su": false,
+       "ord": 9,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 352,
+     "n": "Totais Equipa de fora",
+     "c": 1,
+     "oti": "108",
+     "m": [
+      {
+       "id": 41840,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "1.5",
+       "otoi": "2+1.5",
+       "o": "1.80",
+       "su": false,
+       "ord": 7,
+       "col": 1
+      },
+      {
+       "id": 41841,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "1.5",
+       "otoi": "2-1.5",
+       "o": "1.90",
+       "su": false,
+       "ord": 7,
+       "col": 2
+      },
+      {
+       "id": 41842,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "0.5",
+       "otoi": "2+0.5",
+       "o": "1.14",
+       "su": false,
+       "ord": 6,
+       "col": 1
+      },
+      {
+       "id": 41839,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "0.5",
+       "otoi": "2-0.5",
+       "o": "5.00",
+       "su": false,
+       "ord": 6,
+       "col": 2
+      },
+      {
+       "id": 41804,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "2.5",
+       "otoi": "2+2.5",
+       "o": "3.60",
+       "su": false,
+       "ord": 8,
+       "col": 1
+      },
+      {
+       "id": 41806,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "2.5",
+       "otoi": "2-2.5",
+       "o": "1.25",
+       "su": false,
+       "ord": 8,
+       "col": 2
+      },
+      {
+       "id": 41914,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "3.5",
+       "otoi": "2+3.5",
+       "o": "8.50",
+       "su": false,
+       "ord": 9,
+       "col": 1
+      },
+      {
+       "id": 41915,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "3.5",
+       "otoi": "2-3.5",
+       "o": "1.02",
+       "su": false,
+       "ord": 9,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 317,
+     "n": "EQUIPA DE CASA A MARCAR EM AMBAS AS PARTES?",
+     "c": 1,
+     "oti": "sb1",
+     "m": [
+      {
+       "id": 36811,
+       "n": "Sim",
+       "eon": null,
+       "otoi": "sb1n",
+       "o": "4.75",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 36804,
+       "n": "Não",
+       "eon": null,
+       "otoi": "sb1",
+       "o": "1.10",
+       "su": false,
+       "ord": 2,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 320,
+     "n": "Equipa de fora a marcar em ambas as partes",
+     "c": 1,
+     "oti": "59",
+     "m": [
+      {
+       "id": 36765,
+       "n": "Sim",
+       "eon": null,
+       "otoi": "sb2",
+       "o": "2.70",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 36771,
+       "n": "Não",
+       "eon": null,
+       "otoi": "sb2n",
+       "o": "1.35",
+       "su": false,
+       "ord": 2,
+       "col": 2
+      }
+     ]
+    }
+   ],
+   "ou": []
+  },
+  {
+   "id": 30,
+   "or": 0,
+   "n": "Combo",
+   "is": 0,
+   "o": [
+    {
+     "id": 50001,
+     "n": "1x2+ ACIMA/ABAIXO",
+     "c": 1,
+     "oti": "50001",
+     "m": [
+      {
+       "id": 328639,
+       "n": "Casa/Menos",
+       "eon": null,
+       "sbv": "2.5",
+       "o": "9.00",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 329104,
+       "n": "Empate/Mais",
+       "eon": null,
+       "sbv": "1.5",
+       "o": "5.00",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      },
+      {
+       "id": 329257,
+       "n": "Fora/Mais",
+       "eon": null,
+       "sbv": "1.5",
+       "o": "2.30",
+       "su": false,
+       "ord": 1,
+       "col": 3
+      },
+      {
+       "id": 328728,
+       "n": "Casa/Menos",
+       "eon": null,
+       "sbv": "4.5",
+       "o": "4.60",
+       "su": false,
+       "ord": 2,
+       "col": 1
+      },
+      {
+       "id": 328682,
+       "n": "Empate/Menos",
+       "eon": null,
+       "sbv": "1.5",
+       "o": "11.00",
+       "su": false,
+       "ord": 2,
+       "col": 2
+      },
+      {
+       "id": 328889,
+       "n": "Fora/Menos",
+       "eon": null,
+       "sbv": "1.5",
+       "o": "7.50",
+       "su": false,
+       "ord": 2,
+       "col": 3
+      },
+      {
+       "id": 328781,
+       "n": "Casa/Mais",
+       "eon": null,
+       "sbv": "3.5",
+       "o": "12.00",
+       "su": false,
+       "ord": 3,
+       "col": 1
+      },
+      {
+       "id": 328765,
+       "n": "Empate/Mais",
+       "eon": null,
+       "sbv": "2.5",
+       "o": "12.00",
+       "su": false,
+       "ord": 3,
+       "col": 2
+      },
+      {
+       "id": 329086,
+       "n": "Fora/Mais",
+       "eon": null,
+       "sbv": "2.5",
+       "o": "2.75",
+       "su": false,
+       "ord": 3,
+       "col": 3
+      },
+      {
+       "id": 328842,
+       "n": "Casa/Mais",
+       "eon": null,
+       "sbv": "1.5",
+       "o": "5.25",
+       "su": false,
+       "ord": 4,
+       "col": 1
+      },
+      {
+       "id": 329273,
+       "n": "Empate/Menos",
+       "eon": null,
+       "sbv": "2.5",
+       "o": "5.00",
+       "su": false,
+       "ord": 4,
+       "col": 2
+      },
+      {
+       "id": 328609,
+       "n": "Fora/Menos",
+       "eon": null,
+       "sbv": "2.5",
+       "o": "4.60",
+       "su": false,
+       "ord": 4,
+       "col": 3
+      },
+      {
+       "id": 329069,
+       "n": "Casa/Menos",
+       "eon": null,
+       "sbv": "1.5",
+       "o": "12.00",
+       "su": false,
+       "ord": 5,
+       "col": 1
+      },
+      {
+       "id": 328921,
+       "n": "Empate/Mais",
+       "eon": null,
+       "sbv": "3.5",
+       "o": "12.00",
+       "su": false,
+       "ord": 5,
+       "col": 2
+      },
+      {
+       "id": 329243,
+       "n": "Fora/Mais",
+       "eon": null,
+       "sbv": "3.5",
+       "o": "4.80",
+       "su": false,
+       "ord": 5,
+       "col": 3
+      },
+      {
+       "id": 329071,
+       "n": "Casa/Menos",
+       "eon": null,
+       "sbv": "3.5",
+       "o": "5.25",
+       "su": false,
+       "ord": 6,
+       "col": 1
+      },
+      {
+       "id": 328616,
+       "n": "Empate/Menos",
+       "eon": null,
+       "sbv": "3.5",
+       "o": "5.00",
+       "su": false,
+       "ord": 6,
+       "col": 2
+      },
+      {
+       "id": 328819,
+       "n": "Fora/Menos",
+       "eon": null,
+       "sbv": "3.5",
+       "o": "2.70",
+       "su": false,
+       "ord": 6,
+       "col": 3
+      },
+      {
+       "id": 329197,
+       "n": "Casa/Mais",
+       "eon": null,
+       "sbv": "4.5",
+       "o": "19.00",
+       "su": false,
+       "ord": 7,
+       "col": 1
+      },
+      {
+       "id": 328843,
+       "n": "Empate/Mais",
+       "eon": null,
+       "sbv": "4.5",
+       "o": "41.00",
+       "su": false,
+       "ord": 7,
+       "col": 2
+      },
+      {
+       "id": 328680,
+       "n": "Fora/Mais",
+       "eon": null,
+       "sbv": "4.5",
+       "o": "8.00",
+       "su": false,
+       "ord": 7,
+       "col": 3
+      },
+      {
+       "id": 329212,
+       "n": "Casa/Mais",
+       "eon": null,
+       "sbv": "2.5",
+       "o": "6.50",
+       "su": false,
+       "ord": 8,
+       "col": 1
+      },
+      {
+       "id": 329296,
+       "n": "Empate/Menos",
+       "eon": null,
+       "sbv": "4.5",
+       "o": "3.80",
+       "su": false,
+       "ord": 8,
+       "col": 2
+      },
+      {
+       "id": 329175,
+       "n": "Fora/Menos",
+       "eon": null,
+       "sbv": "4.5",
+       "o": "2.20",
+       "su": false,
+       "ord": 8,
+       "col": 3
+      }
+     ]
+    },
+    {
+     "id": 386,
+     "n": "1X2 + ambas as equipas a marcar (GG=Sim / NG= Não)",
+     "c": 1,
+     "oti": "11",
+     "m": [
+      {
+       "id": 32648,
+       "n": "1/GG",
+       "eon": null,
+       "otoi": "1 y",
+       "o": "7.00",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 32650,
+       "n": "X/GG",
+       "eon": null,
+       "otoi": "x y",
+       "o": "5.00",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      },
+      {
+       "id": 32652,
+       "n": "2/GG",
+       "eon": null,
+       "otoi": "2 y",
+       "o": "3.60",
+       "su": false,
+       "ord": 1,
+       "col": 3
+      },
+      {
+       "id": 32649,
+       "n": "1/NG",
+       "eon": null,
+       "otoi": "1 n",
+       "o": "7.50",
+       "su": false,
+       "ord": 2,
+       "col": 1
+      },
+      {
+       "id": 32651,
+       "n": "X/NG",
+       "eon": null,
+       "otoi": "x n",
+       "o": "11.00",
+       "su": false,
+       "ord": 2,
+       "col": 2
+      },
+      {
+       "id": 32653,
+       "n": "2/NG",
+       "eon": null,
+       "otoi": "2 n",
+       "o": "3.50",
+       "su": false,
+       "ord": 2,
+       "col": 3
+      }
+     ]
+    },
+    {
+     "id": 50003,
+     "n": "HIPÓTESE DUPLA + ACIMA/ABAIXO",
+     "c": 1,
+     "oti": "50003",
+     "m": [
+      {
+       "id": 328685,
+       "n": "1X / Acima",
+       "eon": null,
+       "sbv": "3.5",
+       "o": "6.50",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 329301,
+       "n": "X2 / Acima",
+       "eon": null,
+       "sbv": "1.5",
+       "o": "1.52",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      },
+      {
+       "id": 328610,
+       "n": "12 / Acima",
+       "eon": null,
+       "sbv": "1.5",
+       "o": "1.55",
+       "su": false,
+       "ord": 1,
+       "col": 3
+      },
+      {
+       "id": 328789,
+       "n": "1X / Abaixo",
+       "eon": null,
+       "sbv": "3.5",
+       "o": "2.60",
+       "su": false,
+       "ord": 2,
+       "col": 1
+      },
+      {
+       "id": 328702,
+       "n": "X2 / Abaixo",
+       "eon": null,
+       "sbv": "1.5",
+       "o": "5.00",
+       "su": false,
+       "ord": 2,
+       "col": 2
+      },
+      {
+       "id": 328858,
+       "n": "12 / Abaixo",
+       "eon": null,
+       "sbv": "1.5",
+       "o": "5.00",
+       "su": false,
+       "ord": 2,
+       "col": 3
+      },
+      {
+       "id": 328807,
+       "n": "1X / Acima",
+       "eon": null,
+       "sbv": "1.5",
+       "o": "2.50",
+       "su": false,
+       "ord": 3,
+       "col": 1
+      },
+      {
+       "id": 328849,
+       "n": "X2 / Acima",
+       "eon": null,
+       "sbv": "2.5",
+       "o": "2.25",
+       "su": false,
+       "ord": 3,
+       "col": 2
+      },
+      {
+       "id": 328997,
+       "n": "12 / Acima",
+       "eon": null,
+       "sbv": "2.5",
+       "o": "1.95",
+       "su": false,
+       "ord": 3,
+       "col": 3
+      },
+      {
+       "id": 328845,
+       "n": "1X / Abaixo",
+       "eon": null,
+       "sbv": "1.5",
+       "o": "6.50",
+       "su": false,
+       "ord": 4,
+       "col": 1
+      },
+      {
+       "id": 329249,
+       "n": "X2 / Abaixo",
+       "eon": null,
+       "sbv": "2.5",
+       "o": "2.40",
+       "su": false,
+       "ord": 4,
+       "col": 2
+      },
+      {
+       "id": 329139,
+       "n": "12 / Abaixo",
+       "eon": null,
+       "sbv": "2.5",
+       "o": "3.10",
+       "su": false,
+       "ord": 4,
+       "col": 3
+      },
+      {
+       "id": 329067,
+       "n": "1X / Acima",
+       "eon": null,
+       "sbv": "2.5",
+       "o": "4.20",
+       "su": false,
+       "ord": 5,
+       "col": 1
+      },
+      {
+       "id": 329164,
+       "n": "X2 / Acima",
+       "eon": null,
+       "sbv": "3.5",
+       "o": "3.50",
+       "su": false,
+       "ord": 5,
+       "col": 2
+      },
+      {
+       "id": 328675,
+       "n": "12 / Acima",
+       "eon": null,
+       "sbv": "3.5",
+       "o": "3.50",
+       "su": false,
+       "ord": 5,
+       "col": 3
+      },
+      {
+       "id": 329072,
+       "n": "1X / Abaixo",
+       "eon": null,
+       "sbv": "4.5",
+       "o": "2.10",
+       "su": false,
+       "ord": 6,
+       "col": 1
+      },
+      {
+       "id": 328890,
+       "n": "X2 / Abaixo",
+       "eon": null,
+       "sbv": "3.5",
+       "o": "1.75",
+       "su": false,
+       "ord": 6,
+       "col": 2
+      },
+      {
+       "id": 328875,
+       "n": "12 / Abaixo",
+       "eon": null,
+       "sbv": "3.5",
+       "o": "1.80",
+       "su": false,
+       "ord": 6,
+       "col": 3
+      },
+      {
+       "id": 329140,
+       "n": "1X / Acima",
+       "eon": null,
+       "sbv": "4.5",
+       "o": "15.00",
+       "su": false,
+       "ord": 7,
+       "col": 1
+      },
+      {
+       "id": 328592,
+       "n": "X2 / Acima",
+       "eon": null,
+       "sbv": "4.5",
+       "o": "7.00",
+       "su": false,
+       "ord": 7,
+       "col": 2
+      },
+      {
+       "id": 329236,
+       "n": "12 / Acima",
+       "eon": null,
+       "sbv": "4.5",
+       "o": "5.75",
+       "su": false,
+       "ord": 7,
+       "col": 3
+      },
+      {
+       "id": 329148,
+       "n": "1X / Abaixo",
+       "eon": null,
+       "sbv": "2.5",
+       "o": "3.20",
+       "su": false,
+       "ord": 8,
+       "col": 1
+      },
+      {
+       "id": 329055,
+       "n": "X2 / Abaixo",
+       "eon": null,
+       "sbv": "4.5",
+       "o": "1.40",
+       "su": false,
+       "ord": 8,
+       "col": 2
+      },
+      {
+       "id": 329059,
+       "n": "12 / Abaixo",
+       "eon": null,
+       "sbv": "4.5",
+       "o": "1.50",
+       "su": false,
+       "ord": 8,
+       "col": 3
+      }
+     ]
+    },
+    {
+     "id": 570,
+     "n": "Hipotese Dupla e ambas as equipas a marcar",
+     "c": 1,
+     "m": [
+      {
+       "id": 44684,
+       "n": "1X / Sim",
+       "eon": null,
+       "otoi": "1x y",
+       "o": "2.90",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 44682,
+       "n": "12 / Sim",
+       "eon": null,
+       "otoi": "12 y",
+       "o": "2.35",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      },
+      {
+       "id": 44680,
+       "n": "X2 / Sim",
+       "eon": null,
+       "otoi": "x2 y",
+       "o": "2.05",
+       "su": false,
+       "ord": 1,
+       "col": 3
+      },
+      {
+       "id": 44683,
+       "n": "1X / Não",
+       "eon": null,
+       "otoi": "1x n",
+       "o": "4.80",
+       "su": false,
+       "ord": 2,
+       "col": 1
+      },
+      {
+       "id": 44681,
+       "n": "12 / Não",
+       "eon": null,
+       "otoi": "12 n",
+       "o": "2.40",
+       "su": false,
+       "ord": 2,
+       "col": 2
+      },
+      {
+       "id": 44679,
+       "n": "X2 / Não",
+       "eon": null,
+       "otoi": "x2 n",
+       "o": "2.70",
+       "su": false,
+       "ord": 2,
+       "col": 3
+      }
+     ]
+    },
+    {
+     "id": 414,
+     "n": "Ambas as equipas a marcar + ACIMA/ABAIXO",
+     "c": 1,
+     "oti": "14",
+     "m": [
+      {
+       "id": 41807,
+       "n": "Sim / Acima",
+       "eon": null,
+       "sbv": "2.5",
+       "otoi": "y +2.5",
+       "o": "2.00",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 41803,
+       "n": "Não / Acima",
+       "eon": null,
+       "sbv": "2.5",
+       "otoi": "n +2.5",
+       "o": "10.00",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      },
+      {
+       "id": 41812,
+       "n": "Sim / Abaixo",
+       "eon": null,
+       "sbv": "2.5",
+       "otoi": "y -2.5",
+       "o": "7.00",
+       "su": false,
+       "ord": 2,
+       "col": 1
+      },
+      {
+       "id": 41814,
+       "n": "Não / Abaixo",
+       "eon": null,
+       "sbv": "2.5",
+       "otoi": "n -2.5",
+       "o": "2.50",
+       "su": false,
+       "ord": 2,
+       "col": 2
+      },
+      {
+       "id": 327987,
+       "n": "Sim / Acima",
+       "eon": null,
+       "sbv": "3.5",
+       "otoi": "y +3.5",
+       "o": "3.00",
+       "su": false,
+       "ord": 3,
+       "col": 1
+      },
+      {
+       "id": 328013,
+       "n": "Não / Acima",
+       "eon": null,
+       "sbv": "3.5",
+       "otoi": "n +3.5",
+       "o": "23.00",
+       "su": false,
+       "ord": 3,
+       "col": 2
+      },
+      {
+       "id": 327985,
+       "n": "Sim / Abaixo",
+       "eon": null,
+       "sbv": "3.5",
+       "otoi": "y -3.5",
+       "o": "3.25",
+       "su": false,
+       "ord": 4,
+       "col": 1
+      },
+      {
+       "id": 328015,
+       "n": "Não / Abaixo",
+       "eon": null,
+       "sbv": "3.5",
+       "otoi": "n -3.5",
+       "o": "2.15",
+       "su": false,
+       "ord": 4,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 37,
+     "n": "1º GOLO E RESULTADO FINAL",
+     "c": 1,
+     "oti": "120",
+     "m": [
+      {
+       "id": 22802,
+       "n": "Primeiro golo casa e 1",
+       "eon": null,
+       "otoi": "1 f2",
+       "o": "4.20",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 22803,
+       "n": "Primeiro golo casa e Empate",
+       "eon": null,
+       "otoi": "x f2",
+       "o": "8.50",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      },
+      {
+       "id": 22804,
+       "n": "Primeiro golo casa e 2",
+       "eon": null,
+       "otoi": "2 f2",
+       "o": "10.00",
+       "su": false,
+       "ord": 1,
+       "col": 3
+      },
+      {
+       "id": 22805,
+       "n": "Primeiro golo fora e 1",
+       "eon": null,
+       "otoi": "1 f2",
+       "o": "17.00",
+       "su": false,
+       "ord": 2,
+       "col": 1
+      },
+      {
+       "id": 22806,
+       "n": "Primeiro golo fora e Empate",
+       "eon": null,
+       "otoi": "x f2",
+       "o": "8.50",
+       "su": false,
+       "ord": 2,
+       "col": 2
+      },
+      {
+       "id": 22807,
+       "n": "Primeiro golo fora e 2",
+       "eon": null,
+       "otoi": "2 f2",
+       "o": "1.95",
+       "su": false,
+       "ord": 2,
+       "col": 3
+      },
+      {
+       "id": 836,
+       "n": "Sem Golos",
+       "eon": null,
+       "otoi": "x f0",
+       "o": "11.00",
+       "su": false,
+       "ord": 3,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 18519,
+     "n": "1X2 & Impar/Par",
+     "c": 3,
+     "oti": "18519",
+     "m": [
+      {
+       "id": 329182,
+       "n": "1 & Impar",
+       "eon": null,
+       "otoi": "1 o",
+       "o": "5.00",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 328979,
+       "n": "X & Par",
+       "eon": null,
+       "otoi": "x e",
+       "o": "3.70",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      },
+      {
+       "id": 329214,
+       "n": "2 & Impar",
+       "eon": null,
+       "otoi": "2 o",
+       "o": "2.70",
+       "su": false,
+       "ord": 1,
+       "col": 3
+      },
+      {
+       "id": 328968,
+       "n": "1 & Par",
+       "eon": null,
+       "otoi": "1 e",
+       "o": "12.00",
+       "su": false,
+       "ord": 2,
+       "col": 1
+      },
+      {
+       "id": 329276,
+       "n": "2 & Par",
+       "eon": null,
+       "otoi": "2 e",
+       "o": "4.60",
+       "su": false,
+       "ord": 2,
+       "col": 3
+      }
+     ]
+    },
+    {
+     "id": 50010,
+     "n": "1X2 ou ACIMA/ABAIXO",
+     "c": 1,
+     "oti": "50010",
+     "m": [
+      {
+       "id": 328583,
+       "n": "Casa ou Mais",
+       "eon": null,
+       "sbv": "2.5",
+       "o": "1.52",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 329270,
+       "n": "Empate ou Mais",
+       "eon": null,
+       "sbv": "1.5",
+       "o": "1.18",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      },
+      {
+       "id": 328837,
+       "n": "Fora ou Mais",
+       "eon": null,
+       "sbv": "1.5",
+       "o": "1.10",
+       "su": false,
+       "ord": 1,
+       "col": 3
+      },
+      {
+       "id": 328722,
+       "n": "Casa ou Menos",
+       "eon": null,
+       "sbv": "2.5",
+       "o": "1.60",
+       "su": false,
+       "ord": 2,
+       "col": 1
+      },
+      {
+       "id": 329268,
+       "n": "Empate ou Menos",
+       "eon": null,
+       "sbv": "1.5",
+       "o": "2.25",
+       "su": false,
+       "ord": 2,
+       "col": 2
+      },
+      {
+       "id": 328612,
+       "n": "Fora ou Menos",
+       "eon": null,
+       "sbv": "1.5",
+       "o": "1.48",
+       "su": false,
+       "ord": 2,
+       "col": 3
+      },
+      {
+       "id": 328829,
+       "n": "Casa ou Menos",
+       "eon": null,
+       "sbv": "3.5",
+       "o": "1.30",
+       "su": false,
+       "ord": 3,
+       "col": 1
+      },
+      {
+       "id": 329195,
+       "n": "Empate ou Mais",
+       "eon": null,
+       "sbv": "2.5",
+       "o": "1.35",
+       "su": false,
+       "ord": 3,
+       "col": 2
+      },
+      {
+       "id": 329255,
+       "n": "Fora ou Mais",
+       "eon": null,
+       "sbv": "2.5",
+       "o": "1.34",
+       "su": false,
+       "ord": 3,
+       "col": 3
+      },
+      {
+       "id": 329005,
+       "n": "Casa ou Menos",
+       "eon": null,
+       "sbv": "1.5",
+       "o": "2.30",
+       "su": false,
+       "ord": 4,
+       "col": 1
+      },
+      {
+       "id": 328815,
+       "n": "Empate ou Menos",
+       "eon": null,
+       "sbv": "2.5",
+       "o": "1.80",
+       "su": false,
+       "ord": 4,
+       "col": 2
+      },
+      {
+       "id": 328601,
+       "n": "Fora ou Menos",
+       "eon": null,
+       "sbv": "2.5",
+       "o": "1.22",
+       "su": false,
+       "ord": 4,
+       "col": 3
+      },
+      {
+       "id": 329121,
+       "n": "Casa ou Mais",
+       "eon": null,
+       "sbv": "3.5",
+       "o": "1.95",
+       "su": false,
+       "ord": 5,
+       "col": 1
+      },
+      {
+       "id": 329312,
+       "n": "Empate ou Mais",
+       "eon": null,
+       "sbv": "3.5",
+       "o": "1.90",
+       "su": false,
+       "ord": 5,
+       "col": 2
+      },
+      {
+       "id": 328772,
+       "n": "Fora ou Mais",
+       "eon": null,
+       "sbv": "3.5",
+       "o": "1.46",
+       "su": false,
+       "ord": 5,
+       "col": 3
+      },
+      {
+       "id": 329271,
+       "n": "Casa ou Mais",
+       "eon": null,
+       "sbv": "1.5",
+       "o": "1.18",
+       "su": false,
+       "ord": 6,
+       "col": 1
+      },
+      {
+       "id": 328974,
+       "n": "Empate ou Menos",
+       "eon": null,
+       "sbv": "3.5",
+       "o": "1.30",
+       "su": false,
+       "ord": 6,
+       "col": 2
+      },
+      {
+       "id": 328594,
+       "n": "Fora ou Menos",
+       "eon": null,
+       "sbv": "3.5",
+       "o": "1.12",
+       "su": false,
+       "ord": 6,
+       "col": 3
+      }
+     ]
+    },
+    {
+     "id": 50011,
+     "n": "1x2 ou AMBAS EQUIPAS MARCAM (GG=SIM / NG= NÃO)",
+     "c": 1,
+     "oti": "50011",
+     "m": [
+      {
+       "id": 328550,
+       "n": "Casa ou GG",
+       "eon": null,
+       "o": "1.40",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 328839,
+       "n": "Empate ou GG",
+       "eon": null,
+       "o": "1.55",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      },
+      {
+       "id": 329041,
+       "n": "Fora ou GG",
+       "eon": null,
+       "o": "1.14",
+       "su": false,
+       "ord": 1,
+       "col": 3
+      },
+      {
+       "id": 329006,
+       "n": "Casa ou NG",
+       "eon": null,
+       "o": "1.70",
+       "su": false,
+       "ord": 2,
+       "col": 1
+      },
+      {
+       "id": 329185,
+       "n": "Empate ou NG",
+       "eon": null,
+       "o": "1.55",
+       "su": false,
+       "ord": 2,
+       "col": 2
+      },
+      {
+       "id": 328759,
+       "n": "Fora ou NG",
+       "eon": null,
+       "o": "1.40",
+       "su": false,
+       "ord": 2,
+       "col": 3
+      }
+     ]
+    },
+    {
+     "id": 50012,
+     "n": "AMBAS AS EQUIPAS A MARCAR OU ACIMA/ABAIXO",
+     "c": 1,
+     "oti": "50012",
+     "m": [
+      {
+       "id": 329250,
+       "n": "GG ou Mais",
+       "eon": null,
+       "sbv": "2.5",
+       "o": "1.45",
+       "su": false,
+       "ord": 2,
+       "col": 1
+      },
+      {
+       "id": 328605,
+       "n": "GG ou Menos",
+       "eon": null,
+       "sbv": "2.5",
+       "o": "1.02",
+       "su": false,
+       "ord": 3,
+       "col": 1
+      },
+      {
+       "id": 329248,
+       "n": "NG ou Menos",
+       "eon": null,
+       "sbv": "2.5",
+       "o": "1.70",
+       "su": false,
+       "ord": 3,
+       "col": 2
+      },
+      {
+       "id": 328508,
+       "n": "GG ou Mais",
+       "eon": null,
+       "sbv": "3.5",
+       "o": "1.58",
+       "su": false,
+       "ord": 4,
+       "col": 1
+      },
+      {
+       "id": 328590,
+       "n": "NG ou Mais",
+       "eon": null,
+       "sbv": "2.5",
+       "o": "1.06",
+       "su": false,
+       "ord": 4,
+       "col": 2
+      },
+      {
+       "id": 329180,
+       "n": "NG ou Mais",
+       "eon": null,
+       "sbv": "3.5",
+       "o": "1.28",
+       "su": false,
+       "ord": 5,
+       "col": 2
+      },
+      {
+       "id": 329007,
+       "n": "GG ou Mais",
+       "eon": null,
+       "sbv": "4.5",
+       "o": "1.62",
+       "su": false,
+       "ord": 6,
+       "col": 1
+      },
+      {
+       "id": 328515,
+       "n": "NG ou Menos",
+       "eon": null,
+       "sbv": "3.5",
+       "o": "1.30",
+       "su": false,
+       "ord": 6,
+       "col": 2
+      },
+      {
+       "id": 328782,
+       "n": "NG ou Mais",
+       "eon": null,
+       "sbv": "4.5",
+       "o": "1.55",
+       "su": false,
+       "ord": 7,
+       "col": 2
+      },
+      {
+       "id": 328955,
+       "n": "NG ou Menos",
+       "eon": null,
+       "sbv": "4.5",
+       "o": "1.10",
+       "su": false,
+       "ord": 8,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 413,
+     "n": "1ª Parte - 1X2 + Ambas as equipas a marcar",
+     "c": 1,
+     "oti": "13",
+     "m": [
+      {
+       "id": 32663,
+       "n": "1/GG",
+       "eon": null,
+       "otoi": "1h1 y",
+       "o": "19.00",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 32665,
+       "n": "X/GG",
+       "eon": null,
+       "otoi": "1hx y",
+       "o": "7.00",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      },
+      {
+       "id": 32667,
+       "n": "2/GG",
+       "eon": null,
+       "otoi": "1h2 y",
+       "o": "13.00",
+       "su": false,
+       "ord": 1,
+       "col": 3
+      },
+      {
+       "id": 32664,
+       "n": "1/NG",
+       "eon": null,
+       "otoi": "1h1 n",
+       "o": "4.80",
+       "su": false,
+       "ord": 2,
+       "col": 1
+      },
+      {
+       "id": 32666,
+       "n": "X/NG",
+       "eon": null,
+       "otoi": "1hx n",
+       "o": "3.10",
+       "su": false,
+       "ord": 2,
+       "col": 2
+      },
+      {
+       "id": 32668,
+       "n": "2/NG",
+       "eon": null,
+       "otoi": "1h2 n",
+       "o": "2.80",
+       "su": false,
+       "ord": 2,
+       "col": 3
+      }
+     ]
+    },
+    {
+     "id": 568,
+     "n": "2ª Parte 1X2 + Ambas as equipas a marcar",
+     "c": 1,
+     "m": [
+      {
+       "id": 44654,
+       "n": "1/GG",
+       "eon": null,
+       "otoi": "2h1 y",
+       "o": "13.00",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 44652,
+       "n": "X/GG",
+       "eon": null,
+       "otoi": "2hx y",
+       "o": "6.00",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      },
+      {
+       "id": 44650,
+       "n": "2/GG",
+       "eon": null,
+       "otoi": "2h2 y",
+       "o": "8.50",
+       "su": false,
+       "ord": 1,
+       "col": 3
+      },
+      {
+       "id": 44653,
+       "n": "1/NG",
+       "eon": null,
+       "otoi": "2h1 n",
+       "o": "5.00",
+       "su": false,
+       "ord": 2,
+       "col": 1
+      },
+      {
+       "id": 44651,
+       "n": "X/NG",
+       "eon": null,
+       "otoi": "2hx n",
+       "o": "4.20",
+       "su": false,
+       "ord": 2,
+       "col": 2
+      },
+      {
+       "id": 44649,
+       "n": "2/NG",
+       "eon": null,
+       "otoi": "2h2 n",
+       "o": "2.75",
+       "su": false,
+       "ord": 2,
+       "col": 3
+      }
+     ]
+    }
+   ],
+   "ou": []
+  },
+  {
+   "id": 20,
+   "or": 0,
+   "n": "1a Parte",
+   "is": 0,
+   "o": [
+    {
+     "id": 6,
+     "n": "1st Half - 1X2",
+     "c": 1,
+     "ca": true,
+     "oti": "1h1",
+     "m": [
+      {
+       "id": 623,
+       "n": "1",
+       "eon": "{{HomeTeam}}",
+       "otoi": "1h1",
+       "o": "4.17",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 624,
+       "n": "X",
+       "eon": null,
+       "otoi": "1hx",
+       "o": "2.21",
+       "su": false,
+       "ord": 2,
+       "col": 2
+      },
+      {
+       "id": 625,
+       "n": "2",
+       "eon": "{{AwayTeam}}",
+       "otoi": "1h2",
+       "o": "2.45",
+       "su": false,
+       "ord": 3,
+       "col": 3
+      }
+     ]
+    },
+    {
+     "id": 44,
+     "n": "1ª Parte - Dupla Chance",
+     "c": 1,
+     "oti": "1h1X",
+     "m": [
+      {
+       "id": 852,
+       "n": "1X",
+       "eon": "{{HomeTeam}}/Empate",
+       "otoi": "1h1X",
+       "o": "1.46",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 853,
+       "n": "12",
+       "eon": "{{HomeTeam}} / {{AwayTeam}}\t",
+       "otoi": "1h12",
+       "o": "1.58",
+       "su": false,
+       "ord": 2,
+       "col": 2
+      },
+      {
+       "id": 854,
+       "n": "X2",
+       "eon": "Empate/{{AwayTeam}}\t",
+       "otoi": "1hX2",
+       "o": "1.18",
+       "su": false,
+       "ord": 3,
+       "col": 3
+      }
+     ]
+    },
+    {
+     "id": 119,
+     "n": "1ª Parte - Acima/Abaixo",
+     "c": 1,
+     "oti": "27",
+     "m": [
+      {
+       "id": 1175,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "1.5",
+       "otoi": "1h+1.5",
+       "o": "2.60",
+       "su": false,
+       "ord": 5,
+       "col": 1
+      },
+      {
+       "id": 1174,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "1.5",
+       "otoi": "1h-1.5",
+       "o": "1.44",
+       "su": false,
+       "ord": 5,
+       "col": 2
+      },
+      {
+       "id": 1173,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "0.5",
+       "otoi": "1h+0.5",
+       "o": "1.32",
+       "su": false,
+       "ord": 4,
+       "col": 1
+      },
+      {
+       "id": 1172,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "0.5",
+       "otoi": "1h-0.5",
+       "o": "3.10",
+       "su": false,
+       "ord": 4,
+       "col": 2
+      },
+      {
+       "id": 1177,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "2.5",
+       "otoi": "1h+2.5",
+       "o": "6.00",
+       "su": false,
+       "ord": 6,
+       "col": 1
+      },
+      {
+       "id": 1176,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "2.5",
+       "otoi": "1h-2.5",
+       "o": "1.08",
+       "su": false,
+       "ord": 6,
+       "col": 2
+      },
+      {
+       "id": 50486,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "3.5",
+       "otoi": "1h+3.5",
+       "o": "17.00",
+       "su": false,
+       "ord": 7,
+       "col": 1
+      }
+     ]
+    },
+    {
+     "id": 155,
+     "n": "1ª Parte - Ambas as equipas a marcar",
+     "c": 1,
+     "oti": "32",
+     "m": [
+      {
+       "id": 1411,
+       "n": "Sim",
+       "eon": null,
+       "otoi": "1hy",
+       "o": "4.20",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 1412,
+       "n": "Não",
+       "eon": null,
+       "otoi": "1hn",
+       "o": "1.18",
+       "su": false,
+       "ord": 2,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 392,
+     "n": "1ª Parte - Acima/Abaixo Equipa da Casa",
+     "c": 1,
+     "oti": "28",
+     "m": [
+      {
+       "id": 41822,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "0.5",
+       "otoi": "1h1+0.5",
+       "o": "2.30",
+       "su": false,
+       "ord": 4,
+       "col": 1
+      },
+      {
+       "id": 41819,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "0.5",
+       "otoi": "1h1-0.5",
+       "o": "1.48",
+       "su": false,
+       "ord": 4,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 393,
+     "n": "1ª Parte Acima/Abaixo Equipa de Fora",
+     "c": 1,
+     "oti": "29",
+     "m": [
+      {
+       "id": 41846,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "0.5",
+       "otoi": "1h2+0.5",
+       "o": "1.70",
+       "su": false,
+       "ord": 4,
+       "col": 1
+      },
+      {
+       "id": 41850,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "0.5",
+       "otoi": "1h2-0.5",
+       "o": "1.95",
+       "su": false,
+       "ord": 4,
+       "col": 2
+      },
+      {
+       "id": 41811,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "1.5",
+       "otoi": "1h2+1.5",
+       "o": "5.00",
+       "su": false,
+       "ord": 5,
+       "col": 1
+      },
+      {
+       "id": 41809,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "1.5",
+       "otoi": "1h2-1.5",
+       "o": "1.10",
+       "su": false,
+       "ord": 5,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 18550,
+     "n": "1a Parte - EQUIPA DE CASA IRA MARCAR NO JOGO?",
+     "c": 1,
+     "oti": "18550",
+     "m": [
+      {
+       "id": 328463,
+       "n": "Sim",
+       "eon": null,
+       "o": "2.30",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 329020,
+       "n": "Não",
+       "eon": null,
+       "o": "1.48",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 18551,
+     "n": "1a Parte - EQUIPA DE Fora IRA MARCAR NO JOGO?",
+     "c": 1,
+     "oti": "18551",
+     "m": [
+      {
+       "id": 328532,
+       "n": "Sim",
+       "eon": null,
+       "o": "1.70",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 328478,
+       "n": "Não",
+       "eon": null,
+       "o": "1.95",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 10155,
+     "n": "1a Parte - Casa GANHA SEM SOFRER GOLO",
+     "c": 1,
+     "oti": "10155",
+     "m": [
+      {
+       "id": 329406,
+       "n": "Sim",
+       "eon": null,
+       "o": "4.80",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 329347,
+       "n": "Não",
+       "eon": null,
+       "o": "1.12",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 10156,
+     "n": "1a Parte - Fora GANHA SEM SOFRER GOLO",
+     "c": 1,
+     "oti": "10156",
+     "m": [
+      {
+       "id": 329377,
+       "n": "Sim",
+       "eon": null,
+       "o": "2.80",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 329352,
+       "n": "Não",
+       "eon": null,
+       "o": "1.34",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 390,
+     "n": "1ª Parte Primeira equipa a marcar",
+     "c": 1,
+     "oti": "26",
+     "m": [
+      {
+       "id": 32593,
+       "n": "1",
+       "eon": null,
+       "otoi": "1hf1",
+       "o": "3.25",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 32594,
+       "n": "2",
+       "eon": null,
+       "otoi": "1hf2",
+       "o": "2.10",
+       "su": false,
+       "ord": 2,
+       "col": 2
+      },
+      {
+       "id": 32595,
+       "n": "Nenhum",
+       "eon": null,
+       "otoi": "1hf0",
+       "o": "3.10",
+       "su": false,
+       "ord": 3,
+       "col": 3
+      }
+     ]
+    },
+    {
+     "id": 11837,
+     "n": "1a Parte - Ultima equipa a marcar",
+     "c": 1,
+     "oti": "11837",
+     "m": [
+      {
+       "id": 328878,
+       "n": "1",
+       "eon": null,
+       "o": "3.25",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 328799,
+       "n": "X",
+       "eon": null,
+       "o": "3.10",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      },
+      {
+       "id": 328768,
+       "n": "2",
+       "eon": null,
+       "o": "2.10",
+       "su": false,
+       "ord": 1,
+       "col": 3
+      }
+     ]
+    },
+    {
+     "id": 394,
+     "n": "1ª Parte - EQUIPA DE CASA SEM SOFRER GOLO",
+     "c": 1,
+     "oti": "30",
+     "m": [
+      {
+       "id": 32600,
+       "n": "Sim",
+       "eon": null,
+       "otoi": "1hcs1",
+       "o": "1.95",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 32601,
+       "n": "Não",
+       "eon": null,
+       "otoi": "1hcs1n",
+       "o": "1.70",
+       "su": false,
+       "ord": 2,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 395,
+     "n": "1ª Parte -  EQUIPA DE FORA SEM SOFRER GOLO",
+     "c": 1,
+     "oti": "31",
+     "m": [
+      {
+       "id": 32602,
+       "n": "Sim",
+       "eon": null,
+       "otoi": "1hcs2",
+       "o": "1.48",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 32603,
+       "n": "Não",
+       "eon": null,
+       "otoi": "1hcs2n",
+       "o": "2.30",
+       "su": false,
+       "ord": 2,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 582,
+     "n": "1ª PARTE - Numero exacto de golos",
+     "c": 1,
+     "m": [
+      {
+       "id": 328884,
+       "n": "0",
+       "eon": null,
+       "otoi": "1hg0",
+       "o": "3.10",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 328655,
+       "n": "1",
+       "eon": null,
+       "otoi": "1hg1",
+       "o": "2.60",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      },
+      {
+       "id": 328533,
+       "n": "2",
+       "eon": null,
+       "otoi": "1hg2",
+       "o": "4.00",
+       "su": false,
+       "ord": 1,
+       "col": 3
+      },
+      {
+       "id": 328854,
+       "n": "3+",
+       "eon": null,
+       "otoi": "1hg3+",
+       "o": "6.00",
+       "su": false,
+       "ord": 2,
+       "col": 1
+      }
+     ]
+    },
+    {
+     "id": 32,
+     "n": "1ª Parte - RESULTADO EXACTO",
+     "c": 1,
+     "oti": "33",
+     "m": [
+      {
+       "id": 796,
+       "n": "1:0",
+       "eon": null,
+       "otoi": "1h1-0",
+       "o": "5.50",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 791,
+       "n": "0",
+       "eon": null,
+       "otoi": "1h0-0",
+       "o": "3.10",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      },
+      {
+       "id": 792,
+       "n": "0:1",
+       "eon": null,
+       "otoi": "1h0-1",
+       "o": "3.60",
+       "su": false,
+       "ord": 1,
+       "col": 3
+      },
+      {
+       "id": 801,
+       "n": "2:0",
+       "eon": null,
+       "otoi": "1h2-0",
+       "o": "17.00",
+       "su": false,
+       "ord": 2,
+       "col": 1
+      },
+      {
+       "id": 797,
+       "n": "1:1",
+       "eon": null,
+       "otoi": "1h1-1",
+       "o": "6.50",
+       "su": false,
+       "ord": 2,
+       "col": 2
+      },
+      {
+       "id": 793,
+       "n": "0:2",
+       "eon": null,
+       "otoi": "1h0-2",
+       "o": "8.50",
+       "su": false,
+       "ord": 2,
+       "col": 3
+      },
+      {
+       "id": 802,
+       "n": "2:1",
+       "eon": null,
+       "otoi": "1h2-1",
+       "o": "19.00",
+       "su": false,
+       "ord": 3,
+       "col": 1
+      },
+      {
+       "id": 803,
+       "n": "2:2",
+       "eon": null,
+       "otoi": "1h2-2",
+       "o": "29.00",
+       "su": false,
+       "ord": 3,
+       "col": 2
+      },
+      {
+       "id": 798,
+       "n": "1:2",
+       "eon": null,
+       "otoi": "1h1-2",
+       "o": "15.00",
+       "su": false,
+       "ord": 3,
+       "col": 3
+      },
+      {
+       "id": 43907,
+       "n": "Outros",
+       "eon": null,
+       "otoi": "1h*-*",
+       "o": "12.00",
+       "su": false,
+       "ord": 5,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 49,
+     "n": "1ª Parte - Golos Par/Ímpar",
+     "c": 3,
+     "oti": "35",
+     "m": [
+      {
+       "id": 866,
+       "n": "IMPAR",
+       "eon": null,
+       "otoi": "1ho",
+       "o": "2.05",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 867,
+       "n": "PAR",
+       "eon": null,
+       "otoi": "1he",
+       "o": "1.70",
+       "su": false,
+       "ord": 2,
+       "col": 2
+      }
+     ]
+    }
+   ],
+   "ou": []
+  },
+  {
+   "id": 21,
+   "or": 0,
+   "n": "2a Parte",
+   "is": 0,
+   "o": [
+    {
+     "id": 96,
+     "n": "2ª Parte - 1X2",
+     "c": 1,
+     "oti": "37",
+     "m": [
+      {
+       "id": 1081,
+       "n": "1",
+       "eon": null,
+       "otoi": "2h1",
+       "o": "3.90",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 1082,
+       "n": "X",
+       "eon": null,
+       "otoi": "2hx",
+       "o": "2.50",
+       "su": false,
+       "ord": 2,
+       "col": 2
+      },
+      {
+       "id": 1083,
+       "n": "2",
+       "eon": null,
+       "otoi": "2h2",
+       "o": "2.15",
+       "su": false,
+       "ord": 3,
+       "col": 3
+      }
+     ]
+    },
+    {
+     "id": 45,
+     "n": "2ª Parte - HIPÓTESE DUPLA",
+     "c": 1,
+     "oti": "38",
+     "m": [
+      {
+       "id": 855,
+       "n": "1X",
+       "eon": null,
+       "otoi": "2h1X",
+       "o": "1.55",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 856,
+       "n": "12",
+       "eon": null,
+       "otoi": "2h12",
+       "o": "1.40",
+       "su": false,
+       "ord": 2,
+       "col": 2
+      },
+      {
+       "id": 857,
+       "n": "X2",
+       "eon": null,
+       "otoi": "2hX2",
+       "o": "1.18",
+       "su": false,
+       "ord": 3,
+       "col": 3
+      }
+     ]
+    },
+    {
+     "id": 120,
+     "n": "2ª Parte - Acima/Abaixo",
+     "c": 1,
+     "oti": "42",
+     "m": [
+      {
+       "id": 1181,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "1.5",
+       "otoi": "2h+1.5",
+       "o": "1.95",
+       "su": false,
+       "ord": 5,
+       "col": 1
+      },
+      {
+       "id": 1180,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "1.5",
+       "otoi": "2h-1.5",
+       "o": "1.75",
+       "su": false,
+       "ord": 5,
+       "col": 2
+      },
+      {
+       "id": 1179,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "0.5",
+       "otoi": "2h+0.5",
+       "o": "1.20",
+       "su": false,
+       "ord": 4,
+       "col": 1
+      },
+      {
+       "id": 1178,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "0.5",
+       "otoi": "2h-0.5",
+       "o": "4.20",
+       "su": false,
+       "ord": 4,
+       "col": 2
+      },
+      {
+       "id": 1183,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "2.5",
+       "otoi": "2h+2.5",
+       "o": "4.00",
+       "su": false,
+       "ord": 6,
+       "col": 1
+      },
+      {
+       "id": 1182,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "2.5",
+       "otoi": "2h-2.5",
+       "o": "1.20",
+       "su": false,
+       "ord": 6,
+       "col": 2
+      },
+      {
+       "id": 50488,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "3.5",
+       "otoi": "2h+3.5",
+       "o": "10.00",
+       "su": false,
+       "ord": 7,
+       "col": 1
+      },
+      {
+       "id": 50489,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "3.5",
+       "otoi": "2h-3.5",
+       "o": "1.02",
+       "su": false,
+       "ord": 7,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 156,
+     "n": "2ª Parte - Ambas equipas a marcar",
+     "c": 1,
+     "oti": "51",
+     "m": [
+      {
+       "id": 1413,
+       "n": "Sim",
+       "eon": null,
+       "otoi": "2hy",
+       "o": "3.10",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 1414,
+       "n": "Não",
+       "eon": null,
+       "otoi": "2hn",
+       "o": "1.32",
+       "su": false,
+       "ord": 2,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 405,
+     "n": "2ª Parte - Handicap",
+     "c": 1,
+     "oti": "40",
+     "m": [
+      {
+       "id": 50935,
+       "n": "2",
+       "eon": null,
+       "sbv": "-2",
+       "otoi": "2h2*-2",
+       "o": "15.00",
+       "su": false,
+       "ord": 5,
+       "col": 3
+      },
+      {
+       "id": 50927,
+       "n": "1",
+       "eon": null,
+       "sbv": "-1",
+       "otoi": "2h1*-1",
+       "o": "13.00",
+       "su": false,
+       "ord": 6,
+       "col": 1
+      },
+      {
+       "id": 50939,
+       "n": "X",
+       "eon": null,
+       "sbv": "-1",
+       "otoi": "2hX*-1",
+       "o": "5.75",
+       "su": false,
+       "ord": 6,
+       "col": 2
+      },
+      {
+       "id": 50933,
+       "n": "2",
+       "eon": null,
+       "sbv": "-1",
+       "otoi": "2h2*-1",
+       "o": "5.50",
+       "su": false,
+       "ord": 6,
+       "col": 3
+      },
+      {
+       "id": 50926,
+       "n": "1",
+       "eon": null,
+       "sbv": "1",
+       "otoi": "2h1*1",
+       "o": "1.55",
+       "su": false,
+       "ord": 7,
+       "col": 1
+      },
+      {
+       "id": 50938,
+       "n": "X",
+       "eon": null,
+       "sbv": "1",
+       "otoi": "2hX*1",
+       "o": "3.60",
+       "su": false,
+       "ord": 7,
+       "col": 2
+      },
+      {
+       "id": 50932,
+       "n": "2",
+       "eon": null,
+       "sbv": "1",
+       "otoi": "2h2*1",
+       "o": "1.18",
+       "su": false,
+       "ord": 7,
+       "col": 3
+      },
+      {
+       "id": 50928,
+       "n": "1",
+       "eon": null,
+       "sbv": "2",
+       "otoi": "2h1*2",
+       "o": "1.10",
+       "su": false,
+       "ord": 8,
+       "col": 1
+      },
+      {
+       "id": 50940,
+       "n": "X",
+       "eon": null,
+       "sbv": "2",
+       "otoi": "2hX*2",
+       "o": "7.00",
+       "su": false,
+       "ord": 8,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 18552,
+     "n": "2a Parte - EQUIPA DE CASA IRA MARCAR NO JOGO?",
+     "c": 1,
+     "oti": "18552",
+     "m": [
+      {
+       "id": 329194,
+       "n": "Sim",
+       "eon": null,
+       "o": "1.95",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 329029,
+       "n": "Não",
+       "eon": null,
+       "o": "1.70",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 18553,
+     "n": "2a Parte - EQUIPA DE Fora IRA MARCAR NO JOGO?",
+     "c": 1,
+     "oti": "18553",
+     "m": [
+      {
+       "id": 328977,
+       "n": "Sim",
+       "eon": null,
+       "o": "1.46",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 329254,
+       "n": "Não",
+       "eon": null,
+       "o": "2.40",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 10157,
+     "n": "2a Parte - Casa GANHA SEM SOFRER GOLO",
+     "c": 1,
+     "oti": "10157",
+     "m": [
+      {
+       "id": 328787,
+       "n": "Sim",
+       "eon": null,
+       "o": "5.00",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 329272,
+       "n": "Não",
+       "eon": null,
+       "o": "1.10",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 10158,
+     "n": "2a Parte - Fora GANHA SEM SOFRER GOLO",
+     "c": 1,
+     "oti": "10158",
+     "m": [
+      {
+       "id": 328873,
+       "n": "Sim",
+       "eon": null,
+       "o": "2.75",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 329026,
+       "n": "Não",
+       "eon": null,
+       "o": "1.35",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 404,
+     "n": "2ª Parte - Primeira equipa a marcar ",
+     "c": 1,
+     "oti": "41",
+     "m": [
+      {
+       "id": 32615,
+       "n": "1",
+       "eon": null,
+       "otoi": "2hf1",
+       "o": "2.90",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 32616,
+       "n": "2",
+       "eon": null,
+       "otoi": "2hf2",
+       "o": "1.90",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      },
+      {
+       "id": 32617,
+       "n": "Nenhum",
+       "eon": null,
+       "otoi": "2hf0",
+       "o": "4.20",
+       "su": false,
+       "ord": 1,
+       "col": 3
+      }
+     ]
+    },
+    {
+     "id": 11838,
+     "n": "2a Parte - Ultima equipa a marcar",
+     "c": 1,
+     "oti": "11838",
+     "m": [
+      {
+       "id": 329009,
+       "n": "1",
+       "eon": null,
+       "o": "2.90",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 328564,
+       "n": "X",
+       "eon": null,
+       "o": "4.20",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      },
+      {
+       "id": 328920,
+       "n": "2",
+       "eon": null,
+       "o": "1.90",
+       "su": false,
+       "ord": 1,
+       "col": 3
+      }
+     ]
+    },
+    {
+     "id": 397,
+     "n": "2ª Parte Golos da Equipa da Casa",
+     "c": 1,
+     "oti": "43",
+     "m": [
+      {
+       "id": 41817,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "0.5",
+       "otoi": "2h1+0.5",
+       "o": "1.95",
+       "su": false,
+       "ord": 4,
+       "col": 1
+      },
+      {
+       "id": 41818,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "0.5",
+       "otoi": "2h1-0.5",
+       "o": "1.70",
+       "su": false,
+       "ord": 4,
+       "col": 2
+      },
+      {
+       "id": 41859,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "1.5",
+       "otoi": "2h1+1.5",
+       "o": "6.50",
+       "su": false,
+       "ord": 5,
+       "col": 1
+      },
+      {
+       "id": 41861,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "1.5",
+       "otoi": "2h1-1.5",
+       "o": "1.06",
+       "su": false,
+       "ord": 5,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 398,
+     "n": "2ª Parte  Golos da Equipa de Fora",
+     "c": 1,
+     "oti": "44",
+     "m": [
+      {
+       "id": 41835,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "0.5",
+       "otoi": "2h2+0.5",
+       "o": "1.46",
+       "su": false,
+       "ord": 4,
+       "col": 1
+      },
+      {
+       "id": 41845,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "0.5",
+       "otoi": "2h2-0.5",
+       "o": "2.40",
+       "su": false,
+       "ord": 4,
+       "col": 2
+      },
+      {
+       "id": 41797,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "1.5",
+       "otoi": "2h2+1.5",
+       "o": "3.50",
+       "su": false,
+       "ord": 5,
+       "col": 1
+      },
+      {
+       "id": 41802,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "1.5",
+       "otoi": "2h2-1.5",
+       "o": "1.22",
+       "su": false,
+       "ord": 5,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 399,
+     "n": "2ª Parte - EQUIPA DE CASA SEM SOFRER GOLO",
+     "c": 1,
+     "oti": "45",
+     "m": [
+      {
+       "id": 32611,
+       "n": "Sim",
+       "eon": null,
+       "otoi": "2hcs1",
+       "o": "2.40",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 32612,
+       "n": "Não",
+       "eon": null,
+       "otoi": "2hcsqn",
+       "o": "1.46",
+       "su": false,
+       "ord": 2,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 401,
+     "n": "2ª Parte -  EQUIPA DE FORA SEM SOFRER GOLO",
+     "c": 1,
+     "oti": "46",
+     "m": [
+      {
+       "id": 32613,
+       "n": "Sim",
+       "eon": null,
+       "otoi": "2hcs2",
+       "o": "1.70",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 32614,
+       "n": "Não",
+       "eon": null,
+       "otoi": "2hcs2n",
+       "o": "1.95",
+       "su": false,
+       "ord": 2,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 18027,
+     "n": "2ª Parte - NÚMERO EXACTO DE GOLOS",
+     "c": 1,
+     "oti": "18027",
+     "m": [
+      {
+       "id": 328668,
+       "n": "0",
+       "eon": null,
+       "otoi": "2hg0",
+       "o": "4.20",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 328704,
+       "n": "3+",
+       "eon": null,
+       "otoi": "2hg3+",
+       "o": "4.00",
+       "su": false,
+       "ord": 2,
+       "col": 1
+      }
+     ]
+    },
+    {
+     "id": 154,
+     "n": "2ª Parte - RESULTADO EXACTO",
+     "c": 1,
+     "oti": "50",
+     "m": [
+      {
+       "id": 1390,
+       "n": "1:0",
+       "eon": null,
+       "otoi": "2h1-0",
+       "o": "6.00",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 1385,
+       "n": "0",
+       "eon": null,
+       "otoi": "2h0-0",
+       "o": "4.20",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      },
+      {
+       "id": 1386,
+       "n": "0:1",
+       "eon": null,
+       "otoi": "2h0-1",
+       "o": "4.00",
+       "su": false,
+       "ord": 1,
+       "col": 3
+      },
+      {
+       "id": 1395,
+       "n": "2:0",
+       "eon": null,
+       "otoi": "2h2-0",
+       "o": "15.00",
+       "su": false,
+       "ord": 2,
+       "col": 1
+      },
+      {
+       "id": 1391,
+       "n": "1:1",
+       "eon": null,
+       "otoi": "2h1-1",
+       "o": "6.00",
+       "su": false,
+       "ord": 2,
+       "col": 2
+      },
+      {
+       "id": 1387,
+       "n": "0:2",
+       "eon": null,
+       "otoi": "2h0-2",
+       "o": "8.00",
+       "su": false,
+       "ord": 2,
+       "col": 3
+      },
+      {
+       "id": 1396,
+       "n": "2:1",
+       "eon": null,
+       "otoi": "2h2-1",
+       "o": "15.00",
+       "su": false,
+       "ord": 3,
+       "col": 1
+      },
+      {
+       "id": 1397,
+       "n": "2:2",
+       "eon": null,
+       "otoi": "2h2-2",
+       "o": "23.00",
+       "su": false,
+       "ord": 3,
+       "col": 2
+      },
+      {
+       "id": 1392,
+       "n": "1:2",
+       "eon": null,
+       "otoi": "2h1-2",
+       "o": "11.00",
+       "su": false,
+       "ord": 3,
+       "col": 3
+      },
+      {
+       "id": 1410,
+       "n": "Outro",
+       "eon": null,
+       "otoi": "2h*-*",
+       "o": "7.50",
+       "su": false,
+       "ord": 4,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 50,
+     "n": "2ª Parte - Golos Par/Ímpar",
+     "c": 3,
+     "oti": "48",
+     "m": [
+      {
+       "id": 868,
+       "n": "IMPAR",
+       "eon": null,
+       "otoi": "2ho",
+       "o": "1.95",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 869,
+       "n": "PAR",
+       "eon": null,
+       "otoi": "2he",
+       "o": "1.75",
+       "su": false,
+       "ord": 2,
+       "col": 2
+      }
+     ]
+    }
+   ],
+   "ou": []
+  },
+  {
+   "id": 31,
+   "or": 0,
+   "n": "Golos",
+   "is": 0,
+   "o": [
+    {
+     "id": 326,
+     "n": "MINUTO DO PRIMEIRO GOLO DO JOGO  (NENHUM = NENHUM GOLO MARCADO NO JOGO)",
+     "c": 1,
+     "oti": "_326",
+     "m": [
+      {
+       "id": 36814,
+       "n": "Nenhum",
+       "eon": null,
+       "o": "11.00",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 36808,
+       "n": "1-15",
+       "eon": null,
+       "otoi": "fg1-15",
+       "o": "2.80",
+       "su": false,
+       "ord": 2,
+       "col": 2
+      },
+      {
+       "id": 36807,
+       "n": "16-30",
+       "eon": null,
+       "otoi": "fg16-30",
+       "o": "3.80",
+       "su": false,
+       "ord": 3,
+       "col": 3
+      },
+      {
+       "id": 36810,
+       "n": "31-45",
+       "eon": null,
+       "otoi": "fg31-45",
+       "o": "5.00",
+       "su": false,
+       "ord": 4,
+       "col": 1
+      },
+      {
+       "id": 36813,
+       "n": "46-60",
+       "eon": null,
+       "otoi": "fg46-60",
+       "o": "7.50",
+       "su": false,
+       "ord": 5,
+       "col": 2
+      },
+      {
+       "id": 36809,
+       "n": "61-75",
+       "eon": null,
+       "otoi": "fg61-75",
+       "o": "12.00",
+       "su": false,
+       "ord": 6,
+       "col": 3
+      },
+      {
+       "id": 36816,
+       "n": "76-90",
+       "eon": null,
+       "otoi": "fg76-90",
+       "o": "15.00",
+       "su": false,
+       "ord": 7,
+       "col": 1
+      }
+     ]
+    },
+    {
+     "id": 11839,
+     "n": "Minuto do Ultimo Golo",
+     "c": 1,
+     "oti": "11839",
+     "m": [
+      {
+       "id": 329077,
+       "n": "0-15",
+       "eon": null,
+       "o": "26.00",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 328473,
+       "n": "16-30",
+       "eon": null,
+       "o": "19.00",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      },
+      {
+       "id": 328769,
+       "n": "31-45",
+       "eon": null,
+       "o": "11.00",
+       "su": false,
+       "ord": 1,
+       "col": 3
+      },
+      {
+       "id": 329161,
+       "n": "46-60",
+       "eon": null,
+       "o": "6.50",
+       "su": false,
+       "ord": 2,
+       "col": 1
+      },
+      {
+       "id": 328809,
+       "n": "61-75",
+       "eon": null,
+       "o": "4.40",
+       "su": false,
+       "ord": 2,
+       "col": 2
+      },
+      {
+       "id": 328788,
+       "n": "76-90",
+       "eon": null,
+       "o": "1.85",
+       "su": false,
+       "ord": 2,
+       "col": 3
+      },
+      {
+       "id": 328504,
+       "n": "No Gol",
+       "eon": null,
+       "o": "11.00",
+       "su": false,
+       "ord": 3,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 12974,
+     "n": "Golo nos primeiros 15 Minutos",
+     "c": 1,
+     "oti": "12974",
+     "m": [
+      {
+       "id": 329028,
+       "n": "Sim",
+       "eon": null,
+       "o": "2.80",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 328572,
+       "n": "Não",
+       "eon": null,
+       "o": "1.34",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 12976,
+     "n": "Golo nos primeiros 30 Minutos",
+     "c": 1,
+     "oti": "12976",
+     "m": [
+      {
+       "id": 328698,
+       "n": "Sim",
+       "eon": null,
+       "o": "1.70",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 328946,
+       "n": "Não",
+       "eon": null,
+       "o": "1.95",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 10123,
+     "n": "Equipa de Fora- QUANDO SERÁ MARCADO O PRIMEIRO GOLO? (1 = 1a Parte - 2 = 2a Parte - X = 0 golo)",
+     "c": 1,
+     "oti": "10123",
+     "m": [
+      {
+       "id": 328676,
+       "n": "1",
+       "eon": null,
+       "o": "1.70",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 328705,
+       "n": "X",
+       "eon": null,
+       "o": "5.00",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      },
+      {
+       "id": 329110,
+       "n": "2",
+       "eon": null,
+       "o": "3.10",
+       "su": false,
+       "ord": 1,
+       "col": 3
+      }
+     ]
+    }
+   ],
+   "ou": []
+  },
+  {
+   "id": 245,
+   "or": 0,
+   "n": "Casa/Fora",
+   "is": 0,
+   "o": [
+    {
+     "id": 330,
+     "n": "Parte mais produtiva - Equipa da casa",
+     "c": 1,
+     "oti": "63",
+     "m": [
+      {
+       "id": 32518,
+       "n": "1ª",
+       "eon": null,
+       "otoi": "hsh1.1",
+       "o": "3.75",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 32519,
+       "n": "2ª",
+       "eon": null,
+       "otoi": "hsh1.2",
+       "o": "2.80",
+       "su": false,
+       "ord": 2,
+       "col": 2
+      },
+      {
+       "id": 32520,
+       "n": "Igual",
+       "eon": null,
+       "otoi": "hsh1.x",
+       "o": "2.15",
+       "su": false,
+       "ord": 3,
+       "col": 3
+      }
+     ]
+    },
+    {
+     "id": 331,
+     "n": "Parte mais produtiva - Equipa de fora",
+     "c": 1,
+     "oti": "64",
+     "m": [
+      {
+       "id": 32521,
+       "n": "1ª",
+       "eon": null,
+       "otoi": "hsh2.1",
+       "o": "3.30",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 32522,
+       "n": "2ª",
+       "eon": null,
+       "otoi": "hsh2.2",
+       "o": "2.40",
+       "su": false,
+       "ord": 2,
+       "col": 2
+      },
+      {
+       "id": 32523,
+       "n": "Igual",
+       "eon": null,
+       "otoi": "hsh2.x",
+       "o": "2.75",
+       "su": false,
+       "ord": 3,
+       "col": 3
+      }
+     ]
+    },
+    {
+     "id": 316,
+     "n": "EQUIPA DE CASA GANHA QUALQUER PARTE",
+     "c": 1,
+     "oti": "65",
+     "m": [
+      {
+       "id": 36769,
+       "n": "Sim",
+       "eon": null,
+       "otoi": "we1",
+       "o": "2.40",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 36772,
+       "n": "Não",
+       "eon": null,
+       "otoi": "we1n",
+       "o": "1.52",
+       "su": false,
+       "ord": 2,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 319,
+     "n": "Equipa de fora ganha qualquer parte",
+     "c": 1,
+     "oti": "66",
+     "m": [
+      {
+       "id": 36825,
+       "n": "Sim",
+       "eon": null,
+       "otoi": "we2",
+       "o": "1.46",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 36830,
+       "n": "Não",
+       "eon": null,
+       "otoi": "we2n",
+       "o": "2.50",
+       "su": false,
+       "ord": 2,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 408,
+     "n": "Casa ganha SEM SOFRER GOLO",
+     "c": 1,
+     "oti": "67",
+     "m": [
+      {
+       "id": 32618,
+       "n": "Sim",
+       "eon": null,
+       "otoi": "n1",
+       "o": "7.50",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 32619,
+       "n": "Não",
+       "eon": null,
+       "otoi": "n1n",
+       "o": "1.06",
+       "su": false,
+       "ord": 2,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 409,
+     "n": "Fora ganha SEM SOFRER GOLO",
+     "c": 1,
+     "oti": "68",
+     "m": [
+      {
+       "id": 32620,
+       "n": "Sim",
+       "eon": null,
+       "otoi": "n2",
+       "o": "3.50",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 32621,
+       "n": "Não",
+       "eon": null,
+       "otoi": "n2n",
+       "o": "1.28",
+       "su": false,
+       "ord": 2,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 410,
+     "n": "Par / Ímpar - Equipa da casa",
+     "c": 3,
+     "oti": "69",
+     "m": [
+      {
+       "id": 32622,
+       "n": "IMPAR",
+       "eon": null,
+       "otoi": "o1",
+       "o": "2.05",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 32623,
+       "n": "PAR",
+       "eon": null,
+       "otoi": "e1",
+       "o": "1.68",
+       "su": false,
+       "ord": 2,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 411,
+     "n": "Par / Ímpar - Equipa de fora",
+     "c": 3,
+     "oti": "70",
+     "m": [
+      {
+       "id": 32624,
+       "n": "IMPAR",
+       "eon": null,
+       "otoi": "o2",
+       "o": "1.90",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 32625,
+       "n": "PAR",
+       "eon": null,
+       "otoi": "e2",
+       "o": "1.80",
+       "su": false,
+       "ord": 2,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 12948,
+     "n": "CASA MANTÉM A BALIZA SEM SOFRER GOLO",
+     "c": 1,
+     "oti": "12948",
+     "m": [
+      {
+       "id": 328712,
+       "n": "Sim",
+       "eon": null,
+       "otoi": "cs1",
+       "o": "5.00",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 328604,
+       "n": "Não",
+       "eon": null,
+       "otoi": "cs1n",
+       "o": "1.14",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 12949,
+     "n": "FORA MANTÉM A BALIZA SEM SOFRER GOLO",
+     "c": 1,
+     "oti": "12949",
+     "m": [
+      {
+       "id": 328502,
+       "n": "Sim",
+       "eon": null,
+       "otoi": "cs2",
+       "o": "2.80",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 328587,
+       "n": "Não",
+       "eon": null,
+       "otoi": "cs2n",
+       "o": "1.40",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      }
+     ]
+    }
+   ],
+   "ou": []
+  },
+  {
+   "id": 32,
+   "or": 0,
+   "n": "Cantos",
+   "is": 0,
+   "o": [
+    {
+     "id": 111,
+     "n": "QUAL DAS EQUIPAS TERÁ MAIS CANTOS?",
+     "c": 1,
+     "oti": "_111",
+     "m": [
+      {
+       "id": 1148,
+       "n": "1",
+       "eon": null,
+       "otoi": "c1",
+       "o": "2.20",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 1149,
+       "n": "X",
+       "eon": null,
+       "otoi": "cx",
+       "o": "8.50",
+       "su": false,
+       "ord": 2,
+       "col": 2
+      },
+      {
+       "id": 1150,
+       "n": "2",
+       "eon": null,
+       "otoi": "c2",
+       "o": "1.85",
+       "su": false,
+       "ord": 3,
+       "col": 3
+      }
+     ]
+    },
+    {
+     "id": 115,
+     "n": "Primeiro Canto DO JOGO",
+     "c": 1,
+     "oti": "_115",
+     "m": [
+      {
+       "id": 1158,
+       "n": "1",
+       "eon": null,
+       "otoi": "fc1",
+       "o": "1.90",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 1159,
+       "n": "2",
+       "eon": null,
+       "otoi": "fc2",
+       "o": "1.75",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      },
+      {
+       "id": 1160,
+       "n": "Nenhum",
+       "eon": null,
+       "otoi": "fc0",
+       "o": "101.00",
+       "su": false,
+       "ord": 1,
+       "col": 3
+      }
+     ]
+    },
+    {
+     "id": 121,
+     "n": "Último canto DO JOGO",
+     "c": 1,
+     "oti": "_121",
+     "m": [
+      {
+       "id": 1184,
+       "n": "1",
+       "eon": null,
+       "otoi": "lc1",
+       "o": "1.90",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 1185,
+       "n": "2",
+       "eon": null,
+       "otoi": "lc2",
+       "o": "1.75",
+       "su": false,
+       "ord": 2,
+       "col": 2
+      },
+      {
+       "id": 1186,
+       "n": "Nenhum",
+       "eon": null,
+       "otoi": "lc0",
+       "o": "101.00",
+       "su": false,
+       "ord": 3,
+       "col": 3
+      }
+     ]
+    },
+    {
+     "id": 12060,
+     "n": "Canto = Vai ter um Canto nos primeiros 10 minutos (0:00 à 09:59)",
+     "c": 1,
+     "oti": "12060",
+     "m": [
+      {
+       "id": 332658,
+       "n": "Sim",
+       "eon": null,
+       "o": "1.44",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 332657,
+       "n": "Não",
+       "eon": null,
+       "o": "2.45",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 107,
+     "n": "Total de cantos DO JOGO",
+     "c": 1,
+     "oti": "_107",
+     "m": [
+      {
+       "id": 22879,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "10.5",
+       "otoi": "c+10.5",
+       "o": "1.95",
+       "su": false,
+       "ord": 8,
+       "col": 1
+      },
+      {
+       "id": 22880,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "10.5",
+       "otoi": "c-10.5",
+       "o": "1.65",
+       "su": false,
+       "ord": 8,
+       "col": 2
+      },
+      {
+       "id": 22881,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "8.5",
+       "otoi": "c+8.5",
+       "o": "1.30",
+       "su": false,
+       "ord": 6,
+       "col": 1
+      },
+      {
+       "id": 22882,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "8.5",
+       "otoi": "c-8.5",
+       "o": "2.95",
+       "su": false,
+       "ord": 6,
+       "col": 2
+      },
+      {
+       "id": 22887,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "9.5",
+       "otoi": "c+9.5",
+       "o": "1.58",
+       "su": false,
+       "ord": 7,
+       "col": 1
+      },
+      {
+       "id": 22888,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "9.5",
+       "otoi": "c-9.5",
+       "o": "2.10",
+       "su": false,
+       "ord": 7,
+       "col": 2
+      },
+      {
+       "id": 22885,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "11.5",
+       "otoi": "c+11.5",
+       "o": "2.60",
+       "su": false,
+       "ord": 9,
+       "col": 1
+      },
+      {
+       "id": 22886,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "11.5",
+       "otoi": "c-11.5",
+       "o": "1.36",
+       "su": false,
+       "ord": 9,
+       "col": 2
+      },
+      {
+       "id": 22883,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "12.5",
+       "otoi": "c+12.5",
+       "o": "3.70",
+       "su": false,
+       "ord": 10,
+       "col": 1
+      },
+      {
+       "id": 22884,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "12.5",
+       "otoi": "c-12.5",
+       "o": "1.20",
+       "su": false,
+       "ord": 10,
+       "col": 2
+      },
+      {
+       "id": 50847,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "7.5",
+       "otoi": "c+7.5",
+       "o": "1.12",
+       "su": false,
+       "ord": 15,
+       "col": 1
+      },
+      {
+       "id": 50848,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "7.5",
+       "otoi": "c-7.5",
+       "o": "4.40",
+       "su": false,
+       "ord": 15,
+       "col": 2
+      },
+      {
+       "id": 53828,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "13.5",
+       "otoi": "c+13.5",
+       "o": "5.50",
+       "su": false,
+       "ord": 18,
+       "col": 1
+      },
+      {
+       "id": 53830,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "13.5",
+       "otoi": "c-13.5",
+       "o": "1.08",
+       "su": false,
+       "ord": 18,
+       "col": 2
+      },
+      {
+       "id": 54159,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "6.5",
+       "otoi": "c+6.5",
+       "o": "1.02",
+       "su": false,
+       "ord": 20,
+       "col": 1
+      },
+      {
+       "id": 54161,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "6.5",
+       "otoi": "c-6.5",
+       "o": "7.50",
+       "su": false,
+       "ord": 20,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 18029,
+     "n": "PRIMEIRA EQUIPA A TER 3 CANTOS (X = NENHUMA VAI TER 3 CANTOS)",
+     "c": 1,
+     "oti": "18029",
+     "m": [
+      {
+       "id": 332808,
+       "n": "1",
+       "eon": null,
+       "sbv": "3",
+       "o": "1.90",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 332810,
+       "n": "X",
+       "eon": null,
+       "sbv": "3",
+       "o": "41.00",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      },
+      {
+       "id": 332809,
+       "n": "2",
+       "eon": null,
+       "sbv": "3",
+       "o": "1.65",
+       "su": false,
+       "ord": 1,
+       "col": 3
+      }
+     ]
+    },
+    {
+     "id": 18030,
+     "n": "PRIMEIRA EQUIPA A TER 5 CANTOS (X = NENHUMA VAI TER 5 CANTOS)",
+     "c": 1,
+     "oti": "18030",
+     "m": [
+      {
+       "id": 332811,
+       "n": "1",
+       "eon": null,
+       "sbv": "5",
+       "o": "2.30",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 332813,
+       "n": "X",
+       "eon": null,
+       "sbv": "5",
+       "o": "5.25",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      },
+      {
+       "id": 332812,
+       "n": "2",
+       "eon": null,
+       "sbv": "5",
+       "o": "1.90",
+       "su": false,
+       "ord": 1,
+       "col": 3
+      }
+     ]
+    },
+    {
+     "id": 18031,
+     "n": "PRIMEIRA EQUIPA A TER 7 CANTOS (X = NENHUMA VAI TER 7 CANTOS)",
+     "c": 1,
+     "oti": "18031",
+     "m": [
+      {
+       "id": 332814,
+       "n": "1",
+       "eon": null,
+       "sbv": "7",
+       "o": "4.00",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 332816,
+       "n": "X",
+       "eon": null,
+       "sbv": "7",
+       "o": "1.68",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      },
+      {
+       "id": 332815,
+       "n": "2",
+       "eon": null,
+       "sbv": "7",
+       "o": "3.20",
+       "su": false,
+       "ord": 1,
+       "col": 3
+      }
+     ]
+    },
+    {
+     "id": 18032,
+     "n": "PRIMEIRA EQUIPA A TER 9 CANTOS (X = NENHUMA VAI TER 9 CANTOS)",
+     "c": 1,
+     "oti": "18032",
+     "m": [
+      {
+       "id": 332817,
+       "n": "1",
+       "eon": null,
+       "sbv": "9",
+       "o": "10.00",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 332819,
+       "n": "X",
+       "eon": null,
+       "sbv": "9",
+       "o": "1.10",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      },
+      {
+       "id": 332818,
+       "n": "2",
+       "eon": null,
+       "sbv": "9",
+       "o": "8.00",
+       "su": false,
+       "ord": 1,
+       "col": 3
+      }
+     ]
+    },
+    {
+     "id": 12027,
+     "n": "Total cantos para  EQUIPA DE CASA",
+     "c": 1,
+     "oti": "12027",
+     "m": [
+      {
+       "id": 332537,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "4.5",
+       "o": "1.62",
+       "su": false,
+       "ord": 4,
+       "col": 1
+      },
+      {
+       "id": 332536,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "4.5",
+       "o": "1.95",
+       "su": false,
+       "ord": 4,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 12038,
+     "n": "Total cantos para  EQUIPA DE fora",
+     "c": 1,
+     "oti": "12038",
+     "m": [
+      {
+       "id": 332552,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "5.5",
+       "o": "1.62",
+       "su": false,
+       "ord": 6,
+       "col": 2
+      },
+      {
+       "id": 332555,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "5.5",
+       "o": "1.95",
+       "su": false,
+       "ord": 7,
+       "col": 1
+      }
+     ]
+    },
+    {
+     "id": 12061,
+     "n": "Cantos - TOTAL exacto",
+     "c": 1,
+     "oti": "12061",
+     "m": [
+      {
+       "id": 332804,
+       "n": "6-",
+       "eon": null,
+       "o": "7.50",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 332805,
+       "n": "7",
+       "eon": null,
+       "o": "9.00",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      },
+      {
+       "id": 332806,
+       "n": "8",
+       "eon": null,
+       "o": "7.50",
+       "su": false,
+       "ord": 1,
+       "col": 3
+      },
+      {
+       "id": 332807,
+       "n": "9",
+       "eon": null,
+       "o": "6.50",
+       "su": false,
+       "ord": 2,
+       "col": 1
+      },
+      {
+       "id": 332793,
+       "n": "10",
+       "eon": null,
+       "o": "6.50",
+       "su": false,
+       "ord": 2,
+       "col": 2
+      },
+      {
+       "id": 332794,
+       "n": "11",
+       "eon": null,
+       "o": "7.00",
+       "su": false,
+       "ord": 2,
+       "col": 3
+      },
+      {
+       "id": 332795,
+       "n": "12",
+       "eon": null,
+       "o": "8.00",
+       "su": false,
+       "ord": 3,
+       "col": 1
+      },
+      {
+       "id": 332796,
+       "n": "13",
+       "eon": null,
+       "o": "10.00",
+       "su": false,
+       "ord": 3,
+       "col": 2
+      },
+      {
+       "id": 332797,
+       "n": "14",
+       "eon": null,
+       "o": "12.00",
+       "su": false,
+       "ord": 3,
+       "col": 3
+      },
+      {
+       "id": 332798,
+       "n": "15",
+       "eon": null,
+       "o": "17.00",
+       "su": false,
+       "ord": 4,
+       "col": 1
+      },
+      {
+       "id": 332799,
+       "n": "16",
+       "eon": null,
+       "o": "23.00",
+       "su": false,
+       "ord": 4,
+       "col": 2
+      },
+      {
+       "id": 332800,
+       "n": "17",
+       "eon": null,
+       "o": "29.00",
+       "su": false,
+       "ord": 4,
+       "col": 3
+      },
+      {
+       "id": 332801,
+       "n": "18",
+       "eon": null,
+       "o": "41.00",
+       "su": false,
+       "ord": 5,
+       "col": 1
+      },
+      {
+       "id": 332802,
+       "n": "19",
+       "eon": null,
+       "o": "51.00",
+       "su": false,
+       "ord": 5,
+       "col": 2
+      },
+      {
+       "id": 332803,
+       "n": "20+",
+       "eon": null,
+       "o": "51.00",
+       "su": false,
+       "ord": 5,
+       "col": 3
+      }
+     ]
+    },
+    {
+     "id": 18034,
+     "n": "PARTE COM MAIS Cantos",
+     "c": 1,
+     "oti": "18034",
+     "m": [
+      {
+       "id": 332829,
+       "n": "1a Parte",
+       "eon": null,
+       "o": "1.75",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 332831,
+       "n": "X",
+       "eon": null,
+       "o": "5.25",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      },
+      {
+       "id": 332830,
+       "n": "2a Parte",
+       "eon": null,
+       "o": "1.55",
+       "su": false,
+       "ord": 1,
+       "col": 3
+      }
+     ]
+    },
+    {
+     "id": 113,
+     "n": "Cantos Par / Ímpar",
+     "c": 3,
+     "oti": "_113",
+     "m": [
+      {
+       "id": 1154,
+       "n": "IMPAR",
+       "eon": null,
+       "otoi": "co",
+       "o": "1.85",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 1155,
+       "n": "PAR",
+       "eon": null,
+       "otoi": "ce",
+       "o": "1.85",
+       "su": false,
+       "ord": 2,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 112,
+     "n": "1ª Parte QUAL DAS EQUIPAS TERÁ MAIS CANTOS?",
+     "c": 1,
+     "oti": "_112",
+     "m": [
+      {
+       "id": 1151,
+       "n": "1",
+       "eon": null,
+       "otoi": "1hc1",
+       "o": "2.40",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 1152,
+       "n": "X",
+       "eon": null,
+       "otoi": "1hcx",
+       "o": "4.25",
+       "su": false,
+       "ord": 2,
+       "col": 2
+      },
+      {
+       "id": 1153,
+       "n": "2",
+       "eon": null,
+       "otoi": "1hc2",
+       "o": "2.00",
+       "su": false,
+       "ord": 3,
+       "col": 3
+      }
+     ]
+    },
+    {
+     "id": 108,
+     "n": "1ª Parte - Total de cantos",
+     "c": 1,
+     "oti": "_108",
+     "m": [
+      {
+       "id": 22875,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "4.5",
+       "otoi": "1hc+4.5",
+       "o": "1.60",
+       "su": false,
+       "ord": 4,
+       "col": 1
+      },
+      {
+       "id": 22876,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "4.5",
+       "otoi": "1hc-4.5",
+       "o": "2.05",
+       "su": false,
+       "ord": 4,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 116,
+     "n": "1ª Parte - Primeiro Canto",
+     "c": 1,
+     "oti": "_116",
+     "m": [
+      {
+       "id": 1161,
+       "n": "1",
+       "eon": null,
+       "otoi": "1hfc1",
+       "o": "1.90",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 1162,
+       "n": "2",
+       "eon": null,
+       "otoi": "1hfc2",
+       "o": "1.75",
+       "su": false,
+       "ord": 2,
+       "col": 2
+      },
+      {
+       "id": 1163,
+       "n": "Nenhum",
+       "eon": null,
+       "otoi": "1hfc0",
+       "o": "51.00",
+       "su": false,
+       "ord": 3,
+       "col": 3
+      }
+     ]
+    },
+    {
+     "id": 122,
+     "n": "1ª Parte - Último canto",
+     "c": 1,
+     "oti": "_122",
+     "m": [
+      {
+       "id": 1187,
+       "n": "1",
+       "eon": null,
+       "otoi": "1hlc1",
+       "o": "1.85",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 1188,
+       "n": "2",
+       "eon": null,
+       "otoi": "1hlc2",
+       "o": "1.70",
+       "su": false,
+       "ord": 2,
+       "col": 2
+      },
+      {
+       "id": 1189,
+       "n": "Nenhum",
+       "eon": null,
+       "otoi": "1hlc0",
+       "o": "51.00",
+       "su": false,
+       "ord": 3,
+       "col": 3
+      }
+     ]
+    },
+    {
+     "id": 18093,
+     "n": "2a Parte Cantos - 1X2",
+     "c": 1,
+     "oti": "18093",
+     "m": [
+      {
+       "id": 332677,
+       "n": "1",
+       "eon": null,
+       "o": "2.40",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 332679,
+       "n": "X",
+       "eon": null,
+       "o": "5.25",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      },
+      {
+       "id": 332678,
+       "n": "2",
+       "eon": null,
+       "o": "2.00",
+       "su": false,
+       "ord": 1,
+       "col": 3
+      }
+     ]
+    },
+    {
+     "id": 18035,
+     "n": "2ª PARTE - Total de Cantos",
+     "c": 1,
+     "oti": "18035",
+     "m": [
+      {
+       "id": 332667,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "5.5",
+       "o": "2.05",
+       "su": false,
+       "ord": 5,
+       "col": 1
+      },
+      {
+       "id": 332670,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "5.5",
+       "o": "1.60",
+       "su": false,
+       "ord": 5,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 18047,
+     "n": "2a Parte - Primeiro Canto",
+     "c": 1,
+     "oti": "18047",
+     "m": [
+      {
+       "id": 332975,
+       "n": "1",
+       "eon": null,
+       "o": "1.70",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 332977,
+       "n": "X",
+       "eon": null,
+       "o": "67.00",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      },
+      {
+       "id": 332976,
+       "n": "2",
+       "eon": null,
+       "o": "1.58",
+       "su": false,
+       "ord": 1,
+       "col": 3
+      }
+     ]
+    },
+    {
+     "id": 18033,
+     "n": "Halftime/Fulltime (Cantos)",
+     "c": 1,
+     "oti": "18033",
+     "m": [
+      {
+       "id": 332820,
+       "n": "1/1",
+       "eon": null,
+       "otoi": "1/1",
+       "o": "3.00",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 332826,
+       "n": "X/1",
+       "eon": null,
+       "otoi": "X/1",
+       "o": "10.00",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      },
+      {
+       "id": 332823,
+       "n": "2/1",
+       "eon": null,
+       "otoi": "2/1",
+       "o": "12.00",
+       "su": false,
+       "ord": 1,
+       "col": 3
+      },
+      {
+       "id": 332821,
+       "n": "1/2",
+       "eon": null,
+       "otoi": "1/2",
+       "o": "11.00",
+       "su": false,
+       "ord": 2,
+       "col": 1
+      },
+      {
+       "id": 332827,
+       "n": "X/2",
+       "eon": null,
+       "otoi": "X/2",
+       "o": "9.00",
+       "su": false,
+       "ord": 2,
+       "col": 2
+      },
+      {
+       "id": 332824,
+       "n": "2/2",
+       "eon": null,
+       "otoi": "2/2",
+       "o": "2.40",
+       "su": false,
+       "ord": 2,
+       "col": 3
+      },
+      {
+       "id": 332822,
+       "n": "1/X",
+       "eon": null,
+       "otoi": "1/X",
+       "o": "21.00",
+       "su": false,
+       "ord": 3,
+       "col": 1
+      },
+      {
+       "id": 332828,
+       "n": "X/X",
+       "eon": null,
+       "otoi": "X/X",
+       "o": "26.00",
+       "su": false,
+       "ord": 3,
+       "col": 2
+      },
+      {
+       "id": 332825,
+       "n": "2/X",
+       "eon": null,
+       "otoi": "2/X",
+       "o": "21.00",
+       "su": false,
+       "ord": 3,
+       "col": 3
+      }
+     ]
+    }
+   ],
+   "ou": []
+  },
+  {
+   "id": 33,
+   "or": 0,
+   "n": "Cartoes",
+   "is": 0,
+   "o": [
+    {
+     "id": 73,
+     "n": "Total Cartões Partida",
+     "c": 1,
+     "oti": "_73",
+     "m": [
+      {
+       "id": 22859,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "4.5",
+       "o": "1.90",
+       "su": false,
+       "ord": 14,
+       "col": 1
+      },
+      {
+       "id": 22860,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "4.5",
+       "o": "1.75",
+       "su": false,
+       "ord": 14,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 77,
+     "n": "Ao menos 1 cartão vermelho",
+     "c": 1,
+     "oti": "_77",
+     "m": [
+      {
+       "id": 1007,
+       "n": "Sim",
+       "eon": null,
+       "o": "4.25",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 1008,
+       "n": "Não",
+       "eon": null,
+       "o": "1.16",
+       "su": false,
+       "ord": 2,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 85,
+     "n": "Cards Matchbet",
+     "c": 1,
+     "oti": "_85",
+     "m": [
+      {
+       "id": 1033,
+       "n": "1",
+       "eon": null,
+       "o": "2.40",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 1034,
+       "n": "X",
+       "eon": null,
+       "o": "4.80",
+       "su": false,
+       "ord": 2,
+       "col": 2
+      },
+      {
+       "id": 1035,
+       "n": "2",
+       "eon": null,
+       "o": "2.05",
+       "su": false,
+       "ord": 3,
+       "col": 3
+      }
+     ]
+    },
+    {
+     "id": 12228,
+     "n": "Cartoes Equipa de Casa - Mais/Menos ",
+     "c": 1,
+     "oti": "12228",
+     "m": [
+      {
+       "id": 333333,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "2.5",
+       "o": "2.40",
+       "su": false,
+       "ord": 3,
+       "col": 1
+      },
+      {
+       "id": 333338,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "2.5",
+       "o": "1.46",
+       "su": false,
+       "ord": 3,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 12236,
+     "n": "Cartoes Equipa de Fora - Mais/Menos ",
+     "c": 1,
+     "oti": "12236",
+     "m": [
+      {
+       "id": 333325,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "2.5",
+       "o": "2.15",
+       "su": false,
+       "ord": 3,
+       "col": 1
+      },
+      {
+       "id": 333383,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "2.5",
+       "o": "1.58",
+       "su": false,
+       "ord": 3,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 12246,
+     "n": "Terá o Primeiro Cartão do Jogo ",
+     "c": 1,
+     "oti": "12246",
+     "m": [
+      {
+       "id": 333302,
+       "n": "1",
+       "eon": null,
+       "o": "1.85",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 333305,
+       "n": "Nenhum",
+       "eon": null,
+       "o": "34.00",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      },
+      {
+       "id": 333363,
+       "n": "2",
+       "eon": null,
+       "o": "1.75",
+       "su": false,
+       "ord": 1,
+       "col": 3
+      }
+     ]
+    },
+    {
+     "id": 12247,
+     "n": "Terá o Último Cartão do Jogo ",
+     "c": 1,
+     "oti": "12247",
+     "m": [
+      {
+       "id": 333370,
+       "n": "1",
+       "eon": null,
+       "o": "1.85",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 333379,
+       "n": "Nenhum",
+       "eon": null,
+       "o": "34.00",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      },
+      {
+       "id": 333339,
+       "n": "2",
+       "eon": null,
+       "o": "1.75",
+       "su": false,
+       "ord": 1,
+       "col": 3
+      }
+     ]
+    },
+    {
+     "id": 12248,
+     "n": "Cartoes - Impar/Par",
+     "c": 3,
+     "oti": "12248",
+     "m": [
+      {
+       "id": 333296,
+       "n": "IMPAR",
+       "eon": null,
+       "o": "1.85",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 333340,
+       "n": "PAR",
+       "eon": null,
+       "o": "1.85",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 18513,
+     "n": "Cartoes - Hipotese Dupla ",
+     "c": 1,
+     "oti": "18513",
+     "m": [
+      {
+       "id": 333320,
+       "n": "1X",
+       "eon": null,
+       "o": "1.62",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 333384,
+       "n": "12",
+       "eon": null,
+       "o": "1.06",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      },
+      {
+       "id": 333360,
+       "n": "X2",
+       "eon": null,
+       "o": "1.36",
+       "su": false,
+       "ord": 1,
+       "col": 3
+      }
+     ]
+    },
+    {
+     "id": 18516,
+     "n": "Parte Mais Produtiva Cartoes",
+     "c": 1,
+     "m": [
+      {
+       "id": 333378,
+       "n": "1",
+       "eon": "1",
+       "o": "3.90",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 333377,
+       "n": "X",
+       "eon": "X",
+       "o": "4.80",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      },
+      {
+       "id": 333365,
+       "n": "2",
+       "eon": "2",
+       "o": "1.45",
+       "su": false,
+       "ord": 1,
+       "col": 3
+      }
+     ]
+    },
+    {
+     "id": 18525,
+     "n": "Cartoes - Empate Sem Aposta",
+     "c": 1,
+     "oti": "18525",
+     "m": [
+      {
+       "id": 333358,
+       "n": "1",
+       "eon": null,
+       "o": "1.85",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 333371,
+       "n": "2",
+       "eon": null,
+       "o": "1.62",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      }
+     ]
+    }
+   ],
+   "ou": []
+  },
+  {
+   "id": 249,
+   "or": 0,
+   "n": "Multi Resultado Exacto",
+   "is": 0,
+   "o": [
+    {
+     "id": 11412,
+     "n": "Multi RESULTADO EXACTO (1)",
+     "c": 1,
+     "oti": "11412",
+     "m": [
+      {
+       "id": 328568,
+       "n": "0-0 / 1-0 / 0-1",
+       "eon": null,
+       "o": "3.70",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 328719,
+       "n": "0-2 / 0-3 / 0-4",
+       "eon": null,
+       "o": "4.60",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      },
+      {
+       "id": 328644,
+       "n": "1-3 / 2-3 / 1-4 / 2-4",
+       "eon": null,
+       "o": "4.75",
+       "su": false,
+       "ord": 1,
+       "col": 3
+      },
+      {
+       "id": 329173,
+       "n": "3-1 / 3-2 / 4-1 / 4-2",
+       "eon": null,
+       "o": "10.00",
+       "su": false,
+       "ord": 2,
+       "col": 1
+      },
+      {
+       "id": 329187,
+       "n": "2-0 / 3-0 / 4-0",
+       "eon": null,
+       "o": "13.00",
+       "su": false,
+       "ord": 2,
+       "col": 2
+      },
+      {
+       "id": 329232,
+       "n": "1-1 / 2-1 / 1-2 / 2-2",
+       "eon": null,
+       "o": "1.95",
+       "su": false,
+       "ord": 2,
+       "col": 3
+      },
+      {
+       "id": 328961,
+       "n": "3-3 / 4-3 / 3-4 / 4-4 / Otro (uma equipe marca 5 ou mais gols)",
+       "eon": null,
+       "o": "9.00",
+       "su": false,
+       "ord": 3,
+       "col": 1
+      }
+     ]
+    },
+    {
+     "id": 11413,
+     "n": "Multi RESULTADO EXACTO (2)\t",
+     "c": 1,
+     "oti": "11413",
+     "m": [
+      {
+       "id": 328629,
+       "n": "1-0 / 2-0 / 2-1",
+       "eon": null,
+       "o": "4.20",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 329073,
+       "n": "0-0 / 1-1",
+       "eon": null,
+       "o": "5.00",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      },
+      {
+       "id": 328766,
+       "n": "0-1 / 0-2 / 1-2",
+       "eon": null,
+       "o": "2.30",
+       "su": false,
+       "ord": 1,
+       "col": 3
+      },
+      {
+       "id": 328480,
+       "n": "4-1 / 4-2 / 4-3",
+       "eon": null,
+       "o": "29.00",
+       "su": false,
+       "ord": 2,
+       "col": 1
+      },
+      {
+       "id": 328779,
+       "n": "2-2 / 3-3 / 4-4",
+       "eon": null,
+       "o": "8.50",
+       "su": false,
+       "ord": 2,
+       "col": 2
+      },
+      {
+       "id": 328581,
+       "n": "1-4 / 2-4 / 3-4",
+       "eon": null,
+       "o": "13.00",
+       "su": false,
+       "ord": 2,
+       "col": 3
+      },
+      {
+       "id": 328623,
+       "n": "3-0 / 3-1 / 3-2",
+       "eon": null,
+       "o": "11.00",
+       "su": false,
+       "ord": 3,
+       "col": 1
+      },
+      {
+       "id": 329081,
+       "n": "4-0 / 0-4 / Otro (uma equipe marca 5 ou mais gols)",
+       "eon": null,
+       "o": "10.00",
+       "su": false,
+       "ord": 3,
+       "col": 2
+      },
+      {
+       "id": 329200,
+       "n": "0-3 / 1-3 / 2-3",
+       "eon": null,
+       "o": "4.80",
+       "su": false,
+       "ord": 3,
+       "col": 3
+      }
+     ]
+    },
+    {
+     "id": 11414,
+     "n": "Multi RESULTADO EXACTO (3)\t",
+     "c": 1,
+     "oti": "11414",
+     "m": [
+      {
+       "id": 328580,
+       "n": "0-0 / 1-0",
+       "eon": null,
+       "o": "5.00",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 328794,
+       "n": "1-1 / 2-1",
+       "eon": null,
+       "o": "3.90",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      },
+      {
+       "id": 328542,
+       "n": "0-1 / 0-2",
+       "eon": null,
+       "o": "4.60",
+       "su": false,
+       "ord": 1,
+       "col": 3
+      },
+      {
+       "id": 328784,
+       "n": "2-0 / 3-0",
+       "eon": null,
+       "o": "13.00",
+       "su": false,
+       "ord": 2,
+       "col": 1
+      },
+      {
+       "id": 329113,
+       "n": "1-3 / 2-3",
+       "eon": null,
+       "o": "7.00",
+       "su": false,
+       "ord": 2,
+       "col": 2
+      },
+      {
+       "id": 328535,
+       "n": "1-2 / 0-3",
+       "eon": null,
+       "o": "4.75",
+       "su": false,
+       "ord": 2,
+       "col": 3
+      },
+      {
+       "id": 328608,
+       "n": "4-0 / 4-1",
+       "eon": null,
+       "o": "41.00",
+       "su": false,
+       "ord": 3,
+       "col": 1
+      },
+      {
+       "id": 329237,
+       "n": "3-1 / 3-2 / 2-2",
+       "eon": null,
+       "o": "6.50",
+       "su": false,
+       "ord": 3,
+       "col": 2
+      },
+      {
+       "id": 328985,
+       "n": "2-4 / 3-4",
+       "eon": null,
+       "o": "23.00",
+       "su": false,
+       "ord": 3,
+       "col": 3
+      },
+      {
+       "id": 328745,
+       "n": "4-2 / 4-3",
+       "eon": null,
+       "o": "41.00",
+       "su": false,
+       "ord": 4,
+       "col": 1
+      },
+      {
+       "id": 328514,
+       "n": "3-3 / 4-4 / Otro (uma equipe marca 5 ou mais gols)",
+       "eon": null,
+       "o": "12.00",
+       "su": false,
+       "ord": 4,
+       "col": 2
+      },
+      {
+       "id": 328957,
+       "n": "0-4 / 1-4",
+       "eon": null,
+       "o": "15.00",
+       "su": false,
+       "ord": 4,
+       "col": 3
+      }
+     ]
+    },
+    {
+     "id": 11415,
+     "n": "Multi RESULTADO EXACTO (4)\t",
+     "c": 1,
+     "oti": "11415",
+     "m": [
+      {
+       "id": 328475,
+       "n": "3-1 / 3-2",
+       "eon": null,
+       "o": "13.00",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 329183,
+       "n": "1-0 / 2-0",
+       "eon": null,
+       "o": "9.00",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      },
+      {
+       "id": 328808,
+       "n": "0-0 / 0-1",
+       "eon": null,
+       "o": "3.90",
+       "su": false,
+       "ord": 1,
+       "col": 3
+      },
+      {
+       "id": 328814,
+       "n": "3-0 / 2-1",
+       "eon": null,
+       "o": "9.00",
+       "su": false,
+       "ord": 2,
+       "col": 1
+      },
+      {
+       "id": 329134,
+       "n": "1-1 / 1-2",
+       "eon": null,
+       "o": "3.30",
+       "su": false,
+       "ord": 2,
+       "col": 2
+      },
+      {
+       "id": 328544,
+       "n": "0-2 / 0-3",
+       "eon": null,
+       "o": "5.25",
+       "su": false,
+       "ord": 2,
+       "col": 3
+      },
+      {
+       "id": 328911,
+       "n": "4-0 / 4-3",
+       "eon": null,
+       "o": "41.00",
+       "su": false,
+       "ord": 3,
+       "col": 1
+      },
+      {
+       "id": 328831,
+       "n": "1-3 / 2-3 / 2-2",
+       "eon": null,
+       "o": "4.75",
+       "su": false,
+       "ord": 3,
+       "col": 2
+      },
+      {
+       "id": 328862,
+       "n": "0-4 / 3-4",
+       "eon": null,
+       "o": "21.00",
+       "su": false,
+       "ord": 3,
+       "col": 3
+      },
+      {
+       "id": 329062,
+       "n": "4-1 / 4-2",
+       "eon": null,
+       "o": "34.00",
+       "su": false,
+       "ord": 4,
+       "col": 1
+      },
+      {
+       "id": 329157,
+       "n": "3-3 / 4-4 / Otro (uma equipe marca 5 ou mais gols)",
+       "eon": null,
+       "o": "12.00",
+       "su": false,
+       "ord": 4,
+       "col": 2
+      },
+      {
+       "id": 328851,
+       "n": "1-4 / 2-4",
+       "eon": null,
+       "o": "15.00",
+       "su": false,
+       "ord": 4,
+       "col": 3
+      }
+     ]
+    },
+    {
+     "id": 11416,
+     "n": "Multi RESULTADO EXACTO (5)",
+     "c": 1,
+     "oti": "11416",
+     "m": [
+      {
+       "id": 328696,
+       "n": "4-0 / 4-1 / 4-2 / 4-3",
+       "eon": null,
+       "o": "26.00",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 329116,
+       "n": "0-0 / 1-1 / 0-1 / 1-0",
+       "eon": null,
+       "o": "1.95",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      },
+      {
+       "id": 328555,
+       "n": "0-4 / 1-4 / 2-4 / 3-4",
+       "eon": null,
+       "o": "10.00",
+       "su": false,
+       "ord": 1,
+       "col": 3
+      },
+      {
+       "id": 329108,
+       "n": "2-0 / 2-1 / 3-0 / 3-1",
+       "eon": null,
+       "o": "5.25",
+       "su": false,
+       "ord": 2,
+       "col": 1
+      },
+      {
+       "id": 328954,
+       "n": "2-2 / 2-3 / 3-2 / 3-3",
+       "eon": null,
+       "o": "5.25",
+       "su": false,
+       "ord": 2,
+       "col": 2
+      },
+      {
+       "id": 329170,
+       "n": "0-2 / 1-2 / 0-3 / 1-3",
+       "eon": null,
+       "o": "2.50",
+       "su": false,
+       "ord": 2,
+       "col": 3
+      },
+      {
+       "id": 328466,
+       "n": "4-4 / Otro (uma equipe marca 5 ou mais gols)",
+       "eon": null,
+       "o": "15.00",
+       "su": false,
+       "ord": 3,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 1741,
+     "n": "RESULTADO EXACTO AO INTERVALO / NO FINAL DO JOGO",
+     "c": 1,
+     "oti": "9",
+     "m": [
+      {
+       "id": 29926,
+       "n": "1-0 1-0",
+       "eon": null,
+       "otoi": "1-0/1-0",
+       "o": "21.00",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 29915,
+       "n": "0-0 0-0",
+       "eon": null,
+       "otoi": "0-0/0-0",
+       "o": "11.00",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      },
+      {
+       "id": 29933,
+       "n": "0-1 0-1",
+       "eon": null,
+       "otoi": "0-1/0-1",
+       "o": "15.00",
+       "su": false,
+       "ord": 1,
+       "col": 3
+      },
+      {
+       "id": 29928,
+       "n": "1-0 1-1",
+       "eon": null,
+       "otoi": "1-0/1-1",
+       "o": "21.00",
+       "su": false,
+       "ord": 2,
+       "col": 1
+      },
+      {
+       "id": 29917,
+       "n": "0-0 0-1",
+       "eon": null,
+       "otoi": "0-0/0-1",
+       "o": "12.00",
+       "su": false,
+       "ord": 2,
+       "col": 2
+      },
+      {
+       "id": 29935,
+       "n": "0-1 0-2",
+       "eon": null,
+       "otoi": "0-1/0-2",
+       "o": "15.00",
+       "su": false,
+       "ord": 2,
+       "col": 3
+      },
+      {
+       "id": 29931,
+       "n": "1-0 1-2",
+       "eon": null,
+       "otoi": "1-0/1-2",
+       "o": "34.00",
+       "su": false,
+       "ord": 3,
+       "col": 1
+      },
+      {
+       "id": 29920,
+       "n": "0-0 0-2",
+       "eon": null,
+       "otoi": "0-0/0-2",
+       "o": "23.00",
+       "su": false,
+       "ord": 3,
+       "col": 2
+      },
+      {
+       "id": 29938,
+       "n": "0-1 0-3",
+       "eon": null,
+       "otoi": "0-1/0-3",
+       "o": "29.00",
+       "su": false,
+       "ord": 3,
+       "col": 3
+      },
+      {
+       "id": 29927,
+       "n": "1-0 2-0",
+       "eon": null,
+       "otoi": "1-0/2-0",
+       "o": "29.00",
+       "su": false,
+       "ord": 4,
+       "col": 1
+      },
+      {
+       "id": 29924,
+       "n": "0-0 0-3",
+       "eon": null,
+       "otoi": "0-0/0-3",
+       "o": "41.00",
+       "su": false,
+       "ord": 4,
+       "col": 2
+      },
+      {
+       "id": 29934,
+       "n": "0-1 1-1",
+       "eon": null,
+       "otoi": "0-1/1-1",
+       "o": "21.00",
+       "su": false,
+       "ord": 4,
+       "col": 3
+      },
+      {
+       "id": 29930,
+       "n": "1-0 2-1",
+       "eon": null,
+       "otoi": "1-0/2-1",
+       "o": "29.00",
+       "su": false,
+       "ord": 5,
+       "col": 1
+      },
+      {
+       "id": 29916,
+       "n": "0-0 1-0",
+       "eon": null,
+       "otoi": "0-0/1-0",
+       "o": "17.00",
+       "su": false,
+       "ord": 5,
+       "col": 2
+      },
+      {
+       "id": 29937,
+       "n": "0-1 1-2",
+       "eon": null,
+       "otoi": "0-1/1-2",
+       "o": "21.00",
+       "su": false,
+       "ord": 5,
+       "col": 3
+      },
+      {
+       "id": 29929,
+       "n": "1-0 3-0",
+       "eon": null,
+       "otoi": "1-0/3-0",
+       "o": "51.00",
+       "su": false,
+       "ord": 6,
+       "col": 1
+      },
+      {
+       "id": 29919,
+       "n": "0-0 1-1",
+       "eon": null,
+       "otoi": "0-0/1-1",
+       "o": "17.00",
+       "su": false,
+       "ord": 6,
+       "col": 2
+      },
+      {
+       "id": 29936,
+       "n": "0-1 2-1",
+       "eon": null,
+       "otoi": "0-1/2-1",
+       "o": "51.00",
+       "su": false,
+       "ord": 6,
+       "col": 3
+      },
+      {
+       "id": 29982,
+       "n": "1-0 4+",
+       "eon": null,
+       "otoi": "1-0/4+",
+       "o": "21.00",
+       "su": false,
+       "ord": 7,
+       "col": 1
+      },
+      {
+       "id": 29923,
+       "n": "0-0 1-2",
+       "eon": null,
+       "otoi": "0-0/1-2",
+       "o": "29.00",
+       "su": false,
+       "ord": 7,
+       "col": 2
+      },
+      {
+       "id": 29979,
+       "n": "0-1 4+",
+       "eon": null,
+       "otoi": "0-1/4+",
+       "o": "13.00",
+       "su": false,
+       "ord": 7,
+       "col": 3
+      },
+      {
+       "id": 29944,
+       "n": "2-0 2-0",
+       "eon": null,
+       "otoi": "2-0/2-0",
+       "o": "51.00",
+       "su": false,
+       "ord": 8,
+       "col": 1
+      },
+      {
+       "id": 29918,
+       "n": "0-0 2-0",
+       "eon": null,
+       "otoi": "0-0/2-0",
+       "o": "41.00",
+       "su": false,
+       "ord": 8,
+       "col": 2
+      },
+      {
+       "id": 29948,
+       "n": "0-2 0-2",
+       "eon": null,
+       "otoi": "0-2/0-2",
+       "o": "29.00",
+       "su": false,
+       "ord": 8,
+       "col": 3
+      },
+      {
+       "id": 29946,
+       "n": "2-0 2-1",
+       "eon": null,
+       "otoi": "2-0/2-1",
+       "o": "51.00",
+       "su": false,
+       "ord": 9,
+       "col": 1
+      },
+      {
+       "id": 29922,
+       "n": "0-0 2-1",
+       "eon": null,
+       "otoi": "0-0/2-1",
+       "o": "41.00",
+       "su": false,
+       "ord": 9,
+       "col": 2
+      },
+      {
+       "id": 29950,
+       "n": "0-2 0-3",
+       "eon": null,
+       "otoi": "0-2/0-3",
+       "o": "34.00",
+       "su": false,
+       "ord": 9,
+       "col": 3
+      },
+      {
+       "id": 29945,
+       "n": "2-0 3-0",
+       "eon": null,
+       "otoi": "2-0/3-0",
+       "o": "67.00",
+       "su": false,
+       "ord": 10,
+       "col": 1
+      },
+      {
+       "id": 29921,
+       "n": "0-0 3-0",
+       "eon": null,
+       "otoi": "0-0/3-0",
+       "o": "67.00",
+       "su": false,
+       "ord": 10,
+       "col": 2
+      },
+      {
+       "id": 29949,
+       "n": "0-2 1-2",
+       "eon": null,
+       "otoi": "0-2/1-2",
+       "o": "41.00",
+       "su": false,
+       "ord": 10,
+       "col": 3
+      },
+      {
+       "id": 29975,
+       "n": "2-0 4+",
+       "eon": null,
+       "otoi": "2-0/4+",
+       "o": "34.00",
+       "su": false,
+       "ord": 11,
+       "col": 1
+      },
+      {
+       "id": 29983,
+       "n": "0-0 4+",
+       "eon": null,
+       "otoi": "0-0/4+",
+       "o": "23.00",
+       "su": false,
+       "ord": 11,
+       "col": 2
+      },
+      {
+       "id": 29978,
+       "n": "0-2 4+",
+       "eon": null,
+       "otoi": "0-2/4+",
+       "o": "17.00",
+       "su": false,
+       "ord": 11,
+       "col": 3
+      },
+      {
+       "id": 29952,
+       "n": "2-1 2-1",
+       "eon": null,
+       "otoi": "2-1/2-1",
+       "o": "51.00",
+       "su": false,
+       "ord": 12,
+       "col": 1
+      },
+      {
+       "id": 29940,
+       "n": "1-1 1-1",
+       "eon": null,
+       "otoi": "1-1/1-1",
+       "o": "23.00",
+       "su": false,
+       "ord": 12,
+       "col": 2
+      },
+      {
+       "id": 29958,
+       "n": "0-3 0-3",
+       "eon": null,
+       "otoi": "0-3/0-3",
+       "o": "67.00",
+       "su": false,
+       "ord": 12,
+       "col": 3
+      },
+      {
+       "id": 29974,
+       "n": "2-1 4+",
+       "eon": null,
+       "otoi": "2-1/4+",
+       "o": "26.00",
+       "su": false,
+       "ord": 13,
+       "col": 1
+      },
+      {
+       "id": 29942,
+       "n": "1-1 1-2",
+       "eon": null,
+       "otoi": "1-1/1-2",
+       "o": "26.00",
+       "su": false,
+       "ord": 13,
+       "col": 2
+      },
+      {
+       "id": 29984,
+       "n": "0-3 4+",
+       "eon": null,
+       "otoi": "0-3/4+",
+       "o": "34.00",
+       "su": false,
+       "ord": 13,
+       "col": 3
+      },
+      {
+       "id": 29956,
+       "n": "3-0 3-0",
+       "eon": null,
+       "otoi": "3-0/3-0",
+       "o": "81.00",
+       "su": false,
+       "ord": 14,
+       "col": 1
+      },
+      {
+       "id": 29941,
+       "n": "1-1 2-1",
+       "eon": null,
+       "otoi": "1-1/2-1",
+       "o": "34.00",
+       "su": false,
+       "ord": 14,
+       "col": 2
+      },
+      {
+       "id": 29954,
+       "n": "1-2 1-2",
+       "eon": null,
+       "otoi": "1-2/1-2",
+       "o": "41.00",
+       "su": false,
+       "ord": 14,
+       "col": 3
+      },
+      {
+       "id": 29976,
+       "n": "3-0 4+",
+       "eon": null,
+       "otoi": "3-0/4+",
+       "o": "67.00",
+       "su": false,
+       "ord": 15,
+       "col": 1
+      },
+      {
+       "id": 29981,
+       "n": "1-1 4+",
+       "eon": null,
+       "otoi": "1-1/4+",
+       "o": "13.00",
+       "su": false,
+       "ord": 15,
+       "col": 2
+      },
+      {
+       "id": 29977,
+       "n": "1-2 4+",
+       "eon": null,
+       "otoi": "1-2/4+",
+       "o": "19.00",
+       "su": false,
+       "ord": 15,
+       "col": 3
+      },
+      {
+       "id": 29980,
+       "n": "4+ 4+",
+       "eon": null,
+       "otoi": "4+/4+",
+       "o": "15.00",
+       "su": false,
+       "ord": 16,
+       "col": 2
+      }
+     ]
+    }
+   ],
+   "ou": []
+  },
+  {
+   "id": 280,
+   "or": 0,
+   "n": "Asiaticos",
+   "is": 0,
+   "o": [
+    {
+     "id": 23,
+     "n": "Handicap Asiatico",
+     "c": 1,
+     "oti": "1*a-0.5",
+     "m": [
+      {
+       "id": 1772,
+       "n": "1",
+       "eon": "{{HomeTeam}} {{SV}}",
+       "sbv": "1.5",
+       "otoi": "1*a1.5",
+       "o": "1.28",
+       "su": false,
+       "ord": 36,
+       "col": 1
+      },
+      {
+       "id": 697,
+       "n": "2",
+       "eon": "{{AwayTeam}} {{SV}}",
+       "sbv": "-1.5",
+       "otoi": "2*a-1.5",
+       "o": "3.40",
+       "su": false,
+       "ord": 36,
+       "col": 2
+      },
+      {
+       "id": 682,
+       "n": "1",
+       "eon": "{{HomeTeam}} {{SV}}",
+       "sbv": "-1.5",
+       "otoi": "1*a-1.5",
+       "o": "10.00",
+       "su": false,
+       "ord": 24,
+       "col": 1
+      },
+      {
+       "id": 1773,
+       "n": "2",
+       "eon": "{{AwayTeam}} {{SV}}",
+       "sbv": "1.5",
+       "otoi": "2*a1.5",
+       "o": "1.02",
+       "su": false,
+       "ord": 24,
+       "col": 2
+      },
+      {
+       "id": 1837,
+       "n": "1",
+       "eon": "{{HomeTeam}} {{SV}}",
+       "sbv": "2.5",
+       "otoi": "1*a2.5",
+       "o": "1.05",
+       "su": false,
+       "ord": 40,
+       "col": 1
+      },
+      {
+       "id": 704,
+       "n": "2",
+       "eon": "{{AwayTeam}} {{SV}}",
+       "sbv": "-2.5",
+       "otoi": "2*a-2.5",
+       "o": "7.50",
+       "su": false,
+       "ord": 40,
+       "col": 2
+      }
+     ]
+    }
+   ],
+   "ou": []
+  },
+  {
+   "id": 22,
+   "or": 0,
+   "n": "Especial",
+   "is": 0,
+   "o": [
+    {
+     "id": 15911,
+     "n": "Remontada",
+     "c": 1,
+     "oti": "15911",
+     "m": [
+      {
+       "id": 328915,
+       "n": "Sim",
+       "eon": null,
+       "o": "6.50",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 328631,
+       "n": "Não",
+       "eon": null,
+       "o": "1.05",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 15912,
+     "n": "Remontada para equipa de casa",
+     "c": 1,
+     "oti": "15912",
+     "m": [
+      {
+       "id": 329293,
+       "n": "Sim",
+       "eon": null,
+       "o": "17.00",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      }
+     ]
+    },
+    {
+     "id": 15913,
+     "n": "Remontada para equipa de fora",
+     "c": 1,
+     "oti": "15913",
+     "m": [
+      {
+       "id": 329159,
+       "n": "Sim",
+       "eon": null,
+       "otoi": "1h1X",
+       "o": "10.00",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 329075,
+       "n": "Não",
+       "eon": null,
+       "o": "1.01",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 18520,
+     "n": "Empate com golos",
+     "c": 1,
+     "oti": "18520",
+     "m": [
+      {
+       "id": 334200,
+       "n": "Sim",
+       "eon": null,
+       "o": "5.00",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 334201,
+       "n": "Não",
+       "eon": null,
+       "o": "1.14",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 16997,
+     "n": "Metodo do primeiro golo",
+     "c": 1,
+     "oti": "16997",
+     "m": [
+      {
+       "id": 329151,
+       "n": "Remate em jogo",
+       "eon": null,
+       "o": "1.50",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 328771,
+       "n": "Livre directo",
+       "eon": null,
+       "o": "19.00",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      },
+      {
+       "id": 328827,
+       "n": "Pênalti",
+       "eon": null,
+       "o": "8.00",
+       "su": false,
+       "ord": 1,
+       "col": 3
+      },
+      {
+       "id": 329064,
+       "n": "Autogolo",
+       "eon": null,
+       "o": "21.00",
+       "su": false,
+       "ord": 2,
+       "col": 1
+      },
+      {
+       "id": 329090,
+       "n": "Golo de cabeca",
+       "eon": null,
+       "o": "5.00",
+       "su": false,
+       "ord": 2,
+       "col": 2
+      },
+      {
+       "id": 328495,
+       "n": "Sem Golos",
+       "eon": null,
+       "o": "11.00",
+       "su": false,
+       "ord": 2,
+       "col": 3
+      }
+     ]
+    },
+    {
+     "id": 16998,
+     "n": "Metodo do ultimo golo",
+     "c": 1,
+     "oti": "16998",
+     "m": [
+      {
+       "id": 328519,
+       "n": "Remate em jogo",
+       "eon": null,
+       "o": "1.50",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 328561,
+       "n": "Livre directo",
+       "eon": null,
+       "o": "19.00",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      },
+      {
+       "id": 328881,
+       "n": "Golo de cabeca",
+       "eon": null,
+       "o": "5.00",
+       "su": false,
+       "ord": 1,
+       "col": 3
+      },
+      {
+       "id": 329046,
+       "n": "Pênalti",
+       "eon": null,
+       "o": "8.00",
+       "su": false,
+       "ord": 2,
+       "col": 1
+      },
+      {
+       "id": 329141,
+       "n": "Sem Golos",
+       "eon": null,
+       "o": "11.00",
+       "su": false,
+       "ord": 2,
+       "col": 2
+      },
+      {
+       "id": 329317,
+       "n": "Autogolo",
+       "eon": null,
+       "o": "21.00",
+       "su": false,
+       "ord": 2,
+       "col": 3
+      }
+     ]
+    },
+    {
+     "id": 12959,
+     "n": "SUBSTITUICAO NA PRIMEIRA PARTE",
+     "c": 1,
+     "oti": "12959",
+     "m": [
+      {
+       "id": 330258,
+       "n": "Sim",
+       "eon": null,
+       "o": "3.85",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 330257,
+       "n": "Não",
+       "eon": null,
+       "o": "1.16",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 12965,
+     "n": "1X2 5 Minutos",
+     "c": 1,
+     "oti": "12965",
+     "m": [
+      {
+       "id": 328706,
+       "n": "1",
+       "eon": null,
+       "o": "17.00",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 329261,
+       "n": "X",
+       "eon": null,
+       "o": "1.04",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      },
+      {
+       "id": 329013,
+       "n": "2",
+       "eon": null,
+       "o": "12.00",
+       "su": false,
+       "ord": 1,
+       "col": 3
+      }
+     ]
+    },
+    {
+     "id": 327,
+     "n": "1X2 10 minutos",
+     "c": 1,
+     "oti": "_327",
+     "m": [
+      {
+       "id": 36827,
+       "n": "1",
+       "eon": null,
+       "o": "11.00",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 36821,
+       "n": "X",
+       "eon": null,
+       "o": "1.15",
+       "su": false,
+       "ord": 2,
+       "col": 2
+      },
+      {
+       "id": 36820,
+       "n": "2",
+       "eon": null,
+       "o": "7.00",
+       "su": false,
+       "ord": 3,
+       "col": 3
+      }
+     ]
+    },
+    {
+     "id": 12966,
+     "n": "1X2 15 Minutos",
+     "c": 1,
+     "oti": "12966",
+     "m": [
+      {
+       "id": 329192,
+       "n": "1",
+       "eon": null,
+       "o": "7.50",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 328908,
+       "n": "X",
+       "eon": null,
+       "o": "1.30",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      },
+      {
+       "id": 329106,
+       "n": "2",
+       "eon": null,
+       "o": "5.00",
+       "su": false,
+       "ord": 1,
+       "col": 3
+      }
+     ]
+    },
+    {
+     "id": 12967,
+     "n": "1X2 20 Minutos",
+     "c": 1,
+     "oti": "12967",
+     "m": [
+      {
+       "id": 328978,
+       "n": "1",
+       "eon": null,
+       "o": "6.50",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 328678,
+       "n": "X",
+       "eon": null,
+       "o": "1.44",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      },
+      {
+       "id": 328865,
+       "n": "2",
+       "eon": null,
+       "o": "4.20",
+       "su": false,
+       "ord": 1,
+       "col": 3
+      }
+     ]
+    },
+    {
+     "id": 12970,
+     "n": "1X2 30 Minutos",
+     "c": 1,
+     "oti": "12970",
+     "m": [
+      {
+       "id": 329332,
+       "n": "1",
+       "eon": null,
+       "o": "5.00",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 329030,
+       "n": "X",
+       "eon": null,
+       "o": "1.75",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      },
+      {
+       "id": 328903,
+       "n": "2",
+       "eon": null,
+       "o": "3.10",
+       "su": false,
+       "ord": 1,
+       "col": 3
+      }
+     ]
+    },
+    {
+     "id": 12971,
+     "n": "1X2 60 Minutos",
+     "c": 1,
+     "oti": "12971",
+     "m": [
+      {
+       "id": 328666,
+       "n": "1",
+       "eon": null,
+       "o": "3.90",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 329100,
+       "n": "X",
+       "eon": null,
+       "o": "2.70",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      },
+      {
+       "id": 328575,
+       "n": "2",
+       "eon": null,
+       "o": "2.10",
+       "su": false,
+       "ord": 1,
+       "col": 3
+      }
+     ]
+    },
+    {
+     "id": 12972,
+     "n": "Golo nos primeiros 5 Minutos",
+     "c": 1,
+     "oti": "12972",
+     "m": [
+      {
+       "id": 328517,
+       "n": "Sim",
+       "eon": null,
+       "o": "7.50",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 329137,
+       "n": "Não",
+       "eon": null,
+       "o": "1.02",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 12975,
+     "n": "Golo nos primeiros 20 Minutos",
+     "c": 1,
+     "oti": "12975",
+     "m": [
+      {
+       "id": 328821,
+       "n": "Sim",
+       "eon": null,
+       "o": "2.30",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 329211,
+       "n": "Não",
+       "eon": null,
+       "o": "1.48",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 11836,
+     "n": "PELO MENOS UMA DAS PARTES TERMINA EMPATADA",
+     "c": 1,
+     "oti": "11836",
+     "m": [
+      {
+       "id": 328710,
+       "n": "Sim",
+       "eon": null,
+       "o": "1.45",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 329251,
+       "n": "Não",
+       "eon": null,
+       "o": "2.35",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      }
+     ]
+    }
+   ],
+   "ou": []
+  },
+  {
+   "id": 173,
+   "or": 0,
+   "n": "MultiGolo",
+   "is": 0,
+   "o": [
+    {
+     "id": 11663,
+     "n": "Multi Golos 1-2",
+     "c": 1,
+     "oti": "11663",
+     "m": [
+      {
+       "id": 332742,
+       "n": "1:2",
+       "eon": null,
+       "o": "2.15",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 332727,
+       "n": "Outro",
+       "eon": null,
+       "o": "1.45",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 11664,
+     "n": "Multi Golos 1-3",
+     "c": 1,
+     "oti": "11664",
+     "m": [
+      {
+       "id": 332726,
+       "n": "1:3",
+       "eon": null,
+       "o": "1.44",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 332723,
+       "n": "Outro",
+       "eon": null,
+       "o": "2.20",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 11665,
+     "n": "Multi Golos 1-4",
+     "c": 1,
+     "oti": "11665",
+     "m": [
+      {
+       "id": 332705,
+       "n": "1:4",
+       "eon": null,
+       "o": "1.14",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 332711,
+       "n": "Outro",
+       "eon": null,
+       "o": "3.60",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 11666,
+     "n": "Multi Golos 1-5",
+     "c": 1,
+     "oti": "11666",
+     "m": [
+      {
+       "id": 332736,
+       "n": "1:5",
+       "eon": null,
+       "o": "1.02",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 332697,
+       "n": "Outro",
+       "eon": null,
+       "o": "5.75",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 11667,
+     "n": "Multi Golos 1-6",
+     "c": 1,
+     "oti": "11667",
+     "m": [
+      {
+       "id": 332731,
+       "n": "Outro",
+       "eon": null,
+       "o": "8.00",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 11668,
+     "n": "Multi Golos 2-3",
+     "c": 1,
+     "oti": "11668",
+     "m": [
+      {
+       "id": 332703,
+       "n": "2:3",
+       "eon": null,
+       "o": "1.95",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 332744,
+       "n": "Outro",
+       "eon": null,
+       "o": "1.55",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 11669,
+     "n": "Multi Golos 2-4",
+     "c": 1,
+     "oti": "11669",
+     "m": [
+      {
+       "id": 332699,
+       "n": "2:4",
+       "eon": null,
+       "o": "1.46",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 332722,
+       "n": "Outro",
+       "eon": null,
+       "o": "2.10",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 11670,
+     "n": "Multi Golos 2-5",
+     "c": 1,
+     "oti": "11670",
+     "m": [
+      {
+       "id": 332715,
+       "n": "2:5",
+       "eon": null,
+       "o": "1.28",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 332700,
+       "n": "Outro",
+       "eon": null,
+       "o": "2.70",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 11671,
+     "n": "Multi Golos 2-6",
+     "c": 1,
+     "oti": "11671",
+     "m": [
+      {
+       "id": 332729,
+       "n": "2:6",
+       "eon": null,
+       "o": "1.20",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 332739,
+       "n": "Outro",
+       "eon": null,
+       "o": "3.20",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 11672,
+     "n": "Multi Golos 3-4",
+     "c": 1,
+     "oti": "11672",
+     "m": [
+      {
+       "id": 332709,
+       "n": "3:4",
+       "eon": null,
+       "o": "2.35",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 332732,
+       "n": "Outro",
+       "eon": null,
+       "o": "1.40",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 11673,
+     "n": "Multi Golos 3-5",
+     "c": 1,
+     "oti": "11673",
+     "m": [
+      {
+       "id": 332733,
+       "n": "3:5",
+       "eon": null,
+       "o": "1.90",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 332719,
+       "n": "Outro",
+       "eon": null,
+       "o": "1.60",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 11674,
+     "n": "Multi Golos 3-6",
+     "c": 1,
+     "oti": "11674",
+     "m": [
+      {
+       "id": 332745,
+       "n": "3:6",
+       "eon": null,
+       "o": "1.70",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 332708,
+       "n": "Outro",
+       "eon": null,
+       "o": "1.75",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 11675,
+     "n": "Multi Golos 4-5",
+     "c": 1,
+     "oti": "11675",
+     "m": [
+      {
+       "id": 332720,
+       "n": "4:5",
+       "eon": null,
+       "o": "3.50",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 332725,
+       "n": "Outro",
+       "eon": null,
+       "o": "1.16",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 11676,
+     "n": "Multi Golos 4-6",
+     "c": 1,
+     "oti": "11676",
+     "m": [
+      {
+       "id": 332728,
+       "n": "4:6",
+       "eon": null,
+       "o": "2.90",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 332737,
+       "n": "Outro",
+       "eon": null,
+       "o": "1.22",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 11677,
+     "n": "Multi Golos 5-6",
+     "c": 1,
+     "oti": "11677",
+     "m": [
+      {
+       "id": 332696,
+       "n": "5:6",
+       "eon": null,
+       "o": "6.00",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 332713,
+       "n": "Outro",
+       "eon": null,
+       "o": "1.02",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 11678,
+     "n": "Multi Golos 6+",
+     "c": 1,
+     "oti": "11678",
+     "m": [
+      {
+       "id": 332707,
+       "n": "6+",
+       "eon": null,
+       "o": "10.00",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 332716,
+       "n": "Outro",
+       "eon": null,
+       "o": "1.02",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      }
+     ]
+    }
+   ],
+   "ou": []
+  }
+ ],
+ "brid": null,
+ "obrid": null,
+ "fpc": null,
+ "ati": null,
+ "hti": null,
+ "tus": false,
+ "mid": 5998731,
+ "ec": null,
+ "at": null,
+ "ht": null,
+ "d": null,
+ "scsid": null,
+ "scfi": null,
+ "sm": null,
+ "su": false,
+ "lc": false,
+ "tln": null,
+ "hln": null,
+ "aln": null
+}
