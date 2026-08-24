@@ -38,6 +38,7 @@ class MatchedEvent:
     msport: dict | None = None
     sportpesa: dict | None = None
     betika: dict | None = None
+    elephantbet: dict | None = None
 
 
 class _DSU:
@@ -147,6 +148,7 @@ def match_events(
                 msport=g["platforms"].get("msport"),
                 sportpesa=g["platforms"].get("sportpesa"),
                 betika=g["platforms"].get("betika"),
+                elephantbet=g["platforms"].get("elephantbet"),
             )
         )
     return results

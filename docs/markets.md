@@ -26,23 +26,23 @@ The flag is a no-op for bookmakers whose market ids don't overlap across sports 
 
 ### Soccer (full time)
 
-| Canonical id | Name | Parameterized? | BetPawa | SportyBet | Bet9ja | Betway | MSport | SportPesa | Betika |
-|---|---|---|---|---|---|---|---|---|---|
-| `1x2_ft` | 1X2 — Full Time | no | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| `over_under_ft` | Over/Under — Full Time | yes (line=goals) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| `btts_ft` | Both Teams To Score — Full Time | no | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| `double_chance_ft` | Double Chance — Full Time | no | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| `1x2_1up_ft` | 1X2 1Up — Full Time | no | ✅ | ✅ | ✅ | ✅ | ✅ | — | — |
-| `1x2_2up_ft` | 1X2 2Up — Full Time | no | — | ✅ | ✅ | ✅ | ✅ | — | — |
-| `next_goal_ft` | Next Goal — Full Time | yes (line = goal number) | ✅ | ✅ | ✅ | ✅ | ✅ live | ❌ NOT PROBED | ✅ |
-| `home_over_under_ft` | Over/Under — Home Team — Full Time | yes (line = goals) | ✅ | ✅ | ✅ combined | ✅ | ✅ | ❌ NOT PROBED | ✅ |
-| `away_over_under_ft` | Over/Under — Away Team — Full Time | yes (line = goals) | ✅ | ✅ | ✅ combined | ✅ | ✅ | ❌ NOT PROBED | ✅ |
-| `2way_handicap_ft` | 2-Way Asian Handicap — Full Time | yes (signed line=goals) | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ NOT PROBED | — NOT EXPOSED |
-| `double_chance_1up_ft` | Double Chance 1Up — Full Time | no | ✅ | ✅ | ✅ | — NOT EXPOSED | — NOT EXPOSED | ❌ NOT PROBED | ❌ #31 |
-| `1x2_corners_ft` | Corners 1X2 — Full Time | no | ✅ | ✅ | ✅ | ✅ | ✅ | — NOT OFFERED | ❌ #31 |
-| `over_under_corners_ft` | Corners Over/Under — Full Time | yes (line=corners) | ✅ | ✅ | ✅ | ✅ | ✅ | — NOT OFFERED | ❌ #31 |
-| `1x2_bookings_ft` | Bookings 1X2 — Full Time | no | ✅ | ✅ | ✅ | ✅ | ✅ | — NOT OFFERED | ❌ #31 |
-| `over_under_bookings_ft` | Bookings Over/Under — Full Time | yes (line=cards) | ✅ | ✅ | ✅ | ✅ | ✅ | — NOT OFFERED | ❌ #31 |
+| Canonical id | Name | Parameterized? | BetPawa | SportyBet | Bet9ja | Betway | MSport | SportPesa | Betika | ElephantBet |
+|---|---|---|---|---|---|---|---|---|---|---|
+| `1x2_ft` | 1X2 — Full Time | no | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| `over_under_ft` | Over/Under — Full Time | yes (line=goals) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| `btts_ft` | Both Teams To Score — Full Time | no | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| `double_chance_ft` | Double Chance — Full Time | no | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| `1x2_1up_ft` | 1X2 1Up — Full Time | no | ✅ | ✅ | ✅ | ✅ | ✅ | — | — | — |
+| `1x2_2up_ft` | 1X2 2Up — Full Time | no | — | ✅ | ✅ | ✅ | ✅ | — | — | — |
+| `next_goal_ft` | Next Goal — Full Time | yes (line = goal number) | ✅ | ✅ | ✅ | ✅ | ✅ live | ❌ NOT PROBED | ✅ | — |
+| `home_over_under_ft` | Over/Under — Home Team — Full Time | yes (line = goals) | ✅ | ✅ | ✅ combined | ✅ | ✅ | ❌ NOT PROBED | ✅ | — |
+| `away_over_under_ft` | Over/Under — Away Team — Full Time | yes (line = goals) | ✅ | ✅ | ✅ combined | ✅ | ✅ | ❌ NOT PROBED | ✅ | — |
+| `2way_handicap_ft` | 2-Way Asian Handicap — Full Time | yes (signed line=goals) | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ NOT PROBED | — NOT EXPOSED | — |
+| `double_chance_1up_ft` | Double Chance 1Up — Full Time | no | ✅ | ✅ | ✅ | — NOT EXPOSED | — NOT EXPOSED | ❌ NOT PROBED | ❌ #31 | — |
+| `1x2_corners_ft` | Corners 1X2 — Full Time | no | ✅ | ✅ | ✅ | ✅ | ✅ | — NOT OFFERED | ❌ #31 | — |
+| `over_under_corners_ft` | Corners Over/Under — Full Time | yes (line=corners) | ✅ | ✅ | ✅ | ✅ | ✅ | — NOT OFFERED | ❌ #31 | — |
+| `1x2_bookings_ft` | Bookings 1X2 — Full Time | no | ✅ | ✅ | ✅ | ✅ | ✅ | — NOT OFFERED | ❌ #31 | — |
+| `over_under_bookings_ft` | Bookings Over/Under — Full Time | yes (line=cards) | ✅ | ✅ | ✅ | ✅ | ✅ | — NOT OFFERED | ❌ #31 | — |
 
 The 1Up / 2Up markets pay as a 1X2 if your team gets to a 1- or 2-goal lead at any
 point. BetPawa offers 1Up (id `28000810`) but not 2Up. MSport offers both
@@ -90,7 +90,7 @@ Per-bookmaker goal-number specifier shapes:
 | `over_under_sets_tennis_match` | Over/Under Total Sets | yes (line=sets) | ✅ | ✅ | ✅ | ✅ | — | — | — |
 | `handicap_games_tennis_match` | Game Handicap | yes (signed line=games) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 
-Working on all 7 bookmakers. Some bookmakers don't publish every market on every event — those rows are `None` in `BUILTIN_MAPPINGS` and produce no normalised market when the parser hits them. Per-bookmaker conventions:
+Working on all 7 of the 8 bookmakers — ElephantBet does not offer tennis markets this increment (core soccer only; see [docs/elephantbet.md](elephantbet.md)). Some bookmakers don't publish every market on every event — those rows are `None` in `BUILTIN_MAPPINGS` and produce no normalised market when the parser hits them. Per-bookmaker conventions:
 
 - **BetPawa**: bespoke numeric ids (4895 = Total Games, 3597899 = Total Sets, 3532590 = Match Handicap Games 2-way, 2043818 = Moneyline). Outcomes "1" / "2".
 - **SportyBet / MSport / Betway / Betika**: SR-standard codes `186` (Winner), `189` (Total Games), `314` (Total Sets), `187` (Game Handicap). MSport doesn't expose `314` (Total Sets).
@@ -137,6 +137,7 @@ Frozen dataclass. Fields:
 - `msport_id: str | None`
 - `sportpesa_id: str | None`
 - `betika_id: str | None` — Betika's `sub_type_id` for this market (e.g. `"18"` for soccer O/U, `"189"` for tennis Total Games).
+- `elephantbet_id: str | None` — ElephantBet's market id (e.g. `"3"` for soccer 1X2, `"29"` for O/U — a single id covers every O/U line, distinguished by the outcome's `sbv` field).
 - `sport: str` — sport tag for collision-safe lookups. Defaults to `"soccer"`. Set to `"basketball"` / `"tennis"` for non-soccer mappings so the sport-aware registry can disambiguate ids that overlap across sports on the same platform.
 - `outcomes: dict[str, OutcomeMapping]` — keyed by canonical outcome name (`"home"`, `"over"`, etc.).
 - `parameterized: bool` — `True` for markets with line variants (Over/Under, handicaps).
@@ -152,6 +153,7 @@ Frozen dataclass. One per canonical outcome:
 - `msport: str` — e.g. `"Home"`, `"1 X"` for DC.
 - `sportpesa: str` — e.g. `"1"`, `"Over"`, `"1X"`. SportPesa's selection names align with the SportRadar feed it consumes.
 - `betika: str` — e.g. `"1"`, `"Over"`, `"1/X"`, `"Yes"`. Matched case-insensitively. For parameterized markets (Over/Under), Betika embeds the line in the display label as `"OVER 2.5"`; the parser strips the trailing token before resolving.
+- `elephantbet: str` — e.g. `"1"`, `"X"`, `"2"` (1X2), `"Sim"`/`"Não"` (BTTS — Portuguese for Yes/No). Over/Under outcomes are distinguished by the market's `sbv` (line) field rather than this outcome label.
 
 ### `NormalizedMarket`
 
@@ -177,7 +179,7 @@ Use `__HOME__` / `__AWAY__` on 1X2 (clearest intent) and `__POS_N__` for Double 
 
 ## Parser dispatcher
 
-`parse_markets(response, platform, registry=None)` looks up `platform` in the dispatcher dict and calls the right `_parse_<platform>` function. Currently registered: `"betpawa"`, `"sportybet"`, `"bet9ja"`, `"betway"`, `"msport"`, `"sportpesa"`, `"betika"`. Returns `[]` if `platform` is unknown.
+`parse_markets(response, platform, registry=None)` looks up `platform` in the dispatcher dict and calls the right `_parse_<platform>` function. Currently registered: `"betpawa"`, `"sportybet"`, `"bet9ja"`, `"betway"`, `"msport"`, `"sportpesa"`, `"betika"`, `"elephantbet"`. Returns `[]` if `platform` is unknown.
 
 The Bet9ja parser handles BOTH the prematch `S_*` keys AND the live `LIVES_*` keys. It also unwraps the `{"v": <float>}` odds shape used in live responses (vs bare strings prematch).
 

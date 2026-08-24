@@ -26,6 +26,11 @@ def test_elephantbet_1x2_ft():
     assert m.lines is None
     assert {o.canonical_name for o in m.outcomes} == {"home", "draw", "away"}
     assert all(isinstance(o.odds, float) for o in m.outcomes)
+    # Pin the actual home price ("3.96" in the fixture) so a units or
+    # string-coercion regression (e.g. odds landing as "3.96" instead of
+    # 3.96, or a misplaced decimal) is caught.
+    home = next(o for o in m.outcomes if o.canonical_name == "home")
+    assert home.odds == 3.96
 
 
 def test_elephantbet_double_chance_ft():

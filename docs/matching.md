@@ -28,6 +28,7 @@ New unified entry point. Returns an `EventIds` with whichever provider ids the p
 | `msport` | `data.eventId` | — |
 | `sportpesa` | `data[0].betradarId` | — |
 | `betika` | `data[0].parent_match_id` | — |
+| `elephantbet` | `brid` | — |
 
 ### SportyBet's `1111111` source-id prefix
 
@@ -59,9 +60,10 @@ class MatchedEvent:
     msport: dict | None = None
     sportpesa: dict | None = None
     betika: dict | None = None
+    elephantbet: dict | None = None
 ```
 
-All 7 per-platform fields default to `None`, so callers can pass any subset of platforms.
+All 8 per-platform fields default to `None`, so callers can pass any subset of platforms.
 
 ## End-to-end example
 

@@ -146,6 +146,15 @@ async def main():
 asyncio.run(main())
 ```
 
+## Future increments
+
+- **`get_live_events()`** (`GET /rest/FEMobile/LiveUpcomingFixture`) was in
+  the original design spec but was not implemented this increment — no
+  in-play fixture has been captured to confirm the response shape. This is
+  a deliberate scope cut, not an oversight; pair with the "Live state is not
+  mapped this increment" quirk above (`extract_live_info` returns empty
+  `LiveInfo`) when picking this up.
+
 ## See also
 
 - [docs/markets.md](markets.md) — registry, builtins, custom mappings.
