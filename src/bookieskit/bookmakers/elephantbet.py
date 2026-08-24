@@ -69,3 +69,64 @@ class ElephantBet(BaseBookmaker):
             "/rest/FEWFixture/Sports",
             params={"Culture": self._culture},
         )
+
+    async def get_countries(self, sport_id: str = "1") -> dict[str, Any]:
+        """Get the full sport -> category -> tournament tree.
+
+        BtoBet returns the whole menu in one call rather than per-sport, so
+        ``sport_id`` is accepted for interface symmetry with the other
+        clients and callers filter the ``s[]`` list themselves.
+
+        Returns:
+            Raw JSON with ``s[]`` (sports), each carrying ``i[]``
+            (categories), each carrying ``i[]`` (tournaments).
+        """
+        return await self._request(
+            "GET",
+            "/rest/FEWFixture/FixturesMenu",
+            params={"Culture": self._culture},
+        )
+
+    async def get_tournaments(self, sport_id: str = "1") -> dict[str, Any]:
+        """Alias of :meth:`get_countries` — same endpoint, same payload."""
+        return await self.get_countries(sport_id)
+
+    async def get_events(
+        self, tournament_id: str, limit: int = 50
+    ) -> dict[str, Any]:
+        """Get events for a tournament, with their main markets.
+
+        Args:
+            tournament_id: BtoBet tournament id (e.g. "1428062").
+            limit: Page size.
+
+        Returns:
+            Raw JSON list of sports, each with ``t[]`` tournaments, each
+            with ``m[]`` matches. Match fields include ``mid`` (match id),
+            ``brid`` (SportRadar id), ``ht``/``at`` and ``d`` (kickoff).
+        """
+        return await self._request(
+            "GET",
+            "/rest/FEMobile/GetGroupedMatches",
+            params={
+                "TournamentData[]": tournament_id,
+                "Culture": self._culture,
+                "Limit": str(limit),
+            },
+        )
+
+    async def get_event_detail(self, event_id: str) -> dict[str, Any]:
+        """Get full markets and odds for one match.
+
+        Args:
+            event_id: BtoBet match id (``mid``, e.g. "5998731").
+
+        Returns:
+            Raw JSON shaped ``{"s": ..., "t": [{"o": [<market>, ...]}]}`` —
+            markets are nested under display tabs in ``t[].o[]``.
+        """
+        return await self._request(
+            "GET",
+            "/rest/FEWMatches/MatchOdds",
+            params={"MatchID": event_id, "Culture": self._culture},
+        )
