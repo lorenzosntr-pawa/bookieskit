@@ -527,3 +527,18 @@ def test_elephantbet_core_soccer_mappings():
     btts = r.get_by_canonical("btts_ft").outcomes
     assert btts["yes"].elephantbet == "Sim"
     assert btts["no"].elephantbet == "Não"
+
+
+def test_elephantbet_platform_id_lookup():
+    """Guards the registry wiring: get_by_canonical alone would not catch a
+    missing per-platform index, which is how this gap originally shipped."""
+    from bookieskit.markets.registry import MarketRegistry
+
+    r = MarketRegistry()
+    assert r.get_by_platform_id("elephantbet", "3").canonical_id == "1x2_ft"
+    assert r.get_by_platform_id("elephantbet", "29").canonical_id == "over_under_ft"
+    assert r.get_by_platform_id("elephantbet", "7").canonical_id == "btts_ft"
+    assert (
+        r.get_by_platform_id("elephantbet", "17").canonical_id
+        == "double_chance_ft"
+    )

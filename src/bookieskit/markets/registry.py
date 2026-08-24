@@ -25,6 +25,7 @@ class MarketRegistry:
         self._by_msport: dict[str, MarketMapping] = {}
         self._by_sportpesa: dict[str, MarketMapping] = {}
         self._by_betika: dict[str, MarketMapping] = {}
+        self._by_elephantbet: dict[str, MarketMapping] = {}
         # Sport-scoped index: (platform, sport, market_id) -> mapping.
         # Used to disambiguate market ids that are shared across sports
         # on the same platform (e.g. SportPesa's id "52" is football
@@ -60,6 +61,7 @@ class MarketRegistry:
         _add_to(self._by_msport, mapping.msport_id)
         _add_to(self._by_sportpesa, mapping.sportpesa_id)
         _add_to(self._by_betika, mapping.betika_id)
+        _add_to(self._by_elephantbet, mapping.elephantbet_id)
 
         # Always populate the sport-scoped index — (platform, sport, id)
         # is unique so we don't need first-wins guarding.
@@ -71,6 +73,7 @@ class MarketRegistry:
             ("msport", mapping.msport_id),
             ("sportpesa", mapping.sportpesa_id),
             ("betika", mapping.betika_id),
+            ("elephantbet", mapping.elephantbet_id),
         ):
             if market_id:
                 self._by_platform_sport_id[
@@ -142,7 +145,7 @@ class MarketRegistry:
 
         Args:
             platform: One of "betpawa", "sportybet", "bet9ja", "betway",
-                "msport", "sportpesa", or "betika".
+                "msport", "sportpesa", "betika", or "elephantbet".
             platform_id: Platform-specific market ID or key.
             sport: Optional sport filter. Pass ``"basketball"`` to
                 disambiguate IDs that overlap across sports (e.g.
@@ -165,6 +168,7 @@ class MarketRegistry:
             "msport": self._by_msport,
             "sportpesa": self._by_sportpesa,
             "betika": self._by_betika,
+            "elephantbet": self._by_elephantbet,
         }.get(platform, {})
         return index.get(platform_id)
 

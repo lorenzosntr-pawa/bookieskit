@@ -130,7 +130,8 @@ def parse_markets(
     Args:
         response: Raw JSON from get_event_detail()
         platform: One of "betpawa", "sportybet", "bet9ja", "betway",
-            "msport", "sportpesa", "betika". Unknown values return [].
+            "msport", "sportpesa", "betika", "elephantbet". Unknown
+            values return [].
         registry: Market registry to use (default: built-in markets)
         probability: How much probability data to extract per outcome.
             "off" (default) — no probability parsing; both fields None.
@@ -165,6 +166,7 @@ def parse_markets(
         "msport": _parse_msport,
         "sportpesa": _parse_sportpesa,
         "betika": _parse_betika,
+        "elephantbet": _parse_elephantbet,
     }
     parser = parsers.get(platform)
     if parser is None:
@@ -1470,4 +1472,110 @@ def _resolve_outcome_betika(
         ref = om.betika.lower()
         if target == ref or first == ref:
             return om.canonical_name
+    return None
+
+
+# ---- ElephantBet ------------------------------------------------------------
+
+
+def _parse_elephantbet(
+    response: dict, registry: MarketRegistry, mode: ProbabilityMode = "off"
+) -> list[NormalizedMarket]:
+    """Parse an ElephantBet (BtoBet) MatchOdds response.
+
+    Markets are nested under display tabs: ``t[].o[]``. Odds arrive as
+    strings. Over/Under-style markets repeat one market id across lines and
+    carry the line in each outcome's ``sbv`` field, so grouping is by
+    ``(market_id, sbv)`` rather than by market id alone.
+    """
+    results: list[NormalizedMarket] = []
+    simple: dict[str, list[dict]] = {}
+    parameterized: dict[str, dict[float, list[dict]]] = {}
+    mappings: dict[str, MarketMapping] = {}
+
+    for tab in response.get("t") or []:
+        for market in tab.get("o") or []:
+            market_id = str(market.get("id", ""))
+            mapping = registry.get_by_platform_id("elephantbet", market_id)
+            if mapping is None:
+                continue
+            mappings[market_id] = mapping
+            for outcome in market.get("m") or []:
+                if mapping.parameterized:
+                    line = _try_float(outcome.get("sbv"))
+                    if line is None:
+                        continue
+                    parameterized.setdefault(market_id, {}).setdefault(
+                        line, []
+                    ).append(outcome)
+                else:
+                    simple.setdefault(market_id, []).append(outcome)
+
+    for market_id, outcomes in simple.items():
+        mapping = mappings[market_id]
+        parsed = [
+            Outcome(
+                canonical_name=canonical,
+                odds=odds,
+                platform_name=str(o.get("n", "")),
+            )
+            for o in outcomes
+            if (odds := _try_float(o.get("o"))) is not None
+            and (
+                canonical := _resolve_outcome_elephantbet(
+                    str(o.get("n", "")), mapping
+                )
+            )
+        ]
+        if parsed:
+            results.append(
+                NormalizedMarket(
+                    canonical_id=mapping.canonical_id,
+                    name=mapping.name,
+                    outcomes=parsed,
+                    lines=None,
+                )
+            )
+
+    for market_id, by_line in parameterized.items():
+        mapping = mappings[market_id]
+        lines: dict[float, list[Outcome]] = {}
+        for line, outcomes in by_line.items():
+            parsed = [
+                Outcome(
+                    canonical_name=canonical,
+                    odds=odds,
+                    platform_name=str(o.get("n", "")),
+                )
+                for o in outcomes
+                if (odds := _try_float(o.get("o"))) is not None
+                and (
+                    canonical := _resolve_outcome_elephantbet(
+                        str(o.get("n", "")), mapping
+                    )
+                )
+            ]
+            if parsed:
+                lines[line] = parsed
+        if lines:
+            results.append(
+                NormalizedMarket(
+                    canonical_id=mapping.canonical_id,
+                    name=mapping.name,
+                    outcomes=[],
+                    lines=lines,
+                )
+            )
+
+    return results
+
+
+def _resolve_outcome_elephantbet(
+    label: str, mapping: MarketMapping
+) -> str | None:
+    """Map an ElephantBet outcome label to its canonical name."""
+    target = label.strip().casefold()
+    for canonical, outcome in mapping.outcomes.items():
+        if outcome.elephantbet and outcome.elephantbet.casefold() == target:
+            return canonical
     return None
