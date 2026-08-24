@@ -41,6 +41,7 @@ _ID_ATTR: dict[str, str] = {
     "betway": "betway_id",
     "betika": "betika_id",
     "sportpesa": "sportpesa_id",
+    "elephantbet": "elephantbet_id",
 }
 
 
@@ -111,6 +112,20 @@ def _struct_sportpesa(payload: dict) -> bool:
     return isinstance(first, list)
 
 
+def _struct_elephantbet(payload: dict) -> bool:
+    # Markets nest under display tabs, t[].o[] -- the exact shape
+    # _parse_elephantbet walks (markets/parser.py).
+    if not isinstance(payload, dict):
+        return False
+    tabs = payload.get("t")
+    if not isinstance(tabs, list):
+        return False
+    return all(
+        isinstance(tab, dict) and isinstance(tab.get("o"), list)
+        for tab in tabs
+    )
+
+
 STRUCTURE_PREDICATES: dict[str, Callable[[dict], bool]] = {
     "betpawa": _struct_betpawa,
     "sportybet": _struct_data_markets,
@@ -119,6 +134,7 @@ STRUCTURE_PREDICATES: dict[str, Callable[[dict], bool]] = {
     "bet9ja": _struct_bet9ja,
     "betika": _struct_betika,
     "sportpesa": _struct_sportpesa,
+    "elephantbet": _struct_elephantbet,
 }
 
 

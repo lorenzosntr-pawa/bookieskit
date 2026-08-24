@@ -69,6 +69,17 @@ def test_expected_canonicals_unknown_platform_is_empty():
     assert expected_canonicals("nonexistent", "soccer") == []
 
 
+def test_expected_canonicals_elephantbet_covers_four_core_markets():
+    # Regression: _ID_ATTR was missing "elephantbet", so this silently
+    # returned [] and audit reports rendered ElephantBet as offering
+    # nothing rather than "not checked" (Task 6 fix round 1).
+    exp = expected_canonicals("elephantbet", "soccer")
+    assert exp == sorted(exp)
+    assert set(exp) == {
+        "1x2_ft", "over_under_ft", "btts_ft", "double_chance_ft",
+    }
+
+
 def test_classify_book_marks_parsed_markets_priced_with_odds():
     ba = classify_book(BETWAY_PAYLOAD, "betway", "soccer")
     assert isinstance(ba, BookAudit)

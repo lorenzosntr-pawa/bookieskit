@@ -27,6 +27,7 @@ def iter_candidates(payload: Any, platform: str) -> list[Candidate]:
         "betway": _candidates_betway,
         "sportpesa": _candidates_sportpesa,
         "betika": _candidates_betika,
+        "elephantbet": _candidates_elephantbet,
     }
     reader = readers.get(platform)
     if reader is None:
@@ -233,4 +234,30 @@ def _candidates_betika(payload: Any) -> list[Candidate]:
                 if isinstance(s, dict)
             ],
         ))
+    return out
+
+
+def _candidates_elephantbet(payload: Any) -> list[Candidate]:
+    # Markets nest under display tabs: t[].o[], each with outcomes in .m[].
+    # Same shape _parse_elephantbet walks (markets/parser.py) -- one
+    # Candidate per raw market entry, regardless of parameterization.
+    out: list[Candidate] = []
+    for tab in payload.get("t", []) or []:
+        if not isinstance(tab, dict):
+            continue
+        for m in tab.get("o", []) or []:
+            if not isinstance(m, dict):
+                continue
+            mid = m.get("id")
+            out.append(Candidate(
+                platform="elephantbet",
+                market_id=str(mid) if mid is not None else None,
+                name=str(m.get("n", "")),
+                specifier=None,
+                outcomes=[
+                    str(o.get("n", ""))
+                    for o in m.get("m", []) or []
+                    if isinstance(o, dict)
+                ],
+            ))
     return out

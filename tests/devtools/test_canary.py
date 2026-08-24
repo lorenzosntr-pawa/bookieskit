@@ -41,10 +41,10 @@ def test_bookcheck_and_canaryreport_round_trip_through_asdict():
     assert d["checks"][0]["missing_canonicals"] == []
 
 
-def test_structure_predicates_cover_all_seven_books():
+def test_structure_predicates_cover_all_eight_books():
     assert set(STRUCTURE_PREDICATES) == {
         "betpawa", "sportybet", "msport", "bet9ja",
-        "betway", "betika", "sportpesa",
+        "betway", "betika", "sportpesa", "elephantbet",
     }
 
 
@@ -98,13 +98,36 @@ def test_structure_predicate_sportpesa_first_value_is_list():
     assert pred({}) is False  # empty dict
 
 
+def test_structure_predicate_elephantbet_on_real_fixture():
+    import json
+    from pathlib import Path
+
+    fixture = (
+        Path(__file__).parent.parent
+        / "fixtures" / "event_info" / "elephantbet" / "prematch.json"
+    )
+    payload = json.loads(fixture.read_text(encoding="utf-8"))
+    pred = STRUCTURE_PREDICATES["elephantbet"]
+    assert pred(payload) is True
+    assert pred({}) is False  # missing "t"
+    assert pred({"t": "nope"}) is False  # "t" not a list
+    assert pred({"t": [{"o": "nope"}]}) is False  # tab "o" not a list
+
+
 def test_expected_core_full_for_every_soccer_book():
     reg = MarketRegistry()
     for book in (
         "betpawa", "sportybet", "msport", "bet9ja",
-        "betway", "betika", "sportpesa",
+        "betway", "betika", "sportpesa", "elephantbet",
     ):
         assert set(expected_core(book, "soccer", reg)) == set(CORE_CANONICALS)
+
+
+def test_expected_core_elephantbet_returns_four_canonicals():
+    reg = MarketRegistry()
+    assert set(expected_core("elephantbet", "soccer", reg)) == {
+        "1x2_ft", "over_under_ft", "btts_ft", "double_chance_ft",
+    }
 
 
 def test_expected_core_empty_for_unknown_platform():
@@ -204,6 +227,26 @@ def test_check_book_skipped_when_no_core_mapped():
     bc = check_book({}, "nonexistent", "soccer")
     assert bc.status == "skipped"
     assert bc.reason == "no core markets mapped"
+
+
+def test_check_book_elephantbet_is_not_skipped():
+    # Regression: ElephantBet has 4 core markets mapped, so it must never be
+    # reported as "skipped" -- that reading was a silent blind spot (Task 6
+    # fix round 1), not a real absence of coverage.
+    import json
+    from pathlib import Path
+
+    fixture = (
+        Path(__file__).parent.parent
+        / "fixtures" / "event_info" / "elephantbet" / "prematch.json"
+    )
+    payload = json.loads(fixture.read_text(encoding="utf-8"))
+    bc = check_book(payload, "elephantbet", "soccer")
+    assert bc.status != "skipped"
+    assert set(bc.expected_canonicals) == {
+        "1x2_ft", "over_under_ft", "btts_ft", "double_chance_ft",
+    }
+    assert bc.structure_ok is True
 
 
 import pytest  # noqa: E402
