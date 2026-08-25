@@ -577,3 +577,56 @@ def test_extract_sportradar_id_betika_from_fixture():
     sr = extract_sportradar_id(response, platform="betika")
     assert sr is not None
     assert sr.isdigit()
+
+
+# --- ElephantBet: brid means different things on prematch vs live ----------
+
+
+def test_extract_event_ids_elephantbet_live_uses_obrid_not_brid():
+    """On the live feed `brid` is an 18-digit BtoBet id, NOT a SportRadar id.
+
+    Verified live 2026-08-25: `GetLiveMatchesMetaData` returns
+    brid="312521674767101952" / obrid=73842300 for KT Sonicboom v Mobis
+    Phoebus, and Betway event 73842300 resolves to that exact fixture. The
+    prematch feed is the opposite way round (brid IS the SR id). Reading
+    `brid` blindly would emit a BtoBet id as a SportRadar id — silent
+    corruption in cross-book matching.
+    """
+    from bookieskit.matching import extract_event_ids
+
+    live = {
+        "sid": 2, "mid": 6495637,
+        "brid": "312521674767101952", "obrid": 73842300,
+        "ht": "KT Sonicboom", "at": "Mobis Phoebus",
+        # in-play state is what marks this as a live-feed entry
+        "ms": "Pausa", "mt": 10, "sc": "", "ss": "",
+    }
+    assert extract_event_ids(live, platform="elephantbet").sportradar == "73842300"
+
+
+def test_extract_event_ids_elephantbet_live_without_obrid_yields_none():
+    """A live entry with no `obrid` has no SportRadar id at all.
+
+    It must yield None rather than the 18-digit BtoBet `brid`.
+    """
+    from bookieskit.matching import extract_event_ids
+
+    live = {
+        "sid": 1, "mid": 6495992,
+        "brid": "312525179684810752", "obrid": None,
+        "ht": "Mawryngkneng Cultural", "at": "Smit SC",
+        "ms": "1ª Parte", "mt": 38, "sc": "0:0", "ss": "0:0",
+    }
+    assert extract_event_ids(live, platform="elephantbet").sportradar is None
+
+
+def test_extract_event_ids_elephantbet_prematch_still_uses_brid():
+    """Regression guard: the prematch shape must keep working."""
+    from bookieskit.matching import extract_event_ids
+
+    prematch = {"mid": 5998731, "brid": "72221172", "obrid": None,
+                "ht": "Fulham FC", "at": "Chelsea FC"}
+    assert (
+        extract_event_ids(prematch, platform="elephantbet").sportradar
+        == "72221172"
+    )
