@@ -8,6 +8,10 @@ booking O/U. Plus basketball and tennis market groups.
 from bookieskit.markets.types import MarketMapping, OutcomeMapping
 
 BUILTIN_MAPPINGS: list[MarketMapping] = [
+    # ElephantBet (BtoBet) market ids come from a captured MatchOdds payload;
+    # its outcome labels are Portuguese ("Sim"/"Não", "Acima"/"Abaixo").
+    # Over/Under carries its line in the outcome's `sbv` field, not the
+    # market id, so one market id covers every line.
     MarketMapping(
         canonical_id="1x2_ft",
         name="1X2 - Full Time",
@@ -18,6 +22,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
         msport_id="1",
         sportpesa_id="10",
         betika_id="1",
+        elephantbet_id="3",
         outcomes={
             "home": OutcomeMapping(
                 canonical_name="home",
@@ -28,6 +33,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 msport="Home",
                 sportpesa="1",
                 betika="1",
+                elephantbet="1",
             ),
             "draw": OutcomeMapping(
                 canonical_name="draw",
@@ -38,6 +44,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 msport="Draw",
                 sportpesa="X",
                 betika="X",
+                elephantbet="X",
             ),
             "away": OutcomeMapping(
                 canonical_name="away",
@@ -48,6 +55,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 msport="Away",
                 sportpesa="2",
                 betika="2",
+                elephantbet="2",
             ),
         },
         parameterized=False,
@@ -62,6 +70,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
         msport_id="18",
         sportpesa_id="52",
         betika_id="18",
+        elephantbet_id="29",
         outcomes={
             "over": OutcomeMapping(
                 canonical_name="over",
@@ -72,6 +81,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 msport="Over",
                 sportpesa="OV",
                 betika="Over",
+                elephantbet="Acima",
             ),
             "under": OutcomeMapping(
                 canonical_name="under",
@@ -82,6 +92,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 msport="Under",
                 sportpesa="UN",
                 betika="Under",
+                elephantbet="Abaixo",
             ),
         },
         parameterized=True,
@@ -96,6 +107,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
         msport_id="29",
         sportpesa_id="43",
         betika_id="29",
+        elephantbet_id="7",
         outcomes={
             "yes": OutcomeMapping(
                 canonical_name="yes",
@@ -106,6 +118,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 msport="Yes",
                 sportpesa="Yes",
                 betika="Yes",
+                elephantbet="Sim",
             ),
             "no": OutcomeMapping(
                 canonical_name="no",
@@ -116,6 +129,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 msport="No",
                 sportpesa="No",
                 betika="No",
+                elephantbet="Não",
             ),
         },
         parameterized=False,
@@ -130,6 +144,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
         msport_id="10",
         sportpesa_id="46",
         betika_id="10",
+        elephantbet_id="17",
         outcomes={
             "home_draw": OutcomeMapping(
                 canonical_name="home_draw",
@@ -140,6 +155,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 msport="1 X",
                 sportpesa="1X",
                 betika="1/X",
+                elephantbet="1X",
             ),
             "draw_away": OutcomeMapping(
                 canonical_name="draw_away",
@@ -150,6 +166,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 msport="X 2",
                 sportpesa="X2",
                 betika="X/2",
+                elephantbet="X2",
             ),
             "home_away": OutcomeMapping(
                 canonical_name="home_away",
@@ -160,6 +177,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 msport="1 2",
                 sportpesa="12",
                 betika="1/2",
+                elephantbet="12",
             ),
         },
         parameterized=False,

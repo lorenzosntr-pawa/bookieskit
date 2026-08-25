@@ -29,8 +29,8 @@ affected docs in the same PR. The doc surface to keep in sync:
   library/market changes)
 - `docs/markets.md`, `docs/coverage.md`
 - the relevant per-book page: `docs/bet9ja.md`, `docs/betika.md`,
-  `docs/betpawa.md`, `docs/betway.md`, `docs/msport.md`, `docs/sportpesa.md`,
-  `docs/sportybet.md`
+  `docs/betpawa.md`, `docs/betway.md`, `docs/elephantbet.md`, `docs/msport.md`,
+  `docs/sportpesa.md`, `docs/sportybet.md`
 - `docs/examples.md` / `docs/matching.md` when behavior they describe changes
 
 The `.github/pull_request_template.md` checklist and the reviewer checklist

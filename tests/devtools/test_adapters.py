@@ -2,7 +2,7 @@ import httpx
 import pytest
 import respx
 
-from bookieskit import Betika, Betway, MSport, SportyBet
+from bookieskit import Betika, Betway, ElephantBet, MSport, SportyBet
 from bookieskit.devtools.adapters import ADAPTERS
 from bookieskit.devtools.types import Handle
 
@@ -101,5 +101,27 @@ async def test_betpawa_and_sportpesa_resolve_return_none():
     # Both platforms are present in the adapter table.
     assert set(ADAPTERS) == {
         "betpawa", "sportybet", "msport", "bet9ja",
-        "betway", "betika", "sportpesa",
+        "betway", "betika", "sportpesa", "elephantbet",
     }
+
+
+@pytest.mark.asyncio
+async def test_elephantbet_resolve_returns_none():
+    # No SR->internal reverse lookup yet; resolver records this as a skip.
+    adapter = ADAPTERS["elephantbet"]
+    async with ElephantBet(country="mz") as client:
+        handle = await adapter.resolve(client, "72221172", "soccer")
+    assert handle is None
+
+
+@pytest.mark.asyncio
+@respx.mock
+async def test_elephantbet_fetch_raw_markets_delegates_to_event_detail():
+    respx.get(
+        "https://sports-core.elephantbet.com/rest/FEWMatches/MatchOdds"
+    ).respond(json={"s": [], "t": []})
+    adapter = ADAPTERS["elephantbet"]
+    handle = Handle(platform="elephantbet", event_id="5998731")
+    async with ElephantBet(country="mz") as client:
+        raw = await adapter.fetch_raw_markets(client, handle)
+    assert raw == {"s": [], "t": []}

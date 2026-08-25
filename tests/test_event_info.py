@@ -310,7 +310,10 @@ def test_msport_live_info_live():
 
 @pytest.mark.parametrize(
     "platform",
-    ["betpawa", "sportybet", "bet9ja", "betway", "msport", "sportpesa", "betika"],
+    [
+        "betpawa", "sportybet", "bet9ja", "betway", "msport",
+        "sportpesa", "betika", "elephantbet",
+    ],
 )
 def test_empty_dict_does_not_raise(platform):
     assert extract_kickoff({}, platform) is None
@@ -526,3 +529,63 @@ def test_extract_live_info_betika_malformed_returns_empty():
     assert extract_live_info(
         [{"match_time": "not-a-time", "current_score": "bad"}], "betika"
     ) == LiveInfo()
+
+
+# ---- ElephantBet ------------------------------------------------------------
+
+# ElephantBet's match-level fields (mid/brid/ht/at/d) live on the
+# GetGroupedMatches listing shape ([0]["t"][0]["m"][0]), not on the
+# MatchOdds event-detail fixture (prematch.json), which is markets/odds
+# focused and carries null match metadata. Tests below bind to the
+# captured events.json listing.
+
+
+def _elephantbet_match() -> dict:
+    d = _load("elephantbet", "events")
+    return d[0]["t"][0]["m"][0]
+
+
+def test_extract_participants_elephantbet():
+    from bookieskit import extract_participants
+
+    match = {"mid": 5998731, "ht": "Fulham FC", "at": "Chelsea FC"}
+    p = extract_participants(match, platform="elephantbet")
+    assert p.home == "Fulham FC"
+    assert p.away == "Chelsea FC"
+
+
+def test_extract_participants_elephantbet_from_fixture():
+    match = _elephantbet_match()
+    p = extract_participants(match, "elephantbet")
+    assert p.home == "Fulham FC"
+    assert p.away == "Chelsea FC"
+
+
+def test_extract_participants_elephantbet_malformed_returns_empty():
+    p = extract_participants({}, "elephantbet")
+    assert p.home is None and p.away is None
+    p = extract_participants({"ht": "", "at": ""}, "elephantbet")
+    assert p.home is None and p.away is None
+
+
+def test_extract_kickoff_elephantbet_from_fixture():
+    match = _elephantbet_match()
+    k = extract_kickoff(match, "elephantbet")
+    assert k == datetime(2026, 8, 24, 19, 0)
+    assert k.tzinfo is None
+
+
+def test_extract_kickoff_elephantbet_malformed_returns_none():
+    assert extract_kickoff({}, "elephantbet") is None
+    assert extract_kickoff({"d": None}, "elephantbet") is None
+    assert extract_kickoff({"d": "not-a-date"}, "elephantbet") is None
+    assert extract_kickoff([], "elephantbet") is None
+
+
+def test_extract_live_info_elephantbet_returns_empty():
+    # Live state is not mapped this increment — no captured live fixture
+    # yet. Always returns the empty LiveInfo regardless of mode.
+    match = _elephantbet_match()
+    assert extract_live_info(match, "elephantbet") == LiveInfo()
+    assert extract_live_info(match, "elephantbet", mode="live") == LiveInfo()
+    assert extract_live_info({}, "elephantbet") == LiveInfo()

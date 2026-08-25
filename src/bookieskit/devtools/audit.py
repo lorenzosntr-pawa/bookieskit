@@ -32,6 +32,7 @@ _ID_ATTR: dict[str, str] = {
     "betway": "betway_id",
     "betika": "betika_id",
     "sportpesa": "sportpesa_id",
+    "elephantbet": "elephantbet_id",
 }
 
 

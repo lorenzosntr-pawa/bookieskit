@@ -1,4 +1,9 @@
+import json
+from pathlib import Path
+
 from bookieskit.matching.matcher import MatchedEvent, match_events
+
+_FIXTURES = Path(__file__).parent / "fixtures" / "event_info"
 
 
 def test_match_events_two_platforms():
@@ -294,6 +299,46 @@ def test_match_events_pairs_betpawa_sportybet_via_shared_sr():
     assert me.genius_id is None
     assert me.betpawa is bp_event
     assert me.sportybet is sb_event
+
+
+# ---- ElephantBet support ---------------------------------------------------
+
+
+def _elephantbet_fulham_chelsea_match():
+    """The Fulham FC v Chelsea FC match (mid 5998731, brid "72221172")
+    from the committed ElephantBet events fixture."""
+    raw = json.loads(
+        (_FIXTURES / "elephantbet" / "events.json").read_text(encoding="utf-8")
+    )
+    for sport in raw:
+        for tournament in sport.get("t", []):
+            for match in tournament.get("m", []):
+                if match.get("brid") == "72221172":
+                    return match
+    raise AssertionError("fixture match with brid 72221172 not found")
+
+
+def test_match_events_pairs_elephantbet_via_shared_sr():
+    """extract_event_ids already resolves ElephantBet's `brid` field to a
+    SportRadar id, but match_events dropped every ElephantBet payload
+    because MatchedEvent had no `elephantbet` field and the platform
+    dict lookup in match_events never populated one. This pins that an
+    ElephantBet event and a Betway event sharing the same SR id
+    (72221172 — Fulham FC v Chelsea FC) group into one MatchedEvent with
+    both platform fields populated."""
+    eb_event = _elephantbet_fulham_chelsea_match()
+    bw_event = {"sportEvent": {"eventId": "72221172"}}
+
+    results = match_events(
+        ("elephantbet", [eb_event]),
+        ("betway", [bw_event]),
+    )
+
+    assert len(results) == 1
+    me = results[0]
+    assert me.sportradar_id == "72221172"
+    assert me.elephantbet is eb_event
+    assert me.betway is bw_event
 
 
 def test_match_events_no_ids_event_is_skipped():

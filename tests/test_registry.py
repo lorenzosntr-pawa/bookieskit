@@ -90,6 +90,35 @@ def test_registry_add_custom_mapping():
     assert mapping.betpawa_id == "4703"
 
 
+def test_registry_add_custom_mapping_with_elephantbet_id():
+    registry = MarketRegistry()
+    registry.add(
+        canonical_id="draw_no_bet_ft",
+        name="Draw No Bet - Full Time",
+        elephantbet_id="99",
+        outcomes={
+            "home": OutcomeMapping(
+                canonical_name="home",
+                betpawa="",
+                sportybet="",
+                bet9ja="",
+                elephantbet="1",
+            ),
+            "away": OutcomeMapping(
+                canonical_name="away",
+                betpawa="",
+                sportybet="",
+                bet9ja="",
+                elephantbet="2",
+            ),
+        },
+    )
+    mapping = registry.get_by_canonical("draw_no_bet_ft")
+    assert mapping is not None
+    assert mapping.elephantbet_id == "99"
+    assert registry.get_by_platform_id("elephantbet", "99") is mapping
+
+
 def test_registry_add_parameterized():
     registry = MarketRegistry(load_builtins=False)
     registry.add(
@@ -507,3 +536,38 @@ def test_registry_has_2way_handicap_ft():
     assert r.get_by_platform_id("bet9ja", "S_AH") is m
     assert r.get_by_platform_id("sportybet", "16") is m
     assert r.get_by_platform_id("betway", "[Handicap] [2-Way]") is m
+
+
+def test_elephantbet_core_soccer_mappings():
+    """Ids and labels lifted from the captured prematch fixture."""
+    from bookieskit.markets.registry import MarketRegistry
+
+    r = MarketRegistry()
+    assert r.get_by_canonical("1x2_ft").elephantbet_id == "3"
+    assert r.get_by_canonical("over_under_ft").elephantbet_id == "29"
+    assert r.get_by_canonical("btts_ft").elephantbet_id == "7"
+    assert r.get_by_canonical("double_chance_ft").elephantbet_id == "17"
+
+    dc = r.get_by_canonical("double_chance_ft").outcomes
+    assert dc["home_draw"].elephantbet == "1X"
+    assert dc["home_away"].elephantbet == "12"
+    assert dc["draw_away"].elephantbet == "X2"
+
+    btts = r.get_by_canonical("btts_ft").outcomes
+    assert btts["yes"].elephantbet == "Sim"
+    assert btts["no"].elephantbet == "Não"
+
+
+def test_elephantbet_platform_id_lookup():
+    """Guards the registry wiring: get_by_canonical alone would not catch a
+    missing per-platform index, which is how this gap originally shipped."""
+    from bookieskit.markets.registry import MarketRegistry
+
+    r = MarketRegistry()
+    assert r.get_by_platform_id("elephantbet", "3").canonical_id == "1x2_ft"
+    assert r.get_by_platform_id("elephantbet", "29").canonical_id == "over_under_ft"
+    assert r.get_by_platform_id("elephantbet", "7").canonical_id == "btts_ft"
+    assert (
+        r.get_by_platform_id("elephantbet", "17").canonical_id
+        == "double_chance_ft"
+    )

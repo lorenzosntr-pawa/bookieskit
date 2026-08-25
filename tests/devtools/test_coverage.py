@@ -28,6 +28,7 @@ EXPECTED_MATRIX: dict[str, dict[str, bool]] = {
         "msport": True,
         "sportpesa": False,
         "betika": False,
+        "elephantbet": False,
     },
     "1x2_2up_ft": {
         "betpawa": False,
@@ -37,6 +38,7 @@ EXPECTED_MATRIX: dict[str, dict[str, bool]] = {
         "msport": True,
         "sportpesa": False,
         "betika": False,
+        "elephantbet": False,
     },
     "1x2_bookings_ft": {
         "betpawa": True,
@@ -46,6 +48,7 @@ EXPECTED_MATRIX: dict[str, dict[str, bool]] = {
         "msport": True,
         "sportpesa": False,
         "betika": False,
+        "elephantbet": False,
     },
     "1x2_corners_ft": {
         "betpawa": True,
@@ -55,6 +58,7 @@ EXPECTED_MATRIX: dict[str, dict[str, bool]] = {
         "msport": True,
         "sportpesa": False,
         "betika": False,
+        "elephantbet": False,
     },
     "1x2_ft": {
         "betpawa": True,
@@ -64,6 +68,7 @@ EXPECTED_MATRIX: dict[str, dict[str, bool]] = {
         "msport": True,
         "sportpesa": True,
         "betika": True,
+        "elephantbet": True,
     },
     "2way_handicap_basketball_ft": {
         "betpawa": True,
@@ -73,6 +78,7 @@ EXPECTED_MATRIX: dict[str, dict[str, bool]] = {
         "msport": True,
         "sportpesa": True,
         "betika": False,
+        "elephantbet": False,
     },
     "2way_handicap_ft": {
         "betpawa": True,
@@ -82,6 +88,7 @@ EXPECTED_MATRIX: dict[str, dict[str, bool]] = {
         "msport": True,
         "sportpesa": False,
         "betika": False,
+        "elephantbet": False,
     },
     "away_over_under_ft": {
         "betpawa": True,
@@ -91,6 +98,7 @@ EXPECTED_MATRIX: dict[str, dict[str, bool]] = {
         "msport": True,
         "sportpesa": False,
         "betika": True,
+        "elephantbet": False,
     },
     "btts_ft": {
         "betpawa": True,
@@ -100,6 +108,7 @@ EXPECTED_MATRIX: dict[str, dict[str, bool]] = {
         "msport": True,
         "sportpesa": True,
         "betika": True,
+        "elephantbet": True,
     },
     "double_chance_ft": {
         "betpawa": True,
@@ -109,6 +118,7 @@ EXPECTED_MATRIX: dict[str, dict[str, bool]] = {
         "msport": True,
         "sportpesa": True,
         "betika": True,
+        "elephantbet": True,
     },
     "handicap_games_tennis_match": {
         "betpawa": True,
@@ -118,6 +128,7 @@ EXPECTED_MATRIX: dict[str, dict[str, bool]] = {
         "msport": True,
         "sportpesa": True,
         "betika": True,
+        "elephantbet": False,
     },
     "home_over_under_ft": {
         "betpawa": True,
@@ -127,6 +138,7 @@ EXPECTED_MATRIX: dict[str, dict[str, bool]] = {
         "msport": True,
         "sportpesa": False,
         "betika": True,
+        "elephantbet": False,
     },
     "moneyline_basketball_ft": {
         "betpawa": True,
@@ -136,6 +148,7 @@ EXPECTED_MATRIX: dict[str, dict[str, bool]] = {
         "msport": True,
         "sportpesa": True,
         "betika": True,
+        "elephantbet": False,
     },
     "moneyline_tennis_match": {
         "betpawa": True,
@@ -145,6 +158,7 @@ EXPECTED_MATRIX: dict[str, dict[str, bool]] = {
         "msport": True,
         "sportpesa": True,
         "betika": True,
+        "elephantbet": False,
     },
     "next_goal_ft": {
         "betpawa": True,
@@ -154,6 +168,7 @@ EXPECTED_MATRIX: dict[str, dict[str, bool]] = {
         "msport": True,
         "sportpesa": False,
         "betika": True,
+        "elephantbet": False,
     },
     "over_under_bookings_ft": {
         "betpawa": True,
@@ -163,6 +178,7 @@ EXPECTED_MATRIX: dict[str, dict[str, bool]] = {
         "msport": True,
         "sportpesa": False,
         "betika": False,
+        "elephantbet": False,
     },
     "over_under_corners_ft": {
         "betpawa": True,
@@ -172,6 +188,7 @@ EXPECTED_MATRIX: dict[str, dict[str, bool]] = {
         "msport": True,
         "sportpesa": False,
         "betika": False,
+        "elephantbet": False,
     },
     "over_under_basketball_ft": {
         "betpawa": True,
@@ -181,6 +198,7 @@ EXPECTED_MATRIX: dict[str, dict[str, bool]] = {
         "msport": True,
         "sportpesa": True,
         "betika": True,
+        "elephantbet": False,
     },
     "over_under_ft": {
         "betpawa": True,
@@ -190,6 +208,7 @@ EXPECTED_MATRIX: dict[str, dict[str, bool]] = {
         "msport": True,
         "sportpesa": True,
         "betika": True,
+        "elephantbet": True,
     },
     "over_under_games_tennis_match": {
         "betpawa": True,
@@ -199,6 +218,7 @@ EXPECTED_MATRIX: dict[str, dict[str, bool]] = {
         "msport": True,
         "sportpesa": True,
         "betika": True,
+        "elephantbet": False,
     },
     "over_under_sets_tennis_match": {
         "betpawa": True,
@@ -208,6 +228,7 @@ EXPECTED_MATRIX: dict[str, dict[str, bool]] = {
         "msport": False,
         "sportpesa": False,
         "betika": False,
+        "elephantbet": False,
     },
     "double_chance_1up_ft": {
         "betpawa": True,
@@ -217,6 +238,7 @@ EXPECTED_MATRIX: dict[str, dict[str, bool]] = {
         "msport": False,
         "sportpesa": False,
         "betika": False,
+        "elephantbet": False,
     },
 }
 
@@ -253,12 +275,12 @@ def test_render_markdown_contains_all_platforms():
 
 def test_render_markdown_contains_known_row():
     md = render_markdown(coverage_matrix())
-    # 1x2_ft is supported on all 7 platforms → every cell should be ✓
+    # 1x2_ft is supported on all 8 platforms → every cell should be ✓
     assert "1x2_ft" in md
-    # There should be 7 check marks in the 1x2_ft row
+    # There should be 8 check marks in the 1x2_ft row
     for line in md.splitlines():
         if "1x2_ft" in line:
-            assert line.count("✓") == 7, f"Unexpected row: {line!r}"
+            assert line.count("✓") == 8, f"Unexpected row: {line!r}"
             break
 
 

@@ -1,4 +1,4 @@
-"""Event-info extractors — kickoff, live info, participants — for all 5 bookmakers.
+"""Event-info extractors — kickoff, live info, participants — for all 8 bookmakers.
 
 Mirrors the dispatcher pattern in `bookieskit.matching.extractor`. Each public
 function takes a `platform` string plus an optional `mode` keyword. Auto-detect
@@ -395,6 +395,37 @@ def _participants_betika(response, _mode: Mode | None) -> Participants:
     return Participants(home=home, away=away)
 
 
+# ---- ElephantBet ------------------------------------------------------------
+
+
+def _kickoff_elephantbet(response: dict, _mode: Mode | None) -> datetime | None:
+    if not isinstance(response, dict):
+        return None
+    s = response.get("d")
+    if not isinstance(s, str):
+        return None
+    try:
+        return datetime.strptime(s, "%Y-%m-%d %H:%M")
+    except ValueError:
+        return None
+
+
+def _participants_elephantbet(response: dict, _mode: Mode | None) -> Participants:
+    if not isinstance(response, dict):
+        return _EMPTY_PARTICIPANTS
+    home = response.get("ht") or None
+    away = response.get("at") or None
+    return Participants(home=home, away=away)
+
+
+def _live_info_elephantbet(response: dict, _mode: Mode | None) -> LiveInfo:
+    # Live state (minute/period/score) is not mapped this increment — no
+    # captured live fixture yet to confirm field names. Mirrors SportPesa's
+    # gap in `_live_info_sportpesa` above.
+    del response, _mode
+    return _EMPTY_LIVE_INFO
+
+
 def _live_info_betika(response, mode: Mode | None) -> LiveInfo:
     if mode == "prematch":
         return _EMPTY_LIVE_INFO
@@ -423,6 +454,7 @@ _KICKOFF_DISPATCH: dict[str, Callable[[dict, Mode | None], datetime | None]] = {
     "msport": _kickoff_msport,
     "sportpesa": _kickoff_sportpesa,
     "betika": _kickoff_betika,
+    "elephantbet": _kickoff_elephantbet,
 }
 
 _PARTICIPANTS_DISPATCH: dict[str, Callable[[dict, Mode | None], Participants]] = {
@@ -433,6 +465,7 @@ _PARTICIPANTS_DISPATCH: dict[str, Callable[[dict, Mode | None], Participants]] =
     "msport": _participants_msport,
     "sportpesa": _participants_sportpesa,
     "betika": _participants_betika,
+    "elephantbet": _participants_elephantbet,
 }
 
 _LIVE_INFO_DISPATCH: dict[str, Callable[[dict, Mode | None], LiveInfo]] = {
@@ -443,6 +476,7 @@ _LIVE_INFO_DISPATCH: dict[str, Callable[[dict, Mode | None], LiveInfo]] = {
     "msport": _live_info_msport,
     "sportpesa": _live_info_sportpesa,
     "betika": _live_info_betika,
+    "elephantbet": _live_info_elephantbet,
 }
 
 

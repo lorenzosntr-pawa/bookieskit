@@ -86,3 +86,39 @@ BETIKA_PAYLOAD = {
 def test_unmapped_betika_sub_type_id():
     cands = unmapped(BETIKA_PAYLOAD, "betika", "soccer")
     assert {c.market_id for c in cands} == {"77777"}
+
+
+def _load_elephantbet_prematch() -> dict:
+    import json
+    from pathlib import Path
+
+    fixture = (
+        Path(__file__).parent.parent
+        / "fixtures" / "event_info" / "elephantbet" / "prematch.json"
+    )
+    return json.loads(fixture.read_text(encoding="utf-8"))
+
+
+def test_iter_candidates_elephantbet_reads_ids_names_outcomes():
+    # Regression: no reader was registered for elephantbet, so
+    # `discover --unmapped` could never list its unmapped markets
+    # (Task 6 fix round 1).
+    payload = _load_elephantbet_prematch()
+    cands = iter_candidates(payload, "elephantbet")
+    by_id = {c.market_id: c for c in cands}
+    assert "3" in by_id  # 1x2_ft, registered elephantbet_id
+    assert by_id["3"].name == "1X2"
+    assert by_id["3"].outcomes == ["1", "X", "2"]
+
+
+def test_unmapped_elephantbet_excludes_registered_markets():
+    payload = _load_elephantbet_prematch()
+    cands = unmapped(payload, "elephantbet", "soccer")
+    ids = {c.market_id for c in cands}
+    # The four registered core markets (1x2=3, O/U=29, BTTS=7, DC=17) must
+    # be excluded; the fixture's many other market ids are unmapped.
+    assert "3" not in ids
+    assert "29" not in ids
+    assert "7" not in ids
+    assert "17" not in ids
+    assert ids  # the fixture carries plenty of genuinely unmapped markets

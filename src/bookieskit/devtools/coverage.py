@@ -15,6 +15,7 @@ PLATFORMS: list[str] = [
     "msport",
     "sportpesa",
     "betika",
+    "elephantbet",
 ]
 
 # Maps platform name -> MarketMapping attribute that holds its id.
@@ -26,6 +27,7 @@ _PLATFORM_ATTR: dict[str, str] = {
     "msport": "msport_id",
     "sportpesa": "sportpesa_id",
     "betika": "betika_id",
+    "elephantbet": "elephantbet_id",
 }
 
 

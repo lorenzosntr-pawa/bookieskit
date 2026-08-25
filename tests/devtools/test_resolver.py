@@ -22,10 +22,10 @@ class _FakeClient:
         raise AttributeError(name)
 
 
-def test_all_books_lists_seven():
+def test_all_books_lists_eight():
     assert ALL_BOOKS == (
         "betpawa", "sportybet", "msport", "bet9ja",
-        "betway", "betika", "sportpesa",
+        "betway", "betika", "sportpesa", "elephantbet",
     )
 
 
