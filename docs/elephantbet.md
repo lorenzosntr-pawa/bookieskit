@@ -10,15 +10,34 @@ shared client or brand plumbing with `bookmakers/betpawa.py`.
 |------|---------|----------|--------|
 | `mz` | Mozambique | `https://sports-core.elephantbet.com` | **working** — `DOMAINS` |
 
-ElephantBet also operates Angola (`ao`), Sierra Leone (`sl`) and Malawi (`mw`)
-brand sites, but their API hosts (`sports-core.elephantbet.co.ao`,
-`sports-core.elephantbet.sl`) sit behind a WAF/edge layer that returns `403`
-to non-browser clients — the same host class that serves BetPawa's `ao` and
-`sl` jurisdictions fine, so this is a bot-detection block, not geo-blocking.
-Malawi resolves no API host at all (brand site only). None of the three are
-verifiable, so none are listed in `DOMAINS`; recording an unverified 403
-response as a supported country would repeat a mistake this repo has already
-paid for once (the Betika Double Chance 1Up entry, corrected in #54).
+**Mozambique is the only live ElephantBet sportsbook.** A sweep of 49 country
+codes across five host patterns (2026-08-25) found the company holds several
+other domains, but none serves a reachable sportsbook:
+
+| Domain | Response | What it actually is |
+|---|---|---|
+| `www.elephantbet.ao` | `200` | **A HostGator "Website Startup Guide" placeholder** — the domain is registered but the site was never built |
+| `sports-core.elephantbet.co.ao` | `403` | Cloudflare challenge page (23 KB) |
+| `www.elephantbet.sl` | `403` | Cloudflare "Attention Required!" bot challenge |
+| `www.elephantbet.mw` | `401` | Cloudflare + nginx `Authorization Required` — password-gated |
+| `www.elephantbet.et` | `401` | same 574-byte auth page |
+| `www.elephantbet.mg` | `401` | same 574-byte auth page |
+
+So Angola is a **parked domain**, not a blocked sportsbook; Malawi, Ethiopia
+and Madagascar are **password-protected holding sites**, plausibly staging or
+defensively-registered; only Sierra Leone sits behind a genuine bot challenge
+that *might* front a real site.
+
+An earlier revision of this page described `ao`/`sl`/`mw` as operating brand
+sites whose API hosts were WAF-blocked. That overstated it — a `200` from
+Angola turned out to be default hosting boilerplate. The lesson is the same
+one this repo keeps relearning: a status code is not evidence of a service,
+and only a validated response body is (see the BetPawa jurisdiction sweep in
+#55, where live countries returned ~28 KB of config and dead ones returned
+zero bytes with the same `200`).
+
+`DOMAINS` therefore lists `mz` alone. Re-check with a probe that reads the
+body, not the status code.
 
 ## Methods
 
