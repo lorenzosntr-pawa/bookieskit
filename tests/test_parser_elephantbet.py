@@ -112,3 +112,33 @@ def test_elephantbet_does_not_map_three_way_handicap():
     assert not [
         m for m in _markets() if m.canonical_id == "2way_handicap_ft"
     ]
+
+
+# --- Live feed --------------------------------------------------------------
+
+
+def test_elephantbet_live_fixture_id_fields_match_documented_shape():
+    """Guards the brid/obrid trap against a real committed live capture.
+
+    On the live feed `brid` is an 18-digit BtoBet snowflake and the
+    SportRadar id is in `obrid`. Half the entries have no `obrid` at all,
+    so `extract_event_ids` must yield None for those rather than emitting
+    the BtoBet id as a provider id.
+    """
+    from bookieskit.matching import extract_event_ids
+
+    live = json.loads(
+        (_FIXTURES / "elephantbet" / "live.json").read_text(encoding="utf-8")
+    )
+    assert live, "live fixture is empty"
+    # Length is NOT a usable discriminator: virtual events carry 7-digit
+    # brids that look like SportRadar ids. In-play state is.
+    assert all(
+        any(k in e for k in ("ms", "mt", "sc", "ss")) for e in live
+    ), "every live entry must carry in-play state"
+    for entry in live:
+        sr = extract_event_ids(entry, platform="elephantbet").sportradar
+        if entry.get("obrid"):
+            assert sr == str(entry["obrid"])
+        else:
+            assert sr is None, "must not emit the BtoBet brid as an SR id"

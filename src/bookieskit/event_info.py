@@ -418,12 +418,33 @@ def _participants_elephantbet(response: dict, _mode: Mode | None) -> Participant
     return Participants(home=home, away=away)
 
 
-def _live_info_elephantbet(response: dict, _mode: Mode | None) -> LiveInfo:
-    # Live state (minute/period/score) is not mapped this increment — no
-    # captured live fixture yet to confirm field names. Mirrors SportPesa's
-    # gap in `_live_info_sportpesa` above.
-    del response, _mode
-    return _EMPTY_LIVE_INFO
+def _live_info_elephantbet(response: dict, mode: Mode | None) -> LiveInfo:
+    """Live state from a GetLiveMatchesMetaData entry.
+
+    Fields verified live 2026-08-25: ``ms`` is the localised period name
+    ("1a Parte"), ``mt`` the elapsed minute, and ``sc`` the score as
+    "home:away". The prematch listing carries none of these, so a prematch
+    payload naturally yields the empty LiveInfo.
+    """
+    if mode == "prematch" or not isinstance(response, dict):
+        return _EMPTY_LIVE_INFO
+    minute = _try_int(response.get("mt"))
+    period = response.get("ms") or None
+    if not isinstance(period, str):
+        period = None
+    score_home = score_away = None
+    raw_score = response.get("sc")
+    if isinstance(raw_score, str):
+        parts = raw_score.split(":")
+        if len(parts) == 2:
+            score_home = _try_int(parts[0])
+            score_away = _try_int(parts[1])
+    return LiveInfo(
+        minute=minute,
+        period=period,
+        score_home=score_home,
+        score_away=score_away,
+    )
 
 
 def _live_info_betika(response, mode: Mode | None) -> LiveInfo:
