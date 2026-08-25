@@ -130,7 +130,24 @@ All notable changes to this project are documented in this file. The format foll
   perspective (home `sbv=+1.5` pairs with away `sbv=-1.5`), which needs sign
   normalisation in the parser rather than a registry entry.
 
+- **ElephantBet live (in-play) support.** `get_live_events(sport_id=None)`
+  wraps `GetLiveMatchesMetaData`, which returns every live match across all
+  sports in one call (BtoBet has no per-sport live endpoint), so `sport_id`
+  filters client-side. `extract_live_info` now returns real period, minute
+  and score for ElephantBet instead of the empty placeholder.
+
 ### Fixed
+- **`extract_event_ids` no longer emits a BtoBet id as a SportRadar id for
+  ElephantBet.** The two feeds disagree about `brid`: on the prematch listing
+  it IS the SportRadar id, but on the live feed it is a BtoBet-internal id and
+  the SportRadar id lives in `obrid` (absent on half the entries). The
+  extractor read `brid` unconditionally, so every live payload would have fed
+  a bogus provider id into cross-book matching. It now keys off in-play state
+  (`ms`/`mt`/`sc`/`ss`), which is present on 40/40 live entries and 0/21
+  prematch entries in the committed captures. Length is deliberately not used
+  as the discriminator — live virtual events carry 7-digit `brid` values that
+  are indistinguishable by length from real 8-9 digit SportRadar ids.
+
 - **`double_chance_1up_ft` now maps Bet9ja** (`S_DC1X21`, "DC 1X2 1UP").
   It was previously recorded as not offered — wrong on two counts: the call was
   made from June fixtures whose `D.O` carried no such odds, and the key-scan

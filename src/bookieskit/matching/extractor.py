@@ -306,16 +306,41 @@ def _extract_event_ids_betika(response) -> EventIds:
 # ---- ElephantBet ------------------------------------------------------------
 
 
-def _extract_event_ids_elephantbet(response) -> EventIds:
-    """ElephantBet's ``brid`` is the SportRadar id (bare, no prefix).
+# The live feed always carries in-play state; the prematch listing never
+# does. That is the only reliable way to tell which field holds the provider
+# id, because BtoBet's own ids are NOT length-distinguishable from SportRadar
+# ids (virtual events carry 7-digit brids; real SR match ids are 8-9 digits).
+_ELEPHANTBET_LIVE_MARKERS = ("ms", "mt", "sc", "ss")
 
-    Verified against Betway event ``72221172`` (same fixture: "Fulham FC
-    vs. Chelsea FC") and MSport ``sr:match:72221172``. No Genius Sports id
-    is exposed.
+
+def _extract_event_ids_elephantbet(response) -> EventIds:
+    """Extract ElephantBet's SportRadar id, which moves between fields.
+
+    The two feeds disagree about what ``brid`` means, so reading it blindly
+    corrupts cross-book matching:
+
+    - **Prematch** (``GetGroupedMatches``): ``brid`` IS the SportRadar id.
+      Verified -- ``brid="72221172"`` resolves on Betway and MSport to the
+      same fixture ("Fulham FC vs. Chelsea FC").
+    - **Live** (``GetLiveMatchesMetaData``): ``brid`` is a BtoBet-internal
+      id and the SportRadar id lives in ``obrid``, which is ``None`` on half
+      the entries. Verified -- ``obrid=73842300`` resolves on Betway to "KT
+      Sonicboom vs. Mobis Phoebus", while its ``brid`` matches nothing.
+
+    Length cannot separate them: live virtual events ("Rush Football",
+    "eBasketball") carry 7-digit ``brid`` values that look plausibly like
+    8-9 digit SportRadar ids. What does separate them is in-play state --
+    every live entry carries ``ms``/``mt``/``sc``/``ss`` and no prematch
+    entry does (verified 40/40 and 0/21 against the committed captures).
+
+    So on a live entry only ``obrid`` is trusted, and an entry without one
+    has no SportRadar id at all. No Genius Sports id is exposed by either
+    feed.
     """
     if not isinstance(response, dict):
         return EventIds()
-    brid = response.get("brid")
-    if brid in (None, 0, "0", ""):
+    is_live = any(key in response for key in _ELEPHANTBET_LIVE_MARKERS)
+    raw = response.get("obrid" if is_live else "brid")
+    if raw in (None, 0, "0", ""):
         return EventIds()
-    return EventIds(sportradar=_strip_sr_prefix(str(brid)))
+    return EventIds(sportradar=_strip_sr_prefix(str(raw)))

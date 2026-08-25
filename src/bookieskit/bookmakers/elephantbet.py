@@ -115,6 +115,42 @@ class ElephantBet(BaseBookmaker):
             },
         )
 
+    async def get_live_events(
+        self, sport_id: str | None = None
+    ) -> list[dict[str, Any]]:
+        """Get every in-play match, optionally filtered to one sport.
+
+        BtoBet has no per-sport live endpoint: ``GetLiveMatchesMetaData``
+        returns every live match across all sports in one call, so
+        ``sport_id`` filters client-side on each entry's ``sid``.
+
+        Note the id trap. On this feed ``brid`` is an 18-digit
+        BtoBet-internal snowflake and the SportRadar id lives in ``obrid``
+        (often ``None``) — the exact opposite of the prematch listing.
+        Use :func:`bookieskit.extract_event_ids`, which handles both.
+
+        Live prices are not returned in a parseable form: each entry carries
+        a compressed ``aot`` odds string, and per-match live market endpoints
+        answer ``204``. Live market parsing is a separate increment.
+
+        Args:
+            sport_id: Optional BtoBet sport id (e.g. ``"1"`` for soccer).
+
+        Returns:
+            List of live match entries with ``mid``, ``ht``/``at``, ``ms``
+            (period), ``mt`` (minute) and ``sc`` (score "home:away").
+        """
+        raw = await self._request(
+            "GET",
+            "/rest/FEMobile/GetLiveMatchesMetaData",
+            params={"Culture": self._culture},
+        )
+        if not isinstance(raw, list):
+            return []
+        if sport_id is None:
+            return raw
+        return [m for m in raw if str(m.get("sid")) == str(sport_id)]
+
     async def get_event_detail(self, event_id: str) -> dict[str, Any]:
         """Get full markets and odds for one match.
 

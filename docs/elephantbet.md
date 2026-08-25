@@ -28,6 +28,7 @@ paid for once (the Betika Double Chance 1Up entry, corrected in #54).
 | `get_countries(sport_id)` | GET | `/rest/FEWFixture/FixturesMenu` | Whole sport → category → tournament menu in one call. `sport_id` is accepted for interface symmetry; callers filter `s[]` themselves. |
 | `get_tournaments(sport_id)` | (same as get_countries) | — | Alias — same payload as `get_countries`. |
 | `get_events(tournament_id, limit=50)` | GET | `/rest/FEMobile/GetGroupedMatches` | Events (with main markets) for one tournament. |
+| `get_live_events(sport_id=None)` | GET | `/rest/FEMobile/GetLiveMatchesMetaData` | Every in-play match across all sports; `sport_id` filters client-side. |
 | `get_event_detail(event_id)` | GET | `/rest/FEWMatches/MatchOdds` | Full markets/odds for one match. |
 | `get_markets(event_id)` | (calls `get_event_detail`) | — | Inherited convenience: returns `list[NormalizedMarket]`. |
 | `get_sportradar_id(event_id)` | (calls `get_event_detail`) | — | Inherited convenience: extracts `brid`. |
@@ -122,6 +123,53 @@ Calls `get_event_detail`, then reads `brid`. Note: as above, `brid` is `null`
 on the `MatchOdds` event-detail response in captures to date — use
 `extract_sportradar_id` (or `extract_event_ids`) against a `get_events`
 match object instead, where `brid` is populated.
+
+## Live (in-play)
+
+`get_live_events()` returns every live match in one call — BtoBet has no
+per-sport live endpoint, so `sport_id` filters client-side on each entry's
+`sid`. A sample run returned 40 matches across 10 sports (Soccer, Basketball,
+Table tennis, Snooker, Cricket, Baseball, Volleyball, plus eSoccer,
+eBasketball and "Rush Football" virtuals).
+
+Each entry carries in-play state, which `extract_live_info` reads:
+
+| Field | Meaning |
+|---|---|
+| `ms` | localised period name (`"1ª Parte"`, `"Pausa"`) |
+| `mt` | elapsed minute |
+| `sc` | score, `"home:away"` |
+| `ss` | set/period score |
+
+### The `brid` / `obrid` trap
+
+**The two feeds disagree about which field holds the SportRadar id.** Reading
+`brid` blindly corrupts cross-book matching:
+
+| Feed | `brid` | `obrid` |
+|---|---|---|
+| Prematch (`GetGroupedMatches`) | **the SportRadar id** | `None` |
+| Live (`GetLiveMatchesMetaData`) | BtoBet-internal id | **the SportRadar id**, or `None` |
+
+Verified: prematch `brid="72221172"` and live `obrid=73842300` both resolve on
+Betway to the same fixtures ("Fulham FC vs. Chelsea FC", "KT Sonicboom vs.
+Mobis Phoebus"), while a live `brid` matches nothing anywhere.
+
+Length is **not** a safe discriminator — live virtual events carry 7-digit
+`brid` values that look like real 8-9 digit SportRadar ids. In-play state is:
+every live entry carries `ms`/`mt`/`sc`/`ss` and no prematch entry does
+(40/40 and 0/21 across the committed captures). `extract_event_ids` uses that
+rule, so on a live entry only `obrid` is trusted and an entry without one
+correctly yields `None`. Half the live sample had no `obrid` at all — mostly
+virtuals, which SportRadar does not cover.
+
+### Live prices are not available yet
+
+Live *markets* are not parseable this increment. `FEWMatches/MatchOdds` and
+`FEMobile/GetMatchTabs` both answer `204 No Content` for a live match id, and
+`FEWHome/GetLiveMatchTabs` ignores `MatchID` entirely (it is a global,
+sport-keyed tab config). Prices appear to live in each entry's compressed
+`aot` string; decoding it is its own increment.
 
 ## Quirks
 

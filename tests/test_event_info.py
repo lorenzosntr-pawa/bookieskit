@@ -589,3 +589,38 @@ def test_extract_live_info_elephantbet_returns_empty():
     assert extract_live_info(match, "elephantbet") == LiveInfo()
     assert extract_live_info(match, "elephantbet", mode="live") == LiveInfo()
     assert extract_live_info({}, "elephantbet") == LiveInfo()
+
+
+def test_extract_live_info_elephantbet_from_live_feed():
+    """Live state comes from the GetLiveMatchesMetaData entry.
+
+    Fields verified live 2026-08-25: ms = localised period name, mt = minute,
+    sc = score "home:away".
+    """
+    from bookieskit import extract_live_info
+
+    entry = {
+        "sid": 1, "mid": 6495992, "ms": "1\u00aa Parte", "mt": 38,
+        "sc": "2:1", "ss": "0:0", "ht": "Mawryngkneng Cultural", "at": "Smit SC",
+    }
+    info = extract_live_info(entry, platform="elephantbet")
+    assert info.minute == 38
+    assert info.period == "1\u00aa Parte"
+    assert info.score_home == 2
+    assert info.score_away == 1
+
+
+def test_extract_live_info_elephantbet_malformed_is_total():
+    from bookieskit import extract_live_info
+
+    for bad in ({}, {"sc": "nonsense"}, {"sc": None, "mt": "x"}, {"sc": "1:2:3"}):
+        info = extract_live_info(bad, platform="elephantbet")
+        assert info is not None
+
+
+def test_extract_live_info_elephantbet_prematch_mode_is_empty():
+    from bookieskit import extract_live_info
+
+    entry = {"ms": "1\u00aa Parte", "mt": 38, "sc": "2:1"}
+    info = extract_live_info(entry, platform="elephantbet", mode="prematch")
+    assert info.minute is None and info.score_home is None
