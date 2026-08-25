@@ -378,7 +378,8 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
         betway_id="Corner 1X2",  # market name in captured fixture
         msport_id="162",  # "Corner 1x2"
         sportpesa_id=None,  # no corner data in captured fixture — needs probe
-        betika_id=None,  # no corner data in captured fixture — needs probe
+        betika_id=None,
+        elephantbet_id="111",  # no corner data in captured fixture — needs probe
         outcomes={
             "home": OutcomeMapping(
                 canonical_name="home",
@@ -389,6 +390,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 msport="Home",
                 sportpesa="",
                 betika="",
+                elephantbet="1",
             ),
             "draw": OutcomeMapping(
                 canonical_name="draw",
@@ -399,6 +401,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 msport="Draw",
                 sportpesa="",
                 betika="",
+                elephantbet="X",
             ),
             "away": OutcomeMapping(
                 canonical_name="away",
@@ -409,6 +412,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 msport="Away",
                 sportpesa="",
                 betika="",
+                elephantbet="2",
             ),
         },
         parameterized=False,
@@ -422,7 +426,8 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
         betway_id="Total Corners",  # market name in captured fixture
         msport_id="166",  # "Corners O/U"
         sportpesa_id=None,  # no corner data in captured fixture — needs probe
-        betika_id=None,  # no corner data in captured fixture — needs probe
+        betika_id=None,
+        elephantbet_id="107",  # no corner data in captured fixture — needs probe
         outcomes={
             "over": OutcomeMapping(
                 canonical_name="over",
@@ -433,6 +438,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 msport="Over",
                 sportpesa="",
                 betika="",
+                elephantbet="Acima",
             ),
             "under": OutcomeMapping(
                 canonical_name="under",
@@ -443,6 +449,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 msport="Under",
                 sportpesa="",
                 betika="",
+                elephantbet="Abaixo",
             ),
         },
         parameterized=True,
@@ -528,7 +535,8 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
         betway_id="Total Bookings",  # market name (card count, not points)
         msport_id="139",  # "Bookings O/U"
         sportpesa_id=None,  # cookie-gated probe; owner-flagged not offered
-        betika_id=None,  # truncated no-cookie fetch -- tracked by #31
+        betika_id=None,
+        elephantbet_id="73",  # truncated no-cookie fetch -- tracked by #31
         outcomes={
             "over": OutcomeMapping(
                 canonical_name="over",
@@ -539,6 +547,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 msport="Over",
                 sportpesa="",
                 betika="",
+                elephantbet="Acima",
             ),
             "under": OutcomeMapping(
                 canonical_name="under",
@@ -549,6 +558,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 msport="Under",
                 sportpesa="",
                 betika="",
+                elephantbet="Abaixo",
             ),
         },
         parameterized=True,
@@ -952,7 +962,8 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
         betway_id="[Home Team] Total",         # placeholder substituted at parse-time
         msport_id="19",                        # locked-in via probe
         sportpesa_id=None,                     # NOT PROBED
-        betika_id="19",                        # locked-in via probe
+        betika_id="19",
+        elephantbet_id="353",                        # locked-in via probe
         sport="soccer",
         outcomes={
             "over": OutcomeMapping(
@@ -964,6 +975,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 msport="Over",
                 sportpesa="OV",
                 betika="Over",
+                elephantbet="Acima",
             ),
             "under": OutcomeMapping(
                 canonical_name="under",
@@ -974,6 +986,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 msport="Under",
                 sportpesa="UN",
                 betika="Under",
+                elephantbet="Abaixo",
             ),
         },
         parameterized=True,
@@ -992,7 +1005,8 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
         betway_id="[Away Team] Total",         # placeholder substituted at parse-time
         msport_id="20",                        # locked-in via probe
         sportpesa_id=None,                     # NOT PROBED
-        betika_id="20",                        # locked-in via probe
+        betika_id="20",
+        elephantbet_id="352",                        # locked-in via probe
         sport="soccer",
         outcomes={
             "over": OutcomeMapping(
@@ -1004,6 +1018,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 msport="Over",
                 sportpesa="OV",
                 betika="Over",
+                elephantbet="Acima",
             ),
             "under": OutcomeMapping(
                 canonical_name="under",
@@ -1014,6 +1029,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 msport="Under",
                 sportpesa="UN",
                 betika="Under",
+                elephantbet="Abaixo",
             ),
         },
         parameterized=True,
