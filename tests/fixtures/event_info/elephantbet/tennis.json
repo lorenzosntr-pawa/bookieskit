@@ -1,0 +1,165 @@
+{
+ "s": null,
+ "t": [
+  {
+   "id": 7,
+   "or": 0,
+   "n": "Principial",
+   "is": 0,
+   "o": [
+    {
+     "id": 4,
+     "n": "Probabilidades 2-way",
+     "c": 1,
+     "oti": "99",
+     "m": [
+      {
+       "id": 618,
+       "n": "1",
+       "eon": null,
+       "otoi": "21",
+       "o": "2.40",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 619,
+       "n": "2",
+       "eon": null,
+       "otoi": "22",
+       "o": "1.52",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 23,
+     "n": "Games - Handicap Europeu",
+     "c": 1,
+     "oti": "1*a-0.5",
+     "m": [
+      {
+       "id": 1837,
+       "n": "1",
+       "eon": "{{HomeTeam}} {{SV}}",
+       "sbv": "2.5",
+       "otoi": "1*a2.5",
+       "o": "1.85",
+       "su": false,
+       "ord": 26,
+       "col": 1
+      },
+      {
+       "id": 704,
+       "n": "2",
+       "eon": "{{AwayTeam}} {{SV}}",
+       "sbv": "-2.5",
+       "otoi": "2*a-2.5",
+       "o": "1.80",
+       "su": false,
+       "ord": 26,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 64,
+     "n": "Acima/Abaixo",
+     "c": 1,
+     "oti": "88",
+     "m": [
+      {
+       "id": 1352,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "22.5",
+       "otoi": "+22.5",
+       "o": "1.85",
+       "su": false,
+       "ord": 16,
+       "col": 1
+      },
+      {
+       "id": 1353,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "22.5",
+       "otoi": "-22.5",
+       "o": "1.80",
+       "su": false,
+       "ord": 16,
+       "col": 2
+      },
+      {
+       "id": 1499,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "21.5",
+       "otoi": "+21.5",
+       "o": "1.60",
+       "su": false,
+       "ord": 14,
+       "col": 1
+      },
+      {
+       "id": 1500,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "21.5",
+       "otoi": "-21.5",
+       "o": "2.15",
+       "su": false,
+       "ord": 14,
+       "col": 2
+      },
+      {
+       "id": 23149,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "23.5",
+       "otoi": "+23.5",
+       "o": "2.10",
+       "su": false,
+       "ord": 18,
+       "col": 1
+      },
+      {
+       "id": 23150,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "23.5",
+       "otoi": "-23.5",
+       "o": "1.62",
+       "su": false,
+       "ord": 18,
+       "col": 2
+      }
+     ]
+    }
+   ],
+   "ou": []
+  }
+ ],
+ "brid": null,
+ "obrid": null,
+ "fpc": null,
+ "ati": null,
+ "hti": null,
+ "tus": false,
+ "mid": 6496712,
+ "ec": null,
+ "at": null,
+ "ht": null,
+ "d": null,
+ "scsid": null,
+ "scfi": null,
+ "sm": null,
+ "su": false,
+ "lc": false,
+ "tln": null,
+ "hln": null,
+ "aln": null
+}

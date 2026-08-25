@@ -171,6 +171,51 @@ Live *markets* are not parseable this increment. `FEWMatches/MatchOdds` and
 sport-keyed tab config). Prices appear to live in each entry's compressed
 `aot` string; decoding it is its own increment.
 
+## Basketball and tennis
+
+Sport ids come from `GET /rest/FEWFixture/Sports`: soccer `1`, basketball `2`
+("Basquetebol"), tennis `5` ("Ténis").
+
+| Canonical | Sport | id | ElephantBet market |
+|---|---|---|---|
+| `moneyline_basketball_ft` | basketball | `4` | VENCEDOR (INCL. PROLONGAMENTO) |
+| `over_under_basketball_ft` | basketball | `24` | Acima / Abaixo (inc. prol.) |
+| `moneyline_tennis_match` | tennis | `4` | Probabilidades 2-way |
+| `over_under_games_tennis_match` | tennis | `64` | Acima/Abaixo (games) |
+
+### Market ids are reused across sports — pass `sport=`
+
+**ElephantBet reuses market ids between sports, so `parse_markets` must be
+given `sport=` for anything other than soccer.** Confirmed collisions:
+
+| id | soccer | basketball | tennis |
+|---|---|---|---|
+| `4` | — | VENCEDOR (INCL. PROLONGAMENTO) | Probabilidades 2-way |
+| `23` | Handicap Asiatico | Asian Handicap | Games - Handicap Europeu |
+| `352` | Totais Equipa de fora | Totais Equipa de fora (incl. prol.) | — |
+| `353` | Totais Equipa da casa | Totais Equipa da casa (incl. prol.) | — |
+
+Without `sport=`, the registry's flat index resolves a shared id to whichever
+mapping was registered first. Parsing a **basketball** payload without it
+would surface ids `352`/`353` as `home_over_under_ft` / `away_over_under_ft`
+— the soccer canonicals, which count goals, not points:
+
+```python
+parse_markets(payload, platform="elephantbet", sport="basketball")
+```
+
+This is the same hazard SportPesa's id `52` already has; see
+[docs/markets.md](markets.md).
+
+### Not mapped
+
+- **`over_under_sets_tennis_match`** — no total-sets market on the captured
+  US Open fixture (that event carried only 3 markets).
+- **`2way_handicap_basketball_ft`** and **`handicap_games_tennis_match`** —
+  both are id `23`, which has the same per-outcome signed-line problem as
+  soccer's Asian handicap (home `sbv=-1.5` pairs with away `sbv=+1.5`).
+  Deferred to the handicap increment along with `2way_handicap_ft`.
+
 ## Quirks
 
 - **`Culture` is mandatory.** Every endpoint returns `400` (an RFC-9110

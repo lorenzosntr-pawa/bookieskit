@@ -142,3 +142,92 @@ def test_elephantbet_live_fixture_id_fields_match_documented_shape():
             assert sr == str(entry["obrid"])
         else:
             assert sr is None, "must not emit the BtoBet brid as an SR id"
+
+
+# --- Basketball and tennis --------------------------------------------------
+# ElephantBet REUSES market ids across sports, so these must be resolved
+# through the sport-scoped registry index. Verified in the captures:
+#   id 4   = basketball "VENCEDOR (INCL. PROLONGAMENTO)" AND tennis
+#            "Probabilidades 2-way"  -> two different canonicals
+#   id 23  = soccer / basketball / tennis handicap  -> all three deferred
+#   id 352 = soccer "Totais Equipa de fora" AND basketball
+#            "Totais Equipa de fora (incl. prol.)"
+
+
+def test_elephantbet_basketball_markets():
+    m = _markets("basketball.json")  # no sport= -> flat index
+    del m
+    ms = parse_markets(
+        json.loads(
+            (_FIXTURES / "elephantbet" / "basketball.json").read_text(
+                encoding="utf-8"
+            )
+        ),
+        platform="elephantbet",
+        sport="basketball",
+    )
+    by = {x.canonical_id: x for x in ms}
+    assert "moneyline_basketball_ft" in by
+    ml = by["moneyline_basketball_ft"]
+    assert {o.canonical_name for o in ml.outcomes} == {"home", "away"}
+    ou = by["over_under_basketball_ft"]
+    assert ou.lines is not None and 221.5 in ou.lines
+    assert {o.canonical_name for o in ou.lines[221.5]} == {"over", "under"}
+
+
+def test_elephantbet_tennis_markets():
+    ms = parse_markets(
+        json.loads(
+            (_FIXTURES / "elephantbet" / "tennis.json").read_text(
+                encoding="utf-8"
+            )
+        ),
+        platform="elephantbet",
+        sport="tennis",
+    )
+    by = {x.canonical_id: x for x in ms}
+    assert {o.canonical_name for o in by["moneyline_tennis_match"].outcomes} == {
+        "home", "away",
+    }
+    games = by["over_under_games_tennis_match"]
+    assert games.lines is not None and 22.5 in games.lines
+
+
+def test_elephantbet_market_id_4_resolves_by_sport_not_first_wins():
+    """id 4 is basketball moneyline AND tennis moneyline.
+
+    Without the sport-scoped index one of the two would silently resolve to
+    the other sport's canonical.
+    """
+    from bookieskit.markets.registry import MarketRegistry
+
+    r = MarketRegistry()
+    assert (
+        r.get_by_platform_id("elephantbet", "4", sport="basketball").canonical_id
+        == "moneyline_basketball_ft"
+    )
+    assert (
+        r.get_by_platform_id("elephantbet", "4", sport="tennis").canonical_id
+        == "moneyline_tennis_match"
+    )
+
+
+def test_elephantbet_basketball_does_not_leak_soccer_per_team_totals():
+    """ids 352/353 exist on BOTH soccer and basketball events.
+
+    Parsed with sport="basketball" they must not surface as the soccer
+    canonicals `home_over_under_ft` / `away_over_under_ft`, which describe
+    goals, not points.
+    """
+    ms = parse_markets(
+        json.loads(
+            (_FIXTURES / "elephantbet" / "basketball.json").read_text(
+                encoding="utf-8"
+            )
+        ),
+        platform="elephantbet",
+        sport="basketball",
+    )
+    ids = {x.canonical_id for x in ms}
+    assert "home_over_under_ft" not in ids
+    assert "away_over_under_ft" not in ids

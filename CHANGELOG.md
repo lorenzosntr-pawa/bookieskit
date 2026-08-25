@@ -136,6 +136,17 @@ All notable changes to this project are documented in this file. The format foll
   filters client-side. `extract_live_info` now returns real period, minute
   and score for ElephantBet instead of the empty placeholder.
 
+- **ElephantBet basketball and tennis.** Sport ids wired (basketball `2`,
+  tennis `5`) plus four canonical markets: `moneyline_basketball_ft` (`4`),
+  `over_under_basketball_ft` (`24`), `moneyline_tennis_match` (`4`) and
+  `over_under_games_tennis_match` (`64`). ElephantBet coverage is now 13
+  markets across all three sports. **ElephantBet reuses market ids across
+  sports** — id `4` is both basketball and tennis moneyline, and ids
+  `352`/`353` are per-team totals on both soccer and basketball — so
+  `parse_markets` must be passed `sport=` for non-soccer payloads, the same
+  way SportPesa's id `52` already requires. Captures for both sports are
+  committed.
+
 ### Fixed
 - **`extract_event_ids` no longer emits a BtoBet id as a SportRadar id for
   ElephantBet.** The two feeds disagree about `brid`: on the prematch listing

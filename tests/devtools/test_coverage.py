@@ -148,7 +148,7 @@ EXPECTED_MATRIX: dict[str, dict[str, bool]] = {
         "msport": True,
         "sportpesa": True,
         "betika": True,
-        "elephantbet": False,
+        "elephantbet": True,
     },
     "moneyline_tennis_match": {
         "betpawa": True,
@@ -158,7 +158,7 @@ EXPECTED_MATRIX: dict[str, dict[str, bool]] = {
         "msport": True,
         "sportpesa": True,
         "betika": True,
-        "elephantbet": False,
+        "elephantbet": True,
     },
     "next_goal_ft": {
         "betpawa": True,
@@ -198,7 +198,7 @@ EXPECTED_MATRIX: dict[str, dict[str, bool]] = {
         "msport": True,
         "sportpesa": True,
         "betika": True,
-        "elephantbet": False,
+        "elephantbet": True,
     },
     "over_under_ft": {
         "betpawa": True,
@@ -218,7 +218,7 @@ EXPECTED_MATRIX: dict[str, dict[str, bool]] = {
         "msport": True,
         "sportpesa": True,
         "betika": True,
-        "elephantbet": False,
+        "elephantbet": True,
     },
     "over_under_sets_tennis_match": {
         "betpawa": True,

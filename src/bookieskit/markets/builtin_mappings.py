@@ -591,6 +591,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
         msport_id="219",
         sportpesa_id="382",  # "2 Way - OT incl." (basketball)
         betika_id="219",
+        elephantbet_id="4",
         sport="basketball",
         outcomes={
             "home": OutcomeMapping(
@@ -602,6 +603,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 msport="Home",
                 sportpesa="1",
                 betika="1",
+                elephantbet="1",
             ),
             "away": OutcomeMapping(
                 canonical_name="away",
@@ -612,6 +614,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 msport="Away",
                 sportpesa="2",
                 betika="2",
+                elephantbet="2",
             ),
         },
         parameterized=False,
@@ -626,6 +629,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
         msport_id="225",
         sportpesa_id="52",  # collides with soccer O/U; disambiguated by sport field
         betika_id="225",
+        elephantbet_id="24",
         sport="basketball",
         outcomes={
             "over": OutcomeMapping(
@@ -637,6 +641,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 msport="Over",
                 sportpesa="OV",
                 betika="Over",
+                elephantbet="Acima",
             ),
             "under": OutcomeMapping(
                 canonical_name="under",
@@ -647,6 +652,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 msport="Under",
                 sportpesa="UN",
                 betika="Under",
+                elephantbet="Abaixo",
             ),
         },
         parameterized=True,
@@ -725,6 +731,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
         msport_id="186",
         sportpesa_id="382",
         betika_id="186",
+        elephantbet_id="4",
         sport="tennis",
         outcomes={
             "home": OutcomeMapping(
@@ -736,6 +743,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 msport="Home",
                 sportpesa="1",
                 betika="1",
+                elephantbet="1",
             ),
             "away": OutcomeMapping(
                 canonical_name="away",
@@ -746,6 +754,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 msport="Away",
                 sportpesa="2",
                 betika="2",
+                elephantbet="2",
             ),
         },
         parameterized=False,
@@ -760,6 +769,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
         msport_id="189",
         sportpesa_id="226",
         betika_id="189",
+        elephantbet_id="64",
         sport="tennis",
         outcomes={
             "over": OutcomeMapping(
@@ -771,6 +781,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 msport="Over",
                 sportpesa="OV",
                 betika="Over",
+                elephantbet="Acima",
             ),
             "under": OutcomeMapping(
                 canonical_name="under",
@@ -781,6 +792,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 msport="Under",
                 sportpesa="UN",
                 betika="Under",
+                elephantbet="Abaixo",
             ),
         },
         parameterized=True,
