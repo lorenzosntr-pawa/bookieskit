@@ -118,6 +118,18 @@ All notable changes to this project are documented in this file. The format foll
     all return an identical SPA shell, so neither list is evidence-backed.
     Both are left as-is pending a probe that can actually distinguish them.
 
+- **ElephantBet soccer breadth: 4 → 9 canonical markets.** Adds
+  `1x2_corners_ft` (`111`), `over_under_corners_ft` (`107`),
+  `over_under_bookings_ft` (`73`), `home_over_under_ft` (`353`) and
+  `away_over_under_ft` (`352`), all read from the committed capture. Pure
+  registry additions — no parser change, since all five reuse outcome
+  vocabulary already mapped (`Acima`/`Abaixo`, `1`/`X`/`2`).
+  `1x2_bookings_ft` and `next_goal_ft` were checked and are genuinely not
+  offered in a matching form; `2way_handicap_ft` is deferred because
+  ElephantBet's Asian handicap stores each outcome's line from its own
+  perspective (home `sbv=+1.5` pairs with away `sbv=-1.5`), which needs sign
+  normalisation in the parser rather than a registry entry.
+
 ### Fixed
 - **`double_chance_1up_ft` now maps Bet9ja** (`S_DC1X21`, "DC 1X2 1UP").
   It was previously recorded as not offered — wrong on two counts: the call was
