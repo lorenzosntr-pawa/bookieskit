@@ -148,6 +148,14 @@ All notable changes to this project are documented in this file. The format foll
   committed.
 
 ### Fixed
+- **Corrected ElephantBet's jurisdiction documentation.** `docs/elephantbet.md`
+  described Angola, Sierra Leone and Malawi as operating brand sites whose API
+  hosts were WAF-blocked. A wider sweep (49 country codes, five host patterns)
+  shows `www.elephantbet.ao` returns `200` only because it serves a HostGator
+  placeholder page — a parked domain, not a blocked sportsbook — while Malawi,
+  Ethiopia and Madagascar return Cloudflare `401 Authorization Required`
+  holding pages. Mozambique remains the only live ElephantBet sportsbook.
+
 - **`extract_event_ids` no longer emits a BtoBet id as a SportRadar id for
   ElephantBet.** The two feeds disagree about `brid`: on the prematch listing
   it IS the SportRadar id, but on the live feed it is a BtoBet-internal id and
