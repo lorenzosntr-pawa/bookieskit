@@ -64,8 +64,57 @@ fields are `null` — team names and kickoff for cross-referencing come from
 ### Inherited: `get_markets(event_id, registry=None) -> list[NormalizedMarket]`
 
 Calls `get_event_detail`, then `parse_markets(response, platform="elephantbet")`.
-Four canonical soccer markets are registered this increment: `1x2_ft`,
-`over_under_ft`, `btts_ft`, `double_chance_ft`.
+**Nine** canonical soccer markets are registered:
+
+| Canonical | ElephantBet id | Market name |
+|---|---|---|
+| `1x2_ft` | `3` | 1X2 |
+| `over_under_ft` | `29` | Acima / Abaixo |
+| `btts_ft` | `7` | Ambas as equipas a marcar |
+| `double_chance_ft` | `17` | HIPÓTESE DUPLA |
+| `1x2_corners_ft` | `111` | QUAL DAS EQUIPAS TERÁ MAIS CANTOS? |
+| `over_under_corners_ft` | `107` | Total de cantos DO JOGO |
+| `over_under_bookings_ft` | `73` | Total Cartões Partida |
+| `home_over_under_ft` | `353` | Totais Equipa da casa |
+| `away_over_under_ft` | `352` | Totais Equipa de fora |
+
+The captured fixture carries **153** markets, so this is deliberate breadth,
+not the limit of what ElephantBet publishes. Use
+`python -m bookieskit.devtools discover --unmapped` to enumerate the rest.
+
+**Registered does not mean present on every event.** Sampling eight live
+Premier League fixtures on 2026-08-25:
+
+| Markets | Present |
+|---|---|
+| `1x2_ft`, `over_under_ft`, `btts_ft`, `double_chance_ft`, `home_over_under_ft`, `away_over_under_ft` | **8/8** |
+| `over_under_corners_ft` | 1/8 |
+| `1x2_corners_ft`, `over_under_bookings_ft` | 0/8 |
+
+The six core markets are reliably there; corners and bookings are sparse and
+appear on a minority of fixtures. Their mappings are verified against the
+committed capture, which does carry all three — a caller seeing no corner
+market on a given event is looking at ElephantBet's offering, not a mapping
+gap.
+
+Three canonicals were checked against the capture and are **not offered** in a
+form that matches them:
+
+- `1x2_bookings_ft` — only per-team card Over/Under exists (ids `12228`,
+  `12236`); there is no "which team gets most cards" 1X2.
+- `next_goal_ft` — the nearest markets are first-goal-and-final-result (`37`)
+  and minute-of-first-goal (`326`), neither of which is the canonical's
+  home/none/away shape.
+- `1x2_1up_ft` / `1x2_2up_ft` / `double_chance_1up_ft` — no early-payout
+  markets of any kind in the capture.
+
+`2way_handicap_ft` is **deferred, not absent**. ElephantBet's Asian handicap
+(id `23`) records each outcome's line from that outcome's own perspective —
+home `sbv=1.5` pairs with away `sbv=-1.5`. Grouping by raw `sbv`, as the
+parser does today, would pair home `+1.5` with away `+1.5`, which are two
+different handicap lines. Mapping it needs sign normalisation in the parser,
+so it gets its own increment. Its 3-way European sibling (id `27`, which has
+an `X` outcome) is out of the canonical set entirely.
 
 ### Inherited: `get_sportradar_id(event_id) -> str | None`
 

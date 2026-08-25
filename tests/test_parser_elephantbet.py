@@ -51,3 +51,64 @@ def test_elephantbet_over_under_ft_is_parameterized_by_sbv():
     assert 2.5 in m.lines
     names = {o.canonical_name for o in m.lines[2.5]}
     assert names == {"over", "under"}
+
+
+# --- Soccer breadth increment: corners, bookings, per-team totals ----------
+# Ids and labels lifted from the same captured fixture. All five reuse
+# outcome vocabulary already in the registry ("Acima"/"Abaixo", "1"/"X"/"2"),
+# so only the market ids are new.
+
+
+def test_elephantbet_over_under_corners_ft():
+    # id=107 "Total de cantos DO JOGO", parameterized by sbv.
+    m = next(m for m in _markets() if m.canonical_id == "over_under_corners_ft")
+    assert m.lines is not None
+    assert 10.5 in m.lines
+    by = {o.canonical_name: o.odds for o in m.lines[10.5]}
+    assert by == {"over": 1.95, "under": 1.65}
+
+
+def test_elephantbet_over_under_bookings_ft():
+    # id=73 "Total Cartões Partida".
+    m = next(
+        m for m in _markets() if m.canonical_id == "over_under_bookings_ft"
+    )
+    assert m.lines is not None
+    by = {o.canonical_name: o.odds for o in m.lines[4.5]}
+    assert by == {"over": 1.90, "under": 1.75}
+
+
+def test_elephantbet_home_and_away_over_under_ft_are_distinct():
+    # id=353 "Totais Equipa da casa" / id=352 "Totais Equipa de fora".
+    # Both use Acima/Abaixo, so a mapping that crossed the two market ids
+    # would silently swap home and away totals.
+    ms = _markets()
+    home = next(m for m in ms if m.canonical_id == "home_over_under_ft")
+    away = next(m for m in ms if m.canonical_id == "away_over_under_ft")
+    assert home.lines is not None and away.lines is not None
+    assert {o.canonical_name for o in home.lines[0.5]} == {"over", "under"}
+    # From the fixture: home Acima 0.5 = 1.40, away Acima 1.5 = 1.80.
+    assert {o.canonical_name: o.odds for o in home.lines[0.5]}["over"] == 1.40
+    assert {o.canonical_name: o.odds for o in away.lines[1.5]}["over"] == 1.80
+
+
+def test_elephantbet_1x2_corners_ft():
+    # id=111 "QUAL DAS EQUIPAS TERÁ MAIS CANTOS?" — most-corners 1X2,
+    # unparameterized (no sbv on its outcomes).
+    m = next(m for m in _markets() if m.canonical_id == "1x2_corners_ft")
+    assert m.lines is None
+    by = {o.canonical_name: o.odds for o in m.outcomes}
+    assert by == {"home": 2.20, "draw": 8.50, "away": 1.85}
+
+
+def test_elephantbet_does_not_map_three_way_handicap():
+    """id=27 "Handicap" is the 3-way European variant (has an X outcome).
+
+    Only the 2-way Asian handicap is in the canonical set, and ElephantBet's
+    id=23 needs per-outcome sign normalisation (home sbv=+1.5 pairs with away
+    sbv=-1.5), which the parser does not do — deferred to its own increment.
+    Neither must resolve as 2way_handicap_ft in the meantime.
+    """
+    assert not [
+        m for m in _markets() if m.canonical_id == "2way_handicap_ft"
+    ]
