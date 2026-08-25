@@ -31,7 +31,9 @@ def test_table_covers_all_eight_platforms_for_soccer():
     }
 
 
-def test_elephantbet_soccer_id_only():
+def test_elephantbet_covers_all_three_sports():
+    # Verified live: soccer=1, basketball=2 ("Basquetebol"),
+    # tennis=5 ("Tenis"), read from GET /rest/FEWFixture/Sports.
     assert sport_id("elephantbet", "soccer") == "1"
-    assert sport_id("elephantbet", "basketball") is None
-    assert sport_id("elephantbet", "tennis") is None
+    assert sport_id("elephantbet", "basketball") == "2"
+    assert sport_id("elephantbet", "tennis") == "5"
