@@ -1,0 +1,91 @@
+{
+ "id": "38130200",
+ "name": "Al-Shamal - Qatar SC",
+ "participants": [
+  {
+   "id": "657344",
+   "name": "Al-Shamal",
+   "position": 1
+  },
+  {
+   "id": "656717",
+   "name": "Qatar SC",
+   "position": 2
+  }
+ ],
+ "startTime": "2026-10-23T14:30:00Z",
+ "markets": [
+  {
+   "marketType": {
+    "id": "28000850",
+    "name": "1X2 2UP - FT",
+    "displayName": "1X2 2UP | Full Time",
+    "explainer": "2UP means that if your team goes 2 goals ahead at any point before Full Time, we'll pay you early. Draw is settled at full-time as usual.",
+    "priority": 3,
+    "tabs": [
+     "all",
+     "popular"
+    ],
+    "handicapType": ""
+   },
+   "row": [
+    {
+     "id": "412060987",
+     "prices": [
+      {
+       "id": "1573946860",
+       "name": "1",
+       "typeId": "28000851",
+       "odds": 1.62,
+       "suspended": false,
+       "displayName": "1",
+       "additionalInfo": {
+        "hot": false
+       },
+       "probability": {
+        "win": 0.6009982558575925,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1573946862",
+       "name": "X",
+       "typeId": "28000852",
+       "odds": 4.5,
+       "suspended": false,
+       "displayName": "X",
+       "additionalInfo": {
+        "hot": false
+       },
+       "probability": {
+        "win": 0.21054,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1573946864",
+       "name": "2",
+       "typeId": "28000853",
+       "odds": 4.3,
+       "suspended": false,
+       "displayName": "2",
+       "additionalInfo": {
+        "hot": false
+       },
+       "probability": {
+        "win": 0.22687028360301958,
+        "refund": 0.0
+       }
+      }
+     ]
+    }
+   ],
+   "displayNameRows": [],
+   "displayNameColumns": [],
+   "additionalInfo": {
+    "cashoutable": true,
+    "boosted": false
+   }
+  }
+ ]
+}

@@ -232,11 +232,11 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
         parameterized=False,
     ),
     # 1X2 2Up — pays as 1X2 if your team gets to a 2-goal lead at any point.
-    # Same coverage as 1Up.
+    # Same coverage as 1Up. BetPawa: marketType 28000850, prices 1 / X / 2.
     MarketMapping(
         canonical_id="1x2_2up_ft",
         name="1X2 2Up - Full Time",
-        betpawa_id=None,
+        betpawa_id="28000850",
         sportybet_id="60100",
         bet9ja_key="S_1X22",
         betway_id="1X2 (2Up)",
@@ -246,7 +246,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
         outcomes={
             "home": OutcomeMapping(
                 canonical_name="home",
-                betpawa="",
+                betpawa="1",
                 sportybet="Home",
                 bet9ja="12",
                 betway="__HOME__",
@@ -256,7 +256,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
             ),
             "draw": OutcomeMapping(
                 canonical_name="draw",
-                betpawa="",
+                betpawa="X",
                 sportybet="Draw",
                 bet9ja="X2",
                 betway="Draw",
@@ -266,7 +266,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
             ),
             "away": OutcomeMapping(
                 canonical_name="away",
-                betpawa="",
+                betpawa="2",
                 sportybet="Away",
                 bet9ja="22",
                 betway="__AWAY__",

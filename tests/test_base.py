@@ -176,3 +176,26 @@ async def test_cookie_kwarg_carried_into_live_headers():
     async with MockBookmaker(country="ng", cookie="ck=1") as client:
         await client._request("GET", "/api/test")
         assert client._http_client.headers.get("cookie") == "ck=1"
+
+
+def test_base_url_override():
+    from bookieskit import BetPawa
+
+    client = BetPawa("gh", base_url="https://flexcombo.gh.staging.pawatest.com/")
+    assert client.base_url == "https://flexcombo.gh.staging.pawatest.com"
+
+
+def test_base_url_override_keeps_brand_header():
+    from bookieskit import BetPawa
+
+    default = BetPawa("gh")._build_headers()["x-pawa-brand"]
+    overridden = BetPawa(
+        "gh", base_url="https://flexcombo.gh.staging.pawatest.com"
+    )._build_headers()
+    assert overridden["x-pawa-brand"] == default == "betpawa-ghana"
+
+
+def test_default_base_url_unchanged():
+    from bookieskit import BetPawa
+
+    assert BetPawa("gh").base_url == "https://www.betpawa.com.gh"

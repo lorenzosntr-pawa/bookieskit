@@ -31,7 +31,7 @@ EXPECTED_MATRIX: dict[str, dict[str, bool]] = {
         "elephantbet": False,
     },
     "1x2_2up_ft": {
-        "betpawa": False,
+        "betpawa": True,
         "sportybet": True,
         "bet9ja": True,
         "betway": True,

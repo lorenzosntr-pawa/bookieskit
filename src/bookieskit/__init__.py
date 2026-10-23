@@ -20,6 +20,7 @@ from bookieskit.event_info import (
 )
 from bookieskit.markets.parser import ProbabilityMode
 from bookieskit.matching import EventIds, extract_event_ids
+from bookieskit.pricing import devig_multiplicative, devig_shin, margin
 
 __version__ = "0.16.0"
 __all__ = [
@@ -38,6 +39,9 @@ __all__ = [
     "ProbabilityMode",
     "EventIds",
     "extract_event_ids",
+    "margin",
+    "devig_multiplicative",
+    "devig_shin",
     "extract_kickoff",
     "extract_live_info",
     "extract_participants",
