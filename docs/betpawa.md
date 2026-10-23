@@ -98,7 +98,7 @@ Calls `get_event_detail`, then extracts the SR id from the SPORTRADAR widget. Re
 
 - `x-pawa-brand` header varies per country (`betpawa-nigeria`, `betpawa-ghana`, etc.) and is set automatically by the client.
 - BetPawa's parameterized markets store the line as `formattedHandicap` (display) and `handicap` (internal value × 4). The parser handles both.
-- Outcome odds live under `prices[].price` (not `odds`).
+- Outcome odds live under `prices[].price` or `prices[].odds` (live payloads use `odds`); read `price` first, fall back to `odds`.
 - No SR-id reverse search yet — BetPawa is the seed, not a target, in cross-bookmaker workflows.
 
 ## Recipes
