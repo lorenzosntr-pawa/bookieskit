@@ -5,6 +5,10 @@ All notable changes to this project are documented in this file. The format foll
 ## [Unreleased]
 
 ### Added
+- **`base_url` override** — every bookmaker client accepts an optional
+  `base_url=` (e.g. a staging host) that replaces `DOMAINS[country]`;
+  trailing slashes are stripped and `country` still drives headers such as
+  BetPawa's `x-pawa-brand`.
 - **Pricing helpers** — `bookieskit.pricing` (also exported at top level):
   `margin`, `devig_multiplicative` and `devig_shin` for overround and
   fair-probability extraction from decimal odds. All return `None` for
