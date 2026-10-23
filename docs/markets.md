@@ -33,7 +33,7 @@ The flag is a no-op for bookmakers whose market ids don't overlap across sports 
 | `btts_ft` | Both Teams To Score — Full Time | no | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | `double_chance_ft` | Double Chance — Full Time | no | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | `1x2_1up_ft` | 1X2 1Up — Full Time | no | ✅ | ✅ | ✅ | ✅ | ✅ | — | — | — |
-| `1x2_2up_ft` | 1X2 2Up — Full Time | no | — | ✅ | ✅ | ✅ | ✅ | — | — | — |
+| `1x2_2up_ft` | 1X2 2Up — Full Time | no | ✅ | ✅ | ✅ | ✅ | ✅ | — | — | — |
 | `next_goal_ft` | Next Goal — Full Time | yes (line = goal number) | ✅ | ✅ | ✅ | ✅ | ✅ live | ❌ NOT PROBED | ✅ | — |
 | `home_over_under_ft` | Over/Under — Home Team — Full Time | yes (line = goals) | ✅ | ✅ | ✅ combined | ✅ | ✅ | ❌ NOT PROBED | ✅ | ✅ |
 | `away_over_under_ft` | Over/Under — Away Team — Full Time | yes (line = goals) | ✅ | ✅ | ✅ combined | ✅ | ✅ | ❌ NOT PROBED | ✅ | ✅ |
@@ -45,7 +45,7 @@ The flag is a no-op for bookmakers whose market ids don't overlap across sports 
 | `over_under_bookings_ft` | Bookings Over/Under — Full Time | yes (line=cards) | ✅ | ✅ | ✅ | ✅ | ✅ | — NOT OFFERED | ❌ #31 | ✅ |
 
 The 1Up / 2Up markets pay as a 1X2 if your team gets to a 1- or 2-goal lead at any
-point. BetPawa offers 1Up (id `28000810`) but not 2Up. MSport offers both
+point. BetPawa offers both (1Up `28000810`, 2Up `28000850`). MSport also offers both
 (`5000002` / `5000001`) — note it sends market ids as ints, which the parser
 stringifies. SportPesa and Betika expose neither.
 
