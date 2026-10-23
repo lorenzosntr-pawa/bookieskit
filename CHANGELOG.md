@@ -5,6 +5,10 @@ All notable changes to this project are documented in this file. The format foll
 ## [Unreleased]
 
 ### Added
+- **Pricing helpers** — `bookieskit.pricing` (also exported at top level):
+  `margin`, `devig_multiplicative` and `devig_shin` for overround and
+  fair-probability extraction from decimal odds. All return `None` for
+  fewer than two outcomes or any odds that are `None` or `<= 1.0`.
 - **ElephantBet — eighth bookmaker (Mozambique)** — a new `ElephantBet` client
   for the BtoBet `Sb.WebApi` platform (`sports-core.elephantbet.com`),
   covering the four core soccer markets (`1x2_ft`, `over_under_ft`,
