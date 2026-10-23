@@ -241,3 +241,21 @@ def test_parse_betpawa_2way_handicap_ft_from_real_fixture():
         {"home", "away"}.issubset({o.canonical_name for o in outs})
         for outs in ah.lines.values()
     ), f"no line had both home and away: {ah.lines}"
+
+
+def test_betpawa_2up_parsed():
+    # Live NG capture (event 38130200): marketType.id=28000850 "1X2 2UP - FT",
+    # prices named 1 / X / 2 (same vocabulary as plain 1X2).
+    import json
+    from pathlib import Path
+
+    fixture = (
+        Path(__file__).parent / "fixtures" / "event_info" / "betpawa"
+        / "1x2_2up_ft.json"
+    )
+    payload = json.loads(fixture.read_text(encoding="utf-8"))
+    markets = parse_markets(payload, "betpawa")
+    m = next(m for m in markets if m.canonical_id == "1x2_2up_ft")
+    assert len(m.outcomes) == 3
+    odds = {o.canonical_name: o.odds for o in m.outcomes}
+    assert odds == {"home": 1.62, "draw": 4.5, "away": 4.3}

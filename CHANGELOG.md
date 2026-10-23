@@ -156,6 +156,9 @@ All notable changes to this project are documented in this file. The format foll
   committed.
 
 ### Fixed
+- **BetPawa 1X2 2UP mapping** — `1x2_2up_ft` now maps BetPawa marketType
+  `28000850` (prices `1` / `X` / `2`), confirmed from a live NG payload; it was
+  previously unmapped (`betpawa_id=None`) so the market was silently dropped.
 - **Corrected ElephantBet's jurisdiction documentation.** `docs/elephantbet.md`
   described Angola, Sierra Leone and Malawi as operating brand sites whose API
   hosts were WAF-blocked. A wider sweep (49 country codes, five host patterns)
