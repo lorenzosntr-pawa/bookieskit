@@ -481,3 +481,34 @@ def test_wc_nf_goal_handicap_and_ou_are_the_real_markets():
     assert -0.5 in hcp
     # goal handicap (6645701416hcp=0.5~), not Corner Handicap 2.20/1.60
     assert [o.odds for o in hcp[0.5]] == [2.25, 1.61]
+
+
+def test_parameterized_parent_is_row_the_lines_belong_to():
+    from bookieskit.markets.parser import _build_betway_parameterized
+    from bookieskit.markets.registry import MarketRegistry
+
+    mapping = MarketRegistry().get_by_platform_id(
+        "betway", "[Handicap] [2-Way]"
+    )
+    assert mapping is not None
+    eid = "66457014"
+    goal, decoy = f"{eid}16", f"{eid}165"
+    line = f"{goal}hcp=0.5~"
+
+    def outs(prefix, a, b):
+        return [
+            {"outcomeId": f"{prefix}1", "name": "Norway", "_p": a},
+            {"outcomeId": f"{prefix}2", "name": "France", "_p": b},
+        ]
+
+    goal_outs = outs(f"{line}", 2.25, 1.61)
+    decoy_outs = outs(f"{decoy}hcp=0.5~", 2.2, 1.6)
+    prices = {o["outcomeId"]: o["_p"] for o in goal_outs + decoy_outs}
+    entries = [
+        ({"marketId": goal, "handicap": 0}, goal_outs + decoy_outs[:0]),
+        ({"marketId": line, "handicap": 0.5}, []),
+        ({"marketId": decoy, "handicap": 0}, decoy_outs),
+    ]
+    result = _build_betway_parameterized(entries, mapping, prices)
+    assert result is not None
+    assert [o.odds for o in result.lines[0.5]] == [2.25, 1.61]
