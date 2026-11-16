@@ -88,7 +88,7 @@ Full event payload, including `markets[]` and `widgets[]`. The SR id lives in th
 
 ### Inherited: `get_markets(event_id, registry=None) -> list[NormalizedMarket]`
 
-Calls `get_event_detail`, then `parse_markets(response, platform="betpawa", registry=registry)`. Returns the normalized markets — only those whose `betpawa_id` is registered: **21 of the 22 builtins**, the sole exception being `1x2_2up_ft` (BetPawa offers 1Up but not 2Up). Note that a market being registered does not mean every event carries it — `double_chance_1up_ft` (id `80000`), for instance, appears on only a minority of fixtures.
+Calls `get_event_detail`, then `parse_markets(response, platform="betpawa", registry=registry)`. Returns the normalized markets — only those whose `betpawa_id` is registered: **all 22 builtins** (1X2 2UP is marketType `28000850`). Note that a market being registered does not mean every event carries it — `double_chance_1up_ft` (id `80000`), for instance, appears on only a minority of fixtures.
 
 ### Inherited: `get_sportradar_id(event_id) -> str | None`
 
@@ -98,7 +98,7 @@ Calls `get_event_detail`, then extracts the SR id from the SPORTRADAR widget. Re
 
 - `x-pawa-brand` header varies per country (`betpawa-nigeria`, `betpawa-ghana`, etc.) and is set automatically by the client.
 - BetPawa's parameterized markets store the line as `formattedHandicap` (display) and `handicap` (internal value × 4). The parser handles both.
-- Outcome odds live under `prices[].price` (not `odds`).
+- Outcome odds live under `prices[].price` or `prices[].odds` (live payloads use `odds`); read `price` first, fall back to `odds`.
 - No SR-id reverse search yet — BetPawa is the seed, not a target, in cross-bookmaker workflows.
 
 ## Recipes

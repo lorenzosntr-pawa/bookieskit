@@ -53,6 +53,7 @@ class BaseBookmaker:
         max_concurrent: int | None = None,
         request_delay: float | None = None,
         cookie: str | None = None,
+        base_url: str | None = None,
     ) -> None:
         """Initialise the client for the given country.
 
@@ -66,6 +67,8 @@ class BaseBookmaker:
             cookie: Optional ``Cookie:`` header value sent on every request.
                 Primarily needed for SportPesa (Akamai-gated); callers can
                 also use :meth:`set_cookie` to refresh mid-session.
+            base_url: Optional base URL replacing ``DOMAINS[country]``
+                (e.g. a staging host). ``country`` still drives headers.
 
         Raises:
             UnsupportedCountryError: If ``country`` is not in DOMAINS.
@@ -78,7 +81,7 @@ class BaseBookmaker:
             )
 
         self._country = country
-        self.base_url = self.DOMAINS[country]
+        self.base_url = (base_url or self.DOMAINS[country]).rstrip("/")
         self._timeout = timeout
         self._max_retries = max_retries
         self._backoff_factor = backoff_factor

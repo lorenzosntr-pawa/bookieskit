@@ -16,8 +16,19 @@ All notable changes to this project are documented in this file. The format foll
 - **BetPawa** — `decode_betpawa_probability` accepts the already-decoded
   `{"win", "refund"}` mapping some country sites (Ghana among them) now serve,
   alongside the obfuscated base64 blob.
+- **BetPawa 1X2 2UP mapping** — `1x2_2up_ft` now maps BetPawa marketType
+  `28000850` (prices `1` / `X` / `2`), confirmed from a live NG payload; it was
+  previously unmapped (`betpawa_id=None`) so the market was silently dropped.
 
 ### Added
+- **`base_url` override** — every bookmaker client accepts an optional
+  `base_url=` (e.g. a staging host) that replaces `DOMAINS[country]`;
+  trailing slashes are stripped and `country` still drives headers such as
+  BetPawa's `x-pawa-brand`.
+- **Pricing helpers** — `bookieskit.pricing` (also exported at top level):
+  `margin`, `devig_multiplicative` and `devig_shin` for overround and
+  fair-probability extraction from decimal odds. All return `None` for
+  fewer than two outcomes or any odds that are `None` or `<= 1.0`.
 - **ElephantBet — eighth bookmaker (Mozambique)** — a new `ElephantBet` client
   for the BtoBet `Sb.WebApi` platform (`sports-core.elephantbet.com`),
   covering the four core soccer markets (`1x2_ft`, `over_under_ft`,
