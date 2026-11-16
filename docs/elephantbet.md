@@ -99,8 +99,7 @@ Calls `get_event_detail`, then `parse_markets(response, platform="elephantbet")`
 | `away_over_under_ft` | `352` | Totais Equipa de fora |
 
 The captured fixture carries **153** markets, so this is deliberate breadth,
-not the limit of what ElephantBet publishes. Use
-`python -m bookieskit.devtools discover --unmapped` to enumerate the rest.
+not the limit of what ElephantBet publishes.
 
 **Registered does not mean present on every event.** Sampling eight live
 Premier League fixtures on 2026-08-25:

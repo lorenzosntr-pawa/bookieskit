@@ -271,7 +271,7 @@ class Betway(BaseBookmaker):
         walks every page and merges marketsInGroup / outcomes / prices, then
         attaches the event scoreboard (sportEvent.homeTeam / awayTeam) which
         the parser uses for team-name placeholder substitution. Returns the
-        raw merged dict the parser (and the devtools harness) consume —
+        raw merged dict the parser consumes —
         without parsing.
 
         Args:

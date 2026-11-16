@@ -1,6 +1,6 @@
-# graphify — the fleet's structural map of `src/`
+# graphify — structural map of `src/`
 
-A committed structural graph of the library + orchestration code, used to scope
+A committed structural graph of the library code, used to scope
 changes (blast radius / call sites) **before editing**. It is the concrete
 backing for the "query graphify before touching code" rule in `CLAUDE.md`.
 

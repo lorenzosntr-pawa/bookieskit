@@ -29,7 +29,7 @@ fixture.
 In-region requirement
 ---------------------
 BetPawa geo-blocks US/cloud IPs (HTTP 403), so the host MUST sit on an
-in-region / Africa-reachable IP, exactly like the live canary. Run it
+in-region / Africa-reachable IP. Run it
 backgrounded (``nohup ... &``, ``screen``/``tmux``, or a ``systemd`` unit) so it
 survives logout, then ``--summarize`` the DB.
 

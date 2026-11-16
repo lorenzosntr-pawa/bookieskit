@@ -350,7 +350,7 @@ def test_betika_exported_from_top_level():
 
 
 def test_betika_listed_in_supported_count():
-    """Sanity check: the package description should advertise 7 bookmakers.
+    """Sanity check: the package description should advertise 8 bookmakers.
 
     Reads ``pyproject.toml`` directly (not ``importlib.metadata.metadata``)
     so the test doesn't depend on a fresh ``pip install -e .`` after the
@@ -363,7 +363,7 @@ def test_betika_listed_in_supported_count():
         meta = tomllib.load(f)
     desc = (meta.get("project", {}).get("description") or "").lower()
     assert "betika" in desc
-    assert "7 african" in desc
+    assert "8 african" in desc
 
 
 # ---- regression: meta.total comes back as a string ------------------------

@@ -147,29 +147,6 @@ Each example is a self-contained async script in `examples/`.
 
 See [docs/examples.md](docs/examples.md) for more detail.
 
-## Market-add harness (`bookieskit.devtools`)
-
-Dev/agent tooling for the add-a-market loop — resolve an event across all
-bookmakers from one seed, discover candidate markets, capture fixtures, and
-verify canonical resolution. All offline-testable; no network in tests.
-
-```bash
-# Resolve a SportRadar id across every book (JSON for agents)
-python -m bookieskit.devtools resolve sr:match:42 --sport soccer --json
-
-# Discover candidate markets by name/outcome regex
-python -m bookieskit.devtools discover sr:match:42 --term "handi|asian|spread"
-
-# Autonomous discovery: markets a book exposes but the registry doesn't map
-python -m bookieskit.devtools discover sr:match:42 --unmapped
-
-# Capture raw fixtures (tests/fixtures/event_info/<book>/<name>.json)
-python -m bookieskit.devtools capture sr:match:42 --name my_new_market
-
-# Verify which canonicals parse_markets resolves
-python -m bookieskit.devtools verify sr:match:42 --canonical 1x2_ft,over_under_ft
-```
-
 ## Standalone scripts (`scripts/`)
 
 Self-contained, **stdlib-only** utilities that do not import the library — copy a
@@ -181,8 +158,7 @@ single `.py` to a server and run it.
 lifecycle (poll ~10 min while upcoming, ~2 min while live, stop each when it ends)
 and writes a small SQLite DB, then diffs market availability between the two
 fixtures — surfacing markets offered on one event but not the other (mapped or
-not). **In-region only**: BetPawa geo-blocks US/cloud IPs (403), same as the
-canary.
+not). **In-region only**: BetPawa geo-blocks US/cloud IPs (403).
 
 ```bash
 # Monitor two events until both end (bounded by --max-hours)
@@ -256,12 +232,6 @@ Pass `registry=registry` to `client.get_markets(event_id, registry=registry)` or
 
 - **Silent error swallow in `Bet9ja.build_prematch_event_map`.** `src/bookieskit/bookmakers/bet9ja.py:140` contains a bare `except Exception: return {}` inside the inner `_fetch` coroutine. Any per-tournament HTTP error (rate-limit, 5xx, timeout) is silently swallowed and treated as an empty result — the caller cannot tell which tournaments failed. This is intentional best-effort behaviour but masks transient errors; a logged `BookiesKitError` subclass should replace the bare swallow.
 - **Cross-bookmaker matching uses two provider ids.** SportRadar is the primary; BetGenius / Genius Sports is the secondary (used by BetPawa, SportyBet, and Bet9ja-live). `match_events(...)` groups events from multiple bookmakers by ANY shared provider id via union-find, so events that share only the BetGenius id still match. See [docs/matching.md](docs/matching.md).
-
-## Agent company
-
-This repo is developed by an autonomous **agent company** running on a *Signal → Work → Gate → Ship* loop: a scheduled **canary** detects bookmaker API drift, the **orchestrator** turns queued GitHub Issues into PRs via the market-add harness and the standard build pipeline, **CI** gates every change, and **release automation** ships it. See the north-star spec: [`docs/superpowers/specs/2026-06-22-agent-company-north-star.md`](docs/superpowers/specs/2026-06-22-agent-company-north-star.md).
-
-Run one work cycle from an in-region session with `/orchestrate` (or loop it with `/loop /orchestrate`): each cycle claims the top queue item, builds it, and opens a supervised PR for review.
 
 ## License
 

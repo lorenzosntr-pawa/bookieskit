@@ -4,6 +4,19 @@ All notable changes to this project are documented in this file. The format foll
 
 ## [Unreleased]
 
+### Removed
+- **`bookieskit.orchestration` and `bookieskit.devtools`** — the agent-company
+  tooling (GitHub-Issues work queue, Slack cockpit/ChatOps, always-on
+  orchestrator, live canary, market-add harness CLI, docs-sync and release
+  CLIs) is gone. The library is back to its core: bookmaker clients, market
+  mapping/parsing and cross-book matching. The `orchestration` extra is
+  dropped; release notes are now read straight from this CHANGELOG.
+
+### Fixed
+- **BetPawa** — `decode_betpawa_probability` accepts the already-decoded
+  `{"win", "refund"}` mapping some country sites (Ghana among them) now serve,
+  alongside the obfuscated base64 blob.
+
 ### Added
 - **ElephantBet — eighth bookmaker (Mozambique)** — a new `ElephantBet` client
   for the BtoBet `Sb.WebApi` platform (`sports-core.elephantbet.com`),

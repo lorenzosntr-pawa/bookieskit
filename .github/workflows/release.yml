@@ -16,9 +16,12 @@ jobs:
         with:
           python-version: "3.13"
       - run: pip install build
-      - run: pip install -e .
       - run: python -m build
-      - run: python -m bookieskit.devtools release-notes "${GITHUB_REF_NAME#v}" > notes.md
+      # Notes = the CHANGELOG section for this version (## [x.y.z] up to the next ## [).
+      - run: |
+          v="${GITHUB_REF_NAME#v}"
+          awk -v h="## [$v]" 'index($0, h) == 1 {p=1; next} p && /^## \[/ {exit} p' CHANGELOG.md > notes.md
+          test -s notes.md
       - run: gh release create "$GITHUB_REF_NAME" --title "$GITHUB_REF_NAME" --notes-file notes.md dist/*
         env:
           GH_TOKEN: ${{ github.token }}
