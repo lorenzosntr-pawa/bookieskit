@@ -13,6 +13,7 @@ Async Python clients for 8 African sportsbooks (BetPawa, SportyBet, Bet9ja, Betw
 - TDD; conventional-commit messages; smallest surgical change.
 - Run tests with `.venv/Scripts/python.exe -X utf8 -m pytest`; `ruff check .` must stay clean. CI runs bare `pytest`/`ruff` on 3.11/3.12/3.13.
 - Version lives in BOTH `pyproject.toml` and `src/bookieskit/__init__.py`; keep them in sync. Library/market-facing changes get a `## [Unreleased]` CHANGELOG entry. Release = bump both, promote the CHANGELOG section, push a `v<x.y.z>` tag (the workflow builds and publishes the GitHub Release).
+- Coverage report (raw vs mapped market types, offline): regenerate `docs/coverage.md` with `.venv/Scripts/python.exe -X utf8 scripts/coverage_report.py`.
 - Commit captured fixtures in the same change that uses them; mine existing fixtures before assuming a live probe is needed.
 - Live calls must run from an in-region network: the books geo-block US/cloud IPs (BetPawa returns 403). For upcoming fixtures use prematch endpoints, not the live feed (live hides booking/corner markets).
 - graphify: `graphify query "what depends on <symbol>" --graph src/graphify-out/graph.json` before touching code; refresh with `graphify update src` and commit `src/graphify-out/{graph.json,GRAPH_REPORT.md}`. See `docs/GRAPHIFY.md`.
