@@ -107,10 +107,10 @@ def _write(path: Path, obj) -> None:
 
 
 def main() -> None:
+    manifest = discover()  # may fail loudly: do it before touching files
     GOLDEN_DIR.mkdir(parents=True, exist_ok=True)
     for old in GOLDEN_DIR.glob("*.json"):
         old.unlink()
-    manifest = discover()
     _write(GOLDEN_DIR / "manifest.json", manifest)
     for key, sport in manifest.items():
         book, name = key.split("/", 1)

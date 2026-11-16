@@ -55,3 +55,21 @@ def test_discover_fails_on_stale_excluded_entry(monkeypatch) -> None:
     monkeypatch.setitem(EXCLUDED, key, "stale")
     with pytest.raises(SystemExit, match="stale EXCLUDED"):
         discover()
+
+
+def test_regen_failure_leaves_golden_files(monkeypatch, tmp_path) -> None:
+    from scripts import regen_golden
+
+    gdir = tmp_path / "golden"
+    gdir.mkdir()
+    keep = gdir / "keep.json"
+    keep.write_text("{}", encoding="utf-8")
+    monkeypatch.setattr(regen_golden, "GOLDEN_DIR", gdir)
+
+    def boom():
+        raise SystemExit("discover failed")
+
+    monkeypatch.setattr(regen_golden, "discover", boom)
+    with pytest.raises(SystemExit):
+        regen_golden.main()
+    assert keep.exists()
