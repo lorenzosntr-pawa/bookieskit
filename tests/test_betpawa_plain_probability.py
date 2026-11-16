@@ -32,3 +32,7 @@ def test_non_mapping_non_string_still_none():
 def test_obfuscated_blob_path_unaffected():
     # Garbage base64 must still fail closed rather than raise.
     assert decode_betpawa_probability("not-valid-base64!!") == (None, None)
+
+
+def test_plain_mapping_rejects_non_finite():
+    assert decode_betpawa_probability({"win": float("nan"), "refund": "inf"}) == (None, None)

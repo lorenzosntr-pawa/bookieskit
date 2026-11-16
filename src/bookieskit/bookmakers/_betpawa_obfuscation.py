@@ -14,6 +14,7 @@ from the top-level package.
 
 import base64
 import json
+import math
 import struct
 
 # 64-bit XOR constant baked into BetPawa's client-side decoder.
@@ -22,7 +23,7 @@ _TWO_64 = 1 << 64
 
 
 def decode_betpawa_probability(
-    blob: "str | dict | None",
+    blob: str | dict[str, object] | None,
 ) -> tuple[float | None, float | None]:
     """Decode a BetPawa price.probability value to (win, refund).
 
@@ -69,13 +70,17 @@ def decode_betpawa_probability(
 
 
 def _as_float(value: object) -> float | None:
-    """Coerce an already-decoded probability field to float. None on failure."""
+    """Coerce an already-decoded probability field to a finite float.
+
+    None on failure, including NaN and infinity.
+    """
     if value is None or isinstance(value, bool):
         return None
     try:
-        return float(value)
+        result = float(value)
     except (TypeError, ValueError):
         return None
+    return result if math.isfinite(result) else None
 
 
 def _decode_one(value: object, key: object) -> float | None:

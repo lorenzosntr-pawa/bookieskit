@@ -1,7 +1,7 @@
 # Live Odds Audits
 
-Reports produced by `python -m bookieskit.devtools audit` (the harness lives in
-`src/bookieskit/devtools/audit.py`).
+Historical reports produced by the former `bookieskit.devtools audit` harness
+(since removed). Kept as evidence of mapping/odds issues found at the time.
 
 ## Modes
 
