@@ -17,6 +17,7 @@ from typing import Any, AsyncIterator
 from bookieskit.base import BaseBookmaker
 from bookieskit.bookmakers.types import PrematchEventStub
 from bookieskit.config import BETIKA_MAX_CONCURRENT, BETIKA_REQUEST_DELAY
+from bookieskit.exceptions import ResponseError
 
 # Sub-type ids fanned out by get_event_markets to assemble a complete
 # per-event market set. Order is for readability only — Betika's API
@@ -204,10 +205,17 @@ class Betika(BaseBookmaker):
         if competition_id is not None:
             params["competition_id"] = str(competition_id)
         if live:
-            return await self._live_request(
+            resp = await self._live_request(
                 "GET", "/v1/uo/matches", params=params
             )
-        return await self._request("GET", "/v1/uo/matches", params=params)
+        else:
+            resp = await self._request(
+                "GET", "/v1/uo/matches", params=params
+            )
+        row = _pick_match(resp, event_id)
+        if row is None:
+            raise _wrong_match_error(resp, event_id)
+        return {"data": [row], "meta": resp.get("meta", {})}
 
     async def get_event_markets(
         self,
@@ -263,14 +271,17 @@ class Betika(BaseBookmaker):
         merged_match: dict[str, Any] | None = None
         merged_odds: list[dict[str, Any]] = []
         merged_meta: dict[str, Any] = {}
+        wrong_match: dict[str, Any] | None = None
         for r in responses:
             if isinstance(r, BaseException) or not isinstance(r, dict):
                 continue
             data = r.get("data") or []
             if not isinstance(data, list) or not data:
                 continue
-            match = data[0]
-            if not isinstance(match, dict):
+            # Betika may ignore match_id: only ever merge the requested match.
+            match = _pick_match(r, event_id)
+            if match is None:
+                wrong_match = r
                 continue
             if merged_match is None:
                 merged_match = dict(match)
@@ -282,6 +293,8 @@ class Betika(BaseBookmaker):
                 merged_meta = r["meta"]
 
         if merged_match is None:
+            if wrong_match is not None:
+                raise _wrong_match_error(wrong_match, event_id)
             return {"data": [], "meta": {}}
         merged_match["odds"] = merged_odds
         return {"data": [merged_match], "meta": merged_meta}
@@ -363,6 +376,36 @@ class Betika(BaseBookmaker):
         for r in results:
             for stub in _stubs_from_page(r, sport_id):
                 yield stub
+
+
+def _pick_match(resp: Any, event_id: str) -> dict[str, Any] | None:
+    """Return the row whose ``match_id`` equals ``event_id`` (string-compared).
+
+    ``/v1/uo/matches`` can ignore ``match_id`` and return other matches, so
+    never fall back to ``data[0]``.
+    """
+    if not isinstance(resp, dict):
+        return None
+    data = resp.get("data")
+    if not isinstance(data, list):
+        return None
+    for row in data:
+        if isinstance(row, dict) and str(row.get("match_id")) == str(event_id):
+            return row
+    return None
+
+
+def _wrong_match_error(resp: Any, event_id: str) -> ResponseError:
+    data = resp.get("data") if isinstance(resp, dict) else None
+    returned = [
+        str(r.get("match_id")) for r in (data or []) if isinstance(r, dict)
+    ]
+    return ResponseError(
+        "/v1/uo/matches",
+        200,
+        f"Betika ignored match_id: requested {event_id!s}, "
+        f"returned {returned or 'no rows'}",
+    )
 
 
 def _coerce_int(v: Any) -> int:

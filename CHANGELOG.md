@@ -13,6 +13,12 @@ All notable changes to this project are documented in this file. The format foll
   dropped; release notes are now read straight from this CHANGELOG.
 
 ### Fixed
+- **Betika wrong-match prices** — `/v1/uo/matches` can ignore `match_id`, and
+  `get_event_detail` / `get_event_markets` / `get_markets` used to take
+  `data[0]`, silently returning another match's prices. They now select the
+  row whose `match_id` equals the requested id (string compare) and raise
+  `ResponseError` naming the requested and returned ids if none matches;
+  groups from another match are never merged.
 - **Suspended / missing prices** — `parse_markets` no longer emits
   placeholder prices as real odds (BetPawa suspended `0.0`, Bet9ja literal
   `"1"`, Betway missing price `0.0`) or one-sided lines. If any expected
