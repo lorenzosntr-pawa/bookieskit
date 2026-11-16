@@ -453,3 +453,31 @@ def test_parse_betway_variant_matching_disambiguates_by_market_id_prefix():
     # basketball 2way_handicap_basketball_ft should NOT be produced
     # from a soccer fixture
     assert "2way_handicap_basketball_ft" not in by_canon
+
+
+def test_child_suffix_must_be_a_specifier():
+    from bookieskit.markets.parser import _is_betway_child_market_id
+
+    assert _is_betway_child_market_id("6645701416hcp=-0.5~", "6645701416")
+    assert _is_betway_child_market_id("6645701418total=2.5~", "6645701418")
+    assert not _is_betway_child_market_id("66457014184", "6645701418")
+    assert not _is_betway_child_market_id("66457014165", "6645701416")
+    assert not _is_betway_child_market_id("664570141601xup=1~", "6645701416")
+    assert not _is_betway_child_market_id("6645701416", "6645701416")
+
+
+def test_wc_nf_goal_handicap_and_ou_are_the_real_markets():
+    import json
+    from pathlib import Path
+
+    fixture = Path("tests/fixtures/event_info/betway/wc_nf.json")
+    response = json.loads(fixture.read_text(encoding="utf-8"))
+    out = {
+        m.canonical_id: m
+        for m in parse_markets(response, "betway", sport="soccer")
+    }
+    assert "over_under_ft" in out
+    hcp = out["2way_handicap_ft"].lines
+    assert -0.5 in hcp
+    # goal handicap (6645701416hcp=0.5~), not Corner Handicap 2.20/1.60
+    assert [o.odds for o in hcp[0.5]] == [2.25, 1.61]

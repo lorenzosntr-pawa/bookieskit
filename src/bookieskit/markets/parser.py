@@ -765,10 +765,7 @@ def _parse_betway(
         # marketId-prefix disambiguates correctly.
         matched_mapping: MarketMapping | None = None
         for parent_mid, parent_mapping in parent_by_market_id.items():
-            if (
-                market_id != parent_mid
-                and market_id.startswith(parent_mid)
-            ):
+            if _is_betway_child_market_id(market_id, parent_mid):
                 matched_mapping = parent_mapping
                 break
 
@@ -817,6 +814,19 @@ def _parse_betway(
                 results.append(parsed)
 
     return results
+
+
+def _is_betway_child_market_id(child: str, parent: str) -> bool:
+    """True iff ``child`` is a per-line child row of ``parent``.
+
+    Betway child marketIds are the parent id plus a specifier suffix such
+    as ``hcp=-0.5~`` or ``total=2.5~``. A bare ``startswith`` also matches
+    unrelated markets whose id merely extends the parent's digits (e.g.
+    parent ...16 vs Corner Handicap ...165), so require ``[a-z]+=``.
+    """
+    return child.startswith(parent) and bool(
+        re.match(r"[a-z]+=", child[len(parent):])
+    )
 
 
 def _is_betway_parameterized_variant(
@@ -912,6 +922,7 @@ def _build_betway_parameterized(
     parent_outcomes: list[dict] = []
     line_market_ids: list[tuple[float, str]] = []
     parent_market_id: str = ""
+    zero_rows: list[tuple[str, list[dict]]] = []
 
     for market, outcomes_list in entries:
         handicap = market.get("handicap")
@@ -919,10 +930,21 @@ def _build_betway_parameterized(
         if handicap is None:
             continue
         if handicap == 0:
-            parent_outcomes = outcomes_list
-            parent_market_id = market_id
+            zero_rows.append((market_id, outcomes_list))
         else:
             line_market_ids.append((float(handicap), market_id))
+
+    # The parent is the handicap==0 row that the line rows are children of;
+    # without line rows (single-row case) keep the last handicap==0 row.
+    if zero_rows:
+        parent_market_id, parent_outcomes = zero_rows[-1]
+        for zid, zouts in zero_rows:
+            if any(
+                _is_betway_child_market_id(lmid, zid)
+                for _, lmid in line_market_ids
+            ):
+                parent_market_id, parent_outcomes = zid, zouts
+                break
 
     # Case 1: parent + per-line entries — distribute parent outcomes by line
     if parent_outcomes and line_market_ids:
