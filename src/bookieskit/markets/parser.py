@@ -760,7 +760,8 @@ def _parse_betway(
         # robust path: Betway's per-line child rows have a marketId that
         # is the parent's marketId plus a specifier suffix matching
         # [a-z]+= (e.g. parent <eventId>16, children
-        # <eventId>16hcp=-0.5~; <eventId>165 is NOT a child). When name-based matching has
+        # <eventId>16hcp=-0.5~; <eventId>165 is NOT a child). When
+        # name-based matching has
         # multiple candidates (e.g. 'Handicap' matches both
         # '[Handicap] [2-Way]' and 'Handicap (Incl. Overtime)'),
         # marketId-prefix disambiguates correctly.
