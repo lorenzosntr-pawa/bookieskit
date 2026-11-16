@@ -32,3 +32,13 @@ def test_shin_zero_margin_returns_implied():
 )
 def test_bad_odds_return_none(fn, odds):
     assert fn(odds) is None
+
+
+def test_shin_non_convergence_returns_none():
+    assert devig_shin([1.2, 1.2]) is None
+
+
+@pytest.mark.parametrize("fn", [margin, devig_multiplicative, devig_shin])
+@pytest.mark.parametrize("bad", [float("nan"), float("inf"), float("-inf")])
+def test_non_finite_odds_return_none(fn, bad):
+    assert fn([2.0, bad, 3.0]) is None
