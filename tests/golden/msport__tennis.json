@@ -1,0 +1,197 @@
+[
+ {
+  "canonical_id": "handicap_games_tennis_match",
+  "lines": {
+   "0.5": [
+    {
+     "canonical_name": "home",
+     "odds": 2.11,
+     "platform_name": "Home (+0.5)",
+     "true_probability": 0.4333,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "away",
+     "odds": 1.65,
+     "platform_name": "Away (-0.5)",
+     "true_probability": 0.5667,
+     "void_probability": null
+    }
+   ],
+   "1.5": [
+    {
+     "canonical_name": "home",
+     "odds": 1.93,
+     "platform_name": "Home (+1.5)",
+     "true_probability": 0.479,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "away",
+     "odds": 1.78,
+     "platform_name": "Away (-1.5)",
+     "true_probability": 0.521,
+     "void_probability": null
+    }
+   ],
+   "2.5": [
+    {
+     "canonical_name": "home",
+     "odds": 1.68,
+     "platform_name": "Home (+2.5)",
+     "true_probability": 0.5553,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "away",
+     "odds": 2.06,
+     "platform_name": "Away (-2.5)",
+     "true_probability": 0.4447,
+     "void_probability": null
+    }
+   ]
+  },
+  "name": "Game Handicap - Match",
+  "outcomes": []
+ },
+ {
+  "canonical_id": "moneyline_tennis_match",
+  "lines": null,
+  "name": "Moneyline - Match",
+  "outcomes": [
+   {
+    "canonical_name": "home",
+    "odds": 2.3,
+    "platform_name": "Home",
+    "true_probability": 0.4039,
+    "void_probability": null
+   },
+   {
+    "canonical_name": "away",
+    "odds": 1.6,
+    "platform_name": "Away",
+    "true_probability": 0.5962,
+    "void_probability": null
+   }
+  ]
+ },
+ {
+  "canonical_id": "over_under_games_tennis_match",
+  "lines": {
+   "19.5": [
+    {
+     "canonical_name": "over",
+     "odds": 1.29,
+     "platform_name": "Over 19.5",
+     "true_probability": 0.7455,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "under",
+     "odds": 3.5,
+     "platform_name": "Under 19.5",
+     "true_probability": 0.2545,
+     "void_probability": null
+    }
+   ],
+   "20.5": [
+    {
+     "canonical_name": "over",
+     "odds": 1.44,
+     "platform_name": "Over 20.5",
+     "true_probability": 0.6655,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "under",
+     "odds": 2.75,
+     "platform_name": "Under 20.5",
+     "true_probability": 0.3345,
+     "void_probability": null
+    }
+   ],
+   "21.5": [
+    {
+     "canonical_name": "over",
+     "odds": 1.56,
+     "platform_name": "Over 21.5",
+     "true_probability": 0.6102,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "under",
+     "odds": 2.38,
+     "platform_name": "Under 21.5",
+     "true_probability": 0.3898,
+     "void_probability": null
+    }
+   ],
+   "22.5": [
+    {
+     "canonical_name": "over",
+     "odds": 1.8,
+     "platform_name": "Over 22.5",
+     "true_probability": 0.5244,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "under",
+     "odds": 1.98,
+     "platform_name": "Under 22.5",
+     "true_probability": 0.4756,
+     "void_probability": null
+    }
+   ],
+   "23.5": [
+    {
+     "canonical_name": "over",
+     "odds": 2.05,
+     "platform_name": "Over 23.5",
+     "true_probability": 0.4585,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "under",
+     "odds": 1.75,
+     "platform_name": "Under 23.5",
+     "true_probability": 0.5415,
+     "void_probability": null
+    }
+   ],
+   "24.5": [
+    {
+     "canonical_name": "over",
+     "odds": 2.1,
+     "platform_name": "Over 24.5",
+     "true_probability": 0.4465,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "under",
+     "odds": 1.71,
+     "platform_name": "Under 24.5",
+     "true_probability": 0.5535,
+     "void_probability": null
+    }
+   ],
+   "25.5": [
+    {
+     "canonical_name": "over",
+     "odds": 2.27,
+     "platform_name": "Over 25.5",
+     "true_probability": 0.4102,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "under",
+     "odds": 1.61,
+     "platform_name": "Under 25.5",
+     "true_probability": 0.5898,
+     "void_probability": null
+    }
+   ]
+  },
+  "name": "Over/Under Total Games - Match",
+  "outcomes": []
+ }
+]

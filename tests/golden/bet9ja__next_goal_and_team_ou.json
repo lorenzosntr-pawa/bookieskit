@@ -1,0 +1,355 @@
+[
+ {
+  "canonical_id": "1x2_1up_ft",
+  "lines": null,
+  "name": "1X2 1Up - Full Time",
+  "outcomes": [
+   {
+    "canonical_name": "draw",
+    "odds": 8.6,
+    "platform_name": "X1",
+    "true_probability": null,
+    "void_probability": null
+   },
+   {
+    "canonical_name": "home",
+    "odds": 1.03,
+    "platform_name": "11",
+    "true_probability": null,
+    "void_probability": null
+   },
+   {
+    "canonical_name": "away",
+    "odds": 8.5,
+    "platform_name": "21",
+    "true_probability": null,
+    "void_probability": null
+   }
+  ]
+ },
+ {
+  "canonical_id": "1x2_2up_ft",
+  "lines": null,
+  "name": "1X2 2Up - Full Time",
+  "outcomes": [
+   {
+    "canonical_name": "away",
+    "odds": 24.0,
+    "platform_name": "22",
+    "true_probability": null,
+    "void_probability": null
+   },
+   {
+    "canonical_name": "home",
+    "odds": 1.06,
+    "platform_name": "12",
+    "true_probability": null,
+    "void_probability": null
+   },
+   {
+    "canonical_name": "draw",
+    "odds": 8.6,
+    "platform_name": "X2",
+    "true_probability": null,
+    "void_probability": null
+   }
+  ]
+ },
+ {
+  "canonical_id": "1x2_ft",
+  "lines": null,
+  "name": "1X2 - Full Time",
+  "outcomes": [
+   {
+    "canonical_name": "home",
+    "odds": 1.09,
+    "platform_name": "1",
+    "true_probability": null,
+    "void_probability": null
+   },
+   {
+    "canonical_name": "away",
+    "odds": 27.0,
+    "platform_name": "2",
+    "true_probability": null,
+    "void_probability": null
+   },
+   {
+    "canonical_name": "draw",
+    "odds": 8.6,
+    "platform_name": "X",
+    "true_probability": null,
+    "void_probability": null
+   }
+  ]
+ },
+ {
+  "canonical_id": "2way_handicap_ft",
+  "lines": {
+   "-2.5": [
+    {
+     "canonical_name": "home",
+     "odds": 1.9,
+     "platform_name": "1",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "away",
+     "odds": 1.78,
+     "platform_name": "2",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ]
+  },
+  "name": "2-Way Asian Handicap - Full Time",
+  "outcomes": []
+ },
+ {
+  "canonical_id": "away_over_under_ft",
+  "lines": {
+   "0.5": [
+    {
+     "canonical_name": "under",
+     "odds": 1.23,
+     "platform_name": "UA",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "over",
+     "odds": 3.5,
+     "platform_name": "OA",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ]
+  },
+  "name": "Over/Under Away Team - Full Time",
+  "outcomes": []
+ },
+ {
+  "canonical_id": "btts_ft",
+  "lines": null,
+  "name": "Both Teams To Score - Full Time",
+  "outcomes": [
+   {
+    "canonical_name": "no",
+    "odds": 1.24,
+    "platform_name": "N",
+    "true_probability": null,
+    "void_probability": null
+   },
+   {
+    "canonical_name": "yes",
+    "odds": 3.85,
+    "platform_name": "Y",
+    "true_probability": null,
+    "void_probability": null
+   }
+  ]
+ },
+ {
+  "canonical_id": "home_over_under_ft",
+  "lines": {
+   "1.5": [
+    {
+     "canonical_name": "under",
+     "odds": 3.9,
+     "platform_name": "UH",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "over",
+     "odds": 1.18,
+     "platform_name": "OH",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ],
+   "2.5": [
+    {
+     "canonical_name": "under",
+     "odds": 1.99,
+     "platform_name": "UH",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "over",
+     "odds": 1.68,
+     "platform_name": "OH",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ],
+   "3.5": [
+    {
+     "canonical_name": "under",
+     "odds": 1.32,
+     "platform_name": "UH",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "over",
+     "odds": 2.71,
+     "platform_name": "OH",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ],
+   "4.5": [
+    {
+     "canonical_name": "over",
+     "odds": 5.1,
+     "platform_name": "OH",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "under",
+     "odds": 1.07,
+     "platform_name": "UH",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ]
+  },
+  "name": "Over/Under Home Team - Full Time",
+  "outcomes": []
+ },
+ {
+  "canonical_id": "next_goal_ft",
+  "lines": null,
+  "name": "Next Goal - Full Time",
+  "outcomes": [
+   {
+    "canonical_name": "away",
+    "odds": 9.5,
+    "platform_name": "2",
+    "true_probability": null,
+    "void_probability": null
+   },
+   {
+    "canonical_name": "home",
+    "odds": 1.07,
+    "platform_name": "1",
+    "true_probability": null,
+    "void_probability": null
+   },
+   {
+    "canonical_name": "none",
+    "odds": 14.25,
+    "platform_name": "X",
+    "true_probability": null,
+    "void_probability": null
+   }
+  ]
+ },
+ {
+  "canonical_id": "over_under_ft",
+  "lines": {
+   "0.5": [
+    {
+     "canonical_name": "over",
+     "odds": 1.01,
+     "platform_name": "O",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "under",
+     "odds": 14.25,
+     "platform_name": "U",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ],
+   "1.5": [
+    {
+     "canonical_name": "under",
+     "odds": 4.85,
+     "platform_name": "U",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "over",
+     "odds": 1.14,
+     "platform_name": "O",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ],
+   "2.5": [
+    {
+     "canonical_name": "under",
+     "odds": 2.36,
+     "platform_name": "U",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "over",
+     "odds": 1.54,
+     "platform_name": "O",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ],
+   "3.5": [
+    {
+     "canonical_name": "under",
+     "odds": 1.52,
+     "platform_name": "U",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "over",
+     "odds": 2.35,
+     "platform_name": "O",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ],
+   "4.5": [
+    {
+     "canonical_name": "over",
+     "odds": 4.05,
+     "platform_name": "O",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "under",
+     "odds": 1.19,
+     "platform_name": "U",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ],
+   "5.5": [
+    {
+     "canonical_name": "over",
+     "odds": 7.4,
+     "platform_name": "O",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "under",
+     "odds": 1.04,
+     "platform_name": "U",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ]
+  },
+  "name": "Over/Under - Full Time",
+  "outcomes": []
+ }
+]

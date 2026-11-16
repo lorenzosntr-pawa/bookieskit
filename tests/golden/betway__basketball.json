@@ -1,0 +1,325 @@
+[
+ {
+  "canonical_id": "2way_handicap_basketball_ft",
+  "lines": {
+   "-1.5": [
+    {
+     "canonical_name": "home",
+     "odds": 1.76,
+     "platform_name": "Baskets Bonn",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "away",
+     "odds": 1.96,
+     "platform_name": "Wurzburg Baskets",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ],
+   "-2.5": [
+    {
+     "canonical_name": "home",
+     "odds": 1.88,
+     "platform_name": "Baskets Bonn",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "away",
+     "odds": 1.82,
+     "platform_name": "Wurzburg Baskets",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ],
+   "-3.5": [
+    {
+     "canonical_name": "home",
+     "odds": 2.01,
+     "platform_name": "Baskets Bonn",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "away",
+     "odds": 1.71,
+     "platform_name": "Wurzburg Baskets",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ],
+   "-4.5": [
+    {
+     "canonical_name": "home",
+     "odds": 2.18,
+     "platform_name": "Baskets Bonn",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "away",
+     "odds": 1.61,
+     "platform_name": "Wurzburg Baskets",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ],
+   "-5.5": [
+    {
+     "canonical_name": "home",
+     "odds": 2.39,
+     "platform_name": "Baskets Bonn",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "away",
+     "odds": 1.51,
+     "platform_name": "Wurzburg Baskets",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ],
+   "-6.5": [
+    {
+     "canonical_name": "home",
+     "odds": 2.65,
+     "platform_name": "Baskets Bonn",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "away",
+     "odds": 1.43,
+     "platform_name": "Wurzburg Baskets",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ],
+   "-7.5": [
+    {
+     "canonical_name": "home",
+     "odds": 2.9,
+     "platform_name": "Baskets Bonn",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "away",
+     "odds": 1.36,
+     "platform_name": "Wurzburg Baskets",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ],
+   "1.5": [
+    {
+     "canonical_name": "home",
+     "odds": 1.6,
+     "platform_name": "Baskets Bonn",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "away",
+     "odds": 2.2,
+     "platform_name": "Wurzburg Baskets",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ],
+   "2.5": [
+    {
+     "canonical_name": "home",
+     "odds": 1.51,
+     "platform_name": "Baskets Bonn",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "away",
+     "odds": 2.39,
+     "platform_name": "Wurzburg Baskets",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ]
+  },
+  "name": "2-Way Handicap - Full Time (incl. OT)",
+  "outcomes": []
+ },
+ {
+  "canonical_id": "moneyline_basketball_ft",
+  "lines": null,
+  "name": "Moneyline - Full Time (incl. OT)",
+  "outcomes": [
+   {
+    "canonical_name": "home",
+    "odds": 1.67,
+    "platform_name": "Baskets Bonn",
+    "true_probability": null,
+    "void_probability": null
+   },
+   {
+    "canonical_name": "away",
+    "odds": 2.07,
+    "platform_name": "Wurzburg Baskets",
+    "true_probability": null,
+    "void_probability": null
+   }
+  ]
+ },
+ {
+  "canonical_id": "over_under_basketball_ft",
+  "lines": {
+   "154.5": [
+    {
+     "canonical_name": "over",
+     "odds": 1.6,
+     "platform_name": "Over ",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "under",
+     "odds": 2.21,
+     "platform_name": "Under ",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ],
+   "155.5": [
+    {
+     "canonical_name": "over",
+     "odds": 1.66,
+     "platform_name": "Over ",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "under",
+     "odds": 2.1,
+     "platform_name": "Under ",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ],
+   "156.5": [
+    {
+     "canonical_name": "over",
+     "odds": 1.73,
+     "platform_name": "Over ",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "under",
+     "odds": 1.99,
+     "platform_name": "Under ",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ],
+   "157.5": [
+    {
+     "canonical_name": "over",
+     "odds": 1.8,
+     "platform_name": "Over ",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "under",
+     "odds": 1.9,
+     "platform_name": "Under ",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ],
+   "158.5": [
+    {
+     "canonical_name": "over",
+     "odds": 1.89,
+     "platform_name": "Over ",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "under",
+     "odds": 1.82,
+     "platform_name": "Under ",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ],
+   "159.5": [
+    {
+     "canonical_name": "over",
+     "odds": 1.98,
+     "platform_name": "Over ",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "under",
+     "odds": 1.74,
+     "platform_name": "Under ",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ],
+   "160.5": [
+    {
+     "canonical_name": "over",
+     "odds": 2.08,
+     "platform_name": "Over ",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "under",
+     "odds": 1.67,
+     "platform_name": "Under ",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ],
+   "161.5": [
+    {
+     "canonical_name": "over",
+     "odds": 2.18,
+     "platform_name": "Over ",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "under",
+     "odds": 1.61,
+     "platform_name": "Under ",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ],
+   "162.5": [
+    {
+     "canonical_name": "over",
+     "odds": 2.3,
+     "platform_name": "Over ",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "under",
+     "odds": 1.55,
+     "platform_name": "Under ",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ]
+  },
+  "name": "Over/Under Total Points - Full Time (incl. OT)",
+  "outcomes": []
+ }
+]
