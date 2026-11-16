@@ -14,11 +14,16 @@ All notable changes to this project are documented in this file. The format foll
 - **`base_url` override** — every bookmaker client accepts an optional
   `base_url=` (e.g. a staging host) that replaces `DOMAINS[country]`;
   trailing slashes are stripped and `country` still drives headers such as
-  BetPawa's `x-pawa-brand`.
+  BetPawa's `x-pawa-brand`. Betway's `get_sports` still uses its own config
+  host.
 - **Pricing helpers** — `bookieskit.pricing` (also exported at top level):
   `margin`, `devig_multiplicative` and `devig_shin` for overround and
   fair-probability extraction from decimal odds. All return `None` for
-  fewer than two outcomes or any odds that are `None` or `<= 1.0`.
+  fewer than two outcomes or any odds that are `None`, NaN, infinite or
+  `<= 1.0`; `devig_shin` also returns `None` if its solver does not converge.
+  Only valid for mutually exclusive AND exhaustive outcome sets (1X2, an
+  Over/Under line, BTTS, a 2-way handicap line); NOT for double chance or 1X2
+  1UP/2UP, whose outcomes overlap so margin / de-vig is meaningless.
 - **ElephantBet — eighth bookmaker (Mozambique)** — a new `ElephantBet` client
   for the BtoBet `Sb.WebApi` platform (`sports-core.elephantbet.com`),
   covering the four core soccer markets (`1x2_ft`, `over_under_ft`,
@@ -160,10 +165,6 @@ All notable changes to this project are documented in this file. The format foll
   `parse_markets` must be passed `sport=` for non-soccer payloads, the same
   way SportPesa's id `52` already requires. Captures for both sports are
   committed.
-- Orchestrator now runs under a dedicated **GitHub App identity** that cannot
-  merge to `main`; the Slack `approve` path uses a separate owner token to
-  submit the approving review + merge. Never-merge is now structural for all
-  build operations. See `docs/AGENT_IDENTITY_SETUP.md`.
 
 ### Removed
 - **`bookieskit.orchestration` and `bookieskit.devtools`** — the agent-company
@@ -182,10 +183,14 @@ All notable changes to this project are documented in this file. The format foll
 - **Betika wrong-match prices (behaviour change)** — `/v1/uo/matches` can ignore
   `match_id`, and `get_event_detail` / `get_event_markets` / `get_markets` used
   to take `data[0]`, silently returning another match's prices. They now select
-  the row whose `match_id` equals the requested id (string compare) and raise
-  `ResponseError` instead of returning another match, naming the requested and
-  returned ids if none matches, including when the API returns no rows for the
-  requested id; groups from another match are never merged.
+  the row whose `match_id` equals the requested id (string compare); groups
+  from another match are never merged. `get_event_detail` raises
+  `ResponseError` (naming the requested and returned ids) only when the API
+  returns rows but none is the requested match; when it returns no rows the
+  empty payload comes back unchanged (so `get_sportradar_id` yields `None`).
+  `get_event_markets` / `get_markets` skip empty or other-match responses and
+  return an empty payload when nothing matches; they raise only if every
+  response held rows and none was the requested match.
 - **Suspended / missing prices (behaviour change for consumers)** — `parse_markets` no longer emits
   placeholder prices as real odds (BetPawa suspended `0.0`, Bet9ja literal
   `"1"`, Betway missing price `0.0`) or one-sided lines. If any expected
