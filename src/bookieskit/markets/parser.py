@@ -412,6 +412,16 @@ def _try_float(v: object) -> float | None:
         return None
 
 
+def _sr_unavailable(market_data: dict, outcome_data: dict) -> bool:
+    """SportyBet/MSport flags: market ``status`` 0 = active (1 suspended,
+    2 deactivated, 3 settled); outcome ``isActive`` 0 = inactive. Either
+    one makes the outcome count as missing."""
+    status = market_data.get("status")
+    if status is not None and str(status) != "0":
+        return True
+    return str(outcome_data.get("isActive", 1)) == "0"
+
+
 def _parse_sportybet(
     response: dict, registry: MarketRegistry, mode: ProbabilityMode = "off"
 ) -> list[NormalizedMarket]:
@@ -456,6 +466,8 @@ def _parse_sportybet_simple(
     outcomes: list[Outcome] = []
 
     for outcome_data in market_data.get("outcomes", []):
+        if _sr_unavailable(market_data, outcome_data):
+            continue
         desc = str(outcome_data.get("desc", ""))
         odds = float(outcome_data.get("odds", 0))
         canonical = _resolve_outcome_sportybet(desc, mapping)
@@ -497,6 +509,8 @@ def _parse_sportybet_parameterized(
 
         line_outcomes: list[Outcome] = []
         for outcome_data in entry.get("outcomes", []):
+            if _sr_unavailable(entry, outcome_data):
+                continue
             desc = str(outcome_data.get("desc", ""))
             odds = float(outcome_data.get("odds", 0))
             canonical = _resolve_outcome_sportybet(desc, mapping)
@@ -792,6 +806,25 @@ def _parse_betway(
         price_map[str(p.get("outcomeId", ""))] = float(
             p.get("priceDecimal", 0)
         )
+
+    # Suspended / inactive market rows: their outcomes count as missing.
+    # Outcomes link to the parent marketId; per-line outcome ids start
+    # with the child marketId (which carries a "=" specifier, so the
+    # prefix cannot hit an unrelated market like ...16 vs ...165).
+    closed = {
+        str(m.get("marketId", ""))
+        for m in markets_in_group
+        if m.get("isSuspended") is True or m.get("isActive") is False
+    }
+    closed.discard("")
+    if closed:
+        closed_children = tuple(mid for mid in closed if "=" in mid)
+        for o in all_outcomes:
+            oid = str(o.get("outcomeId", ""))
+            if str(o.get("marketId", "")) in closed or (
+                closed_children and oid.startswith(closed_children)
+            ):
+                price_map.pop(oid, None)
 
     # Build outcome lookup: marketId -> list of outcomes
     outcomes_by_market: dict[str, list[dict]] = {}
@@ -1200,6 +1233,8 @@ def _parse_msport_simple(
     outcomes: list[Outcome] = []
 
     for outcome_data in market_data.get("outcomes", []):
+        if _sr_unavailable(market_data, outcome_data):
+            continue
         desc = str(outcome_data.get("description", ""))
         odds = float(outcome_data.get("odds", 0))
         canonical = _resolve_outcome_msport(desc, mapping)
@@ -1240,6 +1275,8 @@ def _parse_msport_parameterized(
 
         line_outcomes: list[Outcome] = []
         for outcome_data in entry.get("outcomes", []):
+            if _sr_unavailable(entry, outcome_data):
+                continue
             desc = str(outcome_data.get("description", ""))
             odds = float(outcome_data.get("odds", 0))
             canonical = _resolve_outcome_msport(desc, mapping)

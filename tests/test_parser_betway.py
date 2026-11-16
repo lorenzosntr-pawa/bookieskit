@@ -512,3 +512,24 @@ def test_parameterized_parent_is_row_the_lines_belong_to():
     result = _build_betway_parameterized(entries, mapping, prices)
     assert result is not None
     assert [o.odds for o in result.lines[0.5]] == [2.25, 1.61]
+
+
+def test_suspended_or_inactive_market_rows_treated_as_missing():
+    import json
+    from pathlib import Path
+
+    payload = json.loads(
+        Path("tests/fixtures/event_info/betway/wc_nf.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    for row in payload["marketsInGroup"]:
+        if row["name"] == "[Win/Draw/Win]":
+            row["isSuspended"] = True  # simple parent suspended
+        if row["marketId"] == "6645701418total=2.5~":
+            row["isActive"] = False  # one O/U child line deactivated
+    markets = {m.canonical_id: m for m in parse_markets(payload, "betway")}
+    assert "1x2_ft" not in markets
+    assert sorted(markets["over_under_ft"].lines) == [0.5, 1.5, 3.5, 4.5, 5.5]
+    # Corners O/U (parent id 66457014166 extends 6645701416*) is untouched.
+    assert "over_under_corners_ft" in markets

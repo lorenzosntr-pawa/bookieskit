@@ -211,3 +211,48 @@ def test_parse_sportybet_2way_handicap_ft_from_probe_fixture():
         {"home", "away"}.issubset({o.canonical_name for o in outs})
         for outs in ah.lines.values()
     )
+
+
+def test_inactive_outcome_treated_as_missing_drops_market():
+    # wc_nf: Double Chance - 1UP (60110) "Home or Away" has isActive=0
+    # while still carrying a price (1.22); the flag wins.
+    import json
+    from pathlib import Path
+
+    payload = json.loads(
+        Path("tests/fixtures/event_info/sportybet/wc_nf.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    ids = {m.canonical_id for m in parse_markets(payload, "sportybet")}
+    assert "double_chance_1up_ft" not in ids
+    assert "double_chance_ft" in ids
+
+
+def test_suspended_market_status_drops_line():
+    response = {
+        "data": {
+            "markets": [
+                {
+                    "id": "18",
+                    "specifier": "total=2.5",
+                    "status": 0,
+                    "outcomes": [
+                        {"desc": "Over", "odds": "1.80", "isActive": 1},
+                        {"desc": "Under", "odds": "2.00", "isActive": 1},
+                    ],
+                },
+                {
+                    "id": "18",
+                    "specifier": "total=3.5",
+                    "status": 1,
+                    "outcomes": [
+                        {"desc": "Over", "odds": "2.80", "isActive": 1},
+                        {"desc": "Under", "odds": "1.40", "isActive": 1},
+                    ],
+                },
+            ]
+        }
+    }
+    (ou,) = parse_markets(response, "sportybet")
+    assert list(ou.lines) == [2.5]
