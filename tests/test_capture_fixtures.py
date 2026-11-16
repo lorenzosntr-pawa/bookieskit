@@ -68,3 +68,36 @@ def test_nothing_written_without_id(tmp_path):
     assert res == {"betpawa": "ok"}
     assert not (tmp_path / "msport").exists()
     assert clients["msport"].calls == []
+
+
+def test_default_countries_are_supported_by_each_client():
+    from scripts.capture_fixtures import CLIENTS, DEFAULT_COUNTRY
+
+    assert set(DEFAULT_COUNTRY) == set(CLIENTS)
+    for book, cc in DEFAULT_COUNTRY.items():
+        assert cc in CLIENTS[book].DOMAINS, (book, cc)
+
+
+def test_country_override_applied():
+    import pytest
+
+    from scripts.capture_fixtures import DEFAULT_COUNTRY, resolve_countries
+
+    assert resolve_countries([]) == DEFAULT_COUNTRY
+    out = resolve_countries(["betpawa=ke", "betika=ug"])
+    assert out["betpawa"] == "ke"
+    assert out["betika"] == "ug"
+    assert out["bet9ja"] == "ng"
+    with pytest.raises(ValueError):
+        resolve_countries(["nope=ng"])
+    with pytest.raises(ValueError):
+        resolve_countries(["betpawa"])
+
+
+def test_soccer_name_with_other_sport_prefix_warns():
+    from scripts.capture_fixtures import fixture_name
+
+    name, warning = fixture_name("basketball_x", "soccer")
+    assert name == "basketball_x" and warning
+    assert fixture_name("x", "tennis") == ("tennis_x", None)
+    assert fixture_name("x", "soccer") == ("x", None)
