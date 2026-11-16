@@ -22,15 +22,27 @@ _TWO_64 = 1 << 64
 
 
 def decode_betpawa_probability(
-    blob: str | None,
+    blob: "str | dict | None",
 ) -> tuple[float | None, float | None]:
-    """Decode a BetPawa price.probability base64 blob to (win, refund).
+    """Decode a BetPawa price.probability value to (win, refund).
+
+    Accepts either shape BetPawa serves:
+
+    * a base64 blob carrying the obfuscated `{"win", "refund", "key"}`
+      payload, which is XOR-decoded here;
+    * a plain mapping `{"win": 0.5446, "refund": 0.0}`, which several
+      country sites (Ghana among them) now return already decoded. These
+      are passed through as floats.
 
     Returns (None, None) on any decode failure (bad base64, malformed
     JSON, missing `key`, etc.). When `key` is present but `win` or
     `refund` is missing/malformed individually, only that field is None.
     Never raises.
     """
+    # Already-decoded payload: no obfuscation to undo.
+    if isinstance(blob, dict):
+        return (_as_float(blob.get("win")), _as_float(blob.get("refund")))
+
     if not blob or not isinstance(blob, str):
         return (None, None)
 
@@ -54,6 +66,16 @@ def decode_betpawa_probability(
         _decode_one(decoded.get("win"), key),
         _decode_one(decoded.get("refund"), key),
     )
+
+
+def _as_float(value: object) -> float | None:
+    """Coerce an already-decoded probability field to float. None on failure."""
+    if value is None or isinstance(value, bool):
+        return None
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return None
 
 
 def _decode_one(value: object, key: object) -> float | None:
