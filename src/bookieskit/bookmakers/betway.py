@@ -316,7 +316,13 @@ class Betway(BaseBookmaker):
             "sportEvent": sport_event,
         }
 
-    async def get_markets(self, event_id: str, registry: Any = None) -> list:
+    async def get_markets(
+        self,
+        event_id: str,
+        registry: Any = None,
+        *,
+        sport: str | None = None,
+    ) -> list:
         """Fetch event markets and return normalized markets.
 
         Auto-paginates Betway's markets endpoint (which returns at most 100
@@ -330,6 +336,8 @@ class Betway(BaseBookmaker):
         Args:
             event_id: Betway event ID (= SportRadar ID)
             registry: MarketRegistry (default: built-in)
+            sport: Sport tag forwarded to ``parse_markets`` (same meaning
+                there); None keeps the soccer default.
 
         Returns:
             List of NormalizedMarket for recognized markets across all pages.
@@ -338,7 +346,7 @@ class Betway(BaseBookmaker):
 
         merged = await self.get_event_markets_all(event_id=event_id)
         return parse_markets(
-            merged, platform=self.PLATFORM_KEY, registry=registry
+            merged, platform=self.PLATFORM_KEY, registry=registry, sport=sport
         )
 
     async def get_sportradar_id(

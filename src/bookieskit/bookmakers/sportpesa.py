@@ -117,7 +117,13 @@ class SportPesa(BaseBookmaker):
             },
         )
 
-    async def get_markets(self, event_id: str, registry: Any = None) -> list:
+    async def get_markets(
+        self,
+        event_id: str,
+        registry: Any = None,
+        *,
+        sport: str | None = None,
+    ) -> list:
         """Fetch markets and return normalized markets.
 
         Overrides the base because SportPesa uses a separate markets
@@ -126,6 +132,8 @@ class SportPesa(BaseBookmaker):
         Args:
             event_id: SportPesa internal game id
             registry: MarketRegistry (default: built-in)
+            sport: Sport tag forwarded to ``parse_markets`` (same meaning
+                there); None keeps the soccer default.
 
         Returns:
             List of NormalizedMarket for recognized markets.
@@ -133,7 +141,9 @@ class SportPesa(BaseBookmaker):
         from bookieskit.markets.parser import parse_markets
 
         raw = await self.get_event_markets(event_id=event_id)
-        return parse_markets(raw, platform=self.PLATFORM_KEY, registry=registry)
+        return parse_markets(
+            raw, platform=self.PLATFORM_KEY, registry=registry, sport=sport
+        )
 
     async def get_sports(self) -> dict[str, Any]:
         """Get the live sport list.

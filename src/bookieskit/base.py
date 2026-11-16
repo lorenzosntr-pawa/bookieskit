@@ -241,12 +241,16 @@ class BaseBookmaker:
         self,
         event_id: str,
         registry: "MarketRegistry | None" = None,
+        *,
+        sport: str | None = None,
     ) -> "list[NormalizedMarket]":
         """Fetch event detail and return normalized markets.
 
         Args:
             event_id: Platform-specific event ID
             registry: MarketRegistry (default: built-in 6 markets)
+            sport: Sport tag forwarded to ``parse_markets`` (same meaning
+                there); None keeps the soccer default.
 
         Returns:
             List of NormalizedMarket for recognized markets.
@@ -255,7 +259,7 @@ class BaseBookmaker:
 
         raw = await self.get_event_detail(event_id=event_id)
         return parse_markets(
-            raw, platform=self.PLATFORM_KEY, registry=registry
+            raw, platform=self.PLATFORM_KEY, registry=registry, sport=sport
         )
 
     async def get_sportradar_id(self, event_id: str) -> str | None:

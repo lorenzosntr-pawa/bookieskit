@@ -287,19 +287,29 @@ class Betika(BaseBookmaker):
         return {"data": [merged_match], "meta": merged_meta}
 
     async def get_markets(
-        self, event_id: str, registry: Any = None
+        self,
+        event_id: str,
+        registry: Any = None,
+        *,
+        sport: str | None = None,
     ) -> list:
         """Fetch the universal market set and return normalized markets.
 
         Overrides the base because Betika requires seven calls (one per
         universal market id — 1, 8, 10, 18, 19, 20, 29) to assemble a
         complete event payload.
+
+        Args:
+            event_id: Betika event ID
+            registry: MarketRegistry (default: built-in)
+            sport: Sport tag forwarded to ``parse_markets`` (same meaning
+                there); None keeps the soccer default.
         """
         from bookieskit.markets.parser import parse_markets
 
         raw = await self.get_event_markets(event_id=event_id)
         return parse_markets(
-            raw, platform=self.PLATFORM_KEY, registry=registry
+            raw, platform=self.PLATFORM_KEY, registry=registry, sport=sport
         )
 
     async def iter_all_prematch_events(
