@@ -15,16 +15,15 @@ FIXTURES_DIR = ROOT / "tests" / "fixtures" / "event_info"
 GOLDEN_DIR = ROOT / "tests" / "golden"
 
 _GAP = "KNOWN GAP: embedded-markets shape not parsed - Step 3 SportPesa adapter"
-_LIVE0 = "live detail capture; parser returns 0 markets (suspended/finished at capture)"
 
 # Fixtures deliberately left out of the snapshot ("<book>/<file>" -> reason).
 EXCLUDED: dict[str, str] = {
     "bet9ja/dc_1x2_1up_catalogue.json": "catalogue payload: O is empty, no odds",
-    "bet9ja/live.json": _LIVE0,
-    "betpawa/live.json": _LIVE0,
-    "betway/live.json": _LIVE0,
-    "msport/live.json": _LIVE0,
-    "sportybet/live.json": _LIVE0,
+    "bet9ja/live.json": "all 69 outcomes at odds 1.0 placeholder",
+    "betpawa/live.json": "all 239 prices suspended at capture",
+    "betway/live.json": "event-header capture only (sportEvent), no markets",
+    "msport/live.json": "markets list empty at capture (match finished)",
+    "sportybet/live.json": "markets list empty at capture (match finished)",
     "betway/prematch.json": "event-header capture only (sportEvent), no markets",
     "elephantbet/live.json": "event-index list (not a detail payload)",
     "elephantbet/events.json": "event-index list (not a detail payload)",
