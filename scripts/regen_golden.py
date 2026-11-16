@@ -14,6 +14,27 @@ ROOT = Path(__file__).resolve().parent.parent
 FIXTURES_DIR = ROOT / "tests" / "fixtures" / "event_info"
 GOLDEN_DIR = ROOT / "tests" / "golden"
 
+_GAP = "KNOWN GAP: embedded-markets shape not parsed - Step 3 SportPesa adapter"
+_LIVE0 = "live detail capture; parser returns 0 markets (suspended/finished at capture)"
+
+# Fixtures deliberately left out of the snapshot ("<book>/<file>" -> reason).
+EXCLUDED: dict[str, str] = {
+    "bet9ja/dc_1x2_1up_catalogue.json": "catalogue payload: O is empty, no odds",
+    "bet9ja/live.json": _LIVE0,
+    "betpawa/live.json": _LIVE0,
+    "betway/live.json": _LIVE0,
+    "msport/live.json": _LIVE0,
+    "sportybet/live.json": _LIVE0,
+    "betway/prematch.json": "event-header capture only (sportEvent), no markets",
+    "elephantbet/live.json": "event-index list (not a detail payload)",
+    "elephantbet/events.json": "event-index list (not a detail payload)",
+    "sportpesa/basketball.json": "empty list",
+    "sportpesa/games_upcoming.json": _GAP,
+    "sportpesa/live.json": _GAP,
+    "sportpesa/prematch.json": _GAP,
+    "sportpesa/sports_live.json": "sports index (top-level 'sports'), not an event",
+}
+
 
 def sport_for(name: str) -> str:
     if name.startswith("basketball"):
@@ -71,8 +92,13 @@ def discover() -> dict[str, str]:
     for book_dir in sorted(p for p in FIXTURES_DIR.iterdir() if p.is_dir()):
         for f in sorted(book_dir.glob("*.json")):
             sport = sport_for(f.name)
+            key = f"{book_dir.name}/{f.name}"
             if _parse(f, book_dir.name, sport):
-                manifest[f"{book_dir.name}/{f.name}"] = sport
+                if key in EXCLUDED:
+                    raise SystemExit(f"stale EXCLUDED entry (now parses): {key}")
+                manifest[key] = sport
+            elif key not in EXCLUDED:
+                raise SystemExit(f"{key} parses to 0 markets and is not in EXCLUDED")
     return manifest
 
 
