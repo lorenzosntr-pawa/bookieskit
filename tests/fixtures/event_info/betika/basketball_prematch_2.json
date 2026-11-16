@@ -1,0 +1,215 @@
+{
+ "data": [
+  {
+   "home_team": "KK Partizan",
+   "game_id": "07277",
+   "match_id": "11290944",
+   "away_team": "Valencia",
+   "start_time": "2026-11-17 22:45:00",
+   "competition_name": "Euroleague",
+   "category": "International",
+   "parent_match_id": "73263172",
+   "side_bets": "30",
+   "home_odd": "2.11",
+   "neutral_odd": "13.00",
+   "away_odd": "1.95",
+   "competition_id": "9015",
+   "sport_id": "30",
+   "sport_name": "Basketball",
+   "is_esport": false,
+   "is_srl": false,
+   "provider": "sr",
+   "odds": [
+    {
+     "sub_type_id": "219",
+     "name": "WINNER (INCL. OVERTIME)",
+     "odds": [
+      {
+       "display": "1",
+       "odd_key": "KK Partizan",
+       "odd_def": "{$competitor1}",
+       "odd_value": "2.00",
+       "special_bet_value": "",
+       "outcome_id": "4",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "2",
+       "odd_key": "Valencia",
+       "odd_def": "{$competitor2}",
+       "odd_value": "1.85",
+       "special_bet_value": "",
+       "outcome_id": "5",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      }
+     ]
+    },
+    {
+     "sub_type_id": "225",
+     "name": "TOTAL (INCL. OVERTIME)",
+     "odds": [
+      {
+       "display": "OVER 173.5",
+       "odd_key": "over 173.5",
+       "odd_def": "over {total}",
+       "odd_value": "1.71",
+       "special_bet_value": "total=173.5",
+       "outcome_id": "12",
+       "parsed_special_bet_value": {
+        "total": "173.5"
+       }
+      },
+      {
+       "display": "OVER 174.5",
+       "odd_key": "over 174.5",
+       "odd_def": "over {total}",
+       "odd_value": "1.78",
+       "special_bet_value": "total=174.5",
+       "outcome_id": "12",
+       "parsed_special_bet_value": {
+        "total": "174.5"
+       }
+      },
+      {
+       "display": "OVER 175.5",
+       "odd_key": "over 175.5",
+       "odd_def": "over {total}",
+       "odd_value": "1.86",
+       "special_bet_value": "total=175.5",
+       "outcome_id": "12",
+       "parsed_special_bet_value": {
+        "total": "175.5"
+       }
+      },
+      {
+       "display": "OVER 176.5",
+       "odd_key": "over 176.5",
+       "odd_def": "over {total}",
+       "odd_value": "1.95",
+       "special_bet_value": "total=176.5",
+       "outcome_id": "12",
+       "parsed_special_bet_value": {
+        "total": "176.5"
+       }
+      },
+      {
+       "display": "OVER 177.5",
+       "odd_key": "over 177.5",
+       "odd_def": "over {total}",
+       "odd_value": "2.05",
+       "special_bet_value": "total=177.5",
+       "outcome_id": "12",
+       "parsed_special_bet_value": {
+        "total": "177.5"
+       }
+      },
+      {
+       "display": "OVER 178.5",
+       "odd_key": "over 178.5",
+       "odd_def": "over {total}",
+       "odd_value": "2.15",
+       "special_bet_value": "total=178.5",
+       "outcome_id": "12",
+       "parsed_special_bet_value": {
+        "total": "178.5"
+       }
+      },
+      {
+       "display": "OVER 179.5",
+       "odd_key": "over 179.5",
+       "odd_def": "over {total}",
+       "odd_value": "2.26",
+       "special_bet_value": "total=179.5",
+       "outcome_id": "12",
+       "parsed_special_bet_value": {
+        "total": "179.5"
+       }
+      },
+      {
+       "display": "UNDER 173.5",
+       "odd_key": "under 173.5",
+       "odd_def": "under {total}",
+       "odd_value": "2.20",
+       "special_bet_value": "total=173.5",
+       "outcome_id": "13",
+       "parsed_special_bet_value": {
+        "total": "173.5"
+       }
+      },
+      {
+       "display": "UNDER 174.5",
+       "odd_key": "under 174.5",
+       "odd_def": "under {total}",
+       "odd_value": "2.09",
+       "special_bet_value": "total=174.5",
+       "outcome_id": "13",
+       "parsed_special_bet_value": {
+        "total": "174.5"
+       }
+      },
+      {
+       "display": "UNDER 175.5",
+       "odd_key": "under 175.5",
+       "odd_def": "under {total}",
+       "odd_value": "1.99",
+       "special_bet_value": "total=175.5",
+       "outcome_id": "13",
+       "parsed_special_bet_value": {
+        "total": "175.5"
+       }
+      },
+      {
+       "display": "UNDER 176.5",
+       "odd_key": "under 176.5",
+       "odd_def": "under {total}",
+       "odd_value": "1.90",
+       "special_bet_value": "total=176.5",
+       "outcome_id": "13",
+       "parsed_special_bet_value": {
+        "total": "176.5"
+       }
+      },
+      {
+       "display": "UNDER 177.5",
+       "odd_key": "under 177.5",
+       "odd_def": "under {total}",
+       "odd_value": "1.81",
+       "special_bet_value": "total=177.5",
+       "outcome_id": "13",
+       "parsed_special_bet_value": {
+        "total": "177.5"
+       }
+      },
+      {
+       "display": "UNDER 178.5",
+       "odd_key": "under 178.5",
+       "odd_def": "under {total}",
+       "odd_value": "1.74",
+       "special_bet_value": "total=178.5",
+       "outcome_id": "13",
+       "parsed_special_bet_value": {
+        "total": "178.5"
+       }
+      },
+      {
+       "display": "UNDER 179.5",
+       "odd_key": "under 179.5",
+       "odd_def": "under {total}",
+       "odd_value": "1.67",
+       "special_bet_value": "total=179.5",
+       "outcome_id": "13",
+       "parsed_special_bet_value": {
+        "total": "179.5"
+       }
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "meta": {}
+}

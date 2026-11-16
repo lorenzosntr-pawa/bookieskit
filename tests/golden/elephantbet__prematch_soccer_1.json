@@ -1,0 +1,260 @@
+[
+ {
+  "canonical_id": "1x2_ft",
+  "lines": null,
+  "name": "1X2 - Full Time",
+  "outcomes": [
+   {
+    "canonical_name": "home",
+    "odds": 1.39,
+    "platform_name": "1",
+    "true_probability": null,
+    "void_probability": null
+   },
+   {
+    "canonical_name": "draw",
+    "odds": 5.19,
+    "platform_name": "X",
+    "true_probability": null,
+    "void_probability": null
+   },
+   {
+    "canonical_name": "away",
+    "odds": 7.26,
+    "platform_name": "2",
+    "true_probability": null,
+    "void_probability": null
+   }
+  ]
+ },
+ {
+  "canonical_id": "away_over_under_ft",
+  "lines": {
+   "0.5": [
+    {
+     "canonical_name": "over",
+     "odds": 1.52,
+     "platform_name": "Acima",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "under",
+     "odds": 2.25,
+     "platform_name": "Abaixo",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ],
+   "1.5": [
+    {
+     "canonical_name": "over",
+     "odds": 3.8,
+     "platform_name": "Acima",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "under",
+     "odds": 1.2,
+     "platform_name": "Abaixo",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ]
+  },
+  "name": "Over/Under Away Team - Full Time",
+  "outcomes": []
+ },
+ {
+  "canonical_id": "btts_ft",
+  "lines": null,
+  "name": "Both Teams To Score - Full Time",
+  "outcomes": [
+   {
+    "canonical_name": "yes",
+    "odds": 1.69,
+    "platform_name": "Sim",
+    "true_probability": null,
+    "void_probability": null
+   },
+   {
+    "canonical_name": "no",
+    "odds": 2.1,
+    "platform_name": "N\u00e3o",
+    "true_probability": null,
+    "void_probability": null
+   }
+  ]
+ },
+ {
+  "canonical_id": "double_chance_ft",
+  "lines": null,
+  "name": "Double Chance - Full Time",
+  "outcomes": [
+   {
+    "canonical_name": "home_draw",
+    "odds": 1.05,
+    "platform_name": "1X",
+    "true_probability": null,
+    "void_probability": null
+   },
+   {
+    "canonical_name": "home_away",
+    "odds": 1.12,
+    "platform_name": "12",
+    "true_probability": null,
+    "void_probability": null
+   },
+   {
+    "canonical_name": "draw_away",
+    "odds": 2.9,
+    "platform_name": "X2",
+    "true_probability": null,
+    "void_probability": null
+   }
+  ]
+ },
+ {
+  "canonical_id": "home_over_under_ft",
+  "lines": {
+   "1.5": [
+    {
+     "canonical_name": "over",
+     "odds": 1.32,
+     "platform_name": "Acima",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "under",
+     "odds": 2.9,
+     "platform_name": "Abaixo",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ],
+   "2.5": [
+    {
+     "canonical_name": "over",
+     "odds": 2.1,
+     "platform_name": "Acima",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "under",
+     "odds": 1.6,
+     "platform_name": "Abaixo",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ],
+   "3.5": [
+    {
+     "canonical_name": "over",
+     "odds": 3.9,
+     "platform_name": "Acima",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "under",
+     "odds": 1.18,
+     "platform_name": "Abaixo",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ]
+  },
+  "name": "Over/Under Home Team - Full Time",
+  "outcomes": []
+ },
+ {
+  "canonical_id": "over_under_ft",
+  "lines": {
+   "1.5": [
+    {
+     "canonical_name": "over",
+     "odds": 1.13,
+     "platform_name": "Acima",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "under",
+     "odds": 5.4,
+     "platform_name": "Abaixo",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ],
+   "2.5": [
+    {
+     "canonical_name": "over",
+     "odds": 1.47,
+     "platform_name": "Acima",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "under",
+     "odds": 2.56,
+     "platform_name": "Abaixo",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ],
+   "3.5": [
+    {
+     "canonical_name": "over",
+     "odds": 2.19,
+     "platform_name": "Acima",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "under",
+     "odds": 1.63,
+     "platform_name": "Abaixo",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ],
+   "4.5": [
+    {
+     "canonical_name": "over",
+     "odds": 3.69,
+     "platform_name": "Acima",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "under",
+     "odds": 1.25,
+     "platform_name": "Abaixo",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ],
+   "5.5": [
+    {
+     "canonical_name": "over",
+     "odds": 6.67,
+     "platform_name": "Acima",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "under",
+     "odds": 1.09,
+     "platform_name": "Abaixo",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ]
+  },
+  "name": "Over/Under - Full Time",
+  "outcomes": []
+ }
+]

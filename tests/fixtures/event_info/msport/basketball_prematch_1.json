@@ -1,0 +1,913 @@
+{
+ "bizCode": 10000,
+ "data": {
+  "allScores": null,
+  "awayTeam": "Real Madrid",
+  "awayTeamIcon": "",
+  "awayTeamId": "sr:competitor:3540",
+  "bookingStatus": "Booked",
+  "category": "International",
+  "categoryIcon": "https://static.msport.com/public/up/9cac06bc-0223-41c9-9e0f-a768b416a92f.png",
+  "categoryId": "sr:category:103",
+  "eventId": "sr:match:73263192",
+  "eventMatchPeriod": null,
+  "eventMatchStatus": "Not start",
+  "hasChatroom": false,
+  "hasLive": 0,
+  "hasLiveCoverage": 0,
+  "hasLiveWidget": 1,
+  "hasVoucher": 0,
+  "homeTeam": "BC Olympiakos Piraeus",
+  "homeTeamIcon": "",
+  "homeTeamId": "sr:competitor:3501",
+  "howToPlay": null,
+  "liveAudioStreamUrl": null,
+  "markets": [
+   {
+    "betAssistWidget": "moneyLine",
+    "description": "Winner (incl. overtime)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 219,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Winner (incl. OT)",
+    "outcomes": [
+     {
+      "description": "Home",
+      "id": "4",
+      "isActive": 1,
+      "odds": "1.87",
+      "probability": "0.5103"
+     },
+     {
+      "description": "Away",
+      "id": "5",
+      "isActive": 1,
+      "odds": "1.94",
+      "probability": "0.4897"
+     }
+    ],
+    "presentationType": 5,
+    "priority": 1,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "",
+    "status": 0,
+    "title": "1,2",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "spread",
+    "description": "Handicap (incl. overtime)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 223,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Handicap (incl. overtime)",
+    "outcomes": [
+     {
+      "description": "Home (-12.5)",
+      "id": "1714",
+      "isActive": 1,
+      "odds": "6.00",
+      "probability": "0.1386"
+     },
+     {
+      "description": "Away (+12.5)",
+      "id": "1715",
+      "isActive": 1,
+      "odds": "1.13",
+      "probability": "0.8614"
+     }
+    ],
+    "presentationType": 10,
+    "priority": 2,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "hcp=-12.5",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "spread",
+    "description": "Handicap (incl. overtime)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 223,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Handicap (incl. overtime)",
+    "outcomes": [
+     {
+      "description": "Home (-11.5)",
+      "id": "1714",
+      "isActive": 1,
+      "odds": "5.40",
+      "probability": "0.1595"
+     },
+     {
+      "description": "Away (+11.5)",
+      "id": "1715",
+      "isActive": 1,
+      "odds": "1.16",
+      "probability": "0.8405"
+     }
+    ],
+    "presentationType": 10,
+    "priority": 2,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "hcp=-11.5",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "spread",
+    "description": "Handicap (incl. overtime)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 223,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Handicap (incl. overtime)",
+    "outcomes": [
+     {
+      "description": "Home (-10.5)",
+      "id": "1714",
+      "isActive": 1,
+      "odds": "4.80",
+      "probability": "0.1814"
+     },
+     {
+      "description": "Away (+10.5)",
+      "id": "1715",
+      "isActive": 1,
+      "odds": "1.19",
+      "probability": "0.8186"
+     }
+    ],
+    "presentationType": 10,
+    "priority": 2,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "hcp=-10.5",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "spread",
+    "description": "Handicap (incl. overtime)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 223,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Handicap (incl. overtime)",
+    "outcomes": [
+     {
+      "description": "Home (-9.5)",
+      "id": "1714",
+      "isActive": 1,
+      "odds": "4.30",
+      "probability": "0.2057"
+     },
+     {
+      "description": "Away (+9.5)",
+      "id": "1715",
+      "isActive": 1,
+      "odds": "1.22",
+      "probability": "0.7943"
+     }
+    ],
+    "presentationType": 10,
+    "priority": 2,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "hcp=-9.5",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "spread",
+    "description": "Handicap (incl. overtime)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 223,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Handicap (incl. overtime)",
+    "outcomes": [
+     {
+      "description": "Home (-8.5)",
+      "id": "1714",
+      "isActive": 1,
+      "odds": "3.85",
+      "probability": "0.2345"
+     },
+     {
+      "description": "Away (+8.5)",
+      "id": "1715",
+      "isActive": 1,
+      "odds": "1.27",
+      "probability": "0.7655"
+     }
+    ],
+    "presentationType": 10,
+    "priority": 2,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "hcp=-8.5",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "spread",
+    "description": "Handicap (incl. overtime)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 223,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Handicap (incl. overtime)",
+    "outcomes": [
+     {
+      "description": "Home (-7.5)",
+      "id": "1714",
+      "isActive": 1,
+      "odds": "3.45",
+      "probability": "0.2649"
+     },
+     {
+      "description": "Away (+7.5)",
+      "id": "1715",
+      "isActive": 1,
+      "odds": "1.32",
+      "probability": "0.7351"
+     }
+    ],
+    "presentationType": 10,
+    "priority": 2,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "hcp=-7.5",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "spread",
+    "description": "Handicap (incl. overtime)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 223,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Handicap (incl. overtime)",
+    "outcomes": [
+     {
+      "description": "Home (-6.5)",
+      "id": "1714",
+      "isActive": 1,
+      "odds": "3.10",
+      "probability": "0.2979"
+     },
+     {
+      "description": "Away (+6.5)",
+      "id": "1715",
+      "isActive": 1,
+      "odds": "1.38",
+      "probability": "0.7021"
+     }
+    ],
+    "presentationType": 10,
+    "priority": 2,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "hcp=-6.5",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "spread",
+    "description": "Handicap (incl. overtime)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 223,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Handicap (incl. overtime)",
+    "outcomes": [
+     {
+      "description": "Home (-5.5)",
+      "id": "1714",
+      "isActive": 1,
+      "odds": "2.80",
+      "probability": "0.3347"
+     },
+     {
+      "description": "Away (+5.5)",
+      "id": "1715",
+      "isActive": 1,
+      "odds": "1.45",
+      "probability": "0.6653"
+     }
+    ],
+    "presentationType": 10,
+    "priority": 2,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "hcp=-5.5",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "spread",
+    "description": "Handicap (incl. overtime)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 223,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Handicap (incl. overtime)",
+    "outcomes": [
+     {
+      "description": "Home (-4.5)",
+      "id": "1714",
+      "isActive": 1,
+      "odds": "2.50",
+      "probability": "0.3717"
+     },
+     {
+      "description": "Away (+4.5)",
+      "id": "1715",
+      "isActive": 1,
+      "odds": "1.53",
+      "probability": "0.6283"
+     }
+    ],
+    "presentationType": 10,
+    "priority": 2,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "hcp=-4.5",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "spread",
+    "description": "Handicap (incl. overtime)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 223,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Handicap (incl. overtime)",
+    "outcomes": [
+     {
+      "description": "Home (-3.5)",
+      "id": "1714",
+      "isActive": 1,
+      "odds": "2.31",
+      "probability": "0.4084"
+     },
+     {
+      "description": "Away (+3.5)",
+      "id": "1715",
+      "isActive": 1,
+      "odds": "1.62",
+      "probability": "0.5916"
+     }
+    ],
+    "presentationType": 10,
+    "priority": 2,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "hcp=-3.5",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "spread",
+    "description": "Handicap (incl. overtime)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 223,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Handicap (incl. overtime)",
+    "outcomes": [
+     {
+      "description": "Home (-2.5)",
+      "id": "1714",
+      "isActive": 1,
+      "odds": "2.13",
+      "probability": "0.4441"
+     },
+     {
+      "description": "Away (+2.5)",
+      "id": "1715",
+      "isActive": 1,
+      "odds": "1.72",
+      "probability": "0.5559"
+     }
+    ],
+    "presentationType": 10,
+    "priority": 2,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "hcp=-2.5",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "spread",
+    "description": "Handicap (incl. overtime)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 223,
+    "isFavourite": 1,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Handicap (incl. overtime)",
+    "outcomes": [
+     {
+      "description": "Home (-1.5)",
+      "id": "1714",
+      "isActive": 1,
+      "odds": "1.97",
+      "probability": "0.4815"
+     },
+     {
+      "description": "Away (+1.5)",
+      "id": "1715",
+      "isActive": 1,
+      "odds": "1.84",
+      "probability": "0.5185"
+     }
+    ],
+    "presentationType": 10,
+    "priority": 2,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "hcp=-1.5",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "spread",
+    "description": "Handicap (incl. overtime)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 223,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Handicap (incl. overtime)",
+    "outcomes": [
+     {
+      "description": "Home (+1.5)",
+      "id": "1714",
+      "isActive": 1,
+      "odds": "1.77",
+      "probability": "0.5387"
+     },
+     {
+      "description": "Away (-1.5)",
+      "id": "1715",
+      "isActive": 1,
+      "odds": "2.06",
+      "probability": "0.4613"
+     }
+    ],
+    "presentationType": 10,
+    "priority": 2,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "hcp=1.5",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "spread",
+    "description": "Handicap (incl. overtime)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 223,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Handicap (incl. overtime)",
+    "outcomes": [
+     {
+      "description": "Home (+2.5)",
+      "id": "1714",
+      "isActive": 1,
+      "odds": "1.66",
+      "probability": "0.5760"
+     },
+     {
+      "description": "Away (-2.5)",
+      "id": "1715",
+      "isActive": 1,
+      "odds": "2.23",
+      "probability": "0.4240"
+     }
+    ],
+    "presentationType": 10,
+    "priority": 2,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "hcp=2.5",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "spread",
+    "description": "Handicap (incl. overtime)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 223,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Handicap (incl. overtime)",
+    "outcomes": [
+     {
+      "description": "Home (+3.5)",
+      "id": "1714",
+      "isActive": 1,
+      "odds": "1.57",
+      "probability": "0.6113"
+     },
+     {
+      "description": "Away (-3.5)",
+      "id": "1715",
+      "isActive": 1,
+      "odds": "2.42",
+      "probability": "0.3887"
+     }
+    ],
+    "presentationType": 10,
+    "priority": 2,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "hcp=3.5",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "spread",
+    "description": "Handicap (incl. overtime)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 223,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Handicap (incl. overtime)",
+    "outcomes": [
+     {
+      "description": "Home (+4.5)",
+      "id": "1714",
+      "isActive": 1,
+      "odds": "1.49",
+      "probability": "0.6471"
+     },
+     {
+      "description": "Away (-4.5)",
+      "id": "1715",
+      "isActive": 1,
+      "odds": "2.65",
+      "probability": "0.3529"
+     }
+    ],
+    "presentationType": 10,
+    "priority": 2,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "hcp=4.5",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "spread",
+    "description": "Handicap (incl. overtime)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 223,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Handicap (incl. overtime)",
+    "outcomes": [
+     {
+      "description": "Home (+5.5)",
+      "id": "1714",
+      "isActive": 1,
+      "odds": "1.41",
+      "probability": "0.6832"
+     },
+     {
+      "description": "Away (-5.5)",
+      "id": "1715",
+      "isActive": 1,
+      "odds": "2.90",
+      "probability": "0.3168"
+     }
+    ],
+    "presentationType": 10,
+    "priority": 2,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "hcp=5.5",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "spread",
+    "description": "Handicap (incl. overtime)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 223,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Handicap (incl. overtime)",
+    "outcomes": [
+     {
+      "description": "Home (+6.5)",
+      "id": "1714",
+      "isActive": 1,
+      "odds": "1.35",
+      "probability": "0.7188"
+     },
+     {
+      "description": "Away (-6.5)",
+      "id": "1715",
+      "isActive": 1,
+      "odds": "3.25",
+      "probability": "0.2812"
+     }
+    ],
+    "presentationType": 10,
+    "priority": 2,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "hcp=6.5",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "spread",
+    "description": "Handicap (incl. overtime)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 223,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Handicap (incl. overtime)",
+    "outcomes": [
+     {
+      "description": "Home (+7.5)",
+      "id": "1714",
+      "isActive": 1,
+      "odds": "1.29",
+      "probability": "0.7505"
+     },
+     {
+      "description": "Away (-7.5)",
+      "id": "1715",
+      "isActive": 1,
+      "odds": "3.65",
+      "probability": "0.2495"
+     }
+    ],
+    "presentationType": 10,
+    "priority": 2,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "hcp=7.5",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "spread",
+    "description": "Handicap (incl. overtime)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 223,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Handicap (incl. overtime)",
+    "outcomes": [
+     {
+      "description": "Home (+8.5)",
+      "id": "1714",
+      "isActive": 1,
+      "odds": "1.24",
+      "probability": "0.7799"
+     },
+     {
+      "description": "Away (-8.5)",
+      "id": "1715",
+      "isActive": 1,
+      "odds": "4.10",
+      "probability": "0.2201"
+     }
+    ],
+    "presentationType": 10,
+    "priority": 2,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "hcp=8.5",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "spread",
+    "description": "Handicap (incl. overtime)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 223,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Handicap (incl. overtime)",
+    "outcomes": [
+     {
+      "description": "Home (+9.5)",
+      "id": "1714",
+      "isActive": 1,
+      "odds": "1.20",
+      "probability": "0.8072"
+     },
+     {
+      "description": "Away (-9.5)",
+      "id": "1715",
+      "isActive": 1,
+      "odds": "4.60",
+      "probability": "0.1928"
+     }
+    ],
+    "presentationType": 10,
+    "priority": 2,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "hcp=9.5",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": null,
+    "description": "1x2",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 1,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "1x2",
+    "outcomes": [
+     {
+      "description": "Home",
+      "id": "1",
+      "isActive": 1,
+      "odds": "1.97",
+      "probability": "0.4756"
+     },
+     {
+      "description": "Draw",
+      "id": "2",
+      "isActive": 1,
+      "odds": "13.00",
+      "probability": "0.0689"
+     },
+     {
+      "description": "Away",
+      "id": "3",
+      "isActive": 1,
+      "odds": "2.06",
+      "probability": "0.4556"
+     }
+    ],
+    "presentationType": 5,
+    "priority": 100,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "",
+    "status": 0,
+    "title": "1,X,2",
+    "userFavourite": 0
+   }
+  ],
+  "marketsCount": 23,
+  "playedTime": null,
+  "roundNumber": 13,
+  "roundType": "group",
+  "scoreInCurrentSection": null,
+  "scoreOfSection": null,
+  "scoreOfWholeMatch": null,
+  "seasonId": "sr:season:143460",
+  "seasonName": "Euroleague 26/27",
+  "sectionRemainTime": null,
+  "server": null,
+  "soccerBookingsScore": null,
+  "soccerCornerScore": null,
+  "soccerRedCardScore": null,
+  "sport": "Basketball",
+  "sportId": "sr:sport:2",
+  "startTime": 1795202100000,
+  "status": 0,
+  "statusDescription": null,
+  "stoppagePlayedTime": null,
+  "stoppageTime": null,
+  "totalPlayedTime": null,
+  "tournament": "Euroleague",
+  "tournamentId": "sr:tournament:138",
+  "videoInfo": null
+ },
+ "innerMsg": null,
+ "message": "success"
+}

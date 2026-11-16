@@ -1,0 +1,399 @@
+{
+ "s": null,
+ "t": [
+  {
+   "id": 267,
+   "or": 0,
+   "n": "Principales",
+   "is": 0,
+   "o": [
+    {
+     "id": 4,
+     "n": "VENCEDOR (INCL. PROLONGAMENTO)",
+     "c": 1,
+     "oti": "99",
+     "m": [
+      {
+       "id": 618,
+       "n": "1",
+       "eon": null,
+       "otoi": "21",
+       "o": "1.80",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 619,
+       "n": "2",
+       "eon": null,
+       "otoi": "22",
+       "o": "1.90",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 23,
+     "n": "Asian Handicap",
+     "c": 1,
+     "oti": "1*a-0.5",
+     "m": [
+      {
+       "id": 679,
+       "n": "1",
+       "eon": "{{HomeTeam}} {{SV}}",
+       "sbv": "-0.5",
+       "otoi": "1*a-0.5",
+       "o": "1.80",
+       "su": false,
+       "ord": 53,
+       "col": 1
+      },
+      {
+       "id": 705,
+       "n": "2",
+       "eon": "{{AwayTeam}} {{SV}}",
+       "sbv": "0.5",
+       "otoi": "2*a0.5",
+       "o": "1.90",
+       "su": false,
+       "ord": 53,
+       "col": 2
+      },
+      {
+       "id": 682,
+       "n": "1",
+       "eon": "{{HomeTeam}} {{SV}}",
+       "sbv": "-1.5",
+       "otoi": "1*a-1.5",
+       "o": "1.85",
+       "su": false,
+       "ord": 51,
+       "col": 1
+      },
+      {
+       "id": 1773,
+       "n": "2",
+       "eon": "{{AwayTeam}} {{SV}}",
+       "sbv": "1.5",
+       "otoi": "2*a1.5",
+       "o": "1.75",
+       "su": false,
+       "ord": 51,
+       "col": 2
+      },
+      {
+       "id": 690,
+       "n": "1",
+       "eon": "{{HomeTeam}} {{SV}}",
+       "sbv": "0.5",
+       "otoi": "1*a0.5",
+       "o": "1.75",
+       "su": false,
+       "ord": 55,
+       "col": 1
+      },
+      {
+       "id": 694,
+       "n": "2",
+       "eon": "{{AwayTeam}} {{SV}}",
+       "sbv": "-0.5",
+       "otoi": "2*a-0.5",
+       "o": "1.90",
+       "su": false,
+       "ord": 55,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 11026,
+     "n": "Par/Impar (Tempo Regular)",
+     "c": 3,
+     "oti": "11026",
+     "m": [
+      {
+       "id": 330001,
+       "n": "IMPAR",
+       "eon": null,
+       "o": "1.80",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 330005,
+       "n": "PAR",
+       "eon": null,
+       "o": "1.80",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 11029,
+     "n": "Time da Casa - Par/Ímpar",
+     "c": 3,
+     "oti": "11029",
+     "m": [
+      {
+       "id": 331029,
+       "n": "IMPAR",
+       "eon": null,
+       "o": "1.80",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 331028,
+       "n": "PAR",
+       "eon": null,
+       "o": "1.80",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 11030,
+     "n": "Time de Fora - Par/Ímpar",
+     "c": 3,
+     "oti": "11030",
+     "m": [
+      {
+       "id": 331031,
+       "n": "IMPAR",
+       "eon": null,
+       "o": "1.80",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 331030,
+       "n": "PAR",
+       "eon": null,
+       "o": "1.80",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      }
+     ]
+    }
+   ],
+   "ou": []
+  },
+  {
+   "id": 5,
+   "or": 0,
+   "n": "Parte",
+   "is": 0,
+   "o": [
+    {
+     "id": 49,
+     "n": "1ª Parte - Pontos par/ímpar",
+     "c": 3,
+     "oti": "35",
+     "m": [
+      {
+       "id": 866,
+       "n": "IMPAR",
+       "eon": null,
+       "otoi": "1ho",
+       "o": "1.80",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 867,
+       "n": "PAR",
+       "eon": null,
+       "otoi": "1he",
+       "o": "1.80",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 50,
+     "n": "2ª Parte - Pontos par/ímpar",
+     "c": 3,
+     "oti": "48",
+     "m": [
+      {
+       "id": 868,
+       "n": "IMPAR",
+       "eon": null,
+       "otoi": "2ho",
+       "o": "1.80",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 869,
+       "n": "PAR",
+       "eon": null,
+       "otoi": "2he",
+       "o": "1.80",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      }
+     ]
+    }
+   ],
+   "ou": []
+  },
+  {
+   "id": 176,
+   "or": 0,
+   "n": "Periodo",
+   "is": 0,
+   "o": [
+    {
+     "id": 370,
+     "n": "1st Quarter  - Pontos par/ímpar",
+     "c": 3,
+     "oti": "125",
+     "m": [
+      {
+       "id": 36987,
+       "n": "IMPAR",
+       "eon": null,
+       "otoi": "1qo",
+       "o": "1.80",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 36991,
+       "n": "PAR",
+       "eon": null,
+       "otoi": "1qe",
+       "o": "1.80",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 371,
+     "n": "2nd Quarter - Pontos par/ímpar",
+     "c": 3,
+     "oti": "128",
+     "m": [
+      {
+       "id": 36988,
+       "n": "IMPAR",
+       "eon": null,
+       "otoi": "2qe",
+       "o": "1.80",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 36986,
+       "n": "PAR",
+       "eon": null,
+       "otoi": "2qo",
+       "o": "1.80",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 372,
+     "n": "3rd Quarter - Pontos par/ímpar",
+     "c": 3,
+     "oti": "131",
+     "m": [
+      {
+       "id": 36993,
+       "n": "IMPAR",
+       "eon": null,
+       "otoi": "3qo",
+       "o": "1.80",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 36995,
+       "n": "PAR",
+       "eon": null,
+       "otoi": "3qe",
+       "o": "1.80",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 373,
+     "n": "4th Quarter - Pontos par/ímpar",
+     "c": 3,
+     "oti": "134",
+     "m": [
+      {
+       "id": 36994,
+       "n": "IMPAR",
+       "eon": null,
+       "otoi": "4qe",
+       "o": "1.80",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 36989,
+       "n": "PAR",
+       "eon": null,
+       "otoi": "4qo",
+       "o": "1.80",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      }
+     ]
+    }
+   ],
+   "ou": []
+  }
+ ],
+ "brid": null,
+ "obrid": null,
+ "fpc": null,
+ "ati": null,
+ "hti": null,
+ "tus": false,
+ "mid": 7190435,
+ "ec": null,
+ "at": null,
+ "ht": null,
+ "d": null,
+ "scsid": null,
+ "scfi": null,
+ "sm": null,
+ "su": false,
+ "lc": false,
+ "tln": null,
+ "hln": null,
+ "aln": null
+}

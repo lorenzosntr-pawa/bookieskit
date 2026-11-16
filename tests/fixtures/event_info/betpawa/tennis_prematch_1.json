@@ -1,0 +1,897 @@
+{
+ "id": "39357695",
+ "name": "Fils, Arthur - Jodar, Rafael",
+ "widgets": [],
+ "participants": [
+  {
+   "id": "675403",
+   "name": "Fils, Arthur",
+   "position": 1
+  },
+  {
+   "id": "694913",
+   "name": "Jodar, Rafael",
+   "position": 2
+  }
+ ],
+ "startTime": "2026-11-17T13:00:00Z",
+ "markets": [
+  {
+   "marketType": {
+    "id": "2043818",
+    "name": "Moneyline - FT",
+    "displayName": "Match Winner",
+    "explainer": "Pick 1 (home player) or 2 (away player) to win the match. The match must be fully completed for bets to stand. If a player retires or is disqualified, you get your stake back.",
+    "priority": 101,
+    "tabs": [
+     "all",
+     "popular"
+    ],
+    "handicapType": ""
+   },
+   "row": [
+    {
+     "id": "419511165",
+     "prices": [
+      {
+       "id": "1598491463",
+       "name": "1",
+       "typeId": "2043821",
+       "odds": 1.95,
+       "suspended": false,
+       "displayName": "1",
+       "additionalInfo": {
+        "hot": true
+       },
+       "probability": {
+        "win": 0.493996,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1598491462",
+       "name": "2",
+       "typeId": "2043823",
+       "odds": 1.9,
+       "suspended": false,
+       "displayName": "2",
+       "additionalInfo": {
+        "hot": false
+       },
+       "probability": {
+        "win": 0.506004,
+        "refund": 0.0
+       }
+      }
+     ]
+    }
+   ],
+   "displayNameRows": [],
+   "displayNameColumns": [],
+   "additionalInfo": {
+    "cashoutable": true,
+    "boosted": false
+   }
+  },
+  {
+   "marketType": {
+    "id": "3532590",
+    "name": "Match Handicap Games 2-way - FT",
+    "displayName": "Game Handicap | Full Time",
+    "explainer": "The handicap you pick is added to or taken off that player's games total before the bet is settled. Pick the player to be ahead on the adjusted total.",
+    "priority": 102,
+    "tabs": [
+     "all",
+     "popular",
+     "games"
+    ],
+    "handicapType": "ASIAN"
+   },
+   "row": [
+    {
+     "id": "419536091",
+     "handicap": -6,
+     "prices": [
+      {
+       "id": "1598631063",
+       "name": "1",
+       "typeId": "3532591",
+       "odds": 2.13,
+       "suspended": false,
+       "handicap": "-1.5",
+       "displayName": "{formattedHandicap}",
+       "additionalInfo": {
+        "hot": false
+       },
+       "probability": {
+        "win": 0.438109,
+        "refund": 0.0
+       },
+       "specifier": {
+        "hcp": "-1.5"
+       }
+      },
+      {
+       "id": "1598631062",
+       "name": "2",
+       "typeId": "3532593",
+       "odds": 1.68,
+       "suspended": false,
+       "handicap": "+1.5",
+       "displayName": "{formattedHandicap}",
+       "additionalInfo": {
+        "hot": false
+       },
+       "probability": {
+        "win": 0.561891,
+        "refund": 0.0
+       },
+       "specifier": {
+        "hcp": "+1.5"
+       }
+      }
+     ],
+     "specifier": {
+      "hcp": "-1.5"
+     }
+    },
+    {
+     "id": "419536094",
+     "handicap": -2,
+     "prices": [
+      {
+       "id": "1598631069",
+       "name": "1",
+       "typeId": "3532591",
+       "odds": 1.98,
+       "suspended": false,
+       "handicap": "-0.5",
+       "displayName": "{formattedHandicap}",
+       "additionalInfo": {
+        "hot": false
+       },
+       "probability": {
+        "win": 0.47560068424813695,
+        "refund": 0.0
+       },
+       "specifier": {
+        "hcp": "-0.5"
+       }
+      },
+      {
+       "id": "1598631068",
+       "name": "2",
+       "typeId": "3532593",
+       "odds": 1.8,
+       "suspended": false,
+       "handicap": "+0.5",
+       "displayName": "{formattedHandicap}",
+       "additionalInfo": {
+        "hot": false
+       },
+       "probability": {
+        "win": 0.5243993160059962,
+        "refund": 0.0
+       },
+       "specifier": {
+        "hcp": "+0.5"
+       }
+      }
+     ],
+     "specifier": {
+      "hcp": "-0.5"
+     }
+    },
+    {
+     "id": "419536090",
+     "handicap": 2,
+     "prices": [
+      {
+       "id": "1598631061",
+       "name": "1",
+       "typeId": "3532591",
+       "odds": 1.84,
+       "suspended": false,
+       "handicap": "+0.5",
+       "displayName": "{formattedHandicap}",
+       "additionalInfo": {
+        "hot": false
+       },
+       "probability": {
+        "win": 0.512446,
+        "refund": 0.0
+       },
+       "specifier": {
+        "hcp": "+0.5"
+       }
+      },
+      {
+       "id": "1598631060",
+       "name": "2",
+       "typeId": "3532593",
+       "odds": 1.93,
+       "suspended": false,
+       "handicap": "-0.5",
+       "displayName": "{formattedHandicap}",
+       "additionalInfo": {
+        "hot": false
+       },
+       "probability": {
+        "win": 0.487554,
+        "refund": 0.0
+       },
+       "specifier": {
+        "hcp": "-0.5"
+       }
+      }
+     ],
+     "specifier": {
+      "hcp": "0.5"
+     }
+    },
+    {
+     "id": "419536098",
+     "handicap": 6,
+     "prices": [
+      {
+       "id": "1598631077",
+       "name": "1",
+       "typeId": "3532591",
+       "odds": 1.72,
+       "suspended": false,
+       "handicap": "+1.5",
+       "displayName": "{formattedHandicap}",
+       "additionalInfo": {
+        "hot": false
+       },
+       "probability": {
+        "win": 0.550085,
+        "refund": 0.0
+       },
+       "specifier": {
+        "hcp": "+1.5"
+       }
+      },
+      {
+       "id": "1598631076",
+       "name": "2",
+       "typeId": "3532593",
+       "odds": 2.08,
+       "suspended": false,
+       "handicap": "-1.5",
+       "displayName": "{formattedHandicap}",
+       "additionalInfo": {
+        "hot": false
+       },
+       "probability": {
+        "win": 0.449915,
+        "refund": 0.0
+       },
+       "specifier": {
+        "hcp": "-1.5"
+       }
+      }
+     ],
+     "specifier": {
+      "hcp": "1.5"
+     }
+    },
+    {
+     "id": "419536095",
+     "handicap": 10,
+     "prices": [
+      {
+       "id": "1598631071",
+       "name": "1",
+       "typeId": "3532591",
+       "odds": 1.57,
+       "suspended": false,
+       "handicap": "+2.5",
+       "displayName": "{formattedHandicap}",
+       "additionalInfo": {
+        "hot": false
+       },
+       "probability": {
+        "win": 0.604167,
+        "refund": 0.0
+       },
+       "specifier": {
+        "hcp": "+2.5"
+       }
+      },
+      {
+       "id": "1598631070",
+       "name": "2",
+       "typeId": "3532593",
+       "odds": 2.35,
+       "suspended": false,
+       "handicap": "-2.5",
+       "displayName": "{formattedHandicap}",
+       "additionalInfo": {
+        "hot": false
+       },
+       "probability": {
+        "win": 0.395833,
+        "refund": 0.0
+       },
+       "specifier": {
+        "hcp": "-2.5"
+       }
+      }
+     ],
+     "specifier": {
+      "hcp": "2.5"
+     }
+    }
+   ],
+   "displayNameRows": [],
+   "displayNameColumns": [
+    "1",
+    "2"
+   ],
+   "additionalInfo": {
+    "cashoutable": true,
+    "boosted": false
+   }
+  },
+  {
+   "marketType": {
+    "id": "4895",
+    "name": "Total Games - Over/Under - FT",
+    "displayName": "Over/Under | Total Games",
+    "explainer": "Pick how many games there will be meeting the stated criteria. Over is more than that amount, Unders is less.",
+    "priority": 103,
+    "tabs": [
+     "all",
+     "popular",
+     "games"
+    ],
+    "handicapType": "NORMAL"
+   },
+   "row": [
+    {
+     "id": "419536097",
+     "handicap": 82,
+     "prices": [
+      {
+       "id": "1598631074",
+       "name": "Over",
+       "typeId": "4896",
+       "odds": 1.48,
+       "suspended": false,
+       "handicap": "20.5",
+       "displayName": "Over {formattedHandicap}",
+       "additionalInfo": {
+        "hot": false
+       },
+       "probability": {
+        "win": 0.64807,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1598631075",
+       "name": "Under",
+       "typeId": "4897",
+       "odds": 2.65,
+       "suspended": false,
+       "handicap": "20.5",
+       "displayName": "Under {formattedHandicap}",
+       "additionalInfo": {
+        "hot": false
+       },
+       "probability": {
+        "win": 0.35193,
+        "refund": 0.0
+       }
+      }
+     ],
+     "specifier": {
+      "total": "20.5"
+     }
+    },
+    {
+     "id": "419536089",
+     "handicap": 86,
+     "prices": [
+      {
+       "id": "1598631058",
+       "name": "Over",
+       "typeId": "4896",
+       "odds": 1.62,
+       "suspended": false,
+       "handicap": "21.5",
+       "displayName": "Over {formattedHandicap}",
+       "additionalInfo": {
+        "hot": false
+       },
+       "probability": {
+        "win": 0.59239,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1598631059",
+       "name": "Under",
+       "typeId": "4897",
+       "odds": 2.3,
+       "suspended": false,
+       "handicap": "21.5",
+       "displayName": "Under {formattedHandicap}",
+       "additionalInfo": {
+        "hot": false
+       },
+       "probability": {
+        "win": 0.40761,
+        "refund": 0.0
+       }
+      }
+     ],
+     "specifier": {
+      "total": "21.5"
+     }
+    },
+    {
+     "id": "419536093",
+     "handicap": 90,
+     "prices": [
+      {
+       "id": "1598631066",
+       "name": "Over",
+       "typeId": "4896",
+       "odds": 1.87,
+       "suspended": false,
+       "handicap": "22.5",
+       "displayName": "Over {formattedHandicap}",
+       "additionalInfo": {
+        "hot": false
+       },
+       "probability": {
+        "win": 0.510715,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1598631067",
+       "name": "Under",
+       "typeId": "4897",
+       "odds": 1.94,
+       "suspended": false,
+       "handicap": "22.5",
+       "displayName": "Under {formattedHandicap}",
+       "additionalInfo": {
+        "hot": false
+       },
+       "probability": {
+        "win": 0.489285,
+        "refund": 0.0
+       }
+      }
+     ],
+     "specifier": {
+      "total": "22.5"
+     }
+    },
+    {
+     "id": "419536096",
+     "handicap": 94,
+     "prices": [
+      {
+       "id": "1598631072",
+       "name": "Over",
+       "typeId": "4896",
+       "odds": 2.1,
+       "suspended": false,
+       "handicap": "23.5",
+       "displayName": "Over {formattedHandicap}",
+       "additionalInfo": {
+        "hot": false
+       },
+       "probability": {
+        "win": 0.449933,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1598631073",
+       "name": "Under",
+       "typeId": "4897",
+       "odds": 1.74,
+       "suspended": false,
+       "handicap": "23.5",
+       "displayName": "Under {formattedHandicap}",
+       "additionalInfo": {
+        "hot": false
+       },
+       "probability": {
+        "win": 0.550067,
+        "refund": 0.0
+       }
+      }
+     ],
+     "specifier": {
+      "total": "23.5"
+     }
+    },
+    {
+     "id": "419536088",
+     "handicap": 98,
+     "prices": [
+      {
+       "id": "1598631056",
+       "name": "Over",
+       "typeId": "4896",
+       "odds": 2.16,
+       "suspended": false,
+       "handicap": "24.5",
+       "displayName": "Over {formattedHandicap}",
+       "additionalInfo": {
+        "hot": false
+       },
+       "probability": {
+        "win": 0.436131,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1598631057",
+       "name": "Under",
+       "typeId": "4897",
+       "odds": 1.69,
+       "suspended": false,
+       "handicap": "24.5",
+       "displayName": "Under {formattedHandicap}",
+       "additionalInfo": {
+        "hot": false
+       },
+       "probability": {
+        "win": 0.563869,
+        "refund": 0.0
+       }
+      }
+     ],
+     "specifier": {
+      "total": "24.5"
+     }
+    }
+   ],
+   "displayNameRows": [],
+   "displayNameColumns": [],
+   "additionalInfo": {
+    "cashoutable": true,
+    "boosted": false
+   }
+  },
+  {
+   "marketType": {
+    "id": "3597899",
+    "name": "Total Sets - Over/Under - FT",
+    "displayName": "Over/Under | Total Sets",
+    "explainer": "Will the match last more or fewer sets than the number shown? For example, Under 2.5 wins if the match ends 2-0. The match must finish for bets to stand. If a player retires or is disqualified, you get your stake back.",
+    "priority": 105,
+    "tabs": [
+     "all",
+     "popular",
+     "sets"
+    ],
+    "handicapType": "NORMAL"
+   },
+   "row": [
+    {
+     "id": "419511166",
+     "handicap": 10,
+     "prices": [
+      {
+       "id": "1598491464",
+       "name": "Over",
+       "typeId": "3597900",
+       "odds": 2.23,
+       "suspended": false,
+       "handicap": "2.5",
+       "displayName": "Over {formattedHandicap}",
+       "additionalInfo": {
+        "hot": false
+       },
+       "probability": {
+        "win": 0.408311,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1598491465",
+       "name": "Under",
+       "typeId": "3597901",
+       "odds": 1.58,
+       "suspended": false,
+       "handicap": "2.5",
+       "displayName": "Under {formattedHandicap}",
+       "additionalInfo": {
+        "hot": false
+       },
+       "probability": {
+        "win": 0.591689,
+        "refund": 0.0
+       }
+      }
+     ],
+     "specifier": {
+      "total": "2.5"
+     }
+    }
+   ],
+   "displayNameRows": [],
+   "displayNameColumns": [],
+   "additionalInfo": {
+    "cashoutable": true,
+    "boosted": false
+   }
+  },
+  {
+   "marketType": {
+    "id": "3532365",
+    "name": "Odd / Even Games - FT",
+    "displayName": "Odd/Even | Total Games",
+    "explainer": "Will the total number of games played in the match be an odd or even number?",
+    "priority": 109,
+    "tabs": [
+     "all",
+     "popular",
+     "games"
+    ],
+    "handicapType": ""
+   },
+   "row": [
+    {
+     "id": "419511167",
+     "prices": [
+      {
+       "id": "1598491467",
+       "name": "Odd",
+       "typeId": "3532366",
+       "odds": 1.86,
+       "suspended": false,
+       "displayName": "Odd",
+       "additionalInfo": {
+        "hot": false
+       },
+       "probability": {
+        "win": 0.499792,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1598491466",
+       "name": "Even",
+       "typeId": "3532367",
+       "odds": 1.86,
+       "suspended": false,
+       "displayName": "Even",
+       "additionalInfo": {
+        "hot": false
+       },
+       "probability": {
+        "win": 0.500208,
+        "refund": 0.0
+       }
+      }
+     ]
+    }
+   ],
+   "displayNameRows": [],
+   "displayNameColumns": [],
+   "additionalInfo": {
+    "cashoutable": true,
+    "boosted": false
+   }
+  },
+  {
+   "marketType": {
+    "id": "4758",
+    "name": "Moneyline - 1S",
+    "displayName": "First Set Winner",
+    "explainer": "Pick 1 (home player) or 2 (away player) to win the first set. The set must be fully completed for bets to stand. If a player retires or is disqualified, you get your stake back.",
+    "priority": 211,
+    "tabs": [
+     "all",
+     "sets"
+    ],
+    "handicapType": ""
+   },
+   "row": [
+    {
+     "id": "419511168",
+     "prices": [
+      {
+       "id": "1598491468",
+       "name": "1",
+       "typeId": "4759",
+       "odds": 1.9,
+       "suspended": false,
+       "displayName": "1",
+       "additionalInfo": {
+        "hot": false
+       },
+       "probability": {
+        "win": 0.495672,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1598491469",
+       "name": "2",
+       "typeId": "4760",
+       "odds": 1.87,
+       "suspended": false,
+       "displayName": "2",
+       "additionalInfo": {
+        "hot": false
+       },
+       "probability": {
+        "win": 0.504328,
+        "refund": 0.0
+       }
+      }
+     ]
+    }
+   ],
+   "displayNameRows": [],
+   "displayNameColumns": [],
+   "additionalInfo": {
+    "cashoutable": true,
+    "boosted": false
+   }
+  },
+  {
+   "marketType": {
+    "id": "4880",
+    "name": "Total Games - Over/Under - 1S",
+    "displayName": "Over/Under | Set 1 Games",
+    "explainer": "Pick how many games there will be meeting the stated criteria. Over is more than that amount, Unders is less.",
+    "priority": 213,
+    "tabs": [
+     "all",
+     "sets",
+     "games"
+    ],
+    "handicapType": "NORMAL"
+   },
+   "row": [
+    {
+     "id": "419536092",
+     "handicap": 38,
+     "prices": [
+      {
+       "id": "1598631064",
+       "name": "Over",
+       "typeId": "4881",
+       "odds": 1.67,
+       "suspended": false,
+       "handicap": "9.5",
+       "displayName": "Over {formattedHandicap}",
+       "additionalInfo": {
+        "hot": false
+       },
+       "probability": {
+        "win": 0.562469,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1598631065",
+       "name": "Under",
+       "typeId": "4882",
+       "odds": 2.11,
+       "suspended": false,
+       "handicap": "9.5",
+       "displayName": "Under {formattedHandicap}",
+       "additionalInfo": {
+        "hot": false
+       },
+       "probability": {
+        "win": 0.437531,
+        "refund": 0.0
+       }
+      }
+     ],
+     "specifier": {
+      "total": "9.5"
+     }
+    }
+   ],
+   "displayNameRows": [],
+   "displayNameColumns": [],
+   "additionalInfo": {
+    "cashoutable": true,
+    "boosted": false
+   }
+  },
+  {
+   "marketType": {
+    "id": "4770",
+    "name": "Moneyline - 2S",
+    "displayName": "Second Set Winner",
+    "explainer": "Pick 1 (home player) or 2 (away player) to win the second set. The set must be fully completed for bets to stand. If a player retires or is disqualified, you get your stake back.",
+    "priority": 221,
+    "tabs": [
+     "all",
+     "sets"
+    ],
+    "handicapType": ""
+   },
+   "row": [
+    {
+     "id": "419511169",
+     "prices": [
+      {
+       "id": "1598491470",
+       "name": "1",
+       "typeId": "4771",
+       "odds": 1.83,
+       "suspended": false,
+       "displayName": "1",
+       "additionalInfo": {
+        "hot": false
+       },
+       "probability": {
+        "win": 0.495795,
+        "refund": 0.0
+       }
+      },
+      {
+       "id": "1598491471",
+       "name": "2",
+       "typeId": "4772",
+       "odds": 1.8,
+       "suspended": false,
+       "displayName": "2",
+       "additionalInfo": {
+        "hot": false
+       },
+       "probability": {
+        "win": 0.504205,
+        "refund": 0.0
+       }
+      }
+     ]
+    }
+   ],
+   "displayNameRows": [],
+   "displayNameColumns": [],
+   "additionalInfo": {
+    "cashoutable": true,
+    "boosted": false
+   }
+  }
+ ],
+ "comboCards": [],
+ "totalMarketCount": "16",
+ "category": {
+  "id": "452",
+  "name": "Tennis"
+ },
+ "region": {
+  "id": "1",
+  "name": "International"
+ },
+ "competition": {
+  "id": "15313",
+  "name": "ATP World Tour Finals Men Singles"
+ },
+ "additionalInfo": {
+  "live": false,
+  "inplayBooked": true,
+  "neutralVenue": false,
+  "inplayBookedActual": true
+ },
+ "version": "21",
+ "marketCounters": {
+  "totalMarketGroupCount": "8",
+  "marketGroupCountByTab": {
+   "all": "8",
+   "sets": "4",
+   "games": "4",
+   "popular": "5"
+  }
+ },
+ "combos": []
+}

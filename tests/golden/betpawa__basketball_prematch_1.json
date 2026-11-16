@@ -1,0 +1,46 @@
+[
+ {
+  "canonical_id": "2way_handicap_basketball_ft",
+  "lines": {
+   "-1.5": [
+    {
+     "canonical_name": "home",
+     "odds": 1.95,
+     "platform_name": "1",
+     "true_probability": 0.481546,
+     "void_probability": 0.0
+    },
+    {
+     "canonical_name": "away",
+     "odds": 1.82,
+     "platform_name": "2",
+     "true_probability": 0.518454,
+     "void_probability": 0.0
+    }
+   ]
+  },
+  "name": "2-Way Handicap - Full Time (incl. OT)",
+  "outcomes": []
+ },
+ {
+  "canonical_id": "moneyline_basketball_ft",
+  "lines": null,
+  "name": "Moneyline - Full Time (incl. OT)",
+  "outcomes": [
+   {
+    "canonical_name": "home",
+    "odds": 1.87,
+    "platform_name": "1",
+    "true_probability": 0.510295,
+    "void_probability": 0.0
+   },
+   {
+    "canonical_name": "away",
+    "odds": 1.94,
+    "platform_name": "2",
+    "true_probability": 0.489705,
+    "void_probability": 0.0
+   }
+  ]
+ }
+]

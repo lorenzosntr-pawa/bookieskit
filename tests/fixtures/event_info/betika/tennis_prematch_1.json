@@ -1,0 +1,111 @@
+{
+ "data": [
+  {
+   "home_team": "Fils, Arthur",
+   "game_id": "25520",
+   "match_id": "12108256",
+   "away_team": "Jodar, Rafael",
+   "start_time": "2026-11-17 16:00:00",
+   "competition_name": "ATP World Tour Finals Men Singles",
+   "category": "ATP",
+   "parent_match_id": "76736446",
+   "side_bets": "18",
+   "home_odd": "1.91",
+   "neutral_odd": null,
+   "away_odd": "1.87",
+   "competition_id": "21873",
+   "sport_id": "28",
+   "sport_name": "Tennis",
+   "is_esport": false,
+   "is_srl": false,
+   "provider": "sr",
+   "odds": [
+    {
+     "sub_type_id": "186",
+     "name": "WINNER",
+     "odds": [
+      {
+       "display": "1",
+       "odd_key": "Fils, Arthur",
+       "odd_def": "{$competitor1}",
+       "odd_value": "1.91",
+       "special_bet_value": "",
+       "outcome_id": "4",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "2",
+       "odd_key": "Jodar, Rafael",
+       "odd_def": "{$competitor2}",
+       "odd_value": "1.87",
+       "special_bet_value": "",
+       "outcome_id": "5",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      }
+     ]
+    },
+    {
+     "sub_type_id": "187",
+     "name": "GAME HANDICAP",
+     "odds": [
+      {
+       "display": "1 (+0.5)",
+       "odd_key": "Fils, Arthur (+0.5)",
+       "odd_def": "{$competitor1} ({+hcp})",
+       "odd_value": "1.84",
+       "special_bet_value": "hcp=0.5",
+       "outcome_id": "1714",
+       "parsed_special_bet_value": {
+        "hcp": "0.5"
+       }
+      },
+      {
+       "display": "2 (-0.5)",
+       "odd_key": "Jodar, Rafael (-0.5)",
+       "odd_def": "{$competitor2} ({-hcp})",
+       "odd_value": "1.93",
+       "special_bet_value": "hcp=0.5",
+       "outcome_id": "1715",
+       "parsed_special_bet_value": {
+        "hcp": "0.5"
+       }
+      }
+     ]
+    },
+    {
+     "sub_type_id": "189",
+     "name": "TOTAL GAMES",
+     "odds": [
+      {
+       "display": "OVER 22.5",
+       "odd_key": "over 22.5",
+       "odd_def": "over {total}",
+       "odd_value": "1.85",
+       "special_bet_value": "total=22.5",
+       "outcome_id": "12",
+       "parsed_special_bet_value": {
+        "total": "22.5"
+       }
+      },
+      {
+       "display": "UNDER 22.5",
+       "odd_key": "under 22.5",
+       "odd_def": "under {total}",
+       "odd_value": "1.93",
+       "special_bet_value": "total=22.5",
+       "outcome_id": "13",
+       "parsed_special_bet_value": {
+        "total": "22.5"
+       }
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "meta": {}
+}

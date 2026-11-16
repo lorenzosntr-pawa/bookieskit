@@ -1,0 +1,101 @@
+[
+ {
+  "canonical_id": "2way_handicap_basketball_ft",
+  "lines": {
+   "1.5": [
+    {
+     "canonical_name": "home",
+     "odds": 1.86,
+     "platform_name": "1",
+     "true_probability": 0.508548,
+     "void_probability": 0.0
+    },
+    {
+     "canonical_name": "away",
+     "odds": 1.92,
+     "platform_name": "2",
+     "true_probability": 0.491452,
+     "void_probability": 0.0
+    }
+   ]
+  },
+  "name": "2-Way Handicap - Full Time (incl. OT)",
+  "outcomes": []
+ },
+ {
+  "canonical_id": "moneyline_basketball_ft",
+  "lines": null,
+  "name": "Moneyline - Full Time (incl. OT)",
+  "outcomes": [
+   {
+    "canonical_name": "home",
+    "odds": 2.0,
+    "platform_name": "1",
+    "true_probability": 0.480368,
+    "void_probability": 0.0
+   },
+   {
+    "canonical_name": "away",
+    "odds": 1.85,
+    "platform_name": "2",
+    "true_probability": 0.519632,
+    "void_probability": 0.0
+   }
+  ]
+ },
+ {
+  "canonical_id": "over_under_basketball_ft",
+  "lines": {
+   "175.5": [
+    {
+     "canonical_name": "over",
+     "odds": 1.83,
+     "platform_name": "Over",
+     "true_probability": 0.51676,
+     "void_probability": 0.0
+    },
+    {
+     "canonical_name": "under",
+     "odds": 1.95,
+     "platform_name": "Under",
+     "true_probability": 0.48324,
+     "void_probability": 0.0
+    }
+   ],
+   "176.5": [
+    {
+     "canonical_name": "over",
+     "odds": 1.91,
+     "platform_name": "Over",
+     "true_probability": 0.492696,
+     "void_probability": 0.0
+    },
+    {
+     "canonical_name": "under",
+     "odds": 1.86,
+     "platform_name": "Under",
+     "true_probability": 0.507304,
+     "void_probability": 0.0
+    }
+   ],
+   "177.5": [
+    {
+     "canonical_name": "over",
+     "odds": 2.0,
+     "platform_name": "Over",
+     "true_probability": 0.4688978219670565,
+     "void_probability": 0.0
+    },
+    {
+     "canonical_name": "under",
+     "odds": 1.78,
+     "platform_name": "Under",
+     "true_probability": 0.5311021783012911,
+     "void_probability": 0.0
+    }
+   ]
+  },
+  "name": "Over/Under Total Points - Full Time (incl. OT)",
+  "outcomes": []
+ }
+]
