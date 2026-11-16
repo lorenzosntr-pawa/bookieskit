@@ -18,7 +18,9 @@ All notable changes to this project are documented in this file. The format foll
   `"1"`, Betway missing price `0.0`) or one-sided lines. If any expected
   outcome is missing or priced at or below `1.0`, the whole line
   (O/U, handicaps) or the whole market (1X2, BTTS, DC) is dropped; a
-  parameterized market left with no lines is dropped.
+  parameterized market left with no lines is dropped. BetPawa prices flagged
+  `suspended: true` count as missing even when they carry a real-looking
+  price. Each drop is logged at DEBUG on `bookieskit.markets.parser`.
 - **BetPawa** — `decode_betpawa_probability` accepts the already-decoded
   `{"win", "refund"}` mapping some country sites (Ghana among them) now serve,
   alongside the obfuscated base64 blob.

@@ -247,3 +247,45 @@ def test_betpawa_2up_parsed():
     assert len(m.outcomes) == 3
     odds = {o.canonical_name: o.odds for o in m.outcomes}
     assert odds == {"home": 1.62, "draw": 4.5, "away": 4.3}
+
+
+def test_suspended_price_treated_as_missing_even_when_priced():
+    # BetPawa keeps a real-looking price on suspended rows; the flag wins.
+    response = {
+        "markets": [
+            {
+                "id": "3743",
+                "row": [
+                    {
+                        "prices": [
+                            {"name": "1", "price": 1.95},
+                            {"name": "X", "price": 3.50, "suspended": True},
+                            {"name": "2", "price": 2.10},
+                        ]
+                    }
+                ],
+            },
+            {
+                "id": "5000",
+                "row": [
+                    {
+                        "line": 2.5,
+                        "prices": [
+                            {"name": "Over", "price": 1.80, "suspended": False},
+                            {"name": "Under", "price": 2.00, "suspended": False},
+                        ],
+                    },
+                    {
+                        "line": 3.5,
+                        "prices": [
+                            {"name": "Over", "price": 2.10, "suspended": True},
+                            {"name": "Under", "price": 1.70},
+                        ],
+                    },
+                ],
+            },
+        ]
+    }
+    markets = {m.canonical_id: m for m in parse_markets(response, "betpawa")}
+    assert "1x2_ft" not in markets
+    assert list(markets["over_under_ft"].lines) == [2.5]

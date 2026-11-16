@@ -6,7 +6,10 @@ outcome drops the whole line (parameterized) or the whole market
 """
 
 import json
+import logging
 from pathlib import Path
+
+import pytest
 
 from bookieskit.markets.parser import _keep_complete, parse_markets
 from bookieskit.markets.registry import MarketRegistry
@@ -120,10 +123,73 @@ def _all_outcomes(markets: list[NormalizedMarket]) -> list[Outcome]:
     return out
 
 
-def test_betpawa_live_fixture_has_no_suspended_prices():
-    markets = parse_markets(_load("betpawa", "live.json"), "betpawa")
-    assert markets
-    assert [o for o in _all_outcomes(markets) if o.odds <= 1.0] == []
+def _betpawa_suspended_rows(payload: dict) -> set[tuple[str, float | None, str]]:
+    """(betpawa market id, line, price name) of every raw suspended price."""
+    keys: set[tuple[str, float | None, str]] = set()
+    for market in payload.get("markets", []):
+        market_id = str(market.get("marketType", {}).get("id", market.get("id", "")))
+        for row in market.get("row") or []:
+            if row.get("formattedHandicap") is not None:
+                line = float(row["formattedHandicap"])
+            elif row.get("handicap") is not None:
+                line = float(row["handicap"]) / 4
+            else:
+                line = None
+            for price in row.get("prices", []):
+                if price.get("suspended"):
+                    keys.add((market_id, line, str(price.get("name"))))
+    return keys
+
+
+@pytest.mark.parametrize("fixture", ["live.json", "prematch.json", "wc_nf.json"])
+def test_betpawa_no_outcome_survives_from_a_suspended_row(fixture):
+    payload = _load("betpawa", fixture)
+    suspended = _betpawa_suspended_rows(payload)
+    assert suspended  # every fixture carries at least one suspended row
+    reg = MarketRegistry()
+    survivors: set[tuple[str, float | None, str]] = set()
+    for m in parse_markets(payload, "betpawa"):
+        market_id = reg.get_by_canonical(m.canonical_id).betpawa_id
+        if m.lines is None:
+            for o in m.outcomes:
+                survivors.add((market_id, None, o.platform_name))
+        else:
+            for line, outcomes in m.lines.items():
+                for o in outcomes:
+                    survivors.add((market_id, line, o.platform_name))
+        assert all(o.odds > 1.0 for o in _all_outcomes([m]))
+    # Simple-market rows carry handicap 0 in the raw payload; compare both
+    # the line-less and line-0 spellings.
+    leaked = {k for k in survivors if k in suspended or (k[0], 0.0, k[2]) in suspended}
+    assert leaked == set()
+
+
+def test_betpawa_live_fixture_is_fully_suspended():
+    # Every price in live.json is flagged suspended, so nothing survives.
+    assert parse_markets(_load("betpawa", "live.json"), "betpawa") == []
+
+
+def test_drop_is_logged_at_debug(caplog):
+    caplog.set_level(logging.DEBUG, logger="bookieskit.markets.parser")
+    ou = NormalizedMarket(
+        canonical_id="over_under_ft",
+        name="Over/Under",
+        lines={
+            2.5: [_o("over", 1.9), _o("under", 1.9)],
+            8.5: [_o("over", 15.0)],
+        },
+    )
+    _keep_complete([ou, _1x2(2.1, 1.0, 3.4)], MarketRegistry(), "bet9ja")
+    messages = [r.getMessage() for r in caplog.records if r.levelno == logging.DEBUG]
+    assert any(
+        "bet9ja" in m and "over_under_ft" in m and "8.5" in m and "missing" in m and "under" in m
+        for m in messages
+    )
+    assert any(
+        "bet9ja" in m and "1x2_ft" in m and "draw" in m and "1.0" in m
+        for m in messages
+    )
+    assert not any("2.5" in m for m in messages)
 
 
 def test_bet9ja_wc_nf_over_under_drops_placeholder_and_one_sided_lines():

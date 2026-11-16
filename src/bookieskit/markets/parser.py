@@ -1,5 +1,6 @@
 """Market parser — transforms raw event responses into NormalizedMarkets."""
 
+import logging
 import re
 from dataclasses import replace
 from typing import Literal
@@ -14,6 +15,8 @@ from bookieskit.markets.types import (
 )
 
 ProbabilityMode = Literal["off", "true", "with_void"]
+
+_log = logging.getLogger(__name__)
 
 
 def _normalised_probability_mode(mode: object) -> ProbabilityMode:
@@ -178,10 +181,24 @@ def parse_markets(
     return _keep_complete(parser(response, registry, mode), base_registry, platform)
 
 
-def _is_complete(outcomes: list[Outcome], expected: set[str]) -> bool:
-    """True iff every expected outcome is present with odds > 1.0."""
+def _incomplete_reason(outcomes: list[Outcome], expected: set[str]) -> str | None:
+    """None if every expected outcome is present with odds > 1.0, else why not."""
     priced = {o.canonical_name for o in outcomes if o.odds > 1.0}
-    return expected <= priced
+    if expected <= priced:
+        return None
+    present = {o.canonical_name for o in outcomes}
+    reasons = []
+    missing = sorted(expected - present)
+    if missing:
+        reasons.append(f"missing {missing}")
+    low = [
+        (o.canonical_name, o.odds)
+        for o in outcomes
+        if o.canonical_name in expected and o.odds <= 1.0
+    ]
+    if low:
+        reasons.append(f"odds <= 1.0 {low}")
+    return "; ".join(reasons)
 
 
 def _keep_complete(
@@ -209,15 +226,31 @@ def _keep_complete(
             if getattr(om, platform, "")
         }
         if market.lines is None:
-            if _is_complete(market.outcomes, expected):
+            reason = _incomplete_reason(market.outcomes, expected)
+            if reason is None:
                 kept.append(market)
+            else:
+                _log.debug(
+                    "%s %s: market dropped, %s",
+                    platform, market.canonical_id, reason,
+                )
             continue
-        lines = {
-            line: outcomes
-            for line, outcomes in market.lines.items()
-            if _is_complete(outcomes, expected)
-        }
-        if lines:
+        lines: dict[float, list[Outcome]] = {}
+        for line, outcomes in market.lines.items():
+            reason = _incomplete_reason(outcomes, expected)
+            if reason is None:
+                lines[line] = outcomes
+            else:
+                _log.debug(
+                    "%s %s line %s: line dropped, %s",
+                    platform, market.canonical_id, line, reason,
+                )
+        if not lines:
+            _log.debug(
+                "%s %s: market dropped, no complete lines",
+                platform, market.canonical_id,
+            )
+        else:
             kept.append(
                 market if len(lines) == len(market.lines)
                 else replace(market, lines=lines)
@@ -261,6 +294,8 @@ def _parse_betpawa_simple(
 
     for row in rows:
         for price in row.get("prices", []):
+            if price.get("suspended"):
+                continue  # suspended = missing, whatever the price says
             price_name = str(price.get("name", price.get("displayName", "")))
             # BetPawa uses "price" field (not "odds")
             odds = float(price.get("price", price.get("odds", 0)))
@@ -322,6 +357,8 @@ def _parse_betpawa_parameterized(
         line_outcomes: list[Outcome] = []
 
         for price in row.get("prices", []):
+            if price.get("suspended"):
+                continue  # suspended = missing, whatever the price says
             price_name = str(price.get("name", price.get("displayName", "")))
             odds = float(price.get("price", price.get("odds", 0)))
             canonical = _resolve_outcome_betpawa(
