@@ -1,6 +1,7 @@
 """Market parser — transforms raw event responses into NormalizedMarkets."""
 
 import re
+from dataclasses import replace
 from typing import Literal
 
 from bookieskit.bookmakers._betika_shape import betika_first_match
@@ -150,10 +151,13 @@ def parse_markets(
 
     Returns:
         List of NormalizedMarket for all recognized markets.
-        Markets not in the registry are skipped.
+        Markets not in the registry are skipped. Lines (parameterized)
+        or markets (simple) with a missing or suspended (odds <= 1.0)
+        outcome are dropped.
     """
     if registry is None:
         registry = MarketRegistry()
+    base_registry = registry
     if sport is not None:
         registry = _SportScopedRegistry(registry, sport)  # type: ignore[assignment]
     mode = _normalised_probability_mode(probability)
@@ -171,7 +175,54 @@ def parse_markets(
     parser = parsers.get(platform)
     if parser is None:
         return []
-    return parser(response, registry, mode)
+    return _keep_complete(parser(response, registry, mode), base_registry, platform)
+
+
+def _is_complete(outcomes: list[Outcome], expected: set[str]) -> bool:
+    """True iff every expected outcome is present with odds > 1.0."""
+    priced = {o.canonical_name for o in outcomes if o.odds > 1.0}
+    return expected <= priced
+
+
+def _keep_complete(
+    markets: list[NormalizedMarket], registry: MarketRegistry, platform: str
+) -> list[NormalizedMarket]:
+    """Drop suspended / placeholder / one-sided prices.
+
+    Expected outcomes for a market are the registry outcomes whose label
+    for ``platform`` is non-empty. A simple market is kept only if every
+    expected outcome has odds > 1.0 (BetPawa suspended -> 0.0, Bet9ja
+    placeholder "1" -> 1.0 and Betway missing price -> 0.0 all fail).
+    For parameterized markets the same check runs per line; a market
+    left with no lines is dropped. Markets without a registry mapping
+    pass through unchanged.
+    """
+    kept: list[NormalizedMarket] = []
+    for market in markets:
+        mapping = registry.get_by_canonical(market.canonical_id)
+        if mapping is None:
+            kept.append(market)
+            continue
+        expected = {
+            om.canonical_name
+            for om in mapping.outcomes.values()
+            if getattr(om, platform, "")
+        }
+        if market.lines is None:
+            if _is_complete(market.outcomes, expected):
+                kept.append(market)
+            continue
+        lines = {
+            line: outcomes
+            for line, outcomes in market.lines.items()
+            if _is_complete(outcomes, expected)
+        }
+        if lines:
+            kept.append(
+                market if len(lines) == len(market.lines)
+                else replace(market, lines=lines)
+            )
+    return kept
 
 
 def _parse_betpawa(

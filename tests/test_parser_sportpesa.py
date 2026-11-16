@@ -142,10 +142,9 @@ def test_parse_sportpesa_malformed_odds_skipped():
         ]
     }
     result = parse_markets(payload, platform="sportpesa")
-    one_x_two = next(m for m in result if m.canonical_id == "1x2_ft")
-    # The malformed "1" outcome is silently dropped; the others survive.
-    names = sorted(o.canonical_name for o in one_x_two.outcomes)
-    assert names == ["away", "draw"]
+    # The malformed "1" outcome is skipped, which leaves 1X2 incomplete,
+    # so the completeness filter drops the whole market.
+    assert [m for m in result if m.canonical_id == "1x2_ft"] == []
 
 
 def test_parse_sportpesa_outcome_with_unknown_shortname_skipped():
@@ -166,9 +165,9 @@ def test_parse_sportpesa_outcome_with_unknown_shortname_skipped():
         ]
     }
     result = parse_markets(payload, platform="sportpesa")
-    one_x_two = next(m for m in result if m.canonical_id == "1x2_ft")
-    names = sorted(o.canonical_name for o in one_x_two.outcomes)
-    assert names == ["away", "home"]
+    # The unknown outcome is skipped; the draw is then missing, so the
+    # completeness filter drops the whole 1X2 market.
+    assert [m for m in result if m.canonical_id == "1x2_ft"] == []
 
 
 def test_parse_sportpesa_probability_mode_passes_through():

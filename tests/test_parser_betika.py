@@ -232,9 +232,9 @@ def test_parse_betika_malformed_odd_value_skipped():
         }
     ])
     result = parse_markets(payload, platform="betika")
-    one_x_two = next(m for m in result if m.canonical_id == "1x2_ft")
-    names = sorted(o.canonical_name for o in one_x_two.outcomes)
-    assert names == ["away", "draw"]
+    # The malformed "1" outcome is skipped, which leaves 1X2 incomplete,
+    # so the completeness filter drops the whole market.
+    assert [m for m in result if m.canonical_id == "1x2_ft"] == []
 
 
 def test_parse_betika_unknown_outcome_skipped():
@@ -250,9 +250,9 @@ def test_parse_betika_unknown_outcome_skipped():
         }
     ])
     result = parse_markets(payload, platform="betika")
-    one_x_two = next(m for m in result if m.canonical_id == "1x2_ft")
-    names = sorted(o.canonical_name for o in one_x_two.outcomes)
-    assert names == ["away", "home"]
+    # The unknown outcome is skipped; the draw is then missing, so the
+    # completeness filter drops the whole 1X2 market.
+    assert [m for m in result if m.canonical_id == "1x2_ft"] == []
 
 
 def test_parse_betika_probability_mode_passes_through():

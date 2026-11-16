@@ -13,6 +13,12 @@ All notable changes to this project are documented in this file. The format foll
   dropped; release notes are now read straight from this CHANGELOG.
 
 ### Fixed
+- **Suspended / missing prices** — `parse_markets` no longer emits
+  placeholder prices as real odds (BetPawa suspended `0.0`, Bet9ja literal
+  `"1"`, Betway missing price `0.0`) or one-sided lines. If any expected
+  outcome is missing or priced at or below `1.0`, the whole line
+  (O/U, handicaps) or the whole market (1X2, BTTS, DC) is dropped; a
+  parameterized market left with no lines is dropped.
 - **BetPawa** — `decode_betpawa_probability` accepts the already-decoded
   `{"win", "refund"}` mapping some country sites (Ghana among them) now serve,
   alongside the obfuscated base64 blob.

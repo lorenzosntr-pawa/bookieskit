@@ -122,7 +122,8 @@ def test_parse_bet9ja_live_keys_with_lives_prefix():
     assert "1x2_ft" in by_canon
     assert "over_under_ft" in by_canon
     assert "btts_ft" in by_canon
-    assert "double_chance_ft" in by_canon
+    # DC_1X at the 1.0 placeholder -> whole market dropped as suspended.
+    assert "double_chance_ft" not in by_canon
     home = next(o for o in by_canon["1x2_ft"].outcomes if o.canonical_name == "home")
     assert home.odds == 1.27
     over_25 = next(
