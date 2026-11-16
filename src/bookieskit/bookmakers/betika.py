@@ -214,7 +214,10 @@ class Betika(BaseBookmaker):
             )
         row = _pick_match(resp, event_id)
         if row is None:
-            raise _wrong_match_error(resp, event_id)
+            data = resp.get("data") if isinstance(resp, dict) else None
+            if isinstance(data, list) and data:
+                raise _wrong_match_error(resp, event_id)
+            return resp  # no rows: unchanged payload (pre-branch behaviour)
         return {"data": [row], "meta": resp.get("meta", {})}
 
     async def get_event_markets(

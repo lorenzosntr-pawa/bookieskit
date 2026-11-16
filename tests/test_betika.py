@@ -512,3 +512,23 @@ async def test_event_detail_picks_matching_row():
         async with Betika(country="ke") as client:
             result = await client.get_event_detail(event_id="123")
     assert [r["match_id"] for r in result["data"]] == [123]
+
+
+@pytest.mark.asyncio
+async def test_event_detail_no_rows_returns_payload_unchanged():
+    import respx
+    payload = {"data": [], "meta": {"total": 0}}
+    with respx.mock(base_url="https://api.betika.com") as mock:
+        mock.get("/v1/uo/matches").respond(json=payload)
+        async with Betika(country="ke") as client:
+            result = await client.get_event_detail(event_id="M")
+    assert result == payload
+
+
+@pytest.mark.asyncio
+async def test_get_sportradar_id_none_when_no_rows():
+    import respx
+    with respx.mock(base_url="https://api.betika.com") as mock:
+        mock.get("/v1/uo/matches").respond(json={"data": [], "meta": {}})
+        async with Betika(country="ke") as client:
+            assert await client.get_sportradar_id("M") is None
