@@ -9,7 +9,8 @@ documented response shape (see ``betika/RESOLVED.md``).
 import json
 from pathlib import Path
 
-from bookieskit.markets.parser import parse_markets
+from bookieskit.markets.parser import _parse_betika, parse_markets
+from bookieskit.markets.registry import MarketRegistry
 
 FIXTURE_DIR = Path(__file__).parent / "fixtures" / "event_info" / "betika"
 
@@ -235,6 +236,11 @@ def test_parse_betika_malformed_odd_value_skipped():
     # The malformed "1" outcome is skipped, which leaves 1X2 incomplete,
     # so the completeness filter drops the whole market.
     assert [m for m in result if m.canonical_id == "1x2_ft"] == []
+    # The per-book parser itself skips only the bad outcome.
+    raw = _parse_betika(payload, MarketRegistry())
+    one_x_two = next(m for m in raw if m.canonical_id == "1x2_ft")
+    names = sorted(o.canonical_name for o in one_x_two.outcomes)
+    assert names == ["away", "draw"]
 
 
 def test_parse_betika_unknown_outcome_skipped():
@@ -253,6 +259,11 @@ def test_parse_betika_unknown_outcome_skipped():
     # The unknown outcome is skipped; the draw is then missing, so the
     # completeness filter drops the whole 1X2 market.
     assert [m for m in result if m.canonical_id == "1x2_ft"] == []
+    # The per-book parser itself skips only the bad outcome.
+    raw = _parse_betika(payload, MarketRegistry())
+    one_x_two = next(m for m in raw if m.canonical_id == "1x2_ft")
+    names = sorted(o.canonical_name for o in one_x_two.outcomes)
+    assert names == ["away", "home"]
 
 
 def test_parse_betika_probability_mode_passes_through():
