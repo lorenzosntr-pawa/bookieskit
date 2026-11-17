@@ -997,7 +997,7 @@
       "label": "_implied()",
       "file_type": "code",
       "source_file": "bookieskit/pricing.py",
-      "source_location": "L9",
+      "source_location": "L16",
       "id": "bookieskit_pricing_implied",
       "community": 23,
       "norm_label": "_implied()"
@@ -1006,7 +1006,7 @@
       "label": "float",
       "file_type": "code",
       "source_file": "bookieskit/pricing.py",
-      "source_location": "L9",
+      "source_location": "L16",
       "id": "bookieskit_pricing_py_float",
       "community": 23,
       "norm_label": "float"
@@ -1015,7 +1015,7 @@
       "label": "margin()",
       "file_type": "code",
       "source_file": "bookieskit/pricing.py",
-      "source_location": "L18",
+      "source_location": "L29",
       "id": "bookieskit_pricing_margin",
       "community": 23,
       "norm_label": "margin()"
@@ -1024,7 +1024,7 @@
       "label": "devig_multiplicative()",
       "file_type": "code",
       "source_file": "bookieskit/pricing.py",
-      "source_location": "L24",
+      "source_location": "L39",
       "id": "bookieskit_pricing_devig_multiplicative",
       "community": 23,
       "norm_label": "devig_multiplicative()"
@@ -1033,53 +1033,53 @@
       "label": "devig_shin()",
       "file_type": "code",
       "source_file": "bookieskit/pricing.py",
-      "source_location": "L33",
+      "source_location": "L52",
       "id": "bookieskit_pricing_devig_shin",
       "community": 23,
       "norm_label": "devig_shin()"
     },
     {
-      "label": "Margin and de-vig helpers shared across bookmaker comparisons.",
+      "label": "Margin and de-vig helpers shared across bookmaker comparisons.  These helpers",
       "file_type": "rationale",
       "source_file": "bookieskit/pricing.py",
       "source_location": "L1",
       "id": "bookieskit_pricing_rationale_1",
       "community": 23,
-      "norm_label": "margin and de-vig helpers shared across bookmaker comparisons."
+      "norm_label": "margin and de-vig helpers shared across bookmaker comparisons.  these helpers"
     },
     {
-      "label": "Return 1/odds per outcome, or None if the odds are unusable.",
+      "label": "Return 1/odds per outcome, or None if the odds are unusable.      Unusable mea",
       "file_type": "rationale",
       "source_file": "bookieskit/pricing.py",
-      "source_location": "L10",
-      "id": "bookieskit_pricing_rationale_10",
+      "source_location": "L17",
+      "id": "bookieskit_pricing_rationale_17",
       "community": 23,
-      "norm_label": "return 1/odds per outcome, or none if the odds are unusable."
+      "norm_label": "return 1/odds per outcome, or none if the odds are unusable.      unusable mea"
     },
     {
-      "label": "Overround: sum of implied probabilities minus 1.",
+      "label": "Overround: sum of implied probabilities minus 1.      Only meaningful for mutu",
       "file_type": "rationale",
       "source_file": "bookieskit/pricing.py",
-      "source_location": "L19",
-      "id": "bookieskit_pricing_rationale_19",
+      "source_location": "L30",
+      "id": "bookieskit_pricing_rationale_30",
       "community": 23,
-      "norm_label": "overround: sum of implied probabilities minus 1."
+      "norm_label": "overround: sum of implied probabilities minus 1.      only meaningful for mutu"
     },
     {
-      "label": "Remove the margin by proportional normalisation.",
+      "label": "Remove the margin by proportional normalisation.      Only valid for mutually",
       "file_type": "rationale",
       "source_file": "bookieskit/pricing.py",
-      "source_location": "L25",
-      "id": "bookieskit_pricing_rationale_25",
+      "source_location": "L40",
+      "id": "bookieskit_pricing_rationale_40",
       "community": 23,
-      "norm_label": "remove the margin by proportional normalisation."
+      "norm_label": "remove the margin by proportional normalisation.      only valid for mutually"
     },
     {
       "label": "Remove the margin with Shin's insider-trading model.      p_i(z) = (sqrt(z^2 +",
       "file_type": "rationale",
       "source_file": "bookieskit/pricing.py",
-      "source_location": "L34",
-      "id": "bookieskit_pricing_rationale_34",
+      "source_location": "L53",
+      "id": "bookieskit_pricing_rationale_53",
       "community": 23,
       "norm_label": "remove the margin with shin's insider-trading model.      p_i(z) = (sqrt(z^2 +"
     },
@@ -1429,7 +1429,7 @@
       "label": ".get_event_markets()",
       "file_type": "code",
       "source_file": "bookieskit/bookmakers/betika.py",
-      "source_location": "L220",
+      "source_location": "L223",
       "id": "bookmakers_betika_betika_get_event_markets",
       "community": 3,
       "norm_label": ".get_event_markets()"
@@ -1438,7 +1438,7 @@
       "label": ".get_markets()",
       "file_type": "code",
       "source_file": "bookieskit/bookmakers/betika.py",
-      "source_location": "L302",
+      "source_location": "L305",
       "id": "bookmakers_betika_betika_get_markets",
       "community": 3,
       "norm_label": ".get_markets()"
@@ -1447,7 +1447,7 @@
       "label": ".iter_all_prematch_events()",
       "file_type": "code",
       "source_file": "bookieskit/bookmakers/betika.py",
-      "source_location": "L328",
+      "source_location": "L331",
       "id": "bookmakers_betika_betika_iter_all_prematch_events",
       "community": 3,
       "norm_label": ".iter_all_prematch_events()"
@@ -1456,7 +1456,7 @@
       "label": "PrematchEventStub",
       "file_type": "code",
       "source_file": "bookieskit/bookmakers/betika.py",
-      "source_location": "L328",
+      "source_location": "L331",
       "id": "bookieskit_bookmakers_betika_py_prematcheventstub",
       "community": 3,
       "norm_label": "prematcheventstub"
@@ -1465,7 +1465,7 @@
       "label": "_pick_match()",
       "file_type": "code",
       "source_file": "bookieskit/bookmakers/betika.py",
-      "source_location": "L381",
+      "source_location": "L384",
       "id": "bookmakers_betika_pick_match",
       "community": 3,
       "norm_label": "_pick_match()"
@@ -1474,7 +1474,7 @@
       "label": "_wrong_match_error()",
       "file_type": "code",
       "source_file": "bookieskit/bookmakers/betika.py",
-      "source_location": "L398",
+      "source_location": "L401",
       "id": "bookmakers_betika_wrong_match_error",
       "community": 3,
       "norm_label": "_wrong_match_error()"
@@ -1483,7 +1483,7 @@
       "label": "ResponseError",
       "file_type": "code",
       "source_file": "bookieskit/bookmakers/betika.py",
-      "source_location": "L398",
+      "source_location": "L401",
       "id": "responseerror",
       "community": 3,
       "norm_label": "responseerror"
@@ -1492,7 +1492,7 @@
       "label": "_coerce_int()",
       "file_type": "code",
       "source_file": "bookieskit/bookmakers/betika.py",
-      "source_location": "L411",
+      "source_location": "L414",
       "id": "bookmakers_betika_coerce_int",
       "community": 3,
       "norm_label": "_coerce_int()"
@@ -1501,7 +1501,7 @@
       "label": "_stubs_from_page()",
       "file_type": "code",
       "source_file": "bookieskit/bookmakers/betika.py",
-      "source_location": "L427",
+      "source_location": "L430",
       "id": "bookmakers_betika_stubs_from_page",
       "community": 3,
       "norm_label": "_stubs_from_page()"
@@ -1582,8 +1582,8 @@
       "label": "Fetch the universal market set for one event in one merged payload.          B",
       "file_type": "rationale",
       "source_file": "bookieskit/bookmakers/betika.py",
-      "source_location": "L226",
-      "id": "bookmakers_betika_rationale_226",
+      "source_location": "L229",
+      "id": "bookmakers_betika_rationale_229",
       "community": 3,
       "norm_label": "fetch the universal market set for one event in one merged payload.          b"
     },
@@ -1591,8 +1591,8 @@
       "label": "Fetch the universal market set and return normalized markets.          Overrid",
       "file_type": "rationale",
       "source_file": "bookieskit/bookmakers/betika.py",
-      "source_location": "L309",
-      "id": "bookmakers_betika_rationale_309",
+      "source_location": "L312",
+      "id": "bookmakers_betika_rationale_312",
       "community": 3,
       "norm_label": "fetch the universal market set and return normalized markets.          overrid"
     },
@@ -1600,8 +1600,8 @@
       "label": "Yield every prematch event in Betika's catalogue.          Uses ``meta.total``",
       "file_type": "rationale",
       "source_file": "bookieskit/bookmakers/betika.py",
-      "source_location": "L334",
-      "id": "bookmakers_betika_rationale_334",
+      "source_location": "L337",
+      "id": "bookmakers_betika_rationale_337",
       "community": 3,
       "norm_label": "yield every prematch event in betika's catalogue.          uses ``meta.total``"
     },
@@ -1609,8 +1609,8 @@
       "label": "Return the row whose ``match_id`` equals ``event_id`` (string-compared).",
       "file_type": "rationale",
       "source_file": "bookieskit/bookmakers/betika.py",
-      "source_location": "L382",
-      "id": "bookmakers_betika_rationale_382",
+      "source_location": "L385",
+      "id": "bookmakers_betika_rationale_385",
       "community": 3,
       "norm_label": "return the row whose ``match_id`` equals ``event_id`` (string-compared)."
     },
@@ -1618,8 +1618,8 @@
       "label": "Best-effort int coercion \u2014 used for Betika's stringy ``meta.total``.",
       "file_type": "rationale",
       "source_file": "bookieskit/bookmakers/betika.py",
-      "source_location": "L412",
-      "id": "bookmakers_betika_rationale_412",
+      "source_location": "L415",
+      "id": "bookmakers_betika_rationale_415",
       "community": 3,
       "norm_label": "best-effort int coercion \u2014 used for betika's stringy ``meta.total``."
     },
@@ -1627,8 +1627,8 @@
       "label": "Extract :class:`PrematchEventStub`s from one ``/v1/uo/matches`` page.",
       "file_type": "rationale",
       "source_file": "bookieskit/bookmakers/betika.py",
-      "source_location": "L430",
-      "id": "bookmakers_betika_rationale_430",
+      "source_location": "L433",
+      "id": "bookmakers_betika_rationale_433",
       "community": 3,
       "norm_label": "extract :class:`prematcheventstub`s from one ``/v1/uo/matches`` page."
     },
@@ -1800,7 +1800,7 @@
       "source_file": "bookieskit/bookmakers/betway.py",
       "source_location": "L1",
       "id": "bookieskit_bookmakers_betway_py",
-      "community": 19,
+      "community": 5,
       "norm_label": "betway.py"
     },
     {
@@ -1962,7 +1962,7 @@
       "source_file": "bookieskit/bookmakers/betway.py",
       "source_location": "L1",
       "id": "bookmakers_betway_rationale_1",
-      "community": 19,
+      "community": 5,
       "norm_label": "betway client \u2014 supports ng, gh, ke, tz, ug, zm."
     },
     {
@@ -2484,7 +2484,7 @@
       "source_file": "bookieskit/bookmakers/sportpesa.py",
       "source_location": "L1",
       "id": "bookieskit_bookmakers_sportpesa_py",
-      "community": 19,
+      "community": 7,
       "norm_label": "sportpesa.py"
     },
     {
@@ -2637,7 +2637,7 @@
       "source_file": "bookieskit/bookmakers/sportpesa.py",
       "source_location": "L1",
       "id": "bookmakers_sportpesa_rationale_1",
-      "community": 19,
+      "community": 7,
       "norm_label": "sportpesa client \u2014 supports ke, tz."
     },
     {
@@ -2736,7 +2736,7 @@
       "source_file": "bookieskit/bookmakers/sportpesa.py",
       "source_location": "L288",
       "id": "bookmakers_sportpesa_rationale_288",
-      "community": 19,
+      "community": 7,
       "norm_label": "# note: sportpesa has no dedicated tournament / competition list endpoint"
     },
     {
@@ -2956,13 +2956,13 @@
       "norm_label": "shared types for bookmaker clients."
     },
     {
-      "label": "Minimal event identifier yielded by :meth:`iter_all_prematch_events`.      Audit",
+      "label": "Minimal event identifier yielded by :meth:`iter_all_prematch_events`.      Aud",
       "file_type": "rationale",
       "source_file": "bookieskit/bookmakers/types.py",
       "source_location": "L8",
       "id": "bookmakers_types_rationale_8",
       "community": 3,
-      "norm_label": "minimal event identifier yielded by :meth:`iter_all_prematch_events`.      audit"
+      "norm_label": "minimal event identifier yielded by :meth:`iter_all_prematch_events`.      aud"
     },
     {
       "label": "builtin_mappings.py",
@@ -2988,7 +2988,7 @@
       "source_file": "bookieskit/markets/parser.py",
       "source_location": "L1",
       "id": "bookieskit_markets_parser_py",
-      "community": 12,
+      "community": 24,
       "norm_label": "parser.py"
     },
     {
@@ -2997,7 +2997,7 @@
       "source_file": "bookieskit/markets/parser.py",
       "source_location": "L22",
       "id": "markets_parser_normalised_probability_mode",
-      "community": 19,
+      "community": 18,
       "norm_label": "_normalised_probability_mode()"
     },
     {
@@ -3006,7 +3006,7 @@
       "source_file": "bookieskit/markets/parser.py",
       "source_location": "L22",
       "id": "bookieskit_markets_parser_py_object",
-      "community": 19,
+      "community": 12,
       "norm_label": "object"
     },
     {
@@ -3015,7 +3015,7 @@
       "source_file": "bookieskit/markets/parser.py",
       "source_location": "L22",
       "id": "probabilitymode",
-      "community": 0,
+      "community": 18,
       "norm_label": "probabilitymode"
     },
     {
@@ -3033,7 +3033,7 @@
       "source_file": "bookieskit/markets/parser.py",
       "source_location": "L45",
       "id": "markets_parser_sportscopedregistry_init",
-      "community": 0,
+      "community": 19,
       "norm_label": ".__init__()"
     },
     {
@@ -3051,7 +3051,7 @@
       "source_file": "bookieskit/markets/parser.py",
       "source_location": "L45",
       "id": "bookieskit_markets_parser_py_str",
-      "community": 0,
+      "community": 19,
       "norm_label": "str"
     },
     {
@@ -3060,7 +3060,7 @@
       "source_file": "bookieskit/markets/parser.py",
       "source_location": "L49",
       "id": "markets_parser_sportscopedregistry_get_by_platform_id",
-      "community": 20,
+      "community": 25,
       "norm_label": ".get_by_platform_id()"
     },
     {
@@ -3069,7 +3069,7 @@
       "source_file": "bookieskit/markets/parser.py",
       "source_location": "L49",
       "id": "bookieskit_markets_parser_py_marketmapping",
-      "community": 20,
+      "community": 25,
       "norm_label": "marketmapping"
     },
     {
@@ -3087,7 +3087,7 @@
       "source_file": "bookieskit/markets/parser.py",
       "source_location": "L66",
       "id": "markets_parser_teamscopedbetwayregistry",
-      "community": 0,
+      "community": 25,
       "norm_label": "_teamscopedbetwayregistry"
     },
     {
@@ -3105,7 +3105,7 @@
       "source_file": "bookieskit/markets/parser.py",
       "source_location": "L90",
       "id": "markets_parser_teamscopedbetwayregistry_get_by_platform_id",
-      "community": 0,
+      "community": 25,
       "norm_label": ".get_by_platform_id()"
     },
     {
@@ -3114,7 +3114,7 @@
       "source_file": "bookieskit/markets/parser.py",
       "source_location": "L117",
       "id": "markets_parser_teamscopedbetwayregistry_list_markets",
-      "community": 0,
+      "community": 25,
       "norm_label": ".list_markets()"
     },
     {
@@ -3123,7 +3123,7 @@
       "source_file": "bookieskit/markets/parser.py",
       "source_location": "L120",
       "id": "markets_parser_teamscopedbetwayregistry_getattr",
-      "community": 0,
+      "community": 25,
       "norm_label": ".__getattr__()"
     },
     {
@@ -3134,6 +3134,15 @@
       "id": "markets_parser_parse_markets",
       "community": 19,
       "norm_label": "parse_markets()"
+    },
+    {
+      "label": "bool",
+      "file_type": "code",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L124",
+      "id": "bookieskit_markets_parser_py_bool",
+      "community": 19,
+      "norm_label": "bool"
     },
     {
       "label": "NormalizedMarket",
@@ -3148,25 +3157,25 @@
       "label": "_incomplete_reason()",
       "file_type": "code",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L184",
+      "source_location": "L194",
       "id": "markets_parser_incomplete_reason",
-      "community": 18,
+      "community": 20,
       "norm_label": "_incomplete_reason()"
     },
     {
       "label": "Outcome",
       "file_type": "code",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L184",
+      "source_location": "L194",
       "id": "outcome",
-      "community": 18,
+      "community": 20,
       "norm_label": "outcome"
     },
     {
       "label": "_keep_complete()",
       "file_type": "code",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L204",
+      "source_location": "L214",
       "id": "markets_parser_keep_complete",
       "community": 0,
       "norm_label": "_keep_complete()"
@@ -3175,16 +3184,16 @@
       "label": "_parse_betpawa()",
       "file_type": "code",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L261",
+      "source_location": "L271",
       "id": "markets_parser_parse_betpawa",
-      "community": 0,
+      "community": 18,
       "norm_label": "_parse_betpawa()"
     },
     {
       "label": "_parse_betpawa_simple()",
       "file_type": "code",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L286",
+      "source_location": "L296",
       "id": "markets_parser_parse_betpawa_simple",
       "community": 18,
       "norm_label": "_parse_betpawa_simple()"
@@ -3193,7 +3202,7 @@
       "label": "_parse_betpawa_parameterized()",
       "file_type": "code",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L330",
+      "source_location": "L340",
       "id": "markets_parser_parse_betpawa_parameterized",
       "community": 18,
       "norm_label": "_parse_betpawa_parameterized()"
@@ -3202,7 +3211,7 @@
       "label": "_resolve_outcome_betpawa()",
       "file_type": "code",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L395",
+      "source_location": "L405",
       "id": "markets_parser_resolve_outcome_betpawa",
       "community": 18,
       "norm_label": "_resolve_outcome_betpawa()"
@@ -3211,7 +3220,7 @@
       "label": "_try_float()",
       "file_type": "code",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L405",
+      "source_location": "L415",
       "id": "markets_parser_try_float",
       "community": 12,
       "norm_label": "_try_float()"
@@ -3220,7 +3229,7 @@
       "label": "float",
       "file_type": "code",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L405",
+      "source_location": "L415",
       "id": "bookieskit_markets_parser_py_float",
       "community": 21,
       "norm_label": "float"
@@ -3229,25 +3238,16 @@
       "label": "_sr_unavailable()",
       "file_type": "code",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L415",
+      "source_location": "L425",
       "id": "markets_parser_sr_unavailable",
       "community": 12,
       "norm_label": "_sr_unavailable()"
     },
     {
-      "label": "bool",
-      "file_type": "code",
-      "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L415",
-      "id": "bookieskit_markets_parser_py_bool",
-      "community": 12,
-      "norm_label": "bool"
-    },
-    {
       "label": "_parse_sportybet()",
       "file_type": "code",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L425",
+      "source_location": "L435",
       "id": "markets_parser_parse_sportybet",
       "community": 0,
       "norm_label": "_parse_sportybet()"
@@ -3256,7 +3256,7 @@
       "label": "_parse_sportybet_simple()",
       "file_type": "code",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L462",
+      "source_location": "L472",
       "id": "markets_parser_parse_sportybet_simple",
       "community": 12,
       "norm_label": "_parse_sportybet_simple()"
@@ -3265,34 +3265,34 @@
       "label": "_parse_sportybet_parameterized()",
       "file_type": "code",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L498",
+      "source_location": "L508",
       "id": "markets_parser_parse_sportybet_parameterized",
-      "community": 12,
+      "community": 26,
       "norm_label": "_parse_sportybet_parameterized()"
     },
     {
       "label": "_extract_line_from_specifier()",
       "file_type": "code",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L544",
+      "source_location": "L554",
       "id": "markets_parser_extract_line_from_specifier",
-      "community": 12,
+      "community": 26,
       "norm_label": "_extract_line_from_specifier()"
     },
     {
       "label": "_resolve_outcome_sportybet()",
       "file_type": "code",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L561",
+      "source_location": "L571",
       "id": "markets_parser_resolve_outcome_sportybet",
-      "community": 12,
+      "community": 26,
       "norm_label": "_resolve_outcome_sportybet()"
     },
     {
       "label": "_parse_bet9ja()",
       "file_type": "code",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L580",
+      "source_location": "L590",
       "id": "markets_parser_parse_bet9ja",
       "community": 21,
       "norm_label": "_parse_bet9ja()"
@@ -3301,7 +3301,7 @@
       "label": "_parse_bet9ja_key()",
       "file_type": "code",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L693",
+      "source_location": "L703",
       "id": "markets_parser_parse_bet9ja_key",
       "community": 21,
       "norm_label": "_parse_bet9ja_key()"
@@ -3310,52 +3310,52 @@
       "label": "_build_bet9ja_outcomes()",
       "file_type": "code",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L749",
+      "source_location": "L759",
       "id": "markets_parser_build_bet9ja_outcomes",
-      "community": 20,
+      "community": 21,
       "norm_label": "_build_bet9ja_outcomes()"
     },
     {
       "label": "_resolve_outcome_bet9ja()",
       "file_type": "code",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L768",
+      "source_location": "L778",
       "id": "markets_parser_resolve_outcome_bet9ja",
-      "community": 20,
+      "community": 25,
       "norm_label": "_resolve_outcome_bet9ja()"
     },
     {
       "label": "_parse_betway()",
       "file_type": "code",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L778",
+      "source_location": "L788",
       "id": "markets_parser_parse_betway",
-      "community": 0,
+      "community": 25,
       "norm_label": "_parse_betway()"
     },
     {
       "label": "_is_betway_child_market_id()",
       "file_type": "code",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L942",
+      "source_location": "L952",
       "id": "markets_parser_is_betway_child_market_id",
-      "community": 12,
+      "community": 19,
       "norm_label": "_is_betway_child_market_id()"
     },
     {
       "label": "_is_betway_parameterized_variant()",
       "file_type": "code",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L955",
+      "source_location": "L965",
       "id": "markets_parser_is_betway_parameterized_variant",
-      "community": 12,
+      "community": 19,
       "norm_label": "_is_betway_parameterized_variant()"
     },
     {
       "label": "_build_betway_simple()",
       "file_type": "code",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L968",
+      "source_location": "L978",
       "id": "markets_parser_build_betway_simple",
       "community": 22,
       "norm_label": "_build_betway_simple()"
@@ -3364,25 +3364,25 @@
       "label": "_extract_betway_line_from_market_id()",
       "file_type": "code",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L1008",
+      "source_location": "L1018",
       "id": "markets_parser_extract_betway_line_from_market_id",
-      "community": 22,
+      "community": 27,
       "norm_label": "_extract_betway_line_from_market_id()"
     },
     {
       "label": "_build_betway_parameterized()",
       "file_type": "code",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L1029",
+      "source_location": "L1039",
       "id": "markets_parser_build_betway_parameterized",
-      "community": 22,
+      "community": 27,
       "norm_label": "_build_betway_parameterized()"
     },
     {
       "label": "_resolve_outcome_betway()",
       "file_type": "code",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L1161",
+      "source_location": "L1171",
       "id": "markets_parser_resolve_outcome_betway",
       "community": 22,
       "norm_label": "_resolve_outcome_betway()"
@@ -3391,7 +3391,7 @@
       "label": "int",
       "file_type": "code",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L1161",
+      "source_location": "L1171",
       "id": "bookieskit_markets_parser_py_int",
       "community": 22,
       "norm_label": "int"
@@ -3400,7 +3400,7 @@
       "label": "_parse_msport()",
       "file_type": "code",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L1193",
+      "source_location": "L1203",
       "id": "markets_parser_parse_msport",
       "community": 0,
       "norm_label": "_parse_msport()"
@@ -3409,16 +3409,16 @@
       "label": "_parse_msport_simple()",
       "file_type": "code",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L1229",
+      "source_location": "L1239",
       "id": "markets_parser_parse_msport_simple",
-      "community": 24,
+      "community": 12,
       "norm_label": "_parse_msport_simple()"
     },
     {
       "label": "_parse_msport_parameterized()",
       "file_type": "code",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L1264",
+      "source_location": "L1274",
       "id": "markets_parser_parse_msport_parameterized",
       "community": 12,
       "norm_label": "_parse_msport_parameterized()"
@@ -3427,16 +3427,16 @@
       "label": "_resolve_outcome_msport()",
       "file_type": "code",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L1309",
+      "source_location": "L1319",
       "id": "markets_parser_resolve_outcome_msport",
-      "community": 24,
+      "community": 12,
       "norm_label": "_resolve_outcome_msport()"
     },
     {
       "label": "_parse_sportpesa()",
       "file_type": "code",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L1326",
+      "source_location": "L1336",
       "id": "markets_parser_parse_sportpesa",
       "community": 0,
       "norm_label": "_parse_sportpesa()"
@@ -3445,7 +3445,7 @@
       "label": "_parse_sportpesa_simple()",
       "file_type": "code",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L1372",
+      "source_location": "L1382",
       "id": "markets_parser_parse_sportpesa_simple",
       "community": 20,
       "norm_label": "_parse_sportpesa_simple()"
@@ -3454,16 +3454,16 @@
       "label": "_parse_sportpesa_parameterized()",
       "file_type": "code",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L1402",
+      "source_location": "L1412",
       "id": "markets_parser_parse_sportpesa_parameterized",
-      "community": 18,
+      "community": 20,
       "norm_label": "_parse_sportpesa_parameterized()"
     },
     {
       "label": "_resolve_outcome_sportpesa()",
       "file_type": "code",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L1443",
+      "source_location": "L1453",
       "id": "markets_parser_resolve_outcome_sportpesa",
       "community": 20,
       "norm_label": "_resolve_outcome_sportpesa()"
@@ -3472,34 +3472,34 @@
       "label": "_parse_betika()",
       "file_type": "code",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L1463",
+      "source_location": "L1473",
       "id": "markets_parser_parse_betika",
-      "community": 0,
+      "community": 24,
       "norm_label": "_parse_betika()"
     },
     {
       "label": "_parse_betika_simple()",
       "file_type": "code",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L1502",
+      "source_location": "L1512",
       "id": "markets_parser_parse_betika_simple",
-      "community": 18,
+      "community": 24,
       "norm_label": "_parse_betika_simple()"
     },
     {
       "label": "_parse_betika_parameterized()",
       "file_type": "code",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L1532",
+      "source_location": "L1542",
       "id": "markets_parser_parse_betika_parameterized",
-      "community": 21,
+      "community": 24,
       "norm_label": "_parse_betika_parameterized()"
     },
     {
       "label": "_parse_betika_line()",
       "file_type": "code",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L1571",
+      "source_location": "L1581",
       "id": "markets_parser_parse_betika_line",
       "community": 21,
       "norm_label": "_parse_betika_line()"
@@ -3508,27 +3508,27 @@
       "label": "_resolve_outcome_betika()",
       "file_type": "code",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L1603",
+      "source_location": "L1613",
       "id": "markets_parser_resolve_outcome_betika",
-      "community": 18,
+      "community": 24,
       "norm_label": "_resolve_outcome_betika()"
     },
     {
       "label": "_parse_elephantbet()",
       "file_type": "code",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L1630",
+      "source_location": "L1640",
       "id": "markets_parser_parse_elephantbet",
-      "community": 0,
+      "community": 28,
       "norm_label": "_parse_elephantbet()"
     },
     {
       "label": "_resolve_outcome_elephantbet()",
       "file_type": "code",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L1722",
+      "source_location": "L1732",
       "id": "markets_parser_resolve_outcome_elephantbet",
-      "community": 20,
+      "community": 28,
       "norm_label": "_resolve_outcome_elephantbet()"
     },
     {
@@ -3537,7 +3537,7 @@
       "source_file": "bookieskit/markets/parser.py",
       "source_location": "L1",
       "id": "markets_parser_rationale_1",
-      "community": 12,
+      "community": 24,
       "norm_label": "market parser \u2014 transforms raw event responses into normalizedmarkets."
     },
     {
@@ -3546,7 +3546,7 @@
       "source_file": "bookieskit/markets/parser.py",
       "source_location": "L23",
       "id": "markets_parser_rationale_23",
-      "community": 19,
+      "community": 18,
       "norm_label": "coerce arbitrary user input to a known probabilitymode value.      invalid mode"
     },
     {
@@ -3564,15 +3564,15 @@
       "source_file": "bookieskit/markets/parser.py",
       "source_location": "L67",
       "id": "markets_parser_rationale_67",
-      "community": 0,
+      "community": 25,
       "norm_label": "wraps a marketregistry to substitute [home team] / [away team]     placeholders"
     },
     {
       "label": "Parse raw event detail response into normalized markets.      Args:         resp",
       "file_type": "rationale",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L132",
-      "id": "markets_parser_rationale_132",
+      "source_location": "L133",
+      "id": "markets_parser_rationale_133",
       "community": 19,
       "norm_label": "parse raw event detail response into normalized markets.      args:         resp"
     },
@@ -3580,17 +3580,17 @@
       "label": "None if every expected outcome is present with odds > 1.0, else why not.",
       "file_type": "rationale",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L185",
-      "id": "markets_parser_rationale_185",
-      "community": 18,
+      "source_location": "L195",
+      "id": "markets_parser_rationale_195",
+      "community": 20,
       "norm_label": "none if every expected outcome is present with odds > 1.0, else why not."
     },
     {
       "label": "Drop suspended / placeholder / one-sided prices.      Expected outcomes for a ma",
       "file_type": "rationale",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L207",
-      "id": "markets_parser_rationale_207",
+      "source_location": "L217",
+      "id": "markets_parser_rationale_217",
       "community": 0,
       "norm_label": "drop suspended / placeholder / one-sided prices.      expected outcomes for a ma"
     },
@@ -3598,17 +3598,17 @@
       "label": "Parse BetPawa event detail response.",
       "file_type": "rationale",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L264",
-      "id": "markets_parser_rationale_264",
-      "community": 0,
+      "source_location": "L274",
+      "id": "markets_parser_rationale_274",
+      "community": 18,
       "norm_label": "parse betpawa event detail response."
     },
     {
       "label": "Parse a simple BetPawa market (1X2, BTTS, DC).",
       "file_type": "rationale",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L289",
-      "id": "markets_parser_rationale_289",
+      "source_location": "L299",
+      "id": "markets_parser_rationale_299",
       "community": 18,
       "norm_label": "parse a simple betpawa market (1x2, btts, dc)."
     },
@@ -3616,8 +3616,8 @@
       "label": "Parse a parameterized BetPawa market (O/U, handicaps).",
       "file_type": "rationale",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L333",
-      "id": "markets_parser_rationale_333",
+      "source_location": "L343",
+      "id": "markets_parser_rationale_343",
       "community": 18,
       "norm_label": "parse a parameterized betpawa market (o/u, handicaps)."
     },
@@ -3625,8 +3625,8 @@
       "label": "Find canonical outcome name from BetPawa platform name.",
       "file_type": "rationale",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L398",
-      "id": "markets_parser_rationale_398",
+      "source_location": "L408",
+      "id": "markets_parser_rationale_408",
       "community": 18,
       "norm_label": "find canonical outcome name from betpawa platform name."
     },
@@ -3634,8 +3634,8 @@
       "label": "Best-effort float cast; None on failure or empty/invalid string.",
       "file_type": "rationale",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L406",
-      "id": "markets_parser_rationale_406",
+      "source_location": "L416",
+      "id": "markets_parser_rationale_416",
       "community": 12,
       "norm_label": "best-effort float cast; none on failure or empty/invalid string."
     },
@@ -3643,8 +3643,8 @@
       "label": "SportyBet/MSport flags: market ``status`` 0 = active (1 suspended,     2 deactiv",
       "file_type": "rationale",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L416",
-      "id": "markets_parser_rationale_416",
+      "source_location": "L426",
+      "id": "markets_parser_rationale_426",
       "community": 12,
       "norm_label": "sportybet/msport flags: market ``status`` 0 = active (1 suspended,     2 deactiv"
     },
@@ -3652,8 +3652,8 @@
       "label": "Parse SportyBet event detail response.",
       "file_type": "rationale",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L428",
-      "id": "markets_parser_rationale_428",
+      "source_location": "L438",
+      "id": "markets_parser_rationale_438",
       "community": 0,
       "norm_label": "parse sportybet event detail response."
     },
@@ -3661,8 +3661,8 @@
       "label": "Parse a simple SportyBet market.",
       "file_type": "rationale",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L465",
-      "id": "markets_parser_rationale_465",
+      "source_location": "L475",
+      "id": "markets_parser_rationale_475",
       "community": 12,
       "norm_label": "parse a simple sportybet market."
     },
@@ -3670,35 +3670,35 @@
       "label": "Parse a parameterized SportyBet market (multiple entries, one per line).",
       "file_type": "rationale",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L501",
-      "id": "markets_parser_rationale_501",
-      "community": 12,
+      "source_location": "L511",
+      "id": "markets_parser_rationale_511",
+      "community": 26,
       "norm_label": "parse a parameterized sportybet market (multiple entries, one per line)."
     },
     {
       "label": "Extract line value from a specifier string.      Shared by SportyBet and MSport",
       "file_type": "rationale",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L545",
-      "id": "markets_parser_rationale_545",
-      "community": 12,
+      "source_location": "L555",
+      "id": "markets_parser_rationale_555",
+      "community": 26,
       "norm_label": "extract line value from a specifier string.      shared by sportybet and msport"
     },
     {
       "label": "Find canonical outcome name from SportyBet outcome desc.      Handles both exact",
       "file_type": "rationale",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L564",
-      "id": "markets_parser_rationale_564",
-      "community": 12,
+      "source_location": "L574",
+      "id": "markets_parser_rationale_574",
+      "community": 26,
       "norm_label": "find canonical outcome name from sportybet outcome desc.      handles both exact"
     },
     {
       "label": "Parse Bet9ja event detail response.",
       "file_type": "rationale",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L583",
-      "id": "markets_parser_rationale_583",
+      "source_location": "L593",
+      "id": "markets_parser_rationale_593",
       "community": 21,
       "norm_label": "parse bet9ja event detail response."
     },
@@ -3706,8 +3706,8 @@
       "label": "Parse a Bet9ja odds key into (market_key, line, outcome_suffix).      Bet9ja use",
       "file_type": "rationale",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L696",
-      "id": "markets_parser_rationale_696",
+      "source_location": "L706",
+      "id": "markets_parser_rationale_706",
       "community": 21,
       "norm_label": "parse a bet9ja odds key into (market_key, line, outcome_suffix).      bet9ja use"
     },
@@ -3715,53 +3715,53 @@
       "label": "Build Outcome list from Bet9ja suffix/odds pairs.",
       "file_type": "rationale",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L753",
-      "id": "markets_parser_rationale_753",
-      "community": 20,
+      "source_location": "L763",
+      "id": "markets_parser_rationale_763",
+      "community": 21,
       "norm_label": "build outcome list from bet9ja suffix/odds pairs."
     },
     {
       "label": "Find canonical outcome name from Bet9ja key suffix.",
       "file_type": "rationale",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L771",
-      "id": "markets_parser_rationale_771",
-      "community": 20,
+      "source_location": "L781",
+      "id": "markets_parser_rationale_781",
+      "community": 25,
       "norm_label": "find canonical outcome name from bet9ja key suffix."
     },
     {
       "label": "Parse Betway event markets response.      Betway returns denormalized data: mark",
       "file_type": "rationale",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L781",
-      "id": "markets_parser_rationale_781",
-      "community": 0,
+      "source_location": "L791",
+      "id": "markets_parser_rationale_791",
+      "community": 25,
       "norm_label": "parse betway event markets response.      betway returns denormalized data: mark"
     },
     {
       "label": "True iff ``child`` is a per-line child row of ``parent``.      Betway child mark",
       "file_type": "rationale",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L943",
-      "id": "markets_parser_rationale_943",
-      "community": 12,
+      "source_location": "L953",
+      "id": "markets_parser_rationale_953",
+      "community": 19,
       "norm_label": "true iff ``child`` is a per-line child row of ``parent``.      betway child mark"
     },
     {
       "label": "Check if a market name is a variant of a parameterized parent.      e.g., \"Total",
       "file_type": "rationale",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L958",
-      "id": "markets_parser_rationale_958",
-      "community": 12,
+      "source_location": "L968",
+      "id": "markets_parser_rationale_968",
+      "community": 19,
       "norm_label": "check if a market name is a variant of a parameterized parent.      e.g., \"total"
     },
     {
       "label": "Build a simple NormalizedMarket from Betway outcomes.",
       "file_type": "rationale",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L974",
-      "id": "markets_parser_rationale_974",
+      "source_location": "L984",
+      "id": "markets_parser_rationale_984",
       "community": 22,
       "norm_label": "build a simple normalizedmarket from betway outcomes."
     },
@@ -3769,26 +3769,26 @@
       "label": "Extract the line value from a Betway marketId path segment.      Betway encodes",
       "file_type": "rationale",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L1009",
-      "id": "markets_parser_rationale_1009",
-      "community": 22,
+      "source_location": "L1019",
+      "id": "markets_parser_rationale_1019",
+      "community": 27,
       "norm_label": "extract the line value from a betway marketid path segment.      betway encodes"
     },
     {
       "label": "Build a parameterized NormalizedMarket from Betway entries.      Betway links al",
       "file_type": "rationale",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L1035",
-      "id": "markets_parser_rationale_1035",
-      "community": 22,
+      "source_location": "L1045",
+      "id": "markets_parser_rationale_1045",
+      "community": 27,
       "norm_label": "build a parameterized normalizedmarket from betway entries.      betway links al"
     },
     {
       "label": "Find canonical outcome name from Betway outcome.      Uses exact match first, th",
       "file_type": "rationale",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L1166",
-      "id": "markets_parser_rationale_1166",
+      "source_location": "L1176",
+      "id": "markets_parser_rationale_1176",
       "community": 22,
       "norm_label": "find canonical outcome name from betway outcome.      uses exact match first, th"
     },
@@ -3796,8 +3796,8 @@
       "label": "Parse MSport event detail response.      MSport's payload mirrors SportyBet's st",
       "file_type": "rationale",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L1196",
-      "id": "markets_parser_rationale_1196",
+      "source_location": "L1206",
+      "id": "markets_parser_rationale_1206",
       "community": 0,
       "norm_label": "parse msport event detail response.      msport's payload mirrors sportybet's st"
     },
@@ -3805,17 +3805,17 @@
       "label": "Parse a simple MSport market.",
       "file_type": "rationale",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L1232",
-      "id": "markets_parser_rationale_1232",
-      "community": 24,
+      "source_location": "L1242",
+      "id": "markets_parser_rationale_1242",
+      "community": 12,
       "norm_label": "parse a simple msport market."
     },
     {
       "label": "Parse a parameterized MSport market (multiple entries, one per line).",
       "file_type": "rationale",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L1267",
-      "id": "markets_parser_rationale_1267",
+      "source_location": "L1277",
+      "id": "markets_parser_rationale_1277",
       "community": 12,
       "norm_label": "parse a parameterized msport market (multiple entries, one per line)."
     },
@@ -3823,17 +3823,17 @@
       "label": "Find canonical outcome name from MSport outcome description.      Exact match fi",
       "file_type": "rationale",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L1312",
-      "id": "markets_parser_rationale_1312",
-      "community": 24,
+      "source_location": "L1322",
+      "id": "markets_parser_rationale_1322",
+      "community": 12,
       "norm_label": "find canonical outcome name from msport outcome description.      exact match fi"
     },
     {
       "label": "Parse a SportPesa ``/api/games/markets`` payload.      Response shape: ``{<game_",
       "file_type": "rationale",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L1329",
-      "id": "markets_parser_rationale_1329",
+      "source_location": "L1339",
+      "id": "markets_parser_rationale_1339",
       "community": 0,
       "norm_label": "parse a sportpesa ``/api/games/markets`` payload.      response shape: ``{<game_"
     },
@@ -3841,8 +3841,8 @@
       "label": "Parse a simple SportPesa market (1X2, BTTS, DC).",
       "file_type": "rationale",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L1375",
-      "id": "markets_parser_rationale_1375",
+      "source_location": "L1385",
+      "id": "markets_parser_rationale_1385",
       "community": 20,
       "norm_label": "parse a simple sportpesa market (1x2, btts, dc)."
     },
@@ -3850,17 +3850,17 @@
       "label": "Parse a parameterized SportPesa market (Over/Under, handicaps).      Each entry",
       "file_type": "rationale",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L1405",
-      "id": "markets_parser_rationale_1405",
-      "community": 18,
+      "source_location": "L1415",
+      "id": "markets_parser_rationale_1415",
+      "community": 20,
       "norm_label": "parse a parameterized sportpesa market (over/under, handicaps).      each entry"
     },
     {
       "label": "Find canonical outcome name from a SportPesa selection ``shortName``.      Exact",
       "file_type": "rationale",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L1446",
-      "id": "markets_parser_rationale_1446",
+      "source_location": "L1456",
+      "id": "markets_parser_rationale_1456",
       "community": 20,
       "norm_label": "find canonical outcome name from a sportpesa selection ``shortname``.      exact"
     },
@@ -3868,35 +3868,35 @@
       "label": "Parse a Betika ``/v1/uo/matches`` payload.      Response shape: ``{\"data\": [<mat",
       "file_type": "rationale",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L1466",
-      "id": "markets_parser_rationale_1466",
-      "community": 0,
+      "source_location": "L1476",
+      "id": "markets_parser_rationale_1476",
+      "community": 24,
       "norm_label": "parse a betika ``/v1/uo/matches`` payload.      response shape: ``{\"data\": [<mat"
     },
     {
       "label": "Parse a simple Betika market (1X2, BTTS, DC).",
       "file_type": "rationale",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L1505",
-      "id": "markets_parser_rationale_1505",
-      "community": 18,
+      "source_location": "L1515",
+      "id": "markets_parser_rationale_1515",
+      "community": 24,
       "norm_label": "parse a simple betika market (1x2, btts, dc)."
     },
     {
       "label": "Parse a parameterized Betika market (Over/Under).      All selections live in on",
       "file_type": "rationale",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L1535",
-      "id": "markets_parser_rationale_1535",
-      "community": 21,
+      "source_location": "L1545",
+      "id": "markets_parser_rationale_1545",
+      "community": 24,
       "norm_label": "parse a parameterized betika market (over/under).      all selections live in on"
     },
     {
       "label": "Extract the line value for a parameterized Betika selection.      ``special_bet_",
       "file_type": "rationale",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L1572",
-      "id": "markets_parser_rationale_1572",
+      "source_location": "L1582",
+      "id": "markets_parser_rationale_1582",
       "community": 21,
       "norm_label": "extract the line value for a parameterized betika selection.      ``special_bet_"
     },
@@ -3904,27 +3904,27 @@
       "label": "Resolve a Betika selection ``display`` label to a canonical name.      Case-inse",
       "file_type": "rationale",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L1606",
-      "id": "markets_parser_rationale_1606",
-      "community": 18,
+      "source_location": "L1616",
+      "id": "markets_parser_rationale_1616",
+      "community": 24,
       "norm_label": "resolve a betika selection ``display`` label to a canonical name.      case-inse"
     },
     {
       "label": "Parse an ElephantBet (BtoBet) MatchOdds response.      Markets are nested under",
       "file_type": "rationale",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L1633",
-      "id": "markets_parser_rationale_1633",
-      "community": 0,
+      "source_location": "L1643",
+      "id": "markets_parser_rationale_1643",
+      "community": 28,
       "norm_label": "parse an elephantbet (btobet) matchodds response.      markets are nested under"
     },
     {
       "label": "Map an ElephantBet outcome label to its canonical name.",
       "file_type": "rationale",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L1725",
-      "id": "markets_parser_rationale_1725",
-      "community": 20,
+      "source_location": "L1735",
+      "id": "markets_parser_rationale_1735",
+      "community": 28,
       "norm_label": "map an elephantbet outcome label to its canonical name."
     },
     {
@@ -4122,7 +4122,7 @@
       "source_file": "bookieskit/markets/types.py",
       "source_location": "L7",
       "id": "markets_types_outcome",
-      "community": 18,
+      "community": 12,
       "norm_label": "outcome"
     },
     {
@@ -4131,7 +4131,7 @@
       "source_file": "bookieskit/markets/types.py",
       "source_location": "L31",
       "id": "markets_types_normalizedmarket",
-      "community": 18,
+      "community": 24,
       "norm_label": "normalizedmarket"
     },
     {
@@ -4167,7 +4167,7 @@
       "source_file": "bookieskit/markets/types.py",
       "source_location": "L8",
       "id": "markets_types_rationale_8",
-      "community": 18,
+      "community": 12,
       "norm_label": "a single outcome within a market.      `true_probability` is the bookmaker's f"
     },
     {
@@ -4176,7 +4176,7 @@
       "source_file": "bookieskit/markets/types.py",
       "source_location": "L32",
       "id": "markets_types_rationale_32",
-      "community": 18,
+      "community": 24,
       "norm_label": "a market normalized to canonical format.      for simple markets (1x2, btts, d"
     },
     {
@@ -4603,6 +4603,438 @@
       "norm_label": "group events from multiple bookmakers by shared provider ids.      args:"
     },
     {
+      "label": "Return 1/odds per outcome, or None if the odds are unusable.",
+      "file_type": "rationale",
+      "source_file": "bookieskit/pricing.py",
+      "source_location": "L10",
+      "community": 23,
+      "norm_label": "return 1/odds per outcome, or none if the odds are unusable.",
+      "id": "bookieskit_pricing_rationale_10"
+    },
+    {
+      "label": "Overround: sum of implied probabilities minus 1.",
+      "file_type": "rationale",
+      "source_file": "bookieskit/pricing.py",
+      "source_location": "L19",
+      "community": 23,
+      "norm_label": "overround: sum of implied probabilities minus 1.",
+      "id": "bookieskit_pricing_rationale_19"
+    },
+    {
+      "label": "Remove the margin by proportional normalisation.",
+      "file_type": "rationale",
+      "source_file": "bookieskit/pricing.py",
+      "source_location": "L25",
+      "community": 23,
+      "norm_label": "remove the margin by proportional normalisation.",
+      "id": "bookieskit_pricing_rationale_25"
+    },
+    {
+      "label": "Remove the margin with Shin's insider-trading model.      p_i(z) = (sqrt(z^2 +",
+      "file_type": "rationale",
+      "source_file": "bookieskit/pricing.py",
+      "source_location": "L34",
+      "community": 23,
+      "norm_label": "remove the margin with shin's insider-trading model.      p_i(z) = (sqrt(z^2 +",
+      "id": "bookieskit_pricing_rationale_34"
+    },
+    {
+      "label": "Fetch the universal market set for one event in one merged payload.          B",
+      "file_type": "rationale",
+      "source_file": "bookieskit/bookmakers/betika.py",
+      "source_location": "L226",
+      "community": 3,
+      "norm_label": "fetch the universal market set for one event in one merged payload.          b",
+      "id": "bookmakers_betika_rationale_226"
+    },
+    {
+      "label": "Fetch the universal market set and return normalized markets.          Overrid",
+      "file_type": "rationale",
+      "source_file": "bookieskit/bookmakers/betika.py",
+      "source_location": "L309",
+      "community": 3,
+      "norm_label": "fetch the universal market set and return normalized markets.          overrid",
+      "id": "bookmakers_betika_rationale_309"
+    },
+    {
+      "label": "Yield every prematch event in Betika's catalogue.          Uses ``meta.total``",
+      "file_type": "rationale",
+      "source_file": "bookieskit/bookmakers/betika.py",
+      "source_location": "L334",
+      "community": 3,
+      "norm_label": "yield every prematch event in betika's catalogue.          uses ``meta.total``",
+      "id": "bookmakers_betika_rationale_334"
+    },
+    {
+      "label": "Return the row whose ``match_id`` equals ``event_id`` (string-compared).",
+      "file_type": "rationale",
+      "source_file": "bookieskit/bookmakers/betika.py",
+      "source_location": "L382",
+      "community": 3,
+      "norm_label": "return the row whose ``match_id`` equals ``event_id`` (string-compared).",
+      "id": "bookmakers_betika_rationale_382"
+    },
+    {
+      "label": "Best-effort int coercion \u2014 used for Betika's stringy ``meta.total``.",
+      "file_type": "rationale",
+      "source_file": "bookieskit/bookmakers/betika.py",
+      "source_location": "L412",
+      "community": 3,
+      "norm_label": "best-effort int coercion \u2014 used for betika's stringy ``meta.total``.",
+      "id": "bookmakers_betika_rationale_412"
+    },
+    {
+      "label": "Extract :class:`PrematchEventStub`s from one ``/v1/uo/matches`` page.",
+      "file_type": "rationale",
+      "source_file": "bookieskit/bookmakers/betika.py",
+      "source_location": "L430",
+      "community": 3,
+      "norm_label": "extract :class:`prematcheventstub`s from one ``/v1/uo/matches`` page.",
+      "id": "bookmakers_betika_rationale_430"
+    },
+    {
+      "label": "Parse raw event detail response into normalized markets.      Args:         resp",
+      "file_type": "rationale",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L132",
+      "community": 19,
+      "norm_label": "parse raw event detail response into normalized markets.      args:         resp",
+      "id": "markets_parser_rationale_132"
+    },
+    {
+      "label": "None if every expected outcome is present with odds > 1.0, else why not.",
+      "file_type": "rationale",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L185",
+      "community": 20,
+      "norm_label": "none if every expected outcome is present with odds > 1.0, else why not.",
+      "id": "markets_parser_rationale_185"
+    },
+    {
+      "label": "Drop suspended / placeholder / one-sided prices.      Expected outcomes for a ma",
+      "file_type": "rationale",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L207",
+      "community": 0,
+      "norm_label": "drop suspended / placeholder / one-sided prices.      expected outcomes for a ma",
+      "id": "markets_parser_rationale_207"
+    },
+    {
+      "label": "Parse BetPawa event detail response.",
+      "file_type": "rationale",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L264",
+      "community": 18,
+      "norm_label": "parse betpawa event detail response.",
+      "id": "markets_parser_rationale_264"
+    },
+    {
+      "label": "Parse a simple BetPawa market (1X2, BTTS, DC).",
+      "file_type": "rationale",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L289",
+      "community": 18,
+      "norm_label": "parse a simple betpawa market (1x2, btts, dc).",
+      "id": "markets_parser_rationale_289"
+    },
+    {
+      "label": "Parse a parameterized BetPawa market (O/U, handicaps).",
+      "file_type": "rationale",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L333",
+      "community": 18,
+      "norm_label": "parse a parameterized betpawa market (o/u, handicaps).",
+      "id": "markets_parser_rationale_333"
+    },
+    {
+      "label": "Find canonical outcome name from BetPawa platform name.",
+      "file_type": "rationale",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L398",
+      "community": 18,
+      "norm_label": "find canonical outcome name from betpawa platform name.",
+      "id": "markets_parser_rationale_398"
+    },
+    {
+      "label": "Best-effort float cast; None on failure or empty/invalid string.",
+      "file_type": "rationale",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L406",
+      "community": 12,
+      "norm_label": "best-effort float cast; none on failure or empty/invalid string.",
+      "id": "markets_parser_rationale_406"
+    },
+    {
+      "label": "Parse SportyBet event detail response.",
+      "file_type": "rationale",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L428",
+      "community": 0,
+      "norm_label": "parse sportybet event detail response.",
+      "id": "markets_parser_rationale_428"
+    },
+    {
+      "label": "Parse a simple SportyBet market.",
+      "file_type": "rationale",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L465",
+      "community": 12,
+      "norm_label": "parse a simple sportybet market.",
+      "id": "markets_parser_rationale_465"
+    },
+    {
+      "label": "Parse a parameterized SportyBet market (multiple entries, one per line).",
+      "file_type": "rationale",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L501",
+      "community": 26,
+      "norm_label": "parse a parameterized sportybet market (multiple entries, one per line).",
+      "id": "markets_parser_rationale_501"
+    },
+    {
+      "label": "Extract line value from a specifier string.      Shared by SportyBet and MSport",
+      "file_type": "rationale",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L545",
+      "community": 26,
+      "norm_label": "extract line value from a specifier string.      shared by sportybet and msport",
+      "id": "markets_parser_rationale_545"
+    },
+    {
+      "label": "Find canonical outcome name from SportyBet outcome desc.      Handles both exact",
+      "file_type": "rationale",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L564",
+      "community": 26,
+      "norm_label": "find canonical outcome name from sportybet outcome desc.      handles both exact",
+      "id": "markets_parser_rationale_564"
+    },
+    {
+      "label": "Parse Bet9ja event detail response.",
+      "file_type": "rationale",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L583",
+      "community": 21,
+      "norm_label": "parse bet9ja event detail response.",
+      "id": "markets_parser_rationale_583"
+    },
+    {
+      "label": "Parse a Bet9ja odds key into (market_key, line, outcome_suffix).      Bet9ja use",
+      "file_type": "rationale",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L696",
+      "community": 21,
+      "norm_label": "parse a bet9ja odds key into (market_key, line, outcome_suffix).      bet9ja use",
+      "id": "markets_parser_rationale_696"
+    },
+    {
+      "label": "Build Outcome list from Bet9ja suffix/odds pairs.",
+      "file_type": "rationale",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L753",
+      "community": 21,
+      "norm_label": "build outcome list from bet9ja suffix/odds pairs.",
+      "id": "markets_parser_rationale_753"
+    },
+    {
+      "label": "Find canonical outcome name from Bet9ja key suffix.",
+      "file_type": "rationale",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L771",
+      "community": 25,
+      "norm_label": "find canonical outcome name from bet9ja key suffix.",
+      "id": "markets_parser_rationale_771"
+    },
+    {
+      "label": "True iff ``child`` is a per-line child row of ``parent``.      Betway child mark",
+      "file_type": "rationale",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L943",
+      "community": 19,
+      "norm_label": "true iff ``child`` is a per-line child row of ``parent``.      betway child mark",
+      "id": "markets_parser_rationale_943"
+    },
+    {
+      "label": "Check if a market name is a variant of a parameterized parent.      e.g., \"Total",
+      "file_type": "rationale",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L958",
+      "community": 19,
+      "norm_label": "check if a market name is a variant of a parameterized parent.      e.g., \"total",
+      "id": "markets_parser_rationale_958"
+    },
+    {
+      "label": "Build a simple NormalizedMarket from Betway outcomes.",
+      "file_type": "rationale",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L974",
+      "community": 22,
+      "norm_label": "build a simple normalizedmarket from betway outcomes.",
+      "id": "markets_parser_rationale_974"
+    },
+    {
+      "label": "Extract the line value from a Betway marketId path segment.      Betway encodes",
+      "file_type": "rationale",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L1009",
+      "community": 27,
+      "norm_label": "extract the line value from a betway marketid path segment.      betway encodes",
+      "id": "markets_parser_rationale_1009"
+    },
+    {
+      "label": "Build a parameterized NormalizedMarket from Betway entries.      Betway links al",
+      "file_type": "rationale",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L1035",
+      "community": 27,
+      "norm_label": "build a parameterized normalizedmarket from betway entries.      betway links al",
+      "id": "markets_parser_rationale_1035"
+    },
+    {
+      "label": "Find canonical outcome name from Betway outcome.      Uses exact match first, th",
+      "file_type": "rationale",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L1166",
+      "community": 22,
+      "norm_label": "find canonical outcome name from betway outcome.      uses exact match first, th",
+      "id": "markets_parser_rationale_1166"
+    },
+    {
+      "label": "Parse MSport event detail response.      MSport's payload mirrors SportyBet's st",
+      "file_type": "rationale",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L1196",
+      "community": 0,
+      "norm_label": "parse msport event detail response.      msport's payload mirrors sportybet's st",
+      "id": "markets_parser_rationale_1196"
+    },
+    {
+      "label": "Parse a simple MSport market.",
+      "file_type": "rationale",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L1232",
+      "community": 12,
+      "norm_label": "parse a simple msport market.",
+      "id": "markets_parser_rationale_1232"
+    },
+    {
+      "label": "Parse a parameterized MSport market (multiple entries, one per line).",
+      "file_type": "rationale",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L1267",
+      "community": 12,
+      "norm_label": "parse a parameterized msport market (multiple entries, one per line).",
+      "id": "markets_parser_rationale_1267"
+    },
+    {
+      "label": "Find canonical outcome name from MSport outcome description.      Exact match fi",
+      "file_type": "rationale",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L1312",
+      "community": 12,
+      "norm_label": "find canonical outcome name from msport outcome description.      exact match fi",
+      "id": "markets_parser_rationale_1312"
+    },
+    {
+      "label": "Parse a SportPesa ``/api/games/markets`` payload.      Response shape: ``{<game_",
+      "file_type": "rationale",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L1329",
+      "community": 0,
+      "norm_label": "parse a sportpesa ``/api/games/markets`` payload.      response shape: ``{<game_",
+      "id": "markets_parser_rationale_1329"
+    },
+    {
+      "label": "Parse a simple SportPesa market (1X2, BTTS, DC).",
+      "file_type": "rationale",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L1375",
+      "community": 20,
+      "norm_label": "parse a simple sportpesa market (1x2, btts, dc).",
+      "id": "markets_parser_rationale_1375"
+    },
+    {
+      "label": "Parse a parameterized SportPesa market (Over/Under, handicaps).      Each entry",
+      "file_type": "rationale",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L1405",
+      "community": 20,
+      "norm_label": "parse a parameterized sportpesa market (over/under, handicaps).      each entry",
+      "id": "markets_parser_rationale_1405"
+    },
+    {
+      "label": "Find canonical outcome name from a SportPesa selection ``shortName``.      Exact",
+      "file_type": "rationale",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L1446",
+      "community": 20,
+      "norm_label": "find canonical outcome name from a sportpesa selection ``shortname``.      exact",
+      "id": "markets_parser_rationale_1446"
+    },
+    {
+      "label": "Parse a Betika ``/v1/uo/matches`` payload.      Response shape: ``{\"data\": [<mat",
+      "file_type": "rationale",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L1466",
+      "community": 24,
+      "norm_label": "parse a betika ``/v1/uo/matches`` payload.      response shape: ``{\"data\": [<mat",
+      "id": "markets_parser_rationale_1466"
+    },
+    {
+      "label": "Parse a simple Betika market (1X2, BTTS, DC).",
+      "file_type": "rationale",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L1505",
+      "community": 24,
+      "norm_label": "parse a simple betika market (1x2, btts, dc).",
+      "id": "markets_parser_rationale_1505"
+    },
+    {
+      "label": "Parse a parameterized Betika market (Over/Under).      All selections live in on",
+      "file_type": "rationale",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L1535",
+      "community": 24,
+      "norm_label": "parse a parameterized betika market (over/under).      all selections live in on",
+      "id": "markets_parser_rationale_1535"
+    },
+    {
+      "label": "Extract the line value for a parameterized Betika selection.      ``special_bet_",
+      "file_type": "rationale",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L1572",
+      "community": 21,
+      "norm_label": "extract the line value for a parameterized betika selection.      ``special_bet_",
+      "id": "markets_parser_rationale_1572"
+    },
+    {
+      "label": "Resolve a Betika selection ``display`` label to a canonical name.      Case-inse",
+      "file_type": "rationale",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L1606",
+      "community": 24,
+      "norm_label": "resolve a betika selection ``display`` label to a canonical name.      case-inse",
+      "id": "markets_parser_rationale_1606"
+    },
+    {
+      "label": "Parse an ElephantBet (BtoBet) MatchOdds response.      Markets are nested under",
+      "file_type": "rationale",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L1633",
+      "community": 28,
+      "norm_label": "parse an elephantbet (btobet) matchodds response.      markets are nested under",
+      "id": "markets_parser_rationale_1633"
+    },
+    {
+      "label": "Map an ElephantBet outcome label to its canonical name.",
+      "file_type": "rationale",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L1725",
+      "community": 28,
+      "norm_label": "map an elephantbet outcome label to its canonical name.",
+      "id": "markets_parser_rationale_1725"
+    },
+    {
       "label": "Initialise the client for the given country.          Args:             count",
       "file_type": "rationale",
       "source_file": "bookieskit/base.py",
@@ -4886,7 +5318,7 @@
       "file_type": "rationale",
       "source_file": "bookieskit/bookmakers/sportpesa.py",
       "source_location": "L278",
-      "community": 19,
+      "community": 7,
       "norm_label": "# note: sportpesa has no dedicated tournament / competition list endpoint",
       "id": "bookmakers_sportpesa_rationale_278"
     },
@@ -4895,7 +5327,7 @@
       "file_type": "rationale",
       "source_file": "bookieskit/markets/parser.py",
       "source_location": "L19",
-      "community": 19,
+      "community": 18,
       "norm_label": "coerce arbitrary user input to a known probabilitymode value.      invalid mod",
       "id": "markets_parser_rationale_19"
     },
@@ -4913,7 +5345,7 @@
       "file_type": "rationale",
       "source_file": "bookieskit/markets/parser.py",
       "source_location": "L63",
-      "community": 0,
+      "community": 25,
       "norm_label": "wraps a marketregistry to substitute [home team] / [away team]     placeholders",
       "id": "markets_parser_rationale_63"
     },
@@ -4931,7 +5363,7 @@
       "file_type": "rationale",
       "source_file": "bookieskit/markets/parser.py",
       "source_location": "L180",
-      "community": 0,
+      "community": 18,
       "norm_label": "parse betpawa event detail response.",
       "id": "markets_parser_rationale_180"
     },
@@ -4994,7 +5426,7 @@
       "file_type": "rationale",
       "source_file": "bookieskit/markets/parser.py",
       "source_location": "L401",
-      "community": 12,
+      "community": 26,
       "norm_label": "parse a parameterized sportybet market (multiple entries, one per line).",
       "id": "markets_parser_rationale_401"
     },
@@ -5003,7 +5435,7 @@
       "file_type": "rationale",
       "source_file": "bookieskit/markets/parser.py",
       "source_location": "L443",
-      "community": 12,
+      "community": 26,
       "norm_label": "extract line value from a specifier string.      shared by sportybet and mspor",
       "id": "markets_parser_rationale_443"
     },
@@ -5012,7 +5444,7 @@
       "file_type": "rationale",
       "source_file": "bookieskit/markets/parser.py",
       "source_location": "L462",
-      "community": 12,
+      "community": 26,
       "norm_label": "find canonical outcome name from sportybet outcome desc.      handles both exa",
       "id": "markets_parser_rationale_462"
     },
@@ -5039,7 +5471,7 @@
       "file_type": "rationale",
       "source_file": "bookieskit/markets/parser.py",
       "source_location": "L651",
-      "community": 20,
+      "community": 21,
       "norm_label": "build outcome list from bet9ja suffix/odds pairs.",
       "id": "markets_parser_rationale_651"
     },
@@ -5048,7 +5480,7 @@
       "file_type": "rationale",
       "source_file": "bookieskit/markets/parser.py",
       "source_location": "L669",
-      "community": 20,
+      "community": 25,
       "norm_label": "find canonical outcome name from bet9ja key suffix.",
       "id": "markets_parser_rationale_669"
     },
@@ -5057,7 +5489,7 @@
       "file_type": "rationale",
       "source_file": "bookieskit/markets/parser.py",
       "source_location": "L679",
-      "community": 0,
+      "community": 25,
       "norm_label": "parse betway event markets response.      betway returns denormalized data: ma",
       "id": "markets_parser_rationale_679"
     },
@@ -5066,7 +5498,7 @@
       "file_type": "rationale",
       "source_file": "bookieskit/markets/parser.py",
       "source_location": "L825",
-      "community": 12,
+      "community": 19,
       "norm_label": "check if a market name is a variant of a parameterized parent.      e.g., \"tot",
       "id": "markets_parser_rationale_825"
     },
@@ -5084,7 +5516,7 @@
       "file_type": "rationale",
       "source_file": "bookieskit/markets/parser.py",
       "source_location": "L876",
-      "community": 22,
+      "community": 27,
       "norm_label": "extract the line value from a betway marketid path segment.      betway encode",
       "id": "markets_parser_rationale_876"
     },
@@ -5093,7 +5525,7 @@
       "file_type": "rationale",
       "source_file": "bookieskit/markets/parser.py",
       "source_location": "L902",
-      "community": 22,
+      "community": 27,
       "norm_label": "build a parameterized normalizedmarket from betway entries.      betway links",
       "id": "markets_parser_rationale_902"
     },
@@ -5120,7 +5552,7 @@
       "file_type": "rationale",
       "source_file": "bookieskit/markets/parser.py",
       "source_location": "L1087",
-      "community": 24,
+      "community": 12,
       "norm_label": "parse a simple msport market.",
       "id": "markets_parser_rationale_1087"
     },
@@ -5138,7 +5570,7 @@
       "file_type": "rationale",
       "source_file": "bookieskit/markets/parser.py",
       "source_location": "L1163",
-      "community": 24,
+      "community": 12,
       "norm_label": "find canonical outcome name from msport outcome description.      exact match",
       "id": "markets_parser_rationale_1163"
     },
@@ -5165,7 +5597,7 @@
       "file_type": "rationale",
       "source_file": "bookieskit/markets/parser.py",
       "source_location": "L1256",
-      "community": 18,
+      "community": 20,
       "norm_label": "parse a parameterized sportpesa market (over/under, handicaps).      each entr",
       "id": "markets_parser_rationale_1256"
     },
@@ -5183,7 +5615,7 @@
       "file_type": "rationale",
       "source_file": "bookieskit/markets/parser.py",
       "source_location": "L1317",
-      "community": 0,
+      "community": 24,
       "norm_label": "parse a betika ``/v1/uo/matches`` payload.      response shape: ``{\"data\": [<m",
       "id": "markets_parser_rationale_1317"
     },
@@ -5192,7 +5624,7 @@
       "file_type": "rationale",
       "source_file": "bookieskit/markets/parser.py",
       "source_location": "L1356",
-      "community": 18,
+      "community": 24,
       "norm_label": "parse a simple betika market (1x2, btts, dc).",
       "id": "markets_parser_rationale_1356"
     },
@@ -5201,7 +5633,7 @@
       "file_type": "rationale",
       "source_file": "bookieskit/markets/parser.py",
       "source_location": "L1386",
-      "community": 21,
+      "community": 24,
       "norm_label": "parse a parameterized betika market (over/under).      all selections live in",
       "id": "markets_parser_rationale_1386"
     },
@@ -5219,7 +5651,7 @@
       "file_type": "rationale",
       "source_file": "bookieskit/markets/parser.py",
       "source_location": "L1457",
-      "community": 18,
+      "community": 24,
       "norm_label": "resolve a betika selection ``display`` label to a canonical name.      case-in",
       "id": "markets_parser_rationale_1457"
     },
@@ -5228,7 +5660,7 @@
       "file_type": "rationale",
       "source_file": "bookieskit/markets/parser.py",
       "source_location": "L1484",
-      "community": 0,
+      "community": 28,
       "norm_label": "parse an elephantbet (btobet) matchodds response.      markets are nested unde",
       "id": "markets_parser_rationale_1484"
     },
@@ -5237,7 +5669,7 @@
       "file_type": "rationale",
       "source_file": "bookieskit/markets/parser.py",
       "source_location": "L1576",
-      "community": 20,
+      "community": 28,
       "norm_label": "map an elephantbet outcome label to its canonical name.",
       "id": "markets_parser_rationale_1576"
     }
@@ -5797,9 +6229,9 @@
       "source_file": "bookieskit/bookmakers/betika.py",
       "source_location": "L17",
       "weight": 0.8,
+      "confidence_score": 0.5,
       "source": "responseerror",
-      "target": "bookieskit_base_basebookmaker",
-      "confidence_score": 0.5
+      "target": "bookieskit_base_basebookmaker"
     },
     {
       "relation": "uses",
@@ -6070,9 +6502,9 @@
       "source_file": "bookieskit/base.py",
       "source_location": "L58",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bookieskit_base_rationale_58",
-      "target": "bookieskit_base_basebookmaker_init",
-      "confidence_score": 1.0
+      "target": "bookieskit_base_basebookmaker_init"
     },
     {
       "relation": "calls",
@@ -6369,9 +6801,9 @@
       "source_file": "bookieskit/base.py",
       "source_location": "L97",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bookieskit_base_rationale_97",
-      "target": "bookieskit_base_basebookmaker_build_headers",
-      "confidence_score": 1.0
+      "target": "bookieskit_base_basebookmaker_build_headers"
     },
     {
       "relation": "rationale_for",
@@ -6389,9 +6821,9 @@
       "source_file": "bookieskit/base.py",
       "source_location": "L109",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bookieskit_base_rationale_109",
-      "target": "bookieskit_base_basebookmaker_set_cookie",
-      "confidence_score": 1.0
+      "target": "bookieskit_base_basebookmaker_set_cookie"
     },
     {
       "relation": "rationale_for",
@@ -6442,9 +6874,9 @@
       "source_file": "bookieskit/base.py",
       "source_location": "L143",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bookieskit_base_rationale_143",
-      "target": "bookieskit_base_basebookmaker_enter",
-      "confidence_score": 1.0
+      "target": "bookieskit_base_basebookmaker_enter"
     },
     {
       "relation": "rationale_for",
@@ -6462,9 +6894,9 @@
       "source_file": "bookieskit/base.py",
       "source_location": "L149",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bookieskit_base_rationale_149",
-      "target": "bookieskit_base_basebookmaker_exit",
-      "confidence_score": 1.0
+      "target": "bookieskit_base_basebookmaker_exit"
     },
     {
       "relation": "rationale_for",
@@ -6493,9 +6925,9 @@
       "source_file": "bookieskit/base.py",
       "source_location": "L161",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bookieskit_base_rationale_161",
-      "target": "bookieskit_base_basebookmaker_request",
-      "confidence_score": 1.0
+      "target": "bookieskit_base_basebookmaker_request"
     },
     {
       "relation": "calls",
@@ -6617,9 +7049,9 @@
       "source_file": "bookieskit/base.py",
       "source_location": "L247",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bookieskit_base_rationale_247",
-      "target": "bookieskit_base_basebookmaker_get_markets",
-      "confidence_score": 1.0
+      "target": "bookieskit_base_basebookmaker_get_markets"
     },
     {
       "relation": "calls",
@@ -6648,9 +7080,9 @@
       "source_file": "bookieskit/base.py",
       "source_location": "L266",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bookieskit_base_rationale_266",
-      "target": "bookieskit_base_basebookmaker_get_sportradar_id",
-      "confidence_score": 1.0
+      "target": "bookieskit_base_basebookmaker_get_sportradar_id"
     },
     {
       "relation": "calls",
@@ -6699,9 +7131,9 @@
       "source_file": "bookieskit/base.py",
       "source_location": "L283",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bookieskit_base_rationale_283",
-      "target": "bookieskit_base_syncproxy",
-      "confidence_score": 1.0
+      "target": "bookieskit_base_syncproxy"
     },
     {
       "relation": "uses",
@@ -8652,9 +9084,9 @@
       "source_file": "bookieskit/bookmakers/betika.py",
       "source_location": "L20",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bookieskit_bookmakers_betika_py",
-      "target": "bookieskit_exceptions_responseerror",
-      "confidence_score": 1.0
+      "target": "bookieskit_exceptions_responseerror"
     },
     {
       "relation": "calls",
@@ -8663,9 +9095,9 @@
       "source_file": "bookieskit/bookmakers/betika.py",
       "source_location": "L403",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bookmakers_betika_wrong_match_error",
-      "target": "bookieskit_exceptions_responseerror",
-      "confidence_score": 1.0
+      "target": "bookieskit_exceptions_responseerror"
     },
     {
       "relation": "uses",
@@ -8673,9 +9105,9 @@
       "source_file": "bookieskit/bookmakers/betika.py",
       "source_location": "L20",
       "weight": 0.8,
+      "confidence_score": 0.5,
       "source": "bookmakers_betika_betika",
-      "target": "bookieskit_exceptions_responseerror",
-      "confidence_score": 0.5
+      "target": "bookieskit_exceptions_responseerror"
     },
     {
       "relation": "uses",
@@ -8683,9 +9115,9 @@
       "source_file": "bookieskit/bookmakers/betika.py",
       "source_location": "L20",
       "weight": 0.8,
+      "confidence_score": 0.5,
       "source": "bookieskit_bookmakers_betika_py_str",
-      "target": "bookieskit_exceptions_responseerror",
-      "confidence_score": 0.5
+      "target": "bookieskit_exceptions_responseerror"
     },
     {
       "relation": "uses",
@@ -8693,9 +9125,9 @@
       "source_file": "bookieskit/bookmakers/betika.py",
       "source_location": "L20",
       "weight": 0.8,
+      "confidence_score": 0.5,
       "source": "bookieskit_bookmakers_betika_py_any",
-      "target": "bookieskit_exceptions_responseerror",
-      "confidence_score": 0.5
+      "target": "bookieskit_exceptions_responseerror"
     },
     {
       "relation": "uses",
@@ -8703,9 +9135,9 @@
       "source_file": "bookieskit/bookmakers/betika.py",
       "source_location": "L20",
       "weight": 0.8,
+      "confidence_score": 0.5,
       "source": "bookieskit_bookmakers_betika_py_int",
-      "target": "bookieskit_exceptions_responseerror",
-      "confidence_score": 0.5
+      "target": "bookieskit_exceptions_responseerror"
     },
     {
       "relation": "uses",
@@ -8713,9 +9145,9 @@
       "source_file": "bookieskit/bookmakers/betika.py",
       "source_location": "L20",
       "weight": 0.8,
+      "confidence_score": 0.5,
       "source": "bookieskit_bookmakers_betika_py_bool",
-      "target": "bookieskit_exceptions_responseerror",
-      "confidence_score": 0.5
+      "target": "bookieskit_exceptions_responseerror"
     },
     {
       "relation": "uses",
@@ -8723,9 +9155,9 @@
       "source_file": "bookieskit/bookmakers/betika.py",
       "source_location": "L20",
       "weight": 0.8,
+      "confidence_score": 0.5,
       "source": "bookieskit_bookmakers_betika_py_prematcheventstub",
-      "target": "bookieskit_exceptions_responseerror",
-      "confidence_score": 0.5
+      "target": "bookieskit_exceptions_responseerror"
     },
     {
       "relation": "uses",
@@ -8733,9 +9165,9 @@
       "source_file": "bookieskit/bookmakers/betika.py",
       "source_location": "L20",
       "weight": 0.8,
+      "confidence_score": 0.5,
       "source": "responseerror",
-      "target": "bookieskit_exceptions_responseerror",
-      "confidence_score": 0.5
+      "target": "bookieskit_exceptions_responseerror"
     },
     {
       "relation": "calls",
@@ -8774,9 +9206,9 @@
       "source_file": "bookieskit/pricing.py",
       "source_location": "L9",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bookieskit_pricing_py",
-      "target": "bookieskit_pricing_implied",
-      "confidence_score": 1.0
+      "target": "bookieskit_pricing_implied"
     },
     {
       "relation": "contains",
@@ -8784,9 +9216,9 @@
       "source_file": "bookieskit/pricing.py",
       "source_location": "L18",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bookieskit_pricing_py",
-      "target": "bookieskit_pricing_margin",
-      "confidence_score": 1.0
+      "target": "bookieskit_pricing_margin"
     },
     {
       "relation": "contains",
@@ -8794,9 +9226,9 @@
       "source_file": "bookieskit/pricing.py",
       "source_location": "L24",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bookieskit_pricing_py",
-      "target": "bookieskit_pricing_devig_multiplicative",
-      "confidence_score": 1.0
+      "target": "bookieskit_pricing_devig_multiplicative"
     },
     {
       "relation": "contains",
@@ -8804,9 +9236,9 @@
       "source_file": "bookieskit/pricing.py",
       "source_location": "L33",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bookieskit_pricing_py",
-      "target": "bookieskit_pricing_devig_shin",
-      "confidence_score": 1.0
+      "target": "bookieskit_pricing_devig_shin"
     },
     {
       "relation": "rationale_for",
@@ -8814,9 +9246,9 @@
       "source_file": "bookieskit/pricing.py",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bookieskit_pricing_rationale_1",
-      "target": "bookieskit_pricing_py",
-      "confidence_score": 1.0
+      "target": "bookieskit_pricing_py"
     },
     {
       "relation": "references",
@@ -8825,9 +9257,9 @@
       "source_file": "bookieskit/pricing.py",
       "source_location": "L9",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bookieskit_pricing_implied",
-      "target": "bookieskit_pricing_py_float",
-      "confidence_score": 1.0
+      "target": "bookieskit_pricing_py_float"
     },
     {
       "relation": "calls",
@@ -8836,9 +9268,9 @@
       "source_file": "bookieskit/pricing.py",
       "source_location": "L20",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bookieskit_pricing_margin",
-      "target": "bookieskit_pricing_implied",
-      "confidence_score": 1.0
+      "target": "bookieskit_pricing_implied"
     },
     {
       "relation": "calls",
@@ -8847,9 +9279,9 @@
       "source_file": "bookieskit/pricing.py",
       "source_location": "L26",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bookieskit_pricing_devig_multiplicative",
-      "target": "bookieskit_pricing_implied",
-      "confidence_score": 1.0
+      "target": "bookieskit_pricing_implied"
     },
     {
       "relation": "calls",
@@ -8858,7 +9290,17 @@
       "source_file": "bookieskit/pricing.py",
       "source_location": "L40",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bookieskit_pricing_devig_shin",
+      "target": "bookieskit_pricing_implied"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "bookieskit/pricing.py",
+      "source_location": "L17",
+      "weight": 1.0,
+      "source": "bookieskit_pricing_rationale_17",
       "target": "bookieskit_pricing_implied",
       "confidence_score": 1.0
     },
@@ -8868,9 +9310,9 @@
       "source_file": "bookieskit/pricing.py",
       "source_location": "L10",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bookieskit_pricing_rationale_10",
-      "target": "bookieskit_pricing_implied",
-      "confidence_score": 1.0
+      "target": "bookieskit_pricing_implied"
     },
     {
       "relation": "references",
@@ -8879,9 +9321,9 @@
       "source_file": "bookieskit/pricing.py",
       "source_location": "L18",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bookieskit_pricing_margin",
-      "target": "bookieskit_pricing_py_float",
-      "confidence_score": 1.0
+      "target": "bookieskit_pricing_py_float"
     },
     {
       "relation": "references",
@@ -8890,9 +9332,9 @@
       "source_file": "bookieskit/pricing.py",
       "source_location": "L24",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bookieskit_pricing_devig_multiplicative",
-      "target": "bookieskit_pricing_py_float",
-      "confidence_score": 1.0
+      "target": "bookieskit_pricing_py_float"
     },
     {
       "relation": "references",
@@ -8901,8 +9343,18 @@
       "source_file": "bookieskit/pricing.py",
       "source_location": "L33",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bookieskit_pricing_devig_shin",
-      "target": "bookieskit_pricing_py_float",
+      "target": "bookieskit_pricing_py_float"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "bookieskit/pricing.py",
+      "source_location": "L30",
+      "weight": 1.0,
+      "source": "bookieskit_pricing_rationale_30",
+      "target": "bookieskit_pricing_margin",
       "confidence_score": 1.0
     },
     {
@@ -8911,8 +9363,18 @@
       "source_file": "bookieskit/pricing.py",
       "source_location": "L19",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bookieskit_pricing_rationale_19",
-      "target": "bookieskit_pricing_margin",
+      "target": "bookieskit_pricing_margin"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "bookieskit/pricing.py",
+      "source_location": "L40",
+      "weight": 1.0,
+      "source": "bookieskit_pricing_rationale_40",
+      "target": "bookieskit_pricing_devig_multiplicative",
       "confidence_score": 1.0
     },
     {
@@ -8921,8 +9383,18 @@
       "source_file": "bookieskit/pricing.py",
       "source_location": "L25",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bookieskit_pricing_rationale_25",
-      "target": "bookieskit_pricing_devig_multiplicative",
+      "target": "bookieskit_pricing_devig_multiplicative"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "bookieskit/pricing.py",
+      "source_location": "L53",
+      "weight": 1.0,
+      "source": "bookieskit_pricing_rationale_53",
+      "target": "bookieskit_pricing_devig_shin",
       "confidence_score": 1.0
     },
     {
@@ -8931,9 +9403,9 @@
       "source_file": "bookieskit/pricing.py",
       "source_location": "L34",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bookieskit_pricing_rationale_34",
-      "target": "bookieskit_pricing_devig_shin",
-      "confidence_score": 1.0
+      "target": "bookieskit_pricing_devig_shin"
     },
     {
       "relation": "contains",
@@ -9423,9 +9895,9 @@
       "source_file": "bookieskit/bookmakers/betika.py",
       "source_location": "L381",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bookieskit_bookmakers_betika_py",
-      "target": "bookmakers_betika_pick_match",
-      "confidence_score": 1.0
+      "target": "bookmakers_betika_pick_match"
     },
     {
       "relation": "contains",
@@ -9433,9 +9905,9 @@
       "source_file": "bookieskit/bookmakers/betika.py",
       "source_location": "L398",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bookieskit_bookmakers_betika_py",
-      "target": "bookmakers_betika_wrong_match_error",
-      "confidence_score": 1.0
+      "target": "bookmakers_betika_wrong_match_error"
     },
     {
       "relation": "contains",
@@ -9585,9 +10057,9 @@
       "source_file": "bookieskit/bookmakers/betika.py",
       "source_location": "L31",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bookmakers_betika_rationale_31",
-      "target": "bookmakers_betika_betika",
-      "confidence_score": 1.0
+      "target": "bookmakers_betika_betika"
     },
     {
       "relation": "uses",
@@ -9659,9 +10131,9 @@
       "source_file": "bookieskit/bookmakers/betika.py",
       "source_location": "L69",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bookmakers_betika_rationale_69",
-      "target": "bookmakers_betika_betika_live_request",
-      "confidence_score": 1.0
+      "target": "bookmakers_betika_betika_live_request"
     },
     {
       "relation": "rationale_for",
@@ -9757,9 +10229,9 @@
       "source_file": "bookieskit/bookmakers/betika.py",
       "source_location": "L393",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bookmakers_betika_pick_match",
-      "target": "bookieskit_bookmakers_betika_py_str",
-      "confidence_score": 1.0
+      "target": "bookieskit_bookmakers_betika_py_str"
     },
     {
       "relation": "calls",
@@ -9768,9 +10240,9 @@
       "source_file": "bookieskit/bookmakers/betika.py",
       "source_location": "L401",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bookmakers_betika_wrong_match_error",
-      "target": "bookieskit_bookmakers_betika_py_str",
-      "confidence_score": 1.0
+      "target": "bookieskit_bookmakers_betika_py_str"
     },
     {
       "relation": "calls",
@@ -9877,9 +10349,9 @@
       "source_file": "bookieskit/bookmakers/betika.py",
       "source_location": "L381",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bookmakers_betika_pick_match",
-      "target": "bookieskit_bookmakers_betika_py_any",
-      "confidence_score": 1.0
+      "target": "bookieskit_bookmakers_betika_py_any"
     },
     {
       "relation": "references",
@@ -9888,9 +10360,9 @@
       "source_file": "bookieskit/bookmakers/betika.py",
       "source_location": "L398",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bookmakers_betika_wrong_match_error",
-      "target": "bookieskit_bookmakers_betika_py_any",
-      "confidence_score": 1.0
+      "target": "bookieskit_bookmakers_betika_py_any"
     },
     {
       "relation": "references",
@@ -9941,9 +10413,9 @@
       "source_file": "bookieskit/bookmakers/betika.py",
       "source_location": "L82",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bookmakers_betika_rationale_82",
-      "target": "bookmakers_betika_betika_get_sports",
-      "confidence_score": 1.0
+      "target": "bookmakers_betika_betika_get_sports"
     },
     {
       "relation": "rationale_for",
@@ -9961,9 +10433,9 @@
       "source_file": "bookieskit/bookmakers/betika.py",
       "source_location": "L91",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bookmakers_betika_rationale_91",
-      "target": "bookmakers_betika_betika_get_navigation",
-      "confidence_score": 1.0
+      "target": "bookmakers_betika_betika_get_navigation"
     },
     {
       "relation": "rationale_for",
@@ -10003,9 +10475,9 @@
       "source_file": "bookieskit/bookmakers/betika.py",
       "source_location": "L112",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bookmakers_betika_rationale_112",
-      "target": "bookmakers_betika_betika_get_matches",
-      "confidence_score": 1.0
+      "target": "bookmakers_betika_betika_get_matches"
     },
     {
       "relation": "rationale_for",
@@ -10077,9 +10549,9 @@
       "source_file": "bookieskit/bookmakers/betika.py",
       "source_location": "L157",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bookmakers_betika_rationale_157",
-      "target": "bookmakers_betika_betika_get_live_matches",
-      "confidence_score": 1.0
+      "target": "bookmakers_betika_betika_get_live_matches"
     },
     {
       "relation": "rationale_for",
@@ -10109,9 +10581,9 @@
       "source_file": "bookieskit/bookmakers/betika.py",
       "source_location": "L215",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bookmakers_betika_betika_get_event_detail",
-      "target": "bookmakers_betika_pick_match",
-      "confidence_score": 1.0
+      "target": "bookmakers_betika_pick_match"
     },
     {
       "relation": "calls",
@@ -10120,9 +10592,9 @@
       "source_file": "bookieskit/bookmakers/betika.py",
       "source_location": "L217",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bookmakers_betika_betika_get_event_detail",
-      "target": "bookmakers_betika_wrong_match_error",
-      "confidence_score": 1.0
+      "target": "bookmakers_betika_wrong_match_error"
     },
     {
       "relation": "rationale_for",
@@ -10130,9 +10602,9 @@
       "source_file": "bookieskit/bookmakers/betika.py",
       "source_location": "L185",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bookmakers_betika_rationale_185",
-      "target": "bookmakers_betika_betika_get_event_detail",
-      "confidence_score": 1.0
+      "target": "bookmakers_betika_betika_get_event_detail"
     },
     {
       "relation": "rationale_for",
@@ -10172,9 +10644,9 @@
       "source_file": "bookieskit/bookmakers/betika.py",
       "source_location": "L282",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bookmakers_betika_betika_get_event_markets",
-      "target": "bookmakers_betika_pick_match",
-      "confidence_score": 1.0
+      "target": "bookmakers_betika_pick_match"
     },
     {
       "relation": "calls",
@@ -10183,9 +10655,9 @@
       "source_file": "bookieskit/bookmakers/betika.py",
       "source_location": "L297",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bookmakers_betika_betika_get_event_markets",
-      "target": "bookmakers_betika_wrong_match_error",
-      "confidence_score": 1.0
+      "target": "bookmakers_betika_wrong_match_error"
     },
     {
       "relation": "calls",
@@ -10202,11 +10674,21 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "bookieskit/bookmakers/betika.py",
-      "source_location": "L226",
+      "source_location": "L229",
       "weight": 1.0,
-      "source": "bookmakers_betika_rationale_226",
+      "source": "bookmakers_betika_rationale_229",
       "target": "bookmakers_betika_betika_get_event_markets",
       "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "bookieskit/bookmakers/betika.py",
+      "source_location": "L226",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "bookmakers_betika_rationale_226",
+      "target": "bookmakers_betika_betika_get_event_markets"
     },
     {
       "relation": "rationale_for",
@@ -10222,9 +10704,9 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "bookieskit/bookmakers/betika.py",
-      "source_location": "L309",
+      "source_location": "L312",
       "weight": 1.0,
-      "source": "bookmakers_betika_rationale_309",
+      "source": "bookmakers_betika_rationale_312",
       "target": "bookmakers_betika_betika_get_markets",
       "confidence_score": 1.0
     },
@@ -10238,6 +10720,16 @@
       "weight": 1.0,
       "source": "bookmakers_betika_betika_get_markets",
       "target": "markets_parser_parse_markets"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "bookieskit/bookmakers/betika.py",
+      "source_location": "L309",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "bookmakers_betika_rationale_309",
+      "target": "bookmakers_betika_betika_get_markets"
     },
     {
       "relation": "rationale_for",
@@ -10286,11 +10778,21 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "bookieskit/bookmakers/betika.py",
-      "source_location": "L334",
+      "source_location": "L337",
       "weight": 1.0,
-      "source": "bookmakers_betika_rationale_334",
+      "source": "bookmakers_betika_rationale_337",
       "target": "bookmakers_betika_betika_iter_all_prematch_events",
       "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "bookieskit/bookmakers/betika.py",
+      "source_location": "L334",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "bookmakers_betika_rationale_334",
+      "target": "bookmakers_betika_betika_iter_all_prematch_events"
     },
     {
       "relation": "rationale_for",
@@ -10327,11 +10829,21 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "bookieskit/bookmakers/betika.py",
-      "source_location": "L382",
+      "source_location": "L385",
       "weight": 1.0,
-      "source": "bookmakers_betika_rationale_382",
+      "source": "bookmakers_betika_rationale_385",
       "target": "bookmakers_betika_pick_match",
       "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "bookieskit/bookmakers/betika.py",
+      "source_location": "L382",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "bookmakers_betika_rationale_382",
+      "target": "bookmakers_betika_pick_match"
     },
     {
       "relation": "calls",
@@ -10340,9 +10852,9 @@
       "source_file": "bookieskit/bookmakers/betika.py",
       "source_location": "L403",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bookmakers_betika_wrong_match_error",
-      "target": "responseerror",
-      "confidence_score": 1.0
+      "target": "responseerror"
     },
     {
       "relation": "uses",
@@ -10350,9 +10862,19 @@
       "source_file": "bookieskit/bookmakers/betika.py",
       "source_location": "L18",
       "weight": 0.8,
+      "confidence_score": 0.5,
       "source": "responseerror",
-      "target": "bookmakers_types_prematcheventstub",
-      "confidence_score": 0.5
+      "target": "bookmakers_types_prematcheventstub"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "bookieskit/bookmakers/betika.py",
+      "source_location": "L415",
+      "weight": 1.0,
+      "source": "bookmakers_betika_rationale_415",
+      "target": "bookmakers_betika_coerce_int",
+      "confidence_score": 1.0
     },
     {
       "relation": "rationale_for",
@@ -10360,9 +10882,9 @@
       "source_file": "bookieskit/bookmakers/betika.py",
       "source_location": "L412",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bookmakers_betika_rationale_412",
-      "target": "bookmakers_betika_coerce_int",
-      "confidence_score": 1.0
+      "target": "bookmakers_betika_coerce_int"
     },
     {
       "relation": "rationale_for",
@@ -10378,9 +10900,9 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "bookieskit/bookmakers/betika.py",
-      "source_location": "L430",
+      "source_location": "L433",
       "weight": 1.0,
-      "source": "bookmakers_betika_rationale_430",
+      "source": "bookmakers_betika_rationale_433",
       "target": "bookmakers_betika_stubs_from_page",
       "confidence_score": 1.0
     },
@@ -10394,6 +10916,16 @@
       "confidence_score": 1.0,
       "source": "bookmakers_betika_stubs_from_page",
       "target": "bookmakers_types_prematcheventstub"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "bookieskit/bookmakers/betika.py",
+      "source_location": "L430",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "bookmakers_betika_rationale_430",
+      "target": "bookmakers_betika_stubs_from_page"
     },
     {
       "relation": "rationale_for",
@@ -11305,9 +11837,9 @@
       "source_file": "bookieskit/bookmakers/betway.py",
       "source_location": "L326",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bookmakers_betway_rationale_326",
-      "target": "bookmakers_betway_betway_get_markets",
-      "confidence_score": 1.0
+      "target": "bookmakers_betway_betway_get_markets"
     },
     {
       "relation": "calls",
@@ -11336,9 +11868,9 @@
       "source_file": "bookieskit/bookmakers/betway.py",
       "source_location": "L355",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bookmakers_betway_rationale_355",
-      "target": "bookmakers_betway_betway_get_sportradar_id",
-      "confidence_score": 1.0
+      "target": "bookmakers_betway_betway_get_sportradar_id"
     },
     {
       "relation": "rationale_for",
@@ -11367,9 +11899,9 @@
       "source_file": "bookieskit/bookmakers/betway.py",
       "source_location": "L370",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bookmakers_betway_rationale_370",
-      "target": "bookmakers_betway_betway_iter_all_prematch_events",
-      "confidence_score": 1.0
+      "target": "bookmakers_betway_betway_iter_all_prematch_events"
     },
     {
       "relation": "rationale_for",
@@ -12159,9 +12691,9 @@
       "source_file": "bookieskit/bookmakers/sportpesa.py",
       "source_location": "L288",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bookmakers_sportpesa_rationale_288",
-      "target": "bookieskit_bookmakers_sportpesa_py",
-      "confidence_score": 1.0
+      "target": "bookieskit_bookmakers_sportpesa_py"
     },
     {
       "relation": "imports",
@@ -12602,9 +13134,9 @@
       "source_file": "bookieskit/bookmakers/sportpesa.py",
       "source_location": "L127",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bookmakers_sportpesa_rationale_127",
-      "target": "bookmakers_sportpesa_sportpesa_get_markets",
-      "confidence_score": 1.0
+      "target": "bookmakers_sportpesa_sportpesa_get_markets"
     },
     {
       "relation": "calls",
@@ -12633,9 +13165,9 @@
       "source_file": "bookieskit/bookmakers/sportpesa.py",
       "source_location": "L149",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bookmakers_sportpesa_rationale_149",
-      "target": "bookmakers_sportpesa_sportpesa_get_sports",
-      "confidence_score": 1.0
+      "target": "bookmakers_sportpesa_sportpesa_get_sports"
     },
     {
       "relation": "rationale_for",
@@ -12664,9 +13196,9 @@
       "source_file": "bookieskit/bookmakers/sportpesa.py",
       "source_location": "L173",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bookmakers_sportpesa_rationale_173",
-      "target": "bookmakers_sportpesa_sportpesa_get_events",
-      "confidence_score": 1.0
+      "target": "bookmakers_sportpesa_sportpesa_get_events"
     },
     {
       "relation": "rationale_for",
@@ -12694,9 +13226,9 @@
       "source_file": "bookieskit/bookmakers/sportpesa.py",
       "source_location": "L211",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bookmakers_sportpesa_rationale_211",
-      "target": "bookmakers_sportpesa_sportpesa_get_live_events_started",
-      "confidence_score": 1.0
+      "target": "bookmakers_sportpesa_sportpesa_get_live_events_started"
     },
     {
       "relation": "rationale_for",
@@ -12714,9 +13246,9 @@
       "source_file": "bookieskit/bookmakers/sportpesa.py",
       "source_location": "L233",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bookmakers_sportpesa_rationale_233",
-      "target": "bookmakers_sportpesa_sportpesa_get_live_sport_events",
-      "confidence_score": 1.0
+      "target": "bookmakers_sportpesa_sportpesa_get_live_sport_events"
     },
     {
       "relation": "rationale_for",
@@ -12745,9 +13277,9 @@
       "source_file": "bookieskit/bookmakers/sportpesa.py",
       "source_location": "L252",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bookmakers_sportpesa_rationale_252",
-      "target": "bookmakers_sportpesa_sportpesa_get_navigation",
-      "confidence_score": 1.0
+      "target": "bookmakers_sportpesa_sportpesa_get_navigation"
     },
     {
       "relation": "rationale_for",
@@ -12776,9 +13308,9 @@
       "source_file": "bookieskit/bookmakers/sportpesa.py",
       "source_location": "L296",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bookmakers_sportpesa_rationale_296",
-      "target": "bookmakers_sportpesa_sportpesa_iter_all_prematch_events",
-      "confidence_score": 1.0
+      "target": "bookmakers_sportpesa_sportpesa_iter_all_prematch_events"
     },
     {
       "relation": "rationale_for",
@@ -13288,9 +13820,9 @@
       "source_file": "bookieskit/markets/parser.py",
       "source_location": "L184",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bookieskit_markets_parser_py",
-      "target": "markets_parser_incomplete_reason",
-      "confidence_score": 1.0
+      "target": "markets_parser_incomplete_reason"
     },
     {
       "relation": "contains",
@@ -13298,9 +13830,9 @@
       "source_file": "bookieskit/markets/parser.py",
       "source_location": "L204",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bookieskit_markets_parser_py",
-      "target": "markets_parser_keep_complete",
-      "confidence_score": 1.0
+      "target": "markets_parser_keep_complete"
     },
     {
       "relation": "contains",
@@ -13358,9 +13890,9 @@
       "source_file": "bookieskit/markets/parser.py",
       "source_location": "L415",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bookieskit_markets_parser_py",
-      "target": "markets_parser_sr_unavailable",
-      "confidence_score": 1.0
+      "target": "markets_parser_sr_unavailable"
     },
     {
       "relation": "contains",
@@ -13468,9 +14000,9 @@
       "source_file": "bookieskit/markets/parser.py",
       "source_location": "L942",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "bookieskit_markets_parser_py",
-      "target": "markets_parser_is_betway_child_market_id",
-      "confidence_score": 1.0
+      "target": "markets_parser_is_betway_child_market_id"
     },
     {
       "relation": "contains",
@@ -13765,9 +14297,9 @@
       "source_file": "bookieskit/markets/parser.py",
       "source_location": "L23",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "markets_parser_rationale_23",
-      "target": "markets_parser_normalised_probability_mode",
-      "confidence_score": 1.0
+      "target": "markets_parser_normalised_probability_mode"
     },
     {
       "relation": "rationale_for",
@@ -14044,9 +14576,9 @@
       "source_file": "bookieskit/markets/parser.py",
       "source_location": "L33",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "markets_parser_rationale_33",
-      "target": "markets_parser_sportscopedregistry",
-      "confidence_score": 1.0
+      "target": "markets_parser_sportscopedregistry"
     },
     {
       "relation": "uses",
@@ -14119,9 +14651,9 @@
       "source_file": "bookieskit/markets/parser.py",
       "source_location": "L204",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "markets_parser_keep_complete",
-      "target": "marketregistry",
-      "confidence_score": 1.0
+      "target": "marketregistry"
     },
     {
       "relation": "references",
@@ -14294,9 +14826,9 @@
       "source_file": "bookieskit/markets/parser.py",
       "source_location": "L184",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "markets_parser_incomplete_reason",
-      "target": "bookieskit_markets_parser_py_str",
-      "confidence_score": 1.0
+      "target": "bookieskit_markets_parser_py_str"
     },
     {
       "relation": "references",
@@ -14305,9 +14837,9 @@
       "source_file": "bookieskit/markets/parser.py",
       "source_location": "L204",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "markets_parser_keep_complete",
-      "target": "bookieskit_markets_parser_py_str",
-      "confidence_score": 1.0
+      "target": "bookieskit_markets_parser_py_str"
     },
     {
       "relation": "references",
@@ -14382,9 +14914,9 @@
       "source_file": "bookieskit/markets/parser.py",
       "source_location": "L942",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "markets_parser_is_betway_child_market_id",
-      "target": "bookieskit_markets_parser_py_str",
-      "confidence_score": 1.0
+      "target": "bookieskit_markets_parser_py_str"
     },
     {
       "relation": "references",
@@ -14525,9 +15057,9 @@
       "source_file": "bookieskit/markets/parser.py",
       "source_location": "L420",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "markets_parser_sr_unavailable",
-      "target": "bookieskit_markets_parser_py_str",
-      "confidence_score": 1.0
+      "target": "bookieskit_markets_parser_py_str"
     },
     {
       "relation": "calls",
@@ -15035,9 +15567,9 @@
       "source_file": "bookieskit/markets/parser.py",
       "source_location": "L67",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "markets_parser_rationale_67",
-      "target": "markets_parser_teamscopedbetwayregistry",
-      "confidence_score": 1.0
+      "target": "markets_parser_teamscopedbetwayregistry"
     },
     {
       "relation": "uses",
@@ -15171,6 +15703,17 @@
     },
     {
       "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L124",
+      "weight": 1.0,
+      "source": "markets_parser_parse_markets",
+      "target": "bookieskit_markets_parser_py_bool",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
       "context": "generic_arg",
       "confidence": "EXTRACTED",
       "source_file": "bookieskit/markets/parser.py",
@@ -15187,17 +15730,17 @@
       "source_file": "bookieskit/markets/parser.py",
       "source_location": "L181",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "markets_parser_parse_markets",
-      "target": "markets_parser_keep_complete",
-      "confidence_score": 1.0
+      "target": "markets_parser_keep_complete"
     },
     {
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L132",
+      "source_location": "L133",
       "weight": 1.0,
-      "source": "markets_parser_rationale_132",
+      "source": "markets_parser_rationale_133",
       "target": "markets_parser_parse_markets",
       "confidence_score": 1.0
     },
@@ -15216,6 +15759,16 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L132",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "markets_parser_rationale_132",
+      "target": "markets_parser_parse_markets"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "bookieskit/markets/parser.py",
       "source_location": "L128",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -15224,14 +15777,57 @@
     },
     {
       "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L415",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "markets_parser_sr_unavailable",
+      "target": "bookieskit_markets_parser_py_bool"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L950",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "markets_parser_is_betway_child_market_id",
+      "target": "bookieskit_markets_parser_py_bool"
+    },
+    {
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L822",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "markets_parser_is_betway_parameterized_variant",
+      "target": "bookieskit_markets_parser_py_bool"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L8",
+      "weight": 0.8,
+      "confidence_score": 0.5,
+      "source": "bookieskit_markets_parser_py_bool",
+      "target": "markets_registry_marketregistry"
+    },
+    {
+      "relation": "references",
       "context": "generic_arg",
       "confidence": "EXTRACTED",
       "source_file": "bookieskit/markets/parser.py",
       "source_location": "L204",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "markets_parser_keep_complete",
-      "target": "normalizedmarket",
-      "confidence_score": 1.0
+      "target": "normalizedmarket"
     },
     {
       "relation": "references",
@@ -15470,9 +16066,9 @@
       "source_file": "bookieskit/markets/parser.py",
       "source_location": "L184",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "markets_parser_incomplete_reason",
-      "target": "outcome",
-      "confidence_score": 1.0
+      "target": "outcome"
     },
     {
       "relation": "calls",
@@ -15481,7 +16077,17 @@
       "source_file": "bookieskit/markets/parser.py",
       "source_location": "L229",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "markets_parser_keep_complete",
+      "target": "markets_parser_incomplete_reason"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L195",
+      "weight": 1.0,
+      "source": "markets_parser_rationale_195",
       "target": "markets_parser_incomplete_reason",
       "confidence_score": 1.0
     },
@@ -15491,9 +16097,9 @@
       "source_file": "bookieskit/markets/parser.py",
       "source_location": "L185",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "markets_parser_rationale_185",
-      "target": "markets_parser_incomplete_reason",
-      "confidence_score": 1.0
+      "target": "markets_parser_incomplete_reason"
     },
     {
       "relation": "calls",
@@ -15663,11 +16269,21 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L207",
+      "source_location": "L217",
       "weight": 1.0,
-      "source": "markets_parser_rationale_207",
+      "source": "markets_parser_rationale_217",
       "target": "markets_parser_keep_complete",
       "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L207",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "markets_parser_rationale_207",
+      "target": "markets_parser_keep_complete"
     },
     {
       "relation": "calls",
@@ -15695,11 +16311,21 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L264",
+      "source_location": "L274",
       "weight": 1.0,
-      "source": "markets_parser_rationale_264",
+      "source": "markets_parser_rationale_274",
       "target": "markets_parser_parse_betpawa",
       "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L264",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "markets_parser_rationale_264",
+      "target": "markets_parser_parse_betpawa"
     },
     {
       "relation": "rationale_for",
@@ -15737,9 +16363,9 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L289",
+      "source_location": "L299",
       "weight": 1.0,
-      "source": "markets_parser_rationale_289",
+      "source": "markets_parser_rationale_299",
       "target": "markets_parser_parse_betpawa_simple",
       "confidence_score": 1.0
     },
@@ -15764,6 +16390,16 @@
       "confidence_score": 1.0,
       "source": "markets_parser_parse_betpawa_simple",
       "target": "markets_types_normalizedmarket"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L289",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "markets_parser_rationale_289",
+      "target": "markets_parser_parse_betpawa_simple"
     },
     {
       "relation": "rationale_for",
@@ -15801,9 +16437,9 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L333",
+      "source_location": "L343",
       "weight": 1.0,
-      "source": "markets_parser_rationale_333",
+      "source": "markets_parser_rationale_343",
       "target": "markets_parser_parse_betpawa_parameterized",
       "confidence_score": 1.0
     },
@@ -15833,6 +16469,16 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L333",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "markets_parser_rationale_333",
+      "target": "markets_parser_parse_betpawa_parameterized"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "bookieskit/markets/parser.py",
       "source_location": "L247",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -15843,11 +16489,21 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L398",
+      "source_location": "L408",
       "weight": 1.0,
-      "source": "markets_parser_rationale_398",
+      "source": "markets_parser_rationale_408",
       "target": "markets_parser_resolve_outcome_betpawa",
       "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L398",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "markets_parser_rationale_398",
+      "target": "markets_parser_resolve_outcome_betpawa"
     },
     {
       "relation": "rationale_for",
@@ -15929,11 +16585,21 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L406",
+      "source_location": "L416",
       "weight": 1.0,
-      "source": "markets_parser_rationale_406",
+      "source": "markets_parser_rationale_416",
       "target": "markets_parser_try_float",
       "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L406",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "markets_parser_rationale_406",
+      "target": "markets_parser_try_float"
     },
     {
       "relation": "rationale_for",
@@ -16143,26 +16809,15 @@
       "target": "markets_registry_marketregistry"
     },
     {
-      "relation": "references",
-      "context": "return_type",
-      "confidence": "EXTRACTED",
-      "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L415",
-      "weight": 1.0,
-      "source": "markets_parser_sr_unavailable",
-      "target": "bookieskit_markets_parser_py_bool",
-      "confidence_score": 1.0
-    },
-    {
       "relation": "calls",
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "bookieskit/markets/parser.py",
       "source_location": "L469",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "markets_parser_parse_sportybet_simple",
-      "target": "markets_parser_sr_unavailable",
-      "confidence_score": 1.0
+      "target": "markets_parser_sr_unavailable"
     },
     {
       "relation": "calls",
@@ -16171,9 +16826,9 @@
       "source_file": "bookieskit/markets/parser.py",
       "source_location": "L512",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "markets_parser_parse_sportybet_parameterized",
-      "target": "markets_parser_sr_unavailable",
-      "confidence_score": 1.0
+      "target": "markets_parser_sr_unavailable"
     },
     {
       "relation": "calls",
@@ -16182,9 +16837,9 @@
       "source_file": "bookieskit/markets/parser.py",
       "source_location": "L1236",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "markets_parser_parse_msport_simple",
-      "target": "markets_parser_sr_unavailable",
-      "confidence_score": 1.0
+      "target": "markets_parser_sr_unavailable"
     },
     {
       "relation": "calls",
@@ -16193,7 +16848,17 @@
       "source_file": "bookieskit/markets/parser.py",
       "source_location": "L1278",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "markets_parser_parse_msport_parameterized",
+      "target": "markets_parser_sr_unavailable"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L426",
+      "weight": 1.0,
+      "source": "markets_parser_rationale_426",
       "target": "markets_parser_sr_unavailable",
       "confidence_score": 1.0
     },
@@ -16203,41 +16868,9 @@
       "source_file": "bookieskit/markets/parser.py",
       "source_location": "L416",
       "weight": 1.0,
-      "source": "markets_parser_rationale_416",
-      "target": "markets_parser_sr_unavailable",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L950",
-      "weight": 1.0,
-      "source": "markets_parser_is_betway_child_market_id",
-      "target": "bookieskit_markets_parser_py_bool",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "context": "return_type",
-      "confidence": "EXTRACTED",
-      "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L822",
-      "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "markets_parser_is_betway_parameterized_variant",
-      "target": "bookieskit_markets_parser_py_bool"
-    },
-    {
-      "relation": "uses",
-      "confidence": "INFERRED",
-      "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L8",
-      "weight": 0.8,
-      "confidence_score": 0.5,
-      "source": "bookieskit_markets_parser_py_bool",
-      "target": "markets_registry_marketregistry"
+      "source": "markets_parser_rationale_416",
+      "target": "markets_parser_sr_unavailable"
     },
     {
       "relation": "calls",
@@ -16265,11 +16898,21 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L428",
+      "source_location": "L438",
       "weight": 1.0,
-      "source": "markets_parser_rationale_428",
+      "source": "markets_parser_rationale_438",
       "target": "markets_parser_parse_sportybet",
       "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L428",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "markets_parser_rationale_428",
+      "target": "markets_parser_parse_sportybet"
     },
     {
       "relation": "rationale_for",
@@ -16296,9 +16939,9 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L465",
+      "source_location": "L475",
       "weight": 1.0,
-      "source": "markets_parser_rationale_465",
+      "source": "markets_parser_rationale_475",
       "target": "markets_parser_parse_sportybet_simple",
       "confidence_score": 1.0
     },
@@ -16323,6 +16966,16 @@
       "confidence_score": 1.0,
       "source": "markets_parser_parse_sportybet_simple",
       "target": "markets_types_normalizedmarket"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L465",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "markets_parser_rationale_465",
+      "target": "markets_parser_parse_sportybet_simple"
     },
     {
       "relation": "rationale_for",
@@ -16360,9 +17013,9 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L501",
+      "source_location": "L511",
       "weight": 1.0,
-      "source": "markets_parser_rationale_501",
+      "source": "markets_parser_rationale_511",
       "target": "markets_parser_parse_sportybet_parameterized",
       "confidence_score": 1.0
     },
@@ -16392,6 +17045,16 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L501",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "markets_parser_rationale_501",
+      "target": "markets_parser_parse_sportybet_parameterized"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "bookieskit/markets/parser.py",
       "source_location": "L401",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -16413,11 +17076,21 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L545",
+      "source_location": "L555",
       "weight": 1.0,
-      "source": "markets_parser_rationale_545",
+      "source": "markets_parser_rationale_555",
       "target": "markets_parser_extract_line_from_specifier",
       "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L545",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "markets_parser_rationale_545",
+      "target": "markets_parser_extract_line_from_specifier"
     },
     {
       "relation": "rationale_for",
@@ -16433,11 +17106,21 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L564",
+      "source_location": "L574",
       "weight": 1.0,
-      "source": "markets_parser_rationale_564",
+      "source": "markets_parser_rationale_574",
       "target": "markets_parser_resolve_outcome_sportybet",
       "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L564",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "markets_parser_rationale_564",
+      "target": "markets_parser_resolve_outcome_sportybet"
     },
     {
       "relation": "rationale_for",
@@ -16475,9 +17158,9 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L583",
+      "source_location": "L593",
       "weight": 1.0,
-      "source": "markets_parser_rationale_583",
+      "source": "markets_parser_rationale_593",
       "target": "markets_parser_parse_bet9ja",
       "confidence_score": 1.0
     },
@@ -16496,6 +17179,16 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L583",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "markets_parser_rationale_583",
+      "target": "markets_parser_parse_bet9ja"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "bookieskit/markets/parser.py",
       "source_location": "L481",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -16506,11 +17199,21 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L696",
+      "source_location": "L706",
       "weight": 1.0,
-      "source": "markets_parser_rationale_696",
+      "source": "markets_parser_rationale_706",
       "target": "markets_parser_parse_bet9ja_key",
       "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L696",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "markets_parser_rationale_696",
+      "target": "markets_parser_parse_bet9ja_key"
     },
     {
       "relation": "rationale_for",
@@ -16537,9 +17240,9 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L753",
+      "source_location": "L763",
       "weight": 1.0,
-      "source": "markets_parser_rationale_753",
+      "source": "markets_parser_rationale_763",
       "target": "markets_parser_build_bet9ja_outcomes",
       "confidence_score": 1.0
     },
@@ -16558,6 +17261,16 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L753",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "markets_parser_rationale_753",
+      "target": "markets_parser_build_bet9ja_outcomes"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "bookieskit/markets/parser.py",
       "source_location": "L651",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -16568,11 +17281,21 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L771",
+      "source_location": "L781",
       "weight": 1.0,
-      "source": "markets_parser_rationale_771",
+      "source": "markets_parser_rationale_781",
       "target": "markets_parser_resolve_outcome_bet9ja",
       "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L771",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "markets_parser_rationale_771",
+      "target": "markets_parser_resolve_outcome_bet9ja"
     },
     {
       "relation": "rationale_for",
@@ -16591,9 +17314,9 @@
       "source_file": "bookieskit/markets/parser.py",
       "source_location": "L891",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "markets_parser_parse_betway",
-      "target": "markets_parser_is_betway_child_market_id",
-      "confidence_score": 1.0
+      "target": "markets_parser_is_betway_child_market_id"
     },
     {
       "relation": "calls",
@@ -16632,11 +17355,21 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L781",
+      "source_location": "L791",
       "weight": 1.0,
-      "source": "markets_parser_rationale_781",
+      "source": "markets_parser_rationale_791",
       "target": "markets_parser_parse_betway",
       "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L781",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "markets_parser_rationale_781",
+      "target": "markets_parser_parse_betway"
     },
     {
       "relation": "rationale_for",
@@ -16655,7 +17388,17 @@
       "source_file": "bookieskit/markets/parser.py",
       "source_location": "L1066",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "markets_parser_build_betway_parameterized",
+      "target": "markets_parser_is_betway_child_market_id"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L953",
+      "weight": 1.0,
+      "source": "markets_parser_rationale_953",
       "target": "markets_parser_is_betway_child_market_id",
       "confidence_score": 1.0
     },
@@ -16665,8 +17408,18 @@
       "source_file": "bookieskit/markets/parser.py",
       "source_location": "L943",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "markets_parser_rationale_943",
-      "target": "markets_parser_is_betway_child_market_id",
+      "target": "markets_parser_is_betway_child_market_id"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L968",
+      "weight": 1.0,
+      "source": "markets_parser_rationale_968",
+      "target": "markets_parser_is_betway_parameterized_variant",
       "confidence_score": 1.0
     },
     {
@@ -16675,9 +17428,9 @@
       "source_file": "bookieskit/markets/parser.py",
       "source_location": "L958",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "markets_parser_rationale_958",
-      "target": "markets_parser_is_betway_parameterized_variant",
-      "confidence_score": 1.0
+      "target": "markets_parser_is_betway_parameterized_variant"
     },
     {
       "relation": "rationale_for",
@@ -16704,9 +17457,9 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L974",
+      "source_location": "L984",
       "weight": 1.0,
-      "source": "markets_parser_rationale_974",
+      "source": "markets_parser_rationale_984",
       "target": "markets_parser_build_betway_simple",
       "confidence_score": 1.0
     },
@@ -16736,6 +17489,16 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L974",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "markets_parser_rationale_974",
+      "target": "markets_parser_build_betway_simple"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "bookieskit/markets/parser.py",
       "source_location": "L841",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -16757,11 +17520,21 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L1009",
+      "source_location": "L1019",
       "weight": 1.0,
-      "source": "markets_parser_rationale_1009",
+      "source": "markets_parser_rationale_1019",
       "target": "markets_parser_extract_betway_line_from_market_id",
       "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L1009",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "markets_parser_rationale_1009",
+      "target": "markets_parser_extract_betway_line_from_market_id"
     },
     {
       "relation": "rationale_for",
@@ -16788,9 +17561,9 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L1035",
+      "source_location": "L1045",
       "weight": 1.0,
-      "source": "markets_parser_rationale_1035",
+      "source": "markets_parser_rationale_1045",
       "target": "markets_parser_build_betway_parameterized",
       "confidence_score": 1.0
     },
@@ -16820,6 +17593,16 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L1035",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "markets_parser_rationale_1035",
+      "target": "markets_parser_build_betway_parameterized"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "bookieskit/markets/parser.py",
       "source_location": "L902",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -16841,11 +17624,21 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L1166",
+      "source_location": "L1176",
       "weight": 1.0,
-      "source": "markets_parser_rationale_1166",
+      "source": "markets_parser_rationale_1176",
       "target": "markets_parser_resolve_outcome_betway",
       "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L1166",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "markets_parser_rationale_1166",
+      "target": "markets_parser_resolve_outcome_betway"
     },
     {
       "relation": "rationale_for",
@@ -16893,11 +17686,21 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L1196",
+      "source_location": "L1206",
       "weight": 1.0,
-      "source": "markets_parser_rationale_1196",
+      "source": "markets_parser_rationale_1206",
       "target": "markets_parser_parse_msport",
       "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L1196",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "markets_parser_rationale_1196",
+      "target": "markets_parser_parse_msport"
     },
     {
       "relation": "rationale_for",
@@ -16924,9 +17727,9 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L1232",
+      "source_location": "L1242",
       "weight": 1.0,
-      "source": "markets_parser_rationale_1232",
+      "source": "markets_parser_rationale_1242",
       "target": "markets_parser_parse_msport_simple",
       "confidence_score": 1.0
     },
@@ -16956,6 +17759,16 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L1232",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "markets_parser_rationale_1232",
+      "target": "markets_parser_parse_msport_simple"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "bookieskit/markets/parser.py",
       "source_location": "L1087",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -16977,9 +17790,9 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L1267",
+      "source_location": "L1277",
       "weight": 1.0,
-      "source": "markets_parser_rationale_1267",
+      "source": "markets_parser_rationale_1277",
       "target": "markets_parser_parse_msport_parameterized",
       "confidence_score": 1.0
     },
@@ -17009,6 +17822,16 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L1267",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "markets_parser_rationale_1267",
+      "target": "markets_parser_parse_msport_parameterized"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "bookieskit/markets/parser.py",
       "source_location": "L1120",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -17019,11 +17842,21 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L1312",
+      "source_location": "L1322",
       "weight": 1.0,
-      "source": "markets_parser_rationale_1312",
+      "source": "markets_parser_rationale_1322",
       "target": "markets_parser_resolve_outcome_msport",
       "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L1312",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "markets_parser_rationale_1312",
+      "target": "markets_parser_resolve_outcome_msport"
     },
     {
       "relation": "rationale_for",
@@ -17061,11 +17894,21 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L1329",
+      "source_location": "L1339",
       "weight": 1.0,
-      "source": "markets_parser_rationale_1329",
+      "source": "markets_parser_rationale_1339",
       "target": "markets_parser_parse_sportpesa",
       "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L1329",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "markets_parser_rationale_1329",
+      "target": "markets_parser_parse_sportpesa"
     },
     {
       "relation": "rationale_for",
@@ -17092,9 +17935,9 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L1375",
+      "source_location": "L1385",
       "weight": 1.0,
-      "source": "markets_parser_rationale_1375",
+      "source": "markets_parser_rationale_1385",
       "target": "markets_parser_parse_sportpesa_simple",
       "confidence_score": 1.0
     },
@@ -17124,6 +17967,16 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L1375",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "markets_parser_rationale_1375",
+      "target": "markets_parser_parse_sportpesa_simple"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "bookieskit/markets/parser.py",
       "source_location": "L1226",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -17145,9 +17998,9 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L1405",
+      "source_location": "L1415",
       "weight": 1.0,
-      "source": "markets_parser_rationale_1405",
+      "source": "markets_parser_rationale_1415",
       "target": "markets_parser_parse_sportpesa_parameterized",
       "confidence_score": 1.0
     },
@@ -17177,6 +18030,16 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L1405",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "markets_parser_rationale_1405",
+      "target": "markets_parser_parse_sportpesa_parameterized"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "bookieskit/markets/parser.py",
       "source_location": "L1256",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -17187,11 +18050,21 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L1446",
+      "source_location": "L1456",
       "weight": 1.0,
-      "source": "markets_parser_rationale_1446",
+      "source": "markets_parser_rationale_1456",
       "target": "markets_parser_resolve_outcome_sportpesa",
       "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L1446",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "markets_parser_rationale_1446",
+      "target": "markets_parser_resolve_outcome_sportpesa"
     },
     {
       "relation": "rationale_for",
@@ -17229,11 +18102,21 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L1466",
+      "source_location": "L1476",
       "weight": 1.0,
-      "source": "markets_parser_rationale_1466",
+      "source": "markets_parser_rationale_1476",
       "target": "markets_parser_parse_betika",
       "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L1466",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "markets_parser_rationale_1466",
+      "target": "markets_parser_parse_betika"
     },
     {
       "relation": "rationale_for",
@@ -17260,9 +18143,9 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L1505",
+      "source_location": "L1515",
       "weight": 1.0,
-      "source": "markets_parser_rationale_1505",
+      "source": "markets_parser_rationale_1515",
       "target": "markets_parser_parse_betika_simple",
       "confidence_score": 1.0
     },
@@ -17287,6 +18170,16 @@
       "confidence_score": 1.0,
       "source": "markets_parser_parse_betika_simple",
       "target": "markets_types_normalizedmarket"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L1505",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "markets_parser_rationale_1505",
+      "target": "markets_parser_parse_betika_simple"
     },
     {
       "relation": "rationale_for",
@@ -17324,9 +18217,9 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L1535",
+      "source_location": "L1545",
       "weight": 1.0,
-      "source": "markets_parser_rationale_1535",
+      "source": "markets_parser_rationale_1545",
       "target": "markets_parser_parse_betika_parameterized",
       "confidence_score": 1.0
     },
@@ -17356,6 +18249,16 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L1535",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "markets_parser_rationale_1535",
+      "target": "markets_parser_parse_betika_parameterized"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "bookieskit/markets/parser.py",
       "source_location": "L1386",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -17366,11 +18269,21 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L1572",
+      "source_location": "L1582",
       "weight": 1.0,
-      "source": "markets_parser_rationale_1572",
+      "source": "markets_parser_rationale_1582",
       "target": "markets_parser_parse_betika_line",
       "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L1572",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "markets_parser_rationale_1572",
+      "target": "markets_parser_parse_betika_line"
     },
     {
       "relation": "rationale_for",
@@ -17386,11 +18299,21 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L1606",
+      "source_location": "L1616",
       "weight": 1.0,
-      "source": "markets_parser_rationale_1606",
+      "source": "markets_parser_rationale_1616",
       "target": "markets_parser_resolve_outcome_betika",
       "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L1606",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "markets_parser_rationale_1606",
+      "target": "markets_parser_resolve_outcome_betika"
     },
     {
       "relation": "rationale_for",
@@ -17417,9 +18340,9 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L1633",
+      "source_location": "L1643",
       "weight": 1.0,
-      "source": "markets_parser_rationale_1633",
+      "source": "markets_parser_rationale_1643",
       "target": "markets_parser_parse_elephantbet",
       "confidence_score": 1.0
     },
@@ -17449,6 +18372,16 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L1633",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "markets_parser_rationale_1633",
+      "target": "markets_parser_parse_elephantbet"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "bookieskit/markets/parser.py",
       "source_location": "L1484",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -17459,11 +18392,21 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "bookieskit/markets/parser.py",
-      "source_location": "L1725",
+      "source_location": "L1735",
       "weight": 1.0,
-      "source": "markets_parser_rationale_1725",
+      "source": "markets_parser_rationale_1735",
       "target": "markets_parser_resolve_outcome_elephantbet",
       "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "bookieskit/markets/parser.py",
+      "source_location": "L1725",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "markets_parser_rationale_1725",
+      "target": "markets_parser_resolve_outcome_elephantbet"
     },
     {
       "relation": "rationale_for",
@@ -18809,5 +19752,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "3ccc0503135cdc2fa33b5b388f4154e19e8d1a6c"
+  "built_at_commit": "1d1d6b9366554db45f558c7c335f0a160d782ac0"
 }

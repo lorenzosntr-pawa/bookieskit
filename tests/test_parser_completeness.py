@@ -200,3 +200,25 @@ def test_bet9ja_wc_nf_over_under_drops_placeholder_and_one_sided_lines():
     assert ou.lines  # other lines survive
     for outcomes in ou.lines.values():
         assert sorted(o.canonical_name for o in outcomes) == ["over", "under"]
+
+
+# keep_incomplete=True: health checks need the markets the default drops.
+
+
+def _bp_1x2(prices: list[tuple[str, float]]) -> dict:
+    return {"markets": [{"marketType": {"id": "3743"}, "row": [{"prices": [
+        {"name": n, "price": p} for n, p in prices]}]}]}
+
+
+def test_keep_incomplete_keeps_zero_odds_betpawa_market():
+    resp = _bp_1x2([("1", 2.9), ("X", 3.3), ("2", 0.0)])
+    assert parse_markets(resp, "betpawa") == []
+    kept = parse_markets(resp, "betpawa", keep_incomplete=True)
+    assert [m.canonical_id for m in kept] == ["1x2_ft"]
+    assert sorted(o.odds for o in kept[0].outcomes) == [0.0, 2.9, 3.3]
+
+
+def test_keep_incomplete_returns_markets_of_fully_suspended_fixture():
+    payload = _load("betpawa", "live.json")
+    assert parse_markets(payload, "betpawa") == []
+    assert parse_markets(payload, "betpawa", keep_incomplete=True) != []

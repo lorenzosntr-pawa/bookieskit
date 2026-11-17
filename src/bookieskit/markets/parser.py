@@ -128,6 +128,7 @@ def parse_markets(
     *,
     probability: ProbabilityMode = "off",
     sport: str | None = None,
+    keep_incomplete: bool = False,
 ) -> list[NormalizedMarket]:
     """Parse raw event detail response into normalized markets.
 
@@ -151,12 +152,18 @@ def parse_markets(
             to ``None``, preserving pre-0.12.0 behaviour (each shared
             id resolves to whichever mapping was registered first,
             typically soccer).
+        keep_incomplete: Skip the final completeness filter, so markets
+            and lines with a missing, zero or <= 1.0 price are returned
+            as parsed. For health checks that must see broken books
+            (e.g. a BetPawa price of 0 left open). Prices a book flags
+            suspended are still left out. Do not use for margins or
+            comparisons. Default False.
 
     Returns:
         List of NormalizedMarket for all recognized markets.
         Markets not in the registry are skipped. Lines (parameterized)
         or markets (simple) with a missing or suspended (odds <= 1.0)
-        outcome are dropped.
+        outcome are dropped, unless ``keep_incomplete`` is True.
     """
     if registry is None:
         registry = MarketRegistry()
@@ -178,7 +185,10 @@ def parse_markets(
     parser = parsers.get(platform)
     if parser is None:
         return []
-    return _keep_complete(parser(response, registry, mode), base_registry, platform)
+    markets = parser(response, registry, mode)
+    if keep_incomplete:
+        return markets
+    return _keep_complete(markets, base_registry, platform)
 
 
 def _incomplete_reason(outcomes: list[Outcome], expected: set[str]) -> str | None:

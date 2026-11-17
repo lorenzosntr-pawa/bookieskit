@@ -5,6 +5,10 @@ All notable changes to this project are documented in this file. The format foll
 ## [Unreleased]
 
 ### Added
+- **`parse_markets(keep_incomplete=True)`** skips the completeness
+  filter, so markets and lines with a missing, zero or <= 1.0 price come back
+  as parsed (book-compare health checks need to see them). Prices flagged
+  suspended are still left out. Default unchanged.
 - **`get_markets(sport=)` keyword** on every client, passed through to the
   parser.
 - **Scripts** `regen_golden.py`, `coverage_report.py` (offline mapping
