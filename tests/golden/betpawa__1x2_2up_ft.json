@@ -1,0 +1,30 @@
+[
+ {
+  "canonical_id": "1x2_2up_ft",
+  "lines": null,
+  "name": "1X2 2Up - Full Time",
+  "outcomes": [
+   {
+    "canonical_name": "home",
+    "odds": 1.62,
+    "platform_name": "1",
+    "true_probability": 0.6009982558575925,
+    "void_probability": 0.0
+   },
+   {
+    "canonical_name": "draw",
+    "odds": 4.5,
+    "platform_name": "X",
+    "true_probability": 0.21054,
+    "void_probability": 0.0
+   },
+   {
+    "canonical_name": "away",
+    "odds": 4.3,
+    "platform_name": "2",
+    "true_probability": 0.22687028360301958,
+    "void_probability": 0.0
+   }
+  ]
+ }
+]

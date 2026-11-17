@@ -57,6 +57,29 @@ def _markets(book: str, fixture: str = "prematch.json"):
     return parse_markets(payload, platform=book)
 
 
+def _sportybet_wc_nf_reactivated():
+    """SportyBet wc_nf with 60110's outcomes forced active.
+
+    In this capture 60110 "Home or Away" is flagged isActive=0, so the
+    real parse drops double_chance_1up_ft (see
+    test_sportybet_double_chance_1up_dropped_while_an_outcome_is_inactive).
+    Re-activating it here keeps the id/label mapping covered.
+    """
+    payload = json.loads(
+        (_FIXTURES / "sportybet" / "wc_nf.json").read_text(encoding="utf-8")
+    )
+    for market in payload["data"]["markets"]:
+        if str(market.get("id")) == "60110":
+            for outcome in market["outcomes"]:
+                outcome["isActive"] = 1
+    return parse_markets(payload, platform="sportybet")
+
+
+def test_sportybet_double_chance_1up_dropped_while_an_outcome_is_inactive():
+    ids = {m.canonical_id for m in _markets("sportybet", "wc_nf.json")}
+    assert "double_chance_1up_ft" not in ids
+
+
 # --- BetPawa ---------------------------------------------------------------
 
 
@@ -99,7 +122,7 @@ def test_betpawa_double_chance_1up_is_distinct_from_plain_double_chance():
 def test_sportybet_double_chance_1up_ft():
     # id=60110 "Double Chance - 1UP"; outcomes Home or Draw / Home or Away /
     # Draw or Away.
-    markets = _markets("sportybet", "wc_nf.json")
+    markets = _sportybet_wc_nf_reactivated()
     m = next(m for m in markets if m.canonical_id == "double_chance_1up_ft")
     assert m.lines is None
     names = {o.canonical_name: o for o in m.outcomes}
@@ -114,7 +137,7 @@ def test_sportybet_double_chance_1up_ft():
 def test_sportybet_double_chance_1up_not_confused_with_1x2_1up():
     # 60110 (Double Chance - 1UP) and 60200 (1X2 - 1UP) are adjacent ids on
     # the same event; each must resolve to its own canonical.
-    markets = _markets("sportybet", "wc_nf.json")
+    markets = _sportybet_wc_nf_reactivated()
     dc_1up = next(
         m for m in markets if m.canonical_id == "double_chance_1up_ft"
     )

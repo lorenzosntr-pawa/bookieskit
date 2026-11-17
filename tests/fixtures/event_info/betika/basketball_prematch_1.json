@@ -1,0 +1,55 @@
+{
+ "data": [
+  {
+   "home_team": "Olympiakos Piraeus",
+   "game_id": "69675",
+   "match_id": "11290965",
+   "away_team": "Real Madrid",
+   "start_time": "2026-11-20 22:15:00",
+   "competition_name": "Euroleague",
+   "category": "International",
+   "parent_match_id": "73263192",
+   "side_bets": "3",
+   "home_odd": "1.96",
+   "neutral_odd": "13.00",
+   "away_odd": "2.04",
+   "competition_id": "9015",
+   "sport_id": "30",
+   "sport_name": "Basketball",
+   "is_esport": false,
+   "is_srl": false,
+   "provider": "sr",
+   "odds": [
+    {
+     "sub_type_id": "219",
+     "name": "WINNER (INCL. OVERTIME)",
+     "odds": [
+      {
+       "display": "1",
+       "odd_key": "Olympiakos Piraeus",
+       "odd_def": "{$competitor1}",
+       "odd_value": "1.85",
+       "special_bet_value": "",
+       "outcome_id": "4",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "2",
+       "odd_key": "Real Madrid",
+       "odd_def": "{$competitor2}",
+       "odd_value": "1.92",
+       "special_bet_value": "",
+       "outcome_id": "5",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "meta": {}
+}

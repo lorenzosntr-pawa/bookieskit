@@ -1,0 +1,647 @@
+[
+ {
+  "canonical_id": "1x2_1up_ft",
+  "lines": null,
+  "name": "1X2 1Up - Full Time",
+  "outcomes": [
+   {
+    "canonical_name": "home",
+    "odds": 2.27,
+    "platform_name": "Norway",
+    "true_probability": null,
+    "void_probability": null
+   },
+   {
+    "canonical_name": "draw",
+    "odds": 4.3,
+    "platform_name": "Draw",
+    "true_probability": null,
+    "void_probability": null
+   },
+   {
+    "canonical_name": "away",
+    "odds": 1.31,
+    "platform_name": "France",
+    "true_probability": null,
+    "void_probability": null
+   }
+  ]
+ },
+ {
+  "canonical_id": "1x2_2up_ft",
+  "lines": null,
+  "name": "1X2 2Up - Full Time",
+  "outcomes": [
+   {
+    "canonical_name": "home",
+    "odds": 4.0,
+    "platform_name": "Norway",
+    "true_probability": null,
+    "void_probability": null
+   },
+   {
+    "canonical_name": "draw",
+    "odds": 4.3,
+    "platform_name": "Draw",
+    "true_probability": null,
+    "void_probability": null
+   },
+   {
+    "canonical_name": "away",
+    "odds": 1.56,
+    "platform_name": "France",
+    "true_probability": null,
+    "void_probability": null
+   }
+  ]
+ },
+ {
+  "canonical_id": "1x2_bookings_ft",
+  "lines": null,
+  "name": "1X2 Bookings - Full Time",
+  "outcomes": [
+   {
+    "canonical_name": "home",
+    "odds": 2.55,
+    "platform_name": "Norway",
+    "true_probability": null,
+    "void_probability": null
+   },
+   {
+    "canonical_name": "draw",
+    "odds": 2.9,
+    "platform_name": "Draw",
+    "true_probability": null,
+    "void_probability": null
+   },
+   {
+    "canonical_name": "away",
+    "odds": 2.75,
+    "platform_name": "France",
+    "true_probability": null,
+    "void_probability": null
+   }
+  ]
+ },
+ {
+  "canonical_id": "1x2_corners_ft",
+  "lines": null,
+  "name": "1X2 Corners - Full Time",
+  "outcomes": [
+   {
+    "canonical_name": "home",
+    "odds": 2.9,
+    "platform_name": "Norway",
+    "true_probability": null,
+    "void_probability": null
+   },
+   {
+    "canonical_name": "draw",
+    "odds": 8.0,
+    "platform_name": "Draw",
+    "true_probability": null,
+    "void_probability": null
+   },
+   {
+    "canonical_name": "away",
+    "odds": 1.6,
+    "platform_name": "France",
+    "true_probability": null,
+    "void_probability": null
+   }
+  ]
+ },
+ {
+  "canonical_id": "1x2_ft",
+  "lines": null,
+  "name": "1X2 - Full Time",
+  "outcomes": [
+   {
+    "canonical_name": "home",
+    "odds": 4.6,
+    "platform_name": "Norway",
+    "true_probability": null,
+    "void_probability": null
+   },
+   {
+    "canonical_name": "draw",
+    "odds": 4.3,
+    "platform_name": "Draw",
+    "true_probability": null,
+    "void_probability": null
+   },
+   {
+    "canonical_name": "away",
+    "odds": 1.61,
+    "platform_name": "France",
+    "true_probability": null,
+    "void_probability": null
+   }
+  ]
+ },
+ {
+  "canonical_id": "2way_handicap_ft",
+  "lines": {
+   "-0.5": [
+    {
+     "canonical_name": "home",
+     "odds": 4.6,
+     "platform_name": "Norway",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "away",
+     "odds": 1.21,
+     "platform_name": "France",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ],
+   "0.5": [
+    {
+     "canonical_name": "home",
+     "odds": 2.25,
+     "platform_name": "Norway",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "away",
+     "odds": 1.61,
+     "platform_name": "France",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ],
+   "1.5": [
+    {
+     "canonical_name": "home",
+     "odds": 1.5,
+     "platform_name": "Norway",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "away",
+     "odds": 2.49,
+     "platform_name": "France",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ],
+   "2.5": [
+    {
+     "canonical_name": "home",
+     "odds": 1.19,
+     "platform_name": "Norway",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "away",
+     "odds": 4.6,
+     "platform_name": "France",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ]
+  },
+  "name": "2-Way Asian Handicap - Full Time",
+  "outcomes": []
+ },
+ {
+  "canonical_id": "away_over_under_ft",
+  "lines": {
+   "0.5": [
+    {
+     "canonical_name": "over",
+     "odds": 1.1,
+     "platform_name": "Over ",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "under",
+     "odds": 6.6,
+     "platform_name": "Under ",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ],
+   "1.5": [
+    {
+     "canonical_name": "over",
+     "odds": 1.51,
+     "platform_name": "Over ",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "under",
+     "odds": 2.46,
+     "platform_name": "Under ",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ],
+   "2.5": [
+    {
+     "canonical_name": "over",
+     "odds": 2.5,
+     "platform_name": "Over ",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "under",
+     "odds": 1.49,
+     "platform_name": "Under ",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ]
+  },
+  "name": "Over/Under Away Team - Full Time",
+  "outcomes": []
+ },
+ {
+  "canonical_id": "btts_ft",
+  "lines": null,
+  "name": "Both Teams To Score - Full Time",
+  "outcomes": [
+   {
+    "canonical_name": "yes",
+    "odds": 1.58,
+    "platform_name": "Yes",
+    "true_probability": null,
+    "void_probability": null
+   },
+   {
+    "canonical_name": "no",
+    "odds": 2.34,
+    "platform_name": "No",
+    "true_probability": null,
+    "void_probability": null
+   }
+  ]
+ },
+ {
+  "canonical_id": "double_chance_ft",
+  "lines": null,
+  "name": "Double Chance - Full Time",
+  "outcomes": [
+   {
+    "canonical_name": "home_draw",
+    "odds": 2.25,
+    "platform_name": "Norway Or Draw",
+    "true_probability": null,
+    "void_probability": null
+   },
+   {
+    "canonical_name": "home_away",
+    "odds": 1.22,
+    "platform_name": "Norway Or France",
+    "true_probability": null,
+    "void_probability": null
+   },
+   {
+    "canonical_name": "draw_away",
+    "odds": 1.21,
+    "platform_name": "Draw Or France",
+    "true_probability": null,
+    "void_probability": null
+   }
+  ]
+ },
+ {
+  "canonical_id": "home_over_under_ft",
+  "lines": {
+   "0.5": [
+    {
+     "canonical_name": "over",
+     "odds": 1.38,
+     "platform_name": "Over ",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "under",
+     "odds": 2.9,
+     "platform_name": "Under ",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ],
+   "1.5": [
+    {
+     "canonical_name": "over",
+     "odds": 2.75,
+     "platform_name": "Over ",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "under",
+     "odds": 1.42,
+     "platform_name": "Under ",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ],
+   "2.5": [
+    {
+     "canonical_name": "over",
+     "odds": 6.8,
+     "platform_name": "Over ",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "under",
+     "odds": 1.09,
+     "platform_name": "Under ",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ]
+  },
+  "name": "Over/Under Home Team - Full Time",
+  "outcomes": []
+ },
+ {
+  "canonical_id": "next_goal_ft",
+  "lines": {
+   "1.0": [
+    {
+     "canonical_name": "home",
+     "odds": 2.6,
+     "platform_name": "Norway",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "none",
+     "odds": 23.0,
+     "platform_name": "None",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "away",
+     "odds": 1.5,
+     "platform_name": "France",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ]
+  },
+  "name": "Next Goal - Full Time",
+  "outcomes": []
+ },
+ {
+  "canonical_id": "over_under_bookings_ft",
+  "lines": {
+   "0.5": [
+    {
+     "canonical_name": "over",
+     "odds": 1.1,
+     "platform_name": "Over ",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "under",
+     "odds": 6.0,
+     "platform_name": "Under ",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ],
+   "1.5": [
+    {
+     "canonical_name": "over",
+     "odds": 1.47,
+     "platform_name": "Over ",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "under",
+     "odds": 2.5,
+     "platform_name": "Under ",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ],
+   "2.5": [
+    {
+     "canonical_name": "over",
+     "odds": 2.34,
+     "platform_name": "Over ",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "under",
+     "odds": 1.53,
+     "platform_name": "Under ",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ],
+   "3.5": [
+    {
+     "canonical_name": "over",
+     "odds": 4.2,
+     "platform_name": "Over ",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "under",
+     "odds": 1.19,
+     "platform_name": "Under ",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ],
+   "4.5": [
+    {
+     "canonical_name": "over",
+     "odds": 7.6,
+     "platform_name": "Over ",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "under",
+     "odds": 1.05,
+     "platform_name": "Under ",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ]
+  },
+  "name": "Over/Under Bookings - Full Time",
+  "outcomes": []
+ },
+ {
+  "canonical_id": "over_under_corners_ft",
+  "lines": {
+   "7.5": [
+    {
+     "canonical_name": "over",
+     "odds": 1.38,
+     "platform_name": "Over ",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "under",
+     "odds": 2.65,
+     "platform_name": "Under ",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ],
+   "8.5": [
+    {
+     "canonical_name": "over",
+     "odds": 1.64,
+     "platform_name": "Over ",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "under",
+     "odds": 2.03,
+     "platform_name": "Under ",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ],
+   "9.5": [
+    {
+     "canonical_name": "over",
+     "odds": 2.04,
+     "platform_name": "Over ",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "under",
+     "odds": 1.64,
+     "platform_name": "Under ",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ]
+  },
+  "name": "Over/Under Corners - Full Time",
+  "outcomes": []
+ },
+ {
+  "canonical_id": "over_under_ft",
+  "lines": {
+   "0.5": [
+    {
+     "canonical_name": "over",
+     "odds": 1.02,
+     "platform_name": "Over ",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "under",
+     "odds": 23.0,
+     "platform_name": "Under ",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ],
+   "1.5": [
+    {
+     "canonical_name": "over",
+     "odds": 1.15,
+     "platform_name": "Over ",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "under",
+     "odds": 5.6,
+     "platform_name": "Under ",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ],
+   "2.5": [
+    {
+     "canonical_name": "over",
+     "odds": 1.49,
+     "platform_name": "Over ",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "under",
+     "odds": 2.6,
+     "platform_name": "Under ",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ],
+   "3.5": [
+    {
+     "canonical_name": "over",
+     "odds": 2.2,
+     "platform_name": "Over ",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "under",
+     "odds": 1.65,
+     "platform_name": "Under ",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ],
+   "4.5": [
+    {
+     "canonical_name": "over",
+     "odds": 3.65,
+     "platform_name": "Over ",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "under",
+     "odds": 1.27,
+     "platform_name": "Under ",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ],
+   "5.5": [
+    {
+     "canonical_name": "over",
+     "odds": 7.4,
+     "platform_name": "Over ",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "under",
+     "odds": 1.1,
+     "platform_name": "Under ",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ]
+  },
+  "name": "Over/Under - Full Time",
+  "outcomes": []
+ }
+]

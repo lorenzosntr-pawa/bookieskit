@@ -4,20 +4,30 @@ All notable changes to this project are documented in this file. The format foll
 
 ## [Unreleased]
 
-### Removed
-- **`bookieskit.orchestration` and `bookieskit.devtools`** — the agent-company
-  tooling (GitHub-Issues work queue, Slack cockpit/ChatOps, always-on
-  orchestrator, live canary, market-add harness CLI, docs-sync and release
-  CLIs) is gone. The library is back to its core: bookmaker clients, market
-  mapping/parsing and cross-book matching. The `orchestration` extra is
-  dropped; release notes are now read straight from this CHANGELOG.
-
-### Fixed
-- **BetPawa** — `decode_betpawa_probability` accepts the already-decoded
-  `{"win", "refund"}` mapping some country sites (Ghana among them) now serve,
-  alongside the obfuscated base64 blob.
-
 ### Added
+- **`parse_markets(keep_incomplete=True)`** skips the completeness
+  filter, so markets and lines with a missing, zero or <= 1.0 price come back
+  as parsed (book-compare health checks need to see them). Prices flagged
+  suspended are still left out. Default unchanged.
+- **`get_markets(sport=)` keyword** on every client, passed through to the
+  parser.
+- **Scripts** `regen_golden.py`, `coverage_report.py` (offline mapping
+  coverage report) and `capture_fixtures.py` (capture raw fixtures from every
+  book), plus golden snapshot tests of `parse_markets` output for every
+  fixture.
+- **`base_url` override** — every bookmaker client accepts an optional
+  `base_url=` (e.g. a staging host) that replaces `DOMAINS[country]`;
+  trailing slashes are stripped and `country` still drives headers such as
+  BetPawa's `x-pawa-brand`. Betway's `get_sports` still uses its own config
+  host.
+- **Pricing helpers** — `bookieskit.pricing` (also exported at top level):
+  `margin`, `devig_multiplicative` and `devig_shin` for overround and
+  fair-probability extraction from decimal odds. All return `None` for
+  fewer than two outcomes or any odds that are `None`, NaN, infinite or
+  `<= 1.0`; `devig_shin` also returns `None` if its solver does not converge.
+  Only valid for mutually exclusive AND exhaustive outcome sets (1X2, an
+  Over/Under line, BTTS, a 2-way handicap line); NOT for double chance or 1X2
+  1UP/2UP, whose outcomes overlap so margin / de-vig is meaningless.
 - **ElephantBet — eighth bookmaker (Mozambique)** — a new `ElephantBet` client
   for the BtoBet `Sb.WebApi` platform (`sports-core.elephantbet.com`),
   covering the four core soccer markets (`1x2_ft`, `over_under_ft`,
@@ -160,7 +170,48 @@ All notable changes to this project are documented in this file. The format foll
   way SportPesa's id `52` already requires. Captures for both sports are
   committed.
 
+### Removed
+- **`bookieskit.orchestration` and `bookieskit.devtools`** — the agent-company
+  tooling (GitHub-Issues work queue, Slack cockpit/ChatOps, always-on
+  orchestrator, live canary, market-add harness CLI, docs-sync and release
+  CLIs) is gone. The library is back to its core: bookmaker clients, market
+  mapping/parsing and cross-book matching. The `orchestration` extra is
+  dropped; release notes are now read straight from this CHANGELOG.
+
 ### Fixed
+- **Betway child-market attribution** — child markets are attributed to a
+  parent only by specifier suffix, so goal handicap no longer returns
+  corner-handicap prices and Over/Under FT is restored.
+- **`get_markets(..., sport=)`** now reaches the parser on every client, so
+  basketball and tennis payloads are no longer parsed as soccer.
+- **Betika wrong-match prices (behaviour change)** — `/v1/uo/matches` can ignore
+  `match_id`, and `get_event_detail` / `get_event_markets` / `get_markets` used
+  to take `data[0]`, silently returning another match's prices. They now select
+  the row whose `match_id` equals the requested id (string compare); groups
+  from another match are never merged. `get_event_detail` raises
+  `ResponseError` (naming the requested and returned ids) only when the API
+  returns rows but none is the requested match; when it returns no rows the
+  empty payload comes back unchanged (so `get_sportradar_id` yields `None`).
+  `get_event_markets` / `get_markets` skip empty or other-match responses and
+  return an empty payload when nothing matches; they raise only if every
+  response held rows and none was the requested match.
+- **Suspended / missing prices (behaviour change for consumers)** — `parse_markets` no longer emits
+  placeholder prices as real odds (BetPawa suspended `0.0`, Bet9ja literal
+  `"1"`, Betway missing price `0.0`) or one-sided lines. If any expected
+  outcome is missing or priced at or below `1.0`, the whole line
+  (O/U, handicaps) or the whole market (1X2, BTTS, DC) is dropped; a
+  parameterized market left with no lines is dropped. BetPawa prices flagged
+  `suspended: true` count as missing even when they carry a real-looking
+  price. SportyBet/MSport outcomes with `isActive=0` or in a market whose
+  `status` is not `0`, and Betway outcomes of a market row with
+  `isSuspended: true` / `isActive: false`, count as missing too. Each drop is
+  logged at DEBUG on `bookieskit.markets.parser`.
+- **BetPawa** — `decode_betpawa_probability` accepts the already-decoded
+  `{"win", "refund"}` mapping some country sites (Ghana among them) now serve,
+  alongside the obfuscated base64 blob.
+- **BetPawa 1X2 2UP mapping** — `1x2_2up_ft` now maps BetPawa marketType
+  `28000850` (prices `1` / `X` / `2`), confirmed from a live NG payload; it was
+  previously unmapped (`betpawa_id=None`) so the market was silently dropped.
 - **Corrected ElephantBet's jurisdiction documentation.** `docs/elephantbet.md`
   described Angola, Sierra Leone and Malawi as operating brand sites whose API
   hosts were WAF-blocked. A wider sweep (49 country codes, five host patterns)
@@ -227,12 +278,6 @@ All notable changes to this project are documented in this file. The format foll
   `.github/workflows/canary.yml` that does not (and should not) exist: a
   hosted-runner canary would be geo-blocked by the African books and report
   blocks as drift. The live probe is in-region via the orchestrator tick.
-
-### Changed
-- Orchestrator now runs under a dedicated **GitHub App identity** that cannot
-  merge to `main`; the Slack `approve` path uses a separate owner token to
-  submit the approving review + merge. Never-merge is now structural for all
-  build operations. See `docs/AGENT_IDENTITY_SETUP.md`.
 
 ## [0.16.0] - 2026-06-23
 

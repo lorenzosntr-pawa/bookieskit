@@ -1,0 +1,23 @@
+[
+ {
+  "canonical_id": "moneyline_basketball_ft",
+  "lines": null,
+  "name": "Moneyline - Full Time (incl. OT)",
+  "outcomes": [
+   {
+    "canonical_name": "home",
+    "odds": 1.85,
+    "platform_name": "1",
+    "true_probability": null,
+    "void_probability": null
+   },
+   {
+    "canonical_name": "away",
+    "odds": 1.92,
+    "platform_name": "2",
+    "true_probability": null,
+    "void_probability": null
+   }
+  ]
+ }
+]

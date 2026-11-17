@@ -1,6 +1,8 @@
 """Market parser — transforms raw event responses into NormalizedMarkets."""
 
+import logging
 import re
+from dataclasses import replace
 from typing import Literal
 
 from bookieskit.bookmakers._betika_shape import betika_first_match
@@ -13,6 +15,8 @@ from bookieskit.markets.types import (
 )
 
 ProbabilityMode = Literal["off", "true", "with_void"]
+
+_log = logging.getLogger(__name__)
 
 
 def _normalised_probability_mode(mode: object) -> ProbabilityMode:
@@ -124,6 +128,7 @@ def parse_markets(
     *,
     probability: ProbabilityMode = "off",
     sport: str | None = None,
+    keep_incomplete: bool = False,
 ) -> list[NormalizedMarket]:
     """Parse raw event detail response into normalized markets.
 
@@ -147,13 +152,22 @@ def parse_markets(
             to ``None``, preserving pre-0.12.0 behaviour (each shared
             id resolves to whichever mapping was registered first,
             typically soccer).
+        keep_incomplete: Skip the final completeness filter, so markets
+            and lines with a missing, zero or <= 1.0 price are returned
+            as parsed. For health checks that must see broken books
+            (e.g. a BetPawa price of 0 left open). Prices a book flags
+            suspended are still left out. Do not use for margins or
+            comparisons. Default False.
 
     Returns:
         List of NormalizedMarket for all recognized markets.
-        Markets not in the registry are skipped.
+        Markets not in the registry are skipped. Lines (parameterized)
+        or markets (simple) with a missing or suspended (odds <= 1.0)
+        outcome are dropped, unless ``keep_incomplete`` is True.
     """
     if registry is None:
         registry = MarketRegistry()
+    base_registry = registry
     if sport is not None:
         registry = _SportScopedRegistry(registry, sport)  # type: ignore[assignment]
     mode = _normalised_probability_mode(probability)
@@ -171,7 +185,87 @@ def parse_markets(
     parser = parsers.get(platform)
     if parser is None:
         return []
-    return parser(response, registry, mode)
+    markets = parser(response, registry, mode)
+    if keep_incomplete:
+        return markets
+    return _keep_complete(markets, base_registry, platform)
+
+
+def _incomplete_reason(outcomes: list[Outcome], expected: set[str]) -> str | None:
+    """None if every expected outcome is present with odds > 1.0, else why not."""
+    priced = {o.canonical_name for o in outcomes if o.odds > 1.0}
+    if expected <= priced:
+        return None
+    present = {o.canonical_name for o in outcomes}
+    reasons = []
+    missing = sorted(expected - present)
+    if missing:
+        reasons.append(f"missing {missing}")
+    low = [
+        (o.canonical_name, o.odds)
+        for o in outcomes
+        if o.canonical_name in expected and o.odds <= 1.0
+    ]
+    if low:
+        reasons.append(f"odds <= 1.0 {low}")
+    return "; ".join(reasons)
+
+
+def _keep_complete(
+    markets: list[NormalizedMarket], registry: MarketRegistry, platform: str
+) -> list[NormalizedMarket]:
+    """Drop suspended / placeholder / one-sided prices.
+
+    Expected outcomes for a market are the registry outcomes whose label
+    for ``platform`` is non-empty. A simple market is kept only if every
+    expected outcome has odds > 1.0 (BetPawa suspended -> 0.0, Bet9ja
+    placeholder "1" -> 1.0 and Betway missing price -> 0.0 all fail).
+    For parameterized markets the same check runs per line; a market
+    left with no lines is dropped. Markets without a registry mapping
+    pass through unchanged.
+    """
+    kept: list[NormalizedMarket] = []
+    for market in markets:
+        mapping = registry.get_by_canonical(market.canonical_id)
+        if mapping is None:
+            kept.append(market)
+            continue
+        expected = {
+            om.canonical_name
+            for om in mapping.outcomes.values()
+            if getattr(om, platform, "")
+        }
+        if market.lines is None:
+            reason = _incomplete_reason(market.outcomes, expected)
+            if reason is None:
+                kept.append(market)
+            else:
+                _log.debug(
+                    "%s %s: market dropped, %s",
+                    platform, market.canonical_id, reason,
+                )
+            continue
+        lines: dict[float, list[Outcome]] = {}
+        for line, outcomes in market.lines.items():
+            reason = _incomplete_reason(outcomes, expected)
+            if reason is None:
+                lines[line] = outcomes
+            else:
+                _log.debug(
+                    "%s %s line %s: line dropped, %s",
+                    platform, market.canonical_id, line, reason,
+                )
+        if not lines:
+            _log.debug(
+                "%s %s: market dropped, no complete lines",
+                platform, market.canonical_id,
+            )
+        else:
+            kept.append(
+                market if len(lines) == len(market.lines)
+                else replace(market, lines=lines)
+            )
+    return kept
 
 
 def _parse_betpawa(
@@ -210,6 +304,8 @@ def _parse_betpawa_simple(
 
     for row in rows:
         for price in row.get("prices", []):
+            if price.get("suspended"):
+                continue  # suspended = missing, whatever the price says
             price_name = str(price.get("name", price.get("displayName", "")))
             # BetPawa uses "price" field (not "odds")
             odds = float(price.get("price", price.get("odds", 0)))
@@ -271,6 +367,8 @@ def _parse_betpawa_parameterized(
         line_outcomes: list[Outcome] = []
 
         for price in row.get("prices", []):
+            if price.get("suspended"):
+                continue  # suspended = missing, whatever the price says
             price_name = str(price.get("name", price.get("displayName", "")))
             odds = float(price.get("price", price.get("odds", 0)))
             canonical = _resolve_outcome_betpawa(
@@ -324,6 +422,16 @@ def _try_float(v: object) -> float | None:
         return None
 
 
+def _sr_unavailable(market_data: dict, outcome_data: dict) -> bool:
+    """SportyBet/MSport flags: market ``status`` 0 = active (1 suspended,
+    2 deactivated, 3 settled); outcome ``isActive`` 0 = inactive. Either
+    one makes the outcome count as missing."""
+    status = market_data.get("status")
+    if status is not None and str(status) != "0":
+        return True
+    return str(outcome_data.get("isActive", 1)) == "0"
+
+
 def _parse_sportybet(
     response: dict, registry: MarketRegistry, mode: ProbabilityMode = "off"
 ) -> list[NormalizedMarket]:
@@ -368,6 +476,8 @@ def _parse_sportybet_simple(
     outcomes: list[Outcome] = []
 
     for outcome_data in market_data.get("outcomes", []):
+        if _sr_unavailable(market_data, outcome_data):
+            continue
         desc = str(outcome_data.get("desc", ""))
         odds = float(outcome_data.get("odds", 0))
         canonical = _resolve_outcome_sportybet(desc, mapping)
@@ -409,6 +519,8 @@ def _parse_sportybet_parameterized(
 
         line_outcomes: list[Outcome] = []
         for outcome_data in entry.get("outcomes", []):
+            if _sr_unavailable(entry, outcome_data):
+                continue
             desc = str(outcome_data.get("desc", ""))
             odds = float(outcome_data.get("odds", 0))
             canonical = _resolve_outcome_sportybet(desc, mapping)
@@ -705,6 +817,25 @@ def _parse_betway(
             p.get("priceDecimal", 0)
         )
 
+    # Suspended / inactive market rows: their outcomes count as missing.
+    # Outcomes link to the parent marketId; per-line outcome ids start
+    # with the child marketId (which carries a "=" specifier, so the
+    # prefix cannot hit an unrelated market like ...16 vs ...165).
+    closed = {
+        str(m.get("marketId", ""))
+        for m in markets_in_group
+        if m.get("isSuspended") is True or m.get("isActive") is False
+    }
+    closed.discard("")
+    if closed:
+        closed_children = tuple(mid for mid in closed if "=" in mid)
+        for o in all_outcomes:
+            oid = str(o.get("outcomeId", ""))
+            if str(o.get("marketId", "")) in closed or (
+                closed_children and oid.startswith(closed_children)
+            ):
+                price_map.pop(oid, None)
+
     # Build outcome lookup: marketId -> list of outcomes
     outcomes_by_market: dict[str, list[dict]] = {}
     for o in all_outcomes:
@@ -758,17 +889,16 @@ def _parse_betway(
 
         # Variant — first try marketId-prefix attribution. This is the
         # robust path: Betway's per-line child rows have a marketId that
-        # starts with the parent's marketId (e.g. parent <eventId>16,
-        # children <eventId>16hcp=-0.5~). When name-based matching has
+        # is the parent's marketId plus a specifier suffix matching
+        # [a-z]+= (e.g. parent <eventId>16, children
+        # <eventId>16hcp=-0.5~; <eventId>165 is NOT a child). When
+        # name-based matching has
         # multiple candidates (e.g. 'Handicap' matches both
         # '[Handicap] [2-Way]' and 'Handicap (Incl. Overtime)'),
         # marketId-prefix disambiguates correctly.
         matched_mapping: MarketMapping | None = None
         for parent_mid, parent_mapping in parent_by_market_id.items():
-            if (
-                market_id != parent_mid
-                and market_id.startswith(parent_mid)
-            ):
+            if _is_betway_child_market_id(market_id, parent_mid):
                 matched_mapping = parent_mapping
                 break
 
@@ -817,6 +947,19 @@ def _parse_betway(
                 results.append(parsed)
 
     return results
+
+
+def _is_betway_child_market_id(child: str, parent: str) -> bool:
+    """True iff ``child`` is a per-line child row of ``parent``.
+
+    Betway child marketIds are the parent id plus a specifier suffix such
+    as ``hcp=-0.5~`` or ``total=2.5~``. A bare ``startswith`` also matches
+    unrelated markets whose id merely extends the parent's digits (e.g.
+    parent ...16 vs Corner Handicap ...165), so require ``[a-z]+=``.
+    """
+    return child.startswith(parent) and bool(
+        re.match(r"[a-z]+=", child[len(parent):])
+    )
 
 
 def _is_betway_parameterized_variant(
@@ -912,6 +1055,7 @@ def _build_betway_parameterized(
     parent_outcomes: list[dict] = []
     line_market_ids: list[tuple[float, str]] = []
     parent_market_id: str = ""
+    zero_rows: list[tuple[str, list[dict]]] = []
 
     for market, outcomes_list in entries:
         handicap = market.get("handicap")
@@ -919,10 +1063,21 @@ def _build_betway_parameterized(
         if handicap is None:
             continue
         if handicap == 0:
-            parent_outcomes = outcomes_list
-            parent_market_id = market_id
+            zero_rows.append((market_id, outcomes_list))
         else:
             line_market_ids.append((float(handicap), market_id))
+
+    # The parent is the handicap==0 row that the line rows are children of;
+    # without line rows (single-row case) keep the last handicap==0 row.
+    if zero_rows:
+        parent_market_id, parent_outcomes = zero_rows[-1]
+        for zid, zouts in zero_rows:
+            if any(
+                _is_betway_child_market_id(lmid, zid)
+                for _, lmid in line_market_ids
+            ):
+                parent_market_id, parent_outcomes = zid, zouts
+                break
 
     # Case 1: parent + per-line entries — distribute parent outcomes by line
     if parent_outcomes and line_market_ids:
@@ -1088,6 +1243,8 @@ def _parse_msport_simple(
     outcomes: list[Outcome] = []
 
     for outcome_data in market_data.get("outcomes", []):
+        if _sr_unavailable(market_data, outcome_data):
+            continue
         desc = str(outcome_data.get("description", ""))
         odds = float(outcome_data.get("odds", 0))
         canonical = _resolve_outcome_msport(desc, mapping)
@@ -1128,6 +1285,8 @@ def _parse_msport_parameterized(
 
         line_outcomes: list[Outcome] = []
         for outcome_data in entry.get("outcomes", []):
+            if _sr_unavailable(entry, outcome_data):
+                continue
             desc = str(outcome_data.get("description", ""))
             odds = float(outcome_data.get("odds", 0))
             canonical = _resolve_outcome_msport(desc, mapping)

@@ -1,0 +1,2020 @@
+{
+ "s": null,
+ "t": [
+  {
+   "id": 267,
+   "or": 0,
+   "n": "Principales",
+   "is": 0,
+   "o": [
+    {
+     "id": 4,
+     "n": "VENCEDOR (INCL. PROLONGAMENTO)",
+     "c": 1,
+     "oti": "99",
+     "m": [
+      {
+       "id": 618,
+       "n": "1",
+       "eon": null,
+       "otoi": "21",
+       "o": "1.95",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 619,
+       "n": "2",
+       "eon": null,
+       "otoi": "22",
+       "o": "1.80",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 23,
+     "n": "Asian Handicap",
+     "c": 1,
+     "oti": "1*a-0.5",
+     "m": [
+      {
+       "id": 696,
+       "n": "2",
+       "eon": "{{AwayTeam}} {{SV}}",
+       "sbv": "-1",
+       "otoi": "2*a-1",
+       "o": "1.80",
+       "su": false,
+       "ord": 9696,
+       "col": 1
+      },
+      {
+       "id": 1335,
+       "n": "1",
+       "eon": "{{HomeTeam}} {{SV}}",
+       "sbv": "1",
+       "otoi": "1*a1",
+       "o": "1.85",
+       "su": false,
+       "ord": 10335,
+       "col": 1
+      },
+      {
+       "id": 690,
+       "n": "1",
+       "eon": "{{HomeTeam}} {{SV}}",
+       "sbv": "0.5",
+       "otoi": "1*a0.5",
+       "o": "1.95",
+       "su": false,
+       "ord": 55,
+       "col": 1
+      },
+      {
+       "id": 694,
+       "n": "2",
+       "eon": "{{AwayTeam}} {{SV}}",
+       "sbv": "-0.5",
+       "otoi": "2*a-0.5",
+       "o": "1.80",
+       "su": false,
+       "ord": 55,
+       "col": 2
+      },
+      {
+       "id": 1772,
+       "n": "1",
+       "eon": "{{HomeTeam}} {{SV}}",
+       "sbv": "1.5",
+       "otoi": "1*a1.5",
+       "o": "1.80",
+       "su": false,
+       "ord": 57,
+       "col": 1
+      },
+      {
+       "id": 697,
+       "n": "2",
+       "eon": "{{AwayTeam}} {{SV}}",
+       "sbv": "-1.5",
+       "otoi": "2*a-1.5",
+       "o": "1.85",
+       "su": false,
+       "ord": 57,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 36,
+     "n": "Matchbet + Over/Under",
+     "c": 1,
+     "oti": "1 -2.5",
+     "m": [
+      {
+       "id": 332255,
+       "n": "Fora e Acima",
+       "eon": null,
+       "sbv": "176.5",
+       "otoi": "2 +176.5",
+       "o": "3.10",
+       "su": false,
+       "ord": 341255,
+       "col": 1
+      },
+      {
+       "id": 332259,
+       "n": "Fora e Abaixo",
+       "eon": null,
+       "sbv": "176.5",
+       "otoi": "2 -176.5",
+       "o": "3.00",
+       "su": false,
+       "ord": 341259,
+       "col": 1
+      },
+      {
+       "id": 332263,
+       "n": "Casa e Acima",
+       "eon": null,
+       "sbv": "176.5",
+       "otoi": "1 +176.5",
+       "o": "3.40",
+       "su": false,
+       "ord": 341263,
+       "col": 1
+      },
+      {
+       "id": 332267,
+       "n": "Casa e Abaixo",
+       "eon": null,
+       "sbv": "176.5",
+       "otoi": "1 -176.5",
+       "o": "3.25",
+       "su": false,
+       "ord": 341267,
+       "col": 1
+      }
+     ]
+    },
+    {
+     "id": 15,
+     "n": "Halftime/Fulltime",
+     "c": 1,
+     "oti": "1/1",
+     "m": [
+      {
+       "id": 651,
+       "n": "1/1",
+       "eon": "{{HomeTeam}}/{{HomeTeam}}",
+       "otoi": "1/1",
+       "o": "2.50",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 652,
+       "n": "1/X",
+       "eon": "{{HomeTeam}}/Empate",
+       "otoi": "1/X",
+       "o": "26.00",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      },
+      {
+       "id": 653,
+       "n": "1/2",
+       "eon": "{{HomeTeam}}/{{AwayTeam}}",
+       "otoi": "1/2",
+       "o": "7.00",
+       "su": false,
+       "ord": 1,
+       "col": 3
+      },
+      {
+       "id": 654,
+       "n": "X/1",
+       "eon": "Empate/{{HomeTeam}}",
+       "otoi": "X/1",
+       "o": "29.00",
+       "su": false,
+       "ord": 2,
+       "col": 1
+      },
+      {
+       "id": 655,
+       "n": "X/X",
+       "eon": "Empate/Empate",
+       "otoi": "X/X",
+       "o": "41.00",
+       "su": false,
+       "ord": 2,
+       "col": 2
+      },
+      {
+       "id": 656,
+       "n": "X/2",
+       "eon": "Empate/{{AwayTeam}}",
+       "otoi": "X/2",
+       "o": "29.00",
+       "su": false,
+       "ord": 2,
+       "col": 3
+      },
+      {
+       "id": 657,
+       "n": "2/1",
+       "eon": "{{AwayTeam}}/{{HomeTeam}}",
+       "otoi": "2/1",
+       "o": "8.00",
+       "su": false,
+       "ord": 3,
+       "col": 1
+      },
+      {
+       "id": 658,
+       "n": "2/X",
+       "eon": "{{AwayTeam}}/Empate",
+       "otoi": "2/X",
+       "o": "29.00",
+       "su": false,
+       "ord": 3,
+       "col": 2
+      },
+      {
+       "id": 659,
+       "n": "2/2",
+       "eon": "{{AwayTeam}}/{{AwayTeam}}",
+       "otoi": "2/2",
+       "o": "2.25",
+       "su": false,
+       "ord": 3,
+       "col": 3
+      }
+     ]
+    },
+    {
+     "id": 51,
+     "n": "Prolongamento - Sim / Não",
+     "c": 1,
+     "oti": "105",
+     "m": [
+      {
+       "id": 870,
+       "n": "Sim",
+       "eon": null,
+       "otoi": "oty",
+       "o": "17.00",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      }
+     ]
+    },
+    {
+     "id": 11026,
+     "n": "Par/Impar (Tempo Regular)",
+     "c": 3,
+     "oti": "11026",
+     "m": [
+      {
+       "id": 330001,
+       "n": "IMPAR",
+       "eon": null,
+       "o": "1.85",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 330005,
+       "n": "PAR",
+       "eon": null,
+       "o": "1.85",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 11029,
+     "n": "Time da Casa - Par/Ímpar",
+     "c": 3,
+     "oti": "11029",
+     "m": [
+      {
+       "id": 331029,
+       "n": "IMPAR",
+       "eon": null,
+       "o": "1.80",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 331028,
+       "n": "PAR",
+       "eon": null,
+       "o": "1.80",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 11030,
+     "n": "Time de Fora - Par/Ímpar",
+     "c": 3,
+     "oti": "11030",
+     "m": [
+      {
+       "id": 331031,
+       "n": "IMPAR",
+       "eon": null,
+       "o": "1.80",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 331030,
+       "n": "PAR",
+       "eon": null,
+       "o": "1.80",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      }
+     ]
+    }
+   ],
+   "ou": []
+  },
+  {
+   "id": 3,
+   "or": 0,
+   "n": "Totais",
+   "is": 0,
+   "o": [
+    {
+     "id": 24,
+     "n": "Acima / Abaixo (inc. prol.)",
+     "c": 1,
+     "oti": "53",
+     "m": [
+      {
+       "id": 336628,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "176",
+       "o": "1.80",
+       "su": false,
+       "ord": 345628,
+       "col": 1
+      },
+      {
+       "id": 336635,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "176",
+       "o": "1.85",
+       "su": false,
+       "ord": 345635,
+       "col": 1
+      },
+      {
+       "id": 24259,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "176.5",
+       "otoi": "a+176.5",
+       "o": "1.85",
+       "su": false,
+       "ord": 172,
+       "col": 1
+      },
+      {
+       "id": 24180,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "176.5",
+       "otoi": "a-176.5",
+       "o": "1.80",
+       "su": false,
+       "ord": 172,
+       "col": 2
+      },
+      {
+       "id": 336629,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "177",
+       "o": "1.90",
+       "su": false,
+       "ord": 345629,
+       "col": 1
+      },
+      {
+       "id": 336636,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "177",
+       "o": "1.75",
+       "su": false,
+       "ord": 345636,
+       "col": 1
+      }
+     ]
+    },
+    {
+     "id": 353,
+     "n": "Totais Equipa da casa (incl. prol.)",
+     "c": 1,
+     "oti": "109",
+     "m": [
+      {
+       "id": 42577,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "87.5",
+       "otoi": "1+87.5",
+       "o": "1.80",
+       "su": false,
+       "ord": 88,
+       "col": 1
+      },
+      {
+       "id": 42576,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "87.5",
+       "otoi": "1-87.5",
+       "o": "1.85",
+       "su": false,
+       "ord": 88,
+       "col": 2
+      },
+      {
+       "id": 42434,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "85.5",
+       "otoi": "1+85.5",
+       "o": "1.55",
+       "su": false,
+       "ord": 84,
+       "col": 1
+      },
+      {
+       "id": 42435,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "85.5",
+       "otoi": "1-85.5",
+       "o": "2.20",
+       "su": false,
+       "ord": 84,
+       "col": 2
+      },
+      {
+       "id": 42374,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "86.5",
+       "otoi": "1+86.5",
+       "o": "1.65",
+       "su": false,
+       "ord": 86,
+       "col": 1
+      },
+      {
+       "id": 42373,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "86.5",
+       "otoi": "1-86.5",
+       "o": "2.00",
+       "su": false,
+       "ord": 86,
+       "col": 2
+      },
+      {
+       "id": 42633,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "88.5",
+       "otoi": "1+88.5",
+       "o": "1.95",
+       "su": false,
+       "ord": 90,
+       "col": 1
+      },
+      {
+       "id": 42634,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "88.5",
+       "otoi": "1-88.5",
+       "o": "1.70",
+       "su": false,
+       "ord": 90,
+       "col": 2
+      },
+      {
+       "id": 42144,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "89.5",
+       "otoi": "1+89.5",
+       "o": "2.10",
+       "su": false,
+       "ord": 92,
+       "col": 1
+      },
+      {
+       "id": 42148,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "89.5",
+       "otoi": "1-89.5",
+       "o": "1.58",
+       "su": false,
+       "ord": 92,
+       "col": 2
+      },
+      {
+       "id": 336391,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "89",
+       "o": "2.05",
+       "su": false,
+       "ord": 345391,
+       "col": 1
+      },
+      {
+       "id": 336392,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "90",
+       "o": "2.20",
+       "su": false,
+       "ord": 345392,
+       "col": 1
+      },
+      {
+       "id": 336393,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "89",
+       "o": "1.65",
+       "su": false,
+       "ord": 345393,
+       "col": 1
+      },
+      {
+       "id": 336394,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "90",
+       "o": "1.52",
+       "su": false,
+       "ord": 345394,
+       "col": 1
+      },
+      {
+       "id": 336619,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "86",
+       "o": "1.58",
+       "su": false,
+       "ord": 345619,
+       "col": 1
+      },
+      {
+       "id": 336620,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "87",
+       "o": "1.70",
+       "su": false,
+       "ord": 345620,
+       "col": 1
+      },
+      {
+       "id": 336621,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "88",
+       "o": "1.85",
+       "su": false,
+       "ord": 345621,
+       "col": 1
+      },
+      {
+       "id": 336622,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "86",
+       "o": "2.10",
+       "su": false,
+       "ord": 345622,
+       "col": 1
+      },
+      {
+       "id": 336623,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "87",
+       "o": "1.95",
+       "su": false,
+       "ord": 345623,
+       "col": 1
+      },
+      {
+       "id": 336624,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "88",
+       "o": "1.75",
+       "su": false,
+       "ord": 345624,
+       "col": 1
+      }
+     ]
+    },
+    {
+     "id": 352,
+     "n": "Totais Equipa de fora (incl. prol.)",
+     "c": 1,
+     "oti": "108",
+     "m": [
+      {
+       "id": 42427,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "88.5",
+       "otoi": "2+88.5",
+       "o": "1.80",
+       "su": false,
+       "ord": 95,
+       "col": 1
+      },
+      {
+       "id": 42426,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "88.5",
+       "otoi": "2-88.5",
+       "o": "1.85",
+       "su": false,
+       "ord": 95,
+       "col": 2
+      },
+      {
+       "id": 42251,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "86.5",
+       "otoi": "2+86.5",
+       "o": "1.55",
+       "su": false,
+       "ord": 91,
+       "col": 1
+      },
+      {
+       "id": 42249,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "86.5",
+       "otoi": "2-86.5",
+       "o": "2.15",
+       "su": false,
+       "ord": 91,
+       "col": 2
+      },
+      {
+       "id": 42422,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "87.5",
+       "otoi": "2+87.5",
+       "o": "1.65",
+       "su": false,
+       "ord": 93,
+       "col": 1
+      },
+      {
+       "id": 42425,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "87.5",
+       "otoi": "2-87.5",
+       "o": "2.00",
+       "su": false,
+       "ord": 93,
+       "col": 2
+      },
+      {
+       "id": 45252,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "89.5",
+       "otoi": "2+89.5",
+       "o": "1.95",
+       "su": false,
+       "ord": 97,
+       "col": 1
+      },
+      {
+       "id": 45253,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "89.5",
+       "otoi": "2-89.5",
+       "o": "1.68",
+       "su": false,
+       "ord": 97,
+       "col": 2
+      },
+      {
+       "id": 45010,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "90.5",
+       "otoi": "2+90.5",
+       "o": "2.15",
+       "su": false,
+       "ord": 99,
+       "col": 1
+      },
+      {
+       "id": 45011,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "90.5",
+       "otoi": "2-90.5",
+       "o": "1.58",
+       "su": false,
+       "ord": 99,
+       "col": 2
+      },
+      {
+       "id": 336737,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "89",
+       "o": "1.90",
+       "su": false,
+       "ord": 345737,
+       "col": 1
+      },
+      {
+       "id": 336738,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "90",
+       "o": "2.05",
+       "su": false,
+       "ord": 345738,
+       "col": 1
+      },
+      {
+       "id": 336739,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "91",
+       "o": "2.25",
+       "su": false,
+       "ord": 345739,
+       "col": 1
+      },
+      {
+       "id": 336741,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "89",
+       "o": "1.75",
+       "su": false,
+       "ord": 345741,
+       "col": 1
+      },
+      {
+       "id": 336742,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "90",
+       "o": "1.62",
+       "su": false,
+       "ord": 345742,
+       "col": 1
+      },
+      {
+       "id": 336743,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "91",
+       "o": "1.50",
+       "su": false,
+       "ord": 345743,
+       "col": 1
+      },
+      {
+       "id": 336835,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "87",
+       "o": "1.60",
+       "su": false,
+       "ord": 345835,
+       "col": 1
+      },
+      {
+       "id": 336836,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "87",
+       "o": "2.10",
+       "su": false,
+       "ord": 345836,
+       "col": 1
+      },
+      {
+       "id": 336867,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "88",
+       "o": "1.75",
+       "su": false,
+       "ord": 345867,
+       "col": 1
+      },
+      {
+       "id": 336868,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "88",
+       "o": "1.90",
+       "su": false,
+       "ord": 345868,
+       "col": 1
+      }
+     ]
+    }
+   ],
+   "ou": []
+  },
+  {
+   "id": 5,
+   "or": 0,
+   "n": "Parte",
+   "is": 0,
+   "o": [
+    {
+     "id": 6,
+     "n": "BasketballOddType.1stHalf–3way",
+     "c": 1,
+     "oti": "1h1",
+     "m": [
+      {
+       "id": 623,
+       "n": "1",
+       "eon": "{{HomeTeam}}",
+       "otoi": "1h1",
+       "o": "1.95",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 624,
+       "n": "X",
+       "eon": null,
+       "otoi": "1hx",
+       "o": "21.00",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      },
+      {
+       "id": 625,
+       "n": "2",
+       "eon": "{{AwayTeam}}",
+       "otoi": "1h2",
+       "o": "1.85",
+       "su": false,
+       "ord": 1,
+       "col": 3
+      }
+     ]
+    },
+    {
+     "id": 10258,
+     "n": "1ª PARTE - HIPOTESE DUPLA",
+     "c": 1,
+     "oti": "10258",
+     "m": [
+      {
+       "id": 329672,
+       "n": "1X",
+       "eon": null,
+       "o": "1.75",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 329409,
+       "n": "X2",
+       "eon": null,
+       "o": "1.65",
+       "su": false,
+       "ord": 1,
+       "col": 3
+      }
+     ]
+    },
+    {
+     "id": 26,
+     "n": "1ª Parte - Acima/Abaixo",
+     "c": 1,
+     "oti": "53",
+     "m": [
+      {
+       "id": 355858,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "88",
+       "o": "1.75",
+       "su": false,
+       "ord": 364858,
+       "col": 1
+      },
+      {
+       "id": 355859,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "88",
+       "o": "1.85",
+       "su": false,
+       "ord": 364859,
+       "col": 1
+      },
+      {
+       "id": 24739,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "88.5",
+       "otoi": "1ha+88.5",
+       "o": "1.85",
+       "su": false,
+       "ord": 75,
+       "col": 1
+      },
+      {
+       "id": 24697,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "88.5",
+       "otoi": "1ha-88.5",
+       "o": "1.75",
+       "su": false,
+       "ord": 75,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 10758,
+     "n": "1ª PARTE - CASA ACIMA/ABAIXO",
+     "c": 1,
+     "oti": "10758",
+     "m": [
+      {
+       "id": 363915,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "44",
+       "o": "1.85",
+       "su": false,
+       "ord": 372915,
+       "col": 1
+      },
+      {
+       "id": 363916,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "44",
+       "o": "1.80",
+       "su": false,
+       "ord": 372916,
+       "col": 1
+      },
+      {
+       "id": 331574,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "43.5",
+       "o": "1.70",
+       "su": false,
+       "ord": 29,
+       "col": 1
+      },
+      {
+       "id": 331583,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "43.5",
+       "o": "1.90",
+       "su": false,
+       "ord": 33,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 10855,
+     "n": "1ª PARTE - FORA ACIMA/ABAIXO",
+     "c": 1,
+     "oti": "10855",
+     "m": [
+      {
+       "id": 364113,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "44",
+       "o": "1.75",
+       "su": false,
+       "ord": 373113,
+       "col": 1
+      },
+      {
+       "id": 364114,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "44",
+       "o": "1.85",
+       "su": false,
+       "ord": 373114,
+       "col": 1
+      },
+      {
+       "id": 331877,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "44.5",
+       "o": "1.85",
+       "su": false,
+       "ord": 33,
+       "col": 1
+      },
+      {
+       "id": 331878,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "44.5",
+       "o": "1.75",
+       "su": false,
+       "ord": 34,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 120,
+     "n": "2ª Parte - Acima/Abaixo",
+     "c": 1,
+     "oti": "42",
+     "m": [
+      {
+       "id": 45008,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "87.5",
+       "otoi": "2h+87.5",
+       "o": "1.85",
+       "su": false,
+       "ord": 72,
+       "col": 1
+      },
+      {
+       "id": 45009,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "87.5",
+       "otoi": "2h-87.5",
+       "o": "1.75",
+       "su": false,
+       "ord": 72,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 19,
+     "n": "1st Half - Draw No Bet",
+     "c": 1,
+     "oti": "1hd1",
+     "m": [
+      {
+       "id": 667,
+       "n": "1",
+       "eon": "{{HomeTeam}}",
+       "otoi": "1hd1",
+       "o": "1.90",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 668,
+       "n": "2",
+       "eon": "{{AwayTeam}}",
+       "otoi": "1hd2",
+       "o": "1.80",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 25,
+     "n": "1º Tempo - Handicap Asiático",
+     "c": 1,
+     "oti": "1h1*a-3.25",
+     "m": [
+      {
+       "id": 1333,
+       "n": "1",
+       "eon": "{{HomeTeam}} {{SV}}",
+       "sbv": "0.5",
+       "otoi": "1h1*a0.5",
+       "o": "1.75",
+       "su": false,
+       "ord": 24,
+       "col": 1
+      },
+      {
+       "id": 749,
+       "n": "2",
+       "eon": "{{AwayTeam}} {{SV}}",
+       "sbv": "-0.5",
+       "otoi": "1h2*a-0.5",
+       "o": "1.85",
+       "su": false,
+       "ord": 24,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 98,
+     "n": "2ª Parte - Handicap Asiático",
+     "c": 1,
+     "oti": "54",
+     "m": [
+      {
+       "id": 22985,
+       "n": "1",
+       "eon": null,
+       "sbv": "1",
+       "otoi": "2h1*a1",
+       "o": "1.75",
+       "su": false,
+       "ord": 31985,
+       "col": 1
+      },
+      {
+       "id": 22988,
+       "n": "2",
+       "eon": null,
+       "sbv": "-1",
+       "otoi": "2h2*a-1",
+       "o": "1.85",
+       "su": false,
+       "ord": 31988,
+       "col": 1
+      }
+     ]
+    },
+    {
+     "id": 49,
+     "n": "1ª Parte - Pontos par/ímpar",
+     "c": 3,
+     "oti": "35",
+     "m": [
+      {
+       "id": 866,
+       "n": "IMPAR",
+       "eon": null,
+       "otoi": "1ho",
+       "o": "1.80",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 867,
+       "n": "PAR",
+       "eon": null,
+       "otoi": "1he",
+       "o": "1.80",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 50,
+     "n": "2ª Parte - Pontos par/ímpar",
+     "c": 3,
+     "oti": "48",
+     "m": [
+      {
+       "id": 868,
+       "n": "IMPAR",
+       "eon": null,
+       "otoi": "2ho",
+       "o": "1.80",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 869,
+       "n": "PAR",
+       "eon": null,
+       "otoi": "2he",
+       "o": "1.80",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      }
+     ]
+    }
+   ],
+   "ou": []
+  },
+  {
+   "id": 176,
+   "or": 0,
+   "n": "Periodo",
+   "is": 0,
+   "o": [
+    {
+     "id": 354,
+     "n": "1st Quarter- 1X2",
+     "c": 1,
+     "oti": "123",
+     "m": [
+      {
+       "id": 32556,
+       "n": "1",
+       "eon": null,
+       "otoi": "1q1",
+       "o": "2.00",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 32558,
+       "n": "X",
+       "eon": null,
+       "otoi": "1qx",
+       "o": "15.00",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      },
+      {
+       "id": 32557,
+       "n": "2",
+       "eon": null,
+       "otoi": "1q2",
+       "o": "1.90",
+       "su": false,
+       "ord": 1,
+       "col": 3
+      }
+     ]
+    },
+    {
+     "id": 355,
+     "n": "2nd Quarter - 1X2",
+     "c": 1,
+     "oti": "126",
+     "m": [
+      {
+       "id": 32559,
+       "n": "1",
+       "eon": null,
+       "otoi": "2q1",
+       "o": "2.00",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 32561,
+       "n": "X",
+       "eon": null,
+       "otoi": "2qx",
+       "o": "15.00",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      },
+      {
+       "id": 32560,
+       "n": "2",
+       "eon": null,
+       "otoi": "2q2",
+       "o": "1.90",
+       "su": false,
+       "ord": 1,
+       "col": 3
+      }
+     ]
+    },
+    {
+     "id": 356,
+     "n": "3rd Quarter - 1X2",
+     "c": 1,
+     "oti": "129",
+     "m": [
+      {
+       "id": 32562,
+       "n": "1",
+       "eon": null,
+       "otoi": "3q1",
+       "o": "2.00",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 32564,
+       "n": "X",
+       "eon": null,
+       "otoi": "3qx",
+       "o": "15.00",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      },
+      {
+       "id": 32563,
+       "n": "2",
+       "eon": null,
+       "otoi": "3q2",
+       "o": "1.85",
+       "su": false,
+       "ord": 1,
+       "col": 3
+      }
+     ]
+    },
+    {
+     "id": 357,
+     "n": "4th Quarter - 1X2",
+     "c": 1,
+     "oti": "132",
+     "m": [
+      {
+       "id": 32565,
+       "n": "1",
+       "eon": null,
+       "otoi": "4q1",
+       "o": "2.00",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 32567,
+       "n": "X",
+       "eon": null,
+       "otoi": "4qx",
+       "o": "15.00",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      },
+      {
+       "id": 32566,
+       "n": "2",
+       "eon": null,
+       "otoi": "4q2",
+       "o": "1.85",
+       "su": false,
+       "ord": 1,
+       "col": 3
+      }
+     ]
+    },
+    {
+     "id": 362,
+     "n": "1st Quarter  - Acima/Abaixo",
+     "c": 1,
+     "oti": "110",
+     "m": [
+      {
+       "id": 355802,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "44",
+       "o": "1.80",
+       "su": false,
+       "ord": 364802,
+       "col": 1
+      },
+      {
+       "id": 355803,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "44",
+       "o": "1.85",
+       "su": false,
+       "ord": 364803,
+       "col": 1
+      },
+      {
+       "id": 45071,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "44.5",
+       "otoi": "1q+44.5",
+       "o": "1.90",
+       "su": false,
+       "ord": 38,
+       "col": 1
+      },
+      {
+       "id": 45072,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "44.5",
+       "otoi": "1q-44.5",
+       "o": "1.75",
+       "su": false,
+       "ord": 38,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 363,
+     "n": "2nd Quarter - Acima/Abaixo",
+     "c": 1,
+     "oti": "111",
+     "m": [
+      {
+       "id": 363931,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "44",
+       "o": "1.80",
+       "su": false,
+       "ord": 372931,
+       "col": 1
+      },
+      {
+       "id": 363932,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "44",
+       "o": "1.80",
+       "su": false,
+       "ord": 372932,
+       "col": 1
+      },
+      {
+       "id": 45222,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "43.5",
+       "otoi": "2q+43.5",
+       "o": "1.70",
+       "su": false,
+       "ord": 38,
+       "col": 1
+      },
+      {
+       "id": 45223,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "43.5",
+       "otoi": "2q-43.5",
+       "o": "1.90",
+       "su": false,
+       "ord": 38,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 364,
+     "n": "3rd Quarter - Acima/Abaixo",
+     "c": 1,
+     "oti": "_364",
+     "m": [
+      {
+       "id": 363933,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "43",
+       "o": "1.75",
+       "su": false,
+       "ord": 372933,
+       "col": 1
+      },
+      {
+       "id": 363934,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "43",
+       "o": "1.85",
+       "su": false,
+       "ord": 372934,
+       "col": 1
+      },
+      {
+       "id": 45224,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "43.5",
+       "otoi": "3q+43.5",
+       "o": "1.90",
+       "su": false,
+       "ord": 38,
+       "col": 1
+      },
+      {
+       "id": 45225,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "43.5",
+       "otoi": "3q-43.5",
+       "o": "1.70",
+       "su": false,
+       "ord": 38,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 365,
+     "n": "4th Quarter - Acima/Abaixo",
+     "c": 1,
+     "oti": "_365",
+     "m": [
+      {
+       "id": 363935,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "44",
+       "o": "1.80",
+       "su": false,
+       "ord": 372935,
+       "col": 1
+      },
+      {
+       "id": 363936,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "44",
+       "o": "1.80",
+       "su": false,
+       "ord": 372936,
+       "col": 1
+      },
+      {
+       "id": 42247,
+       "n": "Acima",
+       "eon": null,
+       "sbv": "43.5",
+       "otoi": "4q+43.5",
+       "o": "1.70",
+       "su": false,
+       "ord": 37,
+       "col": 1
+      },
+      {
+       "id": 42252,
+       "n": "Abaixo",
+       "eon": null,
+       "sbv": "43.5",
+       "otoi": "4q-43.5",
+       "o": "1.90",
+       "su": false,
+       "ord": 37,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 366,
+     "n": "1st Quarter  - Handicap",
+     "c": 1,
+     "oti": "_366",
+     "m": [
+      {
+       "id": 42010,
+       "n": "1",
+       "eon": null,
+       "sbv": "0.5",
+       "otoi": "1q1*0.5",
+       "o": "1.75",
+       "su": false,
+       "ord": 14,
+       "col": 1
+      },
+      {
+       "id": 42012,
+       "n": "2",
+       "eon": null,
+       "sbv": "-0.5",
+       "otoi": "1q2*-0.5",
+       "o": "1.90",
+       "su": false,
+       "ord": 14,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 367,
+     "n": "2nd Quarter - Handicap",
+     "c": 1,
+     "oti": "_367",
+     "m": [
+      {
+       "id": 42015,
+       "n": "1",
+       "eon": null,
+       "sbv": "0.5",
+       "otoi": "2q1*0.5",
+       "o": "1.70",
+       "su": false,
+       "ord": 13,
+       "col": 1
+      },
+      {
+       "id": 42014,
+       "n": "2",
+       "eon": null,
+       "sbv": "-0.5",
+       "otoi": "2q2*-0.5",
+       "o": "1.90",
+       "su": false,
+       "ord": 13,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 368,
+     "n": "3rd Quarter - Handicap",
+     "c": 1,
+     "oti": "_368",
+     "m": [
+      {
+       "id": 42003,
+       "n": "1",
+       "eon": null,
+       "sbv": "0.5",
+       "otoi": "3q1*0.5",
+       "o": "1.75",
+       "su": false,
+       "ord": 13,
+       "col": 1
+      },
+      {
+       "id": 42000,
+       "n": "2",
+       "eon": null,
+       "sbv": "-0.5",
+       "otoi": "3q2*-0.5",
+       "o": "1.85",
+       "su": false,
+       "ord": 13,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 369,
+     "n": "4th Quarter -Handicap",
+     "c": 1,
+     "oti": "_369",
+     "m": [
+      {
+       "id": 42013,
+       "n": "1",
+       "eon": null,
+       "sbv": "0.5",
+       "otoi": "4q1*0.5",
+       "o": "1.75",
+       "su": false,
+       "ord": 10,
+       "col": 1
+      },
+      {
+       "id": 42004,
+       "n": "2",
+       "eon": null,
+       "sbv": "-0.5",
+       "otoi": "4q2*-0.5",
+       "o": "1.85",
+       "su": false,
+       "ord": 10,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 358,
+     "n": "1st Quarter  - Empate sem apostas",
+     "c": 1,
+     "oti": "124",
+     "m": [
+      {
+       "id": 36892,
+       "n": "1",
+       "eon": null,
+       "otoi": "1qd2",
+       "o": "1.90",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 36888,
+       "n": "2",
+       "eon": null,
+       "otoi": "1qd1",
+       "o": "1.80",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 359,
+     "n": "2nd Quarter - Empate sem apostas",
+     "c": 1,
+     "oti": "127",
+     "m": [
+      {
+       "id": 36900,
+       "n": "1",
+       "eon": null,
+       "otoi": "2qd1",
+       "o": "1.85",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 36904,
+       "n": "2",
+       "eon": null,
+       "otoi": "2qd2",
+       "o": "1.85",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 360,
+     "n": "3rd Quarter - Empate sem apostas",
+     "c": 1,
+     "oti": "130",
+     "m": [
+      {
+       "id": 36887,
+       "n": "1",
+       "eon": null,
+       "otoi": "3qd1",
+       "o": "1.90",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 36890,
+       "n": "2",
+       "eon": null,
+       "otoi": "3qd2",
+       "o": "1.80",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 361,
+     "n": "4th Quarter - Empate sem apostas",
+     "c": 1,
+     "oti": "133",
+     "m": [
+      {
+       "id": 36902,
+       "n": "1",
+       "eon": null,
+       "otoi": "4qd2",
+       "o": "1.90",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 36897,
+       "n": "2",
+       "eon": null,
+       "otoi": "4qd1",
+       "o": "1.80",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 370,
+     "n": "1st Quarter  - Pontos par/ímpar",
+     "c": 3,
+     "oti": "125",
+     "m": [
+      {
+       "id": 36987,
+       "n": "IMPAR",
+       "eon": null,
+       "otoi": "1qo",
+       "o": "1.80",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 36991,
+       "n": "PAR",
+       "eon": null,
+       "otoi": "1qe",
+       "o": "1.80",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 371,
+     "n": "2nd Quarter - Pontos par/ímpar",
+     "c": 3,
+     "oti": "128",
+     "m": [
+      {
+       "id": 36988,
+       "n": "IMPAR",
+       "eon": null,
+       "otoi": "2qe",
+       "o": "1.80",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 36986,
+       "n": "PAR",
+       "eon": null,
+       "otoi": "2qo",
+       "o": "1.80",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 372,
+     "n": "3rd Quarter - Pontos par/ímpar",
+     "c": 3,
+     "oti": "131",
+     "m": [
+      {
+       "id": 36993,
+       "n": "IMPAR",
+       "eon": null,
+       "otoi": "3qo",
+       "o": "1.80",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 36995,
+       "n": "PAR",
+       "eon": null,
+       "otoi": "3qe",
+       "o": "1.80",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 373,
+     "n": "4th Quarter - Pontos par/ímpar",
+     "c": 3,
+     "oti": "134",
+     "m": [
+      {
+       "id": 36994,
+       "n": "IMPAR",
+       "eon": null,
+       "otoi": "4qe",
+       "o": "1.80",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 36989,
+       "n": "PAR",
+       "eon": null,
+       "otoi": "4qo",
+       "o": "1.80",
+       "su": false,
+       "ord": 1,
+       "col": 2
+      }
+     ]
+    },
+    {
+     "id": 10259,
+     "n": "1º Quarto - Chance Dupla",
+     "c": 1,
+     "oti": "10259",
+     "m": [
+      {
+       "id": 329532,
+       "n": "1X",
+       "eon": null,
+       "o": "1.70",
+       "su": false,
+       "ord": 1,
+       "col": 1
+      },
+      {
+       "id": 329623,
+       "n": "X2",
+       "eon": null,
+       "o": "1.62",
+       "su": false,
+       "ord": 1,
+       "col": 3
+      }
+     ]
+    }
+   ],
+   "ou": []
+  }
+ ],
+ "brid": null,
+ "obrid": null,
+ "fpc": null,
+ "ati": null,
+ "hti": null,
+ "tus": false,
+ "mid": 7163937,
+ "ec": null,
+ "at": null,
+ "ht": null,
+ "d": null,
+ "scsid": null,
+ "scfi": null,
+ "sm": null,
+ "su": false,
+ "lc": false,
+ "tln": null,
+ "hln": null,
+ "aln": null
+}

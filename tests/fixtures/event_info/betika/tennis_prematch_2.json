@@ -1,0 +1,111 @@
+{
+ "data": [
+  {
+   "home_team": "Zverev, Alexander",
+   "game_id": "47676",
+   "match_id": "12108254",
+   "away_team": "Shelton, Ben",
+   "start_time": "2026-11-17 22:30:00",
+   "competition_name": "ATP World Tour Finals Men Singles",
+   "category": "ATP",
+   "parent_match_id": "76736442",
+   "side_bets": "18",
+   "home_odd": "1.52",
+   "neutral_odd": null,
+   "away_odd": "2.48",
+   "competition_id": "21873",
+   "sport_id": "28",
+   "sport_name": "Tennis",
+   "is_esport": false,
+   "is_srl": false,
+   "provider": "sr",
+   "odds": [
+    {
+     "sub_type_id": "186",
+     "name": "WINNER",
+     "odds": [
+      {
+       "display": "1",
+       "odd_key": "Zverev, Alexander",
+       "odd_def": "{$competitor1}",
+       "odd_value": "1.52",
+       "special_bet_value": "",
+       "outcome_id": "4",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "2",
+       "odd_key": "Shelton, Ben",
+       "odd_def": "{$competitor2}",
+       "odd_value": "2.48",
+       "special_bet_value": "",
+       "outcome_id": "5",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      }
+     ]
+    },
+    {
+     "sub_type_id": "187",
+     "name": "GAME HANDICAP",
+     "odds": [
+      {
+       "display": "1 (-1.5)",
+       "odd_key": "Zverev, Alexander (-1.5)",
+       "odd_def": "{$competitor1} ({+hcp})",
+       "odd_value": "1.76",
+       "special_bet_value": "hcp=-1.5",
+       "outcome_id": "1714",
+       "parsed_special_bet_value": {
+        "hcp": "-1.5"
+       }
+      },
+      {
+       "display": "2 (+1.5)",
+       "odd_key": "Shelton, Ben (+1.5)",
+       "odd_def": "{$competitor2} ({-hcp})",
+       "odd_value": "2.03",
+       "special_bet_value": "hcp=-1.5",
+       "outcome_id": "1715",
+       "parsed_special_bet_value": {
+        "hcp": "-1.5"
+       }
+      }
+     ]
+    },
+    {
+     "sub_type_id": "189",
+     "name": "TOTAL GAMES",
+     "odds": [
+      {
+       "display": "OVER 25.5",
+       "odd_key": "over 25.5",
+       "odd_def": "over {total}",
+       "odd_value": "1.82",
+       "special_bet_value": "total=25.5",
+       "outcome_id": "12",
+       "parsed_special_bet_value": {
+        "total": "25.5"
+       }
+      },
+      {
+       "display": "UNDER 25.5",
+       "odd_key": "under 25.5",
+       "odd_def": "under {total}",
+       "odd_value": "1.96",
+       "special_bet_value": "total=25.5",
+       "outcome_id": "13",
+       "parsed_special_bet_value": {
+        "total": "25.5"
+       }
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "meta": {}
+}

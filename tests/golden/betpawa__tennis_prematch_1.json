@@ -1,0 +1,220 @@
+[
+ {
+  "canonical_id": "handicap_games_tennis_match",
+  "lines": {
+   "-0.5": [
+    {
+     "canonical_name": "home",
+     "odds": 1.98,
+     "platform_name": "1",
+     "true_probability": 0.47560068424813695,
+     "void_probability": 0.0
+    },
+    {
+     "canonical_name": "away",
+     "odds": 1.8,
+     "platform_name": "2",
+     "true_probability": 0.5243993160059962,
+     "void_probability": 0.0
+    }
+   ],
+   "-1.5": [
+    {
+     "canonical_name": "home",
+     "odds": 2.13,
+     "platform_name": "1",
+     "true_probability": 0.438109,
+     "void_probability": 0.0
+    },
+    {
+     "canonical_name": "away",
+     "odds": 1.68,
+     "platform_name": "2",
+     "true_probability": 0.561891,
+     "void_probability": 0.0
+    }
+   ],
+   "0.5": [
+    {
+     "canonical_name": "home",
+     "odds": 1.84,
+     "platform_name": "1",
+     "true_probability": 0.512446,
+     "void_probability": 0.0
+    },
+    {
+     "canonical_name": "away",
+     "odds": 1.93,
+     "platform_name": "2",
+     "true_probability": 0.487554,
+     "void_probability": 0.0
+    }
+   ],
+   "1.5": [
+    {
+     "canonical_name": "home",
+     "odds": 1.72,
+     "platform_name": "1",
+     "true_probability": 0.550085,
+     "void_probability": 0.0
+    },
+    {
+     "canonical_name": "away",
+     "odds": 2.08,
+     "platform_name": "2",
+     "true_probability": 0.449915,
+     "void_probability": 0.0
+    }
+   ],
+   "2.5": [
+    {
+     "canonical_name": "home",
+     "odds": 1.57,
+     "platform_name": "1",
+     "true_probability": 0.604167,
+     "void_probability": 0.0
+    },
+    {
+     "canonical_name": "away",
+     "odds": 2.35,
+     "platform_name": "2",
+     "true_probability": 0.395833,
+     "void_probability": 0.0
+    }
+   ]
+  },
+  "name": "Game Handicap - Match",
+  "outcomes": []
+ },
+ {
+  "canonical_id": "moneyline_tennis_match",
+  "lines": null,
+  "name": "Moneyline - Match",
+  "outcomes": [
+   {
+    "canonical_name": "home",
+    "odds": 1.95,
+    "platform_name": "1",
+    "true_probability": 0.493996,
+    "void_probability": 0.0
+   },
+   {
+    "canonical_name": "away",
+    "odds": 1.9,
+    "platform_name": "2",
+    "true_probability": 0.506004,
+    "void_probability": 0.0
+   }
+  ]
+ },
+ {
+  "canonical_id": "over_under_games_tennis_match",
+  "lines": {
+   "20.5": [
+    {
+     "canonical_name": "over",
+     "odds": 1.48,
+     "platform_name": "Over",
+     "true_probability": 0.64807,
+     "void_probability": 0.0
+    },
+    {
+     "canonical_name": "under",
+     "odds": 2.65,
+     "platform_name": "Under",
+     "true_probability": 0.35193,
+     "void_probability": 0.0
+    }
+   ],
+   "21.5": [
+    {
+     "canonical_name": "over",
+     "odds": 1.62,
+     "platform_name": "Over",
+     "true_probability": 0.59239,
+     "void_probability": 0.0
+    },
+    {
+     "canonical_name": "under",
+     "odds": 2.3,
+     "platform_name": "Under",
+     "true_probability": 0.40761,
+     "void_probability": 0.0
+    }
+   ],
+   "22.5": [
+    {
+     "canonical_name": "over",
+     "odds": 1.87,
+     "platform_name": "Over",
+     "true_probability": 0.510715,
+     "void_probability": 0.0
+    },
+    {
+     "canonical_name": "under",
+     "odds": 1.94,
+     "platform_name": "Under",
+     "true_probability": 0.489285,
+     "void_probability": 0.0
+    }
+   ],
+   "23.5": [
+    {
+     "canonical_name": "over",
+     "odds": 2.1,
+     "platform_name": "Over",
+     "true_probability": 0.449933,
+     "void_probability": 0.0
+    },
+    {
+     "canonical_name": "under",
+     "odds": 1.74,
+     "platform_name": "Under",
+     "true_probability": 0.550067,
+     "void_probability": 0.0
+    }
+   ],
+   "24.5": [
+    {
+     "canonical_name": "over",
+     "odds": 2.16,
+     "platform_name": "Over",
+     "true_probability": 0.436131,
+     "void_probability": 0.0
+    },
+    {
+     "canonical_name": "under",
+     "odds": 1.69,
+     "platform_name": "Under",
+     "true_probability": 0.563869,
+     "void_probability": 0.0
+    }
+   ]
+  },
+  "name": "Over/Under Total Games - Match",
+  "outcomes": []
+ },
+ {
+  "canonical_id": "over_under_sets_tennis_match",
+  "lines": {
+   "2.5": [
+    {
+     "canonical_name": "over",
+     "odds": 2.23,
+     "platform_name": "Over",
+     "true_probability": 0.408311,
+     "void_probability": 0.0
+    },
+    {
+     "canonical_name": "under",
+     "odds": 1.58,
+     "platform_name": "Under",
+     "true_probability": 0.591689,
+     "void_probability": 0.0
+    }
+   ]
+  },
+  "name": "Over/Under Total Sets - Match",
+  "outcomes": []
+ }
+]

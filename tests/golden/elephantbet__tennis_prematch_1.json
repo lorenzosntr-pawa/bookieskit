@@ -1,0 +1,78 @@
+[
+ {
+  "canonical_id": "moneyline_tennis_match",
+  "lines": null,
+  "name": "Moneyline - Match",
+  "outcomes": [
+   {
+    "canonical_name": "home",
+    "odds": 1.85,
+    "platform_name": "1",
+    "true_probability": null,
+    "void_probability": null
+   },
+   {
+    "canonical_name": "away",
+    "odds": 1.8,
+    "platform_name": "2",
+    "true_probability": null,
+    "void_probability": null
+   }
+  ]
+ },
+ {
+  "canonical_id": "over_under_games_tennis_match",
+  "lines": {
+   "21.5": [
+    {
+     "canonical_name": "over",
+     "odds": 1.55,
+     "platform_name": "Acima",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "under",
+     "odds": 2.2,
+     "platform_name": "Abaixo",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ],
+   "22.5": [
+    {
+     "canonical_name": "over",
+     "odds": 1.8,
+     "platform_name": "Acima",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "under",
+     "odds": 1.85,
+     "platform_name": "Abaixo",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ],
+   "23.5": [
+    {
+     "canonical_name": "over",
+     "odds": 2.0,
+     "platform_name": "Acima",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "under",
+     "odds": 1.65,
+     "platform_name": "Abaixo",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ]
+  },
+  "name": "Over/Under Total Games - Match",
+  "outcomes": []
+ }
+]

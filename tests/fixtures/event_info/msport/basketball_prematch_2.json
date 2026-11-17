@@ -1,0 +1,5189 @@
+{
+ "bizCode": 10000,
+ "data": {
+  "allScores": null,
+  "awayTeam": "Valencia Basket",
+  "awayTeamIcon": "",
+  "awayTeamId": "sr:competitor:3545",
+  "bookingStatus": "Booked",
+  "category": "International",
+  "categoryIcon": "https://static.msport.com/public/up/9cac06bc-0223-41c9-9e0f-a768b416a92f.png",
+  "categoryId": "sr:category:103",
+  "eventId": "sr:match:73263172",
+  "eventMatchPeriod": null,
+  "eventMatchStatus": "Not start",
+  "hasChatroom": false,
+  "hasLive": 1,
+  "hasLiveCoverage": 0,
+  "hasLiveWidget": 1,
+  "hasVoucher": 0,
+  "homeTeam": "KK Partizan Belgrade",
+  "homeTeamIcon": "",
+  "homeTeamId": "sr:competitor:6637",
+  "howToPlay": null,
+  "liveAudioStreamUrl": null,
+  "markets": [
+   {
+    "betAssistWidget": "moneyLine",
+    "description": "Winner (incl. overtime)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 219,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Winner (incl. OT)",
+    "outcomes": [
+     {
+      "description": "Home",
+      "id": "4",
+      "isActive": 1,
+      "odds": "1.98",
+      "probability": "0.4804"
+     },
+     {
+      "description": "Away",
+      "id": "5",
+      "isActive": 1,
+      "odds": "1.84",
+      "probability": "0.5196"
+     }
+    ],
+    "presentationType": 5,
+    "priority": 1,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "",
+    "status": 0,
+    "title": "1,2",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "spread",
+    "description": "Handicap (incl. overtime)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 223,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Handicap (incl. overtime)",
+    "outcomes": [
+     {
+      "description": "Home (-9.5)",
+      "id": "1714",
+      "isActive": 1,
+      "odds": "4.60",
+      "probability": "0.1915"
+     },
+     {
+      "description": "Away (+9.5)",
+      "id": "1715",
+      "isActive": 1,
+      "odds": "1.20",
+      "probability": "0.8085"
+     }
+    ],
+    "presentationType": 10,
+    "priority": 2,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "hcp=-9.5",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "spread",
+    "description": "Handicap (incl. overtime)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 223,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Handicap (incl. overtime)",
+    "outcomes": [
+     {
+      "description": "Home (-8.5)",
+      "id": "1714",
+      "isActive": 1,
+      "odds": "4.10",
+      "probability": "0.2181"
+     },
+     {
+      "description": "Away (+8.5)",
+      "id": "1715",
+      "isActive": 1,
+      "odds": "1.24",
+      "probability": "0.7819"
+     }
+    ],
+    "presentationType": 10,
+    "priority": 2,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "hcp=-8.5",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "spread",
+    "description": "Handicap (incl. overtime)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 223,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Handicap (incl. overtime)",
+    "outcomes": [
+     {
+      "description": "Home (-7.5)",
+      "id": "1714",
+      "isActive": 1,
+      "odds": "3.65",
+      "probability": "0.2467"
+     },
+     {
+      "description": "Away (+7.5)",
+      "id": "1715",
+      "isActive": 1,
+      "odds": "1.29",
+      "probability": "0.7533"
+     }
+    ],
+    "presentationType": 10,
+    "priority": 2,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "hcp=-7.5",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "spread",
+    "description": "Handicap (incl. overtime)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 223,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Handicap (incl. overtime)",
+    "outcomes": [
+     {
+      "description": "Home (-6.5)",
+      "id": "1714",
+      "isActive": 1,
+      "odds": "3.30",
+      "probability": "0.2777"
+     },
+     {
+      "description": "Away (+6.5)",
+      "id": "1715",
+      "isActive": 1,
+      "odds": "1.34",
+      "probability": "0.7223"
+     }
+    ],
+    "presentationType": 10,
+    "priority": 2,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "hcp=-6.5",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "spread",
+    "description": "Handicap (incl. overtime)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 223,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Handicap (incl. overtime)",
+    "outcomes": [
+     {
+      "description": "Home (-5.5)",
+      "id": "1714",
+      "isActive": 1,
+      "odds": "2.95",
+      "probability": "0.3121"
+     },
+     {
+      "description": "Away (+5.5)",
+      "id": "1715",
+      "isActive": 1,
+      "odds": "1.40",
+      "probability": "0.6879"
+     }
+    ],
+    "presentationType": 10,
+    "priority": 2,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "hcp=-5.5",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "spread",
+    "description": "Handicap (incl. overtime)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 223,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Handicap (incl. overtime)",
+    "outcomes": [
+     {
+      "description": "Home (-4.5)",
+      "id": "1714",
+      "isActive": 1,
+      "odds": "2.70",
+      "probability": "0.3471"
+     },
+     {
+      "description": "Away (+4.5)",
+      "id": "1715",
+      "isActive": 1,
+      "odds": "1.48",
+      "probability": "0.6529"
+     }
+    ],
+    "presentationType": 10,
+    "priority": 2,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "hcp=-4.5",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "spread",
+    "description": "Handicap (incl. overtime)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 223,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Handicap (incl. overtime)",
+    "outcomes": [
+     {
+      "description": "Home (-3.5)",
+      "id": "1714",
+      "isActive": 1,
+      "odds": "2.46",
+      "probability": "0.3819"
+     },
+     {
+      "description": "Away (+3.5)",
+      "id": "1715",
+      "isActive": 1,
+      "odds": "1.56",
+      "probability": "0.6181"
+     }
+    ],
+    "presentationType": 10,
+    "priority": 2,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "hcp=-3.5",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "spread",
+    "description": "Handicap (incl. overtime)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 223,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Handicap (incl. overtime)",
+    "outcomes": [
+     {
+      "description": "Home (-2.5)",
+      "id": "1714",
+      "isActive": 1,
+      "odds": "2.27",
+      "probability": "0.4162"
+     },
+     {
+      "description": "Away (+2.5)",
+      "id": "1715",
+      "isActive": 1,
+      "odds": "1.64",
+      "probability": "0.5838"
+     }
+    ],
+    "presentationType": 10,
+    "priority": 2,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "hcp=-2.5",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "spread",
+    "description": "Handicap (incl. overtime)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 223,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Handicap (incl. overtime)",
+    "outcomes": [
+     {
+      "description": "Home (-1.5)",
+      "id": "1714",
+      "isActive": 1,
+      "odds": "2.09",
+      "probability": "0.4527"
+     },
+     {
+      "description": "Away (+1.5)",
+      "id": "1715",
+      "isActive": 1,
+      "odds": "1.75",
+      "probability": "0.5473"
+     }
+    ],
+    "presentationType": 10,
+    "priority": 2,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "hcp=-1.5",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "spread",
+    "description": "Handicap (incl. overtime)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 223,
+    "isFavourite": 1,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Handicap (incl. overtime)",
+    "outcomes": [
+     {
+      "description": "Home (+1.5)",
+      "id": "1714",
+      "isActive": 1,
+      "odds": "1.87",
+      "probability": "0.5085"
+     },
+     {
+      "description": "Away (-1.5)",
+      "id": "1715",
+      "isActive": 1,
+      "odds": "1.94",
+      "probability": "0.4915"
+     }
+    ],
+    "presentationType": 10,
+    "priority": 2,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "hcp=1.5",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "spread",
+    "description": "Handicap (incl. overtime)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 223,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Handicap (incl. overtime)",
+    "outcomes": [
+     {
+      "description": "Home (+2.5)",
+      "id": "1714",
+      "isActive": 1,
+      "odds": "1.75",
+      "probability": "0.5453"
+     },
+     {
+      "description": "Away (-2.5)",
+      "id": "1715",
+      "isActive": 1,
+      "odds": "2.08",
+      "probability": "0.4547"
+     }
+    ],
+    "presentationType": 10,
+    "priority": 2,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "hcp=2.5",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "spread",
+    "description": "Handicap (incl. overtime)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 223,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Handicap (incl. overtime)",
+    "outcomes": [
+     {
+      "description": "Home (+3.5)",
+      "id": "1714",
+      "isActive": 1,
+      "odds": "1.65",
+      "probability": "0.5804"
+     },
+     {
+      "description": "Away (-3.5)",
+      "id": "1715",
+      "isActive": 1,
+      "odds": "2.25",
+      "probability": "0.4196"
+     }
+    ],
+    "presentationType": 10,
+    "priority": 2,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "hcp=3.5",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "spread",
+    "description": "Handicap (incl. overtime)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 223,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Handicap (incl. overtime)",
+    "outcomes": [
+     {
+      "description": "Home (+4.5)",
+      "id": "1714",
+      "isActive": 1,
+      "odds": "1.56",
+      "probability": "0.6165"
+     },
+     {
+      "description": "Away (-4.5)",
+      "id": "1715",
+      "isActive": 1,
+      "odds": "2.45",
+      "probability": "0.3835"
+     }
+    ],
+    "presentationType": 10,
+    "priority": 2,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "hcp=4.5",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "spread",
+    "description": "Handicap (incl. overtime)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 223,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Handicap (incl. overtime)",
+    "outcomes": [
+     {
+      "description": "Home (+5.5)",
+      "id": "1714",
+      "isActive": 1,
+      "odds": "1.47",
+      "probability": "0.6535"
+     },
+     {
+      "description": "Away (-5.5)",
+      "id": "1715",
+      "isActive": 1,
+      "odds": "2.70",
+      "probability": "0.3465"
+     }
+    ],
+    "presentationType": 10,
+    "priority": 2,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "hcp=5.5",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "spread",
+    "description": "Handicap (incl. overtime)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 223,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Handicap (incl. overtime)",
+    "outcomes": [
+     {
+      "description": "Home (+6.5)",
+      "id": "1714",
+      "isActive": 1,
+      "odds": "1.40",
+      "probability": "0.6901"
+     },
+     {
+      "description": "Away (-6.5)",
+      "id": "1715",
+      "isActive": 1,
+      "odds": "3.00",
+      "probability": "0.3099"
+     }
+    ],
+    "presentationType": 10,
+    "priority": 2,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "hcp=6.5",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "spread",
+    "description": "Handicap (incl. overtime)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 223,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Handicap (incl. overtime)",
+    "outcomes": [
+     {
+      "description": "Home (+7.5)",
+      "id": "1714",
+      "isActive": 1,
+      "odds": "1.34",
+      "probability": "0.7228"
+     },
+     {
+      "description": "Away (-7.5)",
+      "id": "1715",
+      "isActive": 1,
+      "odds": "3.30",
+      "probability": "0.2772"
+     }
+    ],
+    "presentationType": 10,
+    "priority": 2,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "hcp=7.5",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "spread",
+    "description": "Handicap (incl. overtime)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 223,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Handicap (incl. overtime)",
+    "outcomes": [
+     {
+      "description": "Home (+8.5)",
+      "id": "1714",
+      "isActive": 1,
+      "odds": "1.29",
+      "probability": "0.7534"
+     },
+     {
+      "description": "Away (-8.5)",
+      "id": "1715",
+      "isActive": 1,
+      "odds": "3.65",
+      "probability": "0.2466"
+     }
+    ],
+    "presentationType": 10,
+    "priority": 2,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "hcp=8.5",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "spread",
+    "description": "Handicap (incl. overtime)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 223,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Handicap (incl. overtime)",
+    "outcomes": [
+     {
+      "description": "Home (+9.5)",
+      "id": "1714",
+      "isActive": 1,
+      "odds": "1.24",
+      "probability": "0.7821"
+     },
+     {
+      "description": "Away (-9.5)",
+      "id": "1715",
+      "isActive": 1,
+      "odds": "4.10",
+      "probability": "0.2179"
+     }
+    ],
+    "presentationType": 10,
+    "priority": 2,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "hcp=9.5",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "spread",
+    "description": "Handicap (incl. overtime)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 223,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Handicap (incl. overtime)",
+    "outcomes": [
+     {
+      "description": "Home (+10.5)",
+      "id": "1714",
+      "isActive": 1,
+      "odds": "1.20",
+      "probability": "0.8069"
+     },
+     {
+      "description": "Away (-10.5)",
+      "id": "1715",
+      "isActive": 1,
+      "odds": "4.60",
+      "probability": "0.1931"
+     }
+    ],
+    "presentationType": 10,
+    "priority": 2,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "hcp=10.5",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "spread",
+    "description": "Handicap (incl. overtime)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 223,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Handicap (incl. overtime)",
+    "outcomes": [
+     {
+      "description": "Home (+11.5)",
+      "id": "1714",
+      "isActive": 1,
+      "odds": "1.17",
+      "probability": "0.8291"
+     },
+     {
+      "description": "Away (-11.5)",
+      "id": "1715",
+      "isActive": 1,
+      "odds": "5.00",
+      "probability": "0.1709"
+     }
+    ],
+    "presentationType": 10,
+    "priority": 2,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "hcp=11.5",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "spread",
+    "description": "Handicap (incl. overtime)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 223,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Handicap (incl. overtime)",
+    "outcomes": [
+     {
+      "description": "Home (+12.5)",
+      "id": "1714",
+      "isActive": 1,
+      "odds": "1.14",
+      "probability": "0.8503"
+     },
+     {
+      "description": "Away (-12.5)",
+      "id": "1715",
+      "isActive": 1,
+      "odds": "5.60",
+      "probability": "0.1497"
+     }
+    ],
+    "presentationType": 10,
+    "priority": 2,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "hcp=12.5",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "totalPoints",
+    "description": "O/U (incl. OT)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 225,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "O/U (incl. OT)",
+    "outcomes": [
+     {
+      "description": "Over 163.5",
+      "id": "12",
+      "isActive": 1,
+      "odds": "1.24",
+      "probability": "0.7846"
+     },
+     {
+      "description": "Under 163.5",
+      "id": "13",
+      "isActive": 1,
+      "odds": "4.10",
+      "probability": "0.2154"
+     }
+    ],
+    "presentationType": 1,
+    "priority": 3,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "total=163.5",
+    "status": 0,
+    "title": "Points,Over,Under",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "totalPoints",
+    "description": "O/U (incl. OT)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 225,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "O/U (incl. OT)",
+    "outcomes": [
+     {
+      "description": "Over 164.5",
+      "id": "12",
+      "isActive": 1,
+      "odds": "1.27",
+      "probability": "0.7654"
+     },
+     {
+      "description": "Under 164.5",
+      "id": "13",
+      "isActive": 1,
+      "odds": "3.85",
+      "probability": "0.2346"
+     }
+    ],
+    "presentationType": 1,
+    "priority": 3,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "total=164.5",
+    "status": 0,
+    "title": "Points,Over,Under",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "totalPoints",
+    "description": "O/U (incl. OT)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 225,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "O/U (incl. OT)",
+    "outcomes": [
+     {
+      "description": "Over 165.5",
+      "id": "12",
+      "isActive": 1,
+      "odds": "1.30",
+      "probability": "0.7455"
+     },
+     {
+      "description": "Under 165.5",
+      "id": "13",
+      "isActive": 1,
+      "odds": "3.55",
+      "probability": "0.2545"
+     }
+    ],
+    "presentationType": 1,
+    "priority": 3,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "total=165.5",
+    "status": 0,
+    "title": "Points,Over,Under",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "totalPoints",
+    "description": "O/U (incl. OT)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 225,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "O/U (incl. OT)",
+    "outcomes": [
+     {
+      "description": "Over 166.5",
+      "id": "12",
+      "isActive": 1,
+      "odds": "1.33",
+      "probability": "0.7249"
+     },
+     {
+      "description": "Under 166.5",
+      "id": "13",
+      "isActive": 1,
+      "odds": "3.30",
+      "probability": "0.2751"
+     }
+    ],
+    "presentationType": 1,
+    "priority": 3,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "total=166.5",
+    "status": 0,
+    "title": "Points,Over,Under",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "totalPoints",
+    "description": "O/U (incl. OT)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 225,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "O/U (incl. OT)",
+    "outcomes": [
+     {
+      "description": "Over 167.5",
+      "id": "12",
+      "isActive": 1,
+      "odds": "1.37",
+      "probability": "0.7036"
+     },
+     {
+      "description": "Under 167.5",
+      "id": "13",
+      "isActive": 1,
+      "odds": "3.10",
+      "probability": "0.2964"
+     }
+    ],
+    "presentationType": 1,
+    "priority": 3,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "total=167.5",
+    "status": 0,
+    "title": "Points,Over,Under",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "totalPoints",
+    "description": "O/U (incl. OT)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 225,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "O/U (incl. OT)",
+    "outcomes": [
+     {
+      "description": "Over 168.5",
+      "id": "12",
+      "isActive": 1,
+      "odds": "1.42",
+      "probability": "0.6818"
+     },
+     {
+      "description": "Under 168.5",
+      "id": "13",
+      "isActive": 1,
+      "odds": "2.90",
+      "probability": "0.3182"
+     }
+    ],
+    "presentationType": 1,
+    "priority": 3,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "total=168.5",
+    "status": 0,
+    "title": "Points,Over,Under",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "totalPoints",
+    "description": "O/U (incl. OT)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 225,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "O/U (incl. OT)",
+    "outcomes": [
+     {
+      "description": "Over 169.5",
+      "id": "12",
+      "isActive": 1,
+      "odds": "1.46",
+      "probability": "0.6590"
+     },
+     {
+      "description": "Under 169.5",
+      "id": "13",
+      "isActive": 1,
+      "odds": "2.75",
+      "probability": "0.3410"
+     }
+    ],
+    "presentationType": 1,
+    "priority": 3,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "total=169.5",
+    "status": 0,
+    "title": "Points,Over,Under",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "totalPoints",
+    "description": "O/U (incl. OT)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 225,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "O/U (incl. OT)",
+    "outcomes": [
+     {
+      "description": "Over 170.5",
+      "id": "12",
+      "isActive": 1,
+      "odds": "1.51",
+      "probability": "0.6361"
+     },
+     {
+      "description": "Under 170.5",
+      "id": "13",
+      "isActive": 1,
+      "odds": "2.55",
+      "probability": "0.3639"
+     }
+    ],
+    "presentationType": 1,
+    "priority": 3,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "total=170.5",
+    "status": 0,
+    "title": "Points,Over,Under",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "totalPoints",
+    "description": "O/U (incl. OT)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 225,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "O/U (incl. OT)",
+    "outcomes": [
+     {
+      "description": "Over 171.5",
+      "id": "12",
+      "isActive": 1,
+      "odds": "1.57",
+      "probability": "0.6127"
+     },
+     {
+      "description": "Under 171.5",
+      "id": "13",
+      "isActive": 1,
+      "odds": "2.42",
+      "probability": "0.3873"
+     }
+    ],
+    "presentationType": 1,
+    "priority": 3,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "total=171.5",
+    "status": 0,
+    "title": "Points,Over,Under",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "totalPoints",
+    "description": "O/U (incl. OT)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 225,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "O/U (incl. OT)",
+    "outcomes": [
+     {
+      "description": "Over 172.5",
+      "id": "12",
+      "isActive": 1,
+      "odds": "1.63",
+      "probability": "0.5889"
+     },
+     {
+      "description": "Under 172.5",
+      "id": "13",
+      "isActive": 1,
+      "odds": "2.29",
+      "probability": "0.4111"
+     }
+    ],
+    "presentationType": 1,
+    "priority": 3,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "total=172.5",
+    "status": 0,
+    "title": "Points,Over,Under",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "totalPoints",
+    "description": "O/U (incl. OT)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 225,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "O/U (incl. OT)",
+    "outcomes": [
+     {
+      "description": "Over 173.5",
+      "id": "12",
+      "isActive": 1,
+      "odds": "1.70",
+      "probability": "0.5650"
+     },
+     {
+      "description": "Under 173.5",
+      "id": "13",
+      "isActive": 1,
+      "odds": "2.17",
+      "probability": "0.4350"
+     }
+    ],
+    "presentationType": 1,
+    "priority": 3,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "total=173.5",
+    "status": 0,
+    "title": "Points,Over,Under",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "totalPoints",
+    "description": "O/U (incl. OT)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 225,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "O/U (incl. OT)",
+    "outcomes": [
+     {
+      "description": "Over 174.5",
+      "id": "12",
+      "isActive": 1,
+      "odds": "1.77",
+      "probability": "0.5409"
+     },
+     {
+      "description": "Under 174.5",
+      "id": "13",
+      "isActive": 1,
+      "odds": "2.07",
+      "probability": "0.4591"
+     }
+    ],
+    "presentationType": 1,
+    "priority": 3,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "total=174.5",
+    "status": 0,
+    "title": "Points,Over,Under",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "totalPoints",
+    "description": "O/U (incl. OT)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 225,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "O/U (incl. OT)",
+    "outcomes": [
+     {
+      "description": "Over 175.5",
+      "id": "12",
+      "isActive": 1,
+      "odds": "1.85",
+      "probability": "0.5168"
+     },
+     {
+      "description": "Under 175.5",
+      "id": "13",
+      "isActive": 1,
+      "odds": "1.97",
+      "probability": "0.4832"
+     }
+    ],
+    "presentationType": 1,
+    "priority": 3,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "total=175.5",
+    "status": 0,
+    "title": "Points,Over,Under",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "totalPoints",
+    "description": "O/U (incl. OT)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 225,
+    "isFavourite": 1,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "O/U (incl. OT)",
+    "outcomes": [
+     {
+      "description": "Over 176.5",
+      "id": "12",
+      "isActive": 1,
+      "odds": "1.93",
+      "probability": "0.4927"
+     },
+     {
+      "description": "Under 176.5",
+      "id": "13",
+      "isActive": 1,
+      "odds": "1.88",
+      "probability": "0.5073"
+     }
+    ],
+    "presentationType": 1,
+    "priority": 3,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "total=176.5",
+    "status": 0,
+    "title": "Points,Over,Under",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "totalPoints",
+    "description": "O/U (incl. OT)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 225,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "O/U (incl. OT)",
+    "outcomes": [
+     {
+      "description": "Over 177.5",
+      "id": "12",
+      "isActive": 1,
+      "odds": "2.02",
+      "probability": "0.4689"
+     },
+     {
+      "description": "Under 177.5",
+      "id": "13",
+      "isActive": 1,
+      "odds": "1.80",
+      "probability": "0.5311"
+     }
+    ],
+    "presentationType": 1,
+    "priority": 3,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "total=177.5",
+    "status": 0,
+    "title": "Points,Over,Under",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "totalPoints",
+    "description": "O/U (incl. OT)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 225,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "O/U (incl. OT)",
+    "outcomes": [
+     {
+      "description": "Over 178.5",
+      "id": "12",
+      "isActive": 1,
+      "odds": "2.13",
+      "probability": "0.4451"
+     },
+     {
+      "description": "Under 178.5",
+      "id": "13",
+      "isActive": 1,
+      "odds": "1.72",
+      "probability": "0.5549"
+     }
+    ],
+    "presentationType": 1,
+    "priority": 3,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "total=178.5",
+    "status": 0,
+    "title": "Points,Over,Under",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "totalPoints",
+    "description": "O/U (incl. OT)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 225,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "O/U (incl. OT)",
+    "outcomes": [
+     {
+      "description": "Over 179.5",
+      "id": "12",
+      "isActive": 1,
+      "odds": "2.24",
+      "probability": "0.4217"
+     },
+     {
+      "description": "Under 179.5",
+      "id": "13",
+      "isActive": 1,
+      "odds": "1.66",
+      "probability": "0.5783"
+     }
+    ],
+    "presentationType": 1,
+    "priority": 3,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "total=179.5",
+    "status": 0,
+    "title": "Points,Over,Under",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "totalPoints",
+    "description": "O/U (incl. OT)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 225,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "O/U (incl. OT)",
+    "outcomes": [
+     {
+      "description": "Over 180.5",
+      "id": "12",
+      "isActive": 1,
+      "odds": "2.36",
+      "probability": "0.3988"
+     },
+     {
+      "description": "Under 180.5",
+      "id": "13",
+      "isActive": 1,
+      "odds": "1.60",
+      "probability": "0.6012"
+     }
+    ],
+    "presentationType": 1,
+    "priority": 3,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "total=180.5",
+    "status": 0,
+    "title": "Points,Over,Under",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "totalPoints",
+    "description": "O/U (incl. OT)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 225,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "O/U (incl. OT)",
+    "outcomes": [
+     {
+      "description": "Over 181.5",
+      "id": "12",
+      "isActive": 1,
+      "odds": "2.49",
+      "probability": "0.3763"
+     },
+     {
+      "description": "Under 181.5",
+      "id": "13",
+      "isActive": 1,
+      "odds": "1.54",
+      "probability": "0.6237"
+     }
+    ],
+    "presentationType": 1,
+    "priority": 3,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "total=181.5",
+    "status": 0,
+    "title": "Points,Over,Under",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "totalPoints",
+    "description": "O/U (incl. OT)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 225,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "O/U (incl. OT)",
+    "outcomes": [
+     {
+      "description": "Over 182.5",
+      "id": "12",
+      "isActive": 1,
+      "odds": "2.65",
+      "probability": "0.3543"
+     },
+     {
+      "description": "Under 182.5",
+      "id": "13",
+      "isActive": 1,
+      "odds": "1.49",
+      "probability": "0.6457"
+     }
+    ],
+    "presentationType": 1,
+    "priority": 3,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "total=182.5",
+    "status": 0,
+    "title": "Points,Over,Under",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "totalPoints",
+    "description": "O/U (incl. OT)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 225,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "O/U (incl. OT)",
+    "outcomes": [
+     {
+      "description": "Over 183.5",
+      "id": "12",
+      "isActive": 1,
+      "odds": "2.80",
+      "probability": "0.3330"
+     },
+     {
+      "description": "Under 183.5",
+      "id": "13",
+      "isActive": 1,
+      "odds": "1.45",
+      "probability": "0.6670"
+     }
+    ],
+    "presentationType": 1,
+    "priority": 3,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "total=183.5",
+    "status": 0,
+    "title": "Points,Over,Under",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "totalPoints",
+    "description": "O/U (incl. OT)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 225,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "O/U (incl. OT)",
+    "outcomes": [
+     {
+      "description": "Over 184.5",
+      "id": "12",
+      "isActive": 1,
+      "odds": "2.95",
+      "probability": "0.3123"
+     },
+     {
+      "description": "Under 184.5",
+      "id": "13",
+      "isActive": 1,
+      "odds": "1.40",
+      "probability": "0.6877"
+     }
+    ],
+    "presentationType": 1,
+    "priority": 3,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "total=184.5",
+    "status": 0,
+    "title": "Points,Over,Under",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "totalPoints",
+    "description": "O/U (incl. OT)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 225,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "O/U (incl. OT)",
+    "outcomes": [
+     {
+      "description": "Over 185.5",
+      "id": "12",
+      "isActive": 1,
+      "odds": "3.15",
+      "probability": "0.2924"
+     },
+     {
+      "description": "Under 185.5",
+      "id": "13",
+      "isActive": 1,
+      "odds": "1.37",
+      "probability": "0.7076"
+     }
+    ],
+    "presentationType": 1,
+    "priority": 3,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "total=185.5",
+    "status": 0,
+    "title": "Points,Over,Under",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "totalPoints",
+    "description": "O/U (incl. OT)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 225,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "O/U (incl. OT)",
+    "outcomes": [
+     {
+      "description": "Over 186.5",
+      "id": "12",
+      "isActive": 1,
+      "odds": "3.35",
+      "probability": "0.2730"
+     },
+     {
+      "description": "Under 186.5",
+      "id": "13",
+      "isActive": 1,
+      "odds": "1.33",
+      "probability": "0.7270"
+     }
+    ],
+    "presentationType": 1,
+    "priority": 3,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "total=186.5",
+    "status": 0,
+    "title": "Points,Over,Under",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "totalPoints",
+    "description": "O/U (incl. OT)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 225,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "O/U (incl. OT)",
+    "outcomes": [
+     {
+      "description": "Over 187.5",
+      "id": "12",
+      "isActive": 1,
+      "odds": "3.55",
+      "probability": "0.2546"
+     },
+     {
+      "description": "Under 187.5",
+      "id": "13",
+      "isActive": 1,
+      "odds": "1.30",
+      "probability": "0.7454"
+     }
+    ],
+    "presentationType": 1,
+    "priority": 3,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "total=187.5",
+    "status": 0,
+    "title": "Points,Over,Under",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "totalPoints",
+    "description": "O/U (incl. OT)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 225,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "O/U (incl. OT)",
+    "outcomes": [
+     {
+      "description": "Over 188.5",
+      "id": "12",
+      "isActive": 1,
+      "odds": "3.80",
+      "probability": "0.2369"
+     },
+     {
+      "description": "Under 188.5",
+      "id": "13",
+      "isActive": 1,
+      "odds": "1.27",
+      "probability": "0.7631"
+     }
+    ],
+    "presentationType": 1,
+    "priority": 3,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "total=188.5",
+    "status": 0,
+    "title": "Points,Over,Under",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "totalPoints",
+    "description": "O/U (incl. OT)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 225,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "O/U (incl. OT)",
+    "outcomes": [
+     {
+      "description": "Over 189.5",
+      "id": "12",
+      "isActive": 1,
+      "odds": "4.10",
+      "probability": "0.2200"
+     },
+     {
+      "description": "Under 189.5",
+      "id": "13",
+      "isActive": 1,
+      "odds": "1.24",
+      "probability": "0.7800"
+     }
+    ],
+    "presentationType": 1,
+    "priority": 3,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "total=189.5",
+    "status": 0,
+    "title": "Points,Over,Under",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": null,
+    "description": "1x2",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 1,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "1x2",
+    "outcomes": [
+     {
+      "description": "Home",
+      "id": "1",
+      "isActive": 1,
+      "odds": "2.09",
+      "probability": "0.4473"
+     },
+     {
+      "description": "Draw",
+      "id": "2",
+      "isActive": 1,
+      "odds": "13.00",
+      "probability": "0.0672"
+     },
+     {
+      "description": "Away",
+      "id": "3",
+      "isActive": 1,
+      "odds": "1.94",
+      "probability": "0.4855"
+     }
+    ],
+    "presentationType": 5,
+    "priority": 100,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "",
+    "status": 0,
+    "title": "1,X,2",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": null,
+    "description": "DNB",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 11,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "DNB",
+    "outcomes": [
+     {
+      "description": "Home",
+      "id": "4",
+      "isActive": 1,
+      "odds": "1.92",
+      "probability": "0.4795"
+     },
+     {
+      "description": "Away",
+      "id": "5",
+      "isActive": 1,
+      "odds": "1.78",
+      "probability": "0.5205"
+     }
+    ],
+    "presentationType": 5,
+    "priority": 100,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "",
+    "status": 0,
+    "title": "1,2",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": null,
+    "description": "HT/FT Result",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 47,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Halftime/fulltime",
+    "outcomes": [
+     {
+      "description": "Home/Home",
+      "id": "418",
+      "isActive": 1,
+      "odds": "2.80",
+      "probability": "0.3122"
+     },
+     {
+      "description": "Home/Draw",
+      "id": "420",
+      "isActive": 1,
+      "odds": "27.00",
+      "probability": "0.0314"
+     },
+     {
+      "description": "Home/Away",
+      "id": "422",
+      "isActive": 1,
+      "odds": "7.00",
+      "probability": "0.1224"
+     },
+     {
+      "description": "Draw/Home",
+      "id": "424",
+      "isActive": 1,
+      "odds": "45.00",
+      "probability": "0.0189"
+     },
+     {
+      "description": "Draw/Draw",
+      "id": "426",
+      "isActive": 1,
+      "odds": "101.00",
+      "probability": "0.0036"
+     },
+     {
+      "description": "Draw/Away",
+      "id": "428",
+      "isActive": 1,
+      "odds": "40.00",
+      "probability": "0.0201"
+     },
+     {
+      "description": "Away/Home",
+      "id": "430",
+      "isActive": 1,
+      "odds": "7.20",
+      "probability": "0.1166"
+     },
+     {
+      "description": "Away/Draw",
+      "id": "432",
+      "isActive": 1,
+      "odds": "26.00",
+      "probability": "0.0316"
+     },
+     {
+      "description": "Away/Away",
+      "id": "434",
+      "isActive": 1,
+      "odds": "2.60",
+      "probability": "0.3431"
+     }
+    ],
+    "presentationType": 3,
+    "priority": 100,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": null,
+    "description": "Will there be overtime",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 220,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Will there be overtime",
+    "outcomes": [
+     {
+      "description": "Yes",
+      "id": "74",
+      "isActive": 1,
+      "odds": "10.00",
+      "probability": "0.0669"
+     },
+     {
+      "description": "No",
+      "id": "76",
+      "isActive": 1,
+      "odds": "1.05",
+      "probability": "0.9331"
+     }
+    ],
+    "presentationType": 5,
+    "priority": 100,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": null,
+    "description": "Odd/Even (incl. overtime)",
+    "expand": 1,
+    "group": "Main",
+    "guidance": null,
+    "id": 229,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Odd/Even (incl. overtime)",
+    "outcomes": [
+     {
+      "description": "Odd",
+      "id": "70",
+      "isActive": 1,
+      "odds": "1.88",
+      "probability": "0.5072"
+     },
+     {
+      "description": "Even",
+      "id": "72",
+      "isActive": 1,
+      "odds": "1.93",
+      "probability": "0.4928"
+     }
+    ],
+    "presentationType": 5,
+    "priority": 100,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "total1stQuarter",
+    "description": "1st quarter - O/U",
+    "expand": 1,
+    "group": "Quarters",
+    "guidance": null,
+    "id": 236,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Quarter O/U",
+    "outcomes": [
+     {
+      "description": "Over 43.5",
+      "id": "12",
+      "isActive": 1,
+      "odds": "1.78",
+      "probability": "0.5374"
+     },
+     {
+      "description": "Under 43.5",
+      "id": "13",
+      "isActive": 1,
+      "odds": "2.05",
+      "probability": "0.4626"
+     }
+    ],
+    "presentationType": 5,
+    "priority": 4,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "total=43.5|quarternr=1",
+    "status": 0,
+    "title": "Points,Over,Under",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "total1stQuarter",
+    "description": "1st quarter - O/U",
+    "expand": 1,
+    "group": "Quarters",
+    "guidance": null,
+    "id": 236,
+    "isFavourite": 1,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Quarter O/U",
+    "outcomes": [
+     {
+      "description": "Over 44.5",
+      "id": "12",
+      "isActive": 1,
+      "odds": "1.97",
+      "probability": "0.4821"
+     },
+     {
+      "description": "Under 44.5",
+      "id": "13",
+      "isActive": 1,
+      "odds": "1.84",
+      "probability": "0.5179"
+     }
+    ],
+    "presentationType": 5,
+    "priority": 4,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "total=44.5|quarternr=1",
+    "status": 0,
+    "title": "Points,Over,Under",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "total1stQuarter",
+    "description": "1st quarter - O/U",
+    "expand": 1,
+    "group": "Quarters",
+    "guidance": null,
+    "id": 236,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Quarter O/U",
+    "outcomes": [
+     {
+      "description": "Over 45.5",
+      "id": "12",
+      "isActive": 1,
+      "odds": "2.21",
+      "probability": "0.4275"
+     },
+     {
+      "description": "Under 45.5",
+      "id": "13",
+      "isActive": 1,
+      "odds": "1.67",
+      "probability": "0.5725"
+     }
+    ],
+    "presentationType": 5,
+    "priority": 4,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "total=45.5|quarternr=1",
+    "status": 0,
+    "title": "Points,Over,Under",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "1stHalfWin",
+    "description": "1st half - 1x2",
+    "expand": 1,
+    "group": "Half",
+    "guidance": null,
+    "id": 60,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "1st half - 1x2",
+    "outcomes": [
+     {
+      "description": "Home",
+      "id": "1",
+      "isActive": 1,
+      "odds": "2.01",
+      "probability": "0.4662"
+     },
+     {
+      "description": "Draw",
+      "id": "2",
+      "isActive": 1,
+      "odds": "21.00",
+      "probability": "0.0427"
+     },
+     {
+      "description": "Away",
+      "id": "3",
+      "isActive": 1,
+      "odds": "1.91",
+      "probability": "0.4911"
+     }
+    ],
+    "presentationType": 5,
+    "priority": 300,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": null,
+    "description": "1st half - DNB",
+    "expand": 0,
+    "group": "Half",
+    "guidance": null,
+    "id": 64,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "1st half - DNB",
+    "outcomes": [
+     {
+      "description": "Home",
+      "id": "4",
+      "isActive": 1,
+      "odds": "1.90",
+      "probability": "0.4870"
+     },
+     {
+      "description": "Away",
+      "id": "5",
+      "isActive": 1,
+      "odds": "1.81",
+      "probability": "0.5130"
+     }
+    ],
+    "presentationType": 5,
+    "priority": 300,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "spread1stHalf",
+    "description": "1st half - Asian Handicap",
+    "expand": 1,
+    "group": "Half",
+    "guidance": null,
+    "id": 66,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "1st half - handicap",
+    "outcomes": [
+     {
+      "description": "Home (-0.5)",
+      "id": "1714",
+      "isActive": 1,
+      "odds": "2.04",
+      "probability": "0.4662"
+     },
+     {
+      "description": "Away (+0.5)",
+      "id": "1715",
+      "isActive": 1,
+      "odds": "1.79",
+      "probability": "0.5338"
+     }
+    ],
+    "presentationType": 10,
+    "priority": 300,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "hcp=-0.5",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "spread1stHalf",
+    "description": "1st half - Asian Handicap",
+    "expand": 1,
+    "group": "Half",
+    "guidance": null,
+    "id": 66,
+    "isFavourite": 1,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "1st half - handicap",
+    "outcomes": [
+     {
+      "description": "Home (+0.5)",
+      "id": "1714",
+      "isActive": 1,
+      "odds": "1.87",
+      "probability": "0.5089"
+     },
+     {
+      "description": "Away (-0.5)",
+      "id": "1715",
+      "isActive": 1,
+      "odds": "1.94",
+      "probability": "0.4911"
+     }
+    ],
+    "presentationType": 10,
+    "priority": 300,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "hcp=0.5",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "spread1stHalf",
+    "description": "1st half - Asian Handicap",
+    "expand": 1,
+    "group": "Half",
+    "guidance": null,
+    "id": 66,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "1st half - handicap",
+    "outcomes": [
+     {
+      "description": "Home (+1.5)",
+      "id": "1714",
+      "isActive": 1,
+      "odds": "1.74",
+      "probability": "0.5514"
+     },
+     {
+      "description": "Away (-1.5)",
+      "id": "1715",
+      "isActive": 1,
+      "odds": "2.11",
+      "probability": "0.4486"
+     }
+    ],
+    "presentationType": 10,
+    "priority": 300,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "hcp=1.5",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "total1stHalf",
+    "description": "1st Half O/U",
+    "expand": 1,
+    "group": "Half",
+    "guidance": null,
+    "id": 68,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "1st Half O/U",
+    "outcomes": [
+     {
+      "description": "Over 87.5",
+      "id": "12",
+      "isActive": 1,
+      "odds": "1.81",
+      "probability": "0.5272"
+     },
+     {
+      "description": "Under 87.5",
+      "id": "13",
+      "isActive": 1,
+      "odds": "2.01",
+      "probability": "0.4728"
+     }
+    ],
+    "presentationType": 1,
+    "priority": 300,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "total=87.5",
+    "status": 0,
+    "title": "Points,Over,Under",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "total1stHalf",
+    "description": "1st Half O/U",
+    "expand": 1,
+    "group": "Half",
+    "guidance": null,
+    "id": 68,
+    "isFavourite": 1,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "1st Half O/U",
+    "outcomes": [
+     {
+      "description": "Over 88.5",
+      "id": "12",
+      "isActive": 1,
+      "odds": "1.94",
+      "probability": "0.4891"
+     },
+     {
+      "description": "Under 88.5",
+      "id": "13",
+      "isActive": 1,
+      "odds": "1.87",
+      "probability": "0.5109"
+     }
+    ],
+    "presentationType": 1,
+    "priority": 300,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "total=88.5",
+    "status": 0,
+    "title": "Points,Over,Under",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "total1stHalf",
+    "description": "1st Half O/U",
+    "expand": 1,
+    "group": "Half",
+    "guidance": null,
+    "id": 68,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "1st Half O/U",
+    "outcomes": [
+     {
+      "description": "Over 89.5",
+      "id": "12",
+      "isActive": 1,
+      "odds": "2.10",
+      "probability": "0.4513"
+     },
+     {
+      "description": "Under 89.5",
+      "id": "13",
+      "isActive": 1,
+      "odds": "1.74",
+      "probability": "0.5487"
+     }
+    ],
+    "presentationType": 1,
+    "priority": 300,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "total=89.5",
+    "status": 0,
+    "title": "Points,Over,Under",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": null,
+    "description": "1st half - Home O/U",
+    "expand": 1,
+    "group": "Half",
+    "guidance": null,
+    "id": 69,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "1st half - Home O/U",
+    "outcomes": [
+     {
+      "description": "Over 42.5",
+      "id": "12",
+      "isActive": 1,
+      "odds": "1.61",
+      "probability": "0.5850"
+     },
+     {
+      "description": "Under 42.5",
+      "id": "13",
+      "isActive": 1,
+      "odds": "2.22",
+      "probability": "0.4150"
+     }
+    ],
+    "presentationType": 1,
+    "priority": 300,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "total=42.5",
+    "status": 0,
+    "title": null,
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": null,
+    "description": "1st half - Home O/U",
+    "expand": 1,
+    "group": "Half",
+    "guidance": null,
+    "id": 69,
+    "isFavourite": 1,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "1st half - Home O/U",
+    "outcomes": [
+     {
+      "description": "Over 43.5",
+      "id": "12",
+      "isActive": 1,
+      "odds": "1.79",
+      "probability": "0.5251"
+     },
+     {
+      "description": "Under 43.5",
+      "id": "13",
+      "isActive": 1,
+      "odds": "1.96",
+      "probability": "0.4749"
+     }
+    ],
+    "presentationType": 1,
+    "priority": 300,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "total=43.5",
+    "status": 0,
+    "title": null,
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": null,
+    "description": "1st half - Home O/U",
+    "expand": 1,
+    "group": "Half",
+    "guidance": null,
+    "id": 69,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "1st half - Home O/U",
+    "outcomes": [
+     {
+      "description": "Over 44.5",
+      "id": "12",
+      "isActive": 1,
+      "odds": "2.00",
+      "probability": "0.4651"
+     },
+     {
+      "description": "Under 44.5",
+      "id": "13",
+      "isActive": 1,
+      "odds": "1.76",
+      "probability": "0.5349"
+     }
+    ],
+    "presentationType": 1,
+    "priority": 300,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "total=44.5",
+    "status": 0,
+    "title": null,
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": null,
+    "description": "1st half - Away O/U",
+    "expand": 1,
+    "group": "Half",
+    "guidance": null,
+    "id": 70,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "1st half - Away O/U",
+    "outcomes": [
+     {
+      "description": "Over 43.5",
+      "id": "12",
+      "isActive": 1,
+      "odds": "1.73",
+      "probability": "0.5426"
+     },
+     {
+      "description": "Under 43.5",
+      "id": "13",
+      "isActive": 1,
+      "odds": "2.03",
+      "probability": "0.4574"
+     }
+    ],
+    "presentationType": 1,
+    "priority": 300,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "total=43.5",
+    "status": 0,
+    "title": null,
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": null,
+    "description": "1st half - Away O/U",
+    "expand": 1,
+    "group": "Half",
+    "guidance": null,
+    "id": 70,
+    "isFavourite": 1,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "1st half - Away O/U",
+    "outcomes": [
+     {
+      "description": "Over 44.5",
+      "id": "12",
+      "isActive": 1,
+      "odds": "1.93",
+      "probability": "0.4826"
+     },
+     {
+      "description": "Under 44.5",
+      "id": "13",
+      "isActive": 1,
+      "odds": "1.81",
+      "probability": "0.5174"
+     }
+    ],
+    "presentationType": 1,
+    "priority": 300,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "total=44.5",
+    "status": 0,
+    "title": null,
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": null,
+    "description": "1st half - Away O/U",
+    "expand": 1,
+    "group": "Half",
+    "guidance": null,
+    "id": 70,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "1st half - Away O/U",
+    "outcomes": [
+     {
+      "description": "Over 45.5",
+      "id": "12",
+      "isActive": 1,
+      "odds": "2.18",
+      "probability": "0.4235"
+     },
+     {
+      "description": "Under 45.5",
+      "id": "13",
+      "isActive": 1,
+      "odds": "1.64",
+      "probability": "0.5765"
+     }
+    ],
+    "presentationType": 1,
+    "priority": 300,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "total=45.5",
+    "status": 0,
+    "title": null,
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": null,
+    "description": "1st half - Odd/Even",
+    "expand": 1,
+    "group": "Half",
+    "guidance": null,
+    "id": 74,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "1st half - Odd/Even",
+    "outcomes": [
+     {
+      "description": "Odd",
+      "id": "70",
+      "isActive": 1,
+      "odds": "1.90",
+      "probability": "0.5000"
+     },
+     {
+      "description": "Even",
+      "id": "72",
+      "isActive": 1,
+      "odds": "1.90",
+      "probability": "0.5000"
+     }
+    ],
+    "presentationType": 5,
+    "priority": 300,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "spread2ndHalf",
+    "description": "2nd half - Asian Handicap",
+    "expand": 1,
+    "group": "Half",
+    "guidance": null,
+    "id": 88,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "2nd half - handicap",
+    "outcomes": [
+     {
+      "description": "Home (-0.5)",
+      "id": "1714",
+      "isActive": 1,
+      "odds": "2.03",
+      "probability": "0.4687"
+     },
+     {
+      "description": "Away (+0.5)",
+      "id": "1715",
+      "isActive": 1,
+      "odds": "1.80",
+      "probability": "0.5313"
+     }
+    ],
+    "presentationType": 10,
+    "priority": 300,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "hcp=-0.5",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "spread2ndHalf",
+    "description": "2nd half - Asian Handicap",
+    "expand": 1,
+    "group": "Half",
+    "guidance": null,
+    "id": 88,
+    "isFavourite": 1,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "2nd half - handicap",
+    "outcomes": [
+     {
+      "description": "Home (+0.5)",
+      "id": "1714",
+      "isActive": 1,
+      "odds": "1.87",
+      "probability": "0.5101"
+     },
+     {
+      "description": "Away (-0.5)",
+      "id": "1715",
+      "isActive": 1,
+      "odds": "1.94",
+      "probability": "0.4899"
+     }
+    ],
+    "presentationType": 10,
+    "priority": 300,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "hcp=0.5",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "spread2ndHalf",
+    "description": "2nd half - Asian Handicap",
+    "expand": 1,
+    "group": "Half",
+    "guidance": null,
+    "id": 88,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "2nd half - handicap",
+    "outcomes": [
+     {
+      "description": "Home (+1.5)",
+      "id": "1714",
+      "isActive": 1,
+      "odds": "1.74",
+      "probability": "0.5513"
+     },
+     {
+      "description": "Away (-1.5)",
+      "id": "1715",
+      "isActive": 1,
+      "odds": "2.11",
+      "probability": "0.4487"
+     }
+    ],
+    "presentationType": 10,
+    "priority": 300,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "hcp=1.5",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": null,
+    "description": "2nd half - O/U",
+    "expand": 1,
+    "group": "Half",
+    "guidance": null,
+    "id": 90,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "2nd half - O/U",
+    "outcomes": [
+     {
+      "description": "Over 85.5",
+      "id": "12",
+      "isActive": 1,
+      "odds": "1.78",
+      "probability": "0.5367"
+     },
+     {
+      "description": "Under 85.5",
+      "id": "13",
+      "isActive": 1,
+      "odds": "2.05",
+      "probability": "0.4633"
+     }
+    ],
+    "presentationType": 1,
+    "priority": 300,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "total=85.5",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": null,
+    "description": "2nd half - O/U",
+    "expand": 1,
+    "group": "Half",
+    "guidance": null,
+    "id": 90,
+    "isFavourite": 1,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "2nd half - O/U",
+    "outcomes": [
+     {
+      "description": "Over 86.5",
+      "id": "12",
+      "isActive": 1,
+      "odds": "1.90",
+      "probability": "0.5011"
+     },
+     {
+      "description": "Under 86.5",
+      "id": "13",
+      "isActive": 1,
+      "odds": "1.91",
+      "probability": "0.4989"
+     }
+    ],
+    "presentationType": 1,
+    "priority": 300,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "total=86.5",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": null,
+    "description": "2nd half - O/U",
+    "expand": 1,
+    "group": "Half",
+    "guidance": null,
+    "id": 90,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "2nd half - O/U",
+    "outcomes": [
+     {
+      "description": "Over 87.5",
+      "id": "12",
+      "isActive": 1,
+      "odds": "2.04",
+      "probability": "0.4656"
+     },
+     {
+      "description": "Under 87.5",
+      "id": "13",
+      "isActive": 1,
+      "odds": "1.79",
+      "probability": "0.5344"
+     }
+    ],
+    "presentationType": 1,
+    "priority": 300,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "total=87.5",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": null,
+    "description": "2nd half - Handicap (incl. overtime)",
+    "expand": 0,
+    "group": "Half",
+    "guidance": null,
+    "id": 231,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "2nd half - Handicap (incl. overtime)",
+    "outcomes": [
+     {
+      "description": "Home (-2.5)",
+      "id": "1714",
+      "isActive": 1,
+      "odds": "2.41",
+      "probability": "0.3891"
+     },
+     {
+      "description": "Away (+2.5)",
+      "id": "1715",
+      "isActive": 1,
+      "odds": "1.57",
+      "probability": "0.6109"
+     }
+    ],
+    "presentationType": 5,
+    "priority": 300,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "hcp=-2.5",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": null,
+    "description": "2nd half - Handicap (incl. overtime)",
+    "expand": 0,
+    "group": "Half",
+    "guidance": null,
+    "id": 231,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "2nd half - Handicap (incl. overtime)",
+    "outcomes": [
+     {
+      "description": "Home (-1.5)",
+      "id": "1714",
+      "isActive": 1,
+      "odds": "2.20",
+      "probability": "0.4285"
+     },
+     {
+      "description": "Away (+1.5)",
+      "id": "1715",
+      "isActive": 1,
+      "odds": "1.68",
+      "probability": "0.5715"
+     }
+    ],
+    "presentationType": 5,
+    "priority": 300,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "hcp=-1.5",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": null,
+    "description": "2nd half - Handicap (incl. overtime)",
+    "expand": 0,
+    "group": "Half",
+    "guidance": null,
+    "id": 231,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "2nd half - Handicap (incl. overtime)",
+    "outcomes": [
+     {
+      "description": "Home (-0.5)",
+      "id": "1714",
+      "isActive": 1,
+      "odds": "2.03",
+      "probability": "0.4687"
+     },
+     {
+      "description": "Away (+0.5)",
+      "id": "1715",
+      "isActive": 1,
+      "odds": "1.80",
+      "probability": "0.5313"
+     }
+    ],
+    "presentationType": 5,
+    "priority": 300,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "hcp=-0.5",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": null,
+    "description": "2nd half - Handicap (incl. overtime)",
+    "expand": 0,
+    "group": "Half",
+    "guidance": null,
+    "id": 231,
+    "isFavourite": 1,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "2nd half - Handicap (incl. overtime)",
+    "outcomes": [
+     {
+      "description": "Home (+0.5)",
+      "id": "1714",
+      "isActive": 1,
+      "odds": "1.87",
+      "probability": "0.5092"
+     },
+     {
+      "description": "Away (-0.5)",
+      "id": "1715",
+      "isActive": 1,
+      "odds": "1.94",
+      "probability": "0.4908"
+     }
+    ],
+    "presentationType": 5,
+    "priority": 300,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "hcp=0.5",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": null,
+    "description": "2nd half - Handicap (incl. overtime)",
+    "expand": 0,
+    "group": "Half",
+    "guidance": null,
+    "id": 231,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "2nd half - Handicap (incl. overtime)",
+    "outcomes": [
+     {
+      "description": "Home (+1.5)",
+      "id": "1714",
+      "isActive": 1,
+      "odds": "1.74",
+      "probability": "0.5495"
+     },
+     {
+      "description": "Away (-1.5)",
+      "id": "1715",
+      "isActive": 1,
+      "odds": "2.10",
+      "probability": "0.4505"
+     }
+    ],
+    "presentationType": 5,
+    "priority": 300,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "hcp=1.5",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": null,
+    "description": "2nd half - Handicap (incl. overtime)",
+    "expand": 0,
+    "group": "Half",
+    "guidance": null,
+    "id": 231,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "2nd half - Handicap (incl. overtime)",
+    "outcomes": [
+     {
+      "description": "Home (+2.5)",
+      "id": "1714",
+      "isActive": 1,
+      "odds": "1.63",
+      "probability": "0.5894"
+     },
+     {
+      "description": "Away (-2.5)",
+      "id": "1715",
+      "isActive": 1,
+      "odds": "2.29",
+      "probability": "0.4106"
+     }
+    ],
+    "presentationType": 5,
+    "priority": 300,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "hcp=2.5",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": null,
+    "description": "2nd half - Handicap (incl. overtime)",
+    "expand": 0,
+    "group": "Half",
+    "guidance": null,
+    "id": 231,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "2nd half - Handicap (incl. overtime)",
+    "outcomes": [
+     {
+      "description": "Home (+3.5)",
+      "id": "1714",
+      "isActive": 1,
+      "odds": "1.53",
+      "probability": "0.6285"
+     },
+     {
+      "description": "Away (-3.5)",
+      "id": "1715",
+      "isActive": 1,
+      "odds": "2.50",
+      "probability": "0.3715"
+     }
+    ],
+    "presentationType": 5,
+    "priority": 300,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "hcp=3.5",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": null,
+    "description": "2nd half - O/U (incl. overtime)",
+    "expand": 0,
+    "group": "Half",
+    "guidance": null,
+    "id": 232,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "2nd half - O/U (incl. overtime)",
+    "outcomes": [
+     {
+      "description": "Over 84.5",
+      "id": "12",
+      "isActive": 1,
+      "odds": "1.60",
+      "probability": "0.6000"
+     },
+     {
+      "description": "Under 84.5",
+      "id": "13",
+      "isActive": 1,
+      "odds": "2.35",
+      "probability": "0.4000"
+     }
+    ],
+    "presentationType": 5,
+    "priority": 300,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "total=84.5",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": null,
+    "description": "2nd half - O/U (incl. overtime)",
+    "expand": 0,
+    "group": "Half",
+    "guidance": null,
+    "id": 232,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "2nd half - O/U (incl. overtime)",
+    "outcomes": [
+     {
+      "description": "Over 85.5",
+      "id": "12",
+      "isActive": 1,
+      "odds": "1.69",
+      "probability": "0.5665"
+     },
+     {
+      "description": "Under 85.5",
+      "id": "13",
+      "isActive": 1,
+      "odds": "2.18",
+      "probability": "0.4335"
+     }
+    ],
+    "presentationType": 5,
+    "priority": 300,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "total=85.5",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": null,
+    "description": "2nd half - O/U (incl. overtime)",
+    "expand": 0,
+    "group": "Half",
+    "guidance": null,
+    "id": 232,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "2nd half - O/U (incl. overtime)",
+    "outcomes": [
+     {
+      "description": "Over 86.5",
+      "id": "12",
+      "isActive": 1,
+      "odds": "1.79",
+      "probability": "0.5329"
+     },
+     {
+      "description": "Under 86.5",
+      "id": "13",
+      "isActive": 1,
+      "odds": "2.03",
+      "probability": "0.4671"
+     }
+    ],
+    "presentationType": 5,
+    "priority": 300,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "total=86.5",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": null,
+    "description": "2nd half - O/U (incl. overtime)",
+    "expand": 0,
+    "group": "Half",
+    "guidance": null,
+    "id": 232,
+    "isFavourite": 1,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "2nd half - O/U (incl. overtime)",
+    "outcomes": [
+     {
+      "description": "Over 87.5",
+      "id": "12",
+      "isActive": 1,
+      "odds": "1.91",
+      "probability": "0.4995"
+     },
+     {
+      "description": "Under 87.5",
+      "id": "13",
+      "isActive": 1,
+      "odds": "1.90",
+      "probability": "0.5005"
+     }
+    ],
+    "presentationType": 5,
+    "priority": 300,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "total=87.5",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": null,
+    "description": "2nd half - O/U (incl. overtime)",
+    "expand": 0,
+    "group": "Half",
+    "guidance": null,
+    "id": 232,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "2nd half - O/U (incl. overtime)",
+    "outcomes": [
+     {
+      "description": "Over 88.5",
+      "id": "12",
+      "isActive": 1,
+      "odds": "2.03",
+      "probability": "0.4664"
+     },
+     {
+      "description": "Under 88.5",
+      "id": "13",
+      "isActive": 1,
+      "odds": "1.79",
+      "probability": "0.5336"
+     }
+    ],
+    "presentationType": 5,
+    "priority": 300,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "total=88.5",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": null,
+    "description": "2nd half - O/U (incl. overtime)",
+    "expand": 0,
+    "group": "Half",
+    "guidance": null,
+    "id": 232,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "2nd half - O/U (incl. overtime)",
+    "outcomes": [
+     {
+      "description": "Over 89.5",
+      "id": "12",
+      "isActive": 1,
+      "odds": "2.18",
+      "probability": "0.4339"
+     },
+     {
+      "description": "Under 89.5",
+      "id": "13",
+      "isActive": 1,
+      "odds": "1.69",
+      "probability": "0.5661"
+     }
+    ],
+    "presentationType": 5,
+    "priority": 300,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "total=89.5",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": null,
+    "description": "2nd half - O/U (incl. overtime)",
+    "expand": 0,
+    "group": "Half",
+    "guidance": null,
+    "id": 232,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "2nd half - O/U (incl. overtime)",
+    "outcomes": [
+     {
+      "description": "Over 90.5",
+      "id": "12",
+      "isActive": 1,
+      "odds": "2.34",
+      "probability": "0.4023"
+     },
+     {
+      "description": "Under 90.5",
+      "id": "13",
+      "isActive": 1,
+      "odds": "1.61",
+      "probability": "0.5977"
+     }
+    ],
+    "presentationType": 5,
+    "priority": 300,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "total=90.5",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": null,
+    "description": "2nd half - 1x2 (incl. overtime)",
+    "expand": 0,
+    "group": "Half",
+    "guidance": null,
+    "id": 293,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "2nd half - 1x2 (incl. overtime)",
+    "outcomes": [
+     {
+      "description": "Home",
+      "id": "1",
+      "isActive": 1,
+      "odds": "2.00",
+      "probability": "0.4687"
+     },
+     {
+      "description": "Draw",
+      "id": "2",
+      "isActive": 1,
+      "odds": "22.00",
+      "probability": "0.0405"
+     },
+     {
+      "description": "Away",
+      "id": "3",
+      "isActive": 1,
+      "odds": "1.91",
+      "probability": "0.4908"
+     }
+    ],
+    "presentationType": 5,
+    "priority": 300,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": null,
+    "description": "2nd half - draw no bet (incl. overtime)",
+    "expand": 0,
+    "group": "Half",
+    "guidance": null,
+    "id": 294,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "2nd half - DNB",
+    "outcomes": [
+     {
+      "description": "Home",
+      "id": "4",
+      "isActive": 1,
+      "odds": "1.91",
+      "probability": "0.4885"
+     },
+     {
+      "description": "Away",
+      "id": "5",
+      "isActive": 1,
+      "odds": "1.83",
+      "probability": "0.5116"
+     }
+    ],
+    "presentationType": 5,
+    "priority": 300,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": null,
+    "description": "2nd half - Odd/Even (incl. overtime)",
+    "expand": 1,
+    "group": "Half",
+    "guidance": null,
+    "id": 295,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "2nd half - Odd/Even (incl. overtime)",
+    "outcomes": [
+     {
+      "description": "Odd",
+      "id": "70",
+      "isActive": 1,
+      "odds": "1.90",
+      "probability": "0.5000"
+     },
+     {
+      "description": "Even",
+      "id": "72",
+      "isActive": 1,
+      "odds": "1.90",
+      "probability": "0.5000"
+     }
+    ],
+    "presentationType": 5,
+    "priority": 300,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": null,
+    "description": "Winning margin (incl. overtime)",
+    "expand": 1,
+    "group": "Specials",
+    "guidance": null,
+    "id": 290,
+    "isFavourite": 1,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Winning margin (incl. overtime)",
+    "outcomes": [
+     {
+      "description": "Home by 6+",
+      "id": "sr:winning_margin:6+:120",
+      "isActive": 1,
+      "odds": "2.90",
+      "probability": "0.3121"
+     },
+     {
+      "description": "Away by 6+",
+      "id": "sr:winning_margin:6+:121",
+      "isActive": 1,
+      "odds": "2.63",
+      "probability": "0.3465"
+     },
+     {
+      "description": "Other",
+      "id": "sr:winning_margin:6+:122",
+      "isActive": 1,
+      "odds": "2.67",
+      "probability": "0.3414"
+     }
+    ],
+    "presentationType": 4,
+    "priority": 400,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "variant=sr:winning_margin:6+",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": null,
+    "description": "Winning margin (incl. overtime)",
+    "expand": 1,
+    "group": "Specials",
+    "guidance": null,
+    "id": 290,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Winning margin (incl. overtime)",
+    "outcomes": [
+     {
+      "description": "Home by 11+",
+      "id": "sr:winning_margin_no_draw:11+:137",
+      "isActive": 1,
+      "odds": "5.14",
+      "probability": "0.1693"
+     },
+     {
+      "description": "Home by 6-10",
+      "id": "sr:winning_margin_no_draw:11+:138",
+      "isActive": 1,
+      "odds": "6.06",
+      "probability": "0.1428"
+     },
+     {
+      "description": "Home by 1-5",
+      "id": "sr:winning_margin_no_draw:11+:139",
+      "isActive": 1,
+      "odds": "5.17",
+      "probability": "0.1683"
+     },
+     {
+      "description": "Away by 1-5",
+      "id": "sr:winning_margin_no_draw:11+:140",
+      "isActive": 1,
+      "odds": "5.03",
+      "probability": "0.1731"
+     },
+     {
+      "description": "Away by 6-10",
+      "id": "sr:winning_margin_no_draw:11+:141",
+      "isActive": 1,
+      "odds": "5.66",
+      "probability": "0.1533"
+     },
+     {
+      "description": "Away by 11+",
+      "id": "sr:winning_margin_no_draw:11+:142",
+      "isActive": 1,
+      "odds": "4.52",
+      "probability": "0.1932"
+     }
+    ],
+    "presentationType": 4,
+    "priority": 400,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "variant=sr:winning_margin_no_draw:11+",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": null,
+    "description": "Winning margin (incl. overtime)",
+    "expand": 1,
+    "group": "Specials",
+    "guidance": null,
+    "id": 290,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Winning margin (incl. overtime)",
+    "outcomes": [
+     {
+      "description": "Home by 1-5",
+      "id": "sr:winning_margin_no_draw:26+:1283",
+      "isActive": 1,
+      "odds": "5.21",
+      "probability": "0.1683"
+     },
+     {
+      "description": "Home by 6-10",
+      "id": "sr:winning_margin_no_draw:26+:1284",
+      "isActive": 1,
+      "odds": "6.11",
+      "probability": "0.1428"
+     },
+     {
+      "description": "Home by 11-15",
+      "id": "sr:winning_margin_no_draw:26+:1285",
+      "isActive": 1,
+      "odds": "10.84",
+      "probability": "0.0796"
+     },
+     {
+      "description": "Home by 16-20",
+      "id": "sr:winning_margin_no_draw:26+:1286",
+      "isActive": 1,
+      "odds": "15.00",
+      "probability": "0.0506"
+     },
+     {
+      "description": "Home by 21-25",
+      "id": "sr:winning_margin_no_draw:26+:1287",
+      "isActive": 1,
+      "odds": "15.00",
+      "probability": "0.0244"
+     },
+     {
+      "description": "Home by 26+",
+      "id": "sr:winning_margin_no_draw:26+:1288",
+      "isActive": 1,
+      "odds": "15.00",
+      "probability": "0.0147"
+     },
+     {
+      "description": "Away by 1-5",
+      "id": "sr:winning_margin_no_draw:26+:1289",
+      "isActive": 1,
+      "odds": "5.06",
+      "probability": "0.1731"
+     },
+     {
+      "description": "Away by 6-10",
+      "id": "sr:winning_margin_no_draw:26+:1290",
+      "isActive": 1,
+      "odds": "5.70",
+      "probability": "0.1533"
+     },
+     {
+      "description": "Away by 11-15",
+      "id": "sr:winning_margin_no_draw:26+:1291",
+      "isActive": 1,
+      "odds": "9.84",
+      "probability": "0.0878"
+     },
+     {
+      "description": "Away by 16-20",
+      "id": "sr:winning_margin_no_draw:26+:1292",
+      "isActive": 1,
+      "odds": "14.84",
+      "probability": "0.0579"
+     },
+     {
+      "description": "Away by 21-25",
+      "id": "sr:winning_margin_no_draw:26+:1293",
+      "isActive": 1,
+      "odds": "15.00",
+      "probability": "0.0291"
+     },
+     {
+      "description": "Away by 26+",
+      "id": "sr:winning_margin_no_draw:26+:1294",
+      "isActive": 1,
+      "odds": "15.00",
+      "probability": "0.0184"
+     }
+    ],
+    "presentationType": 4,
+    "priority": 400,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "variant=sr:winning_margin_no_draw:26+",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": null,
+    "description": "Winner & O/U (incl. overtime)",
+    "expand": 1,
+    "group": "Specials",
+    "guidance": null,
+    "id": 292,
+    "isFavourite": 1,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Winner & O/U (incl. overtime)",
+    "outcomes": [
+     {
+      "description": "Home & Over 176.5",
+      "id": "973",
+      "isActive": 1,
+      "odds": "3.85",
+      "probability": "0.2366"
+     },
+     {
+      "description": "Away & Over 176.5",
+      "id": "974",
+      "isActive": 1,
+      "odds": "3.55",
+      "probability": "0.2560"
+     },
+     {
+      "description": "Home & Under 176.5",
+      "id": "975",
+      "isActive": 1,
+      "odds": "3.75",
+      "probability": "0.2437"
+     },
+     {
+      "description": "Away & Under 176.5",
+      "id": "976",
+      "isActive": 1,
+      "odds": "3.45",
+      "probability": "0.2636"
+     }
+    ],
+    "presentationType": 6,
+    "priority": 400,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "total=176.5",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": null,
+    "description": "Any team winning margin (incl. overtime)",
+    "expand": 1,
+    "group": "Specials",
+    "guidance": null,
+    "id": 849,
+    "isFavourite": 1,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Any team winning margin (incl. overtime)",
+    "outcomes": [
+     {
+      "description": "1-5",
+      "id": "sr:winning_margin_no_draw_any_team:31+:1295",
+      "isActive": 1,
+      "odds": "2.27",
+      "probability": "0.3414"
+     },
+     {
+      "description": "6-10",
+      "id": "sr:winning_margin_no_draw_any_team:31+:1296",
+      "isActive": 1,
+      "odds": "2.56",
+      "probability": "0.2960"
+     },
+     {
+      "description": "11-15",
+      "id": "sr:winning_margin_no_draw_any_team:31+:1297",
+      "isActive": 1,
+      "odds": "4.27",
+      "probability": "0.1674"
+     },
+     {
+      "description": "16-20",
+      "id": "sr:winning_margin_no_draw_any_team:31+:1298",
+      "isActive": 1,
+      "odds": "6.40",
+      "probability": "0.1086"
+     },
+     {
+      "description": "21-25",
+      "id": "sr:winning_margin_no_draw_any_team:31+:1299",
+      "isActive": 1,
+      "odds": "12.63",
+      "probability": "0.0535"
+     },
+     {
+      "description": "26-30",
+      "id": "sr:winning_margin_no_draw_any_team:31+:1300",
+      "isActive": 1,
+      "odds": "15.00",
+      "probability": "0.0223"
+     },
+     {
+      "description": "31+",
+      "id": "sr:winning_margin_no_draw_any_team:31+:1301",
+      "isActive": 1,
+      "odds": "15.00",
+      "probability": "0.0108"
+     }
+    ],
+    "presentationType": 4,
+    "priority": 400,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "variant=sr:winning_margin_no_draw_any_team:31+",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": null,
+    "description": "Home to win both halves",
+    "expand": 1,
+    "group": "Half",
+    "guidance": null,
+    "id": 48,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Home To Win Both Halves",
+    "outcomes": [
+     {
+      "description": "Yes",
+      "id": "74",
+      "isActive": 1,
+      "odds": "4.30",
+      "probability": "0.1960"
+     },
+     {
+      "description": "No",
+      "id": "76",
+      "isActive": 1,
+      "odds": "1.20",
+      "probability": "0.8040"
+     }
+    ],
+    "presentationType": 5,
+    "priority": 9999999,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "",
+    "status": 0,
+    "title": null,
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": null,
+    "description": "Away to win both halves",
+    "expand": 1,
+    "group": "Half",
+    "guidance": null,
+    "id": 49,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Away To Win Both Halves",
+    "outcomes": [
+     {
+      "description": "Yes",
+      "id": "74",
+      "isActive": 1,
+      "odds": "3.95",
+      "probability": "0.2171"
+     },
+     {
+      "description": "No",
+      "id": "76",
+      "isActive": 1,
+      "odds": "1.23",
+      "probability": "0.7829"
+     }
+    ],
+    "presentationType": 5,
+    "priority": 9999999,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "",
+    "status": 0,
+    "title": null,
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "totalHome",
+    "description": "Home O/U (incl. OT)",
+    "expand": 1,
+    "group": "Points",
+    "guidance": null,
+    "id": 227,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Home O/U (incl. OT)",
+    "outcomes": [
+     {
+      "description": "Over 86.5",
+      "id": "12",
+      "isActive": 1,
+      "odds": "1.69",
+      "probability": "0.5557"
+     },
+     {
+      "description": "Under 86.5",
+      "id": "13",
+      "isActive": 1,
+      "odds": "2.09",
+      "probability": "0.4443"
+     }
+    ],
+    "presentationType": 1,
+    "priority": 9999999,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "total=86.5",
+    "status": 0,
+    "title": "Points,Over,Under",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "totalHome",
+    "description": "Home O/U (incl. OT)",
+    "expand": 1,
+    "group": "Points",
+    "guidance": null,
+    "id": 227,
+    "isFavourite": 1,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Home O/U (incl. OT)",
+    "outcomes": [
+     {
+      "description": "Over 87.5",
+      "id": "12",
+      "isActive": 1,
+      "odds": "1.82",
+      "probability": "0.5146"
+     },
+     {
+      "description": "Under 87.5",
+      "id": "13",
+      "isActive": 1,
+      "odds": "1.92",
+      "probability": "0.4854"
+     }
+    ],
+    "presentationType": 1,
+    "priority": 9999999,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "total=87.5",
+    "status": 0,
+    "title": "Points,Over,Under",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "totalHome",
+    "description": "Home O/U (incl. OT)",
+    "expand": 1,
+    "group": "Points",
+    "guidance": null,
+    "id": 227,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Home O/U (incl. OT)",
+    "outcomes": [
+     {
+      "description": "Over 88.5",
+      "id": "12",
+      "isActive": 1,
+      "odds": "1.97",
+      "probability": "0.4737"
+     },
+     {
+      "description": "Under 88.5",
+      "id": "13",
+      "isActive": 1,
+      "odds": "1.78",
+      "probability": "0.5263"
+     }
+    ],
+    "presentationType": 1,
+    "priority": 9999999,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "total=88.5",
+    "status": 0,
+    "title": "Points,Over,Under",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "totalAway",
+    "description": "Away O/U (incl. OT)",
+    "expand": 1,
+    "group": "Points",
+    "guidance": null,
+    "id": 228,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Away O/U (incl. OT)",
+    "outcomes": [
+     {
+      "description": "Over 87.5",
+      "id": "12",
+      "isActive": 1,
+      "odds": "1.75",
+      "probability": "0.5373"
+     },
+     {
+      "description": "Under 87.5",
+      "id": "13",
+      "isActive": 1,
+      "odds": "2.01",
+      "probability": "0.4627"
+     }
+    ],
+    "presentationType": 1,
+    "priority": 9999999,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "total=87.5",
+    "status": 0,
+    "title": "Points,Over,Under",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "totalAway",
+    "description": "Away O/U (incl. OT)",
+    "expand": 1,
+    "group": "Points",
+    "guidance": null,
+    "id": 228,
+    "isFavourite": 1,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Away O/U (incl. OT)",
+    "outcomes": [
+     {
+      "description": "Over 88.5",
+      "id": "12",
+      "isActive": 1,
+      "odds": "1.88",
+      "probability": "0.4964"
+     },
+     {
+      "description": "Under 88.5",
+      "id": "13",
+      "isActive": 1,
+      "odds": "1.86",
+      "probability": "0.5036"
+     }
+    ],
+    "presentationType": 1,
+    "priority": 9999999,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "total=88.5",
+    "status": 0,
+    "title": "Points,Over,Under",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "totalAway",
+    "description": "Away O/U (incl. OT)",
+    "expand": 1,
+    "group": "Points",
+    "guidance": null,
+    "id": 228,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Away O/U (incl. OT)",
+    "outcomes": [
+     {
+      "description": "Over 89.5",
+      "id": "12",
+      "isActive": 1,
+      "odds": "2.04",
+      "probability": "0.4558"
+     },
+     {
+      "description": "Under 89.5",
+      "id": "13",
+      "isActive": 1,
+      "odds": "1.73",
+      "probability": "0.5442"
+     }
+    ],
+    "presentationType": 1,
+    "priority": 9999999,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "total=89.5",
+    "status": 0,
+    "title": "Points,Over,Under",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": null,
+    "description": "Highest scoring quarter",
+    "expand": 1,
+    "group": "Points",
+    "guidance": null,
+    "id": 234,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Highest scoring quarter",
+    "outcomes": [
+     {
+      "description": "1st quarter",
+      "id": "920",
+      "isActive": 1,
+      "odds": "3.40",
+      "probability": "0.2582"
+     },
+     {
+      "description": "2nd quarter",
+      "id": "921",
+      "isActive": 1,
+      "odds": "3.60",
+      "probability": "0.2410"
+     },
+     {
+      "description": "3rd quarter",
+      "id": "922",
+      "isActive": 1,
+      "odds": "4.20",
+      "probability": "0.2052"
+     },
+     {
+      "description": "4th quarter",
+      "id": "923",
+      "isActive": 1,
+      "odds": "3.75",
+      "probability": "0.2316"
+     },
+     {
+      "description": "Equal",
+      "id": "924",
+      "isActive": 1,
+      "odds": "13.00",
+      "probability": "0.0640"
+     }
+    ],
+    "presentationType": 5,
+    "priority": 9999999,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "winner1stQuarter",
+    "description": "1st quarter - 1x2",
+    "expand": 1,
+    "group": "Quarters",
+    "guidance": null,
+    "id": 235,
+    "isFavourite": 1,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "{!quarternr} quarter - 1x2",
+    "outcomes": [
+     {
+      "description": "Home",
+      "id": "1",
+      "isActive": 1,
+      "odds": "2.02",
+      "probability": "0.4637"
+     },
+     {
+      "description": "Draw",
+      "id": "2",
+      "isActive": 1,
+      "odds": "16.00",
+      "probability": "0.0559"
+     },
+     {
+      "description": "Away",
+      "id": "3",
+      "isActive": 1,
+      "odds": "1.95",
+      "probability": "0.4804"
+     }
+    ],
+    "presentationType": 5,
+    "priority": 9999999,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "quarternr=1",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": null,
+    "description": "1st quarter - winning margin",
+    "expand": 1,
+    "group": "Quarters",
+    "guidance": null,
+    "id": 301,
+    "isFavourite": 1,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "{!quarternr} quarter - winning margin",
+    "outcomes": [
+     {
+      "description": "Home by 3+",
+      "id": "1002",
+      "isActive": 1,
+      "odds": "2.57",
+      "probability": "0.3551"
+     },
+     {
+      "description": "Away by 3+",
+      "id": "1003",
+      "isActive": 1,
+      "odds": "2.46",
+      "probability": "0.3708"
+     },
+     {
+      "description": "Other",
+      "id": "1004",
+      "isActive": 1,
+      "odds": "3.28",
+      "probability": "0.2740"
+     }
+    ],
+    "presentationType": 4,
+    "priority": 9999999,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "quarternr=1",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": null,
+    "description": "2nd quarter - winning margin",
+    "expand": 1,
+    "group": "Quarters",
+    "guidance": null,
+    "id": 301,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "{!quarternr} quarter - winning margin",
+    "outcomes": [
+     {
+      "description": "Home by 3+",
+      "id": "1002",
+      "isActive": 1,
+      "odds": "2.53",
+      "probability": "0.3598"
+     },
+     {
+      "description": "Away by 3+",
+      "id": "1003",
+      "isActive": 1,
+      "odds": "2.44",
+      "probability": "0.3744"
+     },
+     {
+      "description": "Other",
+      "id": "1004",
+      "isActive": 1,
+      "odds": "3.38",
+      "probability": "0.2658"
+     }
+    ],
+    "presentationType": 4,
+    "priority": 9999999,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "quarternr=2",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": null,
+    "description": "3rd quarter - winning margin",
+    "expand": 1,
+    "group": "Quarters",
+    "guidance": null,
+    "id": 301,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "{!quarternr} quarter - winning margin",
+    "outcomes": [
+     {
+      "description": "Home by 3+",
+      "id": "1002",
+      "isActive": 1,
+      "odds": "2.56",
+      "probability": "0.3557"
+     },
+     {
+      "description": "Away by 3+",
+      "id": "1003",
+      "isActive": 1,
+      "odds": "2.47",
+      "probability": "0.3704"
+     },
+     {
+      "description": "Other",
+      "id": "1004",
+      "isActive": 1,
+      "odds": "3.29",
+      "probability": "0.2739"
+     }
+    ],
+    "presentationType": 4,
+    "priority": 9999999,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "quarternr=3",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": null,
+    "description": "4th quarter - winning margin",
+    "expand": 1,
+    "group": "Quarters",
+    "guidance": null,
+    "id": 301,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "{!quarternr} quarter - winning margin",
+    "outcomes": [
+     {
+      "description": "Home by 3+",
+      "id": "1002",
+      "isActive": 1,
+      "odds": "2.55",
+      "probability": "0.3580"
+     },
+     {
+      "description": "Away by 3+",
+      "id": "1003",
+      "isActive": 1,
+      "odds": "2.47",
+      "probability": "0.3699"
+     },
+     {
+      "description": "Other",
+      "id": "1004",
+      "isActive": 1,
+      "odds": "3.31",
+      "probability": "0.2721"
+     }
+    ],
+    "presentationType": 4,
+    "priority": 9999999,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "quarternr=4",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": null,
+    "description": "1st quarter - draw no bet",
+    "expand": 0,
+    "group": "Quarters",
+    "guidance": null,
+    "id": 302,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "1st quarter - draw no bet",
+    "outcomes": [
+     {
+      "description": "Home",
+      "id": "4",
+      "isActive": 1,
+      "odds": "1.88",
+      "probability": "0.4912"
+     },
+     {
+      "description": "Away",
+      "id": "5",
+      "isActive": 1,
+      "odds": "1.82",
+      "probability": "0.5088"
+     }
+    ],
+    "presentationType": 5,
+    "priority": 9999999,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "quarternr=1",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": null,
+    "description": "2nd quarter - draw no bet",
+    "expand": 0,
+    "group": "Quarters",
+    "guidance": null,
+    "id": 302,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "2nd quarter - draw no bet",
+    "outcomes": [
+     {
+      "description": "Home",
+      "id": "4",
+      "isActive": 1,
+      "odds": "1.88",
+      "probability": "0.4918"
+     },
+     {
+      "description": "Away",
+      "id": "5",
+      "isActive": 1,
+      "odds": "1.82",
+      "probability": "0.5082"
+     }
+    ],
+    "presentationType": 5,
+    "priority": 9999999,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "quarternr=2",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": null,
+    "description": "3rd quarter - draw no bet",
+    "expand": 0,
+    "group": "Quarters",
+    "guidance": null,
+    "id": 302,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "3rd quarter - draw no bet",
+    "outcomes": [
+     {
+      "description": "Home",
+      "id": "4",
+      "isActive": 1,
+      "odds": "1.88",
+      "probability": "0.4917"
+     },
+     {
+      "description": "Away",
+      "id": "5",
+      "isActive": 1,
+      "odds": "1.82",
+      "probability": "0.5083"
+     }
+    ],
+    "presentationType": 5,
+    "priority": 9999999,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "quarternr=3",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": null,
+    "description": "4th quarter - draw no bet",
+    "expand": 0,
+    "group": "Quarters",
+    "guidance": null,
+    "id": 302,
+    "isFavourite": 1,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "4th quarter - draw no bet",
+    "outcomes": [
+     {
+      "description": "Home",
+      "id": "4",
+      "isActive": 1,
+      "odds": "1.88",
+      "probability": "0.4933"
+     },
+     {
+      "description": "Away",
+      "id": "5",
+      "isActive": 1,
+      "odds": "1.83",
+      "probability": "0.5067"
+     }
+    ],
+    "presentationType": 5,
+    "priority": 9999999,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "quarternr=4",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "spread1stQuarter",
+    "description": "1st quarter - Handicap",
+    "expand": 1,
+    "group": "Quarters",
+    "guidance": null,
+    "id": 303,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "{!quarternr} quarter - handicap",
+    "outcomes": [
+     {
+      "description": "Home (-0.5)",
+      "id": "1714",
+      "isActive": 1,
+      "odds": "2.05",
+      "probability": "0.4637"
+     },
+     {
+      "description": "Away (+0.5)",
+      "id": "1715",
+      "isActive": 1,
+      "odds": "1.78",
+      "probability": "0.5363"
+     }
+    ],
+    "presentationType": 5,
+    "priority": 9999999,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "hcp=-0.5|quarternr=1",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "spread1stQuarter",
+    "description": "1st quarter - Handicap",
+    "expand": 1,
+    "group": "Quarters",
+    "guidance": null,
+    "id": 303,
+    "isFavourite": 1,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "{!quarternr} quarter - handicap",
+    "outcomes": [
+     {
+      "description": "Home (+0.5)",
+      "id": "1714",
+      "isActive": 1,
+      "odds": "1.84",
+      "probability": "0.5196"
+     },
+     {
+      "description": "Away (-0.5)",
+      "id": "1715",
+      "isActive": 1,
+      "odds": "1.98",
+      "probability": "0.4804"
+     }
+    ],
+    "presentationType": 5,
+    "priority": 9999999,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "hcp=0.5|quarternr=1",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": "spread1stQuarter",
+    "description": "1st quarter - Handicap",
+    "expand": 1,
+    "group": "Quarters",
+    "guidance": null,
+    "id": 303,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "{!quarternr} quarter - handicap",
+    "outcomes": [
+     {
+      "description": "Home (+1.5)",
+      "id": "1714",
+      "isActive": 1,
+      "odds": "1.67",
+      "probability": "0.5751"
+     },
+     {
+      "description": "Away (-1.5)",
+      "id": "1715",
+      "isActive": 1,
+      "odds": "2.22",
+      "probability": "0.4249"
+     }
+    ],
+    "presentationType": 5,
+    "priority": 9999999,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "hcp=1.5|quarternr=1",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": null,
+    "description": "1st quarter - Odd/Even",
+    "expand": 1,
+    "group": "Quarters",
+    "guidance": null,
+    "id": 304,
+    "isFavourite": 1,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "{!quarternr} quarter - Odd/Even",
+    "outcomes": [
+     {
+      "description": "Odd",
+      "id": "70",
+      "isActive": 1,
+      "odds": "1.90",
+      "probability": "0.5000"
+     },
+     {
+      "description": "Even",
+      "id": "72",
+      "isActive": 1,
+      "odds": "1.90",
+      "probability": "0.5000"
+     }
+    ],
+    "presentationType": 5,
+    "priority": 9999999,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "quarternr=1",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": null,
+    "description": "2nd quarter - Odd/Even",
+    "expand": 1,
+    "group": "Quarters",
+    "guidance": null,
+    "id": 304,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "{!quarternr} quarter - Odd/Even",
+    "outcomes": [
+     {
+      "description": "Odd",
+      "id": "70",
+      "isActive": 1,
+      "odds": "1.90",
+      "probability": "0.5000"
+     },
+     {
+      "description": "Even",
+      "id": "72",
+      "isActive": 1,
+      "odds": "1.90",
+      "probability": "0.5000"
+     }
+    ],
+    "presentationType": 5,
+    "priority": 9999999,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "quarternr=2",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": null,
+    "description": "3rd quarter - Odd/Even",
+    "expand": 1,
+    "group": "Quarters",
+    "guidance": null,
+    "id": 304,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "{!quarternr} quarter - Odd/Even",
+    "outcomes": [
+     {
+      "description": "Odd",
+      "id": "70",
+      "isActive": 1,
+      "odds": "1.90",
+      "probability": "0.5000"
+     },
+     {
+      "description": "Even",
+      "id": "72",
+      "isActive": 1,
+      "odds": "1.90",
+      "probability": "0.5000"
+     }
+    ],
+    "presentationType": 5,
+    "priority": 9999999,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "quarternr=3",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": null,
+    "description": "4th quarter - Odd/Even",
+    "expand": 1,
+    "group": "Quarters",
+    "guidance": null,
+    "id": 304,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "{!quarternr} quarter - Odd/Even",
+    "outcomes": [
+     {
+      "description": "Odd",
+      "id": "70",
+      "isActive": 1,
+      "odds": "1.90",
+      "probability": "0.5000"
+     },
+     {
+      "description": "Even",
+      "id": "72",
+      "isActive": 1,
+      "odds": "1.90",
+      "probability": "0.5000"
+     }
+    ],
+    "presentationType": 5,
+    "priority": 9999999,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "quarternr=4",
+    "status": 0,
+    "title": "",
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": null,
+    "description": "Highest scoring quarter - total",
+    "expand": 1,
+    "group": "Quarters",
+    "guidance": null,
+    "id": 1193,
+    "isFavourite": 1,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Highest Scoring Quarter - Total",
+    "outcomes": [
+     {
+      "description": "Over 51.5",
+      "id": "12",
+      "isActive": 1,
+      "odds": "1.92",
+      "probability": "0.4861"
+     },
+     {
+      "description": "Under 51.5",
+      "id": "13",
+      "isActive": 1,
+      "odds": "1.82",
+      "probability": "0.5139"
+     }
+    ],
+    "presentationType": 5,
+    "priority": 9999999,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "total=51.5",
+    "status": 0,
+    "title": null,
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": null,
+    "description": "Lowest scoring quarter - total",
+    "expand": 1,
+    "group": "Quarters",
+    "guidance": null,
+    "id": 1195,
+    "isFavourite": 1,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Lowest Scoring Quarter - Total",
+    "outcomes": [
+     {
+      "description": "Over 36.5",
+      "id": "12",
+      "isActive": 1,
+      "odds": "1.92",
+      "probability": "0.4867"
+     },
+     {
+      "description": "Under 36.5",
+      "id": "13",
+      "isActive": 1,
+      "odds": "1.82",
+      "probability": "0.5133"
+     }
+    ],
+    "presentationType": 5,
+    "priority": 9999999,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "total=36.5",
+    "status": 0,
+    "title": null,
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": null,
+    "description": "Any team to win all quarters",
+    "expand": 1,
+    "group": "Quarters",
+    "guidance": null,
+    "id": 1199,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Any Team To Win All Quarters",
+    "outcomes": [
+     {
+      "description": "Yes",
+      "id": "74",
+      "isActive": 1,
+      "odds": "9.20",
+      "probability": "0.0650"
+     },
+     {
+      "description": "No",
+      "id": "76",
+      "isActive": 1,
+      "odds": "1.04",
+      "probability": "0.9350"
+     }
+    ],
+    "presentationType": 5,
+    "priority": 9999999,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "",
+    "status": 0,
+    "title": null,
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": null,
+    "description": "Team to win all quarters",
+    "expand": 1,
+    "group": "Quarters",
+    "guidance": null,
+    "id": 1203,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Team To Win All Quarters",
+    "outcomes": [
+     {
+      "description": "Home",
+      "id": "6",
+      "isActive": 1,
+      "odds": "16.00",
+      "probability": "0.0299"
+     },
+     {
+      "description": "None",
+      "id": "7",
+      "isActive": 1,
+      "odds": "1.03",
+      "probability": "0.9351"
+     },
+     {
+      "description": "Away",
+      "id": "8",
+      "isActive": 1,
+      "odds": "14.00",
+      "probability": "0.0350"
+     }
+    ],
+    "presentationType": 5,
+    "priority": 9999999,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "",
+    "status": 0,
+    "title": null,
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": null,
+    "description": "KK Partizan Belgrade to win all quarters",
+    "expand": 1,
+    "group": "Quarters",
+    "guidance": null,
+    "id": 1313,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Home To Win All Quarters",
+    "outcomes": [
+     {
+      "description": "Yes",
+      "id": "74",
+      "isActive": 1,
+      "odds": "12.00",
+      "probability": "0.0304"
+     },
+     {
+      "description": "No",
+      "id": "76",
+      "isActive": 1,
+      "odds": "1.01",
+      "probability": "0.9696"
+     }
+    ],
+    "presentationType": 5,
+    "priority": 9999999,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "",
+    "status": 0,
+    "title": null,
+    "userFavourite": 0
+   },
+   {
+    "betAssistWidget": null,
+    "description": "Valencia Basket to win all quarters",
+    "expand": 1,
+    "group": "Quarters",
+    "guidance": null,
+    "id": 1314,
+    "isFavourite": 0,
+    "isShown": 1,
+    "marketLabels": null,
+    "name": "Away To Win All Quarters",
+    "outcomes": [
+     {
+      "description": "Yes",
+      "id": "74",
+      "isActive": 1,
+      "odds": "12.00",
+      "probability": "0.0352"
+     },
+     {
+      "description": "No",
+      "id": "76",
+      "isActive": 1,
+      "odds": "1.01",
+      "probability": "0.9648"
+     }
+    ],
+    "presentationType": 5,
+    "priority": 9999999,
+    "product": 3,
+    "relatedMarketId": null,
+    "relatedSpecifiers": null,
+    "specifiers": "",
+    "status": 0,
+    "title": null,
+    "userFavourite": 0
+   }
+  ],
+  "marketsCount": 131,
+  "playedTime": null,
+  "roundNumber": 12,
+  "roundType": "group",
+  "scoreInCurrentSection": null,
+  "scoreOfSection": null,
+  "scoreOfWholeMatch": null,
+  "seasonId": "sr:season:143460",
+  "seasonName": "Euroleague 26/27",
+  "sectionRemainTime": null,
+  "server": null,
+  "soccerBookingsScore": null,
+  "soccerCornerScore": null,
+  "soccerRedCardScore": null,
+  "sport": "Basketball",
+  "sportId": "sr:sport:2",
+  "startTime": 1794944700000,
+  "status": 0,
+  "statusDescription": null,
+  "stoppagePlayedTime": null,
+  "stoppageTime": null,
+  "totalPlayedTime": null,
+  "tournament": "Euroleague",
+  "tournamentId": "sr:tournament:138",
+  "videoInfo": null
+ },
+ "innerMsg": null,
+ "message": "success"
+}

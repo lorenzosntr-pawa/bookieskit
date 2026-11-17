@@ -453,3 +453,83 @@ def test_parse_betway_variant_matching_disambiguates_by_market_id_prefix():
     # basketball 2way_handicap_basketball_ft should NOT be produced
     # from a soccer fixture
     assert "2way_handicap_basketball_ft" not in by_canon
+
+
+def test_child_suffix_must_be_a_specifier():
+    from bookieskit.markets.parser import _is_betway_child_market_id
+
+    assert _is_betway_child_market_id("6645701416hcp=-0.5~", "6645701416")
+    assert _is_betway_child_market_id("6645701418total=2.5~", "6645701418")
+    assert not _is_betway_child_market_id("66457014184", "6645701418")
+    assert not _is_betway_child_market_id("66457014165", "6645701416")
+    assert not _is_betway_child_market_id("664570141601xup=1~", "6645701416")
+    assert not _is_betway_child_market_id("6645701416", "6645701416")
+
+
+def test_wc_nf_goal_handicap_and_ou_are_the_real_markets():
+    import json
+    from pathlib import Path
+
+    fixture = Path("tests/fixtures/event_info/betway/wc_nf.json")
+    response = json.loads(fixture.read_text(encoding="utf-8"))
+    out = {
+        m.canonical_id: m
+        for m in parse_markets(response, "betway", sport="soccer")
+    }
+    assert "over_under_ft" in out
+    hcp = out["2way_handicap_ft"].lines
+    assert -0.5 in hcp
+    # goal handicap (6645701416hcp=0.5~), not Corner Handicap 2.20/1.60
+    assert [o.odds for o in hcp[0.5]] == [2.25, 1.61]
+
+
+def test_parameterized_parent_is_row_the_lines_belong_to():
+    from bookieskit.markets.parser import _build_betway_parameterized
+    from bookieskit.markets.registry import MarketRegistry
+
+    mapping = MarketRegistry().get_by_platform_id(
+        "betway", "[Handicap] [2-Way]"
+    )
+    assert mapping is not None
+    eid = "66457014"
+    goal, decoy = f"{eid}16", f"{eid}165"
+    line = f"{goal}hcp=0.5~"
+
+    def outs(prefix, a, b):
+        return [
+            {"outcomeId": f"{prefix}1", "name": "Norway", "_p": a},
+            {"outcomeId": f"{prefix}2", "name": "France", "_p": b},
+        ]
+
+    goal_outs = outs(f"{line}", 2.25, 1.61)
+    decoy_outs = outs(f"{decoy}hcp=0.5~", 2.2, 1.6)
+    prices = {o["outcomeId"]: o["_p"] for o in goal_outs + decoy_outs}
+    entries = [
+        ({"marketId": goal, "handicap": 0}, goal_outs + decoy_outs[:0]),
+        ({"marketId": line, "handicap": 0.5}, []),
+        ({"marketId": decoy, "handicap": 0}, decoy_outs),
+    ]
+    result = _build_betway_parameterized(entries, mapping, prices)
+    assert result is not None
+    assert [o.odds for o in result.lines[0.5]] == [2.25, 1.61]
+
+
+def test_suspended_or_inactive_market_rows_treated_as_missing():
+    import json
+    from pathlib import Path
+
+    payload = json.loads(
+        Path("tests/fixtures/event_info/betway/wc_nf.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    for row in payload["marketsInGroup"]:
+        if row["name"] == "[Win/Draw/Win]":
+            row["isSuspended"] = True  # simple parent suspended
+        if row["marketId"] == "6645701418total=2.5~":
+            row["isActive"] = False  # one O/U child line deactivated
+    markets = {m.canonical_id: m for m in parse_markets(payload, "betway")}
+    assert "1x2_ft" not in markets
+    assert sorted(markets["over_under_ft"].lines) == [0.5, 1.5, 3.5, 4.5, 5.5]
+    # Corners O/U (parent id 66457014166 extends 6645701416*) is untouched.
+    assert "over_under_corners_ft" in markets

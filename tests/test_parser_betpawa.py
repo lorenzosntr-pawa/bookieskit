@@ -1,3 +1,6 @@
+import json
+from pathlib import Path
+
 from bookieskit.markets.parser import parse_markets
 from bookieskit.markets.registry import MarketRegistry
 
@@ -133,9 +136,6 @@ def test_parse_betpawa_with_custom_registry():
 
 
 def test_parse_betpawa_next_goal_ft_from_real_fixture():
-    import json
-    from pathlib import Path
-
     from bookieskit.markets.parser import parse_markets
 
     fixture = Path("tests/fixtures/event_info/betpawa/prematch.json")
@@ -160,9 +160,6 @@ def test_parse_betpawa_next_goal_ft_from_real_fixture():
 
 
 def test_parse_betpawa_home_over_under_ft_from_real_fixture():
-    import json
-    from pathlib import Path
-
     from bookieskit.markets.parser import parse_markets
 
     fixture = Path("tests/fixtures/event_info/betpawa/prematch.json")
@@ -182,9 +179,6 @@ def test_parse_betpawa_home_over_under_ft_from_real_fixture():
 
 
 def test_parse_betpawa_away_over_under_ft_from_real_fixture():
-    import json
-    from pathlib import Path
-
     from bookieskit.markets.parser import parse_markets
 
     fixture = Path("tests/fixtures/event_info/betpawa/prematch.json")
@@ -212,9 +206,6 @@ def test_parse_betpawa_2way_handicap_ft_from_real_fixture():
     surface a parameterized 2way_handicap_ft canonical with at least
     one line having both home and away outcomes.
     """
-    import json
-    from pathlib import Path
-
     from bookieskit.markets.parser import parse_markets
 
     fixture = Path("tests/fixtures/event_info/betpawa/prematch.json")
@@ -241,3 +232,60 @@ def test_parse_betpawa_2way_handicap_ft_from_real_fixture():
         {"home", "away"}.issubset({o.canonical_name for o in outs})
         for outs in ah.lines.values()
     ), f"no line had both home and away: {ah.lines}"
+
+
+def test_betpawa_2up_parsed():
+    # Live NG capture (event 38130200): marketType.id=28000850 "1X2 2UP - FT",
+    # prices named 1 / X / 2 (same vocabulary as plain 1X2).
+    fixture = (
+        Path(__file__).parent / "fixtures" / "event_info" / "betpawa"
+        / "1x2_2up_ft.json"
+    )
+    payload = json.loads(fixture.read_text(encoding="utf-8"))
+    markets = parse_markets(payload, "betpawa")
+    m = next(m for m in markets if m.canonical_id == "1x2_2up_ft")
+    assert len(m.outcomes) == 3
+    odds = {o.canonical_name: o.odds for o in m.outcomes}
+    assert odds == {"home": 1.62, "draw": 4.5, "away": 4.3}
+
+
+def test_suspended_price_treated_as_missing_even_when_priced():
+    # BetPawa keeps a real-looking price on suspended rows; the flag wins.
+    response = {
+        "markets": [
+            {
+                "id": "3743",
+                "row": [
+                    {
+                        "prices": [
+                            {"name": "1", "price": 1.95},
+                            {"name": "X", "price": 3.50, "suspended": True},
+                            {"name": "2", "price": 2.10},
+                        ]
+                    }
+                ],
+            },
+            {
+                "id": "5000",
+                "row": [
+                    {
+                        "line": 2.5,
+                        "prices": [
+                            {"name": "Over", "price": 1.80, "suspended": False},
+                            {"name": "Under", "price": 2.00, "suspended": False},
+                        ],
+                    },
+                    {
+                        "line": 3.5,
+                        "prices": [
+                            {"name": "Over", "price": 2.10, "suspended": True},
+                            {"name": "Under", "price": 1.70},
+                        ],
+                    },
+                ],
+            },
+        ]
+    }
+    markets = {m.canonical_id: m for m in parse_markets(response, "betpawa")}
+    assert "1x2_ft" not in markets
+    assert list(markets["over_under_ft"].lines) == [2.5]

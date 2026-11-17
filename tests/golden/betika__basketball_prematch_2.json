@@ -1,0 +1,142 @@
+[
+ {
+  "canonical_id": "moneyline_basketball_ft",
+  "lines": null,
+  "name": "Moneyline - Full Time (incl. OT)",
+  "outcomes": [
+   {
+    "canonical_name": "home",
+    "odds": 2.0,
+    "platform_name": "1",
+    "true_probability": null,
+    "void_probability": null
+   },
+   {
+    "canonical_name": "away",
+    "odds": 1.85,
+    "platform_name": "2",
+    "true_probability": null,
+    "void_probability": null
+   }
+  ]
+ },
+ {
+  "canonical_id": "over_under_basketball_ft",
+  "lines": {
+   "173.5": [
+    {
+     "canonical_name": "over",
+     "odds": 1.71,
+     "platform_name": "OVER 173.5",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "under",
+     "odds": 2.2,
+     "platform_name": "UNDER 173.5",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ],
+   "174.5": [
+    {
+     "canonical_name": "over",
+     "odds": 1.78,
+     "platform_name": "OVER 174.5",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "under",
+     "odds": 2.09,
+     "platform_name": "UNDER 174.5",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ],
+   "175.5": [
+    {
+     "canonical_name": "over",
+     "odds": 1.86,
+     "platform_name": "OVER 175.5",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "under",
+     "odds": 1.99,
+     "platform_name": "UNDER 175.5",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ],
+   "176.5": [
+    {
+     "canonical_name": "over",
+     "odds": 1.95,
+     "platform_name": "OVER 176.5",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "under",
+     "odds": 1.9,
+     "platform_name": "UNDER 176.5",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ],
+   "177.5": [
+    {
+     "canonical_name": "over",
+     "odds": 2.05,
+     "platform_name": "OVER 177.5",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "under",
+     "odds": 1.81,
+     "platform_name": "UNDER 177.5",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ],
+   "178.5": [
+    {
+     "canonical_name": "over",
+     "odds": 2.15,
+     "platform_name": "OVER 178.5",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "under",
+     "odds": 1.74,
+     "platform_name": "UNDER 178.5",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ],
+   "179.5": [
+    {
+     "canonical_name": "over",
+     "odds": 2.26,
+     "platform_name": "OVER 179.5",
+     "true_probability": null,
+     "void_probability": null
+    },
+    {
+     "canonical_name": "under",
+     "odds": 1.67,
+     "platform_name": "UNDER 179.5",
+     "true_probability": null,
+     "void_probability": null
+    }
+   ]
+  },
+  "name": "Over/Under Total Points - Full Time (incl. OT)",
+  "outcomes": []
+ }
+]

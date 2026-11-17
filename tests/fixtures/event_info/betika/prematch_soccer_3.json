@@ -1,0 +1,432 @@
+{
+ "data": [
+  {
+   "home_team": "Athletic Club",
+   "game_id": "21937",
+   "match_id": "12009160",
+   "away_team": "Espanyol",
+   "start_time": "2026-11-20 23:00:00",
+   "competition_name": "LaLiga",
+   "category": "Spain",
+   "parent_match_id": "72478708",
+   "side_bets": "76",
+   "home_odd": "1.51",
+   "neutral_odd": "4.50",
+   "away_odd": "6.40",
+   "competition_id": "14482",
+   "sport_id": "14",
+   "sport_name": "Soccer",
+   "is_esport": false,
+   "is_srl": false,
+   "provider": "sr",
+   "odds": [
+    {
+     "sub_type_id": "1",
+     "name": "1X2",
+     "odds": [
+      {
+       "display": "1",
+       "odd_key": "Athletic Club",
+       "odd_def": "{$competitor1}",
+       "odd_value": "1.51",
+       "special_bet_value": "",
+       "outcome_id": "1",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "X",
+       "odd_key": "draw",
+       "odd_def": "draw",
+       "odd_value": "4.50",
+       "special_bet_value": "",
+       "outcome_id": "2",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "2",
+       "odd_key": "Espanyol",
+       "odd_def": "{$competitor2}",
+       "odd_value": "6.40",
+       "special_bet_value": "",
+       "outcome_id": "3",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      }
+     ]
+    },
+    {
+     "sub_type_id": "8",
+     "name": "1ST GOAL",
+     "odds": [
+      {
+       "display": "NONE",
+       "odd_key": "none",
+       "odd_def": "none",
+       "odd_value": "14.00",
+       "special_bet_value": "goalnr=1",
+       "outcome_id": "7",
+       "parsed_special_bet_value": {
+        "goalnr": "1"
+       }
+      },
+      {
+       "display": "1",
+       "odd_key": "Athletic Club",
+       "odd_def": "{$competitor1}",
+       "odd_value": "1.44",
+       "special_bet_value": "goalnr=1",
+       "outcome_id": "6",
+       "parsed_special_bet_value": {
+        "goalnr": "1"
+       }
+      },
+      {
+       "display": "2",
+       "odd_key": "Espanyol",
+       "odd_def": "{$competitor2}",
+       "odd_value": "3.30",
+       "special_bet_value": "goalnr=1",
+       "outcome_id": "8",
+       "parsed_special_bet_value": {
+        "goalnr": "1"
+       }
+      }
+     ]
+    },
+    {
+     "sub_type_id": "10",
+     "name": "DOUBLE CHANCE",
+     "odds": [
+      {
+       "display": "1/X",
+       "odd_key": "Athletic Club or draw",
+       "odd_def": "{$competitor1} or draw",
+       "odd_value": "1.14",
+       "special_bet_value": "",
+       "outcome_id": "9",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "1/2",
+       "odd_key": "Athletic Club or Espanyol",
+       "odd_def": "{$competitor1} or {$competitor2}",
+       "odd_value": "1.22",
+       "special_bet_value": "",
+       "outcome_id": "10",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "X/2",
+       "odd_key": "draw or Espanyol",
+       "odd_def": "draw or {$competitor2}",
+       "odd_value": "2.50",
+       "special_bet_value": "",
+       "outcome_id": "11",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      }
+     ]
+    },
+    {
+     "sub_type_id": "18",
+     "name": "TOTAL",
+     "odds": [
+      {
+       "display": "OVER 0.5",
+       "odd_key": "over 0.5",
+       "odd_def": "over {total}",
+       "odd_value": "1.05",
+       "special_bet_value": "total=0.5",
+       "outcome_id": "12",
+       "parsed_special_bet_value": {
+        "total": "0.5"
+       }
+      },
+      {
+       "display": "OVER 1.5",
+       "odd_key": "over 1.5",
+       "odd_def": "over {total}",
+       "odd_value": "1.26",
+       "special_bet_value": "total=1.5",
+       "outcome_id": "12",
+       "parsed_special_bet_value": {
+        "total": "1.5"
+       }
+      },
+      {
+       "display": "OVER 2.5",
+       "odd_key": "over 2.5",
+       "odd_def": "over {total}",
+       "odd_value": "1.80",
+       "special_bet_value": "total=2.5",
+       "outcome_id": "12",
+       "parsed_special_bet_value": {
+        "total": "2.5"
+       }
+      },
+      {
+       "display": "OVER 3.5",
+       "odd_key": "over 3.5",
+       "odd_def": "over {total}",
+       "odd_value": "3.00",
+       "special_bet_value": "total=3.5",
+       "outcome_id": "12",
+       "parsed_special_bet_value": {
+        "total": "3.5"
+       }
+      },
+      {
+       "display": "OVER 4.5",
+       "odd_key": "over 4.5",
+       "odd_def": "over {total}",
+       "odd_value": "5.60",
+       "special_bet_value": "total=4.5",
+       "outcome_id": "12",
+       "parsed_special_bet_value": {
+        "total": "4.5"
+       }
+      },
+      {
+       "display": "UNDER 0.5",
+       "odd_key": "under 0.5",
+       "odd_def": "under {total}",
+       "odd_value": "11.00",
+       "special_bet_value": "total=0.5",
+       "outcome_id": "13",
+       "parsed_special_bet_value": {
+        "total": "0.5"
+       }
+      },
+      {
+       "display": "UNDER 1.5",
+       "odd_key": "under 1.5",
+       "odd_def": "under {total}",
+       "odd_value": "3.85",
+       "special_bet_value": "total=1.5",
+       "outcome_id": "13",
+       "parsed_special_bet_value": {
+        "total": "1.5"
+       }
+      },
+      {
+       "display": "UNDER 2.5",
+       "odd_key": "under 2.5",
+       "odd_def": "under {total}",
+       "odd_value": "2.02",
+       "special_bet_value": "total=2.5",
+       "outcome_id": "13",
+       "parsed_special_bet_value": {
+        "total": "2.5"
+       }
+      },
+      {
+       "display": "UNDER 3.5",
+       "odd_key": "under 3.5",
+       "odd_def": "under {total}",
+       "odd_value": "1.40",
+       "special_bet_value": "total=3.5",
+       "outcome_id": "13",
+       "parsed_special_bet_value": {
+        "total": "3.5"
+       }
+      },
+      {
+       "display": "UNDER 4.5",
+       "odd_key": "under 4.5",
+       "odd_def": "under {total}",
+       "odd_value": "1.15",
+       "special_bet_value": "total=4.5",
+       "outcome_id": "13",
+       "parsed_special_bet_value": {
+        "total": "4.5"
+       }
+      }
+     ]
+    },
+    {
+     "sub_type_id": "19",
+     "name": "ATHLETIC CLUB TOTAL",
+     "odds": [
+      {
+       "display": "OVER 0.5",
+       "odd_key": "over 0.5",
+       "odd_def": "over {total}",
+       "odd_value": "1.12",
+       "special_bet_value": "total=0.5",
+       "outcome_id": "12",
+       "parsed_special_bet_value": {
+        "total": "0.5"
+       }
+      },
+      {
+       "display": "OVER 1.5",
+       "odd_key": "over 1.5",
+       "odd_def": "over {total}",
+       "odd_value": "1.60",
+       "special_bet_value": "total=1.5",
+       "outcome_id": "12",
+       "parsed_special_bet_value": {
+        "total": "1.5"
+       }
+      },
+      {
+       "display": "OVER 2.5",
+       "odd_key": "over 2.5",
+       "odd_def": "over {total}",
+       "odd_value": "2.80",
+       "special_bet_value": "total=2.5",
+       "outcome_id": "12",
+       "parsed_special_bet_value": {
+        "total": "2.5"
+       }
+      },
+      {
+       "display": "UNDER 0.5",
+       "odd_key": "under 0.5",
+       "odd_def": "under {total}",
+       "odd_value": "5.60",
+       "special_bet_value": "total=0.5",
+       "outcome_id": "13",
+       "parsed_special_bet_value": {
+        "total": "0.5"
+       }
+      },
+      {
+       "display": "UNDER 1.5",
+       "odd_key": "under 1.5",
+       "odd_def": "under {total}",
+       "odd_value": "2.24",
+       "special_bet_value": "total=1.5",
+       "outcome_id": "13",
+       "parsed_special_bet_value": {
+        "total": "1.5"
+       }
+      },
+      {
+       "display": "UNDER 2.5",
+       "odd_key": "under 2.5",
+       "odd_def": "under {total}",
+       "odd_value": "1.40",
+       "special_bet_value": "total=2.5",
+       "outcome_id": "13",
+       "parsed_special_bet_value": {
+        "total": "2.5"
+       }
+      }
+     ]
+    },
+    {
+     "sub_type_id": "20",
+     "name": "ESPANYOL TOTAL",
+     "odds": [
+      {
+       "display": "OVER 0.5",
+       "odd_key": "over 0.5",
+       "odd_def": "over {total}",
+       "odd_value": "1.69",
+       "special_bet_value": "total=0.5",
+       "outcome_id": "12",
+       "parsed_special_bet_value": {
+        "total": "0.5"
+       }
+      },
+      {
+       "display": "OVER 1.5",
+       "odd_key": "over 1.5",
+       "odd_def": "over {total}",
+       "odd_value": "4.30",
+       "special_bet_value": "total=1.5",
+       "outcome_id": "12",
+       "parsed_special_bet_value": {
+        "total": "1.5"
+       }
+      },
+      {
+       "display": "OVER 2.5",
+       "odd_key": "over 2.5",
+       "odd_def": "over {total}",
+       "odd_value": "10.00",
+       "special_bet_value": "total=2.5",
+       "outcome_id": "12",
+       "parsed_special_bet_value": {
+        "total": "2.5"
+       }
+      },
+      {
+       "display": "UNDER 0.5",
+       "odd_key": "under 0.5",
+       "odd_def": "under {total}",
+       "odd_value": "2.09",
+       "special_bet_value": "total=0.5",
+       "outcome_id": "13",
+       "parsed_special_bet_value": {
+        "total": "0.5"
+       }
+      },
+      {
+       "display": "UNDER 1.5",
+       "odd_key": "under 1.5",
+       "odd_def": "under {total}",
+       "odd_value": "1.20",
+       "special_bet_value": "total=1.5",
+       "outcome_id": "13",
+       "parsed_special_bet_value": {
+        "total": "1.5"
+       }
+      },
+      {
+       "display": "UNDER 2.5",
+       "odd_key": "under 2.5",
+       "odd_def": "under {total}",
+       "odd_value": "1.03",
+       "special_bet_value": "total=2.5",
+       "outcome_id": "13",
+       "parsed_special_bet_value": {
+        "total": "2.5"
+       }
+      }
+     ]
+    },
+    {
+     "sub_type_id": "29",
+     "name": "BOTH TEAMS TO SCORE (GG/NG)",
+     "odds": [
+      {
+       "display": "YES",
+       "odd_key": "yes",
+       "odd_def": "yes",
+       "odd_value": "1.98",
+       "special_bet_value": "",
+       "outcome_id": "74",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "NO",
+       "odd_key": "no",
+       "odd_def": "no",
+       "odd_value": "1.84",
+       "special_bet_value": "",
+       "outcome_id": "76",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "meta": {}
+}

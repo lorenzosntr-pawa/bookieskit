@@ -265,3 +265,41 @@ def test_msport_1x2_1up_and_2up_from_fixture():
     # 1Up settles earlier than 2Up, so it is the shorter price on the
     # favourite. Guards against the two adjacent ids being swapped.
     assert names["home"].odds < two_names["home"].odds
+
+
+def test_suspended_market_status_drops_line_on_fixture():
+    # next_goal_and_team_ou: Away O/U (id 20) total=2.5 has status=1
+    # (suspended) but still carries prices 6.60 / 1.01.
+    import json
+    from pathlib import Path
+
+    payload = json.loads(
+        Path("tests/fixtures/event_info/msport/next_goal_and_team_ou.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    away = next(
+        m for m in parse_markets(payload, "msport")
+        if m.canonical_id == "away_over_under_ft"
+    )
+    assert 2.5 not in away.lines
+    assert {0.5, 1.5} <= set(away.lines)
+
+
+def test_inactive_outcome_treated_as_missing():
+    response = {
+        "data": {
+            "markets": [
+                {
+                    "id": "1",
+                    "status": 0,
+                    "outcomes": [
+                        {"description": "Home", "odds": "2.0", "isActive": 1},
+                        {"description": "Draw", "odds": "3.3", "isActive": 0},
+                        {"description": "Away", "odds": "3.8", "isActive": 1},
+                    ],
+                }
+            ]
+        }
+    }
+    assert parse_markets(response, "msport") == []
