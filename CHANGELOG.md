@@ -184,17 +184,17 @@ All notable changes to this project are documented in this file. The format foll
   corner-handicap prices and Over/Under FT is restored.
 - **`get_markets(..., sport=)`** now reaches the parser on every client, so
   basketball and tennis payloads are no longer parsed as soccer.
-- **Betika wrong-match prices (behaviour change)** — `/v1/uo/matches` can ignore
-  `match_id`, and `get_event_detail` / `get_event_markets` / `get_markets` used
-  to take `data[0]`, silently returning another match's prices. They now select
-  the row whose `match_id` equals the requested id (string compare); groups
-  from another match are never merged. `get_event_detail` raises
-  `ResponseError` (naming the requested and returned ids) only when the API
-  returns rows but none is the requested match; when it returns no rows the
-  empty payload comes back unchanged (so `get_sportradar_id` yields `None`).
-  `get_event_markets` / `get_markets` skip empty or other-match responses and
-  return an empty payload when nothing matches; they raise only if every
-  response held rows and none was the requested match.
+- **Betika per-event calls (behaviour change)** — `/v1/uo/matches` ignores
+  `match_id` on both hosts (live probe 2026-11-18), so every Betika
+  `get_event_detail` / `get_event_markets` / `get_markets` / `get_sportradar_id`
+  call returned or rejected another match. They now call
+  `/v1/uo/match?id=<match_id>` once and reshape the answer to the usual
+  `{"data": [<match with "odds">], "meta": {}}`. One call returns the full
+  market list (54 groups on PSG–Roma, booking and corner groups included)
+  instead of the 7-call fan-out of 7 groups. An unknown id gives
+  `{"data": [], "meta": {}}` (`get_sportradar_id` → `None`); a response
+  naming another match raises `ResponseError`. `competition_id` is accepted
+  and ignored. New fixture `betika/prematch_soccer_full.json`.
 - **Suspended / missing prices (behaviour change for consumers)** — `parse_markets` no longer emits
   placeholder prices as real odds (BetPawa suspended `0.0`, Bet9ja literal
   `"1"`, Betway missing price `0.0`) or one-sided lines. If any expected
