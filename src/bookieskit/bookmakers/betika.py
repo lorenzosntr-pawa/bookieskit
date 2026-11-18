@@ -199,8 +199,9 @@ class Betika(BaseBookmaker):
                 f"returned {meta['match_id']!s}",
             )
         groups = resp.get("data")
-        odds = [g for g in groups if isinstance(g, dict)] if isinstance(
-            groups, list) else []
+        if not isinstance(groups, list):
+            groups = []
+        odds = [g for g in groups if isinstance(g, dict)]
         return {"data": [{**meta, "odds": odds}], "meta": {}}
 
     async def get_event_detail(
