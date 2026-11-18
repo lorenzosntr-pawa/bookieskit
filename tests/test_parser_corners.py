@@ -4,9 +4,9 @@ All assertions run against the real captured fixtures — the market ids and
 outcome labels were lifted from those payloads, never guessed. Coverage is
 the five bookmakers whose captured fixtures expose corner markets: BetPawa,
 SportyBet, MSport, Bet9ja and Betway (Betway's corner markets live in its
-``2way_handicap_ft.json`` capture, not ``prematch.json``). SportPesa and
-Betika have no corner data in their fixtures, so their mappings are left
-empty (``—`` in the coverage matrix) pending a dedicated in-region probe.
+``2way_handicap_ft.json`` capture, not ``prematch.json``). Betika's corner
+markets (162/166) are tested in ``test_parser_bookings.py`` on ``wc_nf.json``;
+its ``prematch.json`` carries none. SportPesa has no corner data captured.
 """
 
 import json

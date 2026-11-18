@@ -385,7 +385,7 @@ def test_registry_has_1x2_corners_ft():
     assert m.betway_id == "Corner 1X2"
     # Still not exposed in captured fixtures — None pending a live probe.
     assert m.sportpesa_id is None
-    assert m.betika_id is None
+    assert m.betika_id == "162"
     assert set(m.outcomes.keys()) == {"home", "draw", "away"}
     assert m.outcomes["home"].betpawa == "1"
     assert m.outcomes["draw"].betpawa == "X"
@@ -424,7 +424,7 @@ def test_registry_has_over_under_corners_ft():
     assert m.outcomes["over"].betway == "Over"
     assert m.outcomes["under"].betway == "Under"
     assert m.sportpesa_id is None
-    assert m.betika_id is None
+    assert m.betika_id == "166"
     assert set(m.outcomes.keys()) == {"over", "under"}
     assert m.outcomes["over"].betpawa == "Over"
     assert m.outcomes["under"].betpawa == "Under"
@@ -453,7 +453,7 @@ def test_registry_has_1x2_bookings_ft():
     assert m.bet9ja_key == "S_1X2BOOK"
     assert m.msport_id == "136"
     assert m.sportpesa_id is None
-    assert m.betika_id is None
+    assert m.betika_id == "136"
     assert set(m.outcomes.keys()) == {"home", "draw", "away"}
     assert m.outcomes["home"].betway == "__HOME__"
     assert m.outcomes["draw"].betway == "Draw"
@@ -491,7 +491,7 @@ def test_registry_has_over_under_bookings_ft():
     assert m.bet9ja_key == "S_OUBOOK"
     assert m.msport_id == "139"
     assert m.sportpesa_id is None
-    assert m.betika_id is None
+    assert m.betika_id == "139"
     assert set(m.outcomes.keys()) == {"over", "under"}
     assert m.outcomes["over"].betway == "Over"
     assert m.outcomes["under"].betway == "Under"

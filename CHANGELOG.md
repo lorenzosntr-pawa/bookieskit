@@ -5,6 +5,12 @@ All notable changes to this project are documented in this file. The format foll
 ## [Unreleased]
 
 ### Added
+- **Betika booking and corner markets** — `1x2_bookings_ft` (136),
+  `over_under_bookings_ft` (139, card count), `1x2_corners_ft` (162) and
+  `over_under_corners_ft` (166), the same SportRadar ids SportyBet and MSport
+  map. Reachable now that per-event calls return the full market list; tested
+  on the new `betika/wc_nf.json` (Norway–France, 76 groups). Only events
+  Betika prices these on carry them.
 - **`parse_markets(keep_incomplete=True)`** skips the completeness
   filter, so markets and lines with a missing, zero or <= 1.0 price come back
   as parsed (book-compare health checks need to see them). Prices flagged
