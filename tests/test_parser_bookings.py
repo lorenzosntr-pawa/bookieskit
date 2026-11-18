@@ -21,8 +21,8 @@ BetPawa tournament-258194 World Cup fixture *Norway–France* (BetPawa event
 Still unmapped, deferred rather than guessed:
   - SportPesa: booking odds need a session cookie the harness can't supply
     offline; owner previously flagged it as not offering corner/booking → —.
-  - Betika: the no-cookie market-list fetch is truncated (tracked by #31);
-    its booking column lands once #31 restores the full fetch.
+  - Betika: mapped 2026-11-18 (136 / 139) once per-event calls moved to
+    /v1/uo/match and returned the full market list.
 """
 
 import json
@@ -252,3 +252,48 @@ def test_old_prematch_fixtures_have_no_booking_markets():
             if m.canonical_id in {"1x2_bookings_ft", "over_under_bookings_ft"}
         }
         assert booking == set(), f"{book} hallucinated booking markets"
+
+
+# --- Betika booking + corner markets (unblocked by /v1/uo/match) -----------
+# Betika sub_type_ids are SportRadar market ids, the same ids SportyBet and
+# MSport map: 136 Booking 1X2, 139 Total Bookings (card count), 162 Corner
+# 1X2, 166 Total Corners. Prices from betika/wc_nf.json (Norway-France).
+
+
+def _betika_wc(canonical_id):
+    return next(
+        m for m in _markets("betika", _WC) if m.canonical_id == canonical_id
+    )
+
+
+def test_betika_1x2_bookings_ft():
+    m = _betika_wc("1x2_bookings_ft")
+    assert {o.canonical_name: o.odds for o in m.outcomes} == {
+        "home": 2.60, "draw": 2.85, "away": 2.85}
+
+
+def test_betika_over_under_bookings_ft():
+    m = _betika_wc("over_under_bookings_ft")
+    line = {o.canonical_name: o.odds for o in m.lines[1.5]}
+    assert line == {"over": 1.52, "under": 2.37}
+
+
+def test_betika_1x2_corners_ft():
+    m = _betika_wc("1x2_corners_ft")
+    assert {o.canonical_name: o.odds for o in m.outcomes} == {
+        "home": 3.10, "draw": 8.60, "away": 1.59}
+
+
+def test_betika_over_under_corners_ft():
+    m = _betika_wc("over_under_corners_ft")
+    assert m.lines[9.5][0].canonical_name in {"over", "under"}
+    line = {o.canonical_name: o.odds for o in m.lines[9.5]}
+    assert line["over"] == 2.04
+
+
+def test_betika_first_half_booking_and_corner_1x2_stay_unmapped():
+    ids = {m.canonical_id for m in _markets("betika", _WC)}
+    # 149 / 173 are 1st-half variants; they must not leak into FT ids.
+    assert ids >= {"1x2_bookings_ft", "1x2_corners_ft"}
+    m = _betika_wc("1x2_bookings_ft")
+    assert m.outcomes[0].odds != 3.85  # 149 1H home price

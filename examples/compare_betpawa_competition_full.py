@@ -27,7 +27,7 @@ PER-BOOKMAKER LOOKUP STRATEGY
       ``build_prematch_event_map(sport_id="1")``.
     * **Betika**: walks ``iter_all_prematch_events(sport_id=14)``
       once at startup to build a ``{sr_id: match_id}`` map, then
-      one ``get_event_markets`` call per matched event.
+      one ``get_markets(match_id, sport=...)`` call per matched event.
     * **SportPesa**: same as Betika — walks
       ``iter_all_prematch_events()``, builds a ``{sr_id: game_id}``
       map, then one ``get_event_markets`` per match. Requires
@@ -72,7 +72,6 @@ SPORT_CONFIG = {
         "bet9ja_sport_id": "1",
         "betika_sport_id": 14,
         "sportpesa_sport_id": 1,
-        "betika_sub_type_ids": ("1", "10", "18", "29"),
         "expected_canonicals": (
             "1x2_ft", "over_under_ft", "btts_ft", "double_chance_ft",
         ),
@@ -82,7 +81,6 @@ SPORT_CONFIG = {
         "bet9ja_sport_id": "2",
         "betika_sport_id": 30,
         "sportpesa_sport_id": 2,
-        "betika_sub_type_ids": ("219", "225"),  # no handicap on Betika basketball
         "expected_canonicals": (
             "moneyline_basketball_ft",
             "over_under_basketball_ft",
@@ -94,10 +92,6 @@ SPORT_CONFIG = {
         "bet9ja_sport_id": "5",
         "betika_sport_id": 28,
         "sportpesa_sport_id": 5,
-        # Betika tennis sub_type_ids: 186=WINNER, 187=GAME HANDICAP,
-        # 189=TOTAL GAMES. 188 (SET HANDICAP) and 314 (TOTAL SETS) are
-        # also present per-match but no canonical mapping yet.
-        "betika_sub_type_ids": ("186", "187", "189"),
         "expected_canonicals": (
             "moneyline_tennis_match",
             "over_under_games_tennis_match",
@@ -183,25 +177,17 @@ async def fetch_bet9ja(
 
 
 async def fetch_betika(
-    bk: Betika,
-    sr_id: str,
-    lookup: dict[str, tuple[str, str | None]],
-    sub_type_ids: tuple[str, ...],
-    sport_id: int,
+    bk: Betika, sr_id: str, lookup: dict[str, str], sport_name: str,
 ) -> list:
-    entry = lookup.get(sr_id)
-    if entry is None:
+    match_id = lookup.get(sr_id)
+    if match_id is None:
         return []
-    match_id, competition_id = entry
     try:
-        return await fetch_betika_markets_sportaware(
-            bk, match_id, sub_type_ids, sport_id, competition_id,
-        )
+        # One /v1/uo/match?id= call returns every market group; sport=
+        # keeps basketball/tennis ids from parsing as soccer.
+        return await bk.get_markets(match_id, sport=sport_name)
     except Exception as e:
-        logger.warning(
-            "Betika sr:%s (match %s comp %s) failed: %r",
-            sr_id, match_id, competition_id, e,
-        )
+        logger.warning("Betika sr:%s (match %s) failed: %r", sr_id, match_id, e)
         return []
 
 
@@ -227,17 +213,10 @@ async def fetch_sportpesa(
 
 async def build_betika_index(
     bk: Betika, sport_id: int,
-) -> dict[str, tuple[str, str | None]]:
-    """Walk Betika events for one sport; return ``{sr_id: (match_id, competition_id)}``.
+) -> dict[str, str]:
+    """Walk Betika events for one sport; return ``{sr_id: match_id}``.
 
-    ``parent_match_id`` IS the SR id. ``competition_id`` is captured
-    alongside ``match_id`` because Betika's ``match_id`` is unique only
-    within ``(sport_id, competition_id)`` — a bare ``match_id`` lookup
-    can resolve to a different match that happens to share the id
-    (observed live: Tennis match_id 10945420 is both Svrcina/Den Ouden
-    and Tsitsipas/Mpetshi depending on which competition_id is in
-    scope). Callers MUST pass ``competition_id`` on every per-match
-    lookup to disambiguate.
+    ``parent_match_id`` IS the SR id.
     """
     import math
     first = await bk.get_matches(
@@ -250,18 +229,14 @@ async def build_betika_index(
         total = 0
     pages = max(1, math.ceil(total / 100)) if total > 0 else 1
 
-    mapping: dict[str, tuple[str, str | None]] = {}
+    mapping: dict[str, str] = {}
 
     def _collect(page_data: dict) -> None:
         for m in page_data.get("data") or []:
             sr = m.get("parent_match_id")
             if sr in (None, 0, "0", ""):
                 continue
-            comp = m.get("competition_id")
-            mapping[str(sr)] = (
-                str(m.get("match_id")),
-                str(comp) if comp is not None else None,
-            )
+            mapping[str(sr)] = str(m.get("match_id"))
 
     _collect(first)
     if pages > 1:
@@ -321,70 +296,6 @@ async def build_sportpesa_index(
                 continue
             mapping[str(sr)] = str(ev.get("id"))
     return mapping
-
-
-async def fetch_betika_markets_sportaware(
-    bk: Betika,
-    match_id: str,
-    sub_type_ids: tuple[str, ...],
-    sport_id: int,
-    competition_id: str | None = None,
-) -> list:
-    """Aggregate Betika markets for any sport.
-
-    The lib's ``Betika.get_event_markets`` hardcodes the four soccer
-    universal sub_type_ids (1/10/18/29). For other sports (basketball:
-    219/225, tennis: 186/187/189, etc.) we have to assemble the merged
-    shape ourselves.
-
-    Every request MUST include both ``sport_id`` AND ``competition_id``:
-
-    * ``sport_id`` — Betika's ``match_id`` namespace is per-sport; a
-      bare lookup defaults to soccer and returns a totally different
-      event.
-    * ``competition_id`` — within a sport, ``match_id`` is unique only
-      per competition. Without it the API may return another match
-      that happens to share the id (observed on tennis: match_id
-      10945420 resolves to either Svrcina/Den Ouden or
-      Tsitsipas/Mpetshi depending on which is in scope first).
-
-    Both filters are forwarded on every sub_type_id call.
-    """
-    from bookieskit.markets.parser import parse_markets as _parse
-
-    async def _fetch_one(stid: str) -> dict:
-        params: dict[str, str] = {
-            "match_id": match_id,
-            "sport_id": str(sport_id),
-            "sub_type_id": stid,
-            "limit": "1",
-        }
-        if competition_id is not None:
-            params["competition_id"] = str(competition_id)
-        return await bk._request("GET", "/v1/uo/matches", params=params)
-
-    responses = await asyncio.gather(
-        *(_fetch_one(stid) for stid in sub_type_ids), return_exceptions=True,
-    )
-    merged_odds: list[dict] = []
-    merged_match: dict | None = None
-    for r in responses:
-        if not isinstance(r, dict):
-            continue
-        data = r.get("data") or []
-        if not data or not isinstance(data[0], dict):
-            continue
-        if merged_match is None:
-            merged_match = dict(data[0])
-            merged_match["odds"] = []
-        for grp in data[0].get("odds") or []:
-            if isinstance(grp, dict):
-                merged_odds.append(grp)
-    if merged_match is None:
-        return []
-    merged_match["odds"] = merged_odds
-    aggregated = {"data": [merged_match], "meta": {}}
-    return _parse(aggregated, platform="betika")
 
 
 # ---- Pretty-print ---------------------------------------------------------
@@ -542,9 +453,7 @@ async def main(competition_id: str, sport_id: str) -> None:
                     bw_task = fetch_betway(bw, sr_id)
                     b9_task = fetch_bet9ja(b9, sr_id, bet9ja_map)
                     bk_task = fetch_betika(
-                        bk, sr_id, betika_map,
-                        cfg["betika_sub_type_ids"],
-                        cfg["betika_sport_id"],
+                        bk, sr_id, betika_map, cfg["name"],
                     )
                     if sp_ctx is not None:
                         sp_task = fetch_sportpesa(

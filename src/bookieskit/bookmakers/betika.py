@@ -12,6 +12,7 @@ rate limiting under bursty traffic.
 
 import asyncio
 import math
+import warnings
 from typing import Any, AsyncIterator
 
 from bookieskit.base import BaseBookmaker
@@ -19,12 +20,14 @@ from bookieskit.bookmakers.types import PrematchEventStub
 from bookieskit.config import BETIKA_MAX_CONCURRENT, BETIKA_REQUEST_DELAY
 from bookieskit.exceptions import ResponseError
 
-# Sub-type ids fanned out by get_event_markets to assemble a complete
-# per-event market set. Order is for readability only — Betika's API
-# doesn't care. Each id maps to one canonical market in the built-in
-# registry: 1=1X2, 8=Next Goal, 10=Double Chance, 18=O/U, 19=Home O/U,
-# 20=Away O/U, 29=BTTS.
-_UNIVERSAL_SUB_TYPE_IDS = ("1", "8", "10", "18", "19", "20", "29")
+# Betika sport ids for the parser's sport tags (used to reject a
+# wrong-sport answer before parsing it against the wrong registry).
+_SPORT_IDS = {"soccer": "14", "basketball": "30", "tennis": "28"}
+
+_MATCH_ID_IGNORED = (
+    "Betika's /v1/uo/matches ignores match_id (it returns other matches); "
+    "use get_event_detail(event_id) instead"
+)
 
 
 class Betika(BaseBookmaker):
@@ -119,7 +122,9 @@ class Betika(BaseBookmaker):
                 Over/Under markets in each match's ``odds`` list instead
                 of the default 1X2).
             competition_id: Optional competition (league) filter.
-            match_id: Fetch a single match (overrides paging).
+            match_id: Deprecated. ``/v1/uo/matches`` ignores it and returns
+                other matches; use :meth:`get_event_detail`. Still sent,
+                with a ``DeprecationWarning``.
             period_id: Optional date-window filter. The endpoint defaults
                 to a rolling 48hr ``"Next 48hrs"`` view (~176 football
                 events at writing); pass ``9`` for the full multi-month
@@ -142,6 +147,7 @@ class Betika(BaseBookmaker):
         if competition_id is not None:
             params["competition_id"] = competition_id
         if match_id is not None:
+            warnings.warn(_MATCH_ID_IGNORED, DeprecationWarning, stacklevel=2)
             params["match_id"] = match_id
         if period_id is not None:
             params["period_id"] = str(period_id)
@@ -160,7 +166,8 @@ class Betika(BaseBookmaker):
             sport_id: Betika sport id (default ``14`` = Football).
             page: 1-indexed page number.
             limit: Page size.
-            match_id: Fetch a single in-play match by id (overrides paging).
+            match_id: Deprecated, ignored by the API (see
+                :meth:`get_matches`); use ``get_event_detail(id, live=True)``.
 
         Returns:
             JSON in the same shape as :meth:`get_matches`, plus the rich
@@ -173,8 +180,57 @@ class Betika(BaseBookmaker):
             "limit": str(limit),
         }
         if match_id is not None:
+            warnings.warn(_MATCH_ID_IGNORED, DeprecationWarning, stacklevel=2)
             params["match_id"] = match_id
         return await self._live_request("GET", "/v1/uo/matches", params=params)
+
+    async def _fetch_match(self, event_id: str, live: bool) -> dict[str, Any]:
+        """Fetch one match with every market from ``/v1/uo/match?id=``.
+
+        ``/v1/uo/matches`` ignores ``match_id`` (live probe 2026-11-18:
+        every lookup returned the same unrelated match), so per-event
+        calls use ``/v1/uo/match``. It answers ``{"data": [<group>, ...],
+        "meta": {<match fields>}}``; this reshapes it to the listing shape
+        ``{"data": [{**meta, "odds": groups}], "meta": {}}`` the parser and
+        the SportRadar extractor read. An unknown id (live shape: ``data``
+        null and ``meta`` without ``match_id``) gives
+        ``{"data": [], "meta": {}}``.
+
+        Raises:
+            ResponseError: the response names a different match, or has
+                any other unexpected shape (so a schema change is not
+                mistaken for "event not offered").
+        """
+        params = {"id": str(event_id)}
+        if live:
+            resp = await self._live_request("GET", "/v1/uo/match", params=params)
+        else:
+            resp = await self._request("GET", "/v1/uo/match", params=params)
+        meta = resp.get("meta") if isinstance(resp, dict) else None
+        if not isinstance(meta, dict):
+            raise ResponseError(
+                "/v1/uo/match", 200,
+                f"Betika answered with an unexpected shape for {event_id!s}",
+            )
+        if meta.get("match_id") is None:
+            if resp.get("data") is None:
+                return {"data": [], "meta": {}}  # unknown id
+            raise ResponseError(
+                "/v1/uo/match", 200,
+                f"Betika returned markets without a match_id for {event_id!s}",
+            )
+        if str(meta["match_id"]) != str(event_id):
+            raise ResponseError(
+                "/v1/uo/match",
+                200,
+                f"Betika returned another match: requested {event_id!s}, "
+                f"returned {meta['match_id']!s}",
+            )
+        groups = resp.get("data")
+        if not isinstance(groups, list):
+            groups = []
+        odds = [g for g in groups if isinstance(g, dict)]
+        return {"data": [{**meta, "odds": odds}], "meta": {}}
 
     async def get_event_detail(
         self,
@@ -182,43 +238,23 @@ class Betika(BaseBookmaker):
         live: bool = False,
         competition_id: str | None = None,
     ) -> dict[str, Any]:
-        """Get the event-detail payload for one match.
+        """Get one match with its full market list.
 
         Args:
             event_id: Betika internal ``match_id``.
             live: If True, fetch from ``live.betika.com``; otherwise from
                 ``api.betika.com``.
-            competition_id: Optional Betika ``competition_id`` filter.
-                Betika's ``match_id`` is unique only within a
-                ``(sport_id, competition_id)`` pair — a bare
-                ``match_id`` lookup may resolve to a different match
-                that happens to share the same id. Pass the
-                ``competition_id`` from the listing response to
-                disambiguate.
+            competition_id: Accepted for backwards compatibility and
+                ignored: ``/v1/uo/match?id=`` resolves the match on its own.
 
         Returns:
-            JSON shaped as ``{"data": [<match>], "meta": {...}}``. The
-            default response carries a single market group (1X2);
-            :meth:`get_event_markets` aggregates the full universal set.
+            ``{"data": [<match with "odds">], "meta": {}}``, or
+            ``{"data": [], "meta": {}}`` when Betika does not know the id.
+
+        Raises:
+            ResponseError: Betika answered with a different match.
         """
-        params: dict[str, Any] = {"match_id": event_id, "limit": "1"}
-        if competition_id is not None:
-            params["competition_id"] = str(competition_id)
-        if live:
-            resp = await self._live_request(
-                "GET", "/v1/uo/matches", params=params
-            )
-        else:
-            resp = await self._request(
-                "GET", "/v1/uo/matches", params=params
-            )
-        row = _pick_match(resp, event_id)
-        if row is None:
-            data = resp.get("data") if isinstance(resp, dict) else None
-            if isinstance(data, list) and data:
-                raise _wrong_match_error(resp, event_id)
-            return resp  # no rows: unchanged payload (pre-branch behaviour)
-        return {"data": [row], "meta": resp.get("meta", {})}
+        return await self._fetch_match(event_id, live)
 
     async def get_event_markets(
         self,
@@ -226,81 +262,21 @@ class Betika(BaseBookmaker):
         live: bool = False,
         competition_id: str | None = None,
     ) -> dict[str, Any]:
-        """Fetch the universal market set for one event in one merged payload.
+        """Fetch every market group Betika offers for one event (one call).
 
-        Betika's ``/v1/uo/matches`` returns a single market group per call
-        by default; to fetch a different market you must repeat the call
-        with ``&sub_type_id=N``. This method fans out the seven universal
-        market ids concurrently and stitches their ``odds`` groups into a
-        single match-shaped response — exactly the shape the parser
-        expects. The seven ids are: 1 (1X2), 8 (Next Goal), 10 (Double
-        Chance), 18 (Over/Under), 19 (Home O/U), 20 (Away O/U), 29 (BTTS).
+        Same payload as :meth:`get_event_detail` (``/v1/uo/match`` already
+        returns every market group Betika lists for the event);
+        kept as the name ``get_markets`` and capture scripts call.
 
         Args:
             event_id: Betika internal ``match_id``.
             live: If True, fetch from ``live.betika.com``.
-            competition_id: Optional Betika ``competition_id`` filter.
-                Betika's ``match_id`` is unique only within a
-                ``(sport_id, competition_id)`` pair — without this filter
-                a bare ``match_id`` lookup may return a different match
-                with the same id. Always pass this when you have it
-                (the listing endpoint includes it on every match row).
+            competition_id: Accepted for backwards compatibility; ignored.
 
-        Returns:
-            JSON shaped as ``{"data": [<match>], "meta": {...}}`` where
-            ``<match>.odds`` contains one entry per universal market id
-            (1, 8, 10, 18, 19, 20, 29). If a particular market is
-            unavailable for the event it is silently skipped.
+        Raises:
+            ResponseError: Betika answered with a different match.
         """
-        async def _fetch_one(sub_type_id: str) -> dict[str, Any]:
-            params: dict[str, Any] = {
-                "match_id": event_id,
-                "limit": "1",
-                "sub_type_id": sub_type_id,
-            }
-            if competition_id is not None:
-                params["competition_id"] = str(competition_id)
-            if live:
-                return await self._live_request(
-                    "GET", "/v1/uo/matches", params=params
-                )
-            return await self._request("GET", "/v1/uo/matches", params=params)
-
-        responses = await asyncio.gather(
-            *(_fetch_one(s) for s in _UNIVERSAL_SUB_TYPE_IDS),
-            return_exceptions=True,
-        )
-
-        merged_match: dict[str, Any] | None = None
-        merged_odds: list[dict[str, Any]] = []
-        merged_meta: dict[str, Any] = {}
-        wrong_match: dict[str, Any] | None = None
-        for r in responses:
-            if isinstance(r, BaseException) or not isinstance(r, dict):
-                continue
-            data = r.get("data") or []
-            if not isinstance(data, list) or not data:
-                continue
-            # Betika may ignore match_id: only ever merge the requested match.
-            match = _pick_match(r, event_id)
-            if match is None:
-                wrong_match = r
-                continue
-            if merged_match is None:
-                merged_match = dict(match)
-                merged_match["odds"] = []
-            for grp in match.get("odds") or []:
-                if isinstance(grp, dict):
-                    merged_odds.append(grp)
-            if isinstance(r.get("meta"), dict):
-                merged_meta = r["meta"]
-
-        if merged_match is None:
-            if wrong_match is not None:
-                raise _wrong_match_error(wrong_match, event_id)
-            return {"data": [], "meta": {}}
-        merged_match["odds"] = merged_odds
-        return {"data": [merged_match], "meta": merged_meta}
+        return await self._fetch_match(event_id, live)
 
     async def get_markets(
         self,
@@ -309,21 +285,31 @@ class Betika(BaseBookmaker):
         *,
         sport: str | None = None,
     ) -> list:
-        """Fetch the universal market set and return normalized markets.
-
-        Overrides the base because Betika requires seven calls (one per
-        universal market id — 1, 8, 10, 18, 19, 20, 29) to assemble a
-        complete event payload.
+        """Fetch the full market set and return normalized markets.
 
         Args:
             event_id: Betika event ID
             registry: MarketRegistry (default: built-in)
             sport: Sport tag forwarded to ``parse_markets`` (same meaning
-                there); None keeps the soccer default.
+                there); None keeps the soccer default. When given, the
+                event's ``sport_id`` must match it.
+
+        Raises:
+            ResponseError: wrong match, wrong sport or unexpected shape.
         """
         from bookieskit.markets.parser import parse_markets
 
         raw = await self.get_event_markets(event_id=event_id)
+        expected = _SPORT_IDS.get(sport) if sport is not None else None
+        rows = raw.get("data") or []
+        if expected is not None and rows:
+            got = rows[0].get("sport_id")
+            if got is not None and str(got) != expected:
+                raise ResponseError(
+                    "/v1/uo/match", 200,
+                    f"Betika event {event_id!s} is sport_id {got!s}, "
+                    f"not {sport} ({expected})",
+                )
         return parse_markets(
             raw, platform=self.PLATFORM_KEY, registry=registry, sport=sport
         )
@@ -379,36 +365,6 @@ class Betika(BaseBookmaker):
         for r in results:
             for stub in _stubs_from_page(r, sport_id):
                 yield stub
-
-
-def _pick_match(resp: Any, event_id: str) -> dict[str, Any] | None:
-    """Return the row whose ``match_id`` equals ``event_id`` (string-compared).
-
-    ``/v1/uo/matches`` can ignore ``match_id`` and return other matches, so
-    never fall back to ``data[0]``.
-    """
-    if not isinstance(resp, dict):
-        return None
-    data = resp.get("data")
-    if not isinstance(data, list):
-        return None
-    for row in data:
-        if isinstance(row, dict) and str(row.get("match_id")) == str(event_id):
-            return row
-    return None
-
-
-def _wrong_match_error(resp: Any, event_id: str) -> ResponseError:
-    data = resp.get("data") if isinstance(resp, dict) else None
-    returned = [
-        str(r.get("match_id")) for r in (data or []) if isinstance(r, dict)
-    ]
-    return ResponseError(
-        "/v1/uo/matches",
-        200,
-        f"Betika ignored match_id: requested {event_id!s}, "
-        f"returned {returned or 'no rows'}",
-    )
 
 
 def _coerce_int(v: Any) -> int:

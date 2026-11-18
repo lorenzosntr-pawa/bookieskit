@@ -296,10 +296,9 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
     #     two selections. The earlier "not offered" call was wrong: it was
     #     made from June fixtures whose D.O carried no such odds, and a
     #     key-regex that skipped D.TRANS because entries are M#-prefixed.
-    #   - Betika  — UNKNOWN, not "absent". Its scans surface no 1Up market
-    #     at all (live: 10 events / 210 strings), which is the signature of
-    #     the truncated no-cookie market fetch tracked by #31, not evidence
-    #     of absence. Re-probe once #31 is fixed.
+    #   - Betika  — not seen. The full per-event list (/v1/uo/match, 54
+    #     groups on PSG-Roma 2026-11-18; 76 on Norway-France) has no 1Up
+    #     group. One-event evidence: re-check on a big league fixture.
     #   - SportPesa — UNKNOWN. Not probed; its market list needs an Akamai
     #     cookie the harness cannot supply.
     MarketMapping(
@@ -357,7 +356,8 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
     #     "Over"/"Under" for O/U (whitespace-stripped at parse-time).
     # Coverage notes (— in the coverage matrix means a dedicated in-region
     # live probe is still needed):
-    #   - SportPesa, Betika fixtures contain NO corner data at all.
+    #   - SportPesa fixtures contain NO corner data at all. Betika: 162/166
+    #     (SR ids) mapped from betika/wc_nf.json.
     #   - Bet9ja corner-1X2 (#22): the captured event's market metadata
     #     (D.MK / D.TRANS) labels key S_TEAMCORNER "Corners - 1X2" with
     #     MDESC "Which team will get the most corners during the game in
@@ -378,7 +378,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
         betway_id="Corner 1X2",  # market name in captured fixture
         msport_id="162",  # "Corner 1x2"
         sportpesa_id=None,  # no corner data in captured fixture — needs probe
-        betika_id=None,
+        betika_id="162",  # "CORNER 1X2" (SR id, as SportyBet/MSport)
         elephantbet_id="111",  # no corner data in captured fixture — needs probe
         outcomes={
             "home": OutcomeMapping(
@@ -389,7 +389,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 betway="__HOME__",
                 msport="Home",
                 sportpesa="",
-                betika="",
+                betika="1",
                 elephantbet="1",
             ),
             "draw": OutcomeMapping(
@@ -400,7 +400,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 betway="Draw",
                 msport="Draw",
                 sportpesa="",
-                betika="",
+                betika="X",
                 elephantbet="X",
             ),
             "away": OutcomeMapping(
@@ -411,7 +411,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 betway="__AWAY__",
                 msport="Away",
                 sportpesa="",
-                betika="",
+                betika="2",
                 elephantbet="2",
             ),
         },
@@ -426,7 +426,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
         betway_id="Total Corners",  # market name in captured fixture
         msport_id="166",  # "Corners O/U"
         sportpesa_id=None,  # no corner data in captured fixture — needs probe
-        betika_id=None,
+        betika_id="166",  # "TOTAL CORNERS"
         elephantbet_id="107",  # no corner data in captured fixture — needs probe
         outcomes={
             "over": OutcomeMapping(
@@ -437,7 +437,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 betway="Over",
                 msport="Over",
                 sportpesa="",
-                betika="",
+                betika="Over",
                 elephantbet="Acima",
             ),
             "under": OutcomeMapping(
@@ -448,7 +448,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 betway="Under",
                 msport="Under",
                 sportpesa="",
-                betika="",
+                betika="Under",
                 elephantbet="Abaixo",
             ),
         },
@@ -480,8 +480,6 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
     # Still unmapped -- deferred, NOT guessed:
     #   - SportPesa: booking odds need a session cookie the harness can't
     #     supply offline; owner previously flagged it as not offered.
-    #   - Betika: the no-cookie market-list fetch is truncated (tracked by
-    #     #31); the booking column lands once #31 restores the full fetch.
     MarketMapping(
         canonical_id="1x2_bookings_ft",
         name="1X2 Bookings - Full Time",
@@ -491,7 +489,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
         betway_id="Booking 1X2",  # market name in captured fixture
         msport_id="136",  # "Booking 1x2"
         sportpesa_id=None,  # cookie-gated probe; owner-flagged not offered
-        betika_id=None,  # truncated no-cookie fetch -- tracked by #31
+        betika_id="136",  # "BOOKING 1X2"
         outcomes={
             "home": OutcomeMapping(
                 canonical_name="home",
@@ -501,7 +499,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 betway="__HOME__",
                 msport="Home",
                 sportpesa="",
-                betika="",
+                betika="1",
             ),
             "draw": OutcomeMapping(
                 canonical_name="draw",
@@ -511,7 +509,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 betway="Draw",
                 msport="Draw",
                 sportpesa="",
-                betika="",
+                betika="X",
             ),
             "away": OutcomeMapping(
                 canonical_name="away",
@@ -521,7 +519,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 betway="__AWAY__",
                 msport="Away",
                 sportpesa="",
-                betika="",
+                betika="2",
             ),
         },
         parameterized=False,
@@ -535,8 +533,8 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
         betway_id="Total Bookings",  # market name (card count, not points)
         msport_id="139",  # "Bookings O/U"
         sportpesa_id=None,  # cookie-gated probe; owner-flagged not offered
-        betika_id=None,
-        elephantbet_id="73",  # truncated no-cookie fetch -- tracked by #31
+        betika_id="139",  # "TOTAL BOOKINGS (YELLOW CARD, RED CARD)"
+        elephantbet_id="73",
         outcomes={
             "over": OutcomeMapping(
                 canonical_name="over",
@@ -546,7 +544,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 betway="Over",
                 msport="Over",
                 sportpesa="",
-                betika="",
+                betika="Over",
                 elephantbet="Acima",
             ),
             "under": OutcomeMapping(
@@ -557,7 +555,7 @@ BUILTIN_MAPPINGS: list[MarketMapping] = [
                 betway="Under",
                 msport="Under",
                 sportpesa="",
-                betika="",
+                betika="Under",
                 elephantbet="Abaixo",
             ),
         },

@@ -1,0 +1,3922 @@
+{
+ "data": [
+  {
+   "home_team": "PSG",
+   "game_id": "37020",
+   "match_id": "12024057",
+   "away_team": "AS Roma",
+   "start_time": "2026-11-25 23:00:00",
+   "competition_name": "UEFA Champions League",
+   "category": "International Clubs",
+   "parent_match_id": "74166046",
+   "sport_id": "14",
+   "provider": "sr",
+   "is_esport": false,
+   "odds": [
+    {
+     "sub_type_id": "1",
+     "name": "1X2",
+     "odds": [
+      {
+       "display": "1",
+       "odd_key": "PSG",
+       "odd_def": "{$competitor1}",
+       "odd_value": "1.36",
+       "special_bet_value": "",
+       "outcome_id": "1",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "X",
+       "odd_key": "draw",
+       "odd_def": "draw",
+       "odd_value": "6.00",
+       "special_bet_value": "",
+       "outcome_id": "2",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "2",
+       "odd_key": "AS Roma",
+       "odd_def": "{$competitor2}",
+       "odd_value": "7.60",
+       "special_bet_value": "",
+       "outcome_id": "3",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      }
+     ]
+    },
+    {
+     "sub_type_id": "29",
+     "name": "BOTH TEAMS TO SCORE (GG/NG)",
+     "odds": [
+      {
+       "display": "YES",
+       "odd_key": "yes",
+       "odd_def": "yes",
+       "odd_value": "1.58",
+       "special_bet_value": "",
+       "outcome_id": "74",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "NO",
+       "odd_key": "no",
+       "odd_def": "no",
+       "odd_value": "2.34",
+       "special_bet_value": "",
+       "outcome_id": "76",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      }
+     ]
+    },
+    {
+     "sub_type_id": "10",
+     "name": "DOUBLE CHANCE",
+     "odds": [
+      {
+       "display": "1/X",
+       "odd_key": "PSG or draw",
+       "odd_def": "{$competitor1} or draw",
+       "odd_value": "1.11",
+       "special_bet_value": "",
+       "outcome_id": "9",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "X/2",
+       "odd_key": "draw or AS Roma",
+       "odd_def": "draw or {$competitor2}",
+       "odd_value": "3.00",
+       "special_bet_value": "",
+       "outcome_id": "11",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "1/2",
+       "odd_key": "PSG or AS Roma",
+       "odd_def": "{$competitor1} or {$competitor2}",
+       "odd_value": "1.15",
+       "special_bet_value": "",
+       "outcome_id": "10",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      }
+     ]
+    },
+    {
+     "sub_type_id": "18",
+     "name": "TOTAL",
+     "odds": [
+      {
+       "display": "OVER 1.5",
+       "odd_key": "over 1.5",
+       "odd_def": "over {total}",
+       "odd_value": "1.10",
+       "special_bet_value": "total=1.5",
+       "outcome_id": "12",
+       "parsed_special_bet_value": {
+        "total": "1.5"
+       }
+      },
+      {
+       "display": "UNDER 1.5",
+       "odd_key": "under 1.5",
+       "odd_def": "under {total}",
+       "odd_value": "6.60",
+       "special_bet_value": "total=1.5",
+       "outcome_id": "13",
+       "parsed_special_bet_value": {
+        "total": "1.5"
+       }
+      },
+      {
+       "display": "OVER 2.5",
+       "odd_key": "over 2.5",
+       "odd_def": "over {total}",
+       "odd_value": "1.34",
+       "special_bet_value": "total=2.5",
+       "outcome_id": "12",
+       "parsed_special_bet_value": {
+        "total": "2.5"
+       }
+      },
+      {
+       "display": "UNDER 2.5",
+       "odd_key": "under 2.5",
+       "odd_def": "under {total}",
+       "odd_value": "3.20",
+       "special_bet_value": "total=2.5",
+       "outcome_id": "13",
+       "parsed_special_bet_value": {
+        "total": "2.5"
+       }
+      },
+      {
+       "display": "OVER 3.5",
+       "odd_key": "over 3.5",
+       "odd_def": "over {total}",
+       "odd_value": "1.85",
+       "special_bet_value": "total=3.5",
+       "outcome_id": "12",
+       "parsed_special_bet_value": {
+        "total": "3.5"
+       }
+      },
+      {
+       "display": "UNDER 3.5",
+       "odd_key": "under 3.5",
+       "odd_def": "under {total}",
+       "odd_value": "1.92",
+       "special_bet_value": "total=3.5",
+       "outcome_id": "13",
+       "parsed_special_bet_value": {
+        "total": "3.5"
+       }
+      },
+      {
+       "display": "OVER 4.5",
+       "odd_key": "over 4.5",
+       "odd_def": "over {total}",
+       "odd_value": "2.85",
+       "special_bet_value": "total=4.5",
+       "outcome_id": "12",
+       "parsed_special_bet_value": {
+        "total": "4.5"
+       }
+      },
+      {
+       "display": "UNDER 4.5",
+       "odd_key": "under 4.5",
+       "odd_def": "under {total}",
+       "odd_value": "1.40",
+       "special_bet_value": "total=4.5",
+       "outcome_id": "13",
+       "parsed_special_bet_value": {
+        "total": "4.5"
+       }
+      },
+      {
+       "display": "OVER 5.5",
+       "odd_key": "over 5.5",
+       "odd_def": "over {total}",
+       "odd_value": "4.90",
+       "special_bet_value": "total=5.5",
+       "outcome_id": "12",
+       "parsed_special_bet_value": {
+        "total": "5.5"
+       }
+      },
+      {
+       "display": "UNDER 5.5",
+       "odd_key": "under 5.5",
+       "odd_def": "under {total}",
+       "odd_value": "1.17",
+       "special_bet_value": "total=5.5",
+       "outcome_id": "13",
+       "parsed_special_bet_value": {
+        "total": "5.5"
+       }
+      }
+     ]
+    },
+    {
+     "sub_type_id": "11",
+     "name": "WHO WILL WIN? (IF DRAW, MONEY BACK)",
+     "odds": [
+      {
+       "display": "1",
+       "odd_key": "PSG",
+       "odd_def": "{$competitor1}",
+       "odd_value": "1.13",
+       "special_bet_value": "",
+       "outcome_id": "4",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "2",
+       "odd_key": "AS Roma",
+       "odd_def": "{$competitor2}",
+       "odd_value": "5.60",
+       "special_bet_value": "",
+       "outcome_id": "5",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      }
+     ]
+    },
+    {
+     "sub_type_id": "60",
+     "name": "1ST HALF - 1X2",
+     "odds": [
+      {
+       "display": "1",
+       "odd_key": "PSG",
+       "odd_def": "{$competitor1}",
+       "odd_value": "1.72",
+       "special_bet_value": "",
+       "outcome_id": "1",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "X",
+       "odd_key": "draw",
+       "odd_def": "draw",
+       "odd_value": "3.05",
+       "special_bet_value": "",
+       "outcome_id": "2",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "2",
+       "odd_key": "AS Roma",
+       "odd_def": "{$competitor2}",
+       "odd_value": "6.60",
+       "special_bet_value": "",
+       "outcome_id": "3",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      }
+     ]
+    },
+    {
+     "sub_type_id": "68",
+     "name": "1ST HALF - TOTAL",
+     "odds": [
+      {
+       "display": "OVER 0.5",
+       "odd_key": "over 0.5",
+       "odd_def": "over {total}",
+       "odd_value": "1.18",
+       "special_bet_value": "total=0.5",
+       "outcome_id": "12",
+       "parsed_special_bet_value": {
+        "total": "0.5"
+       }
+      },
+      {
+       "display": "UNDER 0.5",
+       "odd_key": "under 0.5",
+       "odd_def": "under {total}",
+       "odd_value": "4.60",
+       "special_bet_value": "total=0.5",
+       "outcome_id": "13",
+       "parsed_special_bet_value": {
+        "total": "0.5"
+       }
+      },
+      {
+       "display": "OVER 1.5",
+       "odd_key": "over 1.5",
+       "odd_def": "over {total}",
+       "odd_value": "1.88",
+       "special_bet_value": "total=1.5",
+       "outcome_id": "12",
+       "parsed_special_bet_value": {
+        "total": "1.5"
+       }
+      },
+      {
+       "display": "UNDER 1.5",
+       "odd_key": "under 1.5",
+       "odd_def": "under {total}",
+       "odd_value": "1.89",
+       "special_bet_value": "total=1.5",
+       "outcome_id": "13",
+       "parsed_special_bet_value": {
+        "total": "1.5"
+       }
+      },
+      {
+       "display": "OVER 2.5",
+       "odd_key": "over 2.5",
+       "odd_def": "over {total}",
+       "odd_value": "3.75",
+       "special_bet_value": "total=2.5",
+       "outcome_id": "12",
+       "parsed_special_bet_value": {
+        "total": "2.5"
+       }
+      },
+      {
+       "display": "UNDER 2.5",
+       "odd_key": "under 2.5",
+       "odd_def": "under {total}",
+       "odd_value": "1.26",
+       "special_bet_value": "total=2.5",
+       "outcome_id": "13",
+       "parsed_special_bet_value": {
+        "total": "2.5"
+       }
+      }
+     ]
+    },
+    {
+     "sub_type_id": "8",
+     "name": "1ST GOAL",
+     "odds": [
+      {
+       "display": "1",
+       "odd_key": "PSG",
+       "odd_def": "{$competitor1}",
+       "odd_value": "1.36",
+       "special_bet_value": "goalnr=1",
+       "outcome_id": "6",
+       "parsed_special_bet_value": {
+        "goalnr": "1"
+       }
+      },
+      {
+       "display": "NONE",
+       "odd_key": "none",
+       "odd_def": "none",
+       "odd_value": "30.00",
+       "special_bet_value": "goalnr=1",
+       "outcome_id": "7",
+       "parsed_special_bet_value": {
+        "goalnr": "1"
+       }
+      },
+      {
+       "display": "2",
+       "odd_key": "AS Roma",
+       "odd_def": "{$competitor2}",
+       "odd_value": "3.25",
+       "special_bet_value": "goalnr=1",
+       "outcome_id": "8",
+       "parsed_special_bet_value": {
+        "goalnr": "1"
+       }
+      }
+     ]
+    },
+    {
+     "sub_type_id": "105",
+     "name": "10 MINUTES - 1X2 FROM 1ST TO 10TH",
+     "odds": [
+      {
+       "display": "1",
+       "odd_key": "PSG",
+       "odd_def": "{$competitor1}",
+       "odd_value": "4.50",
+       "special_bet_value": "from=1|to=10",
+       "outcome_id": "1",
+       "parsed_special_bet_value": {
+        "from": "1",
+        "to": "10"
+       }
+      },
+      {
+       "display": "X",
+       "odd_key": "draw",
+       "odd_def": "draw",
+       "odd_value": "1.27",
+       "special_bet_value": "from=1|to=10",
+       "outcome_id": "2",
+       "parsed_special_bet_value": {
+        "from": "1",
+        "to": "10"
+       }
+      },
+      {
+       "display": "2",
+       "odd_key": "AS Roma",
+       "odd_def": "{$competitor2}",
+       "odd_value": "12.00",
+       "special_bet_value": "from=1|to=10",
+       "outcome_id": "3",
+       "parsed_special_bet_value": {
+        "from": "1",
+        "to": "10"
+       }
+      }
+     ]
+    },
+    {
+     "sub_type_id": "548",
+     "name": "MULTIGOALS",
+     "odds": [
+      {
+       "display": "1-2",
+       "odd_key": "1-2",
+       "odd_def": "1-2",
+       "odd_value": "2.79",
+       "special_bet_value": "",
+       "outcome_id": "1730",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "1-3",
+       "odd_key": "1-3",
+       "odd_def": "1-3",
+       "odd_value": "1.71",
+       "special_bet_value": "",
+       "outcome_id": "1731",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "1-4",
+       "odd_key": "1-4",
+       "odd_def": "1-4",
+       "odd_value": "1.32",
+       "special_bet_value": "",
+       "outcome_id": "1732",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "1-5",
+       "odd_key": "1-5",
+       "odd_def": "1-5",
+       "odd_value": "1.15",
+       "special_bet_value": "",
+       "outcome_id": "1733",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "1-6",
+       "odd_key": "1-6",
+       "odd_def": "1-6",
+       "odd_value": "1.08",
+       "special_bet_value": "",
+       "outcome_id": "1734",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "2-3",
+       "odd_key": "2-3",
+       "odd_def": "2-3",
+       "odd_value": "2.03",
+       "special_bet_value": "",
+       "outcome_id": "1735",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "2-4",
+       "odd_key": "2-4",
+       "odd_def": "2-4",
+       "odd_value": "1.47",
+       "special_bet_value": "",
+       "outcome_id": "1736",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "2-5",
+       "odd_key": "2-5",
+       "odd_def": "2-5",
+       "odd_value": "1.25",
+       "special_bet_value": "",
+       "outcome_id": "1737",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "2-6",
+       "odd_key": "2-6",
+       "odd_def": "2-6",
+       "odd_value": "1.15",
+       "special_bet_value": "",
+       "outcome_id": "1738",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "3-4",
+       "odd_key": "3-4",
+       "odd_def": "3-4",
+       "odd_value": "1.92",
+       "special_bet_value": "",
+       "outcome_id": "1739",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "3-5",
+       "odd_key": "3-5",
+       "odd_def": "3-5",
+       "odd_value": "1.52",
+       "special_bet_value": "",
+       "outcome_id": "1740",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "3-6",
+       "odd_key": "3-6",
+       "odd_def": "3-6",
+       "odd_value": "1.36",
+       "special_bet_value": "",
+       "outcome_id": "1741",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "4-5",
+       "odd_key": "4-5",
+       "odd_def": "4-5",
+       "odd_value": "2.21",
+       "special_bet_value": "",
+       "outcome_id": "1742",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "4-6",
+       "odd_key": "4-6",
+       "odd_def": "4-6",
+       "odd_value": "1.83",
+       "special_bet_value": "",
+       "outcome_id": "1743",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "5-6",
+       "odd_key": "5-6",
+       "odd_def": "5-6",
+       "odd_value": "3.02",
+       "special_bet_value": "",
+       "outcome_id": "1744",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "7+",
+       "odd_key": "7+",
+       "odd_def": "7+",
+       "odd_value": "7.70",
+       "special_bet_value": "",
+       "outcome_id": "1745",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "NO GOAL",
+       "odd_key": "no goal",
+       "odd_def": "no goal",
+       "odd_value": "23.12",
+       "special_bet_value": "",
+       "outcome_id": "1804",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      }
+     ]
+    },
+    {
+     "sub_type_id": "19",
+     "name": "PSG TOTAL",
+     "odds": [
+      {
+       "display": "OVER 1.5",
+       "odd_key": "over 1.5",
+       "odd_def": "over {total}",
+       "odd_value": "1.28",
+       "special_bet_value": "total=1.5",
+       "outcome_id": "12",
+       "parsed_special_bet_value": {
+        "total": "1.5"
+       }
+      },
+      {
+       "display": "UNDER 1.5",
+       "odd_key": "under 1.5",
+       "odd_def": "under {total}",
+       "odd_value": "3.45",
+       "special_bet_value": "total=1.5",
+       "outcome_id": "13",
+       "parsed_special_bet_value": {
+        "total": "1.5"
+       }
+      },
+      {
+       "display": "OVER 2.5",
+       "odd_key": "over 2.5",
+       "odd_def": "over {total}",
+       "odd_value": "1.87",
+       "special_bet_value": "total=2.5",
+       "outcome_id": "12",
+       "parsed_special_bet_value": {
+        "total": "2.5"
+       }
+      },
+      {
+       "display": "UNDER 2.5",
+       "odd_key": "under 2.5",
+       "odd_def": "under {total}",
+       "odd_value": "1.87",
+       "special_bet_value": "total=2.5",
+       "outcome_id": "13",
+       "parsed_special_bet_value": {
+        "total": "2.5"
+       }
+      },
+      {
+       "display": "OVER 3.5",
+       "odd_key": "over 3.5",
+       "odd_def": "over {total}",
+       "odd_value": "3.15",
+       "special_bet_value": "total=3.5",
+       "outcome_id": "12",
+       "parsed_special_bet_value": {
+        "total": "3.5"
+       }
+      },
+      {
+       "display": "UNDER 3.5",
+       "odd_key": "under 3.5",
+       "odd_def": "under {total}",
+       "odd_value": "1.33",
+       "special_bet_value": "total=3.5",
+       "outcome_id": "13",
+       "parsed_special_bet_value": {
+        "total": "3.5"
+       }
+      }
+     ]
+    },
+    {
+     "sub_type_id": "20",
+     "name": "AS ROMA TOTAL",
+     "odds": [
+      {
+       "display": "OVER 0.5",
+       "odd_key": "over 0.5",
+       "odd_def": "over {total}",
+       "odd_value": "1.47",
+       "special_bet_value": "total=0.5",
+       "outcome_id": "12",
+       "parsed_special_bet_value": {
+        "total": "0.5"
+       }
+      },
+      {
+       "display": "UNDER 0.5",
+       "odd_key": "under 0.5",
+       "odd_def": "under {total}",
+       "odd_value": "2.55",
+       "special_bet_value": "total=0.5",
+       "outcome_id": "13",
+       "parsed_special_bet_value": {
+        "total": "0.5"
+       }
+      },
+      {
+       "display": "OVER 1.5",
+       "odd_key": "over 1.5",
+       "odd_def": "over {total}",
+       "odd_value": "3.15",
+       "special_bet_value": "total=1.5",
+       "outcome_id": "12",
+       "parsed_special_bet_value": {
+        "total": "1.5"
+       }
+      },
+      {
+       "display": "UNDER 1.5",
+       "odd_key": "under 1.5",
+       "odd_def": "under {total}",
+       "odd_value": "1.33",
+       "special_bet_value": "total=1.5",
+       "outcome_id": "13",
+       "parsed_special_bet_value": {
+        "total": "1.5"
+       }
+      },
+      {
+       "display": "OVER 2.5",
+       "odd_key": "over 2.5",
+       "odd_def": "over {total}",
+       "odd_value": "7.80",
+       "special_bet_value": "total=2.5",
+       "outcome_id": "12",
+       "parsed_special_bet_value": {
+        "total": "2.5"
+       }
+      },
+      {
+       "display": "UNDER 2.5",
+       "odd_key": "under 2.5",
+       "odd_def": "under {total}",
+       "odd_value": "1.06",
+       "special_bet_value": "total=2.5",
+       "outcome_id": "13",
+       "parsed_special_bet_value": {
+        "total": "2.5"
+       }
+      }
+     ]
+    },
+    {
+     "sub_type_id": "549",
+     "name": "PSG MULTIGOALS",
+     "odds": [
+      {
+       "display": "1-2",
+       "odd_key": "1-2",
+       "odd_def": "1-2",
+       "odd_value": "1.95",
+       "special_bet_value": "",
+       "outcome_id": "1746",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "1-3",
+       "odd_key": "1-3",
+       "odd_def": "1-3",
+       "odd_value": "1.39",
+       "special_bet_value": "",
+       "outcome_id": "1747",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "2-3",
+       "odd_key": "2-3",
+       "odd_def": "2-3",
+       "odd_value": "1.82",
+       "special_bet_value": "",
+       "outcome_id": "1748",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "4+",
+       "odd_key": "4+",
+       "odd_def": "4+",
+       "odd_value": "2.80",
+       "special_bet_value": "",
+       "outcome_id": "1749",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "NO GOAL",
+       "odd_key": "no goal",
+       "odd_def": "no goal",
+       "odd_value": "10.00",
+       "special_bet_value": "",
+       "outcome_id": "1805",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      }
+     ]
+    },
+    {
+     "sub_type_id": "550",
+     "name": "AS ROMA MULTIGOALS",
+     "odds": [
+      {
+       "display": "1-2",
+       "odd_key": "1-2",
+       "odd_def": "1-2",
+       "odd_value": "1.56",
+       "special_bet_value": "",
+       "outcome_id": "1746",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "1-3",
+       "odd_key": "1-3",
+       "odd_def": "1-3",
+       "odd_value": "1.42",
+       "special_bet_value": "",
+       "outcome_id": "1747",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "2-3",
+       "odd_key": "2-3",
+       "odd_def": "2-3",
+       "odd_value": "3.05",
+       "special_bet_value": "",
+       "outcome_id": "1748",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "4+",
+       "odd_key": "4+",
+       "odd_def": "4+",
+       "odd_value": "35.00",
+       "special_bet_value": "",
+       "outcome_id": "1749",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "NO GOAL",
+       "odd_key": "no goal",
+       "odd_def": "no goal",
+       "odd_value": "2.29",
+       "special_bet_value": "",
+       "outcome_id": "1805",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      }
+     ]
+    },
+    {
+     "sub_type_id": "14",
+     "name": "HANDICAP  (1X2)",
+     "odds": [
+      {
+       "display": "2 (0:1)",
+       "odd_key": "AS Roma (0:1)",
+       "odd_def": "{$competitor2} ({hcp})",
+       "odd_value": "3.25",
+       "special_bet_value": "hcp=0:1",
+       "outcome_id": "1713",
+       "parsed_special_bet_value": {
+        "hcp": "0:1"
+       }
+      },
+      {
+       "display": "X (0:1)",
+       "odd_key": "draw (0:1)",
+       "odd_def": "draw ({hcp})",
+       "odd_value": "4.40",
+       "special_bet_value": "hcp=0:1",
+       "outcome_id": "1712",
+       "parsed_special_bet_value": {
+        "hcp": "0:1"
+       }
+      },
+      {
+       "display": "1 (0:1)",
+       "odd_key": "PSG (0:1)",
+       "odd_def": "{$competitor1} ({hcp})",
+       "odd_value": "1.84",
+       "special_bet_value": "hcp=0:1",
+       "outcome_id": "1711",
+       "parsed_special_bet_value": {
+        "hcp": "0:1"
+       }
+      },
+      {
+       "display": "2 (0:2)",
+       "odd_key": "AS Roma (0:2)",
+       "odd_def": "{$competitor2} ({hcp})",
+       "odd_value": "1.92",
+       "special_bet_value": "hcp=0:2",
+       "outcome_id": "1713",
+       "parsed_special_bet_value": {
+        "hcp": "0:2"
+       }
+      },
+      {
+       "display": "X (0:2)",
+       "odd_key": "draw (0:2)",
+       "odd_def": "draw ({hcp})",
+       "odd_value": "4.50",
+       "special_bet_value": "hcp=0:2",
+       "outcome_id": "1712",
+       "parsed_special_bet_value": {
+        "hcp": "0:2"
+       }
+      },
+      {
+       "display": "1 (0:2)",
+       "odd_key": "PSG (0:2)",
+       "odd_def": "{$competitor1} ({hcp})",
+       "odd_value": "2.95",
+       "special_bet_value": "hcp=0:2",
+       "outcome_id": "1711",
+       "parsed_special_bet_value": {
+        "hcp": "0:2"
+       }
+      },
+      {
+       "display": "2 (0:3)",
+       "odd_key": "AS Roma (0:3)",
+       "odd_def": "{$competitor2} ({hcp})",
+       "odd_value": "1.38",
+       "special_bet_value": "hcp=0:3",
+       "outcome_id": "1713",
+       "parsed_special_bet_value": {
+        "hcp": "0:3"
+       }
+      },
+      {
+       "display": "X (0:3)",
+       "odd_key": "draw (0:3)",
+       "odd_def": "draw ({hcp})",
+       "odd_value": "5.80",
+       "special_bet_value": "hcp=0:3",
+       "outcome_id": "1712",
+       "parsed_special_bet_value": {
+        "hcp": "0:3"
+       }
+      },
+      {
+       "display": "1 (0:3)",
+       "odd_key": "PSG (0:3)",
+       "odd_def": "{$competitor1} ({hcp})",
+       "odd_value": "5.40",
+       "special_bet_value": "hcp=0:3",
+       "outcome_id": "1711",
+       "parsed_special_bet_value": {
+        "hcp": "0:3"
+       }
+      },
+      {
+       "display": "2 (0:4)",
+       "odd_key": "AS Roma (0:4)",
+       "odd_def": "{$competitor2} ({hcp})",
+       "odd_value": "1.14",
+       "special_bet_value": "hcp=0:4",
+       "outcome_id": "1713",
+       "parsed_special_bet_value": {
+        "hcp": "0:4"
+       }
+      },
+      {
+       "display": "X (0:4)",
+       "odd_key": "draw (0:4)",
+       "odd_def": "draw ({hcp})",
+       "odd_value": "8.80",
+       "special_bet_value": "hcp=0:4",
+       "outcome_id": "1712",
+       "parsed_special_bet_value": {
+        "hcp": "0:4"
+       }
+      },
+      {
+       "display": "1 (0:4)",
+       "odd_key": "PSG (0:4)",
+       "odd_def": "{$competitor1} ({hcp})",
+       "odd_value": "11.00",
+       "special_bet_value": "hcp=0:4",
+       "outcome_id": "1711",
+       "parsed_special_bet_value": {
+        "hcp": "0:4"
+       }
+      },
+      {
+       "display": "2 (1:0)",
+       "odd_key": "AS Roma (1:0)",
+       "odd_def": "{$competitor2} ({hcp})",
+       "odd_value": "17.00",
+       "special_bet_value": "hcp=1:0",
+       "outcome_id": "1713",
+       "parsed_special_bet_value": {
+        "hcp": "1:0"
+       }
+      },
+      {
+       "display": "X (1:0)",
+       "odd_key": "draw (1:0)",
+       "odd_def": "draw ({hcp})",
+       "odd_value": "9.00",
+       "special_bet_value": "hcp=1:0",
+       "outcome_id": "1712",
+       "parsed_special_bet_value": {
+        "hcp": "1:0"
+       }
+      },
+      {
+       "display": "1 (1:0)",
+       "odd_key": "PSG (1:0)",
+       "odd_def": "{$competitor1} ({hcp})",
+       "odd_value": "1.10",
+       "special_bet_value": "hcp=1:0",
+       "outcome_id": "1711",
+       "parsed_special_bet_value": {
+        "hcp": "1:0"
+       }
+      }
+     ]
+    },
+    {
+     "sub_type_id": "63",
+     "name": "1ST HALF - DOUBLE CHANCE",
+     "odds": [
+      {
+       "display": "1/X",
+       "odd_key": "PSG or draw",
+       "odd_def": "{$competitor1} or draw",
+       "odd_value": "1.13",
+       "special_bet_value": "",
+       "outcome_id": "9",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "X/2",
+       "odd_key": "draw or AS Roma",
+       "odd_def": "draw or {$competitor2}",
+       "odd_value": "2.01",
+       "special_bet_value": "",
+       "outcome_id": "11",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "1/2",
+       "odd_key": "PSG or AS Roma",
+       "odd_def": "{$competitor1} or {$competitor2}",
+       "odd_value": "1.35",
+       "special_bet_value": "",
+       "outcome_id": "10",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      }
+     ]
+    },
+    {
+     "sub_type_id": "65",
+     "name": "1ST HALF - HANDICAP (1X2)",
+     "odds": [
+      {
+       "display": "2 (0:1)",
+       "odd_key": "AS Roma (0:1)",
+       "odd_def": "{$competitor2} ({hcp})",
+       "odd_value": "2.10",
+       "special_bet_value": "hcp=0:1",
+       "outcome_id": "1713",
+       "parsed_special_bet_value": {
+        "hcp": "0:1"
+       }
+      },
+      {
+       "display": "X (0:1)",
+       "odd_key": "draw (0:1)",
+       "odd_def": "draw ({hcp})",
+       "odd_value": "3.10",
+       "special_bet_value": "hcp=0:1",
+       "outcome_id": "1712",
+       "parsed_special_bet_value": {
+        "hcp": "0:1"
+       }
+      },
+      {
+       "display": "1 (0:1)",
+       "odd_key": "PSG (0:1)",
+       "odd_def": "{$competitor1} ({hcp})",
+       "odd_value": "3.55",
+       "special_bet_value": "hcp=0:1",
+       "outcome_id": "1711",
+       "parsed_special_bet_value": {
+        "hcp": "0:1"
+       }
+      }
+     ]
+    },
+    {
+     "sub_type_id": "69",
+     "name": "1ST HALF - PSG TOTAL",
+     "odds": [
+      {
+       "display": "OVER 0.5",
+       "odd_key": "over 0.5",
+       "odd_def": "over {total}",
+       "odd_value": "1.35",
+       "special_bet_value": "total=0.5",
+       "outcome_id": "12",
+       "parsed_special_bet_value": {
+        "total": "0.5"
+       }
+      },
+      {
+       "display": "UNDER 0.5",
+       "odd_key": "under 0.5",
+       "odd_def": "under {total}",
+       "odd_value": "3.05",
+       "special_bet_value": "total=0.5",
+       "outcome_id": "13",
+       "parsed_special_bet_value": {
+        "total": "0.5"
+       }
+      },
+      {
+       "display": "OVER 1.5",
+       "odd_key": "over 1.5",
+       "odd_def": "over {total}",
+       "odd_value": "2.65",
+       "special_bet_value": "total=1.5",
+       "outcome_id": "12",
+       "parsed_special_bet_value": {
+        "total": "1.5"
+       }
+      },
+      {
+       "display": "UNDER 1.5",
+       "odd_key": "under 1.5",
+       "odd_def": "under {total}",
+       "odd_value": "1.45",
+       "special_bet_value": "total=1.5",
+       "outcome_id": "13",
+       "parsed_special_bet_value": {
+        "total": "1.5"
+       }
+      },
+      {
+       "display": "OVER 2.5",
+       "odd_key": "over 2.5",
+       "odd_def": "over {total}",
+       "odd_value": "6.20",
+       "special_bet_value": "total=2.5",
+       "outcome_id": "12",
+       "parsed_special_bet_value": {
+        "total": "2.5"
+       }
+      },
+      {
+       "display": "UNDER 2.5",
+       "odd_key": "under 2.5",
+       "odd_def": "under {total}",
+       "odd_value": "1.10",
+       "special_bet_value": "total=2.5",
+       "outcome_id": "13",
+       "parsed_special_bet_value": {
+        "total": "2.5"
+       }
+      }
+     ]
+    },
+    {
+     "sub_type_id": "70",
+     "name": "1ST HALF - AS ROMA TOTAL",
+     "odds": [
+      {
+       "display": "OVER 0.5",
+       "odd_key": "over 0.5",
+       "odd_def": "over {total}",
+       "odd_value": "2.47",
+       "special_bet_value": "total=0.5",
+       "outcome_id": "12",
+       "parsed_special_bet_value": {
+        "total": "0.5"
+       }
+      },
+      {
+       "display": "UNDER 0.5",
+       "odd_key": "under 0.5",
+       "odd_def": "under {total}",
+       "odd_value": "1.50",
+       "special_bet_value": "total=0.5",
+       "outcome_id": "13",
+       "parsed_special_bet_value": {
+        "total": "0.5"
+       }
+      },
+      {
+       "display": "OVER 1.5",
+       "odd_key": "over 1.5",
+       "odd_def": "over {total}",
+       "odd_value": "8.40",
+       "special_bet_value": "total=1.5",
+       "outcome_id": "12",
+       "parsed_special_bet_value": {
+        "total": "1.5"
+       }
+      },
+      {
+       "display": "UNDER 1.5",
+       "odd_key": "under 1.5",
+       "odd_def": "under {total}",
+       "odd_value": "1.05",
+       "special_bet_value": "total=1.5",
+       "outcome_id": "13",
+       "parsed_special_bet_value": {
+        "total": "1.5"
+       }
+      },
+      {
+       "display": "OVER 2.5",
+       "odd_key": "over 2.5",
+       "odd_def": "over {total}",
+       "odd_value": "14.00",
+       "special_bet_value": "total=2.5",
+       "outcome_id": "12",
+       "parsed_special_bet_value": {
+        "total": "2.5"
+       }
+      },
+      {
+       "display": "UNDER 2.5",
+       "odd_key": "under 2.5",
+       "odd_def": "under {total}",
+       "odd_value": "1.01",
+       "special_bet_value": "total=2.5",
+       "outcome_id": "13",
+       "parsed_special_bet_value": {
+        "total": "2.5"
+       }
+      }
+     ]
+    },
+    {
+     "sub_type_id": "71",
+     "name": "1ST HALF - EXACT GOALS",
+     "odds": [
+      {
+       "display": "0",
+       "odd_key": "0",
+       "odd_def": "0",
+       "odd_value": "4.80",
+       "special_bet_value": "variant=sr:exact_goals:2+",
+       "outcome_id": "sr:exact_goals:2+:85",
+       "parsed_special_bet_value": {
+        "variant": "sr:exact_goals:2+"
+       }
+      },
+      {
+       "display": "1",
+       "odd_key": "1",
+       "odd_def": "1",
+       "odd_value": "2.85",
+       "special_bet_value": "variant=sr:exact_goals:2+",
+       "outcome_id": "sr:exact_goals:2+:86",
+       "parsed_special_bet_value": {
+        "variant": "sr:exact_goals:2+"
+       }
+      },
+      {
+       "display": "2+",
+       "odd_key": "2+",
+       "odd_def": "2+",
+       "odd_value": "1.85",
+       "special_bet_value": "variant=sr:exact_goals:2+",
+       "outcome_id": "sr:exact_goals:2+:87",
+       "parsed_special_bet_value": {
+        "variant": "sr:exact_goals:2+"
+       }
+      }
+     ]
+    },
+    {
+     "sub_type_id": "75",
+     "name": "1ST HALF - BOTH TEAMS TO SCORE",
+     "odds": [
+      {
+       "display": "YES",
+       "odd_key": "yes",
+       "odd_def": "yes",
+       "odd_value": "3.40",
+       "special_bet_value": "",
+       "outcome_id": "74",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "NO",
+       "odd_key": "no",
+       "odd_def": "no",
+       "odd_value": "1.29",
+       "special_bet_value": "",
+       "outcome_id": "76",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      }
+     ]
+    },
+    {
+     "sub_type_id": "78",
+     "name": "1ST HALF - 1X2 & BOTH TEAMS TO SCORE",
+     "odds": [
+      {
+       "display": "2 & NO",
+       "odd_key": "AS Roma & no",
+       "odd_def": "{$competitor2} & no",
+       "odd_value": "7.40",
+       "special_bet_value": "",
+       "outcome_id": "88",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "2 & YES",
+       "odd_key": "AS Roma & yes",
+       "odd_def": "{$competitor2} & yes",
+       "odd_value": "26.00",
+       "special_bet_value": "",
+       "outcome_id": "86",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "X & NO",
+       "odd_key": "draw & no",
+       "odd_def": "draw & no",
+       "odd_value": "4.50",
+       "special_bet_value": "",
+       "outcome_id": "84",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "X & YES",
+       "odd_key": "draw & yes",
+       "odd_def": "draw & yes",
+       "odd_value": "6.80",
+       "special_bet_value": "",
+       "outcome_id": "82",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "1 & NO",
+       "odd_key": "PSG & no",
+       "odd_def": "{$competitor1} & no",
+       "odd_value": "1.98",
+       "special_bet_value": "",
+       "outcome_id": "80",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "1 & YES",
+       "odd_key": "PSG & yes",
+       "odd_def": "{$competitor1} & yes",
+       "odd_value": "7.60",
+       "special_bet_value": "",
+       "outcome_id": "78",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      }
+     ]
+    },
+    {
+     "sub_type_id": "79",
+     "name": "1ST HALF - 1X2 & TOTAL",
+     "odds": [
+      {
+       "display": "2 & OVER 1.5",
+       "odd_key": "AS Roma & over 1.5",
+       "odd_def": "{$competitor2} & over {total}",
+       "odd_value": "15.00",
+       "special_bet_value": "total=1.5",
+       "outcome_id": "804",
+       "parsed_special_bet_value": {
+        "total": "1.5"
+       }
+      },
+      {
+       "display": "2 & UNDER 1.5",
+       "odd_key": "AS Roma & under 1.5",
+       "odd_def": "{$competitor2} & under {total}",
+       "odd_value": "9.60",
+       "special_bet_value": "total=1.5",
+       "outcome_id": "802",
+       "parsed_special_bet_value": {
+        "total": "1.5"
+       }
+      },
+      {
+       "display": "X & OVER 1.5",
+       "odd_key": "draw & over 1.5",
+       "odd_def": "draw & over {total}",
+       "odd_value": "6.80",
+       "special_bet_value": "total=1.5",
+       "outcome_id": "800",
+       "parsed_special_bet_value": {
+        "total": "1.5"
+       }
+      },
+      {
+       "display": "X & UNDER 1.5",
+       "odd_key": "draw & under 1.5",
+       "odd_def": "draw & under {total}",
+       "odd_value": "4.60",
+       "special_bet_value": "total=1.5",
+       "outcome_id": "798",
+       "parsed_special_bet_value": {
+        "total": "1.5"
+       }
+      },
+      {
+       "display": "1 & OVER 1.5",
+       "odd_key": "PSG & over 1.5",
+       "odd_def": "{$competitor1} & over {total}",
+       "odd_value": "2.65",
+       "special_bet_value": "total=1.5",
+       "outcome_id": "796",
+       "parsed_special_bet_value": {
+        "total": "1.5"
+       }
+      },
+      {
+       "display": "1 & UNDER 1.5",
+       "odd_key": "PSG & under 1.5",
+       "odd_def": "{$competitor1} & under {total}",
+       "odd_value": "3.70",
+       "special_bet_value": "total=1.5",
+       "outcome_id": "794",
+       "parsed_special_bet_value": {
+        "total": "1.5"
+       }
+      }
+     ]
+    },
+    {
+     "sub_type_id": "542",
+     "name": "1ST HALF - DOUBLE CHANCE & BOTH TEAMS TO SCORE",
+     "odds": [
+      {
+       "display": "X/2 & NO",
+       "odd_key": "draw/AS Roma & no",
+       "odd_def": "draw/{$competitor2} & no",
+       "odd_value": "2.95",
+       "special_bet_value": "",
+       "outcome_id": "1723",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "X/2 & YES",
+       "odd_key": "draw/AS Roma & yes",
+       "odd_def": "draw/{$competitor2} & yes",
+       "odd_value": "5.60",
+       "special_bet_value": "",
+       "outcome_id": "1722",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "1/2 & NO",
+       "odd_key": "PSG/AS Roma & no",
+       "odd_def": "{$competitor1}/{$competitor2} & no",
+       "odd_value": "1.65",
+       "special_bet_value": "",
+       "outcome_id": "1721",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "1/2 & YES",
+       "odd_key": "PSG/AS Roma & yes",
+       "odd_def": "{$competitor1}/{$competitor2} & yes",
+       "odd_value": "6.00",
+       "special_bet_value": "",
+       "outcome_id": "1720",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "1/X & NO",
+       "odd_key": "PSG/draw & no",
+       "odd_def": "{$competitor1}/draw & no",
+       "odd_value": "1.48",
+       "special_bet_value": "",
+       "outcome_id": "1719",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "1/X & YES",
+       "odd_key": "PSG/draw & yes",
+       "odd_def": "{$competitor1}/draw & yes",
+       "odd_value": "3.75",
+       "special_bet_value": "",
+       "outcome_id": "1718",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      }
+     ]
+    },
+    {
+     "sub_type_id": "15",
+     "name": "WINNING MARGIN",
+     "odds": [
+      {
+       "display": "2 BY 1",
+       "odd_key": "AS Roma by 1",
+       "odd_def": "{$competitor2} by 1",
+       "odd_value": "10.00",
+       "special_bet_value": "variant=sr:winning_margin:3+",
+       "outcome_id": "sr:winning_margin:3+:116",
+       "parsed_special_bet_value": {
+        "variant": "sr:winning_margin:3+"
+       }
+      },
+      {
+       "display": "2 BY 2",
+       "odd_key": "AS Roma by 2",
+       "odd_def": "{$competitor2} by 2",
+       "odd_value": "27.00",
+       "special_bet_value": "variant=sr:winning_margin:3+",
+       "outcome_id": "sr:winning_margin:3+:117",
+       "parsed_special_bet_value": {
+        "variant": "sr:winning_margin:3+"
+       }
+      },
+      {
+       "display": "2 BY 3+",
+       "odd_key": "AS Roma by 3+",
+       "odd_def": "{$competitor2} by 3+",
+       "odd_value": "70.00",
+       "special_bet_value": "variant=sr:winning_margin:3+",
+       "outcome_id": "sr:winning_margin:3+:118",
+       "parsed_special_bet_value": {
+        "variant": "sr:winning_margin:3+"
+       }
+      },
+      {
+       "display": "1 BY 1",
+       "odd_key": "PSG by 1",
+       "odd_def": "{$competitor1} by 1",
+       "odd_value": "4.10",
+       "special_bet_value": "variant=sr:winning_margin:3+",
+       "outcome_id": "sr:winning_margin:3+:113",
+       "parsed_special_bet_value": {
+        "variant": "sr:winning_margin:3+"
+       }
+      },
+      {
+       "display": "1 BY 2",
+       "odd_key": "PSG by 2",
+       "odd_def": "{$competitor1} by 2",
+       "odd_value": "4.20",
+       "special_bet_value": "variant=sr:winning_margin:3+",
+       "outcome_id": "sr:winning_margin:3+:114",
+       "parsed_special_bet_value": {
+        "variant": "sr:winning_margin:3+"
+       }
+      },
+      {
+       "display": "1 BY 3+",
+       "odd_key": "PSG by 3+",
+       "odd_def": "{$competitor1} by 3+",
+       "odd_value": "2.80",
+       "special_bet_value": "variant=sr:winning_margin:3+",
+       "outcome_id": "sr:winning_margin:3+:115",
+       "parsed_special_bet_value": {
+        "variant": "sr:winning_margin:3+"
+       }
+      },
+      {
+       "display": "X",
+       "odd_key": "draw",
+       "odd_def": "draw",
+       "odd_value": "5.20",
+       "special_bet_value": "variant=sr:winning_margin:3+",
+       "outcome_id": "sr:winning_margin:3+:119",
+       "parsed_special_bet_value": {
+        "variant": "sr:winning_margin:3+"
+       }
+      }
+     ]
+    },
+    {
+     "sub_type_id": "21",
+     "name": "EXACT GOALS",
+     "odds": [
+      {
+       "display": "0",
+       "odd_key": "0",
+       "odd_def": "0",
+       "odd_value": "30.00",
+       "special_bet_value": "variant=sr:exact_goals:6+",
+       "outcome_id": "sr:exact_goals:6+:68",
+       "parsed_special_bet_value": {
+        "variant": "sr:exact_goals:6+"
+       }
+      },
+      {
+       "display": "1",
+       "odd_key": "1",
+       "odd_def": "1",
+       "odd_value": "9.60",
+       "special_bet_value": "variant=sr:exact_goals:6+",
+       "outcome_id": "sr:exact_goals:6+:69",
+       "parsed_special_bet_value": {
+        "variant": "sr:exact_goals:6+"
+       }
+      },
+      {
+       "display": "2",
+       "odd_key": "2",
+       "odd_def": "2",
+       "odd_value": "5.20",
+       "special_bet_value": "variant=sr:exact_goals:6+",
+       "outcome_id": "sr:exact_goals:6+:70",
+       "parsed_special_bet_value": {
+        "variant": "sr:exact_goals:6+"
+       }
+      },
+      {
+       "display": "3",
+       "odd_key": "3",
+       "odd_def": "3",
+       "odd_value": "4.20",
+       "special_bet_value": "variant=sr:exact_goals:6+",
+       "outcome_id": "sr:exact_goals:6+:71",
+       "parsed_special_bet_value": {
+        "variant": "sr:exact_goals:6+"
+       }
+      },
+      {
+       "display": "4",
+       "odd_key": "4",
+       "odd_def": "4",
+       "odd_value": "4.50",
+       "special_bet_value": "variant=sr:exact_goals:6+",
+       "outcome_id": "sr:exact_goals:6+:72",
+       "parsed_special_bet_value": {
+        "variant": "sr:exact_goals:6+"
+       }
+      },
+      {
+       "display": "5",
+       "odd_key": "5",
+       "odd_def": "5",
+       "odd_value": "6.00",
+       "special_bet_value": "variant=sr:exact_goals:6+",
+       "outcome_id": "sr:exact_goals:6+:73",
+       "parsed_special_bet_value": {
+        "variant": "sr:exact_goals:6+"
+       }
+      },
+      {
+       "display": "6+",
+       "odd_key": "6+",
+       "odd_def": "6+",
+       "odd_value": "5.00",
+       "special_bet_value": "variant=sr:exact_goals:6+",
+       "outcome_id": "sr:exact_goals:6+:74",
+       "parsed_special_bet_value": {
+        "variant": "sr:exact_goals:6+"
+       }
+      }
+     ]
+    },
+    {
+     "sub_type_id": "23",
+     "name": "PSG EXACT GOALS",
+     "odds": [
+      {
+       "display": "0",
+       "odd_key": "0",
+       "odd_def": "0",
+       "odd_value": "12.00",
+       "special_bet_value": "variant=sr:exact_goals:3+",
+       "outcome_id": "sr:exact_goals:3+:88",
+       "parsed_special_bet_value": {
+        "variant": "sr:exact_goals:3+"
+       }
+      },
+      {
+       "display": "1",
+       "odd_key": "1",
+       "odd_def": "1",
+       "odd_value": "4.70",
+       "special_bet_value": "variant=sr:exact_goals:3+",
+       "outcome_id": "sr:exact_goals:3+:89",
+       "parsed_special_bet_value": {
+        "variant": "sr:exact_goals:3+"
+       }
+      },
+      {
+       "display": "2",
+       "odd_key": "2",
+       "odd_def": "2",
+       "odd_value": "3.55",
+       "special_bet_value": "variant=sr:exact_goals:3+",
+       "outcome_id": "sr:exact_goals:3+:90",
+       "parsed_special_bet_value": {
+        "variant": "sr:exact_goals:3+"
+       }
+      },
+      {
+       "display": "3+",
+       "odd_key": "3+",
+       "odd_def": "3+",
+       "odd_value": "1.82",
+       "special_bet_value": "variant=sr:exact_goals:3+",
+       "outcome_id": "sr:exact_goals:3+:91",
+       "parsed_special_bet_value": {
+        "variant": "sr:exact_goals:3+"
+       }
+      }
+     ]
+    },
+    {
+     "sub_type_id": "24",
+     "name": "AS ROMA EXACT GOALS",
+     "odds": [
+      {
+       "display": "0",
+       "odd_key": "0",
+       "odd_def": "0",
+       "odd_value": "2.55",
+       "special_bet_value": "variant=sr:exact_goals:3+",
+       "outcome_id": "sr:exact_goals:3+:88",
+       "parsed_special_bet_value": {
+        "variant": "sr:exact_goals:3+"
+       }
+      },
+      {
+       "display": "1",
+       "odd_key": "1",
+       "odd_def": "1",
+       "odd_value": "2.44",
+       "special_bet_value": "variant=sr:exact_goals:3+",
+       "outcome_id": "sr:exact_goals:3+:89",
+       "parsed_special_bet_value": {
+        "variant": "sr:exact_goals:3+"
+       }
+      },
+      {
+       "display": "2",
+       "odd_key": "2",
+       "odd_def": "2",
+       "odd_value": "4.50",
+       "special_bet_value": "variant=sr:exact_goals:3+",
+       "outcome_id": "sr:exact_goals:3+:90",
+       "parsed_special_bet_value": {
+        "variant": "sr:exact_goals:3+"
+       }
+      },
+      {
+       "display": "3+",
+       "odd_key": "3+",
+       "odd_def": "3+",
+       "odd_value": "9.60",
+       "special_bet_value": "variant=sr:exact_goals:3+",
+       "outcome_id": "sr:exact_goals:3+:91",
+       "parsed_special_bet_value": {
+        "variant": "sr:exact_goals:3+"
+       }
+      }
+     ]
+    },
+    {
+     "sub_type_id": "31",
+     "name": "PSG CLEAN SHEET",
+     "odds": [
+      {
+       "display": "YES",
+       "odd_key": "yes",
+       "odd_def": "yes",
+       "odd_value": "2.55",
+       "special_bet_value": "",
+       "outcome_id": "74",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "NO",
+       "odd_key": "no",
+       "odd_def": "no",
+       "odd_value": "1.47",
+       "special_bet_value": "",
+       "outcome_id": "76",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      }
+     ]
+    },
+    {
+     "sub_type_id": "32",
+     "name": "AS ROMA CLEAN SHEET",
+     "odds": [
+      {
+       "display": "YES",
+       "odd_key": "yes",
+       "odd_def": "yes",
+       "odd_value": "8.80",
+       "special_bet_value": "",
+       "outcome_id": "74",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "NO",
+       "odd_key": "no",
+       "odd_def": "no",
+       "odd_value": "1.05",
+       "special_bet_value": "",
+       "outcome_id": "76",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      }
+     ]
+    },
+    {
+     "sub_type_id": "33",
+     "name": "PSG WIN TO NIL",
+     "odds": [
+      {
+       "display": "YES",
+       "odd_key": "yes",
+       "odd_def": "yes",
+       "odd_value": "2.75",
+       "special_bet_value": "",
+       "outcome_id": "74",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "NO",
+       "odd_key": "no",
+       "odd_def": "no",
+       "odd_value": "1.41",
+       "special_bet_value": "",
+       "outcome_id": "76",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      }
+     ]
+    },
+    {
+     "sub_type_id": "34",
+     "name": "AS ROMA WIN TO NIL",
+     "odds": [
+      {
+       "display": "YES",
+       "odd_key": "yes",
+       "odd_def": "yes",
+       "odd_value": "11.00",
+       "special_bet_value": "",
+       "outcome_id": "74",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "NO",
+       "odd_key": "no",
+       "odd_def": "no",
+       "odd_value": "1.02",
+       "special_bet_value": "",
+       "outcome_id": "76",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      }
+     ]
+    },
+    {
+     "sub_type_id": "35",
+     "name": "1X2 & BOTH TEAMS TO SCORE",
+     "odds": [
+      {
+       "display": "2 & NO",
+       "odd_key": "AS Roma & no",
+       "odd_def": "{$competitor2} & no",
+       "odd_value": "19.00",
+       "special_bet_value": "",
+       "outcome_id": "88",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "2 & YES",
+       "odd_key": "AS Roma & yes",
+       "odd_def": "{$competitor2} & yes",
+       "odd_value": "11.00",
+       "special_bet_value": "",
+       "outcome_id": "86",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "X & NO",
+       "odd_key": "draw & no",
+       "odd_def": "draw & no",
+       "odd_value": "30.00",
+       "special_bet_value": "",
+       "outcome_id": "84",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "X & YES",
+       "odd_key": "draw & yes",
+       "odd_def": "draw & yes",
+       "odd_value": "6.40",
+       "special_bet_value": "",
+       "outcome_id": "82",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "1 & NO",
+       "odd_key": "PSG & no",
+       "odd_def": "{$competitor1} & no",
+       "odd_value": "2.70",
+       "special_bet_value": "",
+       "outcome_id": "80",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "1 & YES",
+       "odd_key": "PSG & yes",
+       "odd_def": "{$competitor1} & yes",
+       "odd_value": "2.29",
+       "special_bet_value": "",
+       "outcome_id": "78",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      }
+     ]
+    },
+    {
+     "sub_type_id": "36",
+     "name": "TOTAL & BOTH TEAMS TO SCORE",
+     "odds": [
+      {
+       "display": "OVER 2.5 & NO",
+       "odd_key": "over 2.5 & no",
+       "odd_def": "over {total} & no",
+       "odd_value": "4.50",
+       "special_bet_value": "total=2.5",
+       "outcome_id": "94",
+       "parsed_special_bet_value": {
+        "total": "2.5"
+       }
+      },
+      {
+       "display": "OVER 2.5 & YES",
+       "odd_key": "over 2.5 & yes",
+       "odd_def": "over {total} & yes",
+       "odd_value": "1.68",
+       "special_bet_value": "total=2.5",
+       "outcome_id": "90",
+       "parsed_special_bet_value": {
+        "total": "2.5"
+       }
+      },
+      {
+       "display": "UNDER 2.5 & NO",
+       "odd_key": "under 2.5 & no",
+       "odd_def": "under {total} & no",
+       "odd_value": "3.85",
+       "special_bet_value": "total=2.5",
+       "outcome_id": "96",
+       "parsed_special_bet_value": {
+        "total": "2.5"
+       }
+      },
+      {
+       "display": "UNDER 2.5 & YES",
+       "odd_key": "under 2.5 & yes",
+       "odd_def": "under {total} & yes",
+       "odd_value": "12.00",
+       "special_bet_value": "total=2.5",
+       "outcome_id": "92",
+       "parsed_special_bet_value": {
+        "total": "2.5"
+       }
+      }
+     ]
+    },
+    {
+     "sub_type_id": "37",
+     "name": "1X2 & TOTAL",
+     "odds": [
+      {
+       "display": "2 & OVER 1.5",
+       "odd_key": "AS Roma & over 1.5",
+       "odd_def": "{$competitor2} & over {total}",
+       "odd_value": "8.20",
+       "special_bet_value": "total=1.5",
+       "outcome_id": "804",
+       "parsed_special_bet_value": {
+        "total": "1.5"
+       }
+      },
+      {
+       "display": "2 & UNDER 1.5",
+       "odd_key": "AS Roma & under 1.5",
+       "odd_def": "{$competitor2} & under {total}",
+       "odd_value": "30.00",
+       "special_bet_value": "total=1.5",
+       "outcome_id": "802",
+       "parsed_special_bet_value": {
+        "total": "1.5"
+       }
+      },
+      {
+       "display": "X & OVER 1.5",
+       "odd_key": "draw & over 1.5",
+       "odd_def": "draw & over {total}",
+       "odd_value": "6.20",
+       "special_bet_value": "total=1.5",
+       "outcome_id": "800",
+       "parsed_special_bet_value": {
+        "total": "1.5"
+       }
+      },
+      {
+       "display": "X & UNDER 1.5",
+       "odd_key": "draw & under 1.5",
+       "odd_def": "draw & under {total}",
+       "odd_value": "29.00",
+       "special_bet_value": "total=1.5",
+       "outcome_id": "798",
+       "parsed_special_bet_value": {
+        "total": "1.5"
+       }
+      },
+      {
+       "display": "1 & OVER 1.5",
+       "odd_key": "PSG & over 1.5",
+       "odd_def": "{$competitor1} & over {total}",
+       "odd_value": "1.41",
+       "special_bet_value": "total=1.5",
+       "outcome_id": "796",
+       "parsed_special_bet_value": {
+        "total": "1.5"
+       }
+      },
+      {
+       "display": "1 & UNDER 1.5",
+       "odd_key": "PSG & under 1.5",
+       "odd_def": "{$competitor1} & under {total}",
+       "odd_value": "12.00",
+       "special_bet_value": "total=1.5",
+       "outcome_id": "794",
+       "parsed_special_bet_value": {
+        "total": "1.5"
+       }
+      },
+      {
+       "display": "2 & OVER 2.5",
+       "odd_key": "AS Roma & over 2.5",
+       "odd_def": "{$competitor2} & over {total}",
+       "odd_value": "9.80",
+       "special_bet_value": "total=2.5",
+       "outcome_id": "804",
+       "parsed_special_bet_value": {
+        "total": "2.5"
+       }
+      },
+      {
+       "display": "2 & UNDER 2.5",
+       "odd_key": "AS Roma & under 2.5",
+       "odd_def": "{$competitor2} & under {total}",
+       "odd_value": "21.00",
+       "special_bet_value": "total=2.5",
+       "outcome_id": "802",
+       "parsed_special_bet_value": {
+        "total": "2.5"
+       }
+      },
+      {
+       "display": "X & OVER 2.5",
+       "odd_key": "draw & over 2.5",
+       "odd_def": "draw & over {total}",
+       "odd_value": "13.00",
+       "special_bet_value": "total=2.5",
+       "outcome_id": "800",
+       "parsed_special_bet_value": {
+        "total": "2.5"
+       }
+      },
+      {
+       "display": "X & UNDER 2.5",
+       "odd_key": "draw & under 2.5",
+       "odd_def": "draw & under {total}",
+       "odd_value": "8.80",
+       "special_bet_value": "total=2.5",
+       "outcome_id": "798",
+       "parsed_special_bet_value": {
+        "total": "2.5"
+       }
+      },
+      {
+       "display": "1 & OVER 2.5",
+       "odd_key": "PSG & over 2.5",
+       "odd_def": "{$competitor1} & over {total}",
+       "odd_value": "1.62",
+       "special_bet_value": "total=2.5",
+       "outcome_id": "796",
+       "parsed_special_bet_value": {
+        "total": "2.5"
+       }
+      },
+      {
+       "display": "1 & UNDER 2.5",
+       "odd_key": "PSG & under 2.5",
+       "odd_def": "{$competitor1} & under {total}",
+       "odd_value": "5.60",
+       "special_bet_value": "total=2.5",
+       "outcome_id": "794",
+       "parsed_special_bet_value": {
+        "total": "2.5"
+       }
+      },
+      {
+       "display": "2 & OVER 3.5",
+       "odd_key": "AS Roma & over 3.5",
+       "odd_def": "{$competitor2} & over {total}",
+       "odd_value": "19.00",
+       "special_bet_value": "total=3.5",
+       "outcome_id": "804",
+       "parsed_special_bet_value": {
+        "total": "3.5"
+       }
+      },
+      {
+       "display": "2 & UNDER 3.5",
+       "odd_key": "AS Roma & under 3.5",
+       "odd_def": "{$competitor2} & under {total}",
+       "odd_value": "11.00",
+       "special_bet_value": "total=3.5",
+       "outcome_id": "802",
+       "parsed_special_bet_value": {
+        "total": "3.5"
+       }
+      },
+      {
+       "display": "X & OVER 3.5",
+       "odd_key": "draw & over 3.5",
+       "odd_def": "draw & over {total}",
+       "odd_value": "13.00",
+       "special_bet_value": "total=3.5",
+       "outcome_id": "800",
+       "parsed_special_bet_value": {
+        "total": "3.5"
+       }
+      },
+      {
+       "display": "X & UNDER 3.5",
+       "odd_key": "draw & under 3.5",
+       "odd_def": "draw & under {total}",
+       "odd_value": "9.00",
+       "special_bet_value": "total=3.5",
+       "outcome_id": "798",
+       "parsed_special_bet_value": {
+        "total": "3.5"
+       }
+      },
+      {
+       "display": "1 & OVER 3.5",
+       "odd_key": "PSG & over 3.5",
+       "odd_def": "{$competitor1} & over {total}",
+       "odd_value": "2.24",
+       "special_bet_value": "total=3.5",
+       "outcome_id": "796",
+       "parsed_special_bet_value": {
+        "total": "3.5"
+       }
+      },
+      {
+       "display": "1 & UNDER 3.5",
+       "odd_key": "PSG & under 3.5",
+       "odd_def": "{$competitor1} & under {total}",
+       "odd_value": "2.80",
+       "special_bet_value": "total=3.5",
+       "outcome_id": "794",
+       "parsed_special_bet_value": {
+        "total": "3.5"
+       }
+      }
+     ]
+    },
+    {
+     "sub_type_id": "47",
+     "name": "HALFTIME/FULLTIME",
+     "odds": [
+      {
+       "display": "2/2",
+       "odd_key": "AS Roma/AS Roma",
+       "odd_def": "{$competitor2}/{$competitor2}",
+       "odd_value": "13.00",
+       "special_bet_value": "",
+       "outcome_id": "434",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "2/X",
+       "odd_key": "AS Roma/draw",
+       "odd_def": "{$competitor2}/draw",
+       "odd_value": "22.00",
+       "special_bet_value": "",
+       "outcome_id": "432",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "2/1",
+       "odd_key": "AS Roma/PSG",
+       "odd_def": "{$competitor2}/{$competitor1}",
+       "odd_value": "20.00",
+       "special_bet_value": "",
+       "outcome_id": "430",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "X/2",
+       "odd_key": "draw/AS Roma",
+       "odd_def": "draw/{$competitor2}",
+       "odd_value": "18.00",
+       "special_bet_value": "",
+       "outcome_id": "428",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "X/X",
+       "odd_key": "draw/draw",
+       "odd_def": "draw/draw",
+       "odd_value": "10.00",
+       "special_bet_value": "",
+       "outcome_id": "426",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "X/1",
+       "odd_key": "draw/PSG",
+       "odd_def": "draw/{$competitor1}",
+       "odd_value": "4.80",
+       "special_bet_value": "",
+       "outcome_id": "424",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "1/2",
+       "odd_key": "PSG/AS Roma",
+       "odd_def": "{$competitor1}/{$competitor2}",
+       "odd_value": "60.00",
+       "special_bet_value": "",
+       "outcome_id": "422",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "1/X",
+       "odd_key": "PSG/draw",
+       "odd_def": "{$competitor1}/draw",
+       "odd_value": "20.00",
+       "special_bet_value": "",
+       "outcome_id": "420",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "1/1",
+       "odd_key": "PSG/PSG",
+       "odd_def": "{$competitor1}/{$competitor1}",
+       "odd_value": "1.80",
+       "special_bet_value": "",
+       "outcome_id": "418",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      }
+     ]
+    },
+    {
+     "sub_type_id": "48",
+     "name": "PSG TO WIN BOTH HALVES",
+     "odds": [
+      {
+       "display": "YES",
+       "odd_key": "yes",
+       "odd_def": "yes",
+       "odd_value": "2.80",
+       "special_bet_value": "",
+       "outcome_id": "74",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "NO",
+       "odd_key": "no",
+       "odd_def": "no",
+       "odd_value": "1.41",
+       "special_bet_value": "",
+       "outcome_id": "76",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      }
+     ]
+    },
+    {
+     "sub_type_id": "49",
+     "name": "AS ROMA TO WIN BOTH HALVES",
+     "odds": [
+      {
+       "display": "YES",
+       "odd_key": "yes",
+       "odd_def": "yes",
+       "odd_value": "13.00",
+       "special_bet_value": "",
+       "outcome_id": "74",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "NO",
+       "odd_key": "no",
+       "odd_def": "no",
+       "odd_value": "1.01",
+       "special_bet_value": "",
+       "outcome_id": "76",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      }
+     ]
+    },
+    {
+     "sub_type_id": "50",
+     "name": "PSG TO WIN EITHER HALF",
+     "odds": [
+      {
+       "display": "YES",
+       "odd_key": "yes",
+       "odd_def": "yes",
+       "odd_value": "1.18",
+       "special_bet_value": "",
+       "outcome_id": "74",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "NO",
+       "odd_key": "no",
+       "odd_def": "no",
+       "odd_value": "4.50",
+       "special_bet_value": "",
+       "outcome_id": "76",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      }
+     ]
+    },
+    {
+     "sub_type_id": "51",
+     "name": "AS ROMA TO WIN EITHER HALF",
+     "odds": [
+      {
+       "display": "YES",
+       "odd_key": "yes",
+       "odd_def": "yes",
+       "odd_value": "3.25",
+       "special_bet_value": "",
+       "outcome_id": "74",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "NO",
+       "odd_key": "no",
+       "odd_def": "no",
+       "odd_value": "1.31",
+       "special_bet_value": "",
+       "outcome_id": "76",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      }
+     ]
+    },
+    {
+     "sub_type_id": "55",
+     "name": "1ST/2ND HALF BOTH TEAMS TO SCORE",
+     "odds": [
+      {
+       "display": "NO/NO",
+       "odd_key": "no/no",
+       "odd_def": "no/no",
+       "odd_value": "1.82",
+       "special_bet_value": "",
+       "outcome_id": "806",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "NO/YES",
+       "odd_key": "no/yes",
+       "odd_def": "no/yes",
+       "odd_value": "3.45",
+       "special_bet_value": "",
+       "outcome_id": "812",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "YES/NO",
+       "odd_key": "yes/no",
+       "odd_def": "yes/no",
+       "odd_value": "4.80",
+       "special_bet_value": "",
+       "outcome_id": "808",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "YES/YES",
+       "odd_key": "yes/yes",
+       "odd_def": "yes/yes",
+       "odd_value": "9.40",
+       "special_bet_value": "",
+       "outcome_id": "810",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      }
+     ]
+    },
+    {
+     "sub_type_id": "56",
+     "name": "PSG TO SCORE IN BOTH HALVES",
+     "odds": [
+      {
+       "display": "YES",
+       "odd_key": "yes",
+       "odd_def": "yes",
+       "odd_value": "1.73",
+       "special_bet_value": "",
+       "outcome_id": "74",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "NO",
+       "odd_key": "no",
+       "odd_def": "no",
+       "odd_value": "2.00",
+       "special_bet_value": "",
+       "outcome_id": "76",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      }
+     ]
+    },
+    {
+     "sub_type_id": "57",
+     "name": "AS ROMA TO SCORE IN BOTH HALVES",
+     "odds": [
+      {
+       "display": "YES",
+       "odd_key": "yes",
+       "odd_def": "yes",
+       "odd_value": "4.90",
+       "special_bet_value": "",
+       "outcome_id": "74",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "NO",
+       "odd_key": "no",
+       "odd_def": "no",
+       "odd_value": "1.14",
+       "special_bet_value": "",
+       "outcome_id": "76",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      }
+     ]
+    },
+    {
+     "sub_type_id": "58",
+     "name": "BOTH HALVES OVER 1.5",
+     "odds": [
+      {
+       "display": "YES",
+       "odd_key": "yes",
+       "odd_def": "yes",
+       "odd_value": "2.90",
+       "special_bet_value": "total=1.5",
+       "outcome_id": "74",
+       "parsed_special_bet_value": {
+        "total": "1.5"
+       }
+      },
+      {
+       "display": "NO",
+       "odd_key": "no",
+       "odd_def": "no",
+       "odd_value": "1.38",
+       "special_bet_value": "total=1.5",
+       "outcome_id": "76",
+       "parsed_special_bet_value": {
+        "total": "1.5"
+       }
+      }
+     ]
+    },
+    {
+     "sub_type_id": "59",
+     "name": "BOTH HALVES UNDER 1.5",
+     "odds": [
+      {
+       "display": "YES",
+       "odd_key": "yes",
+       "odd_def": "yes",
+       "odd_value": "4.20",
+       "special_bet_value": "total=1.5",
+       "outcome_id": "74",
+       "parsed_special_bet_value": {
+        "total": "1.5"
+       }
+      },
+      {
+       "display": "NO",
+       "odd_key": "no",
+       "odd_def": "no",
+       "odd_value": "1.20",
+       "special_bet_value": "total=1.5",
+       "outcome_id": "76",
+       "parsed_special_bet_value": {
+        "total": "1.5"
+       }
+      }
+     ]
+    },
+    {
+     "sub_type_id": "81",
+     "name": "1ST HALF - CORRECT SCORE",
+     "odds": [
+      {
+       "display": "0:0",
+       "odd_key": "0:0",
+       "odd_def": "0:0",
+       "odd_value": "4.52",
+       "special_bet_value": "",
+       "outcome_id": "462",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "0:1",
+       "odd_key": "0:1",
+       "odd_def": "0:1",
+       "odd_value": "9.44",
+       "special_bet_value": "",
+       "outcome_id": "474",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "0:2",
+       "odd_key": "0:2",
+       "odd_def": "0:2",
+       "odd_value": "40.49",
+       "special_bet_value": "",
+       "outcome_id": "476",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "1:0",
+       "odd_key": "1:0",
+       "odd_def": "1:0",
+       "odd_value": "3.69",
+       "special_bet_value": "",
+       "outcome_id": "468",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "1:1",
+       "odd_key": "1:1",
+       "odd_def": "1:1",
+       "odd_value": "7.80",
+       "special_bet_value": "",
+       "outcome_id": "464",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "1:2",
+       "odd_key": "1:2",
+       "odd_def": "1:2",
+       "odd_value": "33.33",
+       "special_bet_value": "",
+       "outcome_id": "478",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "2:0",
+       "odd_key": "2:0",
+       "odd_def": "2:0",
+       "odd_value": "5.93",
+       "special_bet_value": "",
+       "outcome_id": "470",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "2:1",
+       "odd_key": "2:1",
+       "odd_def": "2:1",
+       "odd_value": "12.69",
+       "special_bet_value": "",
+       "outcome_id": "472",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "2:2",
+       "odd_key": "2:2",
+       "odd_def": "2:2",
+       "odd_value": "54.70",
+       "special_bet_value": "",
+       "outcome_id": "466",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "OTHER",
+       "odd_key": "other",
+       "odd_def": "other",
+       "odd_value": "6.13",
+       "special_bet_value": "",
+       "outcome_id": "480",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      }
+     ]
+    },
+    {
+     "sub_type_id": "184",
+     "name": "1ST GOAL & 1X2",
+     "odds": [
+      {
+       "display": "2 GOAL & 2",
+       "odd_key": "AS Roma goal & AS Roma",
+       "odd_def": "{$competitor2} goal & {$competitor2}",
+       "odd_value": "8.20",
+       "special_bet_value": "goalnr=1",
+       "outcome_id": "824",
+       "parsed_special_bet_value": {
+        "goalnr": "1"
+       }
+      },
+      {
+       "display": "2 GOAL & X",
+       "odd_key": "AS Roma goal & draw",
+       "odd_def": "{$competitor2} goal & draw",
+       "odd_value": "12.00",
+       "special_bet_value": "goalnr=1",
+       "outcome_id": "822",
+       "parsed_special_bet_value": {
+        "goalnr": "1"
+       }
+      },
+      {
+       "display": "2 GOAL & 1",
+       "odd_key": "AS Roma goal & PSG",
+       "odd_def": "{$competitor2} goal & {$competitor1}",
+       "odd_value": "7.20",
+       "special_bet_value": "goalnr=1",
+       "outcome_id": "820",
+       "parsed_special_bet_value": {
+        "goalnr": "1"
+       }
+      },
+      {
+       "display": "NO GOAL",
+       "odd_key": "no goal",
+       "odd_def": "no goal",
+       "odd_value": "29.00",
+       "special_bet_value": "goalnr=1",
+       "outcome_id": "826",
+       "parsed_special_bet_value": {
+        "goalnr": "1"
+       }
+      },
+      {
+       "display": "1 GOAL & 2",
+       "odd_key": "PSG goal & AS Roma",
+       "odd_def": "{$competitor1} goal & {$competitor2}",
+       "odd_value": "30.00",
+       "special_bet_value": "goalnr=1",
+       "outcome_id": "818",
+       "parsed_special_bet_value": {
+        "goalnr": "1"
+       }
+      },
+      {
+       "display": "1 GOAL & X",
+       "odd_key": "PSG goal & draw",
+       "odd_def": "{$competitor1} goal & draw",
+       "odd_value": "12.00",
+       "special_bet_value": "goalnr=1",
+       "outcome_id": "816",
+       "parsed_special_bet_value": {
+        "goalnr": "1"
+       }
+      },
+      {
+       "display": "1 GOAL & 1",
+       "odd_key": "PSG goal & PSG",
+       "odd_def": "{$competitor1} goal & {$competitor1}",
+       "odd_value": "1.49",
+       "special_bet_value": "goalnr=1",
+       "outcome_id": "814",
+       "parsed_special_bet_value": {
+        "goalnr": "1"
+       }
+      }
+     ]
+    },
+    {
+     "sub_type_id": "543",
+     "name": "2ND HALF - 1X2 & BOTH TEAMS TO SCORE",
+     "odds": [
+      {
+       "display": "2 & NO",
+       "odd_key": "AS Roma & no",
+       "odd_def": "{$competitor2} & no",
+       "odd_value": "7.80",
+       "special_bet_value": "",
+       "outcome_id": "88",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "2 & YES",
+       "odd_key": "AS Roma & yes",
+       "odd_def": "{$competitor2} & yes",
+       "odd_value": "18.00",
+       "special_bet_value": "",
+       "outcome_id": "86",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "X & NO",
+       "odd_key": "draw & no",
+       "odd_def": "draw & no",
+       "odd_value": "6.20",
+       "special_bet_value": "",
+       "outcome_id": "84",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "X & YES",
+       "odd_key": "draw & yes",
+       "odd_def": "draw & yes",
+       "odd_value": "6.20",
+       "special_bet_value": "",
+       "outcome_id": "82",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "1 & NO",
+       "odd_key": "PSG & no",
+       "odd_def": "{$competitor1} & no",
+       "odd_value": "2.06",
+       "special_bet_value": "",
+       "outcome_id": "80",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "1 & YES",
+       "odd_key": "PSG & yes",
+       "odd_def": "{$competitor1} & yes",
+       "odd_value": "5.40",
+       "special_bet_value": "",
+       "outcome_id": "78",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      }
+     ]
+    },
+    {
+     "sub_type_id": "544",
+     "name": "2ND HALF - 1X2 & TOTAL",
+     "odds": [
+      {
+       "display": "2 & OVER 1.5",
+       "odd_key": "AS Roma & over 1.5",
+       "odd_def": "{$competitor2} & over {total}",
+       "odd_value": "11.00",
+       "special_bet_value": "total=1.5",
+       "outcome_id": "804",
+       "parsed_special_bet_value": {
+        "total": "1.5"
+       }
+      },
+      {
+       "display": "2 & UNDER 1.5",
+       "odd_key": "AS Roma & under 1.5",
+       "odd_def": "{$competitor2} & under {total}",
+       "odd_value": "11.00",
+       "special_bet_value": "total=1.5",
+       "outcome_id": "802",
+       "parsed_special_bet_value": {
+        "total": "1.5"
+       }
+      },
+      {
+       "display": "X & OVER 1.5",
+       "odd_key": "draw & over 1.5",
+       "odd_def": "draw & over {total}",
+       "odd_value": "6.20",
+       "special_bet_value": "total=1.5",
+       "outcome_id": "800",
+       "parsed_special_bet_value": {
+        "total": "1.5"
+       }
+      },
+      {
+       "display": "X & UNDER 1.5",
+       "odd_key": "draw & under 1.5",
+       "odd_def": "draw & under {total}",
+       "odd_value": "6.20",
+       "special_bet_value": "total=1.5",
+       "outcome_id": "798",
+       "parsed_special_bet_value": {
+        "total": "1.5"
+       }
+      },
+      {
+       "display": "1 & OVER 1.5",
+       "odd_key": "PSG & over 1.5",
+       "odd_def": "{$competitor1} & over {total}",
+       "odd_value": "2.21",
+       "special_bet_value": "total=1.5",
+       "outcome_id": "796",
+       "parsed_special_bet_value": {
+        "total": "1.5"
+       }
+      },
+      {
+       "display": "1 & UNDER 1.5",
+       "odd_key": "PSG & under 1.5",
+       "odd_def": "{$competitor1} & under {total}",
+       "odd_value": "4.50",
+       "special_bet_value": "total=1.5",
+       "outcome_id": "794",
+       "parsed_special_bet_value": {
+        "total": "1.5"
+       }
+      }
+     ]
+    },
+    {
+     "sub_type_id": "546",
+     "name": "DOUBLE CHANCE & BOTH TEAMS TO SCORE",
+     "odds": [
+      {
+       "display": "X/2 & NO",
+       "odd_key": "draw/AS Roma & no",
+       "odd_def": "draw/{$competitor2} & no",
+       "odd_value": "12.00",
+       "special_bet_value": "",
+       "outcome_id": "1723",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "X/2 & YES",
+       "odd_key": "draw/AS Roma & yes",
+       "odd_def": "draw/{$competitor2} & yes",
+       "odd_value": "4.20",
+       "special_bet_value": "",
+       "outcome_id": "1722",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "1/2 & NO",
+       "odd_key": "PSG/AS Roma & no",
+       "odd_def": "{$competitor1}/{$competitor2} & no",
+       "odd_value": "2.44",
+       "special_bet_value": "",
+       "outcome_id": "1721",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "1/2 & YES",
+       "odd_key": "PSG/AS Roma & yes",
+       "odd_def": "{$competitor1}/{$competitor2} & yes",
+       "odd_value": "1.96",
+       "special_bet_value": "",
+       "outcome_id": "1720",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "1/X & NO",
+       "odd_key": "PSG/draw & no",
+       "odd_def": "{$competitor1}/draw & no",
+       "odd_value": "2.55",
+       "special_bet_value": "",
+       "outcome_id": "1719",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "1/X & YES",
+       "odd_key": "PSG/draw & yes",
+       "odd_def": "{$competitor1}/draw & yes",
+       "odd_value": "1.77",
+       "special_bet_value": "",
+       "outcome_id": "1718",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      }
+     ]
+    },
+    {
+     "sub_type_id": "547",
+     "name": "DOUBLE CHANCE & TOTAL",
+     "odds": [
+      {
+       "display": "X/2 & OVER 1.5",
+       "odd_key": "draw/AS Roma & over 1.5",
+       "odd_def": "draw/{$competitor2} & over {total}",
+       "odd_value": "3.60",
+       "special_bet_value": "total=1.5",
+       "outcome_id": "1729",
+       "parsed_special_bet_value": {
+        "total": "1.5"
+       }
+      },
+      {
+       "display": "X/2 & UNDER 1.5",
+       "odd_key": "draw/AS Roma & under 1.5",
+       "odd_def": "draw/{$competitor2} & under {total}",
+       "odd_value": "15.00",
+       "special_bet_value": "total=1.5",
+       "outcome_id": "1726",
+       "parsed_special_bet_value": {
+        "total": "1.5"
+       }
+      },
+      {
+       "display": "1/2 & OVER 1.5",
+       "odd_key": "PSG/AS Roma & over 1.5",
+       "odd_def": "{$competitor1}/{$competitor2} & over {total}",
+       "odd_value": "1.26",
+       "special_bet_value": "total=1.5",
+       "outcome_id": "1728",
+       "parsed_special_bet_value": {
+        "total": "1.5"
+       }
+      },
+      {
+       "display": "1/2 & UNDER 1.5",
+       "odd_key": "PSG/AS Roma & under 1.5",
+       "odd_def": "{$competitor1}/{$competitor2} & under {total}",
+       "odd_value": "9.00",
+       "special_bet_value": "total=1.5",
+       "outcome_id": "1725",
+       "parsed_special_bet_value": {
+        "total": "1.5"
+       }
+      },
+      {
+       "display": "1/X & OVER 1.5",
+       "odd_key": "PSG/draw & over 1.5",
+       "odd_def": "{$competitor1}/draw & over {total}",
+       "odd_value": "1.21",
+       "special_bet_value": "total=1.5",
+       "outcome_id": "1727",
+       "parsed_special_bet_value": {
+        "total": "1.5"
+       }
+      },
+      {
+       "display": "1/X & UNDER 1.5",
+       "odd_key": "PSG/draw & under 1.5",
+       "odd_def": "{$competitor1}/draw & under {total}",
+       "odd_value": "8.80",
+       "special_bet_value": "total=1.5",
+       "outcome_id": "1724",
+       "parsed_special_bet_value": {
+        "total": "1.5"
+       }
+      },
+      {
+       "display": "X/2 & OVER 2.5",
+       "odd_key": "draw/AS Roma & over 2.5",
+       "odd_def": "draw/{$competitor2} & over {total}",
+       "odd_value": "5.80",
+       "special_bet_value": "total=2.5",
+       "outcome_id": "1729",
+       "parsed_special_bet_value": {
+        "total": "2.5"
+       }
+      },
+      {
+       "display": "X/2 & UNDER 2.5",
+       "odd_key": "draw/AS Roma & under 2.5",
+       "odd_def": "draw/{$competitor2} & under {total}",
+       "odd_value": "6.40",
+       "special_bet_value": "total=2.5",
+       "outcome_id": "1726",
+       "parsed_special_bet_value": {
+        "total": "2.5"
+       }
+      },
+      {
+       "display": "1/2 & OVER 2.5",
+       "odd_key": "PSG/AS Roma & over 2.5",
+       "odd_def": "{$competitor1}/{$competitor2} & over {total}",
+       "odd_value": "1.45",
+       "special_bet_value": "total=2.5",
+       "outcome_id": "1728",
+       "parsed_special_bet_value": {
+        "total": "2.5"
+       }
+      },
+      {
+       "display": "1/2 & UNDER 2.5",
+       "odd_key": "PSG/AS Roma & under 2.5",
+       "odd_def": "{$competitor1}/{$competitor2} & under {total}",
+       "odd_value": "4.60",
+       "special_bet_value": "total=2.5",
+       "outcome_id": "1725",
+       "parsed_special_bet_value": {
+        "total": "2.5"
+       }
+      },
+      {
+       "display": "1/X & OVER 2.5",
+       "odd_key": "PSG/draw & over 2.5",
+       "odd_def": "{$competitor1}/draw & over {total}",
+       "odd_value": "1.49",
+       "special_bet_value": "total=2.5",
+       "outcome_id": "1727",
+       "parsed_special_bet_value": {
+        "total": "2.5"
+       }
+      },
+      {
+       "display": "1/X & UNDER 2.5",
+       "odd_key": "PSG/draw & under 2.5",
+       "odd_def": "{$competitor1}/draw & under {total}",
+       "odd_value": "3.60",
+       "special_bet_value": "total=2.5",
+       "outcome_id": "1724",
+       "parsed_special_bet_value": {
+        "total": "2.5"
+       }
+      },
+      {
+       "display": "X/2 & OVER 3.5",
+       "odd_key": "draw/AS Roma & over 3.5",
+       "odd_def": "draw/{$competitor2} & over {total}",
+       "odd_value": "8.00",
+       "special_bet_value": "total=3.5",
+       "outcome_id": "1729",
+       "parsed_special_bet_value": {
+        "total": "3.5"
+       }
+      },
+      {
+       "display": "X/2 & UNDER 3.5",
+       "odd_key": "draw/AS Roma & under 3.5",
+       "odd_def": "draw/{$competitor2} & under {total}",
+       "odd_value": "5.20",
+       "special_bet_value": "total=3.5",
+       "outcome_id": "1726",
+       "parsed_special_bet_value": {
+        "total": "3.5"
+       }
+      },
+      {
+       "display": "1/2 & OVER 3.5",
+       "odd_key": "PSG/AS Roma & over 3.5",
+       "odd_def": "{$competitor1}/{$competitor2} & over {total}",
+       "odd_value": "2.07",
+       "special_bet_value": "total=3.5",
+       "outcome_id": "1728",
+       "parsed_special_bet_value": {
+        "total": "3.5"
+       }
+      },
+      {
+       "display": "1/2 & UNDER 3.5",
+       "odd_key": "PSG/AS Roma & under 3.5",
+       "odd_def": "{$competitor1}/{$competitor2} & under {total}",
+       "odd_value": "2.31",
+       "special_bet_value": "total=3.5",
+       "outcome_id": "1725",
+       "parsed_special_bet_value": {
+        "total": "3.5"
+       }
+      },
+      {
+       "display": "1/X & OVER 3.5",
+       "odd_key": "PSG/draw & over 3.5",
+       "odd_def": "{$competitor1}/draw & over {total}",
+       "odd_value": "1.99",
+       "special_bet_value": "total=3.5",
+       "outcome_id": "1727",
+       "parsed_special_bet_value": {
+        "total": "3.5"
+       }
+      },
+      {
+       "display": "1/X & UNDER 3.5",
+       "odd_key": "PSG/draw & under 3.5",
+       "odd_def": "{$competitor1}/draw & under {total}",
+       "odd_value": "2.22",
+       "special_bet_value": "total=3.5",
+       "outcome_id": "1724",
+       "parsed_special_bet_value": {
+        "total": "3.5"
+       }
+      },
+      {
+       "display": "X/2 & OVER 4.5",
+       "odd_key": "draw/AS Roma & over 4.5",
+       "odd_def": "draw/{$competitor2} & over {total}",
+       "odd_value": "17.00",
+       "special_bet_value": "total=4.5",
+       "outcome_id": "1729",
+       "parsed_special_bet_value": {
+        "total": "4.5"
+       }
+      },
+      {
+       "display": "X/2 & UNDER 4.5",
+       "odd_key": "draw/AS Roma & under 4.5",
+       "odd_def": "draw/{$competitor2} & under {total}",
+       "odd_value": "3.80",
+       "special_bet_value": "total=4.5",
+       "outcome_id": "1726",
+       "parsed_special_bet_value": {
+        "total": "4.5"
+       }
+      },
+      {
+       "display": "1/2 & OVER 4.5",
+       "odd_key": "PSG/AS Roma & over 4.5",
+       "odd_def": "{$competitor1}/{$competitor2} & over {total}",
+       "odd_value": "3.00",
+       "special_bet_value": "total=4.5",
+       "outcome_id": "1728",
+       "parsed_special_bet_value": {
+        "total": "4.5"
+       }
+      },
+      {
+       "display": "1/2 & UNDER 4.5",
+       "odd_key": "PSG/AS Roma & under 4.5",
+       "odd_def": "{$competitor1}/{$competitor2} & under {total}",
+       "odd_value": "1.72",
+       "special_bet_value": "total=4.5",
+       "outcome_id": "1725",
+       "parsed_special_bet_value": {
+        "total": "4.5"
+       }
+      },
+      {
+       "display": "1/X & OVER 4.5",
+       "odd_key": "PSG/draw & over 4.5",
+       "odd_def": "{$competitor1}/draw & over {total}",
+       "odd_value": "3.10",
+       "special_bet_value": "total=4.5",
+       "outcome_id": "1727",
+       "parsed_special_bet_value": {
+        "total": "4.5"
+       }
+      },
+      {
+       "display": "1/X & UNDER 4.5",
+       "odd_key": "PSG/draw & under 4.5",
+       "odd_def": "{$competitor1}/draw & under {total}",
+       "odd_value": "1.58",
+       "special_bet_value": "total=4.5",
+       "outcome_id": "1724",
+       "parsed_special_bet_value": {
+        "total": "4.5"
+       }
+      }
+     ]
+    },
+    {
+     "sub_type_id": "552",
+     "name": "1ST HALF - MULTIGOALS",
+     "odds": [
+      {
+       "display": "1-2",
+       "odd_key": "1-2",
+       "odd_def": "1-2",
+       "odd_value": "1.48",
+       "special_bet_value": "",
+       "outcome_id": "1746",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "1-3",
+       "odd_key": "1-3",
+       "odd_def": "1-3",
+       "odd_value": "1.25",
+       "special_bet_value": "",
+       "outcome_id": "1747",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "2-3",
+       "odd_key": "2-3",
+       "odd_def": "2-3",
+       "odd_value": "1.95",
+       "special_bet_value": "",
+       "outcome_id": "1748",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "4+",
+       "odd_key": "4+",
+       "odd_def": "4+",
+       "odd_value": "7.80",
+       "special_bet_value": "",
+       "outcome_id": "1749",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "NO GOAL",
+       "odd_key": "no goal",
+       "odd_def": "no goal",
+       "odd_value": "3.95",
+       "special_bet_value": "",
+       "outcome_id": "1805",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      }
+     ]
+    },
+    {
+     "sub_type_id": "818",
+     "name": "HALFTIME/FULLTIME & TOTAL",
+     "odds": [
+      {
+       "display": "2/2 & OVER 4.5",
+       "odd_key": "AS Roma/AS Roma & over 4.5",
+       "odd_def": "{$competitor2}/{$competitor2} & over {total}",
+       "odd_value": "45.00",
+       "special_bet_value": "total=4.5",
+       "outcome_id": "1853",
+       "parsed_special_bet_value": {
+        "total": "4.5"
+       }
+      },
+      {
+       "display": "2/2 & UNDER 4.5",
+       "odd_key": "AS Roma/AS Roma & under 4.5",
+       "odd_def": "{$competitor2}/{$competitor2} & under {total}",
+       "odd_value": "17.00",
+       "special_bet_value": "total=4.5",
+       "outcome_id": "1844",
+       "parsed_special_bet_value": {
+        "total": "4.5"
+       }
+      },
+      {
+       "display": "2/X & OVER 4.5",
+       "odd_key": "AS Roma/draw & over 4.5",
+       "odd_def": "{$competitor2}/draw & over {total}",
+       "odd_value": "101.00",
+       "special_bet_value": "total=4.5",
+       "outcome_id": "1852",
+       "parsed_special_bet_value": {
+        "total": "4.5"
+       }
+      },
+      {
+       "display": "2/X & UNDER 4.5",
+       "odd_key": "AS Roma/draw & under 4.5",
+       "odd_def": "{$competitor2}/draw & under {total}",
+       "odd_value": "26.00",
+       "special_bet_value": "total=4.5",
+       "outcome_id": "1843",
+       "parsed_special_bet_value": {
+        "total": "4.5"
+       }
+      },
+      {
+       "display": "2/1 & OVER 4.5",
+       "odd_key": "AS Roma/PSG & over 4.5",
+       "odd_def": "{$competitor2}/{$competitor1} & over {total}",
+       "odd_value": "35.00",
+       "special_bet_value": "total=4.5",
+       "outcome_id": "1851",
+       "parsed_special_bet_value": {
+        "total": "4.5"
+       }
+      },
+      {
+       "display": "2/1 & UNDER 4.5",
+       "odd_key": "AS Roma/PSG & under 4.5",
+       "odd_def": "{$competitor2}/{$competitor1} & under {total}",
+       "odd_value": "40.00",
+       "special_bet_value": "total=4.5",
+       "outcome_id": "1842",
+       "parsed_special_bet_value": {
+        "total": "4.5"
+       }
+      },
+      {
+       "display": "X/2 & OVER 4.5",
+       "odd_key": "draw/AS Roma & over 4.5",
+       "odd_def": "draw/{$competitor2} & over {total}",
+       "odd_value": "90.00",
+       "special_bet_value": "total=4.5",
+       "outcome_id": "1850",
+       "parsed_special_bet_value": {
+        "total": "4.5"
+       }
+      },
+      {
+       "display": "X/2 & UNDER 4.5",
+       "odd_key": "draw/AS Roma & under 4.5",
+       "odd_def": "draw/{$competitor2} & under {total}",
+       "odd_value": "21.00",
+       "special_bet_value": "total=4.5",
+       "outcome_id": "1841",
+       "parsed_special_bet_value": {
+        "total": "4.5"
+       }
+      },
+      {
+       "display": "X/X & OVER 4.5",
+       "odd_key": "draw/draw & over 4.5",
+       "odd_def": "draw/draw & over {total}",
+       "odd_value": "101.00",
+       "special_bet_value": "total=4.5",
+       "outcome_id": "1849",
+       "parsed_special_bet_value": {
+        "total": "4.5"
+       }
+      },
+      {
+       "display": "X/X & UNDER 4.5",
+       "odd_key": "draw/draw & under 4.5",
+       "odd_def": "draw/draw & under {total}",
+       "odd_value": "10.00",
+       "special_bet_value": "total=4.5",
+       "outcome_id": "1840",
+       "parsed_special_bet_value": {
+        "total": "4.5"
+       }
+      },
+      {
+       "display": "X/1 & OVER 4.5",
+       "odd_key": "draw/PSG & over 4.5",
+       "odd_def": "draw/{$competitor1} & over {total}",
+       "odd_value": "17.00",
+       "special_bet_value": "total=4.5",
+       "outcome_id": "1848",
+       "parsed_special_bet_value": {
+        "total": "4.5"
+       }
+      },
+      {
+       "display": "X/1 & UNDER 4.5",
+       "odd_key": "draw/PSG & under 4.5",
+       "odd_def": "draw/{$competitor1} & under {total}",
+       "odd_value": "6.20",
+       "special_bet_value": "total=4.5",
+       "outcome_id": "1839",
+       "parsed_special_bet_value": {
+        "total": "4.5"
+       }
+      },
+      {
+       "display": "1/2 & OVER 4.5",
+       "odd_key": "PSG/AS Roma & over 4.5",
+       "odd_def": "{$competitor1}/{$competitor2} & over {total}",
+       "odd_value": "101.00",
+       "special_bet_value": "total=4.5",
+       "outcome_id": "1847",
+       "parsed_special_bet_value": {
+        "total": "4.5"
+       }
+      },
+      {
+       "display": "1/2 & UNDER 4.5",
+       "odd_key": "PSG/AS Roma & under 4.5",
+       "odd_def": "{$competitor1}/{$competitor2} & under {total}",
+       "odd_value": "101.00",
+       "special_bet_value": "total=4.5",
+       "outcome_id": "1838",
+       "parsed_special_bet_value": {
+        "total": "4.5"
+       }
+      },
+      {
+       "display": "1/X & OVER 4.5",
+       "odd_key": "PSG/draw & over 4.5",
+       "odd_def": "{$competitor1}/draw & over {total}",
+       "odd_value": "101.00",
+       "special_bet_value": "total=4.5",
+       "outcome_id": "1846",
+       "parsed_special_bet_value": {
+        "total": "4.5"
+       }
+      },
+      {
+       "display": "1/X & UNDER 4.5",
+       "odd_key": "PSG/draw & under 4.5",
+       "odd_def": "{$competitor1}/draw & under {total}",
+       "odd_value": "22.00",
+       "special_bet_value": "total=4.5",
+       "outcome_id": "1837",
+       "parsed_special_bet_value": {
+        "total": "4.5"
+       }
+      },
+      {
+       "display": "1/1 & OVER 4.5",
+       "odd_key": "PSG/PSG & over 4.5",
+       "odd_def": "{$competitor1}/{$competitor1} & over {total}",
+       "odd_value": "4.10",
+       "special_bet_value": "total=4.5",
+       "outcome_id": "1845",
+       "parsed_special_bet_value": {
+        "total": "4.5"
+       }
+      },
+      {
+       "display": "1/1 & UNDER 4.5",
+       "odd_key": "PSG/PSG & under 4.5",
+       "odd_def": "{$competitor1}/{$competitor1} & under {total}",
+       "odd_value": "2.80",
+       "special_bet_value": "total=4.5",
+       "outcome_id": "1836",
+       "parsed_special_bet_value": {
+        "total": "4.5"
+       }
+      }
+     ]
+    },
+    {
+     "sub_type_id": "45",
+     "name": "CORRECT SCORE",
+     "odds": [
+      {
+       "display": "0:0",
+       "odd_key": "0:0",
+       "odd_def": "0:0",
+       "odd_value": "27.84",
+       "special_bet_value": "",
+       "outcome_id": "274",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "0:1",
+       "odd_key": "0:1",
+       "odd_def": "0:1",
+       "odd_value": "30.13",
+       "special_bet_value": "",
+       "outcome_id": "284",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "0:2",
+       "odd_key": "0:2",
+       "odd_def": "0:2",
+       "odd_value": "57.50",
+       "special_bet_value": "",
+       "outcome_id": "294",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "0:3",
+       "odd_key": "0:3",
+       "odd_def": "0:3",
+       "odd_value": "165.00",
+       "special_bet_value": "",
+       "outcome_id": "304",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "0:4",
+       "odd_key": "0:4",
+       "odd_def": "0:4",
+       "odd_value": "251.00",
+       "special_bet_value": "",
+       "outcome_id": "314",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "1:0",
+       "odd_key": "1:0",
+       "odd_def": "1:0",
+       "odd_value": "11.87",
+       "special_bet_value": "",
+       "outcome_id": "276",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "1:1",
+       "odd_key": "1:1",
+       "odd_def": "1:1",
+       "odd_value": "11.29",
+       "special_bet_value": "",
+       "outcome_id": "286",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "1:2",
+       "odd_key": "1:2",
+       "odd_def": "1:2",
+       "odd_value": "21.57",
+       "special_bet_value": "",
+       "outcome_id": "296",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "1:3",
+       "odd_key": "1:3",
+       "odd_def": "1:3",
+       "odd_value": "61.50",
+       "special_bet_value": "",
+       "outcome_id": "306",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "1:4",
+       "odd_key": "1:4",
+       "odd_def": "1:4",
+       "odd_value": "235.00",
+       "special_bet_value": "",
+       "outcome_id": "316",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "2:0",
+       "odd_key": "2:0",
+       "odd_def": "2:0",
+       "odd_value": "8.90",
+       "special_bet_value": "",
+       "outcome_id": "278",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "2:1",
+       "odd_key": "2:1",
+       "odd_def": "2:1",
+       "odd_value": "8.54",
+       "special_bet_value": "",
+       "outcome_id": "288",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "2:2",
+       "odd_key": "2:2",
+       "odd_def": "2:2",
+       "odd_value": "16.00",
+       "special_bet_value": "",
+       "outcome_id": "298",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "2:3",
+       "odd_key": "2:3",
+       "odd_def": "2:3",
+       "odd_value": "45.88",
+       "special_bet_value": "",
+       "outcome_id": "308",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "2:4",
+       "odd_key": "2:4",
+       "odd_def": "2:4",
+       "odd_value": "175.00",
+       "special_bet_value": "",
+       "outcome_id": "318",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "3:0",
+       "odd_key": "3:0",
+       "odd_def": "3:0",
+       "odd_value": "9.92",
+       "special_bet_value": "",
+       "outcome_id": "280",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "3:1",
+       "odd_key": "3:1",
+       "odd_def": "3:1",
+       "odd_value": "9.51",
+       "special_bet_value": "",
+       "outcome_id": "290",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "3:2",
+       "odd_key": "3:2",
+       "odd_def": "3:2",
+       "odd_value": "17.99",
+       "special_bet_value": "",
+       "outcome_id": "300",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "3:3",
+       "odd_key": "3:3",
+       "odd_def": "3:3",
+       "odd_value": "50.80",
+       "special_bet_value": "",
+       "outcome_id": "310",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "3:4",
+       "odd_key": "3:4",
+       "odd_def": "3:4",
+       "odd_value": "196.00",
+       "special_bet_value": "",
+       "outcome_id": "320",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "4:0",
+       "odd_key": "4:0",
+       "odd_def": "4:0",
+       "odd_value": "14.65",
+       "special_bet_value": "",
+       "outcome_id": "282",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "4:1",
+       "odd_key": "4:1",
+       "odd_def": "4:1",
+       "odd_value": "14.04",
+       "special_bet_value": "",
+       "outcome_id": "292",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "4:2",
+       "odd_key": "4:2",
+       "odd_def": "4:2",
+       "odd_value": "26.68",
+       "special_bet_value": "",
+       "outcome_id": "302",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "4:3",
+       "odd_key": "4:3",
+       "odd_def": "4:3",
+       "odd_value": "76.20",
+       "special_bet_value": "",
+       "outcome_id": "312",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "4:4",
+       "odd_key": "4:4",
+       "odd_def": "4:4",
+       "odd_value": "251.00",
+       "special_bet_value": "",
+       "outcome_id": "322",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      },
+      {
+       "display": "OTHER",
+       "odd_key": "other",
+       "odd_def": "other",
+       "odd_value": "5.65",
+       "special_bet_value": "",
+       "outcome_id": "324",
+       "parsed_special_bet_value": {
+        "": ""
+       }
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "meta": {}
+}

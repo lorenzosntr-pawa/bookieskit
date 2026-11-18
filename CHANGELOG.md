@@ -5,6 +5,12 @@ All notable changes to this project are documented in this file. The format foll
 ## [Unreleased]
 
 ### Added
+- **Betika booking and corner markets** — `1x2_bookings_ft` (136),
+  `over_under_bookings_ft` (139, card count), `1x2_corners_ft` (162) and
+  `over_under_corners_ft` (166), the same SportRadar ids SportyBet and MSport
+  map. Reachable now that per-event calls return the full market list; tested
+  on the new `betika/wc_nf.json` (Norway–France, 76 groups). Only events
+  Betika prices these on carry them.
 - **`parse_markets(keep_incomplete=True)`** skips the completeness
   filter, so markets and lines with a missing, zero or <= 1.0 price come back
   as parsed (book-compare health checks need to see them). Prices flagged
@@ -184,17 +190,22 @@ All notable changes to this project are documented in this file. The format foll
   corner-handicap prices and Over/Under FT is restored.
 - **`get_markets(..., sport=)`** now reaches the parser on every client, so
   basketball and tennis payloads are no longer parsed as soccer.
-- **Betika wrong-match prices (behaviour change)** — `/v1/uo/matches` can ignore
-  `match_id`, and `get_event_detail` / `get_event_markets` / `get_markets` used
-  to take `data[0]`, silently returning another match's prices. They now select
-  the row whose `match_id` equals the requested id (string compare); groups
-  from another match are never merged. `get_event_detail` raises
-  `ResponseError` (naming the requested and returned ids) only when the API
-  returns rows but none is the requested match; when it returns no rows the
-  empty payload comes back unchanged (so `get_sportradar_id` yields `None`).
-  `get_event_markets` / `get_markets` skip empty or other-match responses and
-  return an empty payload when nothing matches; they raise only if every
-  response held rows and none was the requested match.
+- **Betika per-event calls (behaviour change)** — `/v1/uo/matches` ignores
+  `match_id` on both hosts (live probe 2026-11-18), so every Betika
+  `get_event_detail` / `get_event_markets` / `get_markets` / `get_sportradar_id`
+  call returned or rejected another match. They now call
+  `/v1/uo/match?id=<match_id>` once and reshape the answer to the usual
+  `{"data": [<match with "odds">], "meta": {}}`. One call returns the full
+  market list (54 groups on PSG–Roma; booking/corner groups when Betika offers them)
+  instead of the 7-call fan-out of 7 groups. An unknown id gives
+  `{"data": [], "meta": {}}` (`get_sportradar_id` → `None`); a response
+  naming another match raises `ResponseError`. `competition_id` is accepted
+  and ignored. Any response shape other than a known match or the
+  unknown-id shape raises `ResponseError`; `get_markets(sport=)` raises if
+  the event's `sport_id` differs. `get_matches(match_id=)` /
+  `get_live_matches(match_id=)` now emit a `DeprecationWarning` (the API
+  ignores the filter). Closes #31. New fixture
+  `betika/prematch_soccer_full.json`.
 - **Suspended / missing prices (behaviour change for consumers)** — `parse_markets` no longer emits
   placeholder prices as real odds (BetPawa suspended `0.0`, Bet9ja literal
   `"1"`, Betway missing price `0.0`) or one-sided lines. If any expected

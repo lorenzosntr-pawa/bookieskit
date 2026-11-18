@@ -9,12 +9,14 @@ Captured from `api.betika.com` / `live.betika.com` on 2026-05-13. No auth or war
 | get_sports | `/v1/sports` |
 | get_matches (prematch) | `/v1/uo/matches?sport_id=N&page=K&limit=100[&sub_type_id=M][&competition_id=L][&match_id=X]` |
 | get_live_matches | `https://live.betika.com/v1/uo/matches?sport_id=N&page=K&limit=100[&match_id=X]` |
-| get_event_detail (prematch) | `/v1/uo/matches?match_id=X&limit=1` |
-| get_event_detail (live) | `https://live.betika.com/v1/uo/matches?match_id=X&limit=1` |
+| get_event_detail / get_event_markets (prematch) | `/v1/uo/match?id=X` (full market list) |
+| get_event_detail / get_event_markets (live) | `https://live.betika.com/v1/uo/match?id=X` |
+
+> 2026-11-18: `/v1/uo/matches` **ignores `match_id`** on both hosts (every lookup returned the same unrelated match). Per-event calls use `/v1/uo/match?id=X`, which answers `{"data": [<group>...], "meta": {<match fields>}}`; the client reshapes it to `{"data": [{**meta, "odds": groups}], "meta": {}}`. Unknown id → `data: null`, `meta` without `match_id`.
 
 ## Event-detail JSON shape
 
-Response shape: `{"data": [<match>], "meta": {...}}`. `data` is always a list (length 1 when filtering by `match_id`).
+Response shape (after the client reshape): `{"data": [<match>], "meta": {}}`.
 
 | Item | JSON path | Notes |
 |---|---|---|
@@ -73,3 +75,9 @@ The parser's `_parse_betika_line` handles both formats (`"2.5"` and `"total=2.5"
 - Country is informational: `api.betika.com` serves the same catalogue regardless of country code in the URL or any `country=` header / param.
 - Captured event (prematch): Man City vs Crystal Palace (parent_match_id="70784812"), kickoff 2026-05-13 22:00:00 UTC.
 - Captured event (live): Ulinzi Stars vs Leopards (parent_match_id=71463790), kickoff 2026-05-13 16:00:00 UTC.
+
+
+## Fixture provenance (added 2026-11-18)
+
+- `wc_nf.json` — Norway–France (SR 66457014), captured 2026-06-26 on branch `fix/betika-full-market-fetch-31` with a comma-joined `sub_type_id` call on `/v1/uo/matches` (listing-row shape, 76 groups). Carries the booking/corner groups 136/139/162/166.
+- `prematch_soccer_full.json` — PSG–AS Roma (SR 74166046), captured 2026-11-18 via `get_event_markets` → `/v1/uo/match?id=12024057` (54 groups, reshaped meta).
