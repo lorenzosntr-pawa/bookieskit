@@ -236,7 +236,7 @@ class Betika(BaseBookmaker):
         """Fetch every market group Betika offers for one event (one call).
 
         Same payload as :meth:`get_event_detail` (``/v1/uo/match`` already
-        returns the full market list, booking and corner groups included);
+        returns every market group Betika lists for the event);
         kept as the name ``get_markets`` and capture scripts call.
 
         Args:

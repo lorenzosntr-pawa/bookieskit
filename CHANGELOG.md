@@ -190,7 +190,7 @@ All notable changes to this project are documented in this file. The format foll
   call returned or rejected another match. They now call
   `/v1/uo/match?id=<match_id>` once and reshape the answer to the usual
   `{"data": [<match with "odds">], "meta": {}}`. One call returns the full
-  market list (54 groups on PSG–Roma, booking and corner groups included)
+  market list (54 groups on PSG–Roma; booking/corner groups when Betika offers them)
   instead of the 7-call fan-out of 7 groups. An unknown id gives
   `{"data": [], "meta": {}}` (`get_sportradar_id` → `None`); a response
   naming another match raises `ResponseError`. `competition_id` is accepted
