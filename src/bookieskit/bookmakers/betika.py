@@ -12,12 +12,22 @@ rate limiting under bursty traffic.
 
 import asyncio
 import math
+import warnings
 from typing import Any, AsyncIterator
 
 from bookieskit.base import BaseBookmaker
 from bookieskit.bookmakers.types import PrematchEventStub
 from bookieskit.config import BETIKA_MAX_CONCURRENT, BETIKA_REQUEST_DELAY
 from bookieskit.exceptions import ResponseError
+
+# Betika sport ids for the parser's sport tags (used to reject a
+# wrong-sport answer before parsing it against the wrong registry).
+_SPORT_IDS = {"soccer": "14", "basketball": "30", "tennis": "28"}
+
+_MATCH_ID_IGNORED = (
+    "Betika's /v1/uo/matches ignores match_id (it returns other matches); "
+    "use get_event_detail(event_id) instead"
+)
 
 
 class Betika(BaseBookmaker):
@@ -112,7 +122,9 @@ class Betika(BaseBookmaker):
                 Over/Under markets in each match's ``odds`` list instead
                 of the default 1X2).
             competition_id: Optional competition (league) filter.
-            match_id: Fetch a single match (overrides paging).
+            match_id: Deprecated. ``/v1/uo/matches`` ignores it and returns
+                other matches; use :meth:`get_event_detail`. Still sent,
+                with a ``DeprecationWarning``.
             period_id: Optional date-window filter. The endpoint defaults
                 to a rolling 48hr ``"Next 48hrs"`` view (~176 football
                 events at writing); pass ``9`` for the full multi-month
@@ -135,6 +147,7 @@ class Betika(BaseBookmaker):
         if competition_id is not None:
             params["competition_id"] = competition_id
         if match_id is not None:
+            warnings.warn(_MATCH_ID_IGNORED, DeprecationWarning, stacklevel=2)
             params["match_id"] = match_id
         if period_id is not None:
             params["period_id"] = str(period_id)
@@ -153,7 +166,8 @@ class Betika(BaseBookmaker):
             sport_id: Betika sport id (default ``14`` = Football).
             page: 1-indexed page number.
             limit: Page size.
-            match_id: Fetch a single in-play match by id (overrides paging).
+            match_id: Deprecated, ignored by the API (see
+                :meth:`get_matches`); use ``get_event_detail(id, live=True)``.
 
         Returns:
             JSON in the same shape as :meth:`get_matches`, plus the rich
@@ -166,6 +180,7 @@ class Betika(BaseBookmaker):
             "limit": str(limit),
         }
         if match_id is not None:
+            warnings.warn(_MATCH_ID_IGNORED, DeprecationWarning, stacklevel=2)
             params["match_id"] = match_id
         return await self._live_request("GET", "/v1/uo/matches", params=params)
 
@@ -177,11 +192,14 @@ class Betika(BaseBookmaker):
         calls use ``/v1/uo/match``. It answers ``{"data": [<group>, ...],
         "meta": {<match fields>}}``; this reshapes it to the listing shape
         ``{"data": [{**meta, "odds": groups}], "meta": {}}`` the parser and
-        the SportRadar extractor read. An unknown id (``meta`` without
-        ``match_id``) gives ``{"data": [], "meta": {}}``.
+        the SportRadar extractor read. An unknown id (live shape: ``data``
+        null and ``meta`` without ``match_id``) gives
+        ``{"data": [], "meta": {}}``.
 
         Raises:
-            ResponseError: the response names a different match.
+            ResponseError: the response names a different match, or has
+                any other unexpected shape (so a schema change is not
+                mistaken for "event not offered").
         """
         params = {"id": str(event_id)}
         if live:
@@ -189,8 +207,18 @@ class Betika(BaseBookmaker):
         else:
             resp = await self._request("GET", "/v1/uo/match", params=params)
         meta = resp.get("meta") if isinstance(resp, dict) else None
-        if not isinstance(meta, dict) or meta.get("match_id") is None:
-            return {"data": [], "meta": {}}
+        if not isinstance(meta, dict):
+            raise ResponseError(
+                "/v1/uo/match", 200,
+                f"Betika answered with an unexpected shape for {event_id!s}",
+            )
+        if meta.get("match_id") is None:
+            if resp.get("data") is None:
+                return {"data": [], "meta": {}}  # unknown id
+            raise ResponseError(
+                "/v1/uo/match", 200,
+                f"Betika returned markets without a match_id for {event_id!s}",
+            )
         if str(meta["match_id"]) != str(event_id):
             raise ResponseError(
                 "/v1/uo/match",
@@ -263,11 +291,25 @@ class Betika(BaseBookmaker):
             event_id: Betika event ID
             registry: MarketRegistry (default: built-in)
             sport: Sport tag forwarded to ``parse_markets`` (same meaning
-                there); None keeps the soccer default.
+                there); None keeps the soccer default. When given, the
+                event's ``sport_id`` must match it.
+
+        Raises:
+            ResponseError: wrong match, wrong sport or unexpected shape.
         """
         from bookieskit.markets.parser import parse_markets
 
         raw = await self.get_event_markets(event_id=event_id)
+        expected = _SPORT_IDS.get(sport) if sport is not None else None
+        rows = raw.get("data") or []
+        if expected is not None and rows:
+            got = rows[0].get("sport_id")
+            if got is not None and str(got) != expected:
+                raise ResponseError(
+                    "/v1/uo/match", 200,
+                    f"Betika event {event_id!s} is sport_id {got!s}, "
+                    f"not {sport} ({expected})",
+                )
         return parse_markets(
             raw, platform=self.PLATFORM_KEY, registry=registry, sport=sport
         )

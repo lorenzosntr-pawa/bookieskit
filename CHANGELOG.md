@@ -200,7 +200,12 @@ All notable changes to this project are documented in this file. The format foll
   instead of the 7-call fan-out of 7 groups. An unknown id gives
   `{"data": [], "meta": {}}` (`get_sportradar_id` → `None`); a response
   naming another match raises `ResponseError`. `competition_id` is accepted
-  and ignored. New fixture `betika/prematch_soccer_full.json`.
+  and ignored. Any response shape other than a known match or the
+  unknown-id shape raises `ResponseError`; `get_markets(sport=)` raises if
+  the event's `sport_id` differs. `get_matches(match_id=)` /
+  `get_live_matches(match_id=)` now emit a `DeprecationWarning` (the API
+  ignores the filter). Closes #31. New fixture
+  `betika/prematch_soccer_full.json`.
 - **Suspended / missing prices (behaviour change for consumers)** — `parse_markets` no longer emits
   placeholder prices as real odds (BetPawa suspended `0.0`, Bet9ja literal
   `"1"`, Betway missing price `0.0`) or one-sided lines. If any expected

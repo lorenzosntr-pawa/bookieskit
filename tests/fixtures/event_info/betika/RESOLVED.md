@@ -75,3 +75,9 @@ The parser's `_parse_betika_line` handles both formats (`"2.5"` and `"total=2.5"
 - Country is informational: `api.betika.com` serves the same catalogue regardless of country code in the URL or any `country=` header / param.
 - Captured event (prematch): Man City vs Crystal Palace (parent_match_id="70784812"), kickoff 2026-05-13 22:00:00 UTC.
 - Captured event (live): Ulinzi Stars vs Leopards (parent_match_id=71463790), kickoff 2026-05-13 16:00:00 UTC.
+
+
+## Fixture provenance (added 2026-11-18)
+
+- `wc_nf.json` — Norway–France (SR 66457014), captured 2026-06-26 on branch `fix/betika-full-market-fetch-31` with a comma-joined `sub_type_id` call on `/v1/uo/matches` (listing-row shape, 76 groups). Carries the booking/corner groups 136/139/162/166.
+- `prematch_soccer_full.json` — PSG–AS Roma (SR 74166046), captured 2026-11-18 via `get_event_markets` → `/v1/uo/match?id=12024057` (54 groups, reshaped meta).

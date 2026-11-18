@@ -88,10 +88,11 @@ async def test_betika_get_matches_with_filters():
     with respx.mock(base_url="https://api.betika.com") as mock:
         route = mock.get("/v1/uo/matches").respond(json=payload)
         async with Betika(country="ke") as client:
-            await client.get_matches(
-                sport_id=14, page=2, limit=50,
-                sub_type_id="18", competition_id="123", match_id="456",
-            )
+            with pytest.warns(DeprecationWarning, match="ignores match_id"):
+                await client.get_matches(
+                    sport_id=14, page=2, limit=50,
+                    sub_type_id="18", competition_id="123", match_id="456",
+                )
     q = route.calls[0].request.url.query.decode()
     assert "page=2" in q
     assert "limit=50" in q
@@ -124,7 +125,8 @@ async def test_betika_get_live_matches_with_match_id():
             json=payload
         )
         async with Betika(country="ke") as client:
-            result = await client.get_live_matches(match_id="X")
+            with pytest.warns(DeprecationWarning):
+                result = await client.get_live_matches(match_id="X")
     assert result["data"][0]["match_id"] == "X"
     q = route.calls[0].request.url.query.decode()
     assert "match_id=X" in q
@@ -474,14 +476,19 @@ async def test_live_host_fails_closed_and_handles_unknown():
 
 
 @pytest.mark.asyncio
-@pytest.mark.parametrize("body", [[], "x", {"data": {"a": 1}, "meta": "m"}])
-async def test_malformed_response_is_empty_payload(body):
+@pytest.mark.parametrize("body", [
+    [], "x", {"data": {"a": 1}, "meta": "m"},
+    {"data": [{"sub_type_id": "1"}], "meta": {"is_esport": False}},
+])
+async def test_malformed_response_raises(body):
     import respx
+
+    from bookieskit.exceptions import ResponseError
     with respx.mock(base_url="https://api.betika.com") as mock:
         mock.get("/v1/uo/match").respond(json=body)
         async with Betika(country="ke") as client:
-            assert await client.get_event_detail(event_id="M") == {
-                "data": [], "meta": {}}
+            with pytest.raises(ResponseError):
+                await client.get_event_detail(event_id="M")
 
 
 @pytest.mark.asyncio
@@ -498,3 +505,18 @@ async def test_non_list_data_and_non_dict_groups_are_dropped():
             b = await client.get_event_detail(event_id="M")
     assert a["data"][0]["odds"] == []
     assert b["data"][0]["odds"] == [{"sub_type_id": "1"}]
+
+
+@pytest.mark.asyncio
+async def test_get_markets_rejects_wrong_sport():
+    import respx
+
+    from bookieskit.exceptions import ResponseError
+    with respx.mock(base_url="https://api.betika.com") as mock:
+        mock.get("/v1/uo/match").respond(json=_detail(sport_id="14"))
+        async with Betika(country="ke") as client:
+            with pytest.raises(ResponseError) as ei:
+                await client.get_markets(event_id="M", sport="tennis")
+            ok = await client.get_markets(event_id="M", sport="soccer")
+    assert "tennis" in str(ei.value)
+    assert {m.canonical_id for m in ok} == {"1x2_ft"}
